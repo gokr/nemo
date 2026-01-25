@@ -447,3 +447,21 @@ nimtalk/
 - Source files use `.nim` extension
 - Test files use `test_*.nim` pattern
 - Example files use `.nt` extension (NimTalk source)
+
+## Future Directions
+
+### BitBarrel Integration
+Consider integrating BitBarrel (the high-performance Bitcask-style key-value storage engine from ../bitbarrel) as a core part of NimTalk. This would provide:
+- First-class barrel objects in NimTalk
+- Built-in persistence model similar to Gemstone and original OODBs
+- High-performance storage with O(1) reads via in-memory hash index
+- Crash recovery with hint files for fast startup
+- Background compaction
+
+Potential integration approaches:
+1. Expose BitBarrel API as NimTalk objects and methods
+2. Implement barrel literals in the language syntax
+3. Provide transparent persistence for NimTalk objects
+4. Use FFI to call BitBarrel C API or directly link the Nim library
+
+This would give NimTalk a powerful persistence layer built into the language.
