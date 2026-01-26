@@ -5,6 +5,10 @@ import os, strutils
 # Build the REPL
 task "repl", "Build the Nimtalk REPL":
   exec "nimble build"
+  # Copy binaries to root directory for convenience
+  exec "cp nimtalk/repl/ntalk ntalk 2>/dev/null || true"
+  exec "cp nimtalk/compiler/ntalkc ntalkc 2>/dev/null || true"
+  echo "Binaries available in root directory as ntalk and ntalkc"
 
 # Build tests
 task "test", "Run tests":
@@ -12,20 +16,10 @@ task "test", "Run tests":
 
 # Clean build artifacts
 task "clean", "Clean build artifacts":
-  for dir in ["nimcache", "build"]:
-    if dirExists(dir):
-      removeDir(dir)
+  exec "rm -rf nimcache build 2>/dev/null || true"
   # Clean binaries in various possible locations
-  for binary in ["ntalk", "ntalkc"]:
-    if fileExists(binary):
-      removeFile(binary)
-    if fileExists(binary & ".exe"):
-      removeFile(binary & ".exe")
-    # Clean from source tree structure
-    if fileExists("nimtalk/repl/" & binary):
-      removeFile("nimtalk/repl/" & binary)
-    if fileExists("nimtalk/compiler/" & binary):
-      removeFile("nimtalk/compiler/" & binary)
+  exec "rm -f ntalk ntalkc ntalk.exe ntalkc.exe 2>/dev/null || true"
+  exec "rm -f nimtalk/repl/ntalk nimtalk/repl/ntalkc nimtalk/compiler/ntalk nimtalk/compiler/ntalkc 2>/dev/null || true"
 
 # Install binary
 task "install", "Install Nimtalk":
@@ -58,10 +52,9 @@ task "install", "Install Nimtalk":
   when defined(windows):
     # On Windows, install to a common location
     let winDest = getHomeDir() / "ntalk" / "ntalk.exe"
-    createDir(getHomeDir() / "ntalk")
-    copyFile(binPath, winDest)
+    exec "mkdir -p " & (getHomeDir() / "ntalk")
+    exec "cp " & binPath & " " & winDest
     echo "Installed to: " & winDest
   else:
-    copyFile(binPath, dest)
-    discard execShellCmd("chmod +x " & dest)
+    exec "cp " & binPath & " " & dest & " && chmod +x " & dest
     echo "Installed to: " & dest
