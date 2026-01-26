@@ -39,3 +39,9 @@ tests/test_core
 ntalk
 ntalkc
 nimtalk/
+# Test binaries
+tests/test_slot_ivars
+tests/test_simple_derive
+tests/test_derive_from_nimtalk
+tests/benchmark_simple
+examples/test_primitive
