@@ -59,7 +59,7 @@ test("Tokenizer recognizes integer literals"):
   tokens.len == 2 and tokens[0].kind == tkInt and tokens[0].value == "42"
 
 test("Tokenizer recognizes string literals"):
-  let tokens = lex("'hello'")
+  let tokens = lex("\"hello\"")
   tokens.len == 2 and tokens[0].kind == tkString and tokens[0].value == "hello"
 
 test("Tokenizer recognizes identifiers"):

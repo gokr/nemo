@@ -200,6 +200,37 @@ proc eval(interp: var Interpreter, node: Node): NodeValue =
 
     return value
 
+  of nkArray:
+    # Array literal - evaluate each element
+    let arr = node.ArrayNode
+    var elements: seq[NodeValue] = @[]
+    for elem in arr.elements:
+      elements.add(interp.eval(elem))
+    return toValue(elements)
+
+  of nkTable:
+    # Table literal - evaluate each key-value pair
+    let tab = node.TableNode
+    var table = initTable[string, NodeValue]()
+    for entry in tab.entries:
+      # Keys must evaluate to strings
+      let keyVal = interp.eval(entry.key)
+      if keyVal.kind != vkString:
+        raise newException(EvalError, "Table key must be string, got: " & $keyVal.kind)
+      let valueVal = interp.eval(entry.value)
+      table[keyVal.strVal] = valueVal
+    return toValue(table)
+
+  of nkObjectLiteral:
+    # Object literal - create new object with properties
+    let objLit = node.ObjectLiteralNode
+    # Create new object derived from root object
+    let obj = newObject()  # Creates new empty object
+    for prop in objLit.properties:
+      let valueVal = interp.eval(prop.value)
+      obj.addProperty(prop.name, valueVal)
+    return toValue(obj)
+
   else:
     raise newException(EvalError, "Unknown node type: " & $node.kind)
 
