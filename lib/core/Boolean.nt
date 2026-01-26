@@ -1,0 +1,101 @@
+#!/usr/bin/env ntalk
+#
+# Boolean.nt - True and false objects with control flow
+#
+
+# Note: true and false are defined by the interpreter
+# This file adds methods to them for control flow
+
+#====================================================================
+# Control flow
+#====================================================================
+
+true at: 'ifTrue:' put: [
+  :block
+  "Evaluate the block and return its value."
+  ^ block value
+].
+
+true at: 'ifFalse:' put: [
+  :block
+  "Return nil - don't evaluate the block."
+  ^ nil
+].
+
+true at: 'ifTrue:ifFalse:' put: [
+  :trueBlock
+  :falseBlock
+  "Evaluate trueBlock and return its value."
+  ^ trueBlock value
+].
+
+false at: 'ifTrue:' put: [
+  :block
+  "Return nil - don't evaluate the block."
+  ^ nil
+].
+
+false at: 'ifFalse:' put: [
+  :block
+  "Evaluate the block and return its value."
+  ^ block value
+].
+
+false at: 'ifTrue:ifFalse:' put: [
+  :trueBlock
+  :falseBlock
+  "Evaluate falseBlock and return its value."
+  ^ falseBlock value
+].
+
+#====================================================================
+# Boolean logic
+#====================================================================
+
+true at: 'and:' put: [
+  :block
+  "Evaluate block and return its value."
+  ^ block value
+].
+
+true at: 'or:' put: [
+  :block
+  "Return true - short circuit."
+  ^ true
+].
+
+true at: 'not' put: [
+  "Return false."
+  ^ false
+].
+
+false at: 'and:' put: [
+  :block
+  "Return false - short circuit."
+  ^ false
+].
+
+false at: 'or:' put: [
+  :block
+  "Evaluate block and return its value."
+  ^ block value
+].
+
+false at: 'not' put: [
+  "Return true."
+  ^ true
+].
+
+#====================================================================
+# Comparison
+#====================================================================
+
+true at: '=' put: [
+  :other
+  ^ other == true
+].
+
+false at: '=' put: [
+  :other
+  ^ other == false
+].

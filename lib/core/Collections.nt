@@ -1,0 +1,149 @@
+#!/usr/bin/env ntalk
+#
+# Collections.nt - Collection protocols and behaviors
+#
+
+#====================================================================
+# Collection protocol
+#====================================================================
+
+# NOTE: Collections in Nimtalk are built on Nim's seq (Array) and Table (Dictionary)
+# These add Smalltalk-style protocols to those fundamental collections
+
+#====================================================================
+# Array (seq) extensions
+#====================================================================
+
+# Add do: method to arrays for iteration
+# This is added to the Array "class" (the prototype for all arrays)
+
+Array at: 'do:' put: [
+  :block
+  "Iterate over each element, evaluating the block."
+  | index size |
+  index := 0.
+  size := self size.
+  [ index < size ] whileTrue: [
+    block value: (self at: index).
+    index := index + 1
+  ].
+  ^ self
+].
+
+Array at: 'collect:' put: [
+  :block
+  "Transform each element with the block, return new array."
+  | result |
+  result := Array new: self size.
+  self do: [ :each | result add: (block value: each) ].
+  ^ result
+].
+
+Array at: 'select:' put: [
+  :block
+  "Return new array with elements where block returns true."
+  | result |
+  result := Array new.
+  self do: [ :each |
+    (block value: each)
+      ifTrue: [ result add: each ]
+  ].
+  ^ result
+].
+
+Array at: 'reject:' put: [
+  :block
+  "Return new array with elements where block returns false."
+  | result |
+  result := Array new.
+  self do: [ :each |
+    (block value: each)
+      ifFalse: [ result add: each ]
+  ].
+  ^ result
+].
+
+Array at: 'detect:' put: [
+  :block
+  "Find first element where block returns true."
+  self do: [ :each |
+    (block value: each)
+      ifTrue: [ ^ each ]
+  ].
+  ^ nil
+].
+
+Array at: 'inject:into:' put: [
+  :initialValue
+  :block
+  "Accumulate a result by iterating with block."
+  | result |
+  result := initialValue.
+  self do: [ :each |
+    result := block value: result value: each
+  ].
+  ^ result
+].
+
+#====================================================================
+# Table (Dictionary) extensions
+#====================================================================
+
+Table at: 'do:' put: [
+  :block
+  "Iterate over key-value pairs."
+  self keys do: [ :key |
+    block value: key value: (self at: key)
+  ].
+  ^ self
+].
+
+Table at: 'keys' put: [
+  "Return array of all keys."
+  ^ self perform: 'primitiveKeys'
+].
+
+Table at: 'values' put: [
+  "Return array of all values."
+  | result |
+  result := Array new.
+  self keys do: [ :key | result add: (self at: key) ].
+  ^ result
+].
+
+Table at: 'includesKey:' put: [
+  :key
+  "Check if key exists in table."
+  ^ self perform: 'primitiveIncludesKey:' with: key
+].
+
+Table at: 'removeKey:' put: [
+  :key
+  "Remove key-value pair and return value (or nil)."
+  ^ self perform: 'primitiveRemoveKey:' with: key
+].
+
+Table at: 'size' put: [
+  "Return number of key-value pairs."
+  ^ self keys size
+].
+
+#====================================================================
+# Collection creation
+#====================================================================
+
+Array at: 'new' put: [
+  "Create new empty array."
+  ^ Array new: 0
+].
+
+Array at: 'new:' put: [
+  :size
+  "Create new array with given size."
+  ^ #()  "Actually creates empty array - real implementation is primitive"
+].
+
+Table at: 'new' put: [
+  "Create new empty table."
+  ^ #{} "Actually creates empty table"
+].

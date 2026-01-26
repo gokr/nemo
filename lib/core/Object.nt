@@ -1,0 +1,139 @@
+#!/usr/bin/env ntalk
+#
+# Object.nt - Root object with core methods
+# This is the foundation of the Nimtalk object system
+
+# Object is the root of the prototype hierarchy
+# It provides fundamental behaviors that all objects inherit
+
+Object := nil  # Will be set to the root object by the interpreter
+
+#====================================================================
+# Object creation and copying
+#====================================================================
+
+Object at: 'clone' put: [
+  "Create a shallow copy of this object without prototype links.
+   The copy has no parents and shares property/method dictionaries."
+  ^ self perform: 'primitiveClone'
+].
+
+Object at: 'derive' put: [
+  "Create a child object with this object as its parent.
+   The child inherits behavior through the prototype chain."
+  ^ self perform: 'primitiveDerive'
+].
+
+Object at: 'deriveWithIVars:' put: [
+  :ivarArray
+  "Create a child with declared instance variables.
+   ivarArray should be an array of symbols like #(name age address)."
+  ^ self perform: 'primitiveDeriveWithIVars:' with: ivarArray
+].
+
+#====================================================================
+# Property access
+#====================================================================
+
+Object at: 'at:' put: [
+  :key
+  "Get the value of a property. Searches the object and its prototype chain."
+  ^ self perform: 'primitiveAt:' with: key
+].
+
+Object at: 'at:put:' put: [
+  :key
+  :value
+  "Set a property value on this object (not in prototypes)."
+  ^ self perform: 'primitiveAt:put:' with: key with: value
+].
+
+Object at: 'hasProperty:' put: [
+  :key
+  "Check if this object directly has a property (not in parents)."
+  ^ self perform: 'primitiveHasProperty:' with: key
+].
+
+Object at: 'properties' put: [
+  "Return a collection of all property keys on this object."
+  ^ self perform: 'primitiveProperties'
+].
+
+#====================================================================
+# Method management
+#====================================================================
+
+Object at: 'respondsTo:' put: [
+  :selector
+  "Check if this object or its prototype chain responds to a message."
+  ^ self perform: 'primitiveRespondsTo:' with: selector
+].
+
+Object at: 'methods' put: [
+  "Return a collection of all method selectors on this object."
+  ^ self perform: 'primitiveMethods'
+].
+
+Object at: 'doesNotUnderstand:' put: [
+  :message
+  "Default handler for unrecognized messages.
+   Subclasses can override to provide custom behavior."
+  self error: 'Message not understood: ' + message asString
+].
+
+#====================================================================
+# Identity and comparison
+#====================================================================
+
+Object at: '==' put: [
+  :other
+  "Test if this object is the same object as other (identity)."
+  ^ self perform: 'primitiveEquals:' with: other
+].
+
+Object at: 'printString' put: [
+  "Return a string representation of this object."
+  ^ '<' + (self className) + '>'
+].
+
+Object at: 'className' put: [
+  "Return the class name of this object."
+  | tags |
+  tags := self at: 'tags'.
+  tags isNil
+    ifTrue: [ ^ 'Object' ]
+    ifFalse: [ ^ tags first ]
+].
+
+#====================================================================
+# Error handling
+#====================================================================
+
+Object at: 'error:' put: [
+  :message
+  "Signal an error with the given message."
+  self perform: 'primitiveError:' with: message
+].
+
+#====================================================================
+# Testing and debugging
+#====================================================================
+
+Object at: 'inspect' put: [
+  "Open an inspector on this object. (placeholder)"
+  self printString print
+].
+
+Object at: 'yourself' put: [
+  "Return self - useful for cascading messages."
+  ^ self
+].
+
+#====================================================================
+# Initialization
+#====================================================================
+
+Object at: 'initialize' put: [
+  "Initialize a new instance. Subclasses should override."
+  ^ self
+].
