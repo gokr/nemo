@@ -10,13 +10,16 @@ type
     line*, col*: int
 
   ProtoObject* = ref object of RootObj
-    properties*: Table[string, NodeValue]  # instance variables
+    properties*: Table[string, NodeValue]  # property bag for dynamic objects
     methods*: Table[string, BlockNode]     # method dictionary
     parents*: seq[ProtoObject]             # prototype chain
     tags*: seq[string]                     # type tags
     isNimProxy*: bool                      # wraps Nim value
     nimValue*: pointer                     # proxied Nim value
     nimType*: string                       # Nim type name
+    hasSlots*: bool                        # true if object has declared instance variables
+    slots*: seq[NodeValue]                 # instance variables (faster than property bag)
+    slotNames*: Table[string, int]         # maps ivar names to slot indices
 
   BlockNode* = ref object of Node
     parameters*: seq[string]   # method parameters
@@ -104,10 +107,63 @@ type
       compiled*: CompiledMethod
 
 # ============================================================================
-# Procs and utilities
+# Procs and utilities for slot-based instance variables
 # ============================================================================
 
+proc initSlotObject*(ivars: seq[string]): ProtoObject =
+  ## Create object with declared instance variables (slots)
+  result = ProtoObject()
+  result.properties = initTable[string, NodeValue]()
+  result.methods = initTable[string, BlockNode]()
+  result.parents = @[]
+  result.tags = @["slotted"]
+  result.isNimProxy = false
+  result.nimValue = nil
+  result.nimType = ""
+  result.hasSlots = true
+  result.slots = newSeq[NodeValue](ivars.len)
+  result.slotNames = initTable[string, int]()
+
+  # Initialize all slots to nil
+  for i in 0..<ivars.len:
+    result.slots[i] = nilValue()
+    result.slotNames[ivars[i]] = i
+
+proc getSlot*(obj: ProtoObject, name: string): NodeValue =
+  ## Get slot value by name (returns nil if not found)
+  if not obj.hasSlots or not obj.slotNames.hasKey(name):
+    return nilValue()
+  let idx = obj.slotNames[name]
+  return obj.slots[idx]
+
+proc setSlot*(obj: var ProtoObject, name: string, value: NodeValue) =
+  ## Set slot value by name (does nothing if slot doesn't exist)
+  if not obj.hasSlots or not obj.slotNames.hasKey(name):
+    return
+  let idx = obj.slotNames[name]
+  obj.slots[idx] = value
+
+proc hasSlotIVars*(obj: ProtoObject): bool =
+  ## Check if object has declared instance variables (slots)
+  return obj.hasSlots
+
+proc getSlotNames*(obj: ProtoObject): seq[string] =
+  ## Get all instance variable names
+  if not obj.hasSlots:
+    return @[]
+  result = @[]
+  for name, idx in obj.slotNames:
+    result.add(name)
+  # Sort by index to maintain order
+  result.sort(proc(a, b: string): int =
+    let idxA = obj.slotNames[a]
+    let idxB = obj.slotNames[b]
+    result = idxA - idxB
+  )
+
+# ============================================================================
 # Node kind helper
+# ============================================================================
 proc kind*(node: Node): NodeKind =
   ## Get the node kind for pattern matching
   if node of LiteralNode: nkLiteral
