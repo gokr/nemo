@@ -17,7 +17,6 @@ proc plusImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc printStringImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc writeImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc writelineImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
-proc doesNotUnderstandImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 
 # Global root object (singleton)
 var rootObject*: RootObject = nil
@@ -87,6 +86,9 @@ proc removeGlobal*(name: string) =
 proc globalNames*(): seq[string] =
   ## Return all global names
   return toSeq(globals.keys)
+
+# Forward declaration for doesNotUnderstandImpl
+proc doesNotUnderstandImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 
 # Initialize root object with core methods
 proc initRootObject*(): RootObject =
@@ -349,7 +351,10 @@ proc plusImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
 
 proc printStringImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   ## Default print representation
-  if self.isNimProxy:
+  if self.isNimProxy and self.nimType == "int":
+    let val = cast[ptr int](self.nimValue)[]
+    return NodeValue(kind: vkString, strVal: $val)
+  elif self.isNimProxy:
     return NodeValue(kind: vkString, strVal: "<Nim " & self.nimType & ">")
   elif "Object" in self.tags:
     return NodeValue(kind: vkString, strVal: "<object>")
@@ -389,21 +394,6 @@ proc doesNotUnderstandImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue 
   let selector = args[0].symVal
   raise newException(ValueError, "Message not understood: " & selector)
 
-# Map method names to implementations (not currently used)
-# var coreMethods: Table[string, CoreMethodProc]
-#
-# proc initCoreMethods() =
-#   if coreMethods.len == 0:
-#     coreMethods = {
-#       "clone": cloneImpl,
-#       "derive": deriveImpl,
-#       "at:": atImpl,
-#       "at:put:": atPutImpl,
-#       "printString": printStringImpl,
-#       "doesNotUnderstand:": doesNotUnderstandImpl
-#     }.toTable
-
-# Object creation helpers
 proc wrapIntAsObject*(value: int): NodeValue =
   ## Wrap an integer as a Nim proxy object that can receive messages
   let obj = ProtoObject()
@@ -415,6 +405,21 @@ proc wrapIntAsObject*(value: int): NodeValue =
   obj.nimValue = cast[pointer](alloc(sizeof(int)))
   cast[ptr int](obj.nimValue)[] = value
   obj.nimType = "int"
+  obj.hasSlots = false
+  obj.slotNames = initTable[string, int]()
+  return NodeValue(kind: vkObject, objVal: obj)
+
+proc wrapBoolAsObject*(value: bool): NodeValue =
+  ## Wrap a boolean as a Nim proxy object that can receive messages
+  let obj = ProtoObject()
+  obj.properties = initTable[string, NodeValue]()
+  obj.methods = initTable[string, BlockNode]()
+  obj.parents = @[rootObject.ProtoObject]
+  obj.tags = @["Boolean"]
+  obj.isNimProxy = true
+  obj.nimValue = cast[pointer](alloc(sizeof(bool)))
+  cast[ptr bool](obj.nimValue)[] = value
+  obj.nimType = "bool"
   obj.hasSlots = false
   obj.slotNames = initTable[string, int]()
   return NodeValue(kind: vkObject, objVal: obj)

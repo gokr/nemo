@@ -4,15 +4,25 @@
 #
 # Compiles Nimtalk source (.nt) to Nim code (.nim)
 
-import std/[os, strutils, parseopt, strformat]
+import std/[os, strutils, parseopt, strformat, logging]
 import ../parser/parser
 import ../parser/lexer
 import ../codegen/module
 import ../compiler/context
 import ../core/types
 
-const
-  VERSION = "0.2.0"
+const VERSION* = block:
+  const nimblePath = currentSourcePath().parentDir().parentDir().parentDir().parentDir() / "nimtalk.nimble"
+  const nimbleContent = staticRead(nimblePath)
+  var versionStr = "unknown"
+  for line in nimbleContent.splitLines():
+    let trimmed = line.strip()
+    if trimmed.startsWith("version"):
+      let parts = trimmed.split("=")
+      if parts.len >= 2:
+        versionStr = parts[1].strip().strip(chars={'\"', '\''})
+        break
+  versionStr
 
 type
   Config = ref object
@@ -25,6 +35,8 @@ type
     release: bool
     help: bool
     version: bool
+    logLevel: Level
+    dumpAst: bool
 
 proc newConfig(): Config =
   Config(
@@ -36,7 +48,9 @@ proc newConfig(): Config =
     run: false,
     release: false,
     help: false,
-    version: false
+    version: false,
+    logLevel: lvlError,  # Default to ERROR level
+    dumpAst: false
   )
 
 proc showUsage() =
@@ -51,6 +65,8 @@ proc showUsage() =
   echo "  -o, --output <file>   Output Nim file path"
   echo "  -d, --dir <dir>       Output directory (default: ./build)"
   echo "  -r, --release         Build with --release flag"
+  echo "  --loglevel <level>    Set log level (DEBUG, INFO, WARN, ERROR)"
+  echo "  --ast                 Dump AST after parsing"
   echo "  -h, --help            Show this help"
   echo "  -v, --version         Show version"
   echo ""
@@ -62,6 +78,24 @@ proc showUsage() =
 
 proc showVersion() =
   echo "Nimtalk Compiler v" & VERSION
+
+proc parseLogLevel(levelStr: string): Level =
+  ## Parse log level string to Level enum
+  case levelStr.toUpperAscii()
+  of "DEBUG":
+    return lvlDebug
+  of "INFO":
+    return lvlInfo
+  of "WARN", "WARNING":
+    return lvlWarn
+  of "ERROR":
+    return lvlError
+  of "FATAL":
+    return lvlFatal
+  else:
+    echo "Invalid log level: ", levelStr
+    echo "Valid levels: DEBUG, INFO, WARN, ERROR, FATAL"
+    quit(1)
 
 proc parseArgs(): Config =
   result = newConfig()
@@ -83,6 +117,10 @@ proc parseArgs(): Config =
         result.help = true
       of "v", "version":
         result.version = true
+      of "loglevel":
+        result.logLevel = parseLogLevel(p.val)
+      of "ast":
+        result.dumpAst = true
       else:
         echo "Unknown option: ", p.key
         quit(1)
@@ -111,6 +149,12 @@ proc compileFile(config: Config): bool =
   if parser.hasError:
     echo "Parse error: ", parser.errorMsg
     return false
+
+  # Dump AST if requested
+  if config.dumpAst:
+    echo "AST:"
+    for node in nodes:
+      echo printAST(node)
 
   let moduleName = changeFileExt(extractFilename(config.inputFile), "")
   let outputDir = if config.outputDir.len > 0: config.outputDir else: "./build"
@@ -207,6 +251,11 @@ proc main() =
       showUsage()
       quit(0)
 
+    # Configure logging
+    var consoleLogger = newConsoleLogger()
+    consoleLogger.levelThreshold = config.logLevel
+    addHandler(consoleLogger)
+
     let success = config.compileFile()
     quit(if success: 0 else: 1)
 
@@ -223,6 +272,11 @@ proc main() =
     if config.help:
       showUsage()
       quit(0)
+
+    # Configure logging
+    var consoleLogger = newConsoleLogger()
+    consoleLogger.levelThreshold = config.logLevel
+    addHandler(consoleLogger)
 
     let success = config.buildFile()
     quit(if success: 0 else: 1)
@@ -241,6 +295,11 @@ proc main() =
       showUsage()
       quit(0)
 
+    # Configure logging
+    var consoleLogger = newConsoleLogger()
+    consoleLogger.levelThreshold = config.logLevel
+    addHandler(consoleLogger)
+
     let success = config.runFile()
     quit(if success: 0 else: 1)
 
@@ -258,6 +317,11 @@ proc main() =
       if config.help:
         showUsage()
         quit(0)
+
+      # Configure logging for backward compat mode
+      var consoleLogger = newConsoleLogger()
+      consoleLogger.levelThreshold = config.logLevel
+      addHandler(consoleLogger)
 
       let success = config.compileFile()
       quit(if success: 0 else: 1)

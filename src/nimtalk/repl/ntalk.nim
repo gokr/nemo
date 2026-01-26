@@ -3,7 +3,7 @@
 # Nimtalk REPL - Main entry point
 #
 
-import std/[os, strutils, terminal]
+import std/[os, strutils, terminal, logging]
 import ../repl/doit
 import ../interpreter/evaluator
 import ../core/types
@@ -11,6 +11,24 @@ import ../core/types
 # ============================================================================
 # Main entry point for Nimtalk REPL
 # ============================================================================
+
+proc parseLogLevel(levelStr: string): Level =
+  ## Parse log level string to Level enum
+  case levelStr.toUpperAscii()
+  of "DEBUG":
+    return lvlDebug
+  of "INFO":
+    return lvlInfo
+  of "WARN", "WARNING":
+    return lvlWarn
+  of "ERROR":
+    return lvlError
+  of "FATAL":
+    return lvlFatal
+  else:
+    echo "Invalid log level: ", levelStr
+    echo "Valid levels: DEBUG, INFO, WARN, ERROR, FATAL"
+    quit(1)
 
 proc showUsage() =
   echo "Nimtalk - Prototype-based Smalltalk for Nim"
@@ -20,17 +38,39 @@ proc showUsage() =
   echo "  ntalk <file.nt>          # Run script file"
   echo "  ntalk -e \"<code>\"       # Evaluate expression"
   echo "  ntalk --help             # Show this help"
+  echo "  ntalk --loglevel <level> # Set log level (DEBUG, INFO, WARN, ERROR)"
   echo ""
 
 proc main() =
   # Check command line arguments
   let args = commandLineParams()
 
+  # Configure logging (default to ERROR level)
+  var logLevel = lvlError
+  var dumpAst = false
+
+  # Look for --loglevel and --ast in arguments
+  for i in 0..<args.len:
+    if args[i] == "--loglevel" and i + 1 < args.len:
+      logLevel = parseLogLevel(args[i + 1])
+    elif args[i] == "--ast":
+      dumpAst = true
+
+  # Add console logger with specified level
+  var consoleLogger = newConsoleLogger()
+  consoleLogger.levelThreshold = logLevel
+  addHandler(consoleLogger)
+
   if args.len == 0:
     # Start REPL
     var ctx = newDoitContext()
     runREPL(ctx)
   elif args.len == 1:
+    # Check if the only argument is --loglevel (which requires a value)
+    if args[0] == "--loglevel":
+      echo "Error: --loglevel requires a value (DEBUG, INFO, WARN, ERROR, FATAL)"
+      quit(1)
+
     case args[0]:
     of "--help", "-h":
       showUsage()
@@ -40,7 +80,7 @@ proc main() =
       # Check if it's a file or just garbage
       if args[0].endsWith(".nt") and fileExists(args[0]):
         # Run script file
-        execScript(args[0])
+        execScript(args[0], dumpAst)
       elif args[0] == "--test":
         # Run tests
         echo "Running Nimtalk tests..."
@@ -101,7 +141,7 @@ proc main() =
   elif args.len == 2 and args[0] == "-e":
     # Evaluate expression
     var ctx = newDoitContext()
-    let (result, err) = ctx.doit(args[1])
+    let (result, err) = ctx.doit(args[1], dumpAst)
     if err.len > 0:
       stderr.writeLine("Error: " & err)
       quit(1)
@@ -109,6 +149,10 @@ proc main() =
       if result.kind != vkNil:
         echo result.toString()
       quit(0)
+  elif args.len == 2 and args[0] == "--loglevel":
+    # Just --loglevel with value, no other command - start REPL
+    var ctx = newDoitContext()
+    runREPL(ctx)
   else:
     echo "Invalid arguments"
     showUsage()

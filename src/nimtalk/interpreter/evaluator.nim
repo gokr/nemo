@@ -1,9 +1,41 @@
-import std/[tables, strutils, sequtils, times, math, strformat]
+import std/[tables, strutils, sequtils, times, math, strformat, logging]
 import ../core/types
 import ../parser/lexer
 import ../parser/parser
 import ../interpreter/objects
 import ../interpreter/activation
+
+# Forward declare wrapIntAsObject that's used for proxy objects
+proc wrapIntAsObject*(value: int): NodeValue
+proc wrapBoolAsObject*(value: bool): NodeValue
+
+# Implementation of wrapIntAsObject for proxy integers
+proc wrapIntAsObject*(value: int): NodeValue =
+  ## Wrap an integer as a Nim proxy object that can receive messages
+  let obj = ProtoObject()
+  obj.properties = initTable[string, NodeValue]()
+  obj.methods = initTable[string, BlockNode]()
+  obj.parents = @[initRootObject().ProtoObject]
+  obj.tags = @["Integer", "Number"]
+  obj.isNimProxy = true
+  obj.nimValue = cast[pointer](alloc(sizeof(int)))
+  cast[ptr int](obj.nimValue)[] = value
+  obj.nimType = "int"
+  return NodeValue(kind: vkObject, objVal: obj)
+
+# Implementation of wrapBoolAsObject for proxy booleans
+proc wrapBoolAsObject*(value: bool): NodeValue =
+  ## Wrap a boolean as a Nim proxy object that can receive messages
+  let obj = ProtoObject()
+  obj.properties = initTable[string, NodeValue]()
+  obj.methods = initTable[string, BlockNode]()
+  obj.parents = @[initRootObject().ProtoObject]
+  obj.tags = @["Boolean"]
+  obj.isNimProxy = true
+  obj.nimValue = cast[pointer](alloc(sizeof(bool)))
+  cast[ptr bool](obj.nimValue)[] = value
+  obj.nimType = "bool"
+  return NodeValue(kind: vkObject, objVal: obj)
 
 # ============================================================================
 # Evaluation engine for Nimtalk
@@ -28,6 +60,7 @@ type
 # Forward declarations
 proc eval*(interp: var Interpreter, node: Node): NodeValue
 proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue
+proc evalCascade(interp: var Interpreter, cascadeNode: CascadeNode): NodeValue
 
 # Initialize interpreter
 proc newInterpreter*(trace: bool = false): Interpreter =
@@ -128,24 +161,30 @@ proc lookupVariable(interp: Interpreter, name: string): NodeValue =
   var activation = interp.currentActivation
   while activation != nil:
     if name in activation.locals:
+      debug("Found variable in activation: ", name)
       return activation.locals[name]
     activation = activation.sender
 
   # Check globals
   if name in interp.globals:
-    return interp.globals[name]
+    debug("Found variable in globals: ", name)
+    let val = interp.globals[name]
+    return val
 
   # Check if it's a property on self
   if interp.currentReceiver != nil:
     let prop = getProperty(interp.currentReceiver, name)
     if prop.kind != vkNil:
+      debug("Found property on self: ", name)
       return prop
 
+  debug("Variable not found: ", name)
   return nilValue()
 
 # Variable assignment
 proc setVariable(interp: var Interpreter, name: string, value: NodeValue) =
   ## Set variable in current activation or create global
+  debug("Setting variable: ", name, " = ", value.toString())
   if interp.currentActivation != nil:
     # If it exists in current activation, update it
     if name in interp.currentActivation.locals:
@@ -186,6 +225,8 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
   ## Execute a currentMethod with given receiver and arguments
   interp.checkStackDepth()
 
+  debug("Executing method with ", arguments.len, " arguments")
+
   # Check for native implementation first
   if currentMethod.nativeImpl != nil:
     # Evaluate arguments to get NodeValues
@@ -193,10 +234,16 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
     for argNode in arguments:
       argValues.add(interp.eval(argNode))
 
-    # Cast and call native implementation
-    type NativeProc = proc(self: ProtoObject, args: seq[NodeValue]): NodeValue {.nimcall.}
-    let nativeProc = cast[NativeProc](currentMethod.nativeImpl)
-    return nativeProc(receiver, argValues)
+    # Check if this is an interpreter-aware native method (has interp parameter)
+    if currentMethod.hasInterpreterParam:
+      type NativeProcWithInterp = proc(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue {.nimcall.}
+      let nativeProc = cast[NativeProcWithInterp](currentMethod.nativeImpl)
+      return nativeProc(interp, receiver, argValues)
+    else:
+      # Standard native method without interpreter
+      type NativeProc = proc(self: ProtoObject, args: seq[NodeValue]): NodeValue {.nimcall.}
+      let nativeProc = cast[NativeProc](currentMethod.nativeImpl)
+      return nativeProc(receiver, argValues)
 
   # Create new activation
   let activation = newActivation(currentMethod, receiver, interp.currentActivation)
@@ -213,6 +260,7 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
     activation.locals[paramName] = argValue
 
   # Push activation
+  debug("Pushing activation, stack depth: ", interp.activationStack.len + 1)
   interp.activationStack.add(activation)
   interp.currentActivation = activation
   interp.currentReceiver = receiver
@@ -228,6 +276,7 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
   finally:
     # Pop activation
     discard interp.activationStack.pop()
+    debug("Popping activation, stack depth: ", interp.activationStack.len)
     if interp.activationStack.len > 0:
       interp.currentActivation = interp.activationStack[^1]
     else:
@@ -236,8 +285,10 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
 
   # Return result (or activation.returnValue if non-local return)
   if activation.hasReturned:
+    debug("Returning from method (non-local)")
     return activation.returnValue
   else:
+    debug("Returning from method: ", result.toString())
     return result
 
 # Evaluation functions
@@ -247,6 +298,8 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     return nilValue()
 
   interp.checkStackDepth()
+
+  debug("Evaluating node: ", node.kind)
 
   case node.kind
   of nkLiteral:
@@ -261,6 +314,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
 
   of nkMessage:
     # Message send
+    debug("Message send: ", node.MessageNode.selector)
     return interp.evalMessage(node.MessageNode)
 
   of nkBlock:
@@ -270,12 +324,14 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
   of nkAssign:
     # Variable assignment
     let assign = node.AssignNode
+    debug("Variable assignment: ", assign.variable)
     let value = interp.eval(assign.expression)
     setVariable(interp, assign.variable, value)
     return value
 
   of nkReturn:
     # Non-local return
+    debug("Non-local return")
     let ret = node.ReturnNode
     var value = nilValue()
     if ret.expression != nil:
@@ -334,6 +390,10 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
       result = interp.eval(stmt)
     return result
 
+  of nkCascade:
+    # Cascade message - send multiple messages to same receiver
+    return interp.evalCascade(node.CascadeNode)
+
   else:
     raise newException(EvalError, "Unknown node type: " & $node.kind)
 
@@ -347,9 +407,14 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
                     else:
                       interp.currentReceiver.toValue()
 
-  # Wrap non-object receivers (like integers) in Nim proxy objects
-  let wrappedReceiver = if receiverVal.kind == vkInt:
+  debug("Message receiver: ", receiverVal.toString())
+
+  # Wrap non-object receivers (like integers and booleans) in Nim proxy objects
+  let wrappedReceiver = case receiverVal.kind
+                        of vkInt:
                           wrapIntAsObject(receiverVal.intVal)
+                        of vkBool:
+                          wrapBoolAsObject(receiverVal.boolVal)
                         else:
                           receiverVal
 
@@ -363,21 +428,25 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
   for argNode in msgNode.arguments:
     arguments.add(interp.eval(argNode))
 
+  debug("Looking up method: ", msgNode.selector)
+
   # Look up currentMethod
   let lookup = lookupMethod(interp, receiver, msgNode.selector)
 
   if lookup.found:
     # Found currentMethod - execute it
     let currentMethodNode = lookup.currentMethod
+    debug("Found method, executing")
 
     # Convert arguments back to AST nodes if needed
     var argNodes = newSeq[Node]()
     for argVal in arguments:
       argNodes.add(LiteralNode(value: argVal))
 
-    return interp.executeMethod(currentMethodNode, lookup.receiver, argNodes)
+    return interp.executeMethod(currentMethodNode, receiver, argNodes)
   else:
     # Method not found - send doesNotUnderstand:
+    debug("Method not found, sending doesNotUnderstand:")
     let dnuSelector = "doesNotUnderstand:"
     let dnuArgs = @[
       NodeValue(kind: vkSymbol, symVal: msgNode.selector)
@@ -394,6 +463,47 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
     else:
       raise newException(EvalError,
         "Message not understood: " & msgNode.selector & " on " & $receiver.tags)
+
+# Evaluate a cascade of messages
+proc evalCascade(interp: var Interpreter, cascadeNode: CascadeNode): NodeValue =
+  ## Evaluate cascade messages - all sent to same receiver
+  ## Return the result of the last message
+
+  # Evaluate receiver once
+  let receiverVal = interp.eval(cascadeNode.receiver)
+  var result = receiverVal
+
+  # Send each message to the receiver
+  for msgNode in cascadeNode.messages:
+    # Temporarily set receiver for this message
+    let savedReceiver = interp.currentReceiver
+
+    # Wrap non-object receivers if needed
+    let wrappedReceiver = if receiverVal.kind == vkInt:
+                            wrapIntAsObject(receiverVal.intVal)
+                          else:
+                            receiverVal
+
+    if wrappedReceiver.kind != vkObject:
+      raise newException(EvalError, "Cascade to non-object: " & receiverVal.toString())
+
+    interp.currentReceiver = wrappedReceiver.toObject()
+
+    # Evaluate message - messages in cascade have receiver set to nil
+    # so they use currentReceiver
+    let msgWithNilReceiver = MessageNode(
+      receiver: nil,
+      selector: msgNode.selector,
+      arguments: msgNode.arguments,
+      isCascade: false
+    )
+    result = interp.evalMessage(msgWithNilReceiver)
+
+    # Restore previous receiver
+    interp.currentReceiver = savedReceiver
+
+  # Return result of last message
+  return result
 
 # Special form for sending messages directly without AST
 proc sendMessage*(interp: var Interpreter, receiver: ProtoObject,
@@ -423,7 +533,7 @@ proc sendMessage*(interp: var Interpreter, receiver: ProtoObject,
       "Message not understood: " & selector)
 
 # Do-it evaluation (for REPL and interactive use)
-proc doit*(interp: var Interpreter, source: string): (NodeValue, string) =
+proc doit*(interp: var Interpreter, source: string, dumpAst = false): (NodeValue, string) =
   ## Parse and evaluate source code, returning result and output
   # Parse
   let (node, parser) = parseExpression(source)
@@ -433,6 +543,11 @@ proc doit*(interp: var Interpreter, source: string): (NodeValue, string) =
 
   if node == nil:
     return (nilValue(), "No expression to evaluate")
+
+  # Dump AST if requested
+  if dumpAst:
+    echo "AST:"
+    echo printAST(node)
 
   # Evaluate
   try:
@@ -466,12 +581,69 @@ proc evalStatements*(interp: var Interpreter, source: string): (seq[NodeValue], 
   except Exception as e:
     return (@[], "Error: " & e.msg)
 
+# Block evaluation helper
+proc evalBlock(interp: var Interpreter, receiver: ProtoObject, blockNode: BlockNode): NodeValue =
+  ## Evaluate a block in the context of the given receiver
+  ## Creates a proper activation to allow access to outer scope
+
+  # Create activation for the block
+  let activation = newActivation(blockNode, receiver, interp.currentActivation)
+
+  # Push the activation onto the stack
+  interp.activationStack.add(activation)
+  let savedActivation = interp.currentActivation
+  let savedReceiver = interp.currentReceiver
+  interp.currentActivation = activation
+  interp.currentReceiver = receiver
+
+  # Execute each statement in the block body
+  var result = nilValue()
+  try:
+    for stmt in blockNode.body:
+      result = interp.eval(stmt)
+      if activation.hasReturned:
+        result = activation.returnValue
+        break
+  finally:
+    # Pop the activation
+    discard interp.activationStack.pop()
+    interp.currentActivation = savedActivation
+    interp.currentReceiver = savedReceiver
+
+  return result
+
+# Conditional method implementations (need to be defined before initGlobals)
+proc ifTrueImpl(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Execute block if receiver is true: true ifTrue: [code]
+  if args.len < 1 or args[0].kind != vkBlock:
+    return nilValue()
+
+  # Check if this is a true boolean
+  if self.isNimProxy and self.nimType == "bool":
+    let boolVal = cast[ptr bool](self.nimValue)[]
+    if boolVal:
+      # Execute the block with proper context
+      let blockNode = args[0].blockVal
+      return evalBlock(interp, interp.currentReceiver, blockNode)
+  return nilValue()
+
+proc ifFalseImpl(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Execute block if receiver is false: false ifFalse: [code]
+  if args.len < 1 or args[0].kind != vkBlock:
+    return nilValue()
+
+  # Check if this is a boolean
+  if self.isNimProxy and self.nimType == "bool":
+    let boolVal = cast[ptr bool](self.nimValue)[]
+    if not boolVal:
+      # Execute the block with proper context
+      let blockNode = args[0].blockVal
+      return evalBlock(interp, interp.currentReceiver, blockNode)
+  return nilValue()
+
 # Built-in globals
 proc initGlobals*(interp: var Interpreter) =
   ## Initialize built-in global variables
-  interp.globals["true"] = NodeValue(kind: vkBool, boolVal: true)
-  interp.globals["false"] = NodeValue(kind: vkBool, boolVal: false)
-  interp.globals["nil"] = nilValue()
 
   # Add some useful constants
   interp.globals["Object"] = interp.rootObject.toValue()
@@ -499,6 +671,48 @@ proc initGlobals*(interp: var Interpreter) =
 
   interp.globals["Stdout"] = stdoutObj.toValue()
   interp.globals["stdout"] = stdoutObj.toValue()
+
+  # Create true and false as objects with ifTrue: and ifFalse: methods
+  let trueObj = ProtoObject()
+  trueObj.properties = initTable[string, NodeValue]()
+  trueObj.methods = initTable[string, BlockNode]()
+  trueObj.parents = @[interp.rootObject.ProtoObject]
+  trueObj.tags = @["Boolean", "True"]
+  trueObj.isNimProxy = true
+  trueObj.nimValue = cast[pointer](alloc(sizeof(bool)))
+  cast[ptr bool](trueObj.nimValue)[] = true
+  trueObj.nimType = "bool"
+  trueObj.hasSlots = false
+  trueObj.slotNames = initTable[string, int]()
+
+  let falseObj = ProtoObject()
+  falseObj.properties = initTable[string, NodeValue]()
+  falseObj.methods = initTable[string, BlockNode]()
+  falseObj.parents = @[interp.rootObject.ProtoObject]
+  falseObj.tags = @["Boolean", "False"]
+  falseObj.isNimProxy = true
+  falseObj.nimValue = cast[pointer](alloc(sizeof(bool)))
+  cast[ptr bool](falseObj.nimValue)[] = false
+  falseObj.nimType = "bool"
+  falseObj.hasSlots = false
+  falseObj.slotNames = initTable[string, int]()
+
+  # Add ifTrue: and ifFalse: methods to both true and false
+  let ifTrueMethod = createCoreMethod("ifTrue:")
+  ifTrueMethod.nativeImpl = cast[pointer](ifTrueImpl)
+  ifTrueMethod.hasInterpreterParam = true
+  addMethod(trueObj, "ifTrue:", ifTrueMethod)
+  addMethod(falseObj, "ifTrue:", ifTrueMethod)
+
+  let ifFalseMethod = createCoreMethod("ifFalse:")
+  ifFalseMethod.nativeImpl = cast[pointer](ifFalseImpl)
+  ifFalseMethod.hasInterpreterParam = true
+  addMethod(trueObj, "ifFalse:", ifFalseMethod)
+  addMethod(falseObj, "ifFalse:", ifFalseMethod)
+
+  interp.globals["true"] = trueObj.toValue()
+  interp.globals["false"] = falseObj.toValue()
+  interp.globals["nil"] = nilValue()
 
 # Simple test function (incomplete - commented out)
 ## proc testBasicArithmetic*(): bool =

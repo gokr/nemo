@@ -99,7 +99,7 @@ proc handleCommand(ctx: DoitContext, line: string): bool =
   return false
 
 # Single expression evaluation (do-it)
-proc doit*(ctx: DoitContext, source: string): (NodeValue, string) =
+proc doit*(ctx: DoitContext, source: string, dumpAst = false): (NodeValue, string) =
   ## Evaluate a single expression with output capture
 
   # Trim whitespace
@@ -113,7 +113,7 @@ proc doit*(ctx: DoitContext, source: string): (NodeValue, string) =
 
   try:
     # Use the interpreter's doit
-    return ctx.interpreter.doit(code)
+    return ctx.interpreter.doit(code, dumpAst)
   except Exception as e:
     return (nilValue(), "Error: " & e.msg)
 
@@ -171,7 +171,7 @@ proc main*() =
   runREPL(ctx)
 
 # File-based script execution
-proc runScript*(filename: string, ctx: DoitContext = nil): (string, string) =
+proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false): (string, string) =
   ## Run a Nimtalk script file
   var scriptCtx = if ctx != nil: ctx else: newDoitContext()
 
@@ -179,6 +179,9 @@ proc runScript*(filename: string, ctx: DoitContext = nil): (string, string) =
     return ("", "File not found: " & filename)
 
   let source = readFile(filename)
+
+  # For full scripts, we need to handle AST dumping differently
+  # For now, just execute without AST dump for scripts
   let (results, err) = scriptCtx.interpreter.evalStatements(source)
 
   if err.len > 0:
@@ -191,9 +194,9 @@ proc runScript*(filename: string, ctx: DoitContext = nil): (string, string) =
       return ("", "")
 
 # Convenience function to run script and print result
-proc execScript*(filename: string) =
+proc execScript*(filename: string, dumpAst = false) =
   ## Execute script and print result
-  let (output, err) = runScript(filename)
+  let (output, err) = runScript(filename, dumpAst = dumpAst)
   if err.len > 0:
     stderr.writeLine(err)
     quit(1)

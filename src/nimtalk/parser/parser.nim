@@ -25,6 +25,7 @@ proc parseObjectLiteral(parser: var Parser): ObjectLiteralNode
 proc parseStatement(parser: var Parser): Node
 proc parseMethod(parser: var Parser): BlockNode
 proc parsePrimitive(parser: var Parser): PrimitiveNode
+proc checkForCascade(parser: var Parser, primary: Node, firstMsg: MessageNode): Node
 
 # Parser errors
 proc parseError*(parser: var Parser, msg: string) =
@@ -156,9 +157,6 @@ proc parseKeywordMessage(parser: var Parser, receiver: Node): MessageNode =
       return nil
     arguments.add(arg)
 
-  # Check for cascade
-  parser.pendingCascade = parser.expect(tkSpecial) and parser.peek().value == ";"
-
   return MessageNode(
     receiver: receiver,
     selector: selector,
@@ -167,25 +165,40 @@ proc parseKeywordMessage(parser: var Parser, receiver: Node): MessageNode =
   )
 
 # Parse binary/unary messages
-proc parseBinaryMessage(parser: var Parser, receiver: Node): Node =
-  var msg = receiver
+proc parseBinaryMessage(parser: var Parser, receiver: Node): MessageNode =
+  # If there are no unary messages, return the receiver wrapped as a message
+  # This should not happen in practice as we only call this when we detect messages
+  if not (parser.peek().kind == tkIdent and parser.peek().value[0].isLowerAscii()):
+    # Should not get here - but create a dummy message to satisfy return type
+    return MessageNode(receiver: receiver, selector: "", arguments: @[], isCascade: false)
 
-  # Unary messages (single token identifiers)
-  while parser.peek().kind == tkIdent and parser.peek().value[0].isLowerAscii():
+  # Parse the first unary message
+  var result: MessageNode
+  if parser.peek().kind == tkIdent and parser.peek().value[0].isLowerAscii():
     let token = parser.next()
-    msg = MessageNode(
-      receiver: msg,
+    result = MessageNode(
+      receiver: receiver,
       selector: token.value,
       arguments: @[],
       isCascade: false
     )
 
+    # Continue parsing additional unary messages
+    while parser.peek().kind == tkIdent and parser.peek().value[0].isLowerAscii():
+      let token = parser.next()
+      result = MessageNode(
+        receiver: result,
+        selector: token.value,
+        arguments: @[],
+        isCascade: false
+      )
+
   # Binary messages (operators - not yet implemented)
   # For now, treat binary operators as keywords
 
-  return msg
+  return result
 
-# Parse expressions with precedence
+# Parse expressions with precedence (no cascade detection)
 proc parseExpression*(parser: var Parser): Node =
   # Start with primary
   let primary = parser.parsePrimary()
@@ -212,13 +225,79 @@ proc parseExpression*(parser: var Parser): Node =
       return nil
 
     # Create a message node for the operator
-    var msgNode = MessageNode()
-    msgNode.receiver = primary
-    msgNode.selector = "+"
-    msgNode.arguments = @[right]
-    return msgNode
+    return MessageNode(
+      receiver: primary,
+      selector: next.value,  # Use the actual operator (+ or -)
+      arguments: @[right],
+      isCascade: false
+    )
   else:
     return primary
+
+# Parse cascade messages
+proc checkForCascade(parser: var Parser, primary: Node, firstMsg: MessageNode): Node =
+  ## Check for cascade and collect all messages separated by ;
+  var messages = @[firstMsg]
+
+  # Determine the receiver for the cascade
+  let cascadeReceiver = if primary != nil:
+                          primary
+                        else:
+                          firstMsg.receiver
+
+  # Check if we have a cascade
+  var safetyCounter = 0
+  const MAX_CASCADE_MESSAGES = 100  # Safety limit
+
+  while parser.peek().kind == tkSpecial and parser.peek().value == ";":
+    inc safetyCounter
+    if safetyCounter > MAX_CASCADE_MESSAGES:
+      parser.parseError("Too many cascade messages (infinite loop?)")
+      return nil
+
+    discard parser.next()  # Skip ;
+
+    # Parse next message (could be unary, binary, or keyword)
+    let next = parser.peek()
+    var nextMsg: MessageNode
+
+    case next.kind
+    of tkKeyword:
+      # Keyword message - need to parse it to get arguments
+      nextMsg = parser.parseKeywordMessage(cascadeReceiver)
+    of tkIdent:
+      if next.value[0].isLowerAscii():
+        # Unary message
+        nextMsg = parser.parseBinaryMessage(cascadeReceiver)
+      else:
+        parser.parseError("Expected message after ;")
+        return nil
+    of tkPlus, tkMinus:
+      # Binary operator
+      discard parser.next()  # Skip operator
+      let right = parser.parseExpression()
+      if right == nil:
+        parser.parseError("Expected expression after binary operator")
+        return nil
+
+      nextMsg = MessageNode(
+        receiver: cascadeReceiver,
+        selector: next.value,
+        arguments: @[right],
+        isCascade: false
+      )
+    else:
+      parser.parseError("Expected message after ;")
+      return nil
+
+    messages.add(nextMsg)
+
+  # If we have multiple messages, return a CascadeNode
+  if messages.len > 1:
+    return CascadeNode(receiver: cascadeReceiver, messages: messages)
+  else:
+    # Single message, return as-is
+    return firstMsg
 
 # Parse block literal
 proc parseBlock*(parser: var Parser): BlockNode =
@@ -391,6 +470,21 @@ proc parseStatement(parser: var Parser): Node =
   let expr = parser.parseExpression()
   if expr == nil:
     return nil
+
+  # Check for cascade - extract receiver if it's a message
+  if expr of MessageNode:
+    let msg = expr.MessageNode
+    let cascadeReceiver = msg.receiver
+    # Create a new message with nil receiver for cascade detection
+    let msgWithNilReceiver = MessageNode(
+      receiver: nil,
+      selector: msg.selector,
+      arguments: msg.arguments,
+      isCascade: false
+    )
+    let cascaded = parser.checkForCascade(cascadeReceiver, msgWithNilReceiver)
+    if cascaded != nil:
+      return cascaded
 
   # Check for assignment :=
   if parser.peek().kind == tkAssign:
@@ -577,6 +671,17 @@ proc printAST*(node: Node, indent: int = 0): string =
       res.add(spaces & "  fallback:\n")
       for stmt in prim.fallback:
         res.add(printAST(stmt, indent + 2))
+    return res
+
+  of nkCascade:
+    let cascade = node.CascadeNode
+    var res = spaces & "Cascade\n"
+    res.add(spaces & "  receiver:\n")
+    res.add(printAST(cascade.receiver, indent + 2))
+    res.add(spaces & "  messages:\n")
+    for msg in cascade.messages:
+      res.add(spaces & "  - ")
+      res.add(printAST(msg, indent + 2))
     return res
   else:
     return spaces & "Unknown(" & $node.kind & ")\n"

@@ -27,6 +27,7 @@ type
     body*: seq[Node]           # AST statements
     isMethod*: bool            # true if method definition
     nativeImpl*: pointer       # compiled implementation
+    hasInterpreterParam*: bool # true if native method needs interpreter parameter
 
   # Value types for AST nodes and runtime values
   ValueKind* = enum
@@ -56,6 +57,10 @@ type
     arguments*: seq[Node]
     isCascade*: bool
 
+  CascadeNode* = ref object of Node
+    receiver*: Node
+    messages*: seq[MessageNode]
+
   AssignNode* = ref object of Node
     variable*: string
     expression*: Node
@@ -80,7 +85,7 @@ type
   # Node type enum for pattern matching
   NodeKind* = enum
     nkLiteral, nkMessage, nkBlock, nkAssign, nkReturn,
-    nkArray, nkTable, nkObjectLiteral, nkPrimitive
+    nkArray, nkTable, nkObjectLiteral, nkPrimitive, nkCascade
 
   # Root object (global singleton)
   RootObject* = ref object of ProtoObject
@@ -125,6 +130,7 @@ proc kind*(node: Node): NodeKind =
   elif node of TableNode: nkTable
   elif node of ObjectLiteralNode: nkObjectLiteral
   elif node of PrimitiveNode: nkPrimitive
+  elif node of CascadeNode: nkCascade
   else: raise newException(ValueError, "Unknown node type")
 
 # Value conversion utilities
