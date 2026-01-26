@@ -1,6 +1,8 @@
 # ============================================================================
 # Lexer for Nimtalk - Tokenizes Smalltalk-style syntax
 # ============================================================================
+
+import std/strutils
 type
   TokenKind* = enum
     tkIdent, tkKeyword, tkString, tkInt, tkFloat
@@ -9,12 +11,14 @@ type
     tkAssign, tkReturn, tkPeriod, tkSeparator
     tkSpecial  # ; & | etc
     tkArrayStart, tkTableStart, tkObjectStart, tkArrow, tkColon
+    tkTag, tkNimCode
+    tkPlus, tkMinus  # Arithmetic operators
   Token* = object
     kind*: TokenKind
     value*: string
     line*, col*: int
   LexState* = enum
-    lsNormal, lsComment, lsString, lsSymbol, lsChar
+    lsNormal, lsComment, lsString, lsSymbol, lsChar, lsNimCode
   Lexer* = ref object
     input*: string
     pos*: int
@@ -121,20 +125,20 @@ proc parseNumber(lexer: var Lexer): Token =
     return Token(kind: tkFloat, value: value, line: startLine, col: startCol)
   else:
     return Token(kind: tkInt, value: value, line: startLine, col: startCol)
-# Parse string
+# Parse string (single or double quotes)
 proc parseString(lexer: var Lexer): Token =
   let startLine = lexer.line
   let startCol = lexer.col
   var value = ""
-  # Skip opening quote
-  if lexer.peek() == '"':
-    discard lexer.next()
-  else:
+  # Check which quote type
+  let quoteChar = lexer.peek()
+  if quoteChar != '"' and quoteChar != '\'':
     return Token(kind: tkError, value: "Expected opening quote", line: startLine, col: startCol)
+  discard lexer.next()
   # Parse string content
   while lexer.pos < lexer.input.len:
     let c = lexer.peek()
-    if c == '"':
+    if c == quoteChar:
       discard lexer.next()
       break
     elif c == '\\':
@@ -146,6 +150,7 @@ proc parseString(lexer: var Lexer): Token =
       of 't': value.add('\t')
       of 'r': value.add('\r')
       of '\\': value.add('\\')
+      of '\'': value.add('\'')
       of '"': value.add('"')
       else:
         value.add('\\')
@@ -179,6 +184,82 @@ proc parseSymbol(lexer: var Lexer): Token =
     # Single char symbol
     value.add(lexer.next())
     return Token(kind: tkSymbol, value: value, line: startLine, col: startCol)
+# Parse XML-style tag <primitive> or </primitive>
+proc parseTag(lexer: var Lexer): Token =
+  let startLine = lexer.line
+  let startCol = lexer.col
+  var value = ""
+
+  # Skip opening <
+  if lexer.peek() == '<':
+    discard lexer.next()
+  else:
+    return Token(kind: tkError, value: "Expected < for tag", line: startLine, col: startCol)
+
+  # Check if it's a closing tag </>
+  var isClosing = false
+  if lexer.peek() == '/':
+    isClosing = true
+    discard lexer.next()
+    value.add('/')
+
+  # Parse tag content until >
+  while lexer.pos < lexer.input.len:
+    let c = lexer.peek()
+    if c == '>':
+      discard lexer.next()
+      break
+    else:
+      value.add(lexer.next())
+
+  # If it's a primitive tag, set appropriate lexer state
+  if value.startsWith("primitive") or value.startsWith("/primitive"):
+    if isClosing:
+      # Closing </primitive> - return to normal state
+      lexer.state = lsNormal
+    else:
+      # Opening <primitive> - enter Nim code mode
+      lexer.state = lsNimCode
+
+  return Token(kind: tkTag, value: value, line: startLine, col: startCol)
+
+# Parse Nim code between <primitive> and </primitive>
+proc parseNimCode(lexer: var Lexer): Token =
+  let startLine = lexer.line
+  let startCol = lexer.col
+  var value = ""
+
+  # Collect characters until we see </primitive>
+  while lexer.pos < lexer.input.len:
+    let c = lexer.peek()
+    if c == '<':
+      # Check if this is </primitive>
+      if lexer.pos + 1 < lexer.input.len and lexer.input[lexer.pos + 1] == '/':
+        # Peek ahead to see if it's </primitive>
+        var i = lexer.pos
+        var possibleTag = ""
+        while i < lexer.input.len and lexer.input[i] != '>':
+          possibleTag.add(lexer.input[i])
+          inc i
+        if i < lexer.input.len:
+          possibleTag.add(lexer.input[i])  # Include '>'
+
+        if possibleTag.startsWith("</primitive"):
+          # Found closing tag - stop here, return to normal state
+          lexer.state = lsNormal
+          break
+
+      # Regular '<' in Nim code, include it
+      value.add(lexer.next())
+    else:
+      value.add(lexer.next())
+
+  # If we collected nothing and reached EOF, return EOF
+  if value.len == 0 and lexer.pos >= lexer.input.len:
+    return Token(kind: tkEOF, value: "", line: startLine, col: startCol)
+
+  return Token(kind: tkNimCode, value: value, line: startLine, col: startCol)
+
 # Skip comment
 proc skipComment(lexer: var Lexer) =
   # Smalltalk style: "comment"
@@ -196,6 +277,11 @@ proc skipComment(lexer: var Lexer) =
 # Main tokenization function
 proc nextToken*(lexer: var Lexer): Token =
   ## Get the next token from the input
+
+  # Handle Nim code mode
+  if lexer.state == lsNimCode:
+    return parseNimCode(lexer)
+
   # Skip whitespace (but keep newlines)
   lexer.skipWhitespace()
   # Handle newlines as separators
@@ -230,6 +316,17 @@ proc nextToken*(lexer: var Lexer): Token =
   of '^':
     discard lexer.next()
     return Token(kind: tkReturn, value: "^", line: startLine, col: startCol)
+  of '+':
+    discard lexer.next()
+    return Token(kind: tkPlus, value: "+", line: startLine, col: startCol)
+  of '-':
+    discard lexer.next()
+    # Check for arrow operator ->
+    if lexer.peek() == '>':
+      discard lexer.next()
+      return Token(kind: tkArrow, value: "->", line: startLine, col: startCol)
+    else:
+      return Token(kind: tkMinus, value: "-", line: startLine, col: startCol)
   of ';':
     discard lexer.next()
     return Token(kind: tkSpecial, value: ";", line: startLine, col: startCol)
@@ -246,6 +343,9 @@ proc nextToken*(lexer: var Lexer): Token =
       return Token(kind: tkColon, value: ":", line: startLine, col: startCol)
   of '"':
     # String literal
+    return parseString(lexer)
+  of '\'':
+    # String literal with single quotes
     return parseString(lexer)
   of '#':
     # Context-sensitive: # followed by whitespace = comment
@@ -283,13 +383,9 @@ proc nextToken*(lexer: var Lexer): Token =
   of '}':
     discard lexer.next()
     return Token(kind: tkSpecial, value: "}", line: startLine, col: startCol)
-  of '-':
-    discard lexer.next()
-    if lexer.peek() == '>':
-      discard lexer.next()
-      return Token(kind: tkArrow, value: "->", line: startLine, col: startCol)
-    else:
-      return Token(kind: tkError, value: "Expected > after - for arrow operator", line: startLine, col: startCol)
+  of '<':
+    # XML-style tag
+    return parseTag(lexer)
   else:
     # Number, identifier, or error
     if c.isDigit:

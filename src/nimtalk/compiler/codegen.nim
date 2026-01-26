@@ -2,43 +2,23 @@ import std/[strutils, tables, sequtils, os]
 import ../core/types
 import ../parser/parser
 import ../parser/lexer
+import ./context
+import ./symbols
+import ./types
 
 # ============================================================================
 # Nim Compiler for Nimtalk
 # Generates Nim code from Smalltalk methods
 # ============================================================================
 
-type
-  CompilerContext* = ref object
-    outputDir*: string
-    moduleName*: string
-    methods*: seq[BlockNode]
-    symbols*: Table[string, string]  # selector -> symbol name
-
-proc newCompiler*(outputDir = "./build", moduleName = "compiled"): CompilerContext =
-  ## Create new compiler context
-  result = CompilerContext(
-    outputDir: outputDir,
-    moduleName: moduleName,
-    methods: @[],
-    symbols: initTable[string, string]()
-  )
-
-# Generate symbol name from selector
-proc mangleName(selector: string): string =
-  ## Convert selector to valid Nim identifier
-  # Replace special characters
-  result = selector.replace(":", "_")
-  result = result.replace("-", "_minus_")
-  result = result.replace("+", "_plus_")
-  result = result.replace("*", "_star_")
-  result = result.replace("/", "_slash_")
-  result = "nt_" & result
+# Re-export for convenience
+export context.CompilerContext, context.newCompiler
+export symbols.mangleSelector
 
 # Generate method stub
 proc genMethodStub(meth: BlockNode, selector: string): string =
   ## Generate Nim procedure stub for a Smalltalk method
-  let nimName = mangleName(selector)
+  let nimName = mangleSelector(selector)
   let arity = meth.parameters.len
 
   var output = "proc " & nimName & "*(self: ref ProtoObject"
@@ -77,7 +57,7 @@ proc compileModule*(ctx: CompilerContext, methods: seq[BlockNode],
                      "method" & $meth.parameters.len
                    else:
                      "method"
-    ctx.symbols[selector] = mangleName(selector)
+    ctx.symbols[selector] = mangleSelector(selector)
     output.add(genMethodStub(meth, selector))
 
   # Add module initialization

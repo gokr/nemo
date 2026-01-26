@@ -2,36 +2,268 @@
 #
 # Nimtalk Compiler - Standalone compiler binary
 #
-# This is a stub implementation that will be expanded later.
+# Compiles Nimtalk source (.nt) to Nim code (.nim)
 
-import std/[os, strutils]
-import ../compiler/codegen
+import std/[os, strutils, parseopt, strformat]
+import ../parser/parser
+import ../parser/lexer
+import ../codegen/module
+import ../core/types
+
+const
+  VERSION = "0.2.0"
+
+type
+  Config = ref object
+    inputFile: string
+    outputFile: string
+    outputDir: string
+    compile: bool
+    build: bool
+    run: bool
+    release: bool
+    help: bool
+    version: bool
+
+proc newConfig(): Config =
+  Config(
+    inputFile: "",
+    outputFile: "",
+    outputDir: "./build",
+    compile: false,
+    build: false,
+    run: false,
+    release: false,
+    help: false,
+    version: false
+  )
 
 proc showUsage() =
   echo "Nimtalk Compiler - Prototype-based Smalltalk for Nim"
   echo ""
   echo "Usage:"
-  echo "  ntalkc <file.nt>          # Compile Nimtalk file to Nim"
-  echo "  ntalkc --help             # Show this help"
+  echo "  ntalkc compile <file.nt> [options]    Compile Nimtalk to Nim"
+  echo "  ntalkc build <file.nt> [options]      Compile and build with Nim"
+  echo "  ntalkc run <file.nt> [options]        Compile, build, and run"
   echo ""
-  echo "Note: Compiler functionality is not yet implemented."
+  echo "Options:"
+  echo "  -o, --output <file>   Output Nim file path"
+  echo "  -d, --dir <dir>       Output directory (default: ./build)"
+  echo "  -r, --release         Build with --release flag"
+  echo "  -h, --help            Show this help"
+  echo "  -v, --version         Show version"
+  echo ""
+  echo "Examples:"
+  echo "  ntalkc compile person.nt -o src/person.nim"
+  echo "  ntalkc build demo.nt -d build/"
+  echo "  ntalkc run myprogram.nt --release"
+  echo ""
+
+proc showVersion() =
+  echo "Nimtalk Compiler v" & VERSION
+
+proc parseArgs(): Config =
+  result = newConfig()
+  var p = initOptParser(commandLineParams())
+
+  while true:
+    p.next()
+    case p.kind
+    of cmdEnd: break
+    of cmdShortOption, cmdLongOption:
+      case p.key
+      of "o", "output":
+        result.outputFile = p.val
+      of "d", "dir":
+        result.outputDir = p.val
+      of "r", "release":
+        result.release = true
+      of "h", "help":
+        result.help = true
+      of "v", "version":
+        result.version = true
+      else:
+        echo "Unknown option: ", p.key
+        quit(1)
+    of cmdArgument:
+      if result.inputFile.len == 0:
+        result.inputFile = p.val
+      else:
+        echo "Unexpected argument: ", p.val
+        quit(1)
+
+proc compileFile(config: Config): bool =
+  ## Compile Nimtalk source to Nim
+  if not fileExists(config.inputFile):
+    echo "Error: Input file not found: ", config.inputFile
+    return false
+
+  echo "Compiling: ", config.inputFile
+
+  let source = readFile(config.inputFile)
+  let tokens = lex(source)
+
+  var parser = initParser(tokens)
+  parser.lastLine = 1
+  let nodes = parser.parseStatements()
+
+  if parser.hasError:
+    echo "Parse error: ", parser.errorMsg
+    return false
+
+  let moduleName = changeFileExt(extractFilename(config.inputFile), "")
+  let outputDir = if config.outputDir.len > 0: config.outputDir else: "./build"
+
+  var ctx = newCompiler(outputDir, moduleName)
+  let nimCode = genModule(ctx, nodes, moduleName)
+
+  var outputPath: string
+  if config.outputFile.len > 0:
+    outputPath = config.outputFile
+  else:
+    outputPath = outputDir / moduleName & ".nim"
+
+  createDir(parentDir(outputPath))
+  writeFile(outputPath, nimCode)
+
+  echo "Generated: ", outputPath
+  return true
+
+proc buildFile(config: Config): bool =
+  ## Compile Nimtalk and build with Nim compiler
+  if not config.compileFile():
+    return false
+
+  var outputFile = if config.outputFile.len > 0:
+                     config.outputFile
+                   else:
+                     let moduleName = changeFileExt(extractFilename(config.inputFile), "")
+                     config.outputDir / moduleName & ".nim"
+
+  let baseName = changeFileExt(outputFile, "")
+  let releaseFlag = if config.release: " --release" else: ""
+  let cmd = fmt("nim c{releaseFlag} -o:{base_name} {outputFile}")
+
+  echo "Building: ", cmd
+  let exitCode = execShellCmd(cmd)
+
+  if exitCode == 0:
+    echo "Build successful: ", baseName
+    return true
+  else:
+    echo "Build failed with exit code: ", exitCode
+    return false
+
+proc runFile(config: Config): bool =
+  ## Compile, build, and run the program
+  if not config.buildFile():
+    return false
+
+  var outputFile = if config.outputFile.len > 0:
+                     config.outputFile
+                   else:
+                     let moduleName = changeFileExt(extractFilename(config.inputFile), "")
+                     config.outputDir / moduleName & ".nim"
+
+  let baseName = changeFileExt(outputFile, "")
+
+  echo "Running: ", baseName
+  let exitCode = execShellCmd(baseName)
+
+  if exitCode == 0:
+    return true
+  else:
+    echo "Program exited with code: ", exitCode
+    return false
 
 proc main() =
   let args = commandLineParams()
 
   if args.len == 0:
     showUsage()
-    quit(1)
+    quit(0)
 
-  case args[0]:
-  of "--help", "-h":
+  var command = ""
+  if args.len >= 1:
+    command = args[0]
+
+  case command
+  of "--help", "-h", "help":
     showUsage()
-  of "--version", "-v":
-    echo "Nimtalk Compiler v0.1.0"
+  of "--version", "-v", "version":
+    showVersion()
+  of "compile":
+    var config = parseArgs()
+    config.compile = true
+    config.inputFile = if args.len >= 2: args[1] else: ""
+
+    if config.inputFile.len == 0:
+      echo "Error: No input file specified"
+      echo "Usage: ntalkc compile <file.nt> [options]"
+      quit(1)
+
+    if config.help:
+      showUsage()
+      quit(0)
+
+    let success = config.compileFile()
+    quit(if success: 0 else: 1)
+
+  of "build":
+    var config = parseArgs()
+    config.build = true
+    config.inputFile = if args.len >= 2: args[1] else: ""
+
+    if config.inputFile.len == 0:
+      echo "Error: No input file specified"
+      echo "Usage: ntalkc build <file.nt> [options]"
+      quit(1)
+
+    if config.help:
+      showUsage()
+      quit(0)
+
+    let success = config.buildFile()
+    quit(if success: 0 else: 1)
+
+  of "run":
+    var config = parseArgs()
+    config.run = true
+    config.inputFile = if args.len >= 2: args[1] else: ""
+
+    if config.inputFile.len == 0:
+      echo "Error: No input file specified"
+      echo "Usage: ntalkc run <file.nt> [options]"
+      quit(1)
+
+    if config.help:
+      showUsage()
+      quit(0)
+
+    let success = config.runFile()
+    quit(if success: 0 else: 1)
+
   else:
-    echo "Compiler not yet implemented. File: ", args[0]
-    echo "Use 'ntalk' to run interpreter."
-    quit(1)
+    # Treat as file path for backward compatibility
+    if fileExists(command) and command.endsWith(".nt"):
+      var config = parseArgs()
+      config.compile = true
+      config.inputFile = command
+
+      if config.version:
+        showVersion()
+        quit(0)
+
+      if config.help:
+        showUsage()
+        quit(0)
+
+      let success = config.compileFile()
+      quit(if success: 0 else: 1)
+    else:
+      echo "Unknown command or invalid file: ", command
+      echo "Run 'ntalkc --help' for usage"
+      quit(1)
 
 when isMainModule:
   main()

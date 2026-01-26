@@ -30,9 +30,8 @@ proc newDoitContext*(trace: bool = false): DoitContext =
   # Initialize interpreter
   initGlobals(result.interpreter)
 
-  # Set up root object with convenient accessors
-  result.globals["Object"] = result.interpreter.rootObject.toValue()
-  result.globals["root"] = result.interpreter.rootObject.toValue()
+  # Copy interpreter globals to REPL context
+  result.globals = result.interpreter.globals
 
 # Print welcome message
 proc printWelcomeRepl() =

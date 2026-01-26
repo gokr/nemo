@@ -24,6 +24,7 @@ proc parseTableLiteral(parser: var Parser): TableNode
 proc parseObjectLiteral(parser: var Parser): ObjectLiteralNode
 proc parseStatement(parser: var Parser): Node
 proc parseMethod(parser: var Parser): BlockNode
+proc parsePrimitive(parser: var Parser): PrimitiveNode
 
 # Parser errors
 proc parseError*(parser: var Parser, msg: string) =
@@ -203,6 +204,19 @@ proc parseExpression*(parser: var Parser): Node =
       return parser.parseBinaryMessage(primary)
     else:
       return primary
+  of tkPlus, tkMinus:
+    # Binary operator - handle very simple left-to-right for now
+    discard parser.next()  # Skip operator
+    let right = parser.parseExpression()
+    if right == nil:
+      return nil
+
+    # Create a message node for the operator
+    var msgNode = MessageNode()
+    msgNode.receiver = primary
+    msgNode.selector = "+"
+    msgNode.arguments = @[right]
+    return msgNode
   else:
     return primary
 
@@ -364,6 +378,10 @@ proc parseObjectLiteral(parser: var Parser): ObjectLiteralNode =
 
 # Parse statement (expression or assignment)
 proc parseStatement(parser: var Parser): Node =
+  # Check for primitive declaration
+  if parser.peek().kind == tkTag and parser.peek().value.startsWith("primitive"):
+    return parser.parsePrimitive()
+
   # Check for return statement
   if parser.expect(tkReturn):
     let expr = parser.parseExpression()
@@ -400,6 +418,59 @@ proc parseMethod(parser: var Parser): BlockNode =
   if blk != nil:
     blk.isMethod = true
   return blk
+
+# Parse primitive declaration: <primitive> ... </primitive> followed by Smalltalk fallback
+proc parsePrimitive(parser: var Parser): PrimitiveNode =
+  let startLine = parser.lastLine
+  let startCol = parser.lastCol
+
+  # Expect opening <primitive> tag
+  let openingTag = parser.next()
+  if openingTag.kind != tkTag or not openingTag.value.startsWith("primitive"):
+    parser.parseError("Expected <primitive> tag")
+    return nil
+
+  # Collect Nim code tokens until closing </primitive>
+  var nimCode = ""
+  while parser.pos < parser.tokens.len:
+    let token = parser.peek()
+    if token.kind == tkTag and token.value.startsWith("/primitive"):
+      # Closing tag - consume it and break
+      discard parser.next()
+      break
+    elif token.kind == tkNimCode:
+      nimCode.add(token.value)
+      discard parser.next()
+    else:
+      # Unexpected token in Nim code (should not happen)
+      parser.parseError("Expected Nim code or closing tag")
+      return nil
+
+  # Parse remaining statements as fallback
+  var fallback: seq[Node] = @[]
+  while parser.pos < parser.tokens.len:
+    # Skip separators and periods before checking for end
+    while parser.expect(tkSeparator) or parser.expect(tkPeriod):
+      discard
+    # Check if we've reached the end of the block/method
+    if parser.peek().kind in {tkRBracket, tkPeriod, tkEOF}:
+      break
+    let stmt = parser.parseStatement()
+    if stmt != nil:
+      fallback.add(stmt)
+    # Skip separators and periods after statement
+    while parser.expect(tkSeparator) or parser.expect(tkPeriod):
+      discard
+    if parser.hasError:
+      break
+
+  let prim = PrimitiveNode()
+  prim.line = startLine
+  prim.col = startCol
+  prim.tag = openingTag.value
+  prim.nimCode = nimCode
+  prim.fallback = fallback
+  return prim
 
 # Parse sequence of statements (method body or REPL input)
 proc parseStatements*(parser: var Parser): seq[Node] =
@@ -498,5 +569,14 @@ proc printAST*(node: Node, indent: int = 0): string =
       res.add(spaces & "  (self)\n")
     return res
 
+  of nkPrimitive:
+    let prim = node.PrimitiveNode
+    var res = spaces & "Primitive(" & prim.tag & ")\n"
+    res.add(spaces & "  nimCode: " & $prim.nimCode.len & " chars\n")
+    if prim.fallback.len > 0:
+      res.add(spaces & "  fallback:\n")
+      for stmt in prim.fallback:
+        res.add(printAST(stmt, indent + 2))
+    return res
   else:
     return spaces & "Unknown(" & $node.kind & ")\n"
