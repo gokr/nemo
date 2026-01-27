@@ -338,6 +338,15 @@ proc nextToken*(lexer: var Lexer): Token =
     # Otherwise: check for #( array, #{ table, or symbol start
     discard lexer.next()
     let nextChar = lexer.peek()
+
+    # Special case: shebang line at start of file (e.g., #!/usr/bin/env ntalk)
+    if lexer.line == 1 and lexer.col == 2 and nextChar == '!':
+      # Skip shebang line
+      while lexer.pos < lexer.input.len and lexer.peek() != '\n':
+        discard lexer.next()
+      # Return next token (skip the shebang line)
+      return nextToken(lexer)
+
     # If followed by whitespace, it's a comment - skip to end of line
     if nextChar.isSpace:
       # Skip to end of line
