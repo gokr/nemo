@@ -212,9 +212,20 @@ proc deriveImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   child.isNimProxy = false
   child.nimValue = nil
   child.nimType = ""
-  child.hasSlots = false
-  child.slots = @[]
-  child.slotNames = initTable[string, int]()
+
+  # Inherit slots if parent has them
+  if self.hasSlots:
+    child.hasSlots = true
+    child.slots = newSeq[NodeValue](self.slots.len)
+    child.slotNames = self.slotNames
+    # Initialize all slots to nil (copy parent's structure but not values)
+    for i in 0..<self.slots.len:
+      child.slots[i] = nilValue()
+  else:
+    child.hasSlots = false
+    child.slots = @[]
+    child.slotNames = initTable[string, int]()
+
   return NodeValue(kind: vkObject, objVal: child)
 
 proc deriveWithIVarsImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
@@ -350,11 +361,6 @@ proc atPutImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
 
   let value = args[1]
   echo "Setting property: ", key, " = ", value.toString(), " on self with tags: ", $self.tags
-  # If value is a block, mark it as a method
-  if value.kind == vkBlock:
-    let blockNode = value.blockVal
-    echo "Marking block as method: ", blockNode.parameters.len, " parameters"
-    blockNode.isMethod = true
   setProperty(self, key, value)
   echo "Property set done, now properties count: ", self.properties.len
   return value
