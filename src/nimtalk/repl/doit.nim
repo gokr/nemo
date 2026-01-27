@@ -180,8 +180,22 @@ proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false): (str
 
   let source = readFile(filename)
 
-  # For full scripts, we need to handle AST dumping differently
-  # For now, just execute without AST dump for scripts
+  # Handle AST dumping if requested
+  if dumpAst:
+    # Parse and dump AST before execution
+    let tokens = lex(source)
+    var parser = initParser(tokens)
+    let nodes = parser.parseStatements()
+
+    if parser.hasError:
+      return ("", "Parse error: " & parser.errorMsg)
+
+    echo "AST:"
+    for node in nodes:
+      echo printAST(node)
+    echo ""
+
+  # Execute the script
   let (results, err) = scriptCtx.interpreter.evalStatements(source)
 
   if err.len > 0:
