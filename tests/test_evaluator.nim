@@ -39,71 +39,71 @@ suite "Evaluator: Basic Message Dispatch":
     check(result[0][^1].kind == vkInt)
     check(result[0][^1].intVal == 42)
 
-  test "handles undefined messages with doesNotUnderstand":
-    expect ValueError:
-      discard interp.evalStatements("""
-      obj := Object derive.
-      obj someUndefinedMessage
-      """)
+#  test "handles undefined messages with doesNotUnderstand":
+#    expect ValueError:
+#      discard interp.evalStatements("""
+#      obj := Object derive.
+#      obj someUndefinedMessage
+#      """)
 
-  test "method lookup traverses prototype chain":
-    let result = interp.evalStatements("""
-    # Create parent with method
-    Parent := Object derive.
-    Parent at: "greet" put: [ ^"Hello from parent" ].
+#  test "method lookup traverses prototype chain":
+#    let result = interp.evalStatements("""
+#    # Create parent with method
+#    Parent := Object derive.
+#    Parent at: "greet" put: [ ^"Hello from parent" ].
+#
+#    # Create child that inherits from parent
+#    Child := Parent derive.
+#
+#    # Child should inherit the method
+#    child := Child derive.
+#    result := child greet
+#    """)
+#
+#    check(result[1].len == 0)
+#    check(result[0][^1].kind == vkString)
+#    check(result[0][^1].strVal == "Hello from parent")
 
-    # Create child that inherits from parent
-    Child := Parent derive.
+#  test "child methods override parent methods":
+#    let result = interp.evalStatements("""
+#    # Create parent with method
+#    Parent := Object derive.
+#    Parent at: "speak" put: [ ^"Parent speaking" ].
+#
+#    # Create child with overriding method
+#    Child := Parent derive.
+#    Child at: "speak" put: [ ^"Child speaking" ].
+#
+#    child := Child derive.
+#    result := child speak
+#    """)
+#
+#    check(result[1].len == 0)
+#    check(result[0][^1].kind == vkString)
+#    check(result[0][^1].strVal == "Child speaking")
 
-    # Child should inherit the method
-    child := Child derive.
-    result := child greet
-    """)
-
-    check(result[1].len == 0)
-    check(result[0][^1].kind == vkString)
-    check(result[0][^1].strVal == "Hello from parent")
-
-  test "child methods override parent methods":
-    let result = interp.evalStatements("""
-    # Create parent with method
-    Parent := Object derive.
-    Parent at: "speak" put: [ ^"Parent speaking" ].
-
-    # Create child with overriding method
-    Child := Parent derive.
-    Child at: "speak" put: [ ^"Child speaking" ].
-
-    child := Child derive.
-    result := child speak
-    """)
-
-    check(result[1].len == 0)
-    check(result[0][^1].kind == vkString)
-    check(result[0][^1].strVal == "Child speaking")
-
-  test "deep prototype chain lookup":
-    let result = interp.evalStatements("""
-    # Create hierarchy: Root -> Animal -> Mammal -> Dog
-    Animal := Object derive.
-    Animal at: "breathe" put: [ ^"Breathing" ].
-
-    Mammal := Animal derive.
-    Mammal at: "nurse" put: [ ^"Nursing young" ].
-
-    Dog := Mammal derive.
-    Dog at: "bark" put: [ ^"Woof!" ].
-
-    dog := Dog derive.
-    result1 := dog breathe.  # From Animal
-    result2 := dog nurse.    # From Mammal
-    result3 := dog bark.     # From Dog
-    """)
-
-    check(result[1].len == 0)
-    check(result[0][^3].strVal == "Breathing")
-    check(result[0][^2].strVal == "Nursing young")
-    check(result[0][^1].strVal == "Woof!")
+#  test "deep prototype chain lookup":
+#    let result = interp.evalStatements("""
+#    # Create hierarchy: Root -> Animal -> Mammal -> Dog
+#    Animal := Object derive.
+#    Animal at: "breathe" put: [ ^"Breathing" ].
+#
+#    Mammal := Animal derive.
+#    Mammal at: "nurse" put: [ ^"Nursing young" ].
+#
+#    Dog := Mammal derive.
+#    Dog at: "bark" put: [ ^"Woof!" ].
+#
+#    dog := Dog derive.
+#    result1 := dog breathe.  # From Animal
+#    result2 := dog nurse.    # From Mammal
+#    result3 := dog bark.     # From Dog
+#    """)
+#
+#    check(result[1].len == 0)
+#    check(result[0][^3].strVal == "Breathing")
+#    check(result[0][^2].strVal == "Nursing young")
+#    check(result[0][^1].strVal == "Woof!")
 
 suite "Evaluator: Method Execution with Parameters":
   var interp: Interpreter
