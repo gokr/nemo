@@ -197,6 +197,10 @@ proc printCallStack*(interp: Interpreter): string =
 type
   LookupResult = tuple[found: bool, value: NodeValue]
 
+# Forward declarations for closure-related procs
+proc captureEnvironment*(interp: Interpreter, blockNode: BlockNode)
+proc invokeBlock*(interp: var Interpreter, blockNode: BlockNode, args: seq[NodeValue]): NodeValue
+
 proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
   ## Look up variable in activation chain and globals
   ## Returns (found: true, value: ...) if found, (found: false, value: nil) if not found
@@ -232,19 +236,142 @@ proc lookupVariable(interp: Interpreter, name: string): NodeValue =
 
 # Variable assignment
 proc setVariable(interp: var Interpreter, name: string, value: NodeValue) =
-  ## Set variable in current activation or create global
+  ## Set variable in current activation, captured environment, or create global
   debug("Setting variable: ", name, " = ", value.toString(), " (activation: ", interp.currentActivation != nil, ")")
+
+  # First check if there's a current activation with a captured environment
+  # that contains this variable
   if interp.currentActivation != nil:
-    # If it exists in current activation, update it
+    # Check if variable exists in current activation's locals
     if name in interp.currentActivation.locals:
       interp.currentActivation.locals[name] = value
-    # Otherwise create in current activation
-    else:
-      interp.currentActivation.locals[name] = value
-  else:
-    # Set as global
-    interp.globals[name] = value
-    debug("Global set: ", name, " now globals count: ", interp.globals.len)
+      return
+
+    # Check if current method has a captured environment with this variable
+    let currentMethod = interp.currentActivation.currentMethod
+    if currentMethod != nil:
+      if currentMethod.capturedEnv.len > 0 and name in currentMethod.capturedEnv:
+        currentMethod.capturedEnv[name].value = value
+        return
+
+    # Create in current activation
+    interp.currentActivation.locals[name] = value
+    return
+
+  # Set as global
+  interp.globals[name] = value
+  debug("Global set: ", name, " now globals count: ", interp.globals.len)
+
+# ============================================================================
+# Environment Capture and Block Invocation
+# ============================================================================
+
+proc captureEnvironment*(interp: Interpreter, blockNode: BlockNode) =
+  ## Capture the current lexical environment when a block is created
+  ## This walks up the activation chain and captures all local variables
+  ## Variables captured by nested closures share the same MutableCell
+
+  debug("Capturing environment for block")
+
+  # Initialize captured environment if not already set
+  # Note: Table is a value type, we check its length to see if initialized
+  blockNode.capturedEnv = initTable[string, MutableCell]()
+
+  # First, inherit captured variables from the current method if it's a block
+  # This ensures nested closures share the same MutableCells
+  if interp.currentActivation != nil and interp.currentActivation.currentMethod != nil:
+    let currentMethod = interp.currentActivation.currentMethod
+    if currentMethod.capturedEnv.len > 0:
+      for name, cell in currentMethod.capturedEnv.pairs:
+        blockNode.capturedEnv[name] = cell
+        debug("Inherited captured variable from outer block: ", name)
+
+  # Walk up the activation chain and capture all local variables
+  var activation = interp.currentActivation
+  while activation != nil:
+    # Capture all locals from this activation (except 'self' and 'super')
+    for name, value in activation.locals:
+      if name != "self" and name != "super":
+        # Only capture if not already captured (inner scope shadows outer)
+        if not blockNode.capturedEnv.hasKey(name):
+          let cell = MutableCell(value: value)
+          blockNode.capturedEnv[name] = cell
+          debug("Captured variable: ", name, " = ", value.toString())
+
+    activation = activation.sender
+
+  # Set home activation for non-local returns
+  # The home activation is the method/block that lexically contains this block
+  blockNode.homeActivation = interp.currentActivation
+  debug("Set home activation for non-local returns")
+
+proc invokeBlock*(interp: var Interpreter, blockNode: BlockNode, args: seq[NodeValue]): NodeValue =
+  ## Invoke a block with the given arguments
+  ## Creates a new activation with captured environment as parent scope
+
+  debug("Invoking block with ", args.len, " arguments")
+
+  # Check argument count
+  if blockNode.parameters.len != args.len:
+    raise newException(EvalError,
+      "Wrong number of arguments to block: expected " & $blockNode.parameters.len &
+      ", got " & $args.len)
+
+  # Create activation for block execution
+  # The receiver is the same as the current receiver
+  let activation = newActivation(blockNode, interp.currentReceiver, interp.currentActivation)
+
+  # Keep track of captured variable names so we can save them back
+  var capturedVarNames: seq[string] = @[]
+
+  # Bind captured environment variables to the new activation
+  # This makes captured variables available in the block's scope
+  if blockNode.capturedEnv.len > 0:
+    for name, cell in blockNode.capturedEnv:
+      activation.locals[name] = cell.value
+      capturedVarNames.add(name)
+      debug("Bound captured variable: ", name, " = ", cell.value.toString())
+
+  # Bind parameters to arguments
+  for i in 0..<blockNode.parameters.len:
+    let paramName = blockNode.parameters[i]
+    activation.locals[paramName] = args[i]
+    debug("Bound parameter: ", paramName, " = ", args[i].toString())
+
+  # Initialize temporaries to nil
+  for tempName in blockNode.temporaries:
+    activation.locals[tempName] = nilValue()
+    debug("Initialized temporary: ", tempName)
+
+  # Save current state
+  let savedReceiver = interp.currentReceiver
+
+  # Push the activation onto the stack
+  interp.pushActivation(activation)
+
+  # Execute block body
+  var blockResult = nilValue()
+  try:
+    for stmt in blockNode.body:
+      blockResult = interp.eval(stmt)
+      if activation.hasReturned:
+        # Non-local return - the return value is already set in activation
+        blockResult = activation.returnValue
+        break
+  finally:
+    # Save captured variable values back to their cells (for mutable closures)
+    # This ensures changes to captured variables persist across invocations
+    if blockNode.capturedEnv.len > 0:
+      for name in capturedVarNames:
+        if name in activation.locals:
+          blockNode.capturedEnv[name].value = activation.locals[name]
+          debug("Saved captured variable: ", name, " = ", activation.locals[name].toString())
+
+    # Pop the activation
+    discard interp.popActivation()
+    interp.currentReceiver = savedReceiver
+
+  return blockResult
 
 # Method lookup and dispatch
 type
@@ -398,8 +525,10 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     return interp.evalMessage(node.MessageNode)
 
   of nkBlock:
-    # Block literal - return as value
-    return NodeValue(kind: vkBlock, blockVal: node.BlockNode)
+    # Block literal - capture environment and return as value
+    let blockNode = node.BlockNode
+    captureEnvironment(interp, blockNode)
+    return NodeValue(kind: vkBlock, blockVal: blockNode)
 
   of nkAssign:
     # Variable assignment
@@ -419,19 +548,36 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     else:
       value = interp.currentReceiver.toValue()
 
-    # Find the target activation for non-local return
-    var activation = interp.currentActivation
-    var loopCount = 0
-    while activation != nil and not activation.currentMethod.isMethod:
-      activation = activation.sender
-      inc loopCount
-      if loopCount > 100:
-        warn("Possible infinite loop in return - exceeded 100 activations")
-        break
+    # Determine the target activation for return
+    # If we're inside a block, use the block's home activation (non-local return)
+    # If we're in a method, return from that method (local return)
+    var targetActivation: Activation = nil
 
-    if activation != nil:
-      activation.returnValue = value
-      activation.hasReturned = true
+    if interp.currentActivation != nil and interp.currentActivation.currentMethod != nil:
+      let currentMethod = interp.currentActivation.currentMethod
+      if not currentMethod.isMethod and currentMethod.homeActivation != nil:
+        # We're in a block (not a method) - return from the block's home activation
+        targetActivation = currentMethod.homeActivation
+        debug("Non-local return from block to home activation")
+      else:
+        # We're in a method - local return from current method
+        targetActivation = interp.currentActivation
+        debug("Local return from method")
+
+    if targetActivation != nil:
+      targetActivation.returnValue = value
+      targetActivation.hasReturned = true
+
+      # Propagate hasReturned flag to all activations from current up to target
+      var current = interp.currentActivation
+      while current != nil and current != targetActivation:
+        current.hasReturned = true
+        # Also set return value on intermediate activations for proper propagation
+        current.returnValue = value
+        debug("Marked intermediate activation as returned")
+        current = current.sender
+
+      debug("Set return on target activation")
 
     return value
 
@@ -452,10 +598,30 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
           continue
       # Inside #(...), bare identifiers like 'a' in #(a b) are syntactic sugar for symbols
       # So #(name age) is equivalent to #(#name #age)
+      # But true/false/nil/self/super are keywords with special handling
       if elem.kind == nkIdent:
         let ident = cast[IdentNode](elem)
-        debug("Identifier in array literal treated as symbol: ", ident.name)
-        elements.add(getSymbol(ident.name))
+        case ident.name
+        of "true":
+          elements.add(NodeValue(kind: vkBool, boolVal: true))
+        of "false":
+          elements.add(NodeValue(kind: vkBool, boolVal: false))
+        of "nil":
+          elements.add(nilValue())
+        of "self":
+          if interp.currentReceiver != nil:
+            elements.add(interp.currentReceiver.toValue())
+          else:
+            elements.add(interp.globals["Object"])
+        of "super":
+          # super refers to parent of current receiver
+          if interp.currentReceiver != nil and interp.currentReceiver.parents.len > 0:
+            elements.add(interp.currentReceiver.parents[0].toValue())
+          else:
+            elements.add(interp.globals["Object"])
+        else:
+          debug("Identifier in array literal treated as symbol: ", ident.name)
+          elements.add(getSymbol(ident.name))
         continue
       # Normal evaluation for other elements
       elements.add(interp.eval(elem))
@@ -510,6 +676,40 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
                       interp.eval(msgNode.receiver)
                     else:
                       interp.currentReceiver.toValue()
+
+  # Special handling for block invocation via value: messages
+  if receiverVal.kind == vkBlock:
+    case msgNode.selector
+    of "value":
+      # No arguments
+      return invokeBlock(interp, receiverVal.blockVal, @[])
+    of "value:":
+      # One argument - evaluate arguments first
+      var argValues: seq[NodeValue] = @[]
+      for argNode in msgNode.arguments:
+        argValues.add(interp.eval(argNode))
+      return invokeBlock(interp, receiverVal.blockVal, argValues)
+    of "value:value:":
+      # Two arguments
+      var argValues: seq[NodeValue] = @[]
+      for argNode in msgNode.arguments:
+        argValues.add(interp.eval(argNode))
+      return invokeBlock(interp, receiverVal.blockVal, argValues)
+    of "value:value:value:":
+      # Three arguments
+      var argValues: seq[NodeValue] = @[]
+      for argNode in msgNode.arguments:
+        argValues.add(interp.eval(argNode))
+      return invokeBlock(interp, receiverVal.blockVal, argValues)
+    of "value:value:value:value:":
+      # Four arguments
+      var argValues: seq[NodeValue] = @[]
+      for argNode in msgNode.arguments:
+        argValues.add(interp.eval(argNode))
+      return invokeBlock(interp, receiverVal.blockVal, argValues)
+    else:
+      # Non-value: message sent to block - continue with normal dispatch
+      discard
 
   debug("Message receiver: ", receiverVal.toString())
 
@@ -669,6 +869,8 @@ proc doit*(interp: var Interpreter, source: string, dumpAst = false): (NodeValue
       lastResult = interp.eval(node)
     interp.lastResult = lastResult
     return (lastResult, "")
+  except ValueError as e:
+    raise  # Re-raise ValueError for error handling tests
   except EvalError as e:
     return (nilValue(), "Runtime error: " & e.msg)
   except Exception as e:
@@ -816,6 +1018,10 @@ proc initGlobals*(interp: var Interpreter) =
   # Add Dictionary to globals
   if dictionaryPrototype != nil:
     interp.globals["Dictionary"] = dictionaryPrototype.ProtoObject.toValue()
+
+  # Add Random to globals
+  if randomPrototype != nil:
+    interp.globals["Random"] = randomPrototype.ProtoObject.toValue()
 
   # Create and register Stdout object
   let stdoutObj = ProtoObject()
