@@ -17,8 +17,7 @@
 # Add do: method to arrays for iteration
 # This is added to the Array "class" (the prototype for all arrays)
 
-Array at: 'do:' put: [
-  :block
+Array>>do: block [
   "Iterate over each element, evaluating the block."
   | index size |
   index := 0.
@@ -30,8 +29,7 @@ Array at: 'do:' put: [
   ^ self
 ].
 
-Array at: 'collect:' put: [
-  :block
+Array>>collect: block [
   "Transform each element with the block, return new array."
   | result |
   result := Array new: self size.
@@ -39,8 +37,7 @@ Array at: 'collect:' put: [
   ^ result
 ].
 
-Array at: 'select:' put: [
-  :block
+Array>>select: block [
   "Return new array with elements where block returns true."
   | result |
   result := Array new.
@@ -51,8 +48,7 @@ Array at: 'select:' put: [
   ^ result
 ].
 
-Array at: 'reject:' put: [
-  :block
+Array>>reject: block [
   "Return new array with elements where block returns false."
   | result |
   result := Array new.
@@ -63,8 +59,7 @@ Array at: 'reject:' put: [
   ^ result
 ].
 
-Array at: 'detect:' put: [
-  :block
+Array>>detect: block [
   "Find first element where block returns true."
   self do: [ :each |
     (block value: each)
@@ -73,9 +68,7 @@ Array at: 'detect:' put: [
   ^ nil
 ].
 
-Array at: 'inject:into:' put: [
-  :initialValue
-  :block
+Array>>inject: initialValue into: block [
   "Accumulate a result by iterating with block."
   | result |
   result := initialValue.
@@ -89,8 +82,7 @@ Array at: 'inject:into:' put: [
 # Table (Dictionary) extensions
 #====================================================================
 
-Table at: 'do:' put: [
-  :block
+Table>>do: block [
   "Iterate over key-value pairs."
   self keys do: [ :key |
     block value: key value: (self at: key)
@@ -98,12 +90,12 @@ Table at: 'do:' put: [
   ^ self
 ].
 
-Table at: 'keys' put: [
+Table>>keys [
   "Return array of all keys."
   ^ self perform: 'primitiveKeys'
 ].
 
-Table at: 'values' put: [
+Table>>values [
   "Return array of all values."
   | result |
   result := Array new.
@@ -111,19 +103,17 @@ Table at: 'values' put: [
   ^ result
 ].
 
-Table at: 'includesKey:' put: [
-  :key
+Table>>includesKey: key [
   "Check if key exists in table."
   ^ self perform: 'primitiveIncludesKey:' with: key
 ].
 
-Table at: 'removeKey:' put: [
-  :key
+Table>>removeKey: key [
   "Remove key-value pair and return value (or nil)."
   ^ self perform: 'primitiveRemoveKey:' with: key
 ].
 
-Table at: 'size' put: [
+Table>>size [
   "Return number of key-value pairs."
   ^ self keys size
 ].
@@ -132,18 +122,17 @@ Table at: 'size' put: [
 # Collection creation
 #====================================================================
 
-Array at: 'new' put: [
+Array>>new [
   "Create new empty array."
   ^ Array new: 0
 ].
 
-Array at: 'new:' put: [
-  :size
+Array>>new: size [
   "Create new array with given size."
   ^ #()  "Actually creates empty array - real implementation is primitive"
 ].
 
-Table at: 'new' put: [
+Table>>new [
   "Create new empty table."
   ^ #{} "Actually creates empty table"
 ].
