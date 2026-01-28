@@ -12,8 +12,8 @@ Nimtalk is a prototype-based Smalltalk dialect that compiles to Nim. It preserve
 "Create a prototype with instance variables"
 Point := Object derive: #(x y).
 
-"Add a method"
-Point at: "moveBy:and:" put: [ :dx :dy |
+"Add a method using >> syntax"
+Point>>moveBy: dx and: dy [
     x := x + dx.
     y := y + dy.
     self
@@ -56,9 +56,9 @@ Instead of classes, you create prototypes and derive instances from them:
 "Create a prototype with automatic accessors for x and y"
 Point := Object derive: #(x y).
 
-"Add methods by storing blocks"
-Point at: "printString" put: [
-    '(' + (x asString) + ', ' + (y asString) + ')'
+"Add methods using >> syntax"
+Point>>printString [
+    ^ '(' + (x asString) + ', ' + (y asString) + ')'
 ].
 
 "Derive an instance"
@@ -139,6 +139,8 @@ Working:
 - REPL with file execution
 - Block closures with lexical scoping
 - Data structure literals (arrays, tables, object literals)
+- Method definition syntax (`>>`) for cleaner method declarations
+- `self` and `super` support for method dispatch
 - Base library (collections, core objects)
 
 In progress:

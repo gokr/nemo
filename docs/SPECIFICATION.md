@@ -28,6 +28,8 @@ The language specification is being developed alongside the implementation. Key 
 - Method tables using canonical Symbols for identity-based lookup
 - String concatenation with comma operator (`'Hello' , ' World'`)
 - Collection access with `at:` method (works on arrays and tables)
+- Method definition syntax (`>>`) for cleaner method declarations in files
+- `self` and `super` support for method dispatch and inheritance
 
 ### Execution Models
 - AST interpreter for development and REPL
@@ -69,4 +71,4 @@ configureLogging(lvlError)  # Suppress debug output
 setLogLevel(lvlDebug)       # Enable debug output
 ```
 
-*Last updated: 2026-01-28 (updated with comma operator and collection access documentation)*
+*Last updated: 2026-01-28 (updated with >> syntax, super support, comma operator and collection access documentation)*

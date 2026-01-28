@@ -80,6 +80,8 @@ Person>>description [
 
 **Note**: The closing `]` acts as the terminator. No trailing period needed!
 
+**Note on `super`**: Use `super` to call parent methods. Inside a method, `super` refers to the parent of the object where the method was defined, enabling proper inheritance chaining.
+
 ### Why Two Syntaxes?
 
 **REPL Mode** - Standard message passing:
@@ -89,7 +91,7 @@ Parser sees: Person at: "greet" put: [ ... ]
 Executes: Send 'at:put:' message to Person
 ```
 
-**File Definition Mode** - Special parsing:
+**File Definition Mode** - Special parsing with `>>`:
 ```
 Parser sees: Person>>greet [ ... ]
         ↓
@@ -99,6 +101,10 @@ Converts to: Person at: "greet" put: [ ... ]
         ↓
 Executes: Same as standard message send
 ```
+
+Both `self` and `super` are available inside methods:
+- `self` - The receiver of the message (dynamic dispatch from receiver's class)
+- `super` - The parent of the object where the method was defined (for calling parent methods)
 
 ## Message Sending
 
@@ -166,15 +172,17 @@ person := Person newWithName: "Alice" age: 30
 
 ```smalltalk
 Employee>>initialize [
-  super perform: "initialize"           # Call parent initialization
+  super initialize.                     # Call parent initialization
   salary := 0.0                         # Then init Employee ivars
 ]
 
 Employee>>greet [
   "Override parent method, call super for base behavior"
-  ^ (super perform: "greet") + " from " + department
+  ^ super greet + " from " + department
 ]
 ```
+
+The `super` keyword refers to the parent of the object where the current method was defined. This ensures that when you override a method, you can call the parent implementation using `super methodName`.
 
 ## File Structure by Convention
 
@@ -395,8 +403,8 @@ result := person greet.             # "Hello, Alice"
 1. ✅ Implemented `derive:` syntax in parser (as regular message)
 2. ✅ Added instance variable storage with 149x performance improvement
 3. ✅ Generated default accessors automatically (direct slot access)
-4. ⏳ `>>` method definition syntax (planned, not critical - current `at:put:` works)
-5. ✅ Added `self` support in methods (super pending)
+4. ✅ `>>` method definition syntax (parser support completed)
+5. ✅ Added `self` and `super` support in methods
 6. ✅ Both REPL and File Definition modes work
 7. ✅ Comprehensive test suite written and passing
 8. ✅ Cascade syntax implemented (`;` operator)
@@ -422,15 +430,17 @@ counter increment; increment; increment.
 
 ### Implementation Note
 
-**File syntax (`>>`)**: The `>>` syntax for method definitions in files is planned but not yet implemented. In the meantime, methods are defined using `at:put:` which works both in REPL and files:
+**File syntax (`>>`)**: The `>>` syntax for method definitions in files is now fully implemented. You can use either syntax:
 
 ```smalltalk
-# Current way (works everywhere)
-Person at: "greet:" put: [ :name | ^"Hello " + name ].
+# New way (cleaner, file-only)
+Person>>greet: name [ ^"Hello " + name ].
 
-# Planned way (not yet implemented)
-# Person>>greet: name [ ^"Hello " + name ]
+# Standard way (works in REPL and files)
+Person at: "greet:" put: [ :name | ^"Hello " + name ].
 ```
+
+The `>>` syntax is transformed by the parser into the standard `at:put:` message send, so both approaches are functionally equivalent.
 
 ## Resources
 

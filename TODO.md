@@ -43,8 +43,8 @@ This document tracks current work items, future directions, and known issues for
 - [x] Instance variable access via automatic getters/setters (automatically generated)
 - [x] Lexical closures with variable capture and non-local returns
 - [x] Cascade syntax (`;` operator) for multiple messages to same receiver
-- [ ] Method definition syntax (`>>`) for files (parser support pending)
-- [ ] `super` support for calling parent methods
+- [x] Method definition syntax (`>>`) for files (parser support completed)
+- [x] `super` support for calling parent methods
 - [ ] Enhanced control flow (loops, conditionals)
 
 ## Medium Priority Tasks
@@ -186,5 +186,5 @@ ntalkc hello.nt
 
 ---
 
-*Last Updated: 2026-01-28 (Object/Dictionary split, Symbol method keys, nimble local task, string concatenation with comma operator, collection access with `at:`)*
+*Last Updated: 2026-01-28 (super support, >> method definition syntax, Object/Dictionary split, Symbol method keys)*
 *Project follows Nim standard layout with `src/` directory structure.*
