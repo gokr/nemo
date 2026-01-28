@@ -560,6 +560,14 @@ proc writelineImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
 
 proc getSlotImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   ## Get slot value: obj getSlot: 'key'
+  when defined(release):
+    discard  # No debug in release
+  else:
+    debug("getSlotImpl called with ", args.len, " args")
+    if args.len > 0:
+      debug("arg[0] kind: ", args[0].kind)
+      if args[0].kind == vkSymbol:
+        debug("arg[0] symVal: ", args[0].symVal)
   if args.len < 1:
     return nilValue()
   let keyVal = args[0]
@@ -570,7 +578,15 @@ proc getSlotImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   of vkString:
     key = keyVal.strVal
   else:
+    when defined(release):
+      discard
+    else:
+      debug("getSlotImpl: key is not symbol or string, kind: ", keyVal.kind)
     return nilValue()
+  when defined(release):
+    discard
+  else:
+    debug("getSlotImpl: getting slot '", key, "'")
   return getSlot(self, key)
 
 proc setSlotValueImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
