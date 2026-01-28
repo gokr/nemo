@@ -58,7 +58,7 @@ suite "Cascade Tests":
 
   test "Evaluate simple cascade with counter object":
     let source = """
-    counter := Object derive.
+    counter := Dictionary derive.
     counter at: "value" put: 0.
     counter at: "increment" put: [ self at: "value" put: ((self at: "value") + 1) ].
     counter at: "get" put: [ ^self at: "value" ].

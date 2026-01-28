@@ -4,10 +4,14 @@
 # Tests basic parsing, objects, and evaluation
 #
 
+import std/logging
 import unittest
 import ../src/nimtalk/core/types
 import ../src/nimtalk/parser/[lexer, parser]
 import ../src/nimtalk/interpreter/[evaluator, objects]
+
+# Configure logging for tests - set to ERROR by default to keep test output clean
+configureLogging(lvlError)
 
 suite "Tokenizer":
   test "recognizes integer literals":
@@ -87,9 +91,9 @@ suite "Object system":
     check clone != root
 
   test "property access":
-    var obj = newObject()
-    obj.setProperty("test", toValue(42))
-    let val = obj.getProperty("test")
+    var dict = newDictionary()
+    dict.setProperty("test", toValue(42))
+    let val = dict.getProperty("test")
     check val.kind == vkInt
     check val.intVal == 42
 

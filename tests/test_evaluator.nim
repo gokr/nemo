@@ -29,7 +29,7 @@ suite "Evaluator: Basic Message Dispatch":
 
   test "evaluates simple property access via messages":
     let result = interp.evalStatements("""
-    obj := Object derive.
+    obj := Dictionary derive.
     obj at: "value" put: 42.
     result := obj at: "value"
     """)
@@ -57,7 +57,7 @@ suite "Evaluator: Method Execution with Parameters":
 
   test "executes methods with keyword parameters":
     let result = interp.evalStatements("""
-    Calculator := Object derive.
+    Calculator := Dictionary derive.
     Calculator at: "add:to:" put: [ :x y | ^x + y ].
 
     calc := Calculator derive.
@@ -70,7 +70,7 @@ suite "Evaluator: Method Execution with Parameters":
 
   test "executes methods with multiple keyword parameters":
     let result = interp.evalStatements("""
-    Point := Object derive: #(x y).
+    Point := Dictionary derive: #(x y).
     Point at: "setX:setY:" put: [ :newX :newY |
       self x: newX.
       self y: newY
