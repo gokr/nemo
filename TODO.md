@@ -50,9 +50,10 @@ This document tracks current work items, future directions, and known issues for
 ## Medium Priority Tasks
 
 ### 4. Standard Library Objects
-- [ ] Basic collection types (Array, Dictionary equivalents)
+- [x] Basic collection types (Array, Dictionary equivalents) - `at:` method implemented for array/table access
+- [x] String concatenation with comma (`,`) operator
 - [ ] Number objects with arithmetic operations
-- [ ] String objects with manipulation methods
+- [ ] String objects with additional manipulation methods
 - [ ] Boolean objects with conditional logic
 
 ### 5. Performance Optimization
@@ -185,5 +186,5 @@ ntalkc hello.nt
 
 ---
 
-*Last Updated: 2026-01-28 (Object/Dictionary split, Symbol method keys, nimble local task)*
+*Last Updated: 2026-01-28 (Object/Dictionary split, Symbol method keys, nimble local task, string concatenation with comma operator, collection access with `at:`)*
 *Project follows Nim standard layout with `src/` directory structure.*
