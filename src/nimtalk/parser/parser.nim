@@ -1,4 +1,4 @@
-import std/strutils
+import std/[strutils, logging]
 import ../parser/lexer
 import ../core/types
 
@@ -115,7 +115,7 @@ proc parsePrimary(parser: var Parser): Node =
 
   of tkLBracket:
     # Block literal
-    echo "parsePrimary: found block ["
+    debug("parsePrimary: found block [")
     return parser.parseBlock()
 
   of tkArrayStart:
@@ -136,19 +136,19 @@ proc parsePrimary(parser: var Parser): Node =
     return nil
 
   else:
-    echo "parsePrimary: ERROR unexpected token ", token.value; parser.parseError("Unexpected token: " & token.value)
+    debug("parsePrimary: unexpected token ", token.value)
+    parser.parseError("Unexpected token: " & token.value)
     return nil
 
 # Parse keyword message
 proc parseKeywordMessage(parser: var Parser, receiver: Node): MessageNode =
-  echo "parseKeywordMessage: entering, receiver type=", receiver.kind, " current token=", parser.peek().kind
+  debug("parseKeywordMessage: entering, receiver type=", receiver.kind, " current token=", parser.peek().kind)
   var selector = ""
   var arguments = newSeq[Node]()
 
   # Collect keyword segments and arguments
   while parser.peek().kind == tkKeyword:
     let token = parser.next()
-    echo "parseKeywordMessage: keyword token='", token.value, "'"
     selector.add(token.value)  # Includes colon
 
     let arg = parser.parseExpression(parseMessages = false)
@@ -305,10 +305,8 @@ proc checkForCascade(parser: var Parser, primary: Node, firstMsg: MessageNode): 
 
 # Parse block literal
 proc parseBlock*(parser: var Parser): BlockNode =
-  echo "parseBlock: entering"
   if not parser.expect(tkLBracket):
     parser.parseError("Expected '[' for block start")
-    echo "parseBlock: expected [ not found"
     return nil
 
   let blk = BlockNode()
@@ -335,41 +333,32 @@ proc parseBlock*(parser: var Parser): BlockNode =
         discard parser.next()
 
     # Expect | after parameters
-    echo "parseBlock: after parameters, token kind=", parser.peek().kind, " value='", parser.peek().value, "'"
     if not (parser.peek().kind == tkSpecial and parser.peek().value == "|"):
       parser.parseError("Expected | after block parameters")
-      echo "parseBlock: expected | after parameters"
       return nil
     discard parser.next()
 
   # Parse statements until closing bracket
-  echo "parseBlock: starting body parse, current token=", parser.peek().kind
   while true:
     # Check for closing bracket first
     if parser.expect(tkRBracket):
-      echo "parseBlock: found ], breaking"
       break
 
     # Check for EOF
     if parser.peek().kind == tkEOF:
       parser.parseError("Unclosed block - expected ']'")
-      echo "parseBlock: unclosed block, EOF"
       return nil
 
     let stmt = parser.parseStatement(parseMessages = true)
-    echo "parseBlock: stmt parsed=", stmt != nil
     if stmt != nil:
       blk.body.add(stmt)
     else:
-      echo "parseBlock: stmt is nil, breaking"
       break
 
   # After loop, make sure we found the closing bracket
   if parser.peek().kind == tkRBracket:
-    echo "parseBlock: consuming ] after break"
     discard parser.next()
 
-  echo "parseBlock: done, token after ]=", parser.peek().kind, "'", parser.peek().value, "'"
   return blk
 
 # Parse array literal #(...)
