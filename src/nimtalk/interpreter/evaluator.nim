@@ -1,4 +1,4 @@
-import std/[tables, strutils, math, strformat, logging]
+import std/[tables, strutils, math, strformat, logging, os]
 import ../core/types
 import ../parser/lexer
 import ../parser/parser
@@ -570,7 +570,11 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
 
       # Propagate hasReturned flag to all activations from current up to target
       var current = interp.currentActivation
+      var safetyCount = 0
       while current != nil and current != targetActivation:
+        inc safetyCount
+        if safetyCount > 1000:
+          raise newException(EvalError, "Return propagation exceeded 1000 activations - possible infinite loop")
         current.hasReturned = true
         # Also set return value on intermediate activations for proper propagation
         current.returnValue = value
@@ -879,20 +883,28 @@ proc doit*(interp: var Interpreter, source: string, dumpAst = false): (NodeValue
 # Batch evaluation of multiple statements
 proc evalStatements*(interp: var Interpreter, source: string): (seq[NodeValue], string) =
   ## Parse and evaluate multiple statements
+  debug("evalStatements: starting lex")
   let tokens = lex(source)
+  debug("evalStatements: got ", tokens.len, " tokens, starting parse")
   var parser = initParser(tokens)
   let nodes = parser.parseStatements()
+  debug("evalStatements: parsed ", nodes.len, " nodes, parser pos=", parser.pos, ", hasError=", parser.hasError)
+  if parser.pos < parser.tokens.len:
+    debug("evalStatements: leftover token at pos ", parser.pos, " = ", parser.tokens[parser.pos].kind, " value='", parser.tokens[parser.pos].value, "'")
 
   if parser.hasError:
     return (@[], "Parse error: " & parser.errorMsg)
 
   var results = newSeq[NodeValue]()
 
+  debug("evalStatements: starting evaluation")
   try:
-    for node in nodes:
+    for i, node in nodes:
+      debug("evalStatements: evaluating node ", i, " of ", nodes.len)
       let evalResult = interp.eval(node)
       results.add(evalResult)
 
+    debug("evalStatements: done, returning ", results.len, " results")
     return (results, "")
   except EvalError as e:
     return (@[], "Runtime error: " & e.msg)
@@ -1084,6 +1096,10 @@ proc initGlobals*(interp: var Interpreter) =
   interp.globals["true"] = trueObj.toValue()
   interp.globals["false"] = falseObj.toValue()
   interp.globals["nil"] = nilValue()
+
+  # Set global true/false values for comparison operators
+  trueValue = trueObj.toValue()
+  falseValue = falseObj.toValue()
 
   # Note: do: method is registered on array and table proxy objects dynamically
   # It would be better to have a Collection prototype, but for now we rely on
