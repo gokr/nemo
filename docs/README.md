@@ -1,0 +1,39 @@
+# Nimtalk Documentation
+
+This directory contains documentation for the Nimtalk programming language.
+
+## Structure
+
+### User Documentation (Current)
+
+These documents describe the current implementation and are kept up to date:
+
+- **[SYNTAX-QUICKREF-updated.md](SYNTAX-QUICKREF-updated.md)** - Quick reference for Nimtalk syntax
+- **[SYNTAX-REALITY.md](SYNTAX-REALITY.md)** - Current implemented syntax details
+- **[SPECIFICATION.md](SPECIFICATION.md)** - Language specification
+- **[TOOLS_AND_DEBUGGING.md](TOOLS_AND_DEBUGGING.md)** - Guide for using ntalk and ntalkc tools
+- **[closures.md](closures.md)** - Documentation of closure implementation
+
+### Research and Historical Documents
+
+The [`research/`](research/) subdirectory contains historical design documents, implementation plans, and proposals. These are kept for reference but may not reflect the current state of the implementation:
+
+- Design proposals for the object model
+- Implementation plans (marked as complete)
+- Decision records from early development
+
+When in doubt, consult the user documentation above rather than research documents.
+
+## Quick Start
+
+New to Nimtalk? Start with:
+
+1. The [main README](../README.md) for an overview
+2. [SYNTAX-QUICKREF-updated.md](SYNTAX-QUICKREF-updated.md) for syntax reference
+3. [TOOLS_AND_DEBUGGING.md](TOOLS_AND_DEBUGGING.md) for using the tools
+
+## Contributing to Documentation
+
+- Keep user-facing docs current with implementation changes
+- Add research documents to `research/` subdirectory
+- Follow the style guidelines in [CLAUDE.md](../CLAUDE.md)
