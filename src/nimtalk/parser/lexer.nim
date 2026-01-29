@@ -393,6 +393,10 @@ proc nextToken*(lexer: var Lexer): Token =
     elif nextChar == '(':
       discard lexer.next()
       return Token(kind: tkArrayStart, value: "#(", line: startLine, col: startCol)
+    # Check for array literal #[ (alternative syntax)
+    elif nextChar == '[':
+      discard lexer.next()
+      return Token(kind: tkArrayStart, value: "#[", line: startLine, col: startCol)
     # Check for table literal #{
     elif nextChar == '{':
       discard lexer.next()
