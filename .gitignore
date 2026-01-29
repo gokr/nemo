@@ -54,6 +54,11 @@ tests/test_simple_derive
 tests/test_derive_from_nimtalk
 tests/benchmark_simple
 examples/test_primitive
+tests/test_cascade
+tests/test_nested_blocks
+tests/test_nested_blocks.nim
+tests/test_stdlib
+tests/test_super_and_syntax
 
 # Test results
 testresults/
