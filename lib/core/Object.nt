@@ -135,7 +135,7 @@ Object>>initialize [
 
 Object>>isNil [
   "Check if object is nil"
-  ^ self == nil
+  ^ self = nil
 ].
 
 Object>>notNil [

@@ -16,44 +16,53 @@ suite "Stdlib: Numbers":
     loadStdlib(interp)
 
   test "arithmetic operations work":
-    let result = interp.doit("3 + 4")
+    let (result, err) = interp.doit("3 + 4")
+    check(err.len == 0)
     check(result.kind == vkInt)
     check(result.intVal == 7)
 
   test "subtraction works":
-    let result = interp.doit("10 - 3")
+    let (result, err) = interp.doit("10 - 3")
+    check(err.len == 0)
     check(result.kind == vkInt)
     check(result.intVal == 7)
 
   test "multiplication works":
-    let result = interp.doit("6 * 7")
+    let (result, err) = interp.doit("6 * 7")
+    check(err.len == 0)
     check(result.kind == vkInt)
     check(result.intVal == 42)
 
   test "integer division // works":
-    let result = interp.doit("17 // 5")
+    let (result, err) = interp.doit("17 // 5")
+    check(err.len == 0)
     check(result.kind == vkInt)
     check(result.intVal == 3)
 
   test "modulo \\ works":
-    let result = interp.doit("17 \\ 5")
+    let (result, err) = interp.doit("17 \\ 5")
+    check(err.len == 0)
     check(result.kind == vkInt)
     check(result.intVal == 2)
 
   test "comparison < works":
-    let result = interp.doit("3 < 5")
+    let (result, err) = interp.doit("3 < 5")
+    check(err.len == 0)
     check(result.kind == vkObject)
 
   test "comparison > works":
-    let result = interp.doit("5 > 3")
+    let (result, err) = interp.doit("5 > 3")
+    check(err.len == 0)
     check(result.kind == vkObject)
 
   test "comparison <= works":
-    let result = interp.doit("3 <= 3")
+    let (result, err) = interp.doit("3 <= 3")
+    check(err.len == 0)
     check(result.kind == vkObject)
 
   test "comparison >= works":
-    let result = interp.doit("5 >= 3")
+    let (result, err) = interp.doit("5 >= 3")
+    check(err.len == 0)
     check(result.kind == vkObject)
 
   test "abs works":
