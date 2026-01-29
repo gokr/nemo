@@ -563,8 +563,19 @@ proc parseStatement(parser: var Parser; parseMessages = true): Node =
     return parser.parsePrimitive()
 
   # Check for return statement
-  if parser.expect(tkReturn):
+  if parser.peek().kind == tkReturn:
+    discard parser.next()  # consume ^
+    # For return statements, we need to parse the expression including any assignment
+    # because ^value := expr should be parsed as return (assignment), not (return value) := expr
     let expr = parser.parseExpression(parseMessages = parseMessages)
+    # Check if the expression is followed by := (assignment to the expression's result)
+    # This handles cases like ^value := value + 1
+    if parser.peek().kind == tkAssign and expr of IdentNode:
+      discard parser.next()  # consume :=
+      let varName = expr.IdentNode.name
+      let valueExpr = parser.parseExpression()
+      let assignNode = AssignNode(variable: varName, expression: valueExpr)
+      return ReturnNode(expression: assignNode)
     return ReturnNode(expression: expr)
 
   # Parse expression

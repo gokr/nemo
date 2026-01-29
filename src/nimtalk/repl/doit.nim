@@ -11,7 +11,7 @@ import ../interpreter/evaluator
 type
   DoitContext* = ref object
     interpreter*: Interpreter
-    globals*: Table[string, NodeValue]
+    globals*: ref Table[string, NodeValue]
     history*: seq[string]
     prompt*: string
     showResults*: bool
@@ -21,7 +21,7 @@ proc newDoitContext*(trace: bool = false): DoitContext =
   ## Create new REPL context
   result = DoitContext(
     interpreter: newInterpreter(trace),
-    globals: initTable[string, NodeValue](),
+    globals: new(Table[string, NodeValue]),
     history: @["-- Nimtalk REPL History --"],
     prompt: "nt> ",
     showResults: true
@@ -66,7 +66,7 @@ proc printHelp() =
 # Show global variables
 proc showGlobals(ctx: DoitContext) =
   echo "\nGlobal Variables:"
-  for key, val in ctx.globals:
+  for key, val in ctx.globals[]:
     echo "  " & key & " = " & val.toString()
   echo ""
 

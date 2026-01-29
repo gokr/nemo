@@ -378,7 +378,26 @@ proc clone*(self: DictionaryObj): NodeValue =
   objClone.hasSlots = self.hasSlots
   objClone.slots = self.slots
   objClone.slotNames = self.slotNames
-  objClone.properties = self.properties  # Copy properties for Dictionary
+  # Deep copy properties, especially for blocks that have captured environments
+  objClone.properties = initTable[string, NodeValue]()
+  for key, value in self.properties:
+    if value.kind == vkBlock:
+      # Create a copy of the block with a fresh captured environment
+      let origBlock = value.blockVal
+      let newBlock = BlockNode(
+        parameters: origBlock.parameters,
+        temporaries: origBlock.temporaries,
+        body: origBlock.body,
+        isMethod: origBlock.isMethod,
+        homeActivation: origBlock.homeActivation
+      )
+      # Copy captured environment (each clone gets its own cells)
+      newBlock.capturedEnv = initTable[string, MutableCell]()
+      for name, cell in origBlock.capturedEnv:
+        newBlock.capturedEnv[name] = MutableCell(value: cell.value)
+      objClone.properties[key] = NodeValue(kind: vkBlock, blockVal: newBlock)
+    else:
+      objClone.properties[key] = value
   result = NodeValue(kind: vkObject, objVal: objClone.ProtoObject)
 
 # Core method implementations
@@ -388,7 +407,24 @@ proc cloneImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   if self of DictionaryObj:
     let selfDict = cast[DictionaryObj](self)
     let clone = DictionaryObj()
-    clone.properties = selfDict.properties
+    # Deep copy properties for blocks
+    clone.properties = initTable[string, NodeValue]()
+    for key, value in selfDict.properties:
+      if value.kind == vkBlock:
+        let origBlock = value.blockVal
+        let newBlock = BlockNode(
+          parameters: origBlock.parameters,
+          temporaries: origBlock.temporaries,
+          body: origBlock.body,
+          isMethod: origBlock.isMethod,
+          homeActivation: origBlock.homeActivation
+        )
+        newBlock.capturedEnv = initTable[string, MutableCell]()
+        for name, cell in origBlock.capturedEnv:
+          newBlock.capturedEnv[name] = MutableCell(value: cell.value)
+        clone.properties[key] = NodeValue(kind: vkBlock, blockVal: newBlock)
+      else:
+        clone.properties[key] = value
     clone.methods = selfDict.methods
     clone.parents = selfDict.parents
     clone.tags = selfDict.tags

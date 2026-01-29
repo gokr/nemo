@@ -49,6 +49,7 @@ type
     definingObject*: ProtoObject  # object where method was found (for super)
     pc*: int                  # program counter
     locals*: Table[string, NodeValue]  # local variables
+    capturedVars*: Table[string, MutableCell]  # shared captured vars for sibling blocks
     returnValue*: NodeValue   # return value
     hasReturned*: bool        # non-local return flag
 
@@ -133,6 +134,11 @@ type
     message*: string
     stackTrace*: string
     signaler*: ProtoObject
+
+  # Global registry object - shared between Nim and Nimtalk
+  GlobalObj* = ref object of ProtoObject
+    tableRef*: ref Table[string, NodeValue]  # Shared heap-allocated table
+    categories*: Table[string, seq[string]]  # category name -> global names
 
   # Compiled method representation
   CompiledMethod* = ref object of RootObj

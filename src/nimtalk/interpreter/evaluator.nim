@@ -130,7 +130,7 @@ type
     stackDepth*: int                # Stack depth when handler installed
 
   Interpreter* = ref object
-    globals*: Table[string, NodeValue]
+    globals*: ref Table[string, NodeValue]
     activationStack*: seq[Activation]
     currentActivation*: Activation
     currentReceiver*: ProtoObject
@@ -153,7 +153,7 @@ proc evalCascade(interp: var Interpreter, cascadeNode: CascadeNode): NodeValue
 proc newInterpreter*(trace: bool = false): Interpreter =
   ## Create a new interpreter instance
   result = Interpreter(
-    globals: initTable[string, NodeValue](),
+    globals: new(Table[string, NodeValue]),
     activationStack: @[],
     currentActivation: nil,
     currentReceiver: nil,
@@ -161,6 +161,9 @@ proc newInterpreter*(trace: bool = false): Interpreter =
     traceExecution: trace,
     lastResult: nilValue()
   )
+
+  # Initialize the heap-allocated globals table
+  result.globals[] = initTable[string, NodeValue]()
 
   # Initialize root object
   result.rootObject = initRootObject()
@@ -271,9 +274,9 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
     activation = activation.sender
 
   # Check globals
-  if name in interp.globals:
-    debug("Found variable in globals: ", name, " = ", interp.globals[name].toString())
-    let val = interp.globals[name]
+  if name in interp.globals[]:
+    debug("Found variable in globals: ", name, " = ", interp.globals[][name].toString())
+    let val = interp.globals[][name]
     return (true, val)
 
   # Check if it's a property on self (only for Dictionary objects)
@@ -300,25 +303,34 @@ proc setVariable(interp: var Interpreter, name: string, value: NodeValue) =
   # First check if there's a current activation with a captured environment
   # that contains this variable
   if interp.currentActivation != nil:
+    # Check if current method has a captured environment with this variable
+    # This must be checked BEFORE locals because captured vars are copied to locals
+    let currentMethod = interp.currentActivation.currentMethod
+    if currentMethod != nil:
+      if currentMethod.capturedEnv.len > 0 and name in currentMethod.capturedEnv:
+        currentMethod.capturedEnv[name].value = value
+        # Also update the local copy to keep them in sync
+        interp.currentActivation.locals[name] = value
+        return
+
     # Check if variable exists in current activation's locals
     if name in interp.currentActivation.locals:
       interp.currentActivation.locals[name] = value
       return
 
-    # Check if current method has a captured environment with this variable
-    let currentMethod = interp.currentActivation.currentMethod
-    if currentMethod != nil:
-      if currentMethod.capturedEnv.len > 0 and name in currentMethod.capturedEnv:
-        currentMethod.capturedEnv[name].value = value
-        return
+    # Check if variable exists in globals - if so, update it there
+    if name in interp.globals[]:
+      interp.globals[][name] = value
+      debug("Global updated: ", name, " = ", value.toString())
+      return
 
     # Create in current activation
     interp.currentActivation.locals[name] = value
     return
 
   # Set as global
-  interp.globals[name] = value
-  debug("Global set: ", name, " now globals count: ", interp.globals.len)
+  interp.globals[][name] = value
+  debug("Global set: ", name, " now globals count: ", interp.globals[].len)
 
 # ============================================================================
 # Environment Capture and Block Invocation
@@ -352,9 +364,19 @@ proc captureEnvironment*(interp: Interpreter, blockNode: BlockNode) =
       if name != "self" and name != "super":
         # Only capture if not already captured (inner scope shadows outer)
         if not blockNode.capturedEnv.hasKey(name):
-          let cell = MutableCell(value: value)
+          # Check if this activation already has a captured cell for this variable
+          # (from a sibling block created earlier in the same activation)
+          var cell: MutableCell
+          if activation.capturedVars.hasKey(name):
+            # Share the existing cell from a sibling block
+            cell = activation.capturedVars[name]
+            debug("Sharing captured variable from sibling: ", name)
+          else:
+            # Create a new cell and store it in the activation for sibling blocks
+            cell = MutableCell(value: value)
+            activation.capturedVars[name] = cell
+            debug("Captured variable: ", name, " = ", value.toString())
           blockNode.capturedEnv[name] = cell
-          debug("Captured variable: ", name, " = ", value.toString())
 
     activation = activation.sender
 
@@ -583,8 +605,16 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     return interp.evalMessage(node.MessageNode)
 
   of nkBlock:
-    # Block literal - capture environment and return as value
-    let blockNode = node.BlockNode
+    # Block literal - create a copy and capture environment
+    # We must copy because the AST node is shared and we need unique captured env per evaluation
+    let origBlock = node.BlockNode
+    let blockNode = BlockNode(
+      parameters: origBlock.parameters,
+      temporaries: origBlock.temporaries,
+      body: origBlock.body,
+      isMethod: origBlock.isMethod
+      # capturedEnv and homeActivation will be set by captureEnvironment
+    )
     captureEnvironment(interp, blockNode)
     return NodeValue(kind: vkBlock, blockVal: blockNode)
 
@@ -674,13 +704,13 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
           if interp.currentReceiver != nil:
             elements.add(interp.currentReceiver.toValue())
           else:
-            elements.add(interp.globals["Object"])
+            elements.add(interp.globals[]["Object"])
         of "super":
           # super refers to parent of current receiver
           if interp.currentReceiver != nil and interp.currentReceiver.parents.len > 0:
             elements.add(interp.currentReceiver.parents[0].toValue())
           else:
-            elements.add(interp.globals["Object"])
+            elements.add(interp.globals[]["Object"])
         else:
           debug("Identifier in array literal treated as symbol: ", ident.name)
           elements.add(getSymbol(ident.name))
@@ -696,12 +726,18 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     let tab = node.TableNode
     var table = initTable[string, NodeValue]()
     for entry in tab.entries:
-      # Keys must evaluate to strings
+      # Keys must evaluate to strings or symbols
       let keyVal = interp.eval(entry.key)
-      if keyVal.kind != vkString:
-        raise newException(EvalError, "Table key must be string, got: " & $keyVal.kind)
+      var keyStr: string
+      case keyVal.kind
+      of vkString:
+        keyStr = keyVal.strVal
+      of vkSymbol:
+        keyStr = keyVal.symVal
+      else:
+        raise newException(EvalError, "Table key must be string or symbol, got: " & $keyVal.kind)
       let valueVal = interp.eval(entry.value)
-      table[keyVal.strVal] = valueVal
+      table[keyStr] = valueVal
     # Wrap table in proxy object so it can receive messages like at:
     return wrapTableAsObject(table)
 
@@ -1280,6 +1316,35 @@ proc signalImpl(self: ProtoObject, args: seq[NodeValue]): NodeValue =
     message = ex.message
   raise newException(ValueError, message)
 
+# Global namespace methods - using shared table reference
+proc globalAtImpl(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Global at: key - lookup global by name
+  if args.len < 1 or args[0].kind != vkString:
+    return nilValue()
+  let key = args[0].strVal
+  if interp.globals[].hasKey(key):
+    return interp.globals[][key]
+  return nilValue()
+
+proc globalAtPutImpl(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Global at: key put: value - set global
+  if args.len < 2 or args[0].kind != vkString:
+    return nilValue()
+  let key = args[0].strVal
+  let val = args[1]
+  interp.globals[][key] = val
+  return val
+
+proc globalAtIfAbsentImpl(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Global at: key ifAbsent: block - lookup or execute block
+  if args.len < 2 or args[0].kind != vkString or args[1].kind != vkBlock:
+    return nilValue()
+  let key = args[0].strVal
+  if interp.globals[].hasKey(key):
+    return interp.globals[][key]
+  # Execute the ifAbsent block
+  return evalBlock(interp, self, args[1].blockVal)
+
 # Array iteration method
 proc arrayDoImpl(interp: var Interpreter, self: ProtoObject, args: seq[NodeValue]): NodeValue =
   ## Iterate over array elements: arr do: [ :elem | code ]
@@ -1312,12 +1377,12 @@ proc initGlobals*(interp: var Interpreter) =
   ## Initialize built-in global variables
 
   # Add some useful constants
-  interp.globals["Object"] = interp.rootObject.toValue()
-  interp.globals["root"] = interp.rootObject.toValue()
+  interp.globals[]["Object"] = interp.rootObject.toValue()
+  interp.globals[]["root"] = interp.rootObject.toValue()
 
   # Add Dictionary to globals
   if dictionaryPrototype != nil:
-    interp.globals["Dictionary"] = dictionaryPrototype.ProtoObject.toValue()
+    interp.globals[]["Dictionary"] = dictionaryPrototype.ProtoObject.toValue()
 
   # Create Float prototype
   let floatProto = ProtoObject()
@@ -1330,7 +1395,7 @@ proc initGlobals*(interp: var Interpreter) =
   floatProto.hasSlots = false
   floatProto.slots = @[]
   floatProto.slotNames = initTable[string, int]()
-  interp.globals["Float"] = floatProto.toValue()
+  interp.globals[]["Float"] = floatProto.toValue()
 
   # Create Array prototype
   let arrayProto = ProtoObject()
@@ -1354,7 +1419,7 @@ proc initGlobals*(interp: var Interpreter) =
   arrayDoMethod.hasInterpreterParam = true
   addMethod(arrayProto, "do:", arrayDoMethod)
 
-  interp.globals["Array"] = arrayProto.toValue()
+  interp.globals[]["Array"] = arrayProto.toValue()
   arrayPrototypeCache = arrayProto  # Set cache for array literals
 
   # Create Table prototype
@@ -1374,7 +1439,7 @@ proc initGlobals*(interp: var Interpreter) =
   tableNewMethod.nativeImpl = cast[pointer](tableNewImpl)
   addMethod(tableProto, "primitiveTableNew", tableNewMethod)
 
-  interp.globals["Table"] = tableProto.toValue()
+  interp.globals[]["Table"] = tableProto.toValue()
 
   # Create String prototype
   let stringProto = ProtoObject()
@@ -1409,7 +1474,7 @@ proc initGlobals*(interp: var Interpreter) =
   stringIndexOfMethod.nativeImpl = cast[pointer](stringIndexOfImpl)
   addMethod(stringProto, "primitiveIndexOf:", stringIndexOfMethod)
 
-  interp.globals["String"] = stringProto.toValue()
+  interp.globals[]["String"] = stringProto.toValue()
 
   # Create FileStream prototype
   let fileStreamProto = FileStreamObj()
@@ -1451,11 +1516,11 @@ proc initGlobals*(interp: var Interpreter) =
   fileReadAllMethod.nativeImpl = cast[pointer](fileReadAllImpl)
   addMethod(fileStreamProto.ProtoObject, "primitiveFileReadAll", fileReadAllMethod)
 
-  interp.globals["FileStream"] = fileStreamProto.ProtoObject.toValue()
+  interp.globals[]["FileStream"] = fileStreamProto.ProtoObject.toValue()
 
   # Add Random to globals
   if randomPrototype != nil:
-    interp.globals["Random"] = randomPrototype.ProtoObject.toValue()
+    interp.globals[]["Random"] = randomPrototype.ProtoObject.toValue()
 
   # Create and register Stdout object
   let stdoutObj = ProtoObject()
@@ -1476,8 +1541,8 @@ proc initGlobals*(interp: var Interpreter) =
   writelineMethod.nativeImpl = cast[pointer](writelineImpl)
   addMethod(stdoutObj, "writeline:", writelineMethod)
 
-  interp.globals["Stdout"] = stdoutObj.toValue()
-  interp.globals["stdout"] = stdoutObj.toValue()
+  interp.globals[]["Stdout"] = stdoutObj.toValue()
+  interp.globals[]["stdout"] = stdoutObj.toValue()
 
   # Create Transcript object for logging/output
   let transcriptObj = ProtoObject()
@@ -1502,39 +1567,39 @@ proc initGlobals*(interp: var Interpreter) =
   showCrMethod.nativeImpl = cast[pointer](writelineImpl)
   addMethod(transcriptObj, "show:cr:", showCrMethod)
 
-  interp.globals["Transcript"] = transcriptObj.toValue()
+  interp.globals[]["Transcript"] = transcriptObj.toValue()
 
-  # Create Global namespace object (provides at: and at:put: for global access)
-  let globalNamespace = DictionaryObj()
-  globalNamespace.methods = initTable[string, BlockNode]()
-  globalNamespace.parents = @[interp.rootObject.ProtoObject]
-  globalNamespace.tags = @["Dictionary", "Global"]
-  globalNamespace.isNimProxy = false
-  globalNamespace.nimValue = nil
-  globalNamespace.nimType = ""
-  globalNamespace.hasSlots = false
-  globalNamespace.slots = @[]
-  globalNamespace.slotNames = initTable[string, int]()
-  globalNamespace.properties = initTable[string, NodeValue]()
+  # Create Global namespace object with shared table reference
+  let globalObj = GlobalObj()
+  globalObj.methods = initTable[string, BlockNode]()
+  globalObj.parents = @[interp.rootObject.ProtoObject]
+  globalObj.tags = @["Global", "Registry"]
+  globalObj.isNimProxy = false
+  globalObj.nimValue = nil
+  globalObj.nimType = ""
+  globalObj.hasSlots = false
+  globalObj.slots = @[]
+  globalObj.slotNames = initTable[string, int]()
+  globalObj.tableRef = interp.globals  # Share the heap-allocated table!
+  globalObj.categories = initTable[string, seq[string]]()
 
   # Add at: and at:put: methods to Global
   let globalAtMethod = createCoreMethod("at:")
-  globalAtMethod.nativeImpl = cast[pointer](atImpl)
-  addMethod(globalNamespace.ProtoObject, "at:", globalAtMethod)
+  globalAtMethod.nativeImpl = cast[pointer](globalAtImpl)
+  globalAtMethod.hasInterpreterParam = true
+  addMethod(globalObj.ProtoObject, "at:", globalAtMethod)
 
   let globalAtPutMethod = createCoreMethod("at:put:")
-  globalAtPutMethod.nativeImpl = cast[pointer](atPutImpl)
-  addMethod(globalNamespace.ProtoObject, "at:put:", globalAtPutMethod)
+  globalAtPutMethod.nativeImpl = cast[pointer](globalAtPutImpl)
+  globalAtPutMethod.hasInterpreterParam = true
+  addMethod(globalObj.ProtoObject, "at:put:", globalAtPutMethod)
 
   let globalAtIfAbsentMethod = createCoreMethod("at:ifAbsent:")
-  globalAtIfAbsentMethod.nativeImpl = cast[pointer](atImpl)  # Same for now
-  addMethod(globalNamespace.ProtoObject, "at:ifAbsent:", globalAtIfAbsentMethod)
+  globalAtIfAbsentMethod.nativeImpl = cast[pointer](globalAtIfAbsentImpl)
+  globalAtIfAbsentMethod.hasInterpreterParam = true
+  addMethod(globalObj.ProtoObject, "at:ifAbsent:", globalAtIfAbsentMethod)
 
-  interp.globals["Global"] = globalNamespace.ProtoObject.toValue()
-
-  # Copy globals to Global namespace for Smalltalk-level access
-  for key, val in interp.globals:
-    globalNamespace.properties[key] = val
+  interp.globals[]["Global"] = globalObj.ProtoObject.toValue()
 
   # Create true and false as objects with ifTrue: and ifFalse: methods
   let trueObj = ProtoObject()
@@ -1599,11 +1664,11 @@ proc initGlobals*(interp: var Interpreter) =
   onDoMethod.hasInterpreterParam = true
   addMethod(blockProto, "on:do:", onDoMethod)
 
-  interp.globals["Block"] = blockProto.toValue()
+  interp.globals[]["Block"] = blockProto.toValue()
 
-  interp.globals["true"] = trueObj.toValue()
-  interp.globals["false"] = falseObj.toValue()
-  interp.globals["nil"] = nilValue()
+  interp.globals[]["true"] = trueObj.toValue()
+  interp.globals[]["false"] = falseObj.toValue()
+  interp.globals[]["nil"] = nilValue()
 
   # Set global true/false values for comparison operators
   trueValue = trueObj.toValue()
@@ -1632,8 +1697,8 @@ proc initGlobals*(interp: var Interpreter) =
   signalNoArgMethod.nativeImpl = cast[pointer](signalImpl)
   addMethod(exceptionProto.ProtoObject, "signal", signalNoArgMethod)
 
-  interp.globals["Exception"] = exceptionProto.ProtoObject.toValue()
-  interp.globals["Error"] = exceptionProto.ProtoObject.toValue()
+  interp.globals[]["Exception"] = exceptionProto.ProtoObject.toValue()
+  interp.globals[]["Error"] = exceptionProto.ProtoObject.toValue()
 
   # Note: do: method is registered on array and table proxy objects dynamically
   # It would be better to have a Collection prototype, but for now we rely on

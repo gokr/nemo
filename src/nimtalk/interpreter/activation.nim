@@ -20,6 +20,7 @@ proc newActivation*(blk: BlockNode,
     definingObject: definingObject,
     pc: 0,
     locals: initTable[string, NodeValue](),
+    capturedVars: initTable[string, MutableCell](),
     returnValue: nilValue(),
     hasReturned: false
   )
