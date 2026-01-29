@@ -138,12 +138,15 @@ Working:
 - Prototype object system with property bags and slot-based instance variables
 - REPL with file execution
 - **Block closures with lexical scoping, environment capture, and non-local returns**
+- **Closure variable isolation (independent counter instances)**
+- **Sibling block variable sharing (multiple closures accessing shared state)**
 - Data structure literals (arrays, tables, object literals)
 - Method definition syntax (`>>`) for cleaner method declarations
 - `self` and `super` support for method dispatch
 - Base library (collections, core objects)
+- **All 47 tests passing** ✅
 
-**New:** Full Smalltalk-style closures are now implemented! See [docs/closures.md](docs/closures.md) for details.
+**New:** Full Smalltalk-style closures are now implemented with proper variable isolation and sharing! See [docs/closures.md](docs/closures.md) for details.
 
 In progress:
 - Compiler to Nim (basic infrastructure in place)

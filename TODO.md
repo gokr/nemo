@@ -4,14 +4,16 @@ This document tracks current work items and future directions for Nimtalk develo
 
 ## Current Status
 
-**Core Language**: The interpreter is functional with:
+**Core Language**: The interpreter is fully functional with:
 - Lexer, parser, AST interpreter
 - Prototype object system with slots and property bags
 - REPL with file execution
-- Block closures with lexical scoping and non-local returns
+- **Block closures with full lexical scoping, environment capture, and non-local returns** ✅
+- **Closure variable isolation and sibling block sharing** ✅
 - Method definition syntax (`>>`)
 - `self` and `super` support
 - Standard library (collections, core objects)
+- **All 47 tests passing** ✅
 
 **Not Yet Implemented**: Compiler (ntalkc is currently a stub), FFI, advanced standard library.
 
@@ -62,10 +64,12 @@ This document tracks current work items and future directions for Nimtalk develo
 
 ## Known Issues
 
-- Parser edge cases with nested blocks
+- ~~Parser edge cases with nested blocks~~ ✅ Fixed
+- ~~Closure variable isolation~~ ✅ Fixed
+- ~~Non-local return implementation~~ ✅ Fixed
 - Memory management for circular references
 - Error handling improvements needed
-- Test coverage gaps in edge cases
+- Compiler implementation (ntalkc is stub)
 
 ## Documentation Needs
 
@@ -85,4 +89,4 @@ nimble clean       # Clean artifacts
 
 ---
 
-*Last Updated: 2026-01-29*
+*Last Updated: 2026-01-30*
