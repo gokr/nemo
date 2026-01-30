@@ -124,7 +124,6 @@ proc addMethod*(obj: ProtoObject, selector: string, blk: BlockNode) =
   ## Add a method to an object's method dictionary using canonical symbol
   let sym = getSymbol(selector)
   obj.methods[sym.symVal] = blk
-  debug("Added method: ", selector, " to object with tags: ", $obj.tags)
 
 proc addDictionaryProperty*(dict: DictionaryObj, name: string, value: NodeValue) =
   ## Add a property to a Dictionary's property bag
@@ -205,6 +204,43 @@ proc initRootObject*(): RootObject =
     let deriveWithIVarsMethod = createCoreMethod("derive:")
     deriveWithIVarsMethod.nativeImpl = cast[pointer](deriveWithIVarsImpl)
     addMethod(rootObject, "derive:", deriveWithIVarsMethod)
+
+    # Register primitives with internal names for perform:with: support
+    let primitiveCloneMethod = createCoreMethod("primitiveClone")
+    primitiveCloneMethod.nativeImpl = cast[pointer](cloneImpl)
+    addMethod(rootObject, "primitiveClone", primitiveCloneMethod)
+
+    let primitiveDeriveMethod = createCoreMethod("primitiveDerive")
+    primitiveDeriveMethod.nativeImpl = cast[pointer](deriveImpl)
+    addMethod(rootObject, "primitiveDerive", primitiveDeriveMethod)
+
+    let primitiveDeriveWithIVarsMethod = createCoreMethod("primitiveDeriveWithIVars:")
+    primitiveDeriveWithIVarsMethod.nativeImpl = cast[pointer](deriveWithIVarsImpl)
+    addMethod(rootObject, "primitiveDeriveWithIVars:", primitiveDeriveWithIVarsMethod)
+
+    let primitiveAtMethod = createCoreMethod("primitiveAt:")
+    primitiveAtMethod.nativeImpl = cast[pointer](atImpl)
+    addMethod(rootObject, "primitiveAt:", primitiveAtMethod)
+
+    let primitiveAtPutMethod = createCoreMethod("primitiveAt:put:")
+    primitiveAtPutMethod.nativeImpl = cast[pointer](atPutImpl)
+    addMethod(rootObject, "primitiveAt:put:", primitiveAtPutMethod)
+
+    let primitiveHasPropertyMethod = createCoreMethod("primitiveHasProperty:")
+    primitiveHasPropertyMethod.nativeImpl = cast[pointer](atImpl)  # atImpl handles property check
+    addMethod(rootObject, "primitiveHasProperty:", primitiveHasPropertyMethod)
+
+    let primitiveRespondsToMethod = createCoreMethod("primitiveRespondsTo:")
+    primitiveRespondsToMethod.nativeImpl = cast[pointer](atImpl)  # Reuse atImpl for lookup
+    addMethod(rootObject, "primitiveRespondsTo:", primitiveRespondsToMethod)
+
+    let primitiveEqualsMethod = createCoreMethod("primitiveEquals:")
+    primitiveEqualsMethod.nativeImpl = cast[pointer](eqImpl)
+    addMethod(rootObject, "primitiveEquals:", primitiveEqualsMethod)
+
+    let primitiveErrorMethod = createCoreMethod("primitiveError:")
+    primitiveErrorMethod.nativeImpl = cast[pointer](doesNotUnderstandImpl)
+    addMethod(rootObject, "primitiveError:", primitiveErrorMethod)
 
     let getSlotMethod = createCoreMethod("getSlot:")
     getSlotMethod.nativeImpl = cast[pointer](getSlotImpl)
