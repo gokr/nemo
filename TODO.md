@@ -14,7 +14,7 @@ This document tracks current work items and future directions for Nimtalk develo
 - `self` and `super` support (unqualified and qualified `super<Parent>`)
 - Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`) ✅
 - Enhanced comment handling (`#` followed by special chars) ✅
-- Standard library (Object, Boolean, Block, Number, Collections, String, FileStream, Exception) ✅
+- Standard library (Object, Boolean, Block, Number, Collections, String, FileStream, Exception, TestCase) ✅
 - Smalltalk-style temporary variables in blocks (`| temp |`) ✅
 - Multiline keyword message support (no `.` needed between lines) ✅
 - **All stdlib files load successfully** ✅
@@ -107,8 +107,23 @@ nimble clean       # Clean artifacts
 - Added `parsePrimaryUnaryOnly` for parsing keyword arguments that allow unary messages
 - Fixed keyword messages to span multiple lines (newline-aware parsing)
 
+### Object Model & Runtime Fixes
+- Fixed array indexing to use 1-based indexing (Smalltalk compatible)
+- Added `selectorPutImpl` for proper method storage on ProtoObjects with slots
+- Added slot variable access in methods (lookup and assignment)
+- Fixed array literal evaluation to handle pseudo-variables (true, false, nil)
+- Added `add:` alias for `primitiveAdd:` on arrays
+
+### Testing Framework
+- Created TestCase class in stdlib with assertion methods
+- Support for `assert:`, `assert:equals:`, `fail:` methods
+- Test lifecycle methods (initialize, setUp, tearDown)
+- Example tests in examples/test_example.nt
+
 ### Documentation
 - Created docs/NEWLINE_RULES.md documenting newline behavior
+- Updated all docs to reflect double-quoted strings only
+- Reserved single quotes for future use in lexer
 
 ---
 

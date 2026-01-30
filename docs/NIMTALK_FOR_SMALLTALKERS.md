@@ -4,13 +4,13 @@ A guide for experienced Smalltalk programmers coming to Nimtalk. This document c
 
 ## Quick Summary
 
-Nimtalk is a class-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing semantics and syntax feel while making pragmatic changes for a modern implementation.
+Nimtalk is a prototype-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing semantics and syntax feel while making pragmatic changes for a modern implementation.
 
 | Feature | Smalltalk-80 | Nimtalk |
 |---------|-------------|---------|
 | Object model | Classes + metaclasses | Classes only (no metaclasses) |
 | Statement separator | Period (`.`) only | Period or newline |
-| String quotes | Single quote (`'`) | Single or double (`'` or `"`) |
+| String quotes | Single quote (`'`) | Double quote (`"`) only |
 | Class methods | Metaclass methods | Methods on class object |
 | Class variables | Shared class state | Not implemented |
 | Pool dictionaries | Shared constants | Not implemented |
@@ -57,7 +57,7 @@ z := x + y.
 "Hello World"       "Double quotes only"
 ```
 
-**Note**: Single quotes are reserved for future use (possibly character literals).
+**Note**: Single quotes are reserved for future use (character literals).
 
 ### 3. Comments
 
@@ -170,7 +170,7 @@ dictionary
 
 ```nimtalk
 * Instance method
-Person>>greet [ ^ 'Hello' ].
+Person>>greet [ ^ "Hello" ].
 
 * Class method (no metaclass needed)
 Person class>>newPerson [ ^ self new ].
@@ -307,7 +307,7 @@ Object subclass: #MyClass
 * Workaround: Global table
 Constants := #{
   #MaxSize -> 100
-  #DefaultName -> 'Unknown'
+  #DefaultName -> "Unknown"
 }.
 
 * Access as: Constants at: #MaxSize

@@ -31,7 +31,7 @@ p x  "Returns 110"
 **What feels familiar:**
 
 - Message syntax is identical: unary `obj size`, binary `3 + 4`, keyword `dict at: key put: value`
-- String concatenation with comma: `'Hello' , ' World'`
+- String concatenation with comma: `"Hello" , " World"`
 - Blocks work as expected with temporary variables: `[ | temp | temp := 1 ]`
 - Everything is an object, everything happens via message sends
 - Live evaluation in the REPL: `ntalk` gives you an interactive prompt
@@ -101,9 +101,9 @@ Use `--loglevel DEBUG` for detailed execution tracing.
 ```smalltalk
 42 "integer"
 3.14 "float"
-'hello' "string"
+"hello" "string"
 #(1 2 3) "array (seq)"
-#{'key' -> 'value'} "table (dictionary)"
+#{"key" -> "value"} "table (dictionary)"
 {| x: 1 y: 2 |} "object literal"
 ```
 
@@ -111,8 +111,8 @@ Use `--loglevel DEBUG` for detailed execution tracing.
 ```smalltalk
 x := 42.
 obj := Object derive.
-obj at: 'foo' put: 'bar'.
-obj at: 'foo'.
+obj at: "foo" put: "bar".
+obj at: "foo".
 ```
 
 **Blocks and control flow:**
@@ -120,14 +120,14 @@ obj at: 'foo'.
 [ :param | param + 1 ] "block with parameter"
 [ | temp | temp := 1 ] "block with temporary variable"
 
-(x > 0) ifTrue: ['positive'] ifFalse: ['negative'].
+(x > 0) ifTrue: ["positive"] ifFalse: ["negative"].
 numbers do: [:each | each print].
 ```
 
 **Multiline keyword messages:**
 ```smalltalk
 tags isNil
-  ifTrue: [ ^ 'Object' ]
+  ifTrue: [ ^ "Object" ]
   ifFalse: [ ^ tags first ]
 ```
 
@@ -146,7 +146,7 @@ Working:
 - `self` and `super` support (unqualified and qualified `super<Parent>`)
 - Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`)
 - Enhanced comment handling (`#` followed by special chars)
-- Standard library (Object, Boolean, Block, Number, Collections, String, FileStream, Exception)
+- Standard library (Object, Boolean, Block, Number, Collections, String, FileStream, Exception, TestCase)
 - All stdlib files load successfully
 
 In progress:

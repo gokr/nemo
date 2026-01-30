@@ -291,7 +291,7 @@ numbers collect: [ :each | each * 2 ]
 
 # Multiline keyword messages (no period needed between lines)
 tags isNil
-  ifTrue: [ ^ 'Object' ]
+  ifTrue: [ ^ "Object" ]
   ifFalse: [ ^ tags first ]
 ```
 
@@ -311,7 +311,7 @@ See [NEWLINE_RULES.md](NEWLINE_RULES.md) for complete newline handling rules.
 | String Concat | `,` (comma) | `,` (comma) - same as Smalltalk |
 | File Structure | Image-based | File-based |
 | Parsing | Single mode | REPL + Definition modes |
-| String Literals | Single quotes | Double or single quotes |
+| String Literals | Single quotes | Double quotes only |
 
 ## Cheat Sheet: Quick Reference
 
@@ -362,8 +362,8 @@ collection do: [ :each | block ].
 
 #=== Strings =================================
 "double quoted"                             # String literal
-'c'                                         # Character
 """multiline"""                            # Multiline string
+# Note: Character literals not yet implemented
 
 #=== Temporary Variables =====================
 [ | temp1 temp2 |
@@ -388,7 +388,7 @@ a ~~ b                                      # Not identity
 
 ## Key Differences Summary
 
-1. **String Literals**: Use `"double quotes"` or `'single quotes'` - both work
+1. **String Literals**: Use `"double quotes"` only - single quotes are reserved
 2. **Ivar Declaration**: `derive: #(#ivar1 #ivar2)` not property bags
 3. **Method Definitions**: `>>` syntax in files, `at:put:` in REPL
 4. **No Trailing Periods**: After method definitions (closing `]` is terminator)
