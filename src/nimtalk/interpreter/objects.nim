@@ -39,14 +39,19 @@ proc randomNextImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc randomNewImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 # Collection primitives
 proc arrayNewImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc arraySizeImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc arrayAddImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc arrayRemoveAtImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc arrayIncludesImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc arrayReverseImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc arrayAtImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc arrayAtPutImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc tableNewImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc tableKeysImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc tableIncludesKeyImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc tableRemoveKeyImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc tableAtImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc tableAtPutImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 # String primitives
 proc stringConcatImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc stringSizeImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
@@ -68,7 +73,22 @@ proc fileAtEndImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 proc fileReadAllImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 # doCollectionImpl is defined in evaluator.nim as it needs interpreter context
 
-# Global root object (singleton)
+# ============================================================================
+# Class-Based Object System (New)
+# ============================================================================
+
+# Forward declarations for class-based methods
+proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue
+proc classNewImpl*(self: Class, args: seq[NodeValue]): NodeValue
+proc classAddMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue
+proc classAddClassMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue
+proc invalidateSubclasses*(cls: Class)
+proc rebuildAllTables*(cls: Class)
+
+# Global root class (singleton) - the new class-based root
+var rootClass*: Class = nil
+
+# Global root object (singleton) - legacy prototype-based root
 var rootObject*: RootObject = nil
 
 # Global Dictionary prototype (singleton)
@@ -191,6 +211,18 @@ proc initRootObject*(): RootObject =
     let setSlotValueMethod = createCoreMethod("setSlot:value:")
     setSlotValueMethod.nativeImpl = cast[pointer](setSlotValueImpl)
     addMethod(rootObject, "setSlot:value:", setSlotValueMethod)
+
+    # Add class-based method definition support
+    # These are aliases for at:put: in the prototype-based system
+    # In full class-based implementation, they would use the Class system
+
+    let selectorPutMethod = createCoreMethod("selector:put:")
+    selectorPutMethod.nativeImpl = cast[pointer](atPutImpl)
+    addMethod(rootObject, "selector:put:", selectorPutMethod)
+
+    let classSelectorPutMethod = createCoreMethod("classSelector:put:")
+    classSelectorPutMethod.nativeImpl = cast[pointer](atPutImpl)
+    addMethod(rootObject, "classSelector:put:", classSelectorPutMethod)
 
     let printStringMethod = createCoreMethod("printString")
     printStringMethod.nativeImpl = cast[pointer](printStringImpl)
@@ -1209,6 +1241,47 @@ proc arrayNewImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
     obj.properties[$i] = nilValue()
   return NodeValue(kind: vkObject, objVal: obj.ProtoObject)
 
+proc arraySizeImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Return number of elements in array
+  if not (self of DictionaryObj):
+    return NodeValue(kind: vkInt, intVal: 0)
+  let dict = cast[DictionaryObj](self)
+  if dict.properties.hasKey("__size"):
+    return dict.properties["__size"]
+  return NodeValue(kind: vkInt, intVal: 0)
+
+proc arrayAtImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Get element at index
+  if args.len < 1 or args[0].kind != vkInt:
+    return nilValue()
+  if not (self of DictionaryObj):
+    return nilValue()
+  let dict = cast[DictionaryObj](self)
+  let idx = args[0].intVal
+  let key = $idx
+  if dict.properties.hasKey(key):
+    return dict.properties[key]
+  return nilValue()
+
+proc arrayAtPutImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Set element at index
+  if args.len < 2 or args[0].kind != vkInt:
+    return nilValue()
+  if not (self of DictionaryObj):
+    return nilValue()
+  let dict = cast[DictionaryObj](self)
+  let idx = args[0].intVal
+  let key = $idx
+  dict.properties[key] = args[1]
+  # Expand size if needed
+  if dict.properties.hasKey("__size"):
+    let size = dict.properties["__size"].intVal
+    if idx >= size:
+      dict.properties["__size"] = NodeValue(kind: vkInt, intVal: idx + 1)
+  else:
+    dict.properties["__size"] = NodeValue(kind: vkInt, intVal: idx + 1)
+  return args[1]
+
 proc arrayAddImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   ## Add element to end of array
   if args.len < 1:
@@ -1392,6 +1465,45 @@ proc tableRemoveKeyImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
     dict.properties.del(keyStr)
     return removedValue
   return nilValue()
+
+proc tableAtImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Get value at key: table at: 'key'
+  if args.len < 1:
+    return nilValue()
+  if not (self of DictionaryObj):
+    return nilValue()
+
+  let dict = cast[DictionaryObj](self)
+  var keyStr: string
+  if args[0].kind == vkString:
+    keyStr = args[0].strVal
+  elif args[0].kind == vkSymbol:
+    keyStr = args[0].symVal
+  else:
+    return nilValue()
+
+  if dict.properties.hasKey(keyStr):
+    return dict.properties[keyStr]
+  return nilValue()
+
+proc tableAtPutImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Set value at key: table at: 'key' put: value
+  if args.len < 2:
+    return nilValue()
+  if not (self of DictionaryObj):
+    return nilValue()
+
+  let dict = cast[DictionaryObj](self)
+  var keyStr: string
+  if args[0].kind == vkString:
+    keyStr = args[0].strVal
+  elif args[0].kind == vkSymbol:
+    keyStr = args[0].symVal
+  else:
+    return nilValue()
+
+  dict.properties[keyStr] = args[1]
+  return args[1]
 
 # ============================================================================
 # String primitives
@@ -1794,3 +1906,222 @@ proc fileReadAllImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
 
   let content = fs.file.readAll()
   return NodeValue(kind: vkString, strVal: content)
+
+# ============================================================================
+# Class-Based Object System Implementation
+# ============================================================================
+
+proc mergeTables*(target: var Table[string, BlockNode], source: Table[string, BlockNode]) =
+  ## Merge source table into target (source values override target)
+  for key, value in source:
+    target[key] = value
+
+proc rebuildAllTables*(cls: Class) =
+  ## Rebuild allMethods, allClassMethods, and allSlotNames from parents
+  # Start with empty tables
+  cls.allMethods = initTable[string, BlockNode]()
+  cls.allClassMethods = initTable[string, BlockNode]()
+  cls.allSlotNames = @[]
+
+  # Merge from all parents using left-to-right priority (first parent wins)
+  for parent in cls.parents:
+    # Merge methods (only add if not already present from earlier parent)
+    for selector, meth in parent.allMethods:
+      if selector notin cls.allMethods:
+        cls.allMethods[selector] = meth
+    # Merge class methods
+    for selector, meth in parent.allClassMethods:
+      if selector notin cls.allClassMethods:
+        cls.allClassMethods[selector] = meth
+    # Merge slot names (avoid duplicates)
+    for slot in parent.allSlotNames:
+      if slot notin cls.allSlotNames:
+        cls.allSlotNames.add(slot)
+
+  # Add own methods (override inherited)
+  for selector, meth in cls.methods:
+    cls.allMethods[selector] = meth
+  for selector, meth in cls.classMethods:
+    cls.allClassMethods[selector] = meth
+
+  # Add own slot names (error on conflict)
+  for slot in cls.slotNames:
+    if slot in cls.allSlotNames:
+      raise newException(ValueError, "Slot name conflict: '" & slot & "' already defined in parent")
+    cls.allSlotNames.add(slot)
+
+  # Update hasSlots flag
+  cls.hasSlots = cls.allSlotNames.len > 0
+
+proc invalidateSubclasses*(cls: Class) =
+  ## Eagerly invalidate and rebuild all subclasses recursively
+  for sub in cls.subclasses:
+    rebuildAllTables(sub)
+    invalidateSubclasses(sub)
+
+proc addMethodToClass*(cls: Class, selector: string, methodBlock: BlockNode, isClassMethod: bool = false) =
+  ## Add a method to a class and trigger eager invalidation
+  if isClassMethod:
+    # Add to class methods
+    cls.classMethods[selector] = methodBlock
+    cls.allClassMethods[selector] = methodBlock
+  else:
+    # Add to instance methods
+    cls.methods[selector] = methodBlock
+    cls.allMethods[selector] = methodBlock
+
+  # Eagerly invalidate all subclasses
+  invalidateSubclasses(cls)
+
+proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a subclass: Class derive: #(slotNames)
+  var newSlotNames: seq[string] = @[]
+
+  # Extract slot names from argument
+  if args.len >= 1:
+    if args[0].kind == vkArray:
+      for val in args[0].arrayVal:
+        if val.kind == vkSymbol:
+          newSlotNames.add(val.symVal)
+        elif val.kind == vkString:
+          newSlotNames.add(val.strVal)
+    elif args[0].kind == vkSymbol:
+      newSlotNames.add(args[0].symVal)
+
+  # Create new class with self as parent
+  let newClass = newClass(parents = @[self], slotNames = newSlotNames)
+
+  # Copy parent's merged methods (shallow copy - BlockNodes are immutable)
+  newClass.allMethods = self.allMethods
+  newClass.allClassMethods = self.allClassMethods
+  newClass.allSlotNames = self.allSlotNames
+
+  # Start with empty own methods
+  newClass.methods = initTable[string, BlockNode]()
+  newClass.classMethods = initTable[string, BlockNode]()
+
+  # Build slot layout (add own slots to parent's)
+  for slot in newSlotNames:
+    if slot in newClass.allSlotNames:
+      raise newException(ValueError, "Slot name conflict: '" & slot & "' already defined in parent")
+    newClass.allSlotNames.add(slot)
+
+  # Update hasSlots flag
+  newClass.hasSlots = newClass.allSlotNames.len > 0
+
+  # Generate accessor methods for each new slot
+  for slot in newSlotNames:
+    # Create getter: slotName -> slots[index]
+    let getterIndex = newClass.allSlotNames.len - newSlotNames.len + newSlotNames.find(slot)
+    var getterBody: seq[Node] = @[]
+    getterBody.add(SlotAccessNode(
+      slotName: slot,
+      slotIndex: getterIndex,
+      isAssignment: false
+    ))
+    let getter = BlockNode(
+      parameters: @[],
+      temporaries: @[],
+      body: getterBody,
+      isMethod: true
+    )
+    newClass.methods[slot] = getter
+    newClass.allMethods[slot] = getter
+
+    # Create setter: slotName: value -> slots[index] := value
+    var setterBody: seq[Node] = @[]
+    setterBody.add(SlotAccessNode(
+      slotName: slot & ":",
+      slotIndex: getterIndex,
+      isAssignment: true
+    ))
+    let setter = BlockNode(
+      parameters: @["newValue"],
+      temporaries: @[],
+      body: setterBody,
+      isMethod: true
+    )
+    newClass.methods[slot & ":"] = setter
+    newClass.allMethods[slot & ":"] = setter
+
+  # Register as subclass with parent for efficient invalidation
+  self.subclasses.add(newClass)
+
+  # Return as vkClass value (no proxy needed)
+  return NodeValue(kind: vkClass, classVal: newClass)
+
+proc classNewImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a new instance: Class new
+  let inst = newInstance(self)
+
+  # Return as vkInstance value (no proxy needed)
+  return NodeValue(kind: vkInstance, instVal: inst)
+
+proc classAddMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Add instance method: Class selector: 'sel' put: [block]
+  if args.len < 2:
+    return nilValue()
+
+  var selector: string
+  if args[0].kind == vkSymbol:
+    selector = args[0].symVal
+  elif args[0].kind == vkString:
+    selector = args[0].strVal
+  else:
+    return nilValue()
+
+  if args[1].kind != vkBlock:
+    return nilValue()
+
+  let blockNode = args[1].blockVal
+  blockNode.isMethod = true
+
+  # Add to own methods
+  self.methods[selector] = blockNode
+
+  # Update allMethods
+  self.allMethods[selector] = blockNode
+
+  # Invalidate subclasses
+  invalidateSubclasses(self)
+
+  return args[1]
+
+proc classAddClassMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Add class method: Class classSelector: 'sel' put: [block]
+  if args.len < 2:
+    return nilValue()
+
+  var selector: string
+  if args[0].kind == vkSymbol:
+    selector = args[0].symVal
+  elif args[0].kind == vkString:
+    selector = args[0].strVal
+  else:
+    return nilValue()
+
+  if args[1].kind != vkBlock:
+    return nilValue()
+
+  let blockNode = args[1].blockVal
+  blockNode.isMethod = true
+
+  # Add to own class methods
+  self.classMethods[selector] = blockNode
+
+  # Update allClassMethods
+  self.allClassMethods[selector] = blockNode
+
+  # Invalidate subclasses
+  invalidateSubclasses(self)
+
+  return args[1]
+
+proc initRootClass*(): Class =
+  ## Initialize the global root class
+  if rootClass == nil:
+    rootClass = newClass()
+    rootClass.tags = @["Object", "Class", "Root"]
+    rootClass.name = "Object"
+
+  return rootClass
