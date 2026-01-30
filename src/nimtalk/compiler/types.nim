@@ -80,6 +80,8 @@ proc constraintForNode*(kind: ValueKind): TypeConstraint =
   of vkBlock: tcBlock
   of vkArray: tcArray
   of vkTable: tcTable
+  of vkClass: tcObject  # Class is treated as Object for now
+  of vkInstance: tcObject  # Instance is treated as Object for now
   of vkSymbol, vkNil: tcNone
 
 const typeConstraintNames*: array[TypeConstraint, string] = [
