@@ -7,7 +7,7 @@
 # True class - represents boolean true value
 #====================================================================
 
-True := Object derive: #().
+True := Object derive: #()
 
 True>>ifTrue: block [
   # Evaluate the block and return its value.
@@ -48,7 +48,7 @@ True>>= other [
 # False class - represents boolean false value
 #====================================================================
 
-False := Object derive: #().
+False := Object derive: #()
 
 False>>ifTrue: block [
   # Return nil - don't evaluate the block.

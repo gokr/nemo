@@ -7,7 +7,7 @@
 # FileStream methods
 #====================================================================
 
-FileStream := Object derive: #(file mode isOpen).
+FileStream := Object derive: #(file mode isOpen)
 
 FileStream>>open: filename mode: mode [
   # Open file with mode ("r", "w", "a", 'r+', 'w+')
@@ -31,8 +31,8 @@ FileStream>>write: string [
 
 FileStream>>writeline: string [
   # Write string with newline
-  self write: string.
-  self write: "\n".
+  self write: string
+  self write: "\n"
   ^ self
 ]
 

@@ -8,7 +8,7 @@
 #====================================================================
 
 # Integer creation
-Integer := Object derive.
+Integer := Object derive
 
 Integer>>new: value [
   # Create a new integer with given value
@@ -18,7 +18,7 @@ Integer>>new: value [
 # Integer arithmetic helpers
 Integer>>abs [
   # Absolute value
-  self < 0 ifTrue: [ ^ 0 - self ].
+  self < 0 ifTrue: [ ^ 0 - self ]
   ^ self
 ]
 
@@ -50,9 +50,9 @@ Integer>>negated [
 Integer>>to: end do: block [
   # Execute block with each integer from self to end (inclusive)
   | i |
-  i := self.
+  i := self
   [ i <= end ] whileTrue: [
-    block value: i.
+    block value: i
     i := i + 1
   ]
 ]
@@ -60,17 +60,17 @@ Integer>>to: end do: block [
 Integer>>to: end by: step do: block [
   # Execute block with each integer from self to end by step
   | i |
-  i := self.
+  i := self
   step > 0
     ifTrue: [
       [ i <= end ] whileTrue: [
-        block value: i.
+        block value: i
         i := i + step
       ]
     ]
     ifFalse: [
       [ i >= end ] whileTrue: [
-        block value: i.
+        block value: i
         i := i + step
       ]
     ]
@@ -79,9 +79,9 @@ Integer>>to: end by: step do: block [
 Integer>>timesRepeat: block [
   # Execute block self times
   | count |
-  count := self.
+  count := self
   [ count > 0 ] whileTrue: [
-    block value.
+    block value
     count := count - 1
   ]
 ]
@@ -101,7 +101,7 @@ Integer>>asString [
 #====================================================================
 
 # Float creation
-Float := Object derive.
+Float := Object derive
 
 Float>>new: value [
   # Create a new float with given value
@@ -111,7 +111,7 @@ Float>>new: value [
 # Float arithmetic helpers
 Float>>abs [
   # Absolute value
-  self < 0.0 ifTrue: [ ^ 0.0 - self ].
+  self < 0.0 ifTrue: [ ^ 0.0 - self ]
   ^ self
 ]
 

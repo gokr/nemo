@@ -7,7 +7,7 @@
 # Block control flow
 #====================================================================
 
-Block := Object derive.
+Block := Object derive
 
 # Block value methods for evaluating blocks
 Block>>value [

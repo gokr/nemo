@@ -30,7 +30,7 @@ Person>>age [ ^ age ]
 
 Person>>age: anAge [
   # Setter for age instance variable - with validation
-  (anAge >= 0) ifFalse: [ Error signal: "Age must be positive" ].
+  (anAge >= 0) ifFalse: [ Error signal: "Age must be positive" ]
   age := anAge
 ]
 
@@ -49,7 +49,7 @@ Person>>greet: otherPerson [
 
 Person>>birthday [
   # Increment age by 1 and return self for chaining
-  age := age + 1.
+  age := age + 1
   ^ self
 ]
 

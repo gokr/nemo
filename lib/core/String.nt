@@ -7,7 +7,7 @@
 # String methods
 #====================================================================
 
-String := Object derive.
+String := Object derive
 
 #====================================================================
 # String primitives
@@ -94,16 +94,16 @@ String>>notEmpty [
 
 String>>startsWith: prefix [
   # Check if string starts with prefix.
-  (self size >= prefix size) ifFalse: [ ^ false ].
+  (self size >= prefix size) ifFalse: [ ^ false ]
   ^ (self from: 1 to: prefix size) = prefix
 ]
 
 String>>endsWith: suffix [
   # Check if string ends with suffix.
   | selfSize suffixSize start |
-  selfSize := self size.
-  suffixSize := suffix size.
-  (selfSize >= suffixSize) ifFalse: [ ^ false ].
-  start := selfSize - suffixSize + 1.
+  selfSize := self size
+  suffixSize := suffix size
+  (selfSize >= suffixSize) ifFalse: [ ^ false ]
+  start := selfSize - suffixSize + 1
   ^ (self from: start to: selfSize) = suffix
 ]

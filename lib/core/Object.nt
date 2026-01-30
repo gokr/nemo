@@ -92,7 +92,7 @@ Object>>printString [
 Object>>className [
   # Return the class name of this object.
   | tags |
-  tags := self at: "tags".
+  tags := self at: "tags"
   tags isNil
     ifTrue: [ ^ "Object" ]
     ifFalse: [ ^ tags first ]
@@ -147,8 +147,8 @@ Object>>notNil [
 Object>>class [
   # Return the class/prototype of this object
   | tags |
-  tags := self at: "tags".
-  tags isNil ifTrue: [ ^ Object ].
+  tags := self at: "tags"
+  tags isNil ifTrue: [ ^ Object ]
   ^ Global at: (tags first) ifAbsent: [ Object ]
 ]
 

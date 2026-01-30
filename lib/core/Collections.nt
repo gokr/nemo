@@ -10,12 +10,12 @@
 Array>>do: block [
   # Iterate over each element, evaluating the block.
   | index size |
-  index := 0.
-  size := self size.
+  index := 0
+  size := self size
   [ index < size ] whileTrue: [
-    block value: (self at: index).
+    block value: (self at: index)
     index := index + 1
-  ].
+  ]
   ^ self
 ]
 
@@ -81,28 +81,28 @@ Array>>sorted [
 Array>>collect: block [
   # Transform each element with the block, return new array.
   | result |
-  result := Array new.
-  self do: [ :each | result add: (block value: each) ].
+  result := Array new
+  self do: [ :each | result add: (block value: each) ]
   ^ result
 ]
 
 Array>>select: block [
   # Return new array with elements where block returns true.
   | result |
-  result := Array new.
+  result := Array new
   self do: [ :each |
     (block value: each) ifTrue: [ result add: each ]
-  ].
+  ]
   ^ result
 ]
 
 Array>>reject: block [
   # Return new array with elements where block returns false.
   | result |
-  result := Array new.
+  result := Array new
   self do: [ :each |
     (block value: each) ifFalse: [ result add: each ]
-  ].
+  ]
   ^ result
 ]
 
@@ -110,7 +110,7 @@ Array>>detect: block [
   # Find first element where block returns true.
   self do: [ :each |
     (block value: each) ifTrue: [ ^ each ]
-  ].
+  ]
   ^ nil
 ]
 
@@ -118,17 +118,17 @@ Array>>detect: block ifNone: noneBlock [
   # Find first element where block returns true, or evaluate noneBlock.
   self do: [ :each |
     (block value: each) ifTrue: [ ^ each ]
-  ].
+  ]
   ^ noneBlock value
 ]
 
 Array>>inject: initialValue into: block [
   # Accumulate a result by iterating with block.
   | result |
-  result := initialValue.
+  result := initialValue
   self do: [ :each |
     result := block value: result value: each
-  ].
+  ]
   ^ result
 ]
 
@@ -136,7 +136,7 @@ Array>>anySatisfy: block [
   # Return true if any element satisfies the block.
   self do: [ :each |
     (block value: each) ifTrue: [ ^ true ]
-  ].
+  ]
   ^ false
 ]
 
@@ -144,7 +144,7 @@ Array>>allSatisfy: block [
   # Return true if all elements satisfy the block.
   self do: [ :each |
     (block value: each) ifFalse: [ ^ false ]
-  ].
+  ]
   ^ true
 ]
 
@@ -156,7 +156,7 @@ Table>>do: block [
   # Iterate over key-value pairs.
   self keys do: [ :key |
     block value: key value: (self at: key)
-  ].
+  ]
   ^ self
 ]
 
@@ -168,8 +168,8 @@ Table>>keys [
 Table>>values [
   # Return array of all values.
   | result |
-  result := Array new.
-  self keys do: [ :key | result add: (self at: key) ].
+  result := Array new
+  self keys do: [ :key | result add: (self at: key) ]
   ^ result
 ]
 
@@ -209,7 +209,7 @@ Table>>keysAndValuesDo: block [
 # Set (using HashSet)
 #====================================================================
 
-Set := Object derive.
+Set := Object derive
 
 Set>>new [
   # Create new empty set.

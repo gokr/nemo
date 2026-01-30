@@ -7,7 +7,7 @@
 # Exception hierarchy
 #====================================================================
 
-Exception := Object derive: #(message stackTrace signaler).
+Exception := Object derive: #(message stackTrace signaler)
 
 Exception>>signal [
   # Signal this exception (raise it)
@@ -16,7 +16,7 @@ Exception>>signal [
 
 Exception>>signal: messageText [
   # Set message and signal this exception
-  self at: "message" put: messageText.
+  self at: "message" put: messageText
   ^ self signal
 ]
 
@@ -38,8 +38,8 @@ Exception>>stackTrace [
 Exception>>printString [
   # String representation including message
   | msg |
-  msg := self getSlot: "message".
-  msg isNil ifTrue: [ msg := 'Unknown error' ].
+  msg := self getSlot: "message"
+  msg isNil ifTrue: [ msg := 'Unknown error' ]
   ^ 'Exception: ' , msg
 ]
 
@@ -47,13 +47,13 @@ Exception>>printString [
 # Common exception types
 #====================================================================
 
-Error := Exception derive.
+Error := Exception derive
 
-MessageNotUnderstood := Exception derive.
+MessageNotUnderstood := Exception derive
 
-SubscriptOutOfBounds := Exception derive.
+SubscriptOutOfBounds := Exception derive
 
-DivisionByZero := Exception derive.
+DivisionByZero := Exception derive
 
 #====================================================================
 # Block extension for exception handling
@@ -79,7 +79,7 @@ Object>>ifError: errorBlock ifNoError: normalBlock [
   | result |
   result := [ self ] on: Error do: [ :ex |
     ^ errorBlock value: ex
-  ].
+  ]
   ^ normalBlock value: result
 ]
 
@@ -91,7 +91,7 @@ Block>>ensure: cleanupBlock [
   # Execute this block, always run cleanupBlock afterwards
   | result |
   # Note: This is a simplified version - full implementation needs primitive support
-  result := self value.
-  cleanupBlock value.
+  result := self value
+  cleanupBlock value
   ^ result
 ]
