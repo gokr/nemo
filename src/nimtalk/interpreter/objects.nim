@@ -167,8 +167,11 @@ proc globalNames*(): seq[string] =
   ## Return all global names
   return toSeq(globals.keys)
 
-# Forward declaration for doesNotUnderstandImpl
+# Forward declarations for primitive implementations
 proc doesNotUnderstandImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc propertiesImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc methodsImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
+proc isKindOfImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue
 
 # Initialize root object with core methods
 proc initRootObject*(): RootObject =
@@ -241,6 +244,19 @@ proc initRootObject*(): RootObject =
     let primitiveErrorMethod = createCoreMethod("primitiveError:")
     primitiveErrorMethod.nativeImpl = cast[pointer](doesNotUnderstandImpl)
     addMethod(rootObject, "primitiveError:", primitiveErrorMethod)
+
+    # Register additional primitives for Object.nt methods
+    let primitivePropertiesMethod = createCoreMethod("primitiveProperties")
+    primitivePropertiesMethod.nativeImpl = cast[pointer](propertiesImpl)
+    addMethod(rootObject, "primitiveProperties", primitivePropertiesMethod)
+
+    let primitiveMethodsMethod = createCoreMethod("primitiveMethods")
+    primitiveMethodsMethod.nativeImpl = cast[pointer](methodsImpl)
+    addMethod(rootObject, "primitiveMethods", primitiveMethodsMethod)
+
+    let primitiveIsKindOfMethod = createCoreMethod("primitiveIsKindOf:")
+    primitiveIsKindOfMethod.nativeImpl = cast[pointer](isKindOfImpl)
+    addMethod(rootObject, "primitiveIsKindOf:", primitiveIsKindOfMethod)
 
     let getSlotMethod = createCoreMethod("getSlot:")
     getSlotMethod.nativeImpl = cast[pointer](getSlotImpl)
@@ -1085,6 +1101,44 @@ proc doesNotUnderstandImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue 
   let selector = args[0].symVal
   raise newException(ValueError, "Message not understood: " & selector)
 
+proc propertiesImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Return collection of all property keys on this object
+  ## For Dictionary objects, return the property keys
+  if self of DictionaryObj:
+    let dict = cast[DictionaryObj](self)
+    var keys: seq[NodeValue] = @[]
+    for key in dict.properties.keys:
+      keys.add(NodeValue(kind: vkSymbol, symVal: key))
+    return NodeValue(kind: vkArray, arrayVal: keys)
+  ## For regular objects, return empty array (properties not supported)
+  return NodeValue(kind: vkArray, arrayVal: @[])
+
+proc methodsImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Return collection of all method selectors on this object
+  var selectors: seq[NodeValue] = @[]
+  for selector in self.methods.keys:
+    selectors.add(NodeValue(kind: vkSymbol, symVal: selector))
+  return NodeValue(kind: vkArray, arrayVal: selectors)
+
+proc isKindOfImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
+  ## Check if object is kind of aClass (in prototype chain)
+  if args.len < 1:
+    return NodeValue(kind: vkBool, boolVal: false)
+
+  let aClass = args[0]
+  if aClass.kind != vkObject or aClass.objVal == nil:
+    return NodeValue(kind: vkBool, boolVal: false)
+
+  var current = self
+  while current != nil:
+    if current == aClass.objVal:
+      return NodeValue(kind: vkBool, boolVal: true)
+    if current.parents.len > 0:
+      current = current.parents[0]
+    else:
+      break
+
+  return NodeValue(kind: vkBool, boolVal: false)
 
 proc concatImpl*(self: ProtoObject, args: seq[NodeValue]): NodeValue =
   ## Concatenate strings: a , b (Smalltalk style using , operator)
