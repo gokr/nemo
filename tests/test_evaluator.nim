@@ -259,16 +259,16 @@ suite "Evaluator: Block Evaluation":
 
   test "blocks can close over variables":  # Requires full closure implementation
     let result = interp.evalStatements("""
-      Counter := Dictionary derive.
+      Counter := Object derive.
       Counter at: #makeCounter put: [ |
         count := 0.
-        ^[ |
+        ^[
           count := count + 1.
           ^count
         ]
       ].
 
-      counter := Counter derive.
+      counter := Counter new.
       c := counter makeCounter.
       result1 := c value.
       result2 := c value.
@@ -590,6 +590,8 @@ suite "Evaluator: Collections":
     check(result[1].len == 0)
     check(result[0][^3].intVal == 1)
     check(result[0][^2].strVal == "hello")
+    # true is stored as vkBool in array literals
+    check(result[0][^1].kind == vkBool)
     check(result[0][^1].boolVal == true)
 
   test "tables can be created and accessed" :  # Requires table iteration protocol
