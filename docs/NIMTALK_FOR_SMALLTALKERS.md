@@ -54,9 +54,10 @@ z := x + y.
 
 **Nimtalk:**
 ```nimtalk
-'Hello World'       "Single quotes"
-"Hello World"       "Double quotes also work"
+"Hello World"       "Double quotes only"
 ```
+
+**Note**: Single quotes are reserved for future use (possibly character literals).
 
 ### 3. Comments
 
@@ -67,10 +68,11 @@ z := x + y.
 
 **Nimtalk:**
 ```nimtalk
-"This is also a comment"    "Evaluated and discarded"
-# This is a line comment     "Nim-style, to end of line"
-#==== Section header         "Also a comment"
+# This is a comment - hash style only
+#==== Section header
 ```
+
+**Note**: Smalltalk-style `"comment"` syntax is not supported. Double-quoted strings are actual string literals, not comments.
 
 ### 4. Block Syntax
 

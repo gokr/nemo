@@ -11,31 +11,23 @@ This document describes the **actual implemented syntax** in the current Nimtalk
 
 ## String Literals
 
-**Both single and double quotes work** for string literals:
+**Double quotes only** for string literals:
 
-```smalltalk
+```nimtalk
 "This is a string"
-'This is also a string'
 ```
 
-The lexer (`src/nimtalk/parser/lexer.nim`) accepts both `'` and `"` as valid string delimiters. Use whichever style you prefer.
+Single quotes are reserved for future use (possibly character literals).
 
 ## Comments
 
-Nimtalk supports **two comment styles**:
+Nimtalk uses **hash-style comments only** (like Nim):
 
-### 1. Smalltalk-style (double-quoted)
-```smalltalk
-"This is a comment"
+```nimtalk
+# This is a comment to end of line
 
-"Create a shallow copy of this object"
-^ self perform: 'primitiveClone'
-```
-
-### 2. Nim-style (hash)
-```smalltalk
-# This is a Nim-style comment (to end of line)
-# They work anywhere, including at the start of files
+# Create a shallow copy of this object
+^ self perform: "primitiveClone"
 
 # Array literal - the # is followed by (, not whitespace
 #(1 2 3)
@@ -45,9 +37,11 @@ Nimtalk supports **two comment styles**:
 
 # Symbol - the # is followed by a letter
 #symbol
+
+# Symbol with spaces: #"symbol with spaces"
 ```
 
-**Important**: The comment syntax `"comment"` (with double quotes) is distinct from string literals `"string"` by context. In practice, comments appear where statements would be, while strings appear as values.
+**Note**: Smalltalk-style `"comment"` syntax is not supported. Use `#` for all comments.
 
 ## Shebang Support
 

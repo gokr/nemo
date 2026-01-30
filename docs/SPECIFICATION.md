@@ -19,33 +19,31 @@ Nimtalk combines Smalltalk's message-passing semantics with Nim's compilation an
 
 ### Literals
 
-```smalltalk
+```nimtalk
 42              # Integer literal
 3.14            # Float literal
-"hello"         # String literal (double quotes)
-'hello'         # String literal (single quotes - also accepted)
-'c'             # Character literal
-'\n'            # Escape sequences
+"hello"         # String literal (double quotes only)
+"\n"            # Escape sequences (\n, \t, \r, \\\", \\)
 ```
+
+**Note**: Single quotes are reserved for future use.
 
 ### Symbols
 
-```smalltalk
+```nimtalk
 #symbol         # Symbol literal
-#'with spaces'  # Symbol with spaces
+#"with spaces"  # Symbol with spaces (double quotes)
 ```
 
 ### Comments
 
-```smalltalk
+```nimtalk
 # This is a comment to end of line
-
-"Inline comment string"  # Double-quoted strings act as comments when evaluated
 #====              # Section header (no space needed after #)
 #----------         # Also works with dashes
 ```
 
-**Note**: `#` followed by whitespace or special characters (`=`, `-`, `*`, `/`, `.`, `|`, `&`, `@`, `!`) marks a comment. This allows section headers like `#====` to work without requiring spaces.
+**Note**: `#` followed by whitespace or special characters (`=`, `-`, `*`, `/`, `.`, `|`, `&`, `@`, `!`) marks a comment. This allows section headers like `#====` to work without requiring spaces. Smalltalk-style `"comment"` syntax is not supported.
 
 ### Arrays and Tables
 

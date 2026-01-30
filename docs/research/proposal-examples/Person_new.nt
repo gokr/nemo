@@ -11,7 +11,7 @@ Person := Object derive: #(name age)
 # Initialization
 #---------------------------------------------------------------------
 Person>>initialize [
-  "Initialize instance variables with defaults"
+  # Initialize instance variables with defaults
   name := "Anonymous"
   age := 0
 ]
@@ -22,14 +22,14 @@ Person>>initialize [
 Person>>name [ ^ name ]
 
 Person>>name: aName [
-  "Setter for name instance variable"
+  # Setter for name instance variable
   name := aName
 ]
 
 Person>>age [ ^ age ]
 
 Person>>age: anAge [
-  "Setter for age instance variable - with validation"
+  # Setter for age instance variable - with validation
   (anAge >= 0) ifFalse: [ Error signal: "Age must be positive" ].
   age := anAge
 ]
@@ -38,17 +38,17 @@ Person>>age: anAge [
 # Behavior methods
 #---------------------------------------------------------------------
 Person>>greet [
-  "Return a greeting message using the person's name"
+  # Return a greeting message using the person's name
   ^ "Hello, my name is " + name
 ]
 
 Person>>greet: otherPerson [
-  "Greet another person"
+  # Greet another person
   ^ "Hello " + otherPerson name + ", my name is " + name
 ]
 
 Person>>birthday [
-  "Increment age by 1 and return self for chaining"
+  # Increment age by 1 and return self for chaining
   age := age + 1.
   ^ self
 ]
@@ -57,7 +57,7 @@ Person>>birthday [
 # Class-side methods
 #---------------------------------------------------------------------
 Person>>newWithName: aName age: anAge [
-  "Create a new person with given name and age"
+  # Create a new person with given name and age
   ^ self derive initialize
       name: aName;
       age: anAge;
@@ -65,6 +65,6 @@ Person>>newWithName: aName age: anAge [
 ]
 
 Person>>newWithName: aName [
-  "Create a new person with given name, age defaults to 0"
+  # Create a new person with given name, age defaults to 0
   ^ self newWithName: aName age: 0
 ]

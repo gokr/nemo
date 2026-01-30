@@ -20,7 +20,6 @@ Nimtalk uses a Smalltalk-style syntax with the following precedence (highest to 
 <newline>      ::= "\n" | "\r" | "\r\n"
 <separator>    ::= <newline> | "."
 <comment>      ::= "#" <any-char-except-newline>* <newline>
-                 | "\"" <any-char-except-double-quote>* "\""
 ```
 
 ### Identifiers and Keywords
@@ -47,13 +46,13 @@ Keywords are identifiers followed by a colon. Multi-part keywords like `at:put:`
 <exponent>     ::= ("e" | "E") ("+" | "-")? <digit>+
 
 <string>       ::= "\"" <string-char>* "\""
-                 | "'" <string-char>* "'"
+                 (* Note: single quotes are reserved for future use *)
 <string-char>  ::= <any-char-except-quote> | <escape-sequence>
-<escape-seq>   ::= "\\n" | "\\t" | "\\r" | "\\\\" | "\\'" | "\\\""
+<escape-seq>   ::= "\\n" | "\\t" | "\\r" | "\\\\" | "\\\""
 
 <symbol>       ::= "#" <identifier>
                  | "#" <keyword>
-                 | "#" "'" <string-content> "'"
+                 | "#" "\"" <string-content> "\""   (* Symbol with spaces: #"symbol with spaces" *)
 ```
 
 ### Operators and Special Characters
