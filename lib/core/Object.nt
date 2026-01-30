@@ -12,21 +12,21 @@
 #====================================================================
 
 Object>>clone [
-  "Create a shallow copy of this object without prototype links.
-   The copy has no parents and shares property/method dictionaries."
-  ^ self perform: 'primitiveClone'
+  # Create a shallow copy of this object without prototype links.
+   The copy has no parents and shares property/method dictionaries.
+  ^ self perform: "primitiveClone"
 ].
 
 Object>>derive [
-  "Create a child object with this object as its parent.
-   The child inherits behavior through the prototype chain."
-  ^ self perform: 'primitiveDerive'
+  # Create a child object with this object as its parent.
+   The child inherits behavior through the prototype chain.
+  ^ self perform: "primitiveDerive"
 ].
 
 Object>>derive: ivarArray [
-  "Create a child with declared instance variables.
-   ivarArray should be an array of symbols like #(name age address)."
-  ^ self perform: 'primitiveDeriveWithIVars:' with: ivarArray
+  # Create a child with declared instance variables.
+   ivarArray should be an array of symbols like #(name age address).
+  ^ self perform: "primitiveDeriveWithIVars:" with: ivarArray
 ].
 
 #====================================================================
@@ -34,23 +34,23 @@ Object>>derive: ivarArray [
 #====================================================================
 
 Object>>at: key [
-  "Get the value of a property. Searches the object and its prototype chain."
-  ^ self perform: 'primitiveAt:' with: key
+  # Get the value of a property. Searches the object and its prototype chain.
+  ^ self perform: "primitiveAt:" with: key
 ].
 
 Object>>at: key put: value [
-  "Set a property value on this object (not in prototypes)."
-  ^ self perform: 'primitiveAt:put:' with: key with: value
+  # Set a property value on this object (not in prototypes).
+  ^ self perform: "primitiveAt:put:" with: key with: value
 ].
 
 Object>>hasProperty: key [
-  "Check if this object directly has a property (not in parents)."
-  ^ self perform: 'primitiveHasProperty:' with: key
+  # Check if this object directly has a property (not in parents).
+  ^ self perform: "primitiveHasProperty:" with: key
 ].
 
 Object>>properties [
-  "Return a collection of all property keys on this object."
-  ^ self perform: 'primitiveProperties'
+  # Return a collection of all property keys on this object.
+  ^ self perform: "primitiveProperties"
 ].
 
 #====================================================================
@@ -58,18 +58,18 @@ Object>>properties [
 #====================================================================
 
 Object>>respondsTo: selector [
-  "Check if this object or its prototype chain responds to a message."
-  ^ self perform: 'primitiveRespondsTo:' with: selector
+  # Check if this object or its prototype chain responds to a message.
+  ^ self perform: "primitiveRespondsTo:" with: selector
 ].
 
 Object>>methods [
-  "Return a collection of all method selectors on this object."
-  ^ self perform: 'primitiveMethods'
+  # Return a collection of all method selectors on this object.
+  ^ self perform: "primitiveMethods"
 ].
 
 Object>>doesNotUnderstand: message [
-  "Default handler for unrecognized messages.
-   Subclasses can override to provide custom behavior."
+  # Default handler for unrecognized messages.
+   Subclasses can override to provide custom behavior.
   self error: 'Message not understood: ' , message asString
 ].
 
@@ -78,21 +78,21 @@ Object>>doesNotUnderstand: message [
 #====================================================================
 
 Object>>== other [
-  "Test if this object is the same object as other (identity)."
-  ^ self perform: 'primitiveEquals:' with: other
+  # Test if this object is the same object as other (identity).
+  ^ self perform: "primitiveEquals:" with: other
 ].
 
 Object>>printString [
-  "Return a string representation of this object."
+  # Return a string representation of this object.
   ^ '<' , (self className) , '>'
 ].
 
 Object>>className [
   | tags |
-  "Return the class name of this object."
-  tags := self at: 'tags'.
+  # Return the class name of this object.
+  tags := self at: "tags".
   tags isNil
-    ifTrue: [ ^ 'Object' ]
+    ifTrue: [ ^ "Object" ]
     ifFalse: [ ^ tags first ]
 ].
 
@@ -101,8 +101,8 @@ Object>>className [
 #====================================================================
 
 Object>>error: message [
-  "Signal an error with the given message."
-  self perform: 'primitiveError:' with: message
+  # Signal an error with the given message.
+  self perform: "primitiveError:" with: message
 ].
 
 #====================================================================
@@ -110,12 +110,12 @@ Object>>error: message [
 #====================================================================
 
 Object>>inspect [
-  "Open an inspector on this object. (placeholder)"
+  # Open an inspector on this object. (placeholder)
   self printString print
 ].
 
 Object>>yourself [
-  "Return self - useful for cascading messages."
+  # Return self - useful for cascading messages.
   ^ self
 ].
 
@@ -124,7 +124,7 @@ Object>>yourself [
 #====================================================================
 
 Object>>initialize [
-  "Initialize a new instance. Subclasses should override."
+  # Initialize a new instance. Subclasses should override.
   ^ self
 ].
 
@@ -133,57 +133,57 @@ Object>>initialize [
 #====================================================================
 
 Object>>isNil [
-  "Check if object is nil"
+  # Check if object is nil
   ^ self = nil
 ].
 
 Object>>notNil [
-  "Check if object is not nil"
+  # Check if object is not nil
   ^ self isNil not
 ].
 
 Object>>class [
   | tags |
-  "Return the class/prototype of this object"
-  tags := self at: 'tags'.
+  # Return the class/prototype of this object
+  tags := self at: "tags".
   tags isNil ifTrue: [ ^ Object ].
   ^ Global at: (tags first) ifAbsent: [ Object ]
 ].
 
 Object>>isKindOf: aClass [
-  "Check if object is kind of aClass (in prototype chain)"
-  ^ self perform: 'primitiveIsKindOf:' with: aClass
+  # Check if object is kind of aClass (in prototype chain)
+  ^ self perform: "primitiveIsKindOf:" with: aClass
 ].
 
 Object>>asString [
-  "Return string representation"
+  # Return string representation
   ^ self printString
 ].
 
 Object>>asSelfDo: aBlock [
-  "Evaluate aBlock with self temporarily bound to this object.
-   This allows executing code in the context of any object.
-   Usage: someObject asSelfDo: [ self doSomething ]"
-  ^ self perform: 'primitiveAsSelfDo:' with: aBlock
+  # Evaluate aBlock with self temporarily bound to this object.
+  # This allows executing code in the context of any object.
+  # Usage: someObject asSelfDo: [ self doSomething ]
+  ^ self perform: #primitiveAsSelfDo: with: aBlock
 ].
 
 Object>>extend: aBlock [
-  "Extend this object with methods defined in aBlock.
-   The block is evaluated with self bound to this object.
-   Usage: Person extend: [
-     >> greet [ 'Hello!' ]
-     >> name: n [ name := n ]
-   ]"
+  # Extend this object with methods defined in aBlock.
+  # The block is evaluated with self bound to this object.
+  # Usage: Person extend: [
+  #   self >> greet [ "Hello!" println ]
+  #   self >> name: n [ name := n ]
+  # ]
   ^ self asSelfDo: aBlock
 ].
 
 Object>>print [
-  "Print to stdout without newline"
+  # Print to stdout without newline
   Stdout write: self printString
 ].
 
 Object>>println [
-  "Print to stdout with newline"
+  # Print to stdout with newline
   Stdout writeline: self printString
 ].
 
@@ -192,16 +192,16 @@ Object>>println [
 #====================================================================
 
 Object>>~= other [
-  "Not equal - delegates to = and negates"
+  # Not equal - delegates to = and negates
   ^ (self = other) not
 ].
 
 Object>>== other [
-  "Identity comparison - true if same object"
-  ^ self perform: 'primitiveIdentity:' with: other
+  # Identity comparison - true if same object
+  ^ self perform: "primitiveIdentity:" with: other
 ].
 
 Object>>~~ other [
-  "Not identity - true if different objects"
+  # Not identity - true if different objects
   ^ (self == other) not
 ].
