@@ -36,11 +36,11 @@ Exception>>stackTrace [
 ].
 
 Exception>>printString [
-  "String representation including message"
   | msg |
+  "String representation including message"
   msg := self getSlot: 'message'.
   msg isNil ifTrue: [ msg := 'Unknown error' ].
-  ^ 'Exception: ' + msg
+  ^ 'Exception: ' , msg
 ].
 
 #====================================================================
@@ -75,8 +75,8 @@ Object>>ifError: errorBlock [
 ].
 
 Object>>ifError: errorBlock ifNoError: normalBlock [
-  "Execute self, handle error or run normal block with result"
   | result |
+  "Execute self, handle error or run normal block with result"
   result := [ self ] on: Error do: [ :ex |
     ^ errorBlock value: ex
   ].
@@ -88,9 +88,9 @@ Object>>ifError: errorBlock ifNoError: normalBlock [
 #====================================================================
 
 Block>>ensure: cleanupBlock [
+  | result |
   "Execute this block, always run cleanupBlock afterwards"
   "Note: This is a simplified version - full implementation needs primitive support"
-  | result |
   result := self value.
   cleanupBlock value.
   ^ result

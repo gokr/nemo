@@ -99,8 +99,8 @@ String>>startsWith: prefix [
 ].
 
 String>>endsWith: suffix [
-  "Check if string ends with suffix."
   | selfSize suffixSize start |
+  "Check if string ends with suffix."
   selfSize := self size.
   suffixSize := suffix size.
   (selfSize >= suffixSize) ifFalse: [ ^ false ].

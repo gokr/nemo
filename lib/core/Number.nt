@@ -48,8 +48,8 @@ Integer>>negated [
 ].
 
 Integer>>to: end do: block [
-  "Execute block with each integer from self to end (inclusive)"
   | i |
+  "Execute block with each integer from self to end (inclusive)"
   i := self.
   [ i <= end ] whileTrue: [
     block value: i.
@@ -58,8 +58,8 @@ Integer>>to: end do: block [
 ].
 
 Integer>>to: end by: step do: block [
-  "Execute block with each integer from self to end by step"
   | i |
+  "Execute block with each integer from self to end by step"
   i := self.
   step > 0
     ifTrue: [
@@ -77,8 +77,8 @@ Integer>>to: end by: step do: block [
 ].
 
 Integer>>timesRepeat: block [
-  "Execute block self times"
   | count |
+  "Execute block self times"
   count := self.
   [ count > 0 ] whileTrue: [
     block value.

@@ -8,8 +8,8 @@
 #====================================================================
 
 Array>>do: block [
-  "Iterate over each element, evaluating the block."
   | index size |
+  "Iterate over each element, evaluating the block."
   index := 0.
   size := self size.
   [ index < size ] whileTrue: [
@@ -79,16 +79,16 @@ Array>>sorted [
 #====================================================================
 
 Array>>collect: block [
-  "Transform each element with the block, return new array."
   | result |
+  "Transform each element with the block, return new array."
   result := Array new.
   self do: [ :each | result add: (block value: each) ].
   ^ result
 ].
 
 Array>>select: block [
-  "Return new array with elements where block returns true."
   | result |
+  "Return new array with elements where block returns true."
   result := Array new.
   self do: [ :each |
     (block value: each) ifTrue: [ result add: each ]
@@ -97,8 +97,8 @@ Array>>select: block [
 ].
 
 Array>>reject: block [
-  "Return new array with elements where block returns false."
   | result |
+  "Return new array with elements where block returns false."
   result := Array new.
   self do: [ :each |
     (block value: each) ifFalse: [ result add: each ]
@@ -123,8 +123,8 @@ Array>>detect: block ifNone: noneBlock [
 ].
 
 Array>>inject: initialValue into: block [
-  "Accumulate a result by iterating with block."
   | result |
+  "Accumulate a result by iterating with block."
   result := initialValue.
   self do: [ :each |
     result := block value: result value: each
@@ -166,8 +166,8 @@ Table>>keys [
 ].
 
 Table>>values [
-  "Return array of all values."
   | result |
+  "Return array of all values."
   result := Array new.
   self keys do: [ :key | result add: (self at: key) ].
   ^ result

@@ -1,87 +1,95 @@
 #!/usr/bin/env ntalk
 #
-# Boolean.nt - True and false objects with control flow
+# Boolean.nt - True and false classes with control flow
 #
 
-# Note: true and false are defined by the interpreter
-# This file adds methods to them for control flow
-
 #====================================================================
-# Control flow
+# True class - represents boolean true value
 #====================================================================
 
-true>>ifTrue: block [
+True := Object derive: #().
+
+True>>ifTrue: block [
   "Evaluate the block and return its value."
   ^ block value
 ].
 
-true>>ifFalse: block [
+True>>ifFalse: block [
   "Return nil - don't evaluate the block."
   ^ nil
 ].
 
-true>>ifTrue: trueBlock ifFalse: falseBlock [
+True>>ifTrue: trueBlock ifFalse: falseBlock [
   "Evaluate trueBlock and return its value."
   ^ trueBlock value
 ].
 
-false>>ifTrue: block [
-  "Return nil - don't evaluate the block."
-  ^ nil
-].
-
-false>>ifFalse: block [
-  "Evaluate the block and return its value."
-  ^ block value
-].
-
-false>>ifTrue: trueBlock ifFalse: falseBlock [
-  "Evaluate falseBlock and return its value."
-  ^ falseBlock value
-].
-
-#====================================================================
-# Boolean logic
-#====================================================================
-
-true>>and: block [
+True>>and: block [
   "Evaluate block and return its value."
   ^ block value
 ].
 
-true>>or: block [
+True>>or: block [
   "Return true - short circuit."
   ^ true
 ].
 
-true>>not [
+True>>not [
   "Return false."
   ^ false
 ].
 
-false>>and: block [
+True>>= other [
+  "Check if other is true."
+  ^ other == true
+].
+
+#====================================================================
+# False class - represents boolean false value
+#====================================================================
+
+False := Object derive: #().
+
+False>>ifTrue: block [
+  "Return nil - don't evaluate the block."
+  ^ nil
+].
+
+False>>ifFalse: block [
+  "Evaluate the block and return its value."
+  ^ block value
+].
+
+False>>ifTrue: trueBlock ifFalse: falseBlock [
+  "Evaluate falseBlock and return its value."
+  ^ falseBlock value
+].
+
+False>>and: block [
   "Return false - short circuit."
   ^ false
 ].
 
-false>>or: block [
+False>>or: block [
   "Evaluate block and return its value."
   ^ block value
 ].
 
-false>>not [
+False>>not [
   "Return true."
   ^ true
 ].
 
-#====================================================================
-# Comparison
-#====================================================================
-
-true>>= other [
-  ^ other == true
-].
-
-false>>= other [
+False>>= other [
+  "Check if other is false."
   ^ other == false
 ].
+
+#====================================================================
+# Create singleton instances
+# Note: The interpreter provides the primitive true/false objects
+# This file defines their behavior through the True/False classes
+#====================================================================
+
+# The interpreter creates the primitive true/false singletons
+# They inherit behavior from True/False classes via the class system

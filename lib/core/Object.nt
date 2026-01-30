@@ -6,8 +6,7 @@
 # Object is the root of the prototype hierarchy
 # It provides fundamental behaviors that all objects inherit
 
-Object := nil  # Will be set to the root object by the interpreter
-
+# Note: Object is set by initGlobals() in interpreter/evaluator.nim
 #====================================================================
 # Object creation and copying
 #====================================================================
@@ -71,7 +70,7 @@ Object>>methods [
 Object>>doesNotUnderstand: message [
   "Default handler for unrecognized messages.
    Subclasses can override to provide custom behavior."
-  self error: 'Message not understood: ' + message asString
+  self error: 'Message not understood: ' , message asString
 ].
 
 #====================================================================
@@ -85,12 +84,12 @@ Object>>== other [
 
 Object>>printString [
   "Return a string representation of this object."
-  ^ '<' + (self className) + '>'
+  ^ '<' , (self className) , '>'
 ].
 
 Object>>className [
-  "Return the class name of this object."
   | tags |
+  "Return the class name of this object."
   tags := self at: 'tags'.
   tags isNil
     ifTrue: [ ^ 'Object' ]
