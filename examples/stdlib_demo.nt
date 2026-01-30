@@ -116,12 +116,12 @@ allPositive := #(1 2 3 4 5) allSatisfy: [ :n | n > 0 ].
 "--- Tables ---" println.
 
 table := Table new.
-table at: 'name' put: 'Alice'.
-table at: 'age' put: 30.
-table at: 'city' put: 'Wonderland'.
+table at: "name" put: "Alice".
+table at: "age" put: 30.
+table at: "city" put: "Wonderland".
 
-("Name: " + (table at: 'name')) println.
-("Age: " + (table at: 'age') asString) println.
+("Name: " + (table at: "name")) println.
+("Age: " + (table at: "age") asString) println.
 ("Size: " + table size asString) println.
 
 "Table keys:" println.
@@ -139,9 +139,9 @@ s := "Hello, World!".
 ("Uppercase: " + s uppercase) println.
 ("Lowercase: " + s lowercase) println.
 ("Trim '  spaces  ': " + ("  spaces  " trim)) println.
-("Index of 'World': " + (s indexOf: 'World') asString) println.
-("Contains 'Hello': " + (s includesSubString: 'Hello') asString) println.
-("Replace: " + (s replace: 'World' with: 'Nimtalk')) println.
+("Index of "World": " + (s indexOf: "World") asString) println.
+("Contains "Hello": " + (s includesSubString: "Hello") asString) println.
+("Replace: " + (s replace: "World" with: "Nimtalk")) println.
 
 "Split:" println.
 parts := "a,b,c,d" split: ','.
@@ -176,7 +176,7 @@ nil isNil println.
 "--- Transcript ---" println.
 
 Transcript show: 'Using Transcript: '.
-Transcript show: 'Hello'.
+Transcript show: "Hello".
 Transcript cr.
 "" println.
 

@@ -6,7 +6,7 @@
 # Simple object with primitive method
 TestObject := Object derive
 
-TestObject at: 'add:and:' put: [
+TestObject at: 'add:and:" put: [
   <primitive>
   # Nim implementation of addition
   let a = args[0].intVal
