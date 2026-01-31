@@ -1,35 +1,29 @@
-import std/[logging, tables]
+import std/[tables, sequtils, logging]
 import ../src/nimtalk/core/types
 import ../src/nimtalk/interpreter/evaluator
-import ../src/nimtalk/parser/parser
+import ../src/nimtalk/interpreter/objects
 
-echo "=== Parsing: self < 0 ifTrue: [ 1 ] ==="
-let (ast1, _) = parse("self < 0 ifTrue: [ 1 ]")
-if ast1.len > 0:
-  let node1 = ast1[0]
-  if node1 of MessageNode:
-    let msg = MessageNode(node1)
-    echo "Selector: ", msg.selector
-    echo "Receiver type: ", if msg.receiver of MessageNode: "MessageNode" 
-                           elif msg.receiver of PseudoVarNode: "PseudoVar" 
-                           elif msg.receiver of LiteralNode: "Literal"
-                           else: "other"
-    if msg.receiver of MessageNode:
-      let inner = MessageNode(msg.receiver)
-      echo "Inner selector: ", inner.selector
+var interp = newInterpreter()
+initGlobals(interp)
+loadStdlib(interp)
 
-echo ""
-echo "=== Parsing: (self < 0) ifTrue: [ 1 ] ==="
-let (ast2, _) = parse("(self < 0) ifTrue: [ 1 ]")
-if ast2.len > 0:
-  let node2 = ast2[0]
-  if node2 of MessageNode:
-    let msg = MessageNode(node2)
-    echo "Selector: ", msg.selector
-    echo "Receiver type: ", if msg.receiver of MessageNode: "MessageNode" 
-                           elif msg.receiver of PseudoVarNode: "PseudoVar" 
-                           elif msg.receiver of LiteralNode: "Literal"
-                           else: "other"
-    if msg.receiver of MessageNode:
-      let inner = MessageNode(msg.receiver)
-      echo "Inner selector: ", inner.selector
+addHandler(newConsoleLogger(lvlDebug))
+
+echo "=== Test what self is inside block ==="
+let r1 = interp.evalStatements("""
+Integer>>test [
+  | x |
+  true ifTrue: [ x := self ].
+  ^ x
+].
+5 test
+""")
+echo "Error: ", r1[1]
+echo "Results count: ", r1[0].len
+for i, res in r1[0]:
+  echo "  Result[", i, "]: ", res
+  if res.kind == vkObject:
+    echo "    tags: ", res.objVal.tags
+    echo "    isNimProxy: ", res.objVal.isNimProxy
+    if res.objVal.isNimProxy and res.objVal.nimType == "int":
+      echo "    nimValue: ", cast[ptr int](res.objVal.nimValue)[]

@@ -1,161 +1,246 @@
 #!/usr/bin/env ntalk
 #
-# Number.nt - Integer and Float number methods
+# Number.nt - Number class hierarchy with Integer and Float
 # Provides Smalltalk-style numeric operations
+#
 
 #====================================================================
-# Integer methods
+# Number class - abstract base class for Integer and Float
 #====================================================================
 
-# Integer creation
-Integer := Object derive
+Number := Object derive: #().
+
+Number>>max: other [
+  # Maximum of self and other
+  self > other
+    ifTrue: [ ^ self ]
+    ifFalse: [ ^ other ]
+].
+
+Number>>min: other [
+  # Minimum of self and other
+  self < other
+    ifTrue: [ ^ self ]
+    ifFalse: [ ^ other ]
+].
+
+Number>>between: min and: max [
+  # Check if self is between min and max (inclusive).
+  (self >= min) ifFalse: [ ^ false ].
+  (self <= max) ifFalse: [ ^ false ].
+  ^ true
+].
+
+Number>>isZero [
+  ^ self = 0
+].
+
+Number>>isPositive [
+  ^ self > 0
+].
+
+Number>>isNegative [
+  ^ self < 0
+].
+
+Number>>sign [
+  # Return -1, 0, or 1 based on sign
+  self < 0 ifTrue: [ ^ -1 ].
+  self > 0 ifTrue: [ ^ 1 ].
+  ^ 0
+].
+
+Number>>asString [
+  # Convert to string
+  ^ self printString
+].
+
+#====================================================================
+# Integer class - whole numbers
+#====================================================================
+
+Integer := Number derive: #().
 
 Integer>>new: value [
   # Create a new integer with given value
   ^ value
-]
+].
 
-# Integer arithmetic helpers
 Integer>>abs [
   # Absolute value
-  self < 0 ifTrue: [ ^ 0 - self ]
+  self < 0
+    ifTrue: [ ^ 0 - self ].
   ^ self
-]
-
-Integer>>even [
-  # Check if even
-  ^ (self \\ 2) = 0
-]
-
-Integer>>odd [
-  # Check if odd
-  ^ (self \\ 2) ~= 0
-]
-
-Integer>>max: other [
-  # Maximum of self and other
-  self > other ifTrue: [ ^ self ] ifFalse: [ ^ other ]
-]
-
-Integer>>min: other [
-  # Minimum of self and other
-  self < other ifTrue: [ ^ self ] ifFalse: [ ^ other ]
-]
+].
 
 Integer>>negated [
   # Return negated value
   ^ 0 - self
-]
+].
+
+Integer>>even [
+  # Check if even
+  ^ (self \\ 2) = 0
+].
+
+Integer>>odd [
+  # Check if odd
+  ^ (self \\ 2) ~= 0
+].
 
 Integer>>to: end do: block [
   # Execute block with each integer from self to end (inclusive)
   | i |
-  i := self
+  i := self.
   [ i <= end ] whileTrue: [
-    block value: i
+    block value: i.
     i := i + 1
   ]
-]
+].
 
 Integer>>to: end by: step do: block [
   # Execute block with each integer from self to end by step
   | i |
-  i := self
+  i := self.
   step > 0
     ifTrue: [
       [ i <= end ] whileTrue: [
-        block value: i
+        block value: i.
         i := i + step
       ]
     ]
     ifFalse: [
       [ i >= end ] whileTrue: [
-        block value: i
+        block value: i.
         i := i + step
       ]
     ]
-]
+].
 
 Integer>>timesRepeat: block [
   # Execute block self times
   | count |
-  count := self
+  count := self.
   [ count > 0 ] whileTrue: [
-    block value
+    block value.
     count := count - 1
   ]
-]
+].
 
 Integer>>asFloat [
   # Convert to float
-  ^ self perform: "primitiveAsFloat"
-]
+  ^ self perform: #primitiveAsFloat
+].
 
-Integer>>asString [
-  # Convert to string
-  ^ self printString
-]
+Integer>>factorial [
+  # Calculate factorial
+  self <= 1 ifTrue: [ ^ 1 ].
+  ^ self * (self - 1) factorial
+].
+
+Integer>>gcd: other [
+  # Greatest common divisor using Euclidean algorithm
+  | a b |
+  a := self abs.
+  b := other abs.
+  [ b > 0 ] whileTrue: [
+    | temp |
+    temp := b.
+    b := a \\ b.
+    a := temp
+  ].
+  ^ a
+].
+
+Integer>>lcm: other [
+  # Least common multiple
+  | gcd |
+  gcd := self gcd: other.
+  gcd = 0 ifTrue: [ ^ 0 ].
+  ^ (self * other) abs // gcd
+].
 
 #====================================================================
-# Float methods
+# Float class - floating point numbers
 #====================================================================
 
-# Float creation
-Float := Object derive
+Float := Number derive: #().
 
 Float>>new: value [
   # Create a new float with given value
   ^ value asFloat
-]
+].
 
-# Float arithmetic helpers
 Float>>abs [
   # Absolute value
-  self < 0.0 ifTrue: [ ^ 0.0 - self ]
+  self < 0.0
+    ifTrue: [ ^ 0.0 - self ].
   ^ self
-]
+].
 
-Float>>max: other [
-  # Maximum of self and other
-  self > other ifTrue: [ ^ self ] ifFalse: [ ^ other ]
-]
-
-Float>>min: other [
-  # Minimum of self and other
-  self < other ifTrue: [ ^ self ] ifFalse: [ ^ other ]
-]
+Float>>negated [
+  # Return negated value
+  ^ 0.0 - self
+].
 
 Float>>floor [
   # Return floor (largest integer <= self)
-  ^ self perform: "primitiveFloor"
-]
+  ^ self perform: #primitiveFloor
+].
 
 Float>>ceiling [
   # Return ceiling (smallest integer >= self)
-  ^ self perform: "primitiveCeiling"
-]
+  ^ self perform: #primitiveCeiling
+].
 
 Float>>rounded [
   # Return rounded to nearest integer
-  ^ self perform: "primitiveRounded"
-]
+  ^ self perform: #primitiveRounded
+].
 
 Float>>truncated [
   # Return truncated toward zero
-  ^ self perform: "primitiveTruncated"
-]
+  ^ self perform: #primitiveTruncated
+].
 
 Float>>sqrt [
   # Return square root
-  ^ self perform: "primitiveSqrt"
-]
+  ^ self perform: #primitiveSqrt
+].
 
 Float>>asInteger [
   # Convert to integer (truncated)
-  ^ self perform: "primitiveAsInteger"
-]
+  ^ self perform: #primitiveAsInteger
+].
 
-Float>>asString [
-  # Convert to string
-  ^ self printString
-]
+Float>>sin [
+  # Return sine
+  ^ self perform: #primitiveSin
+].
+
+Float>>cos [
+  # Return cosine
+  ^ self perform: #primitiveCos
+].
+
+Float>>tan [
+  # Return tangent
+  ^ self perform: #primitiveTan
+].
+
+Float>>exp [
+  # Return e^self
+  ^ self perform: #primitiveExp
+].
+
+Float>>ln [
+  # Return natural logarithm
+  ^ self perform: #primitiveLn
+].
+
+#====================================================================
+# Notes on interpreter integration
+#====================================================================
+# The interpreter provides primitive number objects that inherit
+# from Integer and Float. Integer literals (like 42) and float
+# literals (like 3.14) receive messages defined in this file.

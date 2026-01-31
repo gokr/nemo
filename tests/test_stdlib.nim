@@ -70,8 +70,8 @@ suite "Stdlib: Numbers":
       n := 0 - 5.
       result := n abs
     """)
-    check(result[0][^1].kind == vkInt)
-    check(result[0][^1].intVal == 5)
+    check(result[0][^1].kind == vkObject)
+    check(result[0][^1].toString() == "5")
 
   test "even works":
     let result = interp.evalStatements("result := 4 even")

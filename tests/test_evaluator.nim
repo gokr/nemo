@@ -259,8 +259,8 @@ suite "Evaluator: Block Evaluation":
 
   test "blocks can close over variables":  # Requires full closure implementation
     let result = interp.evalStatements("""
-      Counter := Object derive.
-      Counter at: #makeCounter put: [ |
+      Counter := Dictionary derive.
+      Counter at: #makeCounter put: [ | count |
         count := 0.
         ^[
           count := count + 1.

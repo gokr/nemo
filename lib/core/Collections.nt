@@ -148,6 +148,90 @@ Array>>allSatisfy: block [
   ^ true
 ]
 
+Array>>withIndexDo: block [
+  # Iterate over each element with its index (0-based), evaluating the block.
+  | index size |
+  index := 0
+  size := self size
+  [ index < size ] whileTrue: [
+    block value: (self at: index) value: index
+    index := index + 1
+  ]
+  ^ self
+]
+
+Array>>copyFrom: start to: end [
+  # Return new array with elements from start to end (inclusive, 0-based).
+  | result index |
+  result := Array new
+  index := start
+  [ index <= end ] whileTrue: [
+    result add: (self at: index)
+    index := index + 1
+  ]
+  ^ result
+]
+
+Array>>with: otherArray do: block [
+  # Iterate over two collections in parallel, evaluating block with elements from both.
+  | index size |
+  index := 0
+  size := self size
+  (size = otherArray size) ifFalse: [ self error: "Collections must be same size for with:do:" ]
+  [ index < size ] whileTrue: [
+    block value: (self at: index) value: (otherArray at: index)
+    index := index + 1
+  ]
+  ^ self
+]
+
+Array>>addFirst: element [
+  # Add element to beginning of array (requires shifting existing elements).
+  # Note: This is O(n) operation. For frequent front insertions, consider different structure.
+  | newArray |
+  newArray := Array new
+  newArray add: element
+  self do: [ :each | newArray add: each ]
+  # Copy elements back
+  self removeAll
+  newArray do: [ :each | self add: each ]
+  ^ element
+]
+
+Array>>addLast: element [
+  # Add element to end of array (same as add:).
+  ^ self add: element
+]
+
+Array>>removeFirst [
+  # Remove and return first element.
+  | first |
+  first := self first
+  self removeAt: 0
+  ^ first
+]
+
+Array>>removeLast [
+  # Remove and return last element.
+  | last index |
+  index := self size - 1
+  last := self at: index
+  self removeAt: index
+  ^ last
+]
+
+Array>>addAll: collection [
+  # Add all elements from collection to this array.
+  collection do: [ :each | self add: each ]
+  ^ collection
+]
+
+Array>>removeAll [
+  # Remove all elements from array.
+  [ self isEmpty ] whileFalse: [ self removeAt: 0 ]
+  ^ self
+]
+
 #====================================================================
 # Table (Dictionary) extensions
 #====================================================================
@@ -203,6 +287,32 @@ Table>>keysAndValuesDo: block [
   self keys do: [ :key |
     block value: key value: (self at: key)
   ]
+]
+
+Table>>at: key ifAbsent: block [
+  # Get value at key, or evaluate block if key not present.
+  (self includesKey: key) ifTrue: [ ^ self at: key ] ifFalse: [ ^ block value ]
+]
+
+Table>>at: key ifAbsentPut: block [
+  # Get value at key, or put result of block and return it.
+  | value |
+  (self includesKey: key) ifTrue: [ ^ self at: key ]
+  value := block value
+  self at: key put: value
+  ^ value
+]
+
+Table>>at: key ifPresent: presentBlock [
+  # If key present, evaluate presentBlock with value, else return nil.
+  (self includesKey: key) ifTrue: [ ^ presentBlock value: (self at: key) ]
+  ^ nil
+]
+
+Table>>at: key ifPresent: presentBlock ifAbsent: absentBlock [
+  # If key present, evaluate presentBlock with value, else evaluate absentBlock.
+  (self includesKey: key) ifTrue: [ ^ presentBlock value: (self at: key) ]
+  ^ absentBlock value
 ]
 
 #====================================================================

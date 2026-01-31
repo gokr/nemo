@@ -349,6 +349,12 @@ proc parseExpression*(parser: var Parser; parseMessages = true): Node =
   # Check for messages
   if parseMessages:
     var current: Node = primary
+
+    # Skip separators (newlines) before checking what comes next
+    # This allows keyword messages to start on the next line
+    while parser.peek().kind == tkSeparator:
+      discard parser.next()
+
     let next = parser.peek()
 
     case next.kind
