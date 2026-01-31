@@ -9,7 +9,7 @@ import std/[tables, algorithm, hashes, logging]
 # when objects form reference cycles (which is common in an interpreter).
 # See CLAUDE.md for details on ORC issues.
 type
-  Node* = ref object of RootObj
+  Node* {.acyclic.} = ref object of RootObj
     line*, col*: int
 
   # ============================================================================

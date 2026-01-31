@@ -140,13 +140,13 @@ proc wrapBlockAsObject*(blockNode: BlockNode): NodeValue =
 
 type
   # Exception handler record for on:do: mechanism
-  ExceptionHandler* = object
+  ExceptionHandler* {.acyclic.} = object
     exceptionClass*: ProtoObject    # The exception class to catch
     handlerBlock*: BlockNode        # Block to execute when caught
     activation*: Activation         # Activation where handler was installed
     stackDepth*: int                # Stack depth when handler installed
 
-  Interpreter* = ref object
+  Interpreter* {.acyclic.} = ref object
     globals*: ref Table[string, NodeValue]
     activationStack*: seq[Activation]
     currentActivation*: Activation
