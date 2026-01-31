@@ -62,7 +62,7 @@ Keywords are identifiers followed by a colon. Multi-part keywords like `at:put:`
 <binary-op>    ::= "+" | "-" | "*" | "/" | "//" | "\\" | "\\"
                  | "=" | "==" | "===" | "~="
                  | "<" | ">" | "<=" | ">="
-                 | "," | "%"
+                 | "," | "%" | "&" | "|"
 <assign-op>    ::= ":="
 <return-op>    ::= "^"
 <method-def>   ::= ">>"

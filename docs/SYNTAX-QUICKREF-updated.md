@@ -507,6 +507,8 @@ a >= b      # Greater than or equal
 a // b      # Integer division (double slash)
 a \ b       # Modulo (single backslash)
 a ~~ b      # Not identity
+a & b       # Logical AND
+a | b       # Logical OR
 ```
 
 ### Cascading Messages

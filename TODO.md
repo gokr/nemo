@@ -12,7 +12,7 @@ This document tracks current work items and future directions for Nimtalk develo
 - **Closure variable isolation and sibling block sharing** ✅
 - Method definition syntax (`>>`) with multi-character binary operator support
 - `self` and `super` support (unqualified and qualified `super<Parent>`)
-- Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`) ✅
+- Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`, `&`, `|`) ✅
 - Enhanced comment handling (`#` followed by special chars) ✅
 - Standard library (Object, Boolean, Block, Number, Collections, String, FileStream, Exception, TestCase) ✅
 - Smalltalk-style temporary variables in blocks (`| temp |`) ✅
@@ -160,6 +160,31 @@ nimble clean       # Clean artifacts
 - `Processor` global object with `yield`, `fork:`, `current` methods
 - Process forking from Nimtalk blocks
 - Test suite for scheduler and process lifecycle
+
+---
+
+## Recent Completed Work (2026-01-31)
+
+### Boolean and Number Class Hierarchies
+- Created Boolean as parent class for True and False
+- Created Number as parent class for Integer and Float
+- Updated stdlib to use new hierarchies
+
+### Block Self Resolution Fix
+- Fixed self resolution in blocks to use homeActivation.receiver
+- Blocks now correctly refer to their creating object's self
+
+### New Binary Operators
+- Added & and | as binary operators (logical AND/OR)
+- Added support for & and | as method selectors (True>>& other, True>>| other)
+
+### Negative Number Literals
+- Added support for negative number literals using Spry-style lexer approach
+- Numbers like -5 are now parsed as single negative literals
+
+### Missing Wrap Functions
+- Added wrapBlockAsObject for block method support
+- Added wrapStringAsObject, wrapArrayAsObject, wrapTableAsObject, wrapFloatAsObject
 
 ---
 

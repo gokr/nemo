@@ -253,6 +253,8 @@ a >= b      # Greater than or equal
 a // b      # Integer division
 a \ b       # Modulo (single backslash)
 a ~~ b      # Not identity
+a & b       # Logical AND
+a | b       # Logical OR
 ```
 
 **Collections:**
