@@ -45,7 +45,7 @@ Number>>isNegative [
 
 Number>>sign [
   # Return -1, 0, or 1 based on sign
-  self < 0 ifTrue: [ ^ -1 ].
+  self < 0 ifTrue: [ ^ 0 - 1 ].
   self > 0 ifTrue: [ ^ 1 ].
   ^ 0
 ].
