@@ -9,20 +9,16 @@ d := 100 / 5
 # Sum results (30 + 20 + 30 + 20 = 100)
 result := a + b + c + d
 
-Stdout writeline: '10 + 20 = '
-Stdout writeline: a
-Stdout writeline: '30 - 10 = '
-Stdout writeline: b
-Stdout writeline: '5 * 6 = '
-Stdout writeline: c
-Stdout writeline: '100 / 5 = '
-Stdout writeline: d
-Stdout writeline: 'Total = '
-Stdout writeline: result
+# Print results using proper message send syntax
+("10 + 20 = " + (a asString)) println
+("30 - 10 = " + (b asString)) println
+("5 * 6 = " + (c asString)) println
+("100 / 5 = " + (d asString)) println
+("Total = " + (result asString)) println
 
 # Verify result
 (result = 100) ifTrue: [
-  Stdout writeline: 'Arith: PASS'
+  "Arith: PASS" println
 ]
 
 result
