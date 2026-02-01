@@ -15,7 +15,10 @@ build/
 *.lib
 
 # IDE files
-.vscode/
+# .vscode/ is kept for repository-level language support
+.vscode/settings.json.user
+.vscode/tasks.json
+.vscode/launch.json
 .idea/
 *.swp
 *.swo
