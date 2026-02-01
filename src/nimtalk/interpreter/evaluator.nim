@@ -66,9 +66,10 @@ proc newInterpreter*(trace: bool = false): Interpreter =
   # Initialize root object (legacy - will be removed after migration)
   result.rootObject = initRootObject()
 
-  # Initialize root class (new model)
-  let rootCls = initRootClass()
-  result.currentReceiver = newInstance(rootCls)
+  # Initialize core classes (new model)
+  # This sets up: Root -> Object -> (Integer, Float, String, Array, Table, Block, Boolean)
+  let objCls = initCoreClasses()
+  result.currentReceiver = newInstance(objCls)
 
   # Add asSelfDo: method to root object (interpreter-aware)
   let asSelfDoMethod = createCoreMethod("asSelfDo:")
@@ -119,9 +120,10 @@ proc newInterpreterWithShared*(globals: ref Table[string, NodeValue],
   # Use the shared root object (legacy - will be removed after migration)
   result.rootObject = root
 
-  # Initialize root class (new model)
-  let rootCls = initRootClass()
-  result.currentReceiver = newInstance(rootCls)
+  # Initialize core classes if not already done (new model)
+  # This sets up: Root -> Object -> (Integer, Float, String, Array, Table, Block, Boolean)
+  let objCls = initCoreClasses()
+  result.currentReceiver = newInstance(objCls)
 
 # Check stack depth to prevent infinite recursion
 proc checkStackDepth(interp: var Interpreter) =
@@ -1751,6 +1753,36 @@ proc initGlobals*(interp: var Interpreter) =
   deriveNoArgsMethod.hasInterpreterParam = true
   rootCls.classMethods["derive"] = deriveNoArgsMethod
   rootCls.allClassMethods["derive"] = deriveNoArgsMethod
+
+  # Register addParent: class method on classes
+  # This allows adding a parent to an existing class after creation
+  # Useful for resolving method conflicts by adding parent after overriding methods
+  proc addParentImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
+    # self.class is the Class object receiving the addParent: message
+    let cls = self.class
+    if args.len < 1:
+      raise newException(ValueError, "addParent: requires a parent class as argument")
+
+    var parentClass: Class = nil
+    if args[0].kind == vkClass:
+      parentClass = args[0].classVal
+    elif args[0].kind == vkInstance and args[0].instVal.class != nil:
+      # Instance wrapping a class (from class method dispatch)
+      parentClass = args[0].instVal.class
+    else:
+      raise newException(ValueError, "addParent: requires a class object, got: " & $args[0].kind)
+
+    if parentClass == nil:
+      raise newException(ValueError, "addParent: parent class cannot be nil")
+
+    addParent(cls, parentClass)
+    return nilValue()
+
+  let addParentMethod = createCoreMethod("addParent:")
+  addParentMethod.nativeImpl = cast[pointer](addParentImpl)
+  addParentMethod.hasInterpreterParam = true
+  rootCls.classMethods["addParent:"] = addParentMethod
+  rootCls.allClassMethods["addParent:"] = addParentMethod
 
   # Create Object class (derives from Root)
   let objectCls = newClass(parents = @[rootCls], name = "Object")

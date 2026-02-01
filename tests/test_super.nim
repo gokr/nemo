@@ -92,23 +92,24 @@ suite "Super Method Lookup":
     check(lookupInstanceMethod(child, "test") == parentMeth)
 
   test "Qualified super looks up in specific parent":
-    # Create two parent classes with same method
+    # Create two parent classes with different methods
+    # (same-name method conflict now requires explicit override)
     let parentA = newClass(name = "ParentA")
     let methA = BlockNode()
     methA.isMethod = true
-    parentA.allMethods["shared"] = methA
+    parentA.allMethods["methodA"] = methA
 
     let parentB = newClass(name = "ParentB")
     let methB = BlockNode()
     methB.isMethod = true
-    parentB.allMethods["shared"] = methB
+    parentB.allMethods["methodB"] = methB
 
-    # Create child with multiple parents
+    # Create child with multiple parents (no conflict - different methods)
     let child = newClass(parents = @[parentA, parentB], name = "Child")
-    # Merge methods (first parent wins)
-    for sel, meth in parentA.allMethods:
-      child.allMethods[sel] = meth
 
-    # Lookup via explicit parent name should find correct method
-    check(lookupInstanceMethod(parentA, "shared") == methA)
-    check(lookupInstanceMethod(parentB, "shared") == methB)
+    # Lookup via parent should find correct method
+    check(lookupInstanceMethod(parentA, "methodA") == methA)
+    check(lookupInstanceMethod(parentB, "methodB") == methB)
+    # Child inherits both
+    check(lookupInstanceMethod(child, "methodA") == methA)
+    check(lookupInstanceMethod(child, "methodB") == methB)

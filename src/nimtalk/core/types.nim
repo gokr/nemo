@@ -545,6 +545,16 @@ proc initRootClass*(): Class =
     rootClass.tags = @["Root"]
   return rootClass
 
+proc initObjectClass*(): Class =
+  ## Initialize the global Object class (inherits from Root)
+  ## Object is the normal Smalltalk base class with all core methods
+  if objectClass == nil:
+    # Ensure Root exists first
+    discard initRootClass()
+    objectClass = newClass(parents = @[rootClass], name = "Object")
+    objectClass.tags = @["Object"]
+  return objectClass
+
 # ============================================================================
 # Class and Instance Helpers
 # ============================================================================
@@ -567,12 +577,46 @@ proc newClass*(parents: seq[Class] = @[], slotNames: seq[string] = @[], name: st
   result.nimtalkType = ""
   result.hasSlots = slotNames.len > 0
 
+  # Check for slot name conflicts from parents
+  var seenSlotNames: seq[string] = @[]
+  for parent in parents:
+    for slotName in parent.allSlotNames:
+      if slotName in seenSlotNames:
+        raise newException(ValueError, "Slot name conflict: '" & slotName & "' exists in multiple parents")
+      seenSlotNames.add(slotName)
+
+  # Check for slot name conflicts between new slots and parent slots
+  for slotName in slotNames:
+    if slotName in seenSlotNames:
+      raise newException(ValueError, "Slot name conflict: '" & slotName & "' already exists in parent class")
+
+  # Add new slot names to seen list for checking among new slots
+  for slotName in slotNames:
+    if slotName in seenSlotNames:
+      raise newException(ValueError, "Slot name conflict: '" & slotName & "' declared multiple times")
+    seenSlotNames.add(slotName)
+
+  # Check for method selector conflicts between parents (only for directly-defined methods)
+  # Inherited methods should not cause conflicts
+  var seenInstanceMethods: seq[string] = @[]
+  var seenClassMethods: seq[string] = @[]
+  for parent in parents:
+    for selector in parent.methods.keys:  # Only check directly-defined instance methods
+      if selector in seenInstanceMethods:
+        raise newException(ValueError, "Method selector conflict: '" & selector & "' exists in multiple parents (override in child class first, then use addParent:)")
+      seenInstanceMethods.add(selector)
+    for selector in parent.classMethods.keys:  # Only check directly-defined class methods
+      if selector in seenClassMethods:
+        raise newException(ValueError, "Class method selector conflict: '" & selector & "' exists in multiple parents")
+      seenClassMethods.add(selector)
+
   # Add to parents' subclasses lists and inherit methods
   for parent in parents:
     parent.subclasses.add(result)
-    # Inherit instance methods
+    # Inherit instance methods (unless child overrides)
     for selector, methodBlock in parent.allMethods:
-      result.allMethods[selector] = methodBlock
+      if selector notin result.methods:  # Only inherit if not overridden
+        result.allMethods[selector] = methodBlock
     # Inherit class methods
     for selector, methodBlock in parent.allClassMethods:
       result.allClassMethods[selector] = methodBlock
@@ -584,6 +628,52 @@ proc newClass*(parents: seq[Class] = @[], slotNames: seq[string] = @[], name: st
   for slotName in slotNames:
     if slotName notin result.allSlotNames:
       result.allSlotNames.add(slotName)
+
+proc addParent*(cls: Class, parent: Class) =
+  ## Add a parent to an existing class
+  ## Useful for resolving method conflicts by adding parent after overriding methods
+  if parent in cls.parents:
+    return  # Already has this parent
+
+  # Check for slot name conflicts (only for directly-defined slots on this parent)
+  for slotName in parent.slotNames:
+    if slotName in cls.allSlotNames and slotName notin cls.slotNames:
+      raise newException(ValueError, "Slot name conflict: '" & slotName & "' already exists in existing parent hierarchy")
+
+  # Check for method selector conflicts (only for directly-defined methods on this parent)
+  # Only error if child doesn't override
+  for selector in parent.methods.keys:  # Only check directly-defined instance methods
+    if selector in cls.allMethods and selector notin cls.methods:
+      # Child inherits this method from another parent but it conflicts with this parent's directly-defined method
+      raise newException(ValueError, "Method selector conflict: '" & selector & "' exists in existing parent (override in child class first)")
+
+  for selector in parent.classMethods.keys:  # Only check directly-defined class methods
+    if selector in cls.allClassMethods and selector notin cls.classMethods:
+      # Child inherits this class method from another parent but it conflicts with this parent's directly-defined method
+      raise newException(ValueError, "Class method selector conflict: '" & selector & "' exists in existing parent (override in child class first)")
+
+  # Add parent
+  cls.parents.add(parent)
+  parent.subclasses.add(cls)
+
+  # Inherit instance methods (unless child overrides)
+  for selector, methodBlock in parent.allMethods:
+    if selector notin cls.methods and selector notin cls.allMethods:
+      cls.allMethods[selector] = methodBlock
+
+  # Inherit class methods
+  for selector, methodBlock in parent.allClassMethods:
+    if selector notin cls.classMethods and selector notin cls.allClassMethods:
+      cls.allClassMethods[selector] = methodBlock
+
+  # Inherit slot names
+  for slotName in parent.allSlotNames:
+    if slotName notin cls.allSlotNames:
+      cls.allSlotNames.add(slotName)
+
+  # Update hasSlots flag if needed
+  if cls.allSlotNames.len > 0:
+    cls.hasSlots = true
 
 proc newInstance*(cls: Class): Instance =
   ## Create a new Instance of the given Class (ikObject variant)

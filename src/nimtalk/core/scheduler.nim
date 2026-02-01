@@ -206,40 +206,42 @@ proc processorCurrentImpl(interp: var Interpreter, self: Instance,
   debug("Processor current called")
   return nilValue()
 
-proc createProcessorObject*(interp: var Interpreter): RuntimeObject =
-  ## Create the Processor global object
-  let processorObj = RuntimeObject()
-  processorObj.methods = initTable[string, BlockNode]()
-  processorObj.parents = @[interp.rootObject.RuntimeObject]
-  processorObj.tags = @["Processor", "Scheduler"]
-  processorObj.isNimProxy = false
-  processorObj.nimValue = nil
-  processorObj.nimType = ""
-  processorObj.hasSlots = false
-  processorObj.slots = @[]
-  processorObj.slotNames = initTable[string, int]()
+var processorClass*: Class = nil
+
+proc createProcessorClass*(): Class =
+  ## Create the Processor class with yield, fork:, current methods
+  if processorClass != nil:
+    return processorClass
+
+  # Ensure objectClass is initialized
+  discard initCoreClasses()
+
+  processorClass = newClass(parents = @[objectClass], name = "Processor")
+  processorClass.tags = @["Processor", "Scheduler"]
 
   # Add yield method
   let yieldMethod = createCoreMethod("yield")
   yieldMethod.nativeImpl = cast[pointer](processorYieldImpl)
   yieldMethod.hasInterpreterParam = true
-  addMethod(processorObj, "yield", yieldMethod)
+  addMethodToClass(processorClass, "yield", yieldMethod)
 
   # Add fork: method
   let forkMethod = createCoreMethod("fork:")
   forkMethod.nativeImpl = cast[pointer](processorForkImpl)
   forkMethod.hasInterpreterParam = true
-  addMethod(processorObj, "fork:", forkMethod)
+  addMethodToClass(processorClass, "fork:", forkMethod)
 
   # Add current method
   let currentMethod = createCoreMethod("current")
   currentMethod.nativeImpl = cast[pointer](processorCurrentImpl)
   currentMethod.hasInterpreterParam = true
-  addMethod(processorObj, "current", currentMethod)
+  addMethodToClass(processorClass, "current", currentMethod)
 
-  return processorObj
+  return processorClass
 
 proc initProcessorGlobal*(interp: var Interpreter) =
   ## Initialize the Processor global in the interpreter
-  let processorObj = createProcessorObject(interp)
-  interp.globals[]["Processor"] = processorObj.toValue()
+  ## Processor is a singleton instance of ProcessorClass
+  let cls = createProcessorClass()
+  let processorInstance = newInstance(cls)
+  interp.globals[]["Processor"] = processorInstance.toValue()

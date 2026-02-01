@@ -3,8 +3,11 @@ import ../src/nimtalk/core/types
 import ../src/nimtalk/core/process
 import ../src/nimtalk/core/scheduler
 import ../src/nimtalk/interpreter/evaluator
+import ../src/nimtalk/interpreter/objects
 
 suite "Green Threads - Scheduler Integration":
+  # Initialize core classes before any tests
+  discard initCoreClasses()
 
   test "Create scheduler context":
     let ctx = newSchedulerContext()
@@ -29,6 +32,7 @@ suite "Green Threads - Scheduler Integration":
     mainInterp.globals[]["testVar"] = NodeValue(kind: vkInt, intVal: 42)
 
     # Create a second interpreter with shared state
+    # Note: newInterpreterWithShared still uses legacy RootObject type
     let newInterp = newInterpreterWithShared(
       ctx.scheduler.sharedGlobals,
       ctx.scheduler.rootObject
@@ -53,8 +57,9 @@ suite "Green Threads - Scheduler Integration":
       isMethod: false
     )
 
-    # Fork a new process
-    let newProc = ctx.forkProcess(blockNode, ctx.scheduler.rootObject, "test-fork")
+    # Fork a new process with a proper Instance receiver
+    let receiver = newInstance(objectClass)
+    let newProc = ctx.forkProcess(blockNode, receiver, "test-fork")
 
     check newProc != nil
     check newProc.name == "test-fork"
@@ -71,7 +76,8 @@ suite "Green Threads - Scheduler Integration":
       isMethod: false
     )
 
-    let newProc = ctx.forkProcess(blockNode, ctx.scheduler.rootObject, "forked")
+    let receiver = newInstance(objectClass)
+    let newProc = ctx.forkProcess(blockNode, receiver, "forked")
     let mainInterp = ctx.mainProcess.getInterpreter()
     let forkInterp = newProc.getInterpreter()
 
@@ -92,7 +98,7 @@ suite "Green Threads - Scheduler Integration":
         body: @[LiteralNode(value: NodeValue(kind: vkInt, intVal: i)).Node],
         isMethod: false
       )
-      discard ctx.forkProcess(blockNode, ctx.scheduler.rootObject, "proc-" & $i)
+      discard ctx.forkProcess(blockNode, newInstance(objectClass), "proc-" & $i)
 
     # Should have 4 processes (main + 3 forked)
     check ctx.scheduler.processCount == 4
@@ -108,7 +114,7 @@ suite "Green Threads - Scheduler Integration":
       isMethod: false
     )
 
-    let proc1 = ctx.forkProcess(blockNode, ctx.scheduler.rootObject, "lifecycle")
+    let proc1 = ctx.forkProcess(blockNode, newInstance(objectClass), "lifecycle")
 
     # Initially ready
     check proc1.state == psReady
@@ -127,7 +133,7 @@ suite "Green Threads - Scheduler Integration":
 
     check "Processor" in interp.globals[]
     let processorVal = interp.globals[]["Processor"]
-    check processorVal.kind == vkObject
+    check processorVal.kind == vkInstance  # Processor is now an Instance
 
   test "Run forked process to completion":
     let ctx = newSchedulerContext()
@@ -146,7 +152,7 @@ suite "Green Threads - Scheduler Integration":
     )
 
     # Fork the process
-    discard ctx.forkProcess(blockNode, ctx.scheduler.rootObject, "compute")
+    discard ctx.forkProcess(blockNode, newInstance(objectClass), "compute")
 
     # Run until done
     let steps = ctx.runToCompletion(maxSteps = 100)

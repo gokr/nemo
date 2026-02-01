@@ -74,12 +74,11 @@ suite "Class-Based Object Model":
 
   test "Slot conflict detection":
     let parent = newClass(slotNames = @["name"], name = "Parent")
-    parent.allSlotNames = @["name"]
+    # parent.allSlotNames is already set by newClass
 
-    let child = newClass(parents = @[parent], slotNames = @["name"], name = "Child")
-    # Should raise error when rebuilding tables
+    # Should raise error during class creation due to slot name conflict
     expect ValueError:
-      rebuildAllTables(child)
+      discard newClass(parents = @[parent], slotNames = @["name"], name = "Child")
 
   test "Subclass registration":
     let parent = newClass(name = "Parent")
@@ -148,11 +147,12 @@ suite "Class-Based Object Model":
 
     let meth1 = BlockNode()
     meth1.isMethod = true
-    trait1.allMethods["shared"] = meth1
+    # Use addMethodToClass to properly add methods (updates both methods and allMethods)
+    addMethodToClass(trait1, "shared", meth1)
 
     let meth2 = BlockNode()
     meth2.isMethod = true
-    trait2.allMethods["shared"] = meth2
+    addMethodToClass(trait2, "shared", meth2)
 
     # Deriving from both parents with conflicting methods should error
     expect ValueError:

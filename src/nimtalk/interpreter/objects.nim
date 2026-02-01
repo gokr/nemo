@@ -86,6 +86,7 @@ proc instStringSplitImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instStringAsIntegerImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instStringAsSymbolImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instIdentityImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc instanceCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 # File primitives
 proc fileOpenImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
 proc fileCloseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
@@ -2466,3 +2467,370 @@ proc instIdentityImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
   else:
     result = false
   return NodeValue(kind: vkBool, boolVal: result)
+
+# ============================================================================
+# Core Classes Initialization (New Class-Based System)
+# ============================================================================
+
+proc initCoreClasses*(): Class =
+  ## Initialize the core class hierarchy:
+  ##   Root (empty - for DNU proxies)
+  ##     └── Object (core methods)
+  ##           ├── Integer
+  ##           ├── Float
+  ##           ├── String
+  ##           ├── Array
+  ##           ├── Table
+  ##           └── Block
+  ##
+  ## Returns objectClass for convenience.
+
+  # Initialize symbol table and globals first
+  initSymbolTable()
+  initGlobals()
+
+  # Create Root class (empty - for DNU proxies/wrappers)
+  if rootClass == nil:
+    rootClass = initRootClass()
+
+  # Create Object class (inherits from Root)
+  if objectClass == nil:
+    objectClass = initObjectClass()
+
+    # Install core methods on Object class
+    # These are the methods that all objects should have
+
+    # Clone method (instance method)
+    let cloneMethod = createCoreMethod("clone")
+    cloneMethod.nativeImpl = cast[pointer](instanceCloneImpl)
+    addMethodToClass(objectClass, "clone", cloneMethod)
+
+    # Class methods: derive and derive: (called on Class, not Instance)
+    let deriveMethod = createCoreMethod("derive")
+    deriveMethod.nativeImpl = cast[pointer](classDeriveImpl)
+    addMethodToClass(objectClass, "derive", deriveMethod, isClassMethod = true)
+
+    let deriveWithSlotsMethod = createCoreMethod("derive:")
+    deriveWithSlotsMethod.nativeImpl = cast[pointer](classDeriveImpl)
+    addMethodToClass(objectClass, "derive:", deriveWithSlotsMethod, isClassMethod = true)
+
+    # new method (class method)
+    let newMethod = createCoreMethod("new")
+    newMethod.nativeImpl = cast[pointer](classNewImpl)
+    addMethodToClass(objectClass, "new", newMethod, isClassMethod = true)
+
+    # selector:put: method (class method for adding instance methods)
+    let selectorPutMethod = createCoreMethod("selector:put:")
+    selectorPutMethod.nativeImpl = cast[pointer](classAddMethodImpl)
+    addMethodToClass(objectClass, "selector:put:", selectorPutMethod, isClassMethod = true)
+
+    # classSelector:put: method (class method for adding class methods)
+    let classSelectorPutMethod = createCoreMethod("classSelector:put:")
+    classSelectorPutMethod.nativeImpl = cast[pointer](classAddClassMethodImpl)
+    addMethodToClass(objectClass, "classSelector:put:", classSelectorPutMethod, isClassMethod = true)
+
+    # Identity method
+    let identityMethod = createCoreMethod("==")
+    identityMethod.nativeImpl = cast[pointer](instIdentityImpl)
+    addMethodToClass(objectClass, "==", identityMethod)
+
+    # printString method
+    let printStringMethod = createCoreMethod("printString")
+    printStringMethod.nativeImpl = cast[pointer](printStringImpl)
+    addMethodToClass(objectClass, "printString", printStringMethod)
+
+    # Add Object to globals as a Class value
+    addGlobal("Object", NodeValue(kind: vkClass, classVal: objectClass))
+
+  # Create Integer class
+  if integerClass == nil:
+    integerClass = newClass(parents = @[objectClass], name = "Integer")
+    integerClass.tags = @["Integer", "Number"]
+
+    # Arithmetic methods
+    let plusMethod = createCoreMethod("+")
+    plusMethod.nativeImpl = cast[pointer](plusImpl)
+    addMethodToClass(integerClass, "+", plusMethod)
+
+    let minusMethod = createCoreMethod("-")
+    minusMethod.nativeImpl = cast[pointer](minusImpl)
+    addMethodToClass(integerClass, "-", minusMethod)
+
+    let starMethod = createCoreMethod("*")
+    starMethod.nativeImpl = cast[pointer](starImpl)
+    addMethodToClass(integerClass, "*", starMethod)
+
+    let slashMethod = createCoreMethod("/")
+    slashMethod.nativeImpl = cast[pointer](slashImpl)
+    addMethodToClass(integerClass, "/", slashMethod)
+
+    let intDivMethod = createCoreMethod("//")
+    intDivMethod.nativeImpl = cast[pointer](intDivImpl)
+    addMethodToClass(integerClass, "//", intDivMethod)
+
+    let moduloMethod = createCoreMethod("\\")
+    moduloMethod.nativeImpl = cast[pointer](backslashModuloImpl)
+    addMethodToClass(integerClass, "\\", moduloMethod)
+
+    let modMethod = createCoreMethod("%")
+    modMethod.nativeImpl = cast[pointer](moduloImpl)
+    addMethodToClass(integerClass, "%", modMethod)
+
+    # Comparison methods
+    let ltMethod = createCoreMethod("<")
+    ltMethod.nativeImpl = cast[pointer](ltImpl)
+    addMethodToClass(integerClass, "<", ltMethod)
+
+    let gtMethod = createCoreMethod(">")
+    gtMethod.nativeImpl = cast[pointer](gtImpl)
+    addMethodToClass(integerClass, ">", gtMethod)
+
+    let eqMethod = createCoreMethod("=")
+    eqMethod.nativeImpl = cast[pointer](eqImpl)
+    addMethodToClass(integerClass, "=", eqMethod)
+
+    let leMethod = createCoreMethod("<=")
+    leMethod.nativeImpl = cast[pointer](leImpl)
+    addMethodToClass(integerClass, "<=", leMethod)
+
+    let geMethod = createCoreMethod(">=")
+    geMethod.nativeImpl = cast[pointer](geImpl)
+    addMethodToClass(integerClass, ">=", geMethod)
+
+    let neMethod = createCoreMethod("~=")
+    neMethod.nativeImpl = cast[pointer](neImpl)
+    addMethodToClass(integerClass, "~=", neMethod)
+
+    addGlobal("Integer", NodeValue(kind: vkClass, classVal: integerClass))
+
+  # Create Float class
+  if floatClass == nil:
+    floatClass = newClass(parents = @[objectClass], name = "Float")
+    floatClass.tags = @["Float", "Number"]
+
+    # Arithmetic (inherit from same impls as Integer - they handle both)
+    let plusMethod = createCoreMethod("+")
+    plusMethod.nativeImpl = cast[pointer](plusImpl)
+    addMethodToClass(floatClass, "+", plusMethod)
+
+    let minusMethod = createCoreMethod("-")
+    minusMethod.nativeImpl = cast[pointer](minusImpl)
+    addMethodToClass(floatClass, "-", minusMethod)
+
+    let starMethod = createCoreMethod("*")
+    starMethod.nativeImpl = cast[pointer](starImpl)
+    addMethodToClass(floatClass, "*", starMethod)
+
+    let slashMethod = createCoreMethod("/")
+    slashMethod.nativeImpl = cast[pointer](slashImpl)
+    addMethodToClass(floatClass, "/", slashMethod)
+
+    let sqrtMethod = createCoreMethod("sqrt")
+    sqrtMethod.nativeImpl = cast[pointer](sqrtImpl)
+    addMethodToClass(floatClass, "sqrt", sqrtMethod)
+
+    # Comparison methods
+    let ltMethod = createCoreMethod("<")
+    ltMethod.nativeImpl = cast[pointer](ltImpl)
+    addMethodToClass(floatClass, "<", ltMethod)
+
+    let gtMethod = createCoreMethod(">")
+    gtMethod.nativeImpl = cast[pointer](gtImpl)
+    addMethodToClass(floatClass, ">", gtMethod)
+
+    let eqMethod = createCoreMethod("=")
+    eqMethod.nativeImpl = cast[pointer](eqImpl)
+    addMethodToClass(floatClass, "=", eqMethod)
+
+    let leMethod = createCoreMethod("<=")
+    leMethod.nativeImpl = cast[pointer](leImpl)
+    addMethodToClass(floatClass, "<=", leMethod)
+
+    let geMethod = createCoreMethod(">=")
+    geMethod.nativeImpl = cast[pointer](geImpl)
+    addMethodToClass(floatClass, ">=", geMethod)
+
+    addGlobal("Float", NodeValue(kind: vkClass, classVal: floatClass))
+
+  # Create String class
+  if stringClass == nil:
+    stringClass = newClass(parents = @[objectClass], name = "String")
+    stringClass.tags = @["String"]
+
+    let concatMethod = createCoreMethod(",")
+    concatMethod.nativeImpl = cast[pointer](instStringConcatImpl)
+    addMethodToClass(stringClass, ",", concatMethod)
+
+    let sizeMethod = createCoreMethod("size")
+    sizeMethod.nativeImpl = cast[pointer](instStringSizeImpl)
+    addMethodToClass(stringClass, "size", sizeMethod)
+
+    let atMethod = createCoreMethod("at:")
+    atMethod.nativeImpl = cast[pointer](instStringAtImpl)
+    addMethodToClass(stringClass, "at:", atMethod)
+
+    let fromToMethod = createCoreMethod("from:to:")
+    fromToMethod.nativeImpl = cast[pointer](instStringFromToImpl)
+    addMethodToClass(stringClass, "from:to:", fromToMethod)
+
+    let indexOfMethod = createCoreMethod("indexOf:")
+    indexOfMethod.nativeImpl = cast[pointer](instStringIndexOfImpl)
+    addMethodToClass(stringClass, "indexOf:", indexOfMethod)
+
+    let includesMethod = createCoreMethod("includesSubString:")
+    includesMethod.nativeImpl = cast[pointer](instStringIncludesSubStringImpl)
+    addMethodToClass(stringClass, "includesSubString:", includesMethod)
+
+    let replaceMethod = createCoreMethod("replace:with:")
+    replaceMethod.nativeImpl = cast[pointer](instStringReplaceWithImpl)
+    addMethodToClass(stringClass, "replace:with:", replaceMethod)
+
+    let uppercaseMethod = createCoreMethod("asUppercase")
+    uppercaseMethod.nativeImpl = cast[pointer](instStringUppercaseImpl)
+    addMethodToClass(stringClass, "asUppercase", uppercaseMethod)
+
+    let lowercaseMethod = createCoreMethod("asLowercase")
+    lowercaseMethod.nativeImpl = cast[pointer](instStringLowercaseImpl)
+    addMethodToClass(stringClass, "asLowercase", lowercaseMethod)
+
+    let trimMethod = createCoreMethod("trim")
+    trimMethod.nativeImpl = cast[pointer](instStringTrimImpl)
+    addMethodToClass(stringClass, "trim", trimMethod)
+
+    let splitMethod = createCoreMethod("split:")
+    splitMethod.nativeImpl = cast[pointer](instStringSplitImpl)
+    addMethodToClass(stringClass, "split:", splitMethod)
+
+    let asIntegerMethod = createCoreMethod("asInteger")
+    asIntegerMethod.nativeImpl = cast[pointer](instStringAsIntegerImpl)
+    addMethodToClass(stringClass, "asInteger", asIntegerMethod)
+
+    let asSymbolMethod = createCoreMethod("asSymbol")
+    asSymbolMethod.nativeImpl = cast[pointer](instStringAsSymbolImpl)
+    addMethodToClass(stringClass, "asSymbol", asSymbolMethod)
+
+    addGlobal("String", NodeValue(kind: vkClass, classVal: stringClass))
+
+  # Create Array class
+  if arrayClass == nil:
+    arrayClass = newClass(parents = @[objectClass], name = "Array")
+    arrayClass.tags = @["Array", "Collection"]
+
+    let sizeMethod = createCoreMethod("size")
+    sizeMethod.nativeImpl = cast[pointer](arraySizeImpl)
+    addMethodToClass(arrayClass, "size", sizeMethod)
+
+    let atMethod = createCoreMethod("at:")
+    atMethod.nativeImpl = cast[pointer](arrayAtImpl)
+    addMethodToClass(arrayClass, "at:", atMethod)
+
+    let atPutMethod = createCoreMethod("at:put:")
+    atPutMethod.nativeImpl = cast[pointer](arrayAtPutImpl)
+    addMethodToClass(arrayClass, "at:put:", atPutMethod)
+
+    let addMethod = createCoreMethod("add:")
+    addMethod.nativeImpl = cast[pointer](arrayAddImpl)
+    addMethodToClass(arrayClass, "add:", addMethod)
+
+    let removeAtMethod = createCoreMethod("removeAt:")
+    removeAtMethod.nativeImpl = cast[pointer](arrayRemoveAtImpl)
+    addMethodToClass(arrayClass, "removeAt:", removeAtMethod)
+
+    let includesMethod = createCoreMethod("includes:")
+    includesMethod.nativeImpl = cast[pointer](arrayIncludesImpl)
+    addMethodToClass(arrayClass, "includes:", includesMethod)
+
+    let reverseMethod = createCoreMethod("reverse")
+    reverseMethod.nativeImpl = cast[pointer](arrayReverseImpl)
+    addMethodToClass(arrayClass, "reverse", reverseMethod)
+
+    # Array new: is a class method
+    let newMethod = createCoreMethod("new")
+    newMethod.nativeImpl = cast[pointer](arrayNewImpl)
+    addMethodToClass(arrayClass, "new", newMethod, isClassMethod = true)
+
+    addGlobal("Array", NodeValue(kind: vkClass, classVal: arrayClass))
+
+  # Create Table class
+  if tableClass == nil:
+    tableClass = newClass(parents = @[objectClass], name = "Table")
+    tableClass.tags = @["Table", "Collection", "Dictionary"]
+
+    let atMethod = createCoreMethod("at:")
+    atMethod.nativeImpl = cast[pointer](tableAtImpl)
+    addMethodToClass(tableClass, "at:", atMethod)
+
+    let atPutMethod = createCoreMethod("at:put:")
+    atPutMethod.nativeImpl = cast[pointer](tableAtPutImpl)
+    addMethodToClass(tableClass, "at:put:", atPutMethod)
+
+    let keysMethod = createCoreMethod("keys")
+    keysMethod.nativeImpl = cast[pointer](tableKeysImpl)
+    addMethodToClass(tableClass, "keys", keysMethod)
+
+    let includesKeyMethod = createCoreMethod("includesKey:")
+    includesKeyMethod.nativeImpl = cast[pointer](tableIncludesKeyImpl)
+    addMethodToClass(tableClass, "includesKey:", includesKeyMethod)
+
+    let removeKeyMethod = createCoreMethod("removeKey:")
+    removeKeyMethod.nativeImpl = cast[pointer](tableRemoveKeyImpl)
+    addMethodToClass(tableClass, "removeKey:", removeKeyMethod)
+
+    # Table new is a class method
+    let newMethod = createCoreMethod("new")
+    newMethod.nativeImpl = cast[pointer](tableNewImpl)
+    addMethodToClass(tableClass, "new", newMethod, isClassMethod = true)
+
+    addGlobal("Table", NodeValue(kind: vkClass, classVal: tableClass))
+
+  # Create Block class
+  if blockClass == nil:
+    blockClass = newClass(parents = @[objectClass], name = "Block")
+    blockClass.tags = @["Block", "Closure"]
+
+    addGlobal("Block", NodeValue(kind: vkClass, classVal: blockClass))
+
+  # Create Boolean class (parent for True and False)
+  if booleanClass == nil:
+    booleanClass = newClass(parents = @[objectClass], name = "Boolean")
+    booleanClass.tags = @["Boolean"]
+
+    addGlobal("Boolean", NodeValue(kind: vkClass, classVal: booleanClass))
+
+  # Also ensure the type module globals point to our classes
+  types.rootClass = rootClass
+  types.objectClass = objectClass
+  types.integerClass = integerClass
+  types.floatClass = floatClass
+  types.stringClass = stringClass
+  types.arrayClass = arrayClass
+  types.tableClass = tableClass
+  types.blockClass = blockClass
+  types.booleanClass = booleanClass
+
+  return objectClass
+
+# Instance clone implementation (for new class-based system)
+proc instanceCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Clone an instance - creates a new instance with same class and copied slots
+  case self.kind
+  of ikObject:
+    let clone = Instance(kind: ikObject, class: self.class)
+    clone.slots = self.slots  # Copy slot values
+    clone.isNimProxy = self.isNimProxy
+    clone.nimValue = self.nimValue
+    return NodeValue(kind: vkInstance, instVal: clone)
+  of ikArray:
+    let clone = Instance(kind: ikArray, class: self.class)
+    clone.elements = self.elements  # Copy elements
+    return NodeValue(kind: vkInstance, instVal: clone)
+  of ikTable:
+    let clone = Instance(kind: ikTable, class: self.class)
+    clone.entries = self.entries  # Copy entries
+    return NodeValue(kind: vkInstance, instVal: clone)
+  of ikInt:
+    return NodeValue(kind: vkInstance, instVal: newIntInstance(self.class, self.intVal))
+  of ikFloat:
+    return NodeValue(kind: vkInstance, instVal: newFloatInstance(self.class, self.floatVal))
+  of ikString:
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
