@@ -11,7 +11,7 @@ Person := Object derive: #(#name #age)
 
 # Create and initialize instance
 person := Person new.
-person name: 'Alice'              # Uses generated setter (direct slot access)
+person name: "Alice"              # Uses generated setter (direct slot access)
 person age: 30
 
 # Access ivars
