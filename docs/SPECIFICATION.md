@@ -6,7 +6,7 @@ Nimtalk is a class-based Smalltalk dialect that compiles to Nim code. This docum
 
 Nimtalk combines Smalltalk's message-passing semantics with Nim's compilation and performance characteristics. Key features include:
 
-- Class-based object system with multiple inheritance
+- Class-based object system with single inheritance (multiple parents planned)
 - Message-passing semantics (unary, binary, keyword)
 - Block closures with lexical scoping
 - Direct slot access for declared instance variables (O(1) access)
@@ -164,10 +164,12 @@ Employee := Person derive: #(salary department)
 # Multi-level inheritance
 Manager := Employee derive: #(teamSize)
 
-# Multiple inheritance (traits pattern)
+# Multiple inheritance (planned)
 Enumerable := Object derive: #().
 Employee := Person derive: #(salary) withParents: #(Enumerable)
 ```
+
+**Note**: The internal class model supports multiple parents. The first parent defines the "kind" of class (Object, Array, Number, etc.) and determines the instance representation. Additional parents act as mixins/traits and are constrained based on compatibility with the primary parent. The `withParents:` syntax is not yet implemented - currently only single inheritance works via `derive:`.
 
 ## Methods
 
