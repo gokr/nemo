@@ -11,37 +11,35 @@ This document describes the **actual implemented syntax** in the current Nimtalk
 
 ## String Literals
 
-**Single quotes** for string literals:
+**Double quotes** for string literals:
 
 ```nimtalk
-'This is a string'
+"This is a string"
 ```
 
-Double quotes are used for comments.
+Single quotes are reserved for future use.
 
 ## Comments
 
-Nimtalk uses **double-quote comments** (like Smalltalk):
+Nimtalk uses **hash-style comments**:
 
 ```nimtalk
-"This is a comment - double quotes for comments"
+# This is a comment
 
-"Create a shallow copy of this object"
-^ self perform: "primitiveClone"
+# Create a shallow copy of this object
+^ self perform: #primitiveClone
 
-"Array literal - the # is followed by (, not whitespace
+# Array literal - the # is followed by (, not whitespace
 #(1 2 3)
 
-"Table literal - the # is followed by {, not whitespace
-#{key: value}
+# Table literal - the # is followed by {, not whitespace
+#{"key" -> "value"}
 
-"Symbol - the # is followed by a letter
+# Symbol - the # is followed by a letter
 #symbol
-
-"Symbol with spaces: #'symbol with spaces'
 ```
 
-**Note**: Hash-style `# comment` syntax is also supported for section headers.
+**Note**: Double quotes are for strings, not comments. Hash-style `# comment` is the comment syntax.
 
 ## Shebang Support
 
@@ -107,13 +105,13 @@ The vertical bar `|` **only appears when you have block parameters or temporarie
 # Nimtalk - valid and concise
 Object at: #error: put: [
   :message
-  self error: 'Message not understood: ' + message asString
+  self error: "Message not understood: " + message asString
 ].
 
 # Traditional Smalltalk would require:
 # Object at: #error: put: [
 #   :message |
-#   self error: 'Message not understood: ' + message asString
+#   self error: "Message not understood: " + message asString
 # ].
 ```
 
@@ -154,7 +152,7 @@ Nimtalk supports the `>>` method definition syntax for cleaner method declaratio
 
 ```smalltalk
 # Unary method (no parameters)
-Person>>greet [ ^ 'Hello, ' + name ]
+Person>>greet [ ^ "Hello, " + name ]
 
 # Method with one parameter
 Person>>name: aName [ name := aName ]
@@ -180,7 +178,7 @@ Methods can also be defined using explicit message passing:
 ```smalltalk
 # Define a method on Object
 Object at: #printString put: [
-  ^ '<' + (self className) + '>'
+  ^ "<" + (self className) + ">"
 ].
 
 # Keyword method
