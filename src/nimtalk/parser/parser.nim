@@ -350,12 +350,26 @@ proc parseExpression*(parser: var Parser; parseMessages = true): Node =
   if parseMessages:
     var current: Node = primary
 
-    # Skip separators (newlines) before checking what comes next
-    # This allows keyword messages to start on the next line
-    while parser.peek().kind == tkSeparator:
-      discard parser.next()
+    # First check what's immediately next (on same line)
+    var next = parser.peek()
 
-    let next = parser.peek()
+    # If we hit a separator, peek at what follows
+    # Keyword messages can span lines, but identifiers/assignments cannot
+    if next.kind == tkSeparator:
+      # Save position for potential backtrack
+      let savePos = parser.pos
+
+      # Skip separators to see what's next
+      while parser.peek().kind == tkSeparator:
+        discard parser.next()
+
+      next = parser.peek()
+
+      # Only continue across newlines for keyword messages
+      if next.kind != tkKeyword:
+        # Not a keyword - restore position and return
+        parser.pos = savePos
+        return primary
 
     case next.kind
     of tkKeyword:
@@ -372,11 +386,18 @@ proc parseExpression*(parser: var Parser; parseMessages = true): Node =
         # After unary messages, check for binary operators
         if parser.peek().kind in BinaryOpTokens:
           current = parser.parseBinaryOperators(current)
-        # After binary operators, skip separators and check for keyword messages
-        while parser.peek().kind == tkSeparator:
-          discard parser.next()
+        # Check for keyword messages (may be on next line)
         if parser.peek().kind == tkKeyword:
           return parser.parseKeywordMessage(current)
+        # Also check for keyword after separator (multi-line support)
+        if parser.peek().kind == tkSeparator:
+          let savePos = parser.pos
+          while parser.peek().kind == tkSeparator:
+            discard parser.next()
+          if parser.peek().kind == tkKeyword:
+            return parser.parseKeywordMessage(current)
+          # Not a keyword continuation - restore position
+          parser.pos = savePos
         return current
       else:
         return primary
@@ -384,11 +405,18 @@ proc parseExpression*(parser: var Parser; parseMessages = true): Node =
        tkIntDiv, tkMod, tkLtEq, tkGtEq, tkNotEq, tkAmpersand, tkPipe:
       # Binary operator directly after primary
       current = parser.parseBinaryOperators(primary)
-      # After binary operators, skip separators and check for keyword messages
-      while parser.peek().kind == tkSeparator:
-        discard parser.next()
+      # Check for keyword messages (may be on next line)
       if parser.peek().kind == tkKeyword:
         return parser.parseKeywordMessage(current)
+      # Also check for keyword after separator (multi-line support)
+      if parser.peek().kind == tkSeparator:
+        let savePos = parser.pos
+        while parser.peek().kind == tkSeparator:
+          discard parser.next()
+        if parser.peek().kind == tkKeyword:
+          return parser.parseKeywordMessage(current)
+        # Not a keyword continuation - restore position
+        parser.pos = savePos
       return current
     else:
       return primary
@@ -737,17 +765,37 @@ proc parseStatement(parser: var Parser; parseMessages = true): Node =
     return parser.parseMethodDefinition(expr)
 
   # Check for assignment :=
+  debug("parseStatement: checking for assignment, pos=", parser.pos, " peek.kind=", parser.peek().kind, " value=", parser.peek().value)
   if parser.peek().kind == tkAssign:
+    debug("parseStatement: found assignment token, consuming it")
     discard parser.next()
+    debug("parseStatement: after consuming :=, pos=", parser.pos, " peek.kind=", parser.peek().kind, " value=", parser.peek().value)
 
     # Left side must be an identifier
     if expr of IdentNode:
       let varName = expr.IdentNode.name
       let valueExpr = parser.parseExpression()
+      debug("parseStatement: after parsing value expression, pos=", parser.pos, " peek.kind=", parser.peek().kind, " value=", parser.peek().value)
       if valueExpr == nil:
         parser.parseError("Expected expression after :=")
         return nil
-      return AssignNode(variable: varName, expression: valueExpr)
+
+      # Check if the right side is a message that could be cascaded
+      var finalExpr = valueExpr
+      if valueExpr of MessageNode:
+        let msg = valueExpr.MessageNode
+        let cascadeReceiver = msg.receiver
+        let msgWithNilReceiver = MessageNode(
+          receiver: nil,
+          selector: msg.selector,
+          arguments: msg.arguments,
+          isCascade: false
+        )
+        let cascaded = parser.checkForCascade(cascadeReceiver, msgWithNilReceiver)
+        if cascaded != nil:
+          finalExpr = cascaded
+
+      return AssignNode(variable: varName, expression: finalExpr)
     else:
       parser.parseError("Can only assign to variable name")
       return nil

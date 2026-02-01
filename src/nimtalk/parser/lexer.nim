@@ -375,10 +375,13 @@ proc nextToken*(lexer: var Lexer): Token =
       return parseTag(lexer)
     else:
       discard lexer.next()
-      # Check for <= comparison
+      # Check for <= or <> comparison
       if lexer.peek() == '=':
         discard lexer.next()
         return Token(kind: tkLtEq, value: "<=", line: startLine, col: startCol)
+      elif lexer.peek() == '>':
+        discard lexer.next()
+        return Token(kind: tkNotEq, value: "<>", line: startLine, col: startCol)
       else:
         # Single < is comparison operator
         return Token(kind: tkLt, value: "<", line: startLine, col: startCol)
@@ -428,7 +431,7 @@ proc nextToken*(lexer: var Lexer): Token =
     # # can start: comments, symbols, array/table literals
     # - #<whitespace> or #==== or #--- → comment
     # - #symbol, #1, #:keyword → symbol (but #1 not commonly used)
-    # - #(array), #[array], #{table} → literals
+    # - #(array), #{table} → literals
     discard lexer.next()
     let nextChar = lexer.peek()
 
@@ -441,12 +444,10 @@ proc nextToken*(lexer: var Lexer): Token =
       return nextToken(lexer)
 
     # Check for array/table literals
+    # #( starts an array, #{ starts a table
     if nextChar == '(':
       discard lexer.next()
       return Token(kind: tkArrayStart, value: "#(", line: startLine, col: startCol)
-    elif nextChar == '[':
-      discard lexer.next()
-      return Token(kind: tkArrayStart, value: "#[", line: startLine, col: startCol)
     elif nextChar == '{':
       discard lexer.next()
       return Token(kind: tkTableStart, value: "#{", line: startLine, col: startCol)
