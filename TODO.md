@@ -67,7 +67,7 @@ This document tracks current work items and future directions for Nimtalk develo
 - [ ] Crash recovery support
 
 ### Language Evolution
-- [ ] Multiple inheritance syntax (`withParents:`)
+- [ ] Multiple inheritance syntax (`withParents:`) - first parent defines "kind", additional parents are mixins
 - [ ] Optional static type checking
 - [ ] Module/namespace system
 - [ ] Concurrency model
