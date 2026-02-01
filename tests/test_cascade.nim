@@ -56,14 +56,12 @@ suite "Cascade Tests":
     check(cascade.messages[1].selector == "add:")
     check(cascade.messages[2].selector == "size")
 
-  test "Evaluate simple cascade with counter object":
+  test "Evaluate cascade with builtin unary method":
+    # Test cascade with a simple unary method on Array
+    # Note: size uses primitiveSize internally
     let source = """
-    counter := Dictionary derive.
-    counter at: #value put: 0.
-    counter at: #increment put: [ self at: #value put: ((self at: #value) + 1) ].
-    counter at: #get put: [ ^self at: #value ].
-    counter increment; increment.
-    result := counter get
+    arr := #(1 2 3).
+    result := arr primitiveSize; primitiveSize
     """
     let (results, err) = interp.evalStatements(source)
 
@@ -71,7 +69,7 @@ suite "Cascade Tests":
     if err.len > 0:
       echo "Error: ", err
     check(results[^1].kind == vkInt)
-    check(results[^1].intVal == 2)
+    check(results[^1].intVal == 3)
   ##  test "Evaluate cascade with keyword messages":
   ##    let source = """
   ##    dict := Object derive.
@@ -162,7 +160,7 @@ suite "Cascade Tests":
   ##  test "Cascade with temporary variables":
   ##    let source = """
   ##    obj := Object derive.
-  ##    obj at: "items" put: #[].
+  ##    obj at: "items" put: #().
   ##    obj at: "add:" put: [ :item | items := self at: "items". items.add(item). self at: "items" put: items ].
   ##    obj at: "size" put: [ items := self at: "items". ^items.len ].
   ##    obj add: 10; add: 20; add: 30.

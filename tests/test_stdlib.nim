@@ -48,40 +48,46 @@ suite "Stdlib: Numbers":
   test "comparison < works":
     let (result, err) = interp.doit("3 < 5")
     check(err.len == 0)
-    check(result.kind == vkObject)
+    check(result.kind == vkBool)
+    check(result.boolVal == true)
 
   test "comparison > works":
     let (result, err) = interp.doit("5 > 3")
     check(err.len == 0)
-    check(result.kind == vkObject)
+    check(result.kind == vkBool)
+    check(result.boolVal == true)
 
   test "comparison <= works":
     let (result, err) = interp.doit("3 <= 3")
     check(err.len == 0)
-    check(result.kind == vkObject)
+    check(result.kind == vkBool)
+    check(result.boolVal == true)
 
   test "comparison >= works":
     let (result, err) = interp.doit("5 >= 3")
     check(err.len == 0)
-    check(result.kind == vkObject)
+    check(result.kind == vkBool)
+    check(result.boolVal == true)
 
   test "abs works":
     let result = interp.evalStatements("""
       n := 0 - 5.
       result := n abs
     """)
-    check(result[0][^1].kind == vkObject)
-    check(result[0][^1].toString() == "5")
+    check(result[0][^1].kind == vkInt)
+    check(result[0][^1].intVal == 5)
 
   test "even works":
     let result = interp.evalStatements("result := 4 even")
-    # Check it's a boolean
-    check(result[0][^1].kind == vkObject)
+    # Check it's a boolean (vkBool in class-based model)
+    check(result[0][^1].kind == vkBool)
+    check(result[0][^1].boolVal == true)
 
   test "odd works":
     let result = interp.evalStatements("result := 5 odd")
-    # Check it's a boolean
-    check(result[0][^1].kind == vkObject)
+    # Check it's a boolean (vkBool in class-based model)
+    check(result[0][^1].kind == vkBool)
+    check(result[0][^1].boolVal == true)
 
   test "max: works":
     let result = interp.evalStatements("result := 3 max: 7")
@@ -396,16 +402,18 @@ suite "Stdlib: Object utilities":
 
   test "isNil returns false for objects":
     let result = interp.evalStatements("""
-      obj := Object derive.
+      obj := Object new.
       result := obj isNil
     """)
     check(result[1].len == 0)
-    check(result[0][^1].kind == vkObject)
+    check(result[0][^1].kind == vkBool)
+    check(result[0][^1].boolVal == false)
 
   test "notNil returns true for objects":
     let result = interp.evalStatements("""
-      obj := Object derive.
+      obj := Object new.
       result := obj notNil
     """)
     check(result[1].len == 0)
-    check(result[0][^1].kind == vkObject)
+    check(result[0][^1].kind == vkBool)
+    check(result[0][^1].boolVal == true)

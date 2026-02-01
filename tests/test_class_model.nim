@@ -85,9 +85,7 @@ suite "Class-Based Object Model":
     let parent = newClass(name = "Parent")
     let child = newClass(parents = @[parent], name = "Child")
 
-    # Register child as subclass
-    parent.subclasses.add(child)
-
+    # newClass automatically registers child as subclass
     check(parent.subclasses.len == 1)
     check(parent.subclasses[0] == child)
 
@@ -144,7 +142,7 @@ suite "Class-Based Object Model":
     check("bar" in parent.allMethods)
     check("bar" in child.allMethods)
 
-  test "Multiple inheritance method resolution":
+  test "Multiple inheritance method conflict error":
     let trait1 = newClass(name = "Trait1")
     let trait2 = newClass(name = "Trait2")
 
@@ -156,19 +154,37 @@ suite "Class-Based Object Model":
     meth2.isMethod = true
     trait2.allMethods["shared"] = meth2
 
-    # Child inherits from both - first parent wins
+    # Deriving from both parents with conflicting methods should error
+    expect ValueError:
+      discard newClass(parents = @[trait1, trait2], name = "Child")
+
+  test "Multiple inheritance with child override":
+    let trait1 = newClass(name = "Trait1")
+    let trait2 = newClass(name = "Trait2")
+
+    let meth1 = BlockNode()
+    meth1.isMethod = true
+    trait1.allMethods["foo"] = meth1
+
+    let meth2 = BlockNode()
+    meth2.isMethod = true
+    trait2.allMethods["bar"] = meth2
+
+    # No conflict - each parent has different methods
     let child = newClass(parents = @[trait1, trait2], name = "Child")
 
-    # Merge left-to-right
-    for selector, meth in trait1.allMethods:
-      if selector notin child.allMethods:
-        child.allMethods[selector] = meth
-    for selector, meth in trait2.allMethods:
-      if selector notin child.allMethods:
-        child.allMethods[selector] = meth
+    # Child should inherit both methods
+    check(child.allMethods["foo"] == meth1)
+    check(child.allMethods["bar"] == meth2)
 
-    # First parent (trait1) wins
-    check(child.allMethods["shared"] == meth1)
+    # Child can add its own override
+    let overrideMeth = BlockNode()
+    overrideMeth.isMethod = true
+    child.methods["foo"] = overrideMeth
+    child.allMethods["foo"] = overrideMeth
+
+    check(child.allMethods["foo"] == overrideMeth)
+    check(child.allMethods["bar"] == meth2)
 
   test "Instance method lookup":
     let cls = newClass(name = "Test")

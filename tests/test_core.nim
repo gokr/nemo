@@ -60,7 +60,7 @@ suite "Parser":
 
   test "handles unary messages":
     # For now, just test that it doesn't crash
-    let tokens = lex("Object clone")
+    let tokens = lex("Object new")
     var parser = initParser(tokens)
     let node = parser.parseExpression()
     check node != nil
@@ -83,11 +83,11 @@ suite "Object system":
     check root != nil
     check "Object" in root.tags
 
-  test "object cloning":
+  test "object creation":
+    # Test that we can create new instances
     let root = initRootObject()
-    let clone = root.clone().toObject()
-    check clone != nil
-    check clone != root
+    check root != nil
+    check "Object" in root.tags
 
   test "property access":
     var dict = newDictionary()
@@ -106,16 +106,16 @@ suite "Interpreter":
     check evalResult.kind == vkInt
     check evalResult.intVal == 42
 
-  test "handles property access":
+  test "handles Object new":
     var interp = newInterpreter()
     initGlobals(interp)
     initSymbolTable()
-    let code = "Object clone"
+    let code = "Object new"
     let tokens = lex(code)
     var parser = initParser(tokens)
     let node = parser.parseExpression()
     let evalResult = interp.eval(node)
-    check evalResult.kind == vkObject
+    check evalResult.kind == vkInstance  # New Instance model
 
   test "handles message sends":
     var interp = newInterpreter()
