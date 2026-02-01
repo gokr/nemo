@@ -148,12 +148,12 @@ person at: #key put: "value"                # Keyword (for collections)
 ```smalltalk
 # Inside method bodies, access ivars directly
 Person>>greet [
-  ^ 'Hello, ' , name                    "Direct slot access"
+  ^ "Hello, " , name                    # Direct slot access
 ]
 
 Person>>birthday [
   | age |
-  age := age + 1                        "Direct read and write"
+  age := age + 1                        # Direct read and write
   ^ self
 ]
 ```
@@ -162,37 +162,37 @@ Person>>birthday [
 
 ```smalltalk
 Person>>initialize [
-  name := 'Anonymous'                   "Direct ivar assignment"
+  name := "Anonymous"                   # Direct ivar assignment
   age := 0
 ]
 
 # Usage
-person := Person derive initialize.     "Create then init"ialize
-person name: 'Alice'                    "Then configure"
+person := Person derive initialize.     # Create then initialize
+person name: "Alice"                    # Then configure
 
 # Or use class-side constructor
 Person>>newWithName: aName age: anAge [
   ^ self derive initialize
-      name: aName;                      "Cascade messages"
+      name: aName;                      # Cascade messages
       age: anAge;
       yourself
 ]
 
 # Usage
-person := Person newWithName: 'Alice' age: 30
+person := Person newWithName: "Alice" age: 30
 ```
 
 ## Inheritance and Super
 
 ```smalltalk
 Employee>>initialize [
-  super initialize.                     "Call parent initialization"
-  salary := 0.0                         "Then init Employee ivars"
+  super initialize.                     # Call parent initialization
+  salary := 0.0                         # Then init Employee ivars
 ]
 
 Employee>>greet [
-  'Override parent method, call super for base behavior'
-  ^ super greet , ' from ' , department
+  # Override parent method, call super for base behavior
+  ^ super greet , " from " , department
 ]
 ```
 
@@ -201,15 +201,15 @@ The `super` keyword refers to the parent of the class where the current method w
 ## File Structure by Convention
 
 ```
-"One class per file (recommended)
+# One class per file (recommended)
 src/
   models/
-    Person.nt            "Defines Person class"
+    Person.nt            # Defines Person class
     Employee.nt          # Defines Employee
     Company.nt           # Defines Company
   main.nt                # Application entry point
 
-"Multi-class files also supported
+# Multi-class files also supported
 src/
   models.nt              # Person, Employee, Company all defined here
 ```
@@ -220,9 +220,9 @@ src/
 ```smalltalk
 # Standard message passing - everything executes immediately
 > Person := Object derive: #(#name)
-> Person at: "name:" put: [ :n | name := n ]
+> Person at: #name: put: [ :n | name := n ]
 > person := Person derive initialize
-> person name: 'Alice'
+> person name: "Alice"
 ```
 
 ### File Definition Mode
@@ -232,13 +232,13 @@ src/
 
 Person := Object derive: #(#name #age)                    # Executable
 
-Person>>initialize [                                    # Method definition
+Person>>initialize [                                      # Method definition
   | name age |
-  name := 'Anonymous'.
+  name := "Anonymous".
   age := 0
 ]
 
-Person>>name: aName [                                   # Method definition
+Person>>name: aName [                                     # Method definition
   name := aName
 ]
 ```
@@ -246,52 +246,51 @@ Person>>name: aName [                                   # Method definition
 ## Standard Types Provided
 
 ```smalltalk
-"Object - Root class (all objects inherit from this)
+# Object - Root class (all objects inherit from this)
 obj := Object derive.
 
-"String, Number, Boolean - Built-in types
-'hello world'           # String (double-quoted)
+# String, Number, Boolean - Built-in types
+"hello world"           # String (double-quoted)
 42                      # Integer
 3.14                    # Float
 true/false              # Boolean
 
-"Multiline strings (like Nim)
-""
+# Multiline strings (like Nim)
+"""
 This is a multiline string
 It can span multiple lines
 """
 
-# Characters (single-quoted, single character)
-#'a'                    # Character symbol
-#'newline'              # Newline symbol
-#'tab'                  # Tab symbol
+# Symbols
+#symbol                 # Simple symbol
+#at:put:                # Keyword symbol
 
 # Collections
-#(1 2 3)                "Array literal (ordered)
-#{"key" -> "value"}    "Table literal (dictionary)
+#(1 2 3)                # Array literal (ordered)
+#{"key" -> "value"}     # Table literal (dictionary)
 
 # Collection access
-arr at: 2              "Get element from array (1-based indexing)
-tab at: "key"          "Get value from table
+arr at: 2               # Get element from array (1-based indexing)
+tab at: "key"           # Get value from table
 ```
 
 ## Control Flow
 
 ```smalltalk
-"Conditional (messages to boolean objects)
-(x > 0) ifTrue: [ 'positive' ] ifFalse: [ 'negative' ]
+# Conditional (messages to boolean objects)
+(x > 0) ifTrue: [ "positive" ] ifFalse: [ "negative" ]
 
-"Looping
+# Looping
 [ x < 10 ] whileTrue: [ x := x + 1 ]
 
-"Collection iteration
+# Collection iteration
 numbers do: [ :each | each print ]
 numbers select: [ :each | each > 5 ]
 numbers collect: [ :each | each * 2 ]
 
 # Multiline keyword messages (no period needed between lines)
 tags isNil
-  ifTrue: [ ^ 'Object' ]
+  ifTrue: [ ^ "Object" ]
   ifFalse: [ ^ tags first ]
 ```
 
@@ -317,22 +316,22 @@ See [NEWLINE_RULES.md](NEWLINE_RULES.md) for complete newline handling rules.
 
 ```smalltalk
 #=== Object Creation =========================
-cls := Object derive                          "Empty class
-obj := cls derive initialize                   "Create then init"
+cls := Object derive                          # Empty class
+obj := cls derive initialize                  # Create then init
 
 #=== Instance Variables ======================
-MyClass := Object derive: #(#ivar1 #ivar2)     "Declare ivars"
+MyClass := Object derive: #(#ivar1 #ivar2)    # Declare ivars
 obj   := MyClass derive initialize.
-obj ivar1: value                              "Accessor method" (direct slot access)
+obj ivar1: value                              # Accessor method (direct slot access)
 
 #=== Methods (in files) ======================
-MyClass>>method [ ^ result ]                  "Define unary"
-MyClass>>method: arg [ ^ result ]             "Define keyword"
-MyClass>>arg1: x arg2: y [ ^ x + y ]          "Multi-keyword"
+MyClass>>method [ ^ result ]                  # Define unary
+MyClass>>method: arg [ ^ result ]             # Define keyword
+MyClass>>arg1: x arg2: y [ ^ x + y ]          # Multi-keyword
 
 #=== Methods (in REPL) =======================
-MyClass at: #method put: [ ^ result ]        "Standard way"
-MyClass perform: #method                      "Call dynamically"
+MyClass at: #method put: [ ^ result ]         # Standard way
+MyClass perform: #method                      # Call dynamically
 
 #=== Method Batching (extend:) ===============
 MyClass extend: [
@@ -354,13 +353,13 @@ obj asSelfDo: [
 ]
 
 #=== Message Sending =========================
-obj method                                    "Unary"
-obj method: value                             "Keyword"
-obj binaryOp: other                           "Binary"
+obj method                                    # Unary
+obj method: value                             # Keyword
+obj binaryOp: other                           # Binary
 
 #=== Inheritance =============================
-Child := Parent derive: #(#newIvar)            "Inherit + add"
-Child>>method [ super perform: #method ]   "Call parent"
+Child := Parent derive: #(#newIvar)           # Inherit + add
+Child>>method [ super method ]                # Call parent
 
 #=== Control Flow ============================
 expr ifTrue: [ block ] ifFalse: [ block ].
