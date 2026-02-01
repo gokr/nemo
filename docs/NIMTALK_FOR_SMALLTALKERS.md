@@ -15,7 +15,7 @@ Nimtalk is a class-based Smalltalk dialect that compiles to Nim. It preserves Sm
 | Class variables | Shared class state | Not implemented |
 | Pool dictionaries | Shared constants | Not implemented |
 | Instance variables | Named slots | Indexed slots (faster) |
-| Multiple inheritance | Single only | Supported |
+| Multiple inheritance | Single only | Single (multiple planned) |
 | Primitives | VM-specific | Nim code embedding |
 
 ## Syntactic Differences
@@ -204,22 +204,25 @@ Performance comparison (per 100k ops):
 - Named slot access: ~67ms
 - Property bag access: ~119ms
 
-### 3. Multiple Inheritance
+### 3. Inheritance
 
 **Smalltalk:** Single inheritance only. Traits provide code sharing.
 
-**Nimtalk:** Multiple inheritance is supported:
+**Nimtalk:** Currently single inheritance, with multiple parents planned:
 
 ```nimtalk
-# Single inheritance (default)
+# Single inheritance
 Employee := Person derive: #(salary).
 
-# Multiple inheritance
+# Multi-level inheritance
+Manager := Employee derive: #(teamSize).
+
+# Multiple parents (planned syntax)
 Enumerable := Object derive: #().
 Employee := Person derive: #(salary) withParents: #(Enumerable).
 ```
 
-Method lookup uses merged method tables (`allMethods`, `allClassMethods`) for O(1) dispatch.
+The internal class model stores `parents: seq[Class]`. The first parent defines the "kind" of class (Object, Array, Number, etc.) and determines instance representation. Additional parents act as mixins/traits and are constrained based on compatibility with the primary parent. The `withParents:` syntax is not yet implemented. Method lookup uses merged method tables for O(1) dispatch.
 
 ### 4. Super Sends
 
@@ -435,8 +438,8 @@ Nimtalk preserves the essence of Smalltalk (message passing, blocks, live progra
 
 1. No metaclasses - classes are just objects
 2. No class variables - use globals or closures
-3. Multiple inheritance - supported natively
+3. Single inheritance currently - multiple parents planned
 4. Nim primitives - embed native code directly
-5. Flexible syntax - optional separators, quote styles
+5. Use double quotes for strings - hash `#` for comments
 
 The trade-off is simplicity over completeness - Nimtalk is smaller and compiles to native code through Nim, but lacks some of Smalltalk's advanced reflective features.
