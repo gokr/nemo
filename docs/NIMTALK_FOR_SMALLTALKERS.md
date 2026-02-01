@@ -54,10 +54,10 @@ z := x + y.
 
 **Nimtalk:**
 ```nimtalk
-'Hello World'       'Single quotes'
+"Hello World"       # Double quotes only
 ```
 
-**Note**: Double quotes are used for comments.
+**Note**: Single quotes are reserved for future use. Use double quotes for all strings.
 
 ### 3. Comments
 
@@ -68,11 +68,11 @@ z := x + y.
 
 **Nimtalk:**
 ```nimtalk
-"This is a comment - double quotes for comments"
-"==== Section header
+# This is a comment - hash style
+#==== Section header
 ```
 
-**Note**: Hash-style `# comment` is also supported for section headers.
+**Note**: Hash-style comments are the only comment syntax. Double quotes are for strings.
 
 ### 4. Block Syntax
 
@@ -87,19 +87,19 @@ z := x + y.
 
 **Nimtalk:**
 ```nimtalk
-* Optional | after parameters (Nimtalk-specific)
+# Optional | after parameters (Nimtalk-specific)
 [ :x :y
   x + y
 ]
 
-* Traditional style also works
+# Traditional style also works
 [ :x :y | | temp1 temp2 |
   temp1 := x.
   temp2 := y.
   temp1 + temp2
 ]
 
-* Parameters with temporaries
+# Parameters with temporaries
 [ :x :y | temp1 temp2 |
   temp1 := x.
   temp2 := y.
@@ -127,15 +127,15 @@ name: aName
 
 **Nimtalk:**
 ```nimtalk
-* Define class with slots
+# Define class with slots
 Person := Object derive: #(#name #age).
 
-* Define method using >> syntax
+# Define method using >> syntax
 Person>>name: aName [
     name := aName
 ].
 
-* Or using at:put: syntax
+# Or using at:put: syntax
 Person at: #name: put: [ :aName |
     name := aName
 ].
@@ -153,8 +153,8 @@ dictionary
 
 **Nimtalk:**
 ```nimtalk
-* Same syntax, but note that newlines act as separators
-* except when continuing a keyword message chain
+# Same syntax, but note that newlines act as separators
+# except when continuing a keyword message chain
 dictionary
   at: #key
   put: value
