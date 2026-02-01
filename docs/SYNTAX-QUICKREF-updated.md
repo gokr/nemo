@@ -37,16 +37,16 @@ Employee := Person derive: #(#salary) withParents: #(Enumerable)
 ### Standard Syntax (REPL/Interactive)
 ```smalltalk
 # Normal executable code - works in REPL
-Person selector: #greet put: [ ^ 'Hello, ' , name ]
+Person selector: #greet put: [ ^ "Hello, " , name ]
 ```
 
 ### Definition Syntax (Files Only - SPECIAL PARSING)
 ```smalltalk
-"This syntax requires special parsing" - NOT executable in REPL
-"Use in .nt files for class definitions
+# This syntax requires special parsing - NOT executable in REPL
+# Use in .nt files for class definitions
 
-"Unary" method (no parameters)
-Person>>greet [ ^ 'Hello, ' , name ]
+# Unary method (no parameters)
+Person>>greet [ ^ "Hello, " , name ]
 
 # Method with one parameter
 Person>>name: aName [ name := aName ]
@@ -57,11 +57,11 @@ Person>>moveX: dx y: dy [
   y := y + dy
 ]
 
-# Method with comment and validation
+# Method with validation
 Person>>age: anAge [
   | age |
-  'Validate age is positive'
-  (anAge >= 0) ifFalse: [ Error signal: 'Age must be positive' ].
+  # Validate age is positive
+  (anAge >= 0) ifFalse: [ Error signal: "Age must be positive" ].
   age := anAge
 ]
 
