@@ -9,21 +9,21 @@ Nimtalk is a class-based Smalltalk dialect that compiles to Nim. It preserves Sm
 ```smalltalk
 #!/usr/bin/env ntalk
 
-"Create a class with instance variables"
-Point := Object derive: #(x y).
+# Create a class with instance variables
+Point := Object derive: #(x y)
 
-"Add a method using >> syntax"
+# Add a method using >> syntax
 Point>>moveBy: dx and: dy [
-    x := x + dx.
-    y := y + dy.
+    x := x + dx
+    y := y + dy
     self
-].
+]
 
-"Create an instance and use it"
-p := Point new.
-p x: 100 y: 200.
-p moveBy: 10 and: 20.
-p x  "Returns 110"
+# Create an instance and use it
+p := Point new
+p x: 100 y: 200
+p moveBy: 10 and: 20
+p x  # Returns 110
 ```
 
 ## For Smalltalkers
@@ -41,32 +41,63 @@ p x  "Returns 110"
 
 | Smalltalk | Nimtalk |
 |-----------|---------|
-| Classes define structure | Classes derive from parents: `Object derive: #(ivars)` |
+| Period required at end of statements | Optional - newline or period both work |
+| Comments in double quotes | Hash `#` comments |
+| Single or double quotes for strings | Double quotes only for strings |
+| Classes define structure via class definition | Classes derive from parents: `Object derive: #(ivars)` |
 | Instance variables declared in class | Declare in class with `derive: #(x y)`, inherited by derived |
 | Methods compiled to method dictionary | Methods stored on class tables, inherited via class hierarchy |
 | Image-based persistence | Source files, git, normal Unix workflow |
 | VM execution | Interprets AST directly, compiles to Nim (in development) |
 | FFI via C bindings | Direct Nim interop: call Nim functions, use Nim types |
 
+### Syntax Notes
+
+**Comments:**
+```smalltalk
+# This is a hash comment - the standard comment style
+#==== Section headers also use hash style
+```
+
+**Strings:**
+```smalltalk
+"Hello, World"           # Double quotes for strings
+```
+
+**Statements:**
+```smalltalk
+# Both styles work - newline or period:
+x := 1
+y := 2
+
+x := 1.
+y := 2.
+```
+
 **The class system:**
 
-Classes inherit from parent classes and instances are created via `new`:
+Classes inherit from parent classes via `derive:`, and instances are created via `new`:
 
 ```smalltalk
-"Create a class with automatic accessors for x and y"
-Point := Object derive: #(x y).
+# Create a class with automatic accessors for x and y
+Point := Object derive: #(x y)
 
-"Add methods using >> syntax"
+# Add methods using >> syntax
 Point>>printString [
     ^ '(' , (x asString) , ', ' , (y asString) , ')'
-].
+]
 
-"Create an instance"
-p := Point new.
-p x: 42.
-p y: 99.
-p printString  "Returns '(42, 99)'"
+# Create an instance
+p := Point new
+p x: 42
+p y: 99
+p printString  # Returns '(42, 99)'
 ```
+
+Key differences to understand:
+- `Object derive: #(x y)` - Creates a **class** (a subclass of Object) with instance variables
+- `Point new` - Creates an **instance** of the Point class
+- `Point new x: 42` - You can cascade initialization after `new`
 
 Instance variables declared with `derive:` are stored in slots (fast array access). Classes have merged method tables for fast O(1) lookup. The `derive:` syntax creates a class and generates accessor methods `x`, `x:`, `y`, `y:` for O(1) direct slot access.
 
@@ -77,8 +108,8 @@ Nimtalk supports multiple ways to define methods:
 **Approach 1: Individual method definition (>> syntax)**
 ```smalltalk
 Point>>moveBy: dx and: dy [
-    x := x + dx.
-    y := y + dy.
+    x := x + dx
+    y := y + dy
     ^ self
 ]
 ```
@@ -87,9 +118,9 @@ Point>>moveBy: dx and: dy [
 ```smalltalk
 Point extend: [
     self >> moveBy: dx and: dy [
-        x := x + dx.
+        x := x + dx
         y := y + dy
-    ].
+    ]
     self >> distanceFromOrigin [
         ^ ((x * x) + (y * y)) sqrt
     ]
@@ -99,7 +130,7 @@ Point extend: [
 **Approach 3: Combined class creation with methods (derive:methods:)**
 ```smalltalk
 Person := Object derive: #(name age) methods: [
-    self >> greet [ "Hello, I am " , name ].
+    self >> greet [ ^ "Hello, I am " , name ]
     self >> haveBirthday [ age := age + 1 ]
 ]
 ```
@@ -109,15 +140,15 @@ Person := Object derive: #(name age) methods: [
 Person extendClass: [
     self >> newNamed: n aged: a [
         | person |
-        person := self derive.
-        person name: n.
-        person age: a.
+        person := self derive
+        person name: n
+        person age: a
         ^ person
     ]
 ]
 
 # Usage
-p := Person newNamed: "Alice" aged: 30.
+p := Person newNamed: "Alice" aged: 30
 ```
 
 The `extend:` and `extendClass:` methods use `asSelfDo:` internally, which temporarily rebinds `self` to the target object during block evaluation. This enables clean method batching syntax.
@@ -127,15 +158,15 @@ The `extend:` and `extendClass:` methods use `asSelfDo:` internally, which tempo
 Nimtalk supports cooperative green threads for concurrent execution:
 
 ```smalltalk
-"Fork a new process"
+# Fork a new process
 process := Processor fork: [
   1 to: 10 do: [:i |
-    Stdout writeline: i.
-    Processor yield  "Yield to other processes"
+    Stdout writeline: i
+    Processor yield  # Yield to other processes
   ]
 ]
 
-"Yield current process"
+# Yield current process
 Processor yield
 ```
 
@@ -192,30 +223,30 @@ Use `--loglevel DEBUG` for detailed execution tracing.
 
 **Literals:**
 ```smalltalk
-42 "integer"
-3.14 "float"
-"hello" "string"
-#(1 2 3) "array (seq)"
-#{"key" -> "value"} "table (dictionary)"
-{| x: 1 y: 2 |} "object literal"
-#symbol "symbol literal"
+42                  # integer
+3.14                # float
+"hello"             # string
+#(1 2 3)            # array (seq)
+#{"key" -> "value"} # table (dictionary)
+{| x: 1 y: 2 |}    # object literal
+#symbol             # symbol literal
 ```
 
 **Assignment and messages:**
 ```smalltalk
-x := 42.
-obj := Object derive.
-obj at: "foo" put: "bar".
-obj at: "foo".
+x := 42
+obj := Object derive
+obj at: #foo put: #bar
+obj at: #foo
 ```
 
 **Blocks and control flow:**
 ```smalltalk
-[ :param | param + 1 ] "block with parameter"
-[ | temp | temp := 1 ] "block with temporary variable"
+[ :param | param + 1 ]     # block with parameter
+[ | temp | temp := 1 ]     # block with temporary variable
 
-(x > 0) ifTrue: ["positive"] ifFalse: ["negative"].
-numbers do: [:each | each print].
+(x > 0) ifTrue: ["positive"] ifFalse: ["negative"]
+numbers do: [:each | each print]
 ```
 
 **Multiline keyword messages:**
@@ -229,7 +260,7 @@ See [docs/NEWLINE_RULES.md](docs/NEWLINE_RULES.md) for details on newline handli
 
 ## Current Status
 
-Working:
+**Working:**
 - Lexer, parser, AST interpreter
 - Class-based object system with slot-based instance variables
 - REPL with file execution
@@ -238,7 +269,7 @@ Working:
 - Data structure literals (arrays, tables, object literals)
 - Method definition syntax (`>>`)
 - `self` and `super` support (unqualified and qualified `super<Parent>`)
-- Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`)
+- Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`, `&`, `|`)
 - Enhanced comment handling (`#` followed by special chars)
 - Standard library (Object, Boolean, Block, Number, Collections, String, FileStream, Exception, TestCase)
 - All stdlib files load successfully
@@ -248,7 +279,7 @@ Working:
 - Green threads: cooperative processes with `Processor yield`, `Processor fork:`
 - Per-process interpreters with shared globals
 
-In progress:
+**In progress:**
 - Compiler to Nim (ntalkc is stub)
 - FFI to Nim
 - Standard library expansion
@@ -265,6 +296,7 @@ Nimtalk uses AST interpretation for REPL and rapid prototyping. The compiler (in
 - `{| |}` object literals
 - `# comment` (Nim-style comments) and `#====` section headers
 - `| temp |` for temporary variables in blocks (Smalltalk-style)
+- Newline as implicit statement separator (period still works explicitly)
 
 **Multi-character binary operators:**
 ```smalltalk
