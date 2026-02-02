@@ -443,8 +443,15 @@ proc configureLogging*(level: Level = lvlError) =
 # ============================================================================
 # Root Class
 # ============================================================================
-# SchedulerContext forward declaration (defined in scheduler.nim)
-type SchedulerContext* = ref object
+# SchedulerContext type definition
+# Defined in types.nim to avoid circular import between types.nim and scheduler.nim
+import ./process
+
+type
+  SchedulerContext* = ref object
+    ## Full scheduler context with interpreter integration
+    theScheduler*: Scheduler  ## 'theScheduler' to avoid naming conflict with scheduler module
+    mainProcess*: Process  ## The initial/main process
 
 # Forward declarations
 proc newClass*(superclasses: seq[Class] = @[], slotNames: seq[string] = @[], name: string = ""): Class
