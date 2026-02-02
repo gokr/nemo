@@ -174,9 +174,10 @@ obj perform: #method:with: with: args      # Call with args
 
 ### New Way (Declared Classs)
 ```smalltalk
-# Generated accessor methods (compile to direct slot access)
-person name                                 # Getter - direct read
-person name: "Alice"                        # Setter - direct write
+# Direct slot access inside methods
+Person>>greet [
+  ^ "Hello, " , name                    # Direct slot access
+]
 
 # Standard message sending (always available)
 person greet                                # Unary message

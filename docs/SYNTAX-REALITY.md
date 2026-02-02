@@ -249,10 +249,6 @@ obj at: #key put: value           # set property
 obj at: #key                       # get property (also works on arrays/tables)
 array inject: 0 into: [ :sum :each | sum + each ]
 
-# Instance variable access (via generated accessors)
-person name           # Generated getter - direct slot access
-person name: "Alice"  # Generated setter - direct slot write
-
 # Collection access with at:
 arr := #(1 2 3).
 arr at: 2             # returns 2 (1-based indexing, Smalltalk-style)

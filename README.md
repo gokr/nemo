@@ -99,7 +99,7 @@ Key differences to understand:
 - `Point new` - Creates an **instance** of the Point class
 - `Point new x: 42` - You can cascade initialization after `new`
 
-Instance variables declared with `derive:` are stored in slots (fast array access). Classes have merged method tables for fast O(1) lookup. The `derive:` syntax creates a class and generates accessor methods `x`, `x:`, `y`, `y:` for O(1) direct slot access.
+Instance variables declared with `derive:` are stored in slots (fast array access). Classes have merged method tables for fast O(1) lookup. Slot access within methods is via direct slot access. For external slot manipulation, use `at:/at:put:` on collection instances (Array, Table).
 
 ### Method Definition Approaches
 

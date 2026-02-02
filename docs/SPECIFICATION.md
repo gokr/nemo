@@ -149,10 +149,14 @@ p := Point new
 # Declare with symbol literal
 Person := Object derive: #(name age address)
 
-# Access via automatically generated accessors
-person := Person new.
-person name: "Alice".       # Generated setter
-result := person name       # Generated getter
+# Direct slot access inside methods
+Person>>greet [
+  ^ "Hello, " , name
+]
+
+# For external access, use at:put: on collection instances
+arr := #(1 2 3).
+arr at: 2 put: 42.
 ```
 
 ### Inheritance
