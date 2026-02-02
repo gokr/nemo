@@ -1904,6 +1904,93 @@ proc primitiveAsSelfDoImpl(interp: var Interpreter, self: Instance, args: seq[No
     # Restore original receiver
     interp.currentReceiver = savedReceiver
 
+proc primitiveHasPropertyImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Check if object has a slots property (not inherited)
+  if args.len < 1:
+    return falseValue()
+  let key = if args[0].kind == vkString: args[0].strVal
+            elif args[0].kind == vkSymbol: args[0].symVal
+            else: ""
+  if key.len == 0 or self.kind != ikObject or self.class == nil:
+    return falseValue()
+  let slotIdx = self.class.slotNames.find(key)
+  toValue(slotIdx >= 0 and slotIdx < self.slots.len)
+
+proc primitivePropertiesImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Return slot names as an array
+  if self.kind != ikObject or self.class == nil:
+    return Array.new().toValue()
+  var slotNames: seq[NodeValue] = @[]
+  for name in self.class.slotNames:
+    slotNames.add(toSymbol(name))
+  return newArrayInstance(arrayClass, slotNames).toValue()
+
+proc primitiveRespondsToImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Check if the class responds to a message
+  if args.len < 1:
+    return falseValue()
+  let selector = if args[0].kind == vkString: args[0].strVal
+                  elif args[0].kind == vkSymbol: args[0].symVal
+                  else: ""
+  if selector.len == 0:
+    return falseValue()
+  let lookup = lookupMethod(interp, self, selector)
+  toValue(lookup.found)
+
+proc primitiveMethodsImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Return the class's method selector names as an array
+  if self.kind != ikObject or self.class == nil:
+    return Array.new().toValue()
+  var selectors: seq[NodeValue] = @[]
+  for selector in self.classmethods.keys():
+    selectors.add(toSymbol(selector))
+  return newArrayInstance(arrayClass, selectors).toValue()
+
+proc primitiveErrorImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Raise an exception with the given message
+  let msg = if args.len > 0: args[0].toString()
+            else: "Error"
+  raise newException(EvalError, msg)
+
+proc primitiveIsKindOfImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Check if object is an instance of the given class or any superclass
+  if args.len < 1 or args[0].kind != vkClass:
+    return falseValue()
+  let targetClass = args[0].classVal
+  var currentClass: Class = self.class
+  while currentClass != nil:
+    if currentClass == targetClass:
+      return trueValue()
+    if currentClass.superclasses.len > 0:
+      currentClass = currentClass.superclasses[0]
+    else:
+      break
+  falseValue
+
+# Object primitive methods
+
+proc primitiveAsSelfDoImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Evaluate a block with self temporarily rebound to this object
+  ## Usage: self perform: #primitiveAsSelfDo: with: block
+  if args.len < 1 or args[0].kind != vkBlock:
+    return nilValue()
+
+  let blockNode = args[0].blockVal
+  debug("primitiveAsSelfDo called, evaluating block with self = ", self.class.name)
+
+  # Save current receiver
+  let savedReceiver = interp.currentReceiver
+
+  # Temporarily set receiver to self
+  interp.currentReceiver = self
+
+  try:
+    # Evaluate the block with new self
+    return evalBlock(interp, self, blockNode)
+  finally:
+    # Restore original receiver
+    interp.currentReceiver = savedReceiver
+
 # Block value methods
 proc primitiveValueImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Evaluate this block with no arguments
@@ -2160,6 +2247,48 @@ proc initGlobals*(interp: var Interpreter) =
   objAsSelfDoMethod.hasInterpreterParam = true
   objectCls.methods["primitiveAsSelfDo:"] = objAsSelfDoMethod
   objectCls.allMethods["primitiveAsSelfDo:"] = objAsSelfDoMethod
+
+  # Add primitiveHasProperty: for hasProperty: implementation
+  let objHasPropertyMethod = createCoreMethod("primitiveHasProperty:")
+  objHasPropertyMethod.nativeImpl = cast[pointer](primitiveHasPropertyImpl)
+  objHasPropertyMethod.hasInterpreterParam = true
+  objectCls.methods["primitiveHasProperty:"] = objHasPropertyMethod
+  objectCls.allMethods["primitiveHasProperty:"] = objHasPropertyMethod
+
+  # Add primitiveProperties for properties implementation
+  let objPropertiesMethod = createCoreMethod("primitiveProperties")
+  objPropertiesMethod.nativeImpl = cast[pointer](primitivePropertiesImpl)
+  objPropertiesMethod.hasInterpreterParam = true
+  objectCls.methods["primitiveProperties"] = objPropertiesMethod
+  objectCls.allMethods["primitiveProperties"] = objPropertiesMethod
+
+  # Add primitiveRespondsTo: for respondsTo: implementation
+  let objRespondsToMethod = createCoreMethod("primitiveRespondsTo:")
+  objRespondsToMethod.nativeImpl = cast[pointer](primitiveRespondsToImpl)
+  objRespondsToMethod.hasInterpreterParam = true
+  objectCls.methods["primitiveRespondsTo:"] = objRespondsToMethod
+  objectCls.allMethods["primitiveRespondsTo:"] = objRespondsToMethod
+
+  # Add primitiveMethods for methods implementation
+  let objMethodsMethod = createCoreMethod("primitiveMethods")
+  objMethodsMethod.nativeImpl = cast[pointer](primitiveMethodsImpl)
+  objMethodsMethod.hasInterpreterParam = true
+  objectCls.methods["primitiveMethods"] = objMethodsMethod
+  objectCls.allMethods["primitiveMethods"] = objMethodsMethod
+
+  # Add primitiveError: for error: implementation
+  let objErrorMethod = createCoreMethod("primitiveError:")
+  objErrorMethod.nativeImpl = cast[pointer](primitiveErrorImpl)
+  objErrorMethod.hasInterpreterParam = true
+  objectCls.methods["primitiveError:"] = objErrorMethod
+  objectCls.allMethods["primitiveError:"] = objErrorMethod
+
+  # Add primitiveIsKindOf: for isKindOf: implementation
+  let objIsKindOfMethod = createCoreMethod("primitiveIsKindOf:")
+  objIsKindOfMethod.nativeImpl = cast[pointer](primitiveIsKindOfImpl)
+  objIsKindOfMethod.hasInterpreterParam = true
+  objectCls.methods["primitiveIsKindOf:"] = objIsKindOfMethod
+  objectCls.allMethods["primitiveIsKindOf:"] = objIsKindOfMethod
 
   # Add print and println as native methods
   proc objPrintImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
