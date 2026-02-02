@@ -1,4 +1,4 @@
-import std/[tables, sequtils]
+import std/tables
 import ./types
 
 # ============================================================================
@@ -32,7 +32,6 @@ type
     classes*: Table[string, ClassInfo]  ## Class registry
     currentClass*: ClassInfo  ## Currently compiling class
     symbols*: Table[string, string]  ## Selector -> mangled name
-    generatedMethods*: seq[tuple[selector: string, code: string]]
 
 proc newCompiler*(outputDir = "./build", moduleName = "compiled"): CompilerContext =
   ## Create new compiler context
@@ -41,8 +40,7 @@ proc newCompiler*(outputDir = "./build", moduleName = "compiled"): CompilerConte
     moduleName: moduleName,
     classes: initTable[string, ClassInfo](),
     currentClass: nil,
-    symbols: initTable[string, string](),
-    generatedMethods: @[]
+    symbols: initTable[string, string]()
   )
 
 proc newClassInfo*(name: string, parent: ClassInfo = nil): ClassInfo =
@@ -89,42 +87,22 @@ proc getSlotDef*(cls: ClassInfo, name: string): SlotDef =
     return cls.parent.getSlotDef(name)
   return SlotDef(name: name, constraint: tcNone, index: -1, isInherited: true)
 
-proc addMethod*(cls: ClassInfo, selector: string,
-                parameters: seq[TypeConstraint],
-                returnType: TypeConstraint = tcNone): MethodType =
-  ## Add method type information
-  let meth = MethodType(
-    selector: selector,
-    parameters: parameters,
-    returnType: returnType,
-    isPrimitive: false
-  )
-  cls.methods.add(meth)
-  return meth
-
-proc getMethodType*(cls: ClassInfo, selector: string): MethodType =
-  ## Get method type info, searching inheritance chain
-  for meth in cls.methods:
-    if meth.selector == selector:
-      return meth
-  if cls.parent != nil:
-    return cls.parent.getMethodType(selector)
-  return MethodType(selector: selector, parameters: @[], returnType: tcNone)
-
 proc getAllSlots*(cls: ClassInfo): seq[SlotDef] =
-  ## Get all slots including inherited ones
+  ## Get all slots including inherited ones (parents first)
   result = @[]
   var current: ClassInfo = cls
   while current != nil:
     for slot in current.slots:
-      if not slot.isInherited and result.allIt(it.name != slot.name):
-        result.add(slot)
+      if not slot.isInherited:
+        # Check if slot with same name already exists
+        var found = false
+        for existing in result:
+          if existing.name == slot.name:
+            found = true
+            break
+        if not found:
+          result.insert(slot, 0)
     current = current.parent
-  # Reverse to put parents first
-  var reversedResult: seq[SlotDef] = @[]
-  for i in countdown(result.len - 1, 0):
-    reversedResult.add(result[i])
-  result = reversedResult
 
 proc resolveSlotIndices*(ctx: var CompilerContext): void =
   ## Resolve and assign slot indices across inheritance chain
