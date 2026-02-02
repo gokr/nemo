@@ -26,14 +26,20 @@ proc newActivation*(blk: BlockNode,
   )
 
   # Initialize 'self' for all activations (blocks invoked as methods need self)
-  result.locals["self"] = receiver.toValue()
+  # Special case: for class methods, receiver is a hidden class receiver (ikObject with empty slots)
+  # In this case, self should return the Class object, not the wrapper Instance
+  if receiver != nil and receiver.kind == ikObject and receiver.slots.len == 0 and receiver.isNimProxy == false and receiver.nimValue == nil:
+    # This is a hidden class receiver - return the Class object
+    result.locals["self"] = receiver.class.toValue()
+  else:
+    result.locals["self"] = receiver.toValue()
 
   # Initialize 'super' in locals for super sends (as Class)
-  if definingClass != nil and definingClass.parents.len > 0:
-    result.locals["super"] = definingClass.parents[0].toValue()
-  elif receiver != nil and receiver.class != nil and receiver.class.parents.len > 0:
-    # Super starts from receiver's class's first parent if no defining object
-    result.locals["super"] = receiver.class.parents[0].toValue()
+  if definingClass != nil and definingClass.superclasses.len > 0:
+    result.locals["super"] = definingClass.superclasses[0].toValue()
+  elif receiver != nil and receiver.class != nil and receiver.class.superclasses.len > 0:
+    # Super starts from receiver's class's first superclass if no defining object
+    result.locals["super"] = receiver.class.superclasses[0].toValue()
 
   # Initialize parameters (bound by caller)
   # parameters will be bound when method is invoked

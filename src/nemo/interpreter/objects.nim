@@ -112,6 +112,10 @@ var stringClassCache*: Class = nil
 var arrayClassCache*: Class = nil
 var blockClassCache*: Class = nil
 
+# Scheduler-related classes (set by scheduler module)
+var processClass*: Class = nil
+var schedulerClass*: Class = nil
+
 # Create a core method
 
 
@@ -173,7 +177,7 @@ proc doesNotUnderstandImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 # Build inheritance chain for a class (self first, then parents in DFS order)
 proc inheritanceChain*(cls: Class): seq[Class] =
   result = @[cls]
-  for parent in cls.parents:
+  for parent in cls.superclasses:
     result.add(parent.inheritanceChain())
 
 # Helper for NodeValue equality
@@ -303,7 +307,7 @@ proc initCoreClasses*(): Class =
 
   # Create Integer class
   if integerClass == nil:
-    integerClass = newClass(parents = @[objectClass], name = "Integer")
+    integerClass = newClass(superclasses = @[objectClass], name = "Integer")
     integerClass.tags = @["Integer", "Number"]
 
     # Arithmetic methods
@@ -364,7 +368,7 @@ proc initCoreClasses*(): Class =
 
   # Create Float class
   if floatClass == nil:
-    floatClass = newClass(parents = @[objectClass], name = "Float")
+    floatClass = newClass(superclasses = @[objectClass], name = "Float")
     floatClass.tags = @["Float", "Number"]
 
     # Arithmetic (inherit from same impls as Integer - they handle both)
@@ -413,7 +417,7 @@ proc initCoreClasses*(): Class =
 
   # Create String class
   if stringClass == nil:
-    stringClass = newClass(parents = @[objectClass], name = "String")
+    stringClass = newClass(superclasses = @[objectClass], name = "String")
     stringClass.tags = @["String"]
 
     let concatMethod = createCoreMethod(",")
@@ -472,7 +476,7 @@ proc initCoreClasses*(): Class =
 
   # Create Array class
   if arrayClass == nil:
-    arrayClass = newClass(parents = @[objectClass], name = "Array")
+    arrayClass = newClass(superclasses = @[objectClass], name = "Array")
     arrayClass.tags = @["Array", "Collection"]
 
     let sizeMethod = createCoreMethod("size")
@@ -517,7 +521,7 @@ proc initCoreClasses*(): Class =
 
   # Create Table class
   if tableClass == nil:
-    tableClass = newClass(parents = @[objectClass], name = "Table")
+    tableClass = newClass(superclasses = @[objectClass], name = "Table")
     tableClass.tags = @["Table", "Collection", "Dictionary"]
 
     let atMethod = createCoreMethod("at:")
@@ -549,14 +553,14 @@ proc initCoreClasses*(): Class =
 
   # Create Block class
   if blockClass == nil:
-    blockClass = newClass(parents = @[objectClass], name = "Block")
+    blockClass = newClass(superclasses = @[objectClass], name = "Block")
     blockClass.tags = @["Block", "Closure"]
 
     addGlobal("Block", NodeValue(kind: vkClass, classVal: blockClass))
 
   # Create Boolean class (parent for True and False)
   if booleanClass == nil:
-    booleanClass = newClass(parents = @[objectClass], name = "Boolean")
+    booleanClass = newClass(superclasses = @[objectClass], name = "Boolean")
     booleanClass.tags = @["Boolean"]
 
     addGlobal("Boolean", NodeValue(kind: vkClass, classVal: booleanClass))
@@ -726,7 +730,7 @@ proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue =
       if slot.kind == vkSymbol:
         slotNames.add(slot.symVal)
   let className = if self.name.len > 0: self.name & "+Derived" else: "Anonymous"
-  let newClass = newClass(parents = @[self], slotNames = slotNames, name = className)
+  let newClass = newClass(superclasses = @[self], slotNames = slotNames, name = className)
   return NodeValue(kind: vkClass, classVal: newClass)
 
 proc classDeriveParentsIvarArrayMethodsImpl*(self: Class, args: seq[NodeValue]): NodeValue =
@@ -773,7 +777,7 @@ proc classDeriveParentsIvarArrayMethodsImpl*(self: Class, args: seq[NodeValue]):
                     self.name & "+Derived"
                   else:
                     "Anonymous"
-  let newClass = newClass(parents = actualParents, slotNames = slotNames, name = className)
+  let newClass = newClass(superclasses =actualParents, slotNames = slotNames, name = className)
 
   # Execute method block if provided (to define/override methods and resolve conflicts)
   # For now, skip block execution - it requires an interpreter context
@@ -1121,7 +1125,7 @@ proc rebuildAllTables*(cls: Class) =
 
   # For parent classes, use allMethods (includes what they inherited)
   # This ensures we pick up manually-added methods from tests
-  for parent in cls.parents:
+  for parent in cls.superclasses:
     for c in parent.inheritanceChain():
       for sel, m in c.allMethods:
         if sel notin allMethods:  # Don't override if already defined
@@ -1132,7 +1136,7 @@ proc rebuildAllTables*(cls: Class) =
 
   # Also inherit slot names from parents
   var allSlotNames = cls.slotNames
-  for parent in cls.parents:
+  for parent in cls.superclasses:
     for slotName in parent.allSlotNames:
       if slotName notin allSlotNames:
         allSlotNames.add(slotName)
