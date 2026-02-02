@@ -184,7 +184,7 @@ All the **logic** (layout, event handling, state management) lives in Nemo.
 ## Part 3: Directory Structure
 
 ```
-src/nimtalk/gui/
+src/nemo/gui/
 ├── gtk4/                       # GTK4 bridge layer
 │   ├── bridge.nim              # Main bridge initialization
 │   ├── widget.nim              # Base Widget wrapper
@@ -202,7 +202,7 @@ src/nimtalk/gui/
 │
 └── ide.nim                     # IDE entry point - loads Nemo GUI code
 
-lib/nimtalk/gui/                # GUI tools written in Nemo
+lib/nemo/gui/                # GUI tools written in Nemo
 ├── Gtk4/                       # GTK4 wrapper classes (Nemo)
 │   ├── Widget.nt               # Base widget class
 │   ├── Window.nt               # Window wrapper
@@ -238,7 +238,7 @@ This is the only static Nim code. It's a thin wrapper that:
 
 ### 4.1 Widget Wrapper Base
 
-**File:** `src/nimtalk/gui/gtk4/widget.nim`
+**File:** `src/nemo/gui/gtk4/widget.nim`
 
 ```nim
 ## Base widget wrapper - exposes GTK widget to Nemo
@@ -348,7 +348,7 @@ proc connectDoImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
 ### 4.2 Window Wrapper
 
-**File:** `src/nimtalk/gui/gtk4/window.nim`
+**File:** `src/nemo/gui/gtk4/window.nim`
 
 ```nim
 ## GtkWindow wrapper
@@ -396,7 +396,7 @@ proc presentImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
 ### 4.3 Button Wrapper
 
-**File:** `src/nimtalk/gui/gtk4/button.nim`
+**File:** `src/nemo/gui/gtk4/button.nim`
 
 ```nim
 ## GtkButton wrapper
@@ -452,7 +452,7 @@ proc connectClickedImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
 GTK signals have varying signatures. The generic `connect:do:` works for simple signals, but signals like `motion-notify` pass coordinates. Provide typed helpers for common patterns:
 
-**File:** `src/nimtalk/gui/gtk4/signal.nim`
+**File:** `src/nemo/gui/gtk4/signal.nim`
 
 ```nim
 ## Typed signal connection helpers
@@ -617,7 +617,7 @@ This is where the actual IDE tools live. All written in Nemo - fully malleable!
 
 ### 6.1 GTK4 Base Classes (Nemo)
 
-**File:** `lib/nimtalk/gui/Gtk4/Widget.nt`
+**File:** `lib/nemo/gui/Gtk4/Widget.nt`
 
 ```smalltalk
 "Base class for all GTK widgets
@@ -665,7 +665,7 @@ GtkWidget at: #addCssClass: put: [ :className |
 
 ### 6.2 Window Class (Nemo)
 
-**File:** `lib/nimtalk/gui/Gtk4/Window.nt`
+**File:** `lib/nemo/gui/Gtk4/Window.nt`
 
 ```smalltalk
 "GTK Window - top-level window"
@@ -722,7 +722,7 @@ GtkWindow at: #defaultSize: put: [ :aPoint |
 
 ### 6.3 Button Class (Nemo)
 
-**File:** `lib/nimtalk/gui/Gtk4/Button.nt`
+**File:** `lib/nemo/gui/Gtk4/Button.nt`
 
 ```smalltalk
 "GTK Button widget"
@@ -773,7 +773,7 @@ GtkButton at: #clicked: put: [ :aBlock |
 
 ### 6.4 Box Layout (Nemo)
 
-**File:** `lib/nimtalk/gui/Gtk4/Box.nt`
+**File:** `lib/nemo/gui/Gtk4/Box.nt`
 
 ```smalltalk
 "GTK Box - layout container"
@@ -827,7 +827,7 @@ GtkBox at: #remove: put: [ :aWidget |
 
 ### 7.1 Launcher Window
 
-**File:** `lib/nimtalk/gui/Ide/Launcher.nt`
+**File:** `lib/nemo/gui/Ide/Launcher.nt`
 
 ```smalltalk
 "Main IDE launcher window with Transcript"
@@ -926,7 +926,7 @@ IdeLauncher at: #showLine: put: [ :text |
 
 ### 7.2 Workspace Window
 
-**File:** `lib/nimtalk/gui/Ide/Workspace.nt`
+**File:** `lib/nemo/gui/Ide/Workspace.nt`
 
 ```smalltalk
 "Workspace - code editor with Do It / Print It / Inspect It"
@@ -1037,7 +1037,7 @@ IdeWorkspace at: #clear put: [
 
 ### 7.3 Inspector Window
 
-**File:** `lib/nimtalk/gui/Ide/Inspector.nt`
+**File:** `lib/nemo/gui/Ide/Inspector.nt`
 
 ```smalltalk
 "Inspector - view object internals"
@@ -1121,7 +1121,7 @@ IdeInspector at: #refresh put: [
 
 ## Part 8: IDE Entry Point
 
-**File:** `src/nimtalk/gui/ide.nim`
+**File:** `src/nemo/gui/ide.nim`
 
 ```nim
 ## IDE Entry Point
@@ -1150,19 +1150,19 @@ proc initGtkBridge(interp: var Interpreter) =
 proc loadGuiCode(interp: var Interpreter) =
   ## Load all Nemo GUI files
   let guiFiles = [
-    "lib/nimtalk/gui/Gtk4/Widget.nt",
-    "lib/nimtalk/gui/Gtk4/Window.nt",
-    "lib/nimtalk/gui/Gtk4/Button.nt",
-    "lib/nimtalk/gui/Gtk4/Box.nt",
-    "lib/nimtalk/gui/Gtk4/TextView.nt",
-    "lib/nimtalk/gui/Gtk4/TreeView.nt",
-    "lib/nimtalk/gui/Ide/BaseTool.nt",
-    "lib/nimtalk/gui/Ide/Launcher.nt",
-    "lib/nimtalk/gui/Ide/Workspace.nt",
-    "lib/nimtalk/gui/Ide/Inspector.nt",
-    "lib/nimtalk/gui/Ide/Browser.nt",
-    "lib/nimtalk/gui/Ide/Debugger.nt",
-    "lib/nimtalk/gui/main.nt"  # Entry point
+    "lib/nemo/gui/Gtk4/Widget.nt",
+    "lib/nemo/gui/Gtk4/Window.nt",
+    "lib/nemo/gui/Gtk4/Button.nt",
+    "lib/nemo/gui/Gtk4/Box.nt",
+    "lib/nemo/gui/Gtk4/TextView.nt",
+    "lib/nemo/gui/Gtk4/TreeView.nt",
+    "lib/nemo/gui/Ide/BaseTool.nt",
+    "lib/nemo/gui/Ide/Launcher.nt",
+    "lib/nemo/gui/Ide/Workspace.nt",
+    "lib/nemo/gui/Ide/Inspector.nt",
+    "lib/nemo/gui/Ide/Browser.nt",
+    "lib/nemo/gui/Ide/Debugger.nt",
+    "lib/nemo/gui/main.nt"  # Entry point
   ]
 
   for file in guiFiles:
@@ -1294,7 +1294,7 @@ The same bridge supports:
 
 For visual UI design, add support for Glade XML files:
 
-**File:** `lib/nimtalk/gui/Gtk4/Builder.nt`
+**File:** `lib/nemo/gui/Gtk4/Builder.nt`
 
 ```smalltalk
 "GtkBuilder - load UIs from Glade XML"
@@ -1334,7 +1334,7 @@ GtkBuilder at: #connectSignals: put: [ :signalDict |
 ```smalltalk
 "Load a Glade-designed UI"
 builder := GtkBuilder new.
-builder addFromFile: 'lib/nimtalk/gui/glade/Workspace.glade'.
+builder addFromFile: 'lib/nemo/gui/glade/Workspace.glade'.
 
 "Get widgets by ID"
 window := builder getObject: 'workspaceWindow'.

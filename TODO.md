@@ -152,7 +152,7 @@ nimble clean       # Clean artifacts
 - Updated `doesNotUnderstand:` to accept selector with optional arguments
 
 ### Green Threads (Cooperative Processes)
-- Implemented core scheduler in `nimtalk/core/process.nim`
+- Implemented core scheduler in `nemo/core/process.nim`
 - Added `SchedulerContext` for interpreter integration
 - Each process has its own interpreter with isolated activation stack
 - Shared globals and rootObject between all processes

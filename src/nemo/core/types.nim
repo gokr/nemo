@@ -46,7 +46,7 @@ type
     name*: string                           # Class name for debugging/reflection
     tags*: seq[string]                      # Type tags
     isNimProxy*: bool                       # Class wraps Nim type
-    nimtalkType*: string                    # Nim type name for FFI
+    nemoType*: string                    # Nim type name for FFI
     hasSlots*: bool                         # Has any instance variables
 
   Instance* {.acyclic.} = ref object of RootObj
@@ -446,7 +446,7 @@ proc newClass*(parents: seq[Class] = @[], slotNames: seq[string] = @[], name: st
   result.name = name
   result.tags = @["Class"]
   result.isNimProxy = false
-  result.nimtalkType = ""
+  result.nemoType = ""
   result.hasSlots = slotNames.len > 0
 
   # Check for slot name conflicts from parents

@@ -13,7 +13,7 @@ This document describes the **actual implemented syntax** in the current Nemo in
 
 **Double quotes** for string literals:
 
-```nimtalk
+```nemo
 "This is a string"
 ```
 
@@ -23,7 +23,7 @@ Single quotes are reserved for future use.
 
 Nemo uses **hash-style comments**:
 
-```nimtalk
+```nemo
 # This is a comment
 
 # Create a shallow copy of this object
@@ -318,8 +318,8 @@ Object at: #primitiveClone put: <primitive>
 
 ## Key Files Reference
 
-- **Lexer**: `src/nimtalk/parser/lexer.nim` - Tokenization rules
-- **Parser**: `src/nimtalk/parser/parser.nim` - Syntax parsing
+- **Lexer**: `src/nemo/parser/lexer.nim` - Tokenization rules
+- **Parser**: `src/nemo/parser/parser.nim` - Syntax parsing
 - **Examples**: `examples/*.nt` - Working syntax examples
 - **Core objects**: `lib/core/*.nt` - Standard library implementations
 

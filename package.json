@@ -1,12 +1,12 @@
 {
   "displayName": "Nemo Language Support",
-  "name": "nimtalk-lang",
+  "name": "nemo-lang",
   "description": "Syntax highlighting for Nemo (.nt) files",
   "version": "0.1.0",
   "publisher": "gokr",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gokr/nimtalk.git"
+    "url": "https://github.com/gokr/nemo.git"
    },
   "engines": {
     "vscode": "^1.0.0"
@@ -15,16 +15,16 @@
   "contributes": {
     "languages": [
       {
-        "id": "nimtalk",
-        "aliases": ["Nemo", "nimtalk"],
+        "id": "nemo",
+        "aliases": ["Nemo", "nemo"],
         "extensions": [".nt"],
         "configuration": "./.vscode/language-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "nimtalk",
-        "scopeName": "source.nimtalk",
+        "language": "nemo",
+        "scopeName": "source.nemo",
         "path": "./.vscode/syntaxes/nt.tmLanguage.json"
       }
     ]

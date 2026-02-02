@@ -317,7 +317,7 @@ For tests and embedded usage, control logging programmatically:
 
 ```nim
 import std/logging
-import nimtalk/core/types
+import nemo/core/types
 
 # Configure logging with specific level
 configureLogging(lvlError)  # Suppress debug output

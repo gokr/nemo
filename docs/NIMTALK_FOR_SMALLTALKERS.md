@@ -30,7 +30,7 @@ z := x + y.
 ```
 
 **Nemo:**
-```nimtalk
+```nemo
 * Periods work (Smalltalk-compatible)
 x := 1.
 y := 2.
@@ -53,7 +53,7 @@ z := x + y.
 ```
 
 **Nemo:**
-```nimtalk
+```nemo
 "Hello World"       # Double quotes only
 ```
 
@@ -67,7 +67,7 @@ z := x + y.
 ```
 
 **Nemo:**
-```nimtalk
+```nemo
 # This is a comment - hash style
 #==== Section header
 ```
@@ -86,7 +86,7 @@ z := x + y.
 ```
 
 **Nemo:**
-```nimtalk
+```nemo
 # Optional | after parameters (Nemo-specific)
 [ :x :y
   x + y
@@ -126,7 +126,7 @@ name: aName
 ```
 
 **Nemo:**
-```nimtalk
+```nemo
 # Define class with slots
 Person := Object derive: #(#name #age).
 
@@ -152,7 +152,7 @@ dictionary
 ```
 
 **Nemo:**
-```nimtalk
+```nemo
 # Same syntax, but note that newlines act as separators
 # except when continuing a keyword message chain
 dictionary
@@ -168,7 +168,7 @@ dictionary
 
 **Nemo:** Classes are objects, but there are no metaclasses. Class methods are stored directly on the class object.
 
-```nimtalk
+```nemo
 # Instance method
 Person>>greet [ ^ "Hello" ].
 
@@ -186,7 +186,7 @@ The `class` message returns the class object itself, and methods can be stored t
 
 **Nemo:** Instance variables are indexed slots for O(1) access. The class maintains `slotNames` (declared on class) and `allSlotNames` (inherited layout).
 
-```nimtalk
+```nemo
 Person := Object derive: #(#name #age).
 
 # Inside methods, access by name (converted to slot index at compile time)
@@ -210,7 +210,7 @@ Performance comparison (per 100k ops):
 
 **Nemo:** Currently single inheritance, with multiple parents planned:
 
-```nimtalk
+```nemo
 # Single inheritance
 Employee := Person derive: #(salary).
 
@@ -231,7 +231,7 @@ When creating a class with multiple parents (or adding parents via `addParent:`)
 - **Slot name conflicts**: If any slot name exists in multiple parent hierarchies, an error is raised
 - **Method selector conflicts**: If directly-defined method selectors conflict between parents, an error is raised
 
-```nimtalk
+```nemo
 # This will raise an error:
 Parent1 := Object derive: #(shared)
 Parent2 := Object derive: #(shared)
@@ -244,7 +244,7 @@ Child := Object derive: #(x)
 
 To work with conflicting parent methods, override the method in the child class first, then use `addParent:`:
 
-```nimtalk
+```nemo
 Parent1 := Object derive: #(a)
 Parent1 >> foo [ ^ "foo1" ]
 
@@ -270,7 +270,7 @@ Child addParent: Parent2
 
 **Nemo:** `super` works similarly, but supports qualified super for multiple inheritance:
 
-```nimtalk
+```nemo
 # Unqualified super (uses first parent)
 Employee>>calculatePay [
     base := super calculatePay.
@@ -290,7 +290,7 @@ Employee>>calculatePay [
 
 **Nemo:** Primitives embed Nim code directly:
 
-```nimtalk
+```nemo
 Object>>primitiveClone [
     <primitive>
     ## Create a shallow copy in Nim
@@ -314,7 +314,7 @@ Object subclass: #MyClass
 
 **Nemo:** Not implemented. Use class methods with captured state or global objects:
 
-```nimtalk
+```nemo
 # Workaround: Store in class method closure
 MyClass>>sharedCounter [
     | count |
@@ -346,7 +346,7 @@ Object subclass: #MyClass
 
 **Nemo:** Not implemented. Use global tables or symbols:
 
-```nimtalk
+```nemo
 # Workaround: Global table
 Constants := #{
   #MaxSize -> 100
@@ -399,7 +399,7 @@ No `Behavior`, `ClassDescription`, or metaclass chain.
 
 Nemo implements Smalltalk's cascade using `;`:
 
-```nimtalk
+```nemo
 obj
   at: #x put: 0;
   at: #y put: 0;
@@ -414,7 +414,7 @@ obj at: #z put: 0.
 
 Create objects with literal syntax:
 
-```nimtalk
+```nemo
 point := {| x: 10 y: 20 |}.
 ```
 
@@ -422,7 +422,7 @@ point := {| x: 10 y: 20 |}.
 
 Hash table literals with arrow syntax:
 
-```nimtalk
+```nemo
 dict := #{ "name" -> "Alice" "age" -> 30 }.
 ```
 
@@ -452,7 +452,7 @@ Singleton class>>instance
 ```
 
 **Nemo singleton:**
-```nimtalk
+```nemo
 # Using captured variable
 Singleton class>>instance [
     | inst |

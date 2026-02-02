@@ -15,7 +15,7 @@ The slot-based instance variable system is **fully implemented and complete**:
 - `initSlotObject`, `getSlot`, `setSlot`, `hasSlotIVars`, `getSlotNames` procs
 - `derive:` method added to root object as a regular message send
 - **149x performance improvement** over property bag access
-- Test files `tests/test_slot_ivars.nim` and `tests/test_derive_from_nimtalk.nim` created
+- Test files `tests/test_slot_ivars.nim` and `tests/test_derive_from_nemo.nim` created
 - Parser supports `derive: #(ivar1 ivar2)` syntax as a regular message
 - Direct slot access via automatically generated getter/setter methods
 - Native method dispatch from Nemo code integrated

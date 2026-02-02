@@ -54,7 +54,7 @@ tests/test_evaluator
 tests/test_evaluator.nim
 tests/test_slot_ivars
 tests/test_simple_derive
-tests/test_derive_from_nimtalk
+tests/test_derive_from_nemo
 tests/benchmark_simple
 examples/test_primitive
 tests/test_cascade

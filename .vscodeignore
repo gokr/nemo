@@ -23,7 +23,7 @@ build/
 # Binaries
 nemo
 nemoc
-nimtalk/
+nemo/
 
 # Tools
 .nimble/

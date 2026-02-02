@@ -296,11 +296,11 @@ Processor fork: [100 timesRepeat: [Transcript show: queue take]]
 
 ### Phase 1: Core Scheduler and Monitor (✅ Completed)
 
-- [x] `nimtalk/core/process.nim`: Process, Scheduler types.
+- [x] `nemo/core/process.nim`: Process, Scheduler types.
 - [x] Basic round‑robin scheduler, with only explicit yields.
 - [ ] Monitor: Nim‑side re‑entrant lock + condition variable.
 - [x] Simple yield and block/unblock operations.
-- [x] `nimtalk/core/scheduler.nim`: Scheduler-Interpreter integration.
+- [x] `nemo/core/scheduler.nim`: Scheduler-Interpreter integration.
 - [x] Process forking with shared globals and rootObject.
 - [x] Processor global object with `yield`, `fork:`, `current` methods.
 - [x] Test suite for scheduler and process lifecycle.

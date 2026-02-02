@@ -8,17 +8,17 @@ The Nemo repository includes a VSCode extension that provides syntax highlightin
 
 ### From the Repository
 
-The extension file is included in the repository as `nimtalk-lang-0.1.0.vsix`.
+The extension file is included in the repository as `nemo-lang-0.1.0.vsix`.
 
 **Command line:**
 ```bash
-code --install-extension nimtalk-lang-0.1.0.vsix
+code --install-extension nemo-lang-0.1.0.vsix
 ```
 
 **From VSCode:**
 1. Press `Ctrl+Shift+P` (Cmd+Shift+P on Mac)
 2. Type "Extensions: Install from VSIX..."
-3. Select `nimtalk-lang-0.1.0.vsix`
+3. Select `nemo-lang-0.1.0.vsix`
 4. Reload VSCode when prompted
 
 ### Rebuilding the Extension
@@ -38,28 +38,28 @@ The grammar provides scopes for the following constructs:
 
 | Construct | Scope | Example |
 |-----------|-------|---------|
-| Comments | `comment.line.nimtalk` | `# This is a comment` |
-| Strings | `string.quoted.double.nimtalk` | `"hello"` |
-| Symbols | `entity.name.tag.symbol.nimtalk` | `#foo`, `#bar:baz:` |
-| Symbols (quoted) | `entity.name.tag.symbol.quoted.nimtalk` | `"symbol with spaces"` |
-| Numbers | `constant.numeric.nimtalk` | `42`, `3.14`, `-10` |
-| Booleans | `constant.language.nimtalk` | `true`, `false` |
-| Nil | `constant.language.nimtalk` | `nil` |
-| Self/Super | `constant.language.nimtalk` | `self`, `super` |
-| Globals (classes) | `constant.other.class.nimtalk` | `Object`, `Point` |
-| Variables | `variable.other.nimtalk` | `x`, `message` |
-| Block parameters | `variable.parameter.nimtalk` | `:param`, `:x :y` |
-| Block temps | `variable.other.temporary.nimtalk` | `| temp1 temp2` |
-| Keywords | `keyword.control.nimtalk` | `ifTrue:`, `at:put:` |
-| Assignment | `keyword.operator.assignment.nimtalk` | `:=` |
-| Return | `keyword.operator.return.nimtalk` | `^` |
-| Method def | `keyword.operator.method-definition.nimtalk` | `>>` |
-| Arrow | `keyword.operator.arrow.nimtalk` | `->` |
-| Operators | `keyword.operator.nimtalk` | `+`, `-`, `*`, `/`, `&`, `\|` |
-| Arrays | `meta.array.literal.nimtalk` | `#(1 2 3)` |
-| Tables | `meta.table.literal.nimtalk` | `#{"key" -> "value"}` |
-| Objects | `meta.object.literal.nimtalk` | `{| x: 1 \|}` |
-| Primitives | `support.function.primitive.nimtalk` | `<primitive>...</primitive>` |
+| Comments | `comment.line.nemo` | `# This is a comment` |
+| Strings | `string.quoted.double.nemo` | `"hello"` |
+| Symbols | `entity.name.tag.symbol.nemo` | `#foo`, `#bar:baz:` |
+| Symbols (quoted) | `entity.name.tag.symbol.quoted.nemo` | `"symbol with spaces"` |
+| Numbers | `constant.numeric.nemo` | `42`, `3.14`, `-10` |
+| Booleans | `constant.language.nemo` | `true`, `false` |
+| Nil | `constant.language.nemo` | `nil` |
+| Self/Super | `constant.language.nemo` | `self`, `super` |
+| Globals (classes) | `constant.other.class.nemo` | `Object`, `Point` |
+| Variables | `variable.other.nemo` | `x`, `message` |
+| Block parameters | `variable.parameter.nemo` | `:param`, `:x :y` |
+| Block temps | `variable.other.temporary.nemo` | `| temp1 temp2` |
+| Keywords | `keyword.control.nemo` | `ifTrue:`, `at:put:` |
+| Assignment | `keyword.operator.assignment.nemo` | `:=` |
+| Return | `keyword.operator.return.nemo` | `^` |
+| Method def | `keyword.operator.method-definition.nemo` | `>>` |
+| Arrow | `keyword.operator.arrow.nemo` | `->` |
+| Operators | `keyword.operator.nemo` | `+`, `-`, `*`, `/`, `&`, `\|` |
+| Arrays | `meta.array.literal.nemo` | `#(1 2 3)` |
+| Tables | `meta.table.literal.nemo` | `#{"key" -> "value"}` |
+| Objects | `meta.object.literal.nemo` | `{| x: 1 \|}` |
+| Primitives | `support.function.primitive.nemo` | `<primitive>...</primitive>` |
 
 ## Files
 
@@ -70,7 +70,7 @@ The grammar provides scopes for the following constructs:
 | `.vscode/settings.json` | File association for `.nt` files |
 | `package.json` | Extension manifest |
 | `.vscodeignore` | Files to exclude from `.vsix` |
-| `nimtalk-lang-0.1.0.vsix` | Packaged extension |
+| `nemo-lang-0.1.0.vsix` | Packaged extension |
 
 ## Verifying Syntax Highlighting
 
@@ -80,7 +80,7 @@ To check that syntax highlighting is working correctly:
 2. Press `Ctrl+Shift+P` (Cmd+Shift+P on Mac)
 3. Type "Developer: Inspect Editor Tokens and Scopes"
 4. Move your cursor over different code elements
-5. A popup will show the scopes applied (e.g., `source.nimtalk keyword.control.nimtalk`)
+5. A popup will show the scopes applied (e.g., `source.nemo keyword.control.nemo`)
 
 ## Customizing Colors
 
@@ -91,13 +91,13 @@ To customize the colors in your VSCode settings (`settings.json`):
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": "entity.name.tag.symbol.nimtalk",
+        "scope": "entity.name.tag.symbol.nemo",
         "settings": {
           "foreground": "#ff5555"
         }
       },
       {
-        "scope": "constant.other.class.nimtalk",
+        "scope": "constant.other.class.nemo",
         "settings": {
           "foreground": "#8be9fd",
           "fontStyle": "bold"
@@ -120,8 +120,8 @@ This prevents cases like `#primitiveIsKindOf:` from being incorrectly highlighte
 
 ### Identifiers vs Globals
 
-- Identifiers starting with lowercase: `variable.other.nimtalk`
-- Identifiers starting with uppercase: `constant.other.class.nimtalk`
+- Identifiers starting with lowercase: `variable.other.nemo`
+- Identifiers starting with uppercase: `constant.other.class.nemo`
 
 This convention makes class references stand out from local variables.
 

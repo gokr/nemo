@@ -1,6 +1,6 @@
 # Nemo BNF Grammar
 
-This document provides a formal BNF (Backus-Naur Form) grammar for the Nemo language, derived from the lexer (`src/nimtalk/parser/lexer.nim`) and parser (`src/nimtalk/parser/parser.nim`) implementations.
+This document provides a formal BNF (Backus-Naur Form) grammar for the Nemo language, derived from the lexer (`src/nemo/parser/lexer.nim`) and parser (`src/nemo/parser/parser.nim`) implementations.
 
 ## Overview
 
@@ -447,9 +447,9 @@ Temporary variables must be declared at the beginning of a block, before any sta
 ## Relationship to Implementation
 
 This grammar corresponds to:
-- **Lexer**: `src/nimtalk/parser/lexer.nim` - Token production rules
-- **Parser**: `src/nimtalk/parser/parser.nim` - Recursive descent implementation
-- **AST Types**: `src/nimtalk/core/types.nim` - Node type definitions
+- **Lexer**: `src/nemo/parser/lexer.nim` - Token production rules
+- **Parser**: `src/nemo/parser/parser.nim` - Recursive descent implementation
+- **AST Types**: `src/nemo/core/types.nim` - Node type definitions
 
 The parser uses recursive descent with the following entry points:
 - `parseExpression()` - Parses expressions with message chains

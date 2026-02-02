@@ -550,7 +550,7 @@ proc close*(barrel: Barrel) =
 ## Project Structure
 
 ```
-nimtalk/
+nemo/
 ├── core/           # Core types and object system
 ├── parser/         # Lexer and parser
 ├── interpreter/    # Evaluation and activation

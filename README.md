@@ -205,8 +205,8 @@ Each process has its own interpreter with an isolated activation stack, but all 
 ## Installation
 
 ```bash
-git clone https://github.com/gokr/nimtalk.git
-cd nimtalk
+git clone https://github.com/gokr/nemo.git
+cd nemo
 nimble build
 nimble local   # Copies binaries to current directory
 ```
@@ -219,12 +219,12 @@ Syntax highlighting for `.nt` files is available via the included VSCode extensi
 
 ```bash
 # From command line
-code --install-extension nimtalk-lang-0.1.0.vsix
+code --install-extension nemo-lang-0.1.0.vsix
 
 # Or from VSCode:
 # 1. Press Ctrl+Shift+P (Cmd+Shift+P on Mac)
 # 2. Type "Extensions: Install from VSIX..."
-# 3. Select nimtalk-lang-0.1.0.vsix
+# 3. Select nemo-lang-0.1.0.vsix
 # 4. Reload VSCode when prompted
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "Nemo",
-  "scopeName": "source.nimtalk",
+  "scopeName": "source.nemo",
   "fileTypes": ["nt"],
   "patterns": [
     {
@@ -29,7 +29,7 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.line.nimtalk",
+          "name": "comment.line.nemo",
           "match": "#(?![a-zA-Z_\"\\(\\{])[^\\n]*"
         }
       ]
@@ -37,31 +37,31 @@
     "literals": {
       "patterns": [
         {
-          "name": "string.quoted.double.nimtalk",
+          "name": "string.quoted.double.nemo",
           "begin": "\"",
           "end": "\"",
           "patterns": [
             {
-              "name": "constant.character.escape.nimtalk",
+              "name": "constant.character.escape.nemo",
               "match": "\\\\."
             }
           ]
         },
         {
-          "name": "entity.name.tag.symbol.nimtalk",
+          "name": "entity.name.tag.symbol.nemo",
           "match": "#[a-zA-Z_][a-zA-Z0-9_]*(:[a-zA-Z0-9_]+)*"
         },
         {
-          "name": "entity.name.tag.symbol.quoted.nimtalk",
+          "name": "entity.name.tag.symbol.quoted.nemo",
           "begin": "#\"",
           "end": "\""
         },
         {
-          "name": "constant.numeric.nimtalk",
+          "name": "constant.numeric.nemo",
           "match": "(?<![\\w\\d])(-?\\d+\\.?\\d*([eE][+-]?\\d+)?|\\d*[eE][+-]?\\d+)"
         },
         {
-          "name": "constant.language.nimtalk",
+          "name": "constant.language.nemo",
           "match": "\\b(self|super|nil|true|false)\\b"
         }
       ]
@@ -69,7 +69,7 @@
     "method-definition": {
       "patterns": [
         {
-          "name": "keyword.operator.method-definition.nimtalk",
+          "name": "keyword.operator.method-definition.nemo",
           "match": ">>"
         }
       ]
@@ -77,14 +77,14 @@
     "block": {
       "patterns": [
         {
-          "name": "meta.block.nimtalk",
+          "name": "meta.block.nemo",
           "begin": "\\[",
           "end": "\\]",
           "beginCaptures": {
-            "0": { "name": "punctuation.definition.block.begin.nimtalk" }
+            "0": { "name": "punctuation.definition.block.begin.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "punctuation.definition.block.end.nimtalk" }
+            "0": { "name": "punctuation.definition.block.end.nemo" }
           },
           "patterns": [
             {
@@ -103,25 +103,25 @@
     "block-parameters": {
       "patterns": [
         {
-          "name": "meta.block.parameters.nimtalk",
+          "name": "meta.block.parameters.nemo",
           "begin": "(\\[)\\s*(:)",
           "end": "(\\|)",
           "beginCaptures": {
-            "1": { "name": "punctuation.definition.block.begin.nimtalk" },
-            "2": { "name": "punctuation.definition.parameter.nimtalk" }
+            "1": { "name": "punctuation.definition.block.begin.nemo" },
+            "2": { "name": "punctuation.definition.parameter.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "punctuation.separator.parameters.nimtalk" }
+            "0": { "name": "punctuation.separator.parameters.nemo" }
           },
           "patterns": [
             {
-              "name": "variable.parameter.nimtalk",
+              "name": "variable.parameter.nemo",
               "match": ":[a-zA-Z_][a-zA-Z0-9_]*"
             }
           ]
         },
         {
-          "name": "variable.parameter.nimtalk",
+          "name": "variable.parameter.nemo",
           "match": "(?<=\\[|:)\\s*:[a-zA-Z_][a-zA-Z0-9_]*"
         }
       ]
@@ -129,18 +129,18 @@
     "block-temps": {
       "patterns": [
         {
-          "name": "meta.block.temporaries.nimtalk",
+          "name": "meta.block.temporaries.nemo",
           "begin": "(\\|)(?![^\\|]*:)",
           "end": "(\\|)",
           "beginCaptures": {
-            "0": { "name": "punctuation.separator.temporaries.nimtalk" }
+            "0": { "name": "punctuation.separator.temporaries.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "punctuation.separator.temporaries.nimtalk" }
+            "0": { "name": "punctuation.separator.temporaries.nemo" }
           },
           "patterns": [
             {
-              "name": "variable.other.temporary.nimtalk",
+              "name": "variable.other.temporary.nemo",
               "match": "[a-zA-Z_][a-zA-Z0-9_]*"
             }
           ]
@@ -150,14 +150,14 @@
     "collections": {
       "patterns": [
         {
-          "name": "meta.array.literal.nimtalk",
+          "name": "meta.array.literal.nemo",
           "begin": "#\\(",
           "end": "\\)",
           "beginCaptures": {
-            "0": { "name": "keyword.control.array.begin.nimtalk punctuation.definition.array.begin.nimtalk" }
+            "0": { "name": "keyword.control.array.begin.nemo punctuation.definition.array.begin.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "keyword.control.array.end.nimtalk punctuation.definition.array.end.nimtalk" }
+            "0": { "name": "keyword.control.array.end.nemo punctuation.definition.array.end.nemo" }
           },
           "patterns": [
             {
@@ -166,14 +166,14 @@
           ]
         },
         {
-          "name": "meta.table.literal.nimtalk",
+          "name": "meta.table.literal.nemo",
           "begin": "#\\{",
           "end": "\\}",
           "beginCaptures": {
-            "0": { "name": "keyword.control.table.begin.nimtalk punctuation.definition.table.begin.nimtalk" }
+            "0": { "name": "keyword.control.table.begin.nemo punctuation.definition.table.begin.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "keyword.control.table.end.nimtalk punctuation.definition.table.end.nimtalk" }
+            "0": { "name": "keyword.control.table.end.nemo punctuation.definition.table.end.nemo" }
           },
           "patterns": [
             {
@@ -185,14 +185,14 @@
           ]
         },
         {
-          "name": "meta.object.literal.nimtalk",
+          "name": "meta.object.literal.nemo",
           "begin": "\\{\\|",
           "end": "\\|\\}",
           "beginCaptures": {
-            "0": { "name": "keyword.control.object.begin.nimtalk punctuation.definition.object.begin.nimtalk" }
+            "0": { "name": "keyword.control.object.begin.nemo punctuation.definition.object.begin.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "keyword.control.object.end.nimtalk punctuation.definition.object.end.nimtalk" }
+            "0": { "name": "keyword.control.object.end.nemo punctuation.definition.object.end.nemo" }
           },
           "patterns": [
             {
@@ -224,14 +224,14 @@
     "parenthesized": {
       "patterns": [
         {
-          "name": "meta.parens.nimtalk",
+          "name": "meta.parens.nemo",
           "begin": "\\(",
           "end": "\\)",
           "beginCaptures": {
-            "0": { "name": "punctuation.definition.parentheses.begin.nimtalk" }
+            "0": { "name": "punctuation.definition.parentheses.begin.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "punctuation.definition.parentheses.end.nimtalk" }
+            "0": { "name": "punctuation.definition.parentheses.end.nemo" }
           },
           "patterns": [
             {
@@ -244,22 +244,22 @@
     "keywords": {
       "patterns": [
         {
-          "name": "keyword.control.nimtalk",
+          "name": "keyword.control.nemo",
           "match": "(?<=[a-zA-Z_][a-zA-Z0-9_]*)(:)(?=[a-zA-Z0-9_]+:?)",
           "captures": {
-            "1": { "name": "punctuation.definition.keyword.nimtalk" }
+            "1": { "name": "punctuation.definition.keyword.nemo" }
           }
         },
         {
-          "name": "keyword.control.nimtalk",
+          "name": "keyword.control.nemo",
           "match": "(?<![a-zA-Z0-9])([a-zA-Z_][a-zA-Z0-9_]*)(:)(?![a-zA-Z0-9_:])",
           "captures": {
-            "1": { "name": "entity.name.function.nimtalk" },
-            "2": { "name": "punctuation.definition.keyword.nimtalk" }
+            "1": { "name": "entity.name.function.nemo" },
+            "2": { "name": "punctuation.definition.keyword.nemo" }
           }
         },
         {
-          "name": "keyword.control.multi-part.nimtalk",
+          "name": "keyword.control.multi-part.nemo",
           "match": "(?<![a-zA-Z0-9])([a-zA-Z_][a-zA-Z0-9_]*:[a-zA-Z0-9_]+:?)+(?![a-zA-Z0-9_:])"
         }
       ]
@@ -267,15 +267,15 @@
     "operators": {
       "patterns": [
         {
-          "name": "keyword.operator.assignment.nimtalk",
+          "name": "keyword.operator.assignment.nemo",
           "match": ":="
         },
         {
-          "name": "keyword.operator.return.nimtalk",
+          "name": "keyword.operator.return.nemo",
           "match": "\\^"
         },
         {
-          "name": "keyword.operator.nimtalk",
+          "name": "keyword.operator.nemo",
           "match": "\\+|-|\\*|/|//|\\\\|<>|<=|>=|=|==|===|~=|<|>|,|%|&|\\|"
         }
       ]
@@ -283,7 +283,7 @@
     "arrow": {
       "patterns": [
         {
-          "name": "keyword.operator.arrow.nimtalk",
+          "name": "keyword.operator.arrow.nemo",
           "match": "->"
         }
       ]
@@ -291,7 +291,7 @@
     "cascade": {
       "patterns": [
         {
-          "name": "punctuation.separator.cascade.nimtalk",
+          "name": "punctuation.separator.cascade.nemo",
           "match": ";"
         }
       ]
@@ -299,11 +299,11 @@
     "identifier": {
       "patterns": [
         {
-          "name": "constant.other.class.nimtalk",
+          "name": "constant.other.class.nemo",
           "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
         },
         {
-          "name": "variable.other.nimtalk",
+          "name": "variable.other.nemo",
           "match": "\\b[a-z_][a-zA-Z0-9_]*\\b"
         }
       ]
@@ -311,14 +311,14 @@
     "primitives": {
       "patterns": [
         {
-          "name": "support.function.primitive.nimtalk",
+          "name": "support.function.primitive.nemo",
           "begin": "<primitive>",
           "end": "</primitive>",
           "beginCaptures": {
-            "0": { "name": "punctuation.definition.primitive.begin.nimtalk" }
+            "0": { "name": "punctuation.definition.primitive.begin.nemo" }
           },
           "endCaptures": {
-            "0": { "name": "punctuation.definition.primitive.end.nimtalk" }
+            "0": { "name": "punctuation.definition.primitive.end.nemo" }
           },
           "patterns": [
             {
