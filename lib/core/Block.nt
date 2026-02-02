@@ -32,15 +32,8 @@ Block>>value: arg1 value: arg2 value: arg3 [
 ]
 
 # while loops - receiver is condition block, argument is body block
-Block>>whileTrue: bodyBlock [
-  # Execute bodyBlock while receiver evaluates to true
-  ^ self perform: #primitiveWhileTrue: with: bodyBlock
-]
-
-Block>>whileFalse: bodyBlock [
-  # Execute bodyBlock while receiver evaluates to false
-  ^ self perform: #primitiveWhileFalse: with: bodyBlock
-]
+# Note: whileTrue: and whileFalse: are implemented natively in the interpreter
+# They are registered directly on the Block class during initialization
 
 # repeat loops
 Block>>repeat [
