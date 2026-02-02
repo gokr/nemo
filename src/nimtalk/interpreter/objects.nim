@@ -7,18 +7,6 @@ import ../core/types
 # ============================================================================
 
 # Forward declarations for core method implementations (exported for testing)
-proc cloneImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc deriveImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc deriveWithIVarsImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc atImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc atPutImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc selectorPutImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc wrapBoolAsObject*(value: bool): NodeValue
-proc wrapBlockAsObject*(blockNode: BlockNode): NodeValue
-proc wrapStringAsObject*(s: string): NodeValue
-proc wrapArrayAsObject*(arr: seq[NodeValue]): NodeValue
-proc wrapTableAsObject*(tab: Table[string, NodeValue]): NodeValue
-proc wrapFloatAsObject*(value: float): NodeValue
 proc plusImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc minusImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc starImpl*(self: Instance, args: seq[NodeValue]): NodeValue
@@ -36,14 +24,7 @@ proc moduloImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc printStringImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc writeImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc writelineImpl*(self: Instance, args: seq[NodeValue]): NodeValue
-proc getSlotImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc setSlotValueImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc concatImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc atCollectionImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc sizeImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc atCollectionPutImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc randomNextImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc randomNewImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
+
 # Collection primitives
 proc arrayNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc arraySizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue
@@ -59,19 +40,7 @@ proc tableIncludesKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc tableRemoveKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc tableAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc tableAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue
-# String primitives (legacy RuntimeObject)
-proc stringConcatImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringSizeImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringAtImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringFromToImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringIndexOfImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringIncludesSubStringImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringReplaceWithImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringUppercaseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringLowercaseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringTrimImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc stringSplitImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-# String primitives (new Instance-based)
+# String primitives (Instance-based)
 proc instStringConcatImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instStringSizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instStringAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue
@@ -87,14 +56,8 @@ proc instStringAsIntegerImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instStringAsSymbolImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instIdentityImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instanceCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue
-# File primitives
-proc fileOpenImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc fileCloseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc fileReadLineImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc fileWriteImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc fileAtEndImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc fileReadAllImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-# doCollectionImpl is defined in evaluator.nim as it needs interpreter context
+
+# Slot accessors are implemented in evaluator.nim to avoid circular import
 
 # ============================================================================
 # Helper: Extract integer value from NodeValue or wrapped object
@@ -109,34 +72,29 @@ proc tryGetInt*(value: NodeValue): (bool, int) =
   of vkInstance:
     if value.instVal.kind == ikInt:
       return (true, value.instVal.intVal)
-  of vkObject:
-    let obj = value.objVal
-    if obj.isNimProxy and obj.nimType == "int":
-      return (true, cast[ptr int](obj.nimValue)[])
   else:
     discard
   return (false, 0)
 
 # ============================================================================
-# Class-Based Object System (New)
+# Object System
 # ============================================================================
 
 # Forward declarations for class-based methods
 proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue
+proc classDeriveParentsIvarArrayMethodsImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc classNewImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc classAddMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc classAddClassMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc invalidateSubclasses*(cls: Class)
 proc rebuildAllTables*(cls: Class)
+proc registerPrimitivesOnObjectClass*(objCls: Class)
+proc primitiveCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc primitiveAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc primitiveAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 
-# Global root class (singleton) - the new class-based root
+# Global root class (singleton)
 var rootClass*: Class = nil
-
-# Global root object (singleton) - legacy prototype-based root
-var rootObject*: RootObject = nil
-
-# Global Random prototype (singleton) - uses DictionaryObj for properties
-var randomPrototype*: DictionaryObj = nil
 
 # Global true/false values for comparison operators
 var trueValue*: NodeValue = NodeValue(kind: vkBool, boolVal: true)
@@ -169,16 +127,6 @@ proc createCoreMethod*(name: string): BlockNode =
   blk.isMethod = true
   blk.nativeImpl = nil
   return blk
-
-# Method installation
-proc addMethod*(obj: RuntimeObject, selector: string, blk: BlockNode) =
-  ## Add a method to an object's method dictionary using canonical symbol
-  let sym = getSymbol(selector)
-  obj.methods[sym.symVal] = blk
-
-proc addDictionaryProperty*(dict: DictionaryObj, name: string, value: NodeValue) =
-  ## Add a property to a Dictionary's property bag
-  dict.properties[name] = value
 
 # Global namespace for storing "classes" and constants
 var globals*: Table[string, NodeValue]
@@ -218,2258 +166,59 @@ proc globalNames*(): seq[string] =
   ## Return all global names
   return toSeq(globals.keys)
 
-# Forward declarations for primitive implementations
-proc doesNotUnderstandImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc propertiesImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc methodsImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-proc isKindOfImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue
-
-# Initialize root object with core methods
-proc initRootObject*(): RootObject =
-  ## Initialize the global root object with core methods
-  if rootObject == nil:
-    # Initialize symbol table and globals first
-    initSymbolTable()
-    initGlobals()
-
-    rootObject = RootObject()
-    rootObject.methods = initTable[string, BlockNode]()
-    rootObject.parents = @[]
-    rootObject.tags = @["Object"]
-    rootObject.isNimProxy = false
-    rootObject.nimValue = nil
-    rootObject.nimType = ""
-    rootObject.hasSlots = false
-    rootObject.slots = @[]
-    rootObject.slotNames = initTable[string, int]()
-
-    # Add Object to globals immediately
-    addGlobal("Object", NodeValue(kind: vkObject, objVal: rootObject))
-
-    # Install core Object methods
-    let cloneMethod = createCoreMethod("clone")
-    cloneMethod.nativeImpl = cast[pointer](cloneImpl)
-    addMethod(rootObject, "clone", cloneMethod)
-
-    let deriveMethod = createCoreMethod("derive")
-    deriveMethod.nativeImpl = cast[pointer](deriveImpl)
-    addMethod(rootObject, "derive", deriveMethod)
-
-    let deriveWithIVarsMethod = createCoreMethod("derive:")
-    deriveWithIVarsMethod.nativeImpl = cast[pointer](deriveWithIVarsImpl)
-    addMethod(rootObject, "derive:", deriveWithIVarsMethod)
-
-    # Register primitives with internal names for perform:with: support
-    let primitiveCloneMethod = createCoreMethod("primitiveClone")
-    primitiveCloneMethod.nativeImpl = cast[pointer](cloneImpl)
-    addMethod(rootObject, "primitiveClone", primitiveCloneMethod)
-
-    let primitiveDeriveMethod = createCoreMethod("primitiveDerive")
-    primitiveDeriveMethod.nativeImpl = cast[pointer](deriveImpl)
-    addMethod(rootObject, "primitiveDerive", primitiveDeriveMethod)
-
-    let primitiveDeriveWithIVarsMethod = createCoreMethod("primitiveDeriveWithIVars:")
-    primitiveDeriveWithIVarsMethod.nativeImpl = cast[pointer](deriveWithIVarsImpl)
-    addMethod(rootObject, "primitiveDeriveWithIVars:", primitiveDeriveWithIVarsMethod)
-
-    let primitiveAtMethod = createCoreMethod("primitiveAt:")
-    primitiveAtMethod.nativeImpl = cast[pointer](atImpl)
-    addMethod(rootObject, "primitiveAt:", primitiveAtMethod)
-
-    let primitiveAtPutMethod = createCoreMethod("primitiveAt:put:")
-    primitiveAtPutMethod.nativeImpl = cast[pointer](atPutImpl)
-    addMethod(rootObject, "primitiveAt:put:", primitiveAtPutMethod)
-
-    let primitiveHasPropertyMethod = createCoreMethod("primitiveHasProperty:")
-    primitiveHasPropertyMethod.nativeImpl = cast[pointer](atImpl)  # atImpl handles property check
-    addMethod(rootObject, "primitiveHasProperty:", primitiveHasPropertyMethod)
-
-    let primitiveRespondsToMethod = createCoreMethod("primitiveRespondsTo:")
-    primitiveRespondsToMethod.nativeImpl = cast[pointer](atImpl)  # Reuse atImpl for lookup
-    addMethod(rootObject, "primitiveRespondsTo:", primitiveRespondsToMethod)
-
-    let primitiveEqualsMethod = createCoreMethod("primitiveEquals:")
-    primitiveEqualsMethod.nativeImpl = cast[pointer](eqImpl)
-    addMethod(rootObject, "primitiveEquals:", primitiveEqualsMethod)
-
-    let primitiveErrorMethod = createCoreMethod("primitiveError:")
-    primitiveErrorMethod.nativeImpl = cast[pointer](doesNotUnderstandImpl)
-    addMethod(rootObject, "primitiveError:", primitiveErrorMethod)
-
-    # Register additional primitives for Object.nt methods
-    let primitivePropertiesMethod = createCoreMethod("primitiveProperties")
-    primitivePropertiesMethod.nativeImpl = cast[pointer](propertiesImpl)
-    addMethod(rootObject, "primitiveProperties", primitivePropertiesMethod)
-
-    let primitiveMethodsMethod = createCoreMethod("primitiveMethods")
-    primitiveMethodsMethod.nativeImpl = cast[pointer](methodsImpl)
-    addMethod(rootObject, "primitiveMethods", primitiveMethodsMethod)
-
-    let primitiveIsKindOfMethod = createCoreMethod("primitiveIsKindOf:")
-    primitiveIsKindOfMethod.nativeImpl = cast[pointer](isKindOfImpl)
-    addMethod(rootObject, "primitiveIsKindOf:", primitiveIsKindOfMethod)
-
-    let getSlotMethod = createCoreMethod("getSlot:")
-    getSlotMethod.nativeImpl = cast[pointer](getSlotImpl)
-    addMethod(rootObject, "getSlot:", getSlotMethod)
-
-    let setSlotValueMethod = createCoreMethod("setSlot:value:")
-    setSlotValueMethod.nativeImpl = cast[pointer](setSlotValueImpl)
-    addMethod(rootObject, "setSlot:value:", setSlotValueMethod)
-
-    # Add class-based method definition support
-    # These are aliases for at:put: in the runtime system
-    # In full class-based implementation, they would use the Class system
-
-    let selectorPutMethod = createCoreMethod("selector:put:")
-    selectorPutMethod.nativeImpl = cast[pointer](selectorPutImpl)
-    addMethod(rootObject, "selector:put:", selectorPutMethod)
-
-    let classSelectorPutMethod = createCoreMethod("classSelector:put:")
-    classSelectorPutMethod.nativeImpl = cast[pointer](atPutImpl)
-    addMethod(rootObject, "classSelector:put:", classSelectorPutMethod)
-
-    let printStringMethod = createCoreMethod("printString")
-    printStringMethod.nativeImpl = cast[pointer](printStringImpl)
-    addMethod(rootObject, "printString", printStringMethod)
-
-    let dnuMethod = createCoreMethod("doesNotUnderstand:")
-    dnuMethod.nativeImpl = cast[pointer](doesNotUnderstandImpl)
-    addMethod(rootObject, "doesNotUnderstand:", dnuMethod)
-
-    # Add arithmetic operators
-    let plusMethod = createCoreMethod("+")
-    plusMethod.nativeImpl = cast[pointer](plusImpl)
-    addMethod(rootObject, "+", plusMethod)
-
-    let minusMethod = createCoreMethod("-")
-    minusMethod.nativeImpl = cast[pointer](minusImpl)
-    addMethod(rootObject, "-", minusMethod)
-
-    let starMethod = createCoreMethod("*")
-    starMethod.nativeImpl = cast[pointer](starImpl)
-    addMethod(rootObject, "*", starMethod)
-
-    let slashMethod = createCoreMethod("/")
-    slashMethod.nativeImpl = cast[pointer](slashImpl)
-    addMethod(rootObject, "/", slashMethod)
-
-    let sqrtMethod = createCoreMethod("sqrt")
-    sqrtMethod.nativeImpl = cast[pointer](sqrtImpl)
-    addMethod(rootObject, "sqrt", sqrtMethod)
-
-    # Add comparison operators
-    let ltMethod = createCoreMethod("<")
-    ltMethod.nativeImpl = cast[pointer](ltImpl)
-    addMethod(rootObject, "<", ltMethod)
-
-    let gtMethod = createCoreMethod(">")
-    gtMethod.nativeImpl = cast[pointer](gtImpl)
-    addMethod(rootObject, ">", gtMethod)
-
-    let eqMethod = createCoreMethod("=")
-    eqMethod.nativeImpl = cast[pointer](eqImpl)
-    addMethod(rootObject, "=", eqMethod)
-
-    let leMethod = createCoreMethod("<=")
-    leMethod.nativeImpl = cast[pointer](leImpl)
-    addMethod(rootObject, "<=", leMethod)
-
-    let geMethod = createCoreMethod(">=")
-    geMethod.nativeImpl = cast[pointer](geImpl)
-    addMethod(rootObject, ">=", geMethod)
-
-    let neMethod = createCoreMethod("~=")
-    neMethod.nativeImpl = cast[pointer](neImpl)
-    addMethod(rootObject, "~=", neMethod)
-
-    let intDivMethod = createCoreMethod("//")
-    intDivMethod.nativeImpl = cast[pointer](intDivImpl)
-    addMethod(rootObject, "//", intDivMethod)
-
-    let backslashModuloMethod = createCoreMethod("\\")
-    backslashModuloMethod.nativeImpl = cast[pointer](backslashModuloImpl)
-    addMethod(rootObject, "\\", backslashModuloMethod)
-
-    let moduloMethod = createCoreMethod("%")
-    moduloMethod.nativeImpl = cast[pointer](moduloImpl)
-    addMethod(rootObject, "%", moduloMethod)
-
-    # Add string concatenation operator (, in Smalltalk)
-    let concatMethod = createCoreMethod(",")
-    concatMethod.nativeImpl = cast[pointer](concatImpl)
-    addMethod(rootObject, ",", concatMethod)
-
-    # Add collection access method
-    let atCollectionMethod = createCoreMethod("at:")
-    atCollectionMethod.nativeImpl = cast[pointer](atCollectionImpl)
-    addMethod(rootObject, "at:", atCollectionMethod)
-
-    # Add collection size method
-    let sizeMethod = createCoreMethod("size")
-    sizeMethod.nativeImpl = cast[pointer](sizeImpl)
-    addMethod(rootObject, "size", sizeMethod)
-
-    # Add collection write method
-    let atPutMethod = createCoreMethod("at:put:")
-    atPutMethod.nativeImpl = cast[pointer](atCollectionPutImpl)
-    addMethod(rootObject, "at:put:", atPutMethod)
-
-    # Initialize Random prototype (uses DictionaryObj for properties)
-    randomPrototype = DictionaryObj()
-    randomPrototype.methods = initTable[string, BlockNode]()
-    randomPrototype.parents = @[rootObject.RuntimeObject]
-    randomPrototype.tags = @["Random"]
-    randomPrototype.isNimProxy = false
-    randomPrototype.nimValue = nil
-    randomPrototype.nimType = ""
-    randomPrototype.hasSlots = false
-    randomPrototype.slots = @[]
-    randomPrototype.slotNames = initTable[string, int]()
-    randomPrototype.properties = initTable[string, NodeValue]()
-    randomPrototype.properties["seed"] = NodeValue(kind: vkInt, intVal: 74755)
-
-    # Add next method for Random
-    let randomNextMethod = createCoreMethod("next")
-    randomNextMethod.nativeImpl = cast[pointer](randomNextImpl)
-    addMethod(randomPrototype, "next", randomNextMethod)
-
-    # Add new method for Random
-    let randomNewMethod = createCoreMethod("new")
-    randomNewMethod.nativeImpl = cast[pointer](randomNewImpl)
-    addMethod(randomPrototype, "new", randomNewMethod)
-
-    # Add Random to globals
-    addGlobal("Random", NodeValue(kind: vkObject, objVal: randomPrototype))
-
-  return rootObject
-
-# Nim-level clone function for RuntimeObject - returns NodeValue wrapper
-proc clone*(self: RuntimeObject): NodeValue =
-  ## Shallow clone of RuntimeObject (Nim-level clone) wrapped in NodeValue
-  let objClone = RuntimeObject()
-  objClone.methods = initTable[string, BlockNode]()
-  for key, value in self.methods:
-    objClone.methods[key] = value
-  objClone.parents = self.parents
-  objClone.tags = self.tags
-  objClone.isNimProxy = self.isNimProxy
-  objClone.nimValue = self.nimValue
-  objClone.nimType = self.nimType
-  objClone.hasSlots = self.hasSlots
-  objClone.slots = self.slots  # Copy slots by value (seq is value type)
-  objClone.slotNames = self.slotNames
-  result = NodeValue(kind: vkObject, objVal: objClone)
-
-# Nim-level clone function for RootObject - returns NodeValue wrapper
-proc clone*(self: RootObject): NodeValue =
-  ## Shallow clone of RootObject (Nim-level clone) wrapped in NodeValue
-  let objClone = RootObject()
-  objClone.methods = initTable[string, BlockNode]()
-  for key, value in self.methods:
-    objClone.methods[key] = value
-  objClone.parents = self.parents
-  objClone.tags = self.tags
-  objClone.isNimProxy = self.isNimProxy
-  objClone.nimValue = self.nimValue
-  objClone.nimType = self.nimType
-  result = NodeValue(kind: vkObject, objVal: objClone)
-
-# Nim-level clone function for DictionaryObj - returns NodeValue wrapper
-proc clone*(self: DictionaryObj): NodeValue =
-  ## Shallow clone of DictionaryObj (Nim-level clone) wrapped in NodeValue
-  let objClone = DictionaryObj()
-  objClone.methods = initTable[string, BlockNode]()
-  for key, value in self.methods:
-    objClone.methods[key] = value
-  objClone.parents = self.parents
-  objClone.tags = self.tags
-  objClone.isNimProxy = self.isNimProxy
-  objClone.nimValue = self.nimValue
-  objClone.nimType = self.nimType
-  objClone.hasSlots = self.hasSlots
-  objClone.slots = self.slots
-  objClone.slotNames = self.slotNames
-  # Deep copy properties, especially for blocks that have captured environments
-  objClone.properties = initTable[string, NodeValue]()
-  for key, value in self.properties:
-    if value.kind == vkBlock:
-      # Create a copy of the block with a fresh captured environment
-      let origBlock = value.blockVal
-      let newBlock = BlockNode(
-        parameters: origBlock.parameters,
-        temporaries: origBlock.temporaries,
-        body: origBlock.body,
-        isMethod: origBlock.isMethod,
-        homeActivation: origBlock.homeActivation
-      )
-      # Copy captured environment (each clone gets its own cells)
-      newBlock.capturedEnv = initTable[string, MutableCell]()
-      for name, cell in origBlock.capturedEnv:
-        newBlock.capturedEnv[name] = MutableCell(value: cell.value)
-      objClone.properties[key] = NodeValue(kind: vkBlock, blockVal: newBlock)
-    else:
-      objClone.properties[key] = value
-  result = NodeValue(kind: vkObject, objVal: objClone.RuntimeObject)
-
-# Core method implementations
-proc cloneImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Shallow clone of object
-  # For Dictionary objects, use Dictionary-specific clone
-  if self of DictionaryObj:
-    let selfDict = cast[DictionaryObj](self)
-    let clone = DictionaryObj()
-    # Deep copy properties for blocks
-    clone.properties = initTable[string, NodeValue]()
-    for key, value in selfDict.properties:
-      if value.kind == vkBlock:
-        let origBlock = value.blockVal
-        let newBlock = BlockNode(
-          parameters: origBlock.parameters,
-          temporaries: origBlock.temporaries,
-          body: origBlock.body,
-          isMethod: origBlock.isMethod,
-          homeActivation: origBlock.homeActivation
-        )
-        newBlock.capturedEnv = initTable[string, MutableCell]()
-        for name, cell in origBlock.capturedEnv:
-          newBlock.capturedEnv[name] = MutableCell(value: cell.value)
-        clone.properties[key] = NodeValue(kind: vkBlock, blockVal: newBlock)
-      else:
-        clone.properties[key] = value
-    clone.methods = selfDict.methods
-    clone.parents = selfDict.parents
-    clone.tags = selfDict.tags
-    clone.isNimProxy = false
-    clone.nimValue = nil
-    clone.nimType = ""
-    clone.hasSlots = selfDict.hasSlots
-    clone.slots = selfDict.slots
-    clone.slotNames = selfDict.slotNames
-    return NodeValue(kind: vkObject, objVal: clone.RuntimeObject)
-
-  # Regular RuntimeObject clone
-  let clone = RuntimeObject()
-  clone.methods = self.methods  # Copy methods table, don't create empty one
-  clone.parents = self.parents
-  clone.tags = self.tags
-  clone.isNimProxy = false
-  clone.nimValue = nil
-  clone.nimType = ""
-  clone.hasSlots = self.hasSlots
-  clone.slots = self.slots
-  clone.slotNames = self.slotNames
-  return NodeValue(kind: vkObject, objVal: clone)
-
-proc deriveImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Create child with self as parent (inheritance/delegation)
-  # If deriving from Dictionary or Table, create a DictionaryObj child
-  if self of DictionaryObj:
-    let child = DictionaryObj()
-    child.properties = initTable[string, NodeValue]()
-    child.methods = initTable[string, BlockNode]()
-    child.parents = @[self]
-    child.tags = self.tags & @["derived"]
-    child.isNimProxy = false
-    child.nimValue = nil
-    child.nimType = ""
-
-    # Inherit slots if parent has them
-    if self.hasSlots:
-      child.hasSlots = true
-      child.slots = newSeq[NodeValue](self.slots.len)
-      child.slotNames = self.slotNames  # Share slot names (they don't change)
-      for i in 0..<self.slots.len:
-        child.slots[i] = nilValue()  # Initialize with nil
-    else:
-      child.hasSlots = false
-      child.slots = @[]
-      child.slotNames = initTable[string, int]()
-
-    return NodeValue(kind: vkObject, objVal: child.RuntimeObject)
-
-  # Regular RuntimeObject derivation
-  let child = RuntimeObject()
-  child.methods = initTable[string, BlockNode]()
-  child.parents = @[self]
-  child.tags = self.tags & @["derived"]
-  child.isNimProxy = false
-  child.nimValue = nil
-  child.nimType = ""
-
-  # Inherit slots if parent has them
-  if self.hasSlots:
-    child.hasSlots = true
-    child.slots = newSeq[NodeValue](self.slots.len)
-    child.slotNames = self.slotNames
-    # Initialize all slots to nil (copy parent's structure but not values)
-    for i in 0..<self.slots.len:
-      child.slots[i] = nilValue()
-  else:
-    child.hasSlots = false
-    child.slots = @[]
-    child.slotNames = initTable[string, int]()
-
-  return NodeValue(kind: vkObject, objVal: child)
-
-proc deriveWithIVarsImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Create child with self as parent and declared instance variables
-  ## Also generates accessor methods for all instance variables
-  if args.len < 1:
-    raise newException(ValueError, "derive:: requires array of ivar names")
-
-  # Extract ivar names from array (handle both raw arrays and wrapped array objects)
-  var ivarArray: seq[NodeValue]
-  if args[0].kind == vkArray:
-    ivarArray = args[0].arrayVal
-  elif args[0].kind == vkObject and args[0].objVal.isNimProxy and args[0].objVal.nimType == "array":
-    # Unwrap proxy array - extract elements from properties
-    if args[0].objVal of DictionaryObj:
-      let dict = cast[DictionaryObj](args[0].objVal)
-      # Get elements from properties (stored with numeric keys)
-      var i = 0
-      while true:
-        let key = $i
-        if not dict.properties.hasKey(key):
-          break
-        ivarArray.add(dict.properties[key])
-        inc i
-    else:
-      raise newException(ValueError, "derive:: first argument must be array of strings")
-  else:
-    raise newException(ValueError, "derive:: first argument must be array of strings, got: " & $args[0].kind)
-  var childIvars: seq[string] = @[]
-  for ivarVal in ivarArray:
-    if ivarVal.kind != vkSymbol:
-      raise newException(ValueError, "derive:: all ivar names must be symbols")
-    childIvars.add(ivarVal.symVal)
-
-  # If parent has slots, inherit them first
-  var allIvars: seq[string] = @[]
-  if self.hasSlots:
-    # Inherit parent's ivars
-    allIvars = self.getSlotNames()
-
-  # Add child's new ivars (checking for duplicates)
-  for ivar in childIvars:
-    if ivar in allIvars:
-      raise newException(ValueError, "Instance variable conflict: " & ivar & " already defined in parent")
-    allIvars.add(ivar)
-
-  # Determine if parent is a Dictionary
-  let parentIsDictionary = self of DictionaryObj
-
-  # Create object with combined slots
-  var child: RuntimeObject
-  if parentIsDictionary:
-    # Create Dictionary-derived object with slots
-    let dictChild = DictionaryObj()
-    dictChild.methods = initTable[string, BlockNode]()
-    dictChild.parents = @[self]
-    dictChild.tags = self.tags & @["derived"]
-    dictChild.isNimProxy = false
-    dictChild.nimValue = nil
-    dictChild.nimType = ""
-    dictChild.properties = initTable[string, NodeValue]()
-
-    if allIvars.len > 0:
-      dictChild.hasSlots = true
-      dictChild.slots = newSeq[NodeValue](allIvars.len)
-      dictChild.slotNames = initTable[string, int]()
-      for i in 0..<allIvars.len:
-        dictChild.slots[i] = nilValue()
-        dictChild.slotNames[allIvars[i]] = i
-    else:
-      dictChild.hasSlots = false
-      dictChild.slots = @[]
-      dictChild.slotNames = initTable[string, int]()
-
-    child = dictChild.RuntimeObject
-  else:
-    if allIvars.len > 0:
-      child = initSlotObject(allIvars)
-    else:
-      # Fallback to empty object if no ivars
-      child = RuntimeObject()
-      child.methods = initTable[string, BlockNode]()
-      child.parents = @[]
-      child.tags = @[]
-      child.isNimProxy = false
-      child.nimValue = nil
-      child.nimType = ""
-      child.hasSlots = false
-      child.slots = @[]
-      child.slotNames = initTable[string, int]()
-
-    child.parents = @[self]
-  child.tags = self.tags & @["derived", "slotted"]
-
-  # Generate accessor methods for all instance variables
-  for ivar in allIvars:
-    # Generate getter: ivar -> slots[slotNames[ivar]]
-    var getterBody: seq[Node] = @[]
-    var msgArgs: seq[Node] = @[]
-    msgArgs.add(LiteralNode(value: getSymbol(ivar)))
-    getterBody.add(ReturnNode(
-      expression: MessageNode(
-        receiver: nil,  # implicit self
-        selector: "getSlot:",
-        arguments: msgArgs
-      )
-    ))
-
-    let getterBlock = BlockNode(
-      parameters: @[],
-      temporaries: @[],
-      body: getterBody,
-      isMethod: true
-    )
-    child.methods[ivar] = getterBlock
-
-    # Generate setter: ivar: value -> slots[slotNames[ivar]] := value
-    var setterBody: seq[Node] = @[]
-    var setterArgs: seq[Node] = @[]
-    setterArgs.add(LiteralNode(value: getSymbol(ivar)))
-    setterArgs.add(IdentNode(name: "newValue"))  # Variable reference for parameter
-    setterBody.add(MessageNode(
-      receiver: nil,
-      selector: "setSlot:value:",
-      arguments: setterArgs
-    ))
-    setterBody.add(ReturnNode(
-      expression: IdentNode(name: "newValue")  # Variable reference for parameter
-    ))
-
-    let setterBlock = BlockNode(
-      parameters: @["newValue"],
-      temporaries: @[],
-      body: setterBody,
-      isMethod: true
-    )
-    child.methods[ivar & ":"] = setterBlock
-
-  return NodeValue(kind: vkObject, objVal: child)
-
-proc atImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Get property value from Dictionary: dict at: 'key'
-  if args.len < 1:
-    return nilValue()
-  if not (self of DictionaryObj):
-    return nilValue()  # at: only works on Dictionary objects
-
-  let keyVal = args[0]
-  var key: string
-  case keyVal.kind
-  of vkSymbol:
-    key = keyVal.symVal
-  of vkString:
-    key = keyVal.strVal
-  else:
-    return nilValue()
-
-  let dict = cast[DictionaryObj](self)
-  return getProperty(dict, key)
-
-proc atPutImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Set property value on Dictionary: dict at: 'key' put: value
-  if args.len < 2:
-    return nilValue()
-  if not (self of DictionaryObj):
-    return nilValue()  # at:put: only works on Dictionary objects
-
-  let keyVal = args[0]
-  var key: string
-  case keyVal.kind
-  of vkSymbol:
-    key = keyVal.symVal
-  of vkString:
-    key = keyVal.strVal
-  else:
-    return nilValue()
-
-  let value = args[1]
-  debug("Setting property: ", key, " = ", value.toString())
-  let dict = cast[DictionaryObj](self)
-  setProperty(dict, key, value)
-  return value
-
-proc selectorPutImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Store a method in the object's method dictionary: obj selector: 'sel' put: [block]
-  ## Works on any RuntimeObject, not just Dictionary
-  if args.len < 2:
-    return nilValue()
-
-  # Get selector name
-  var selector: string
-  if args[0].kind == vkSymbol:
-    selector = args[0].symVal
-  elif args[0].kind == vkString:
-    selector = args[0].strVal
-  else:
-    return nilValue()
-
-  # Value must be a block
-  if args[1].kind != vkBlock:
-    return nilValue()
-
-  let blockNode = args[1].blockVal
-  blockNode.isMethod = true
-
-  # Store in methods table
-  self.methods[selector] = blockNode
-  debug("Added method: ", selector, " to object with tags: ", $self.tags)
-  return args[1]
-
-proc plusImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Add two numbers: a + b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkInt, intVal: self.intVal + otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal + float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkFloat, floatVal: float(self.intVal) + other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal + other.floatVal)
-
-  return nilValue()
-
-proc minusImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Subtract two numbers: a - b
-  if args.len < 1:
-    return nilValue()
-
-  debug("minusImpl: self.kind=", self.kind, ", args[0].kind=", args[0].kind)
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  debug("tryGetInt result: otherOk=", otherOk, ", otherVal=", otherVal)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkInt, intVal: self.intVal - otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal - float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkFloat, floatVal: float(self.intVal) - other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal - other.floatVal)
-
-  return nilValue()
-
-proc starImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Multiply two numbers: a * b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkInt, intVal: self.intVal * otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal * float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkFloat, floatVal: float(self.intVal) * other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal * other.floatVal)
-
-  return nilValue()
-
-proc slashImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Divide two numbers: a / b (integer division for ints, float division for floats)
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    if otherVal == 0:
-      return nilValue()  # Division by zero
-    return NodeValue(kind: vkInt, intVal: self.intVal div otherVal)
-  if self.kind == ikFloat and otherOk:
-    if otherVal == 0:
-      return nilValue()
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal / float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    if other.floatVal == 0.0:
-      return nilValue()
-    return NodeValue(kind: vkFloat, floatVal: float(self.intVal) / other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    if other.floatVal == 0.0:
-      return nilValue()
-    return NodeValue(kind: vkFloat, floatVal: self.floatVal / other.floatVal)
-
-  return nilValue()
-
-proc sqrtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Square root: a sqrt
-  if self.kind == ikInt:
-    return NodeValue(kind: vkFloat, floatVal: sqrt(float(self.intVal)))
-  if self.kind == ikFloat:
-    return NodeValue(kind: vkFloat, floatVal: sqrt(self.floatVal))
-
-  return nilValue()
-
-proc ltImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Less than comparison: a < b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.intVal < otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal < float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: float(self.intVal) < other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal < other.floatVal)
-
-  return nilValue()
-
-proc gtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Greater than comparison: a > b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.intVal > otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal > float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: float(self.intVal) > other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal > other.floatVal)
-
-  return nilValue()
-
-proc eqImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Equality comparison: a = b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.intVal == otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal == float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: float(self.intVal) == other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal == other.floatVal)
-
-  return nilValue()
-
-proc leImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Less than or equal: a <= b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.intVal <= otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal <= float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: float(self.intVal) <= other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal <= other.floatVal)
-
-  return nilValue()
-
-proc geImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Greater than or equal: a >= b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.intVal >= otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal >= float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: float(self.intVal) >= other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal >= other.floatVal)
-
-  return nilValue()
-
-proc neImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Not equal: a <> b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.intVal != otherVal)
-  if self.kind == ikFloat and otherOk:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal != float(otherVal))
-  if self.kind == ikInt and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: float(self.intVal) != other.floatVal)
-  if self.kind == ikFloat and other.kind == vkFloat:
-    return NodeValue(kind: vkBool, boolVal: self.floatVal != other.floatVal)
-
-  return nilValue()
-
-proc intDivImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Integer division: a // b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    if otherVal == 0:
-      return nilValue()  # Division by zero
-    return NodeValue(kind: vkInt, intVal: self.intVal div otherVal)
-
-  return nilValue()
-
-proc backslashModuloImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Smalltalk-style modulo: a \\ b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    if otherVal == 0:
-      return nilValue()  # Modulo by zero
-    return NodeValue(kind: vkInt, intVal: self.intVal mod otherVal)
-
-  return nilValue()
-
-proc moduloImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Modulo: a % b
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-  let (otherOk, otherVal) = tryGetInt(other)
-  if self.kind == ikInt and otherOk:
-    if otherVal == 0:
-      return nilValue()  # Modulo by zero
-    return NodeValue(kind: vkInt, intVal: self.intVal mod otherVal)
-
-  return nilValue()
-
-proc printStringImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Default print representation
-  case self.kind
-  of ikInt:
-    return NodeValue(kind: vkString, strVal: $self.intVal)
-  of ikFloat:
-    return NodeValue(kind: vkString, strVal: $self.floatVal)
-  of ikString:
-    return NodeValue(kind: vkString, strVal: self.strVal)
-  of ikArray:
-    return NodeValue(kind: vkString, strVal: "#(" & $self.elements.len & " elements)")
-  of ikTable:
-    return NodeValue(kind: vkString, strVal: "{" & $self.entries.len & " entries}")
-  of ikObject:
-    if self.class != nil:
-      return NodeValue(kind: vkString, strVal: "<" & self.class.name & ">")
-    else:
-      return NodeValue(kind: vkString, strVal: "<object>")
-
-proc writeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Write string to stdout without newline (Stdout write: 'text')
-  if args.len < 1:
-    return nilValue()
-  let strVal = args[0]
-  if strVal.kind == vkString:
-    stdout.write(strVal.strVal)
-    flushFile(stdout)
-  return strVal  ## Return the string written
-
-proc writelineImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Write string or integer to stdout with newline (Stdout writeline: value)
-  if args.len < 1:
-    stdout.write("\n")
-  else:
-    let value = args[0]
-    case value.kind
-    of vkString:
-      echo value.strVal  ## echo adds newline
-    of vkInt:
-      echo value.intVal
-    else:
-      echo value.toString()
-  return nilValue()
-
-proc getSlotImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Get slot value: obj getSlot: 'key'
-  when defined(release):
-    discard  # No debug in release
-  else:
-    debug("getSlotImpl called with ", args.len, " args")
-    if args.len > 0:
-      debug("arg[0] kind: ", args[0].kind)
-      if args[0].kind == vkSymbol:
-        debug("arg[0] symVal: ", args[0].symVal)
-  if args.len < 1:
-    return nilValue()
-  let keyVal = args[0]
-  var key: string
-  case keyVal.kind
-  of vkSymbol:
-    key = keyVal.symVal
-  of vkString:
-    key = keyVal.strVal
-  else:
-    when defined(release):
-      discard
-    else:
-      debug("getSlotImpl: key is not symbol or string, kind: ", keyVal.kind)
-    return nilValue()
-  when defined(release):
-    discard
-  else:
-    debug("getSlotImpl: getting slot '", key, "'")
-  return getSlot(self, key)
-
-proc setSlotValueImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Set slot value: obj setSlot: 'key' value: value
-  if args.len < 2:
-    return nilValue()
-  let keyVal = args[0]
-  var key: string
-  case keyVal.kind
-  of vkSymbol:
-    key = keyVal.symVal
-  of vkString:
-    key = keyVal.strVal
-  else:
-    return nilValue()
-  let value = args[1]
-  debug("setSlotValueImpl: setting slot '", key, "' to ", value.toString())
-  when not defined(release):
-    debug("  obj hasSlots: ", self.hasSlots)
-    debug("  obj slotNames: ", self.slotNames)
-  setSlot(self, key, value)
-  return value
-
-proc doesNotUnderstandImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Default handler for unknown messages
-  if args.len < 1 or args[0].kind != vkSymbol:
-    raise newException(ValueError, "doesNotUnderstand: requires message symbol")
-
-  let selector = args[0].symVal
-  raise newException(ValueError, "Message not understood: " & selector)
-
-proc propertiesImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return collection of all property keys on this object
-  ## For Dictionary objects, return the property keys
-  if self of DictionaryObj:
-    let dict = cast[DictionaryObj](self)
-    var keys: seq[NodeValue] = @[]
-    for key in dict.properties.keys:
-      keys.add(NodeValue(kind: vkSymbol, symVal: key))
-    return NodeValue(kind: vkArray, arrayVal: keys)
-  ## For regular objects, return empty array (properties not supported)
-  return NodeValue(kind: vkArray, arrayVal: @[])
-
-proc methodsImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return collection of all method selectors on this object
-  var selectors: seq[NodeValue] = @[]
-  for selector in self.methods.keys:
-    selectors.add(NodeValue(kind: vkSymbol, symVal: selector))
-  return NodeValue(kind: vkArray, arrayVal: selectors)
-
-proc isKindOfImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Check if object is kind of aClass (in class hierarchy)
-  if args.len < 1:
-    return NodeValue(kind: vkBool, boolVal: false)
-
-  let aClass = args[0]
-  if aClass.kind != vkObject or aClass.objVal == nil:
-    return NodeValue(kind: vkBool, boolVal: false)
-
-  var current = self
-  while current != nil:
-    if current == aClass.objVal:
-      return NodeValue(kind: vkBool, boolVal: true)
-    if current.parents.len > 0:
-      current = current.parents[0]
-    else:
-      break
-
-  return NodeValue(kind: vkBool, boolVal: false)
-
-proc concatImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Concatenate strings: a , b (Smalltalk style using , operator)
-  if args.len < 1:
-    return nilValue()
-
-  let other = args[0]
-
-  # Handle string concatenation
-  if self.isNimProxy and self.nimType == "string":
-    # Get self string value from properties
-    if self of DictionaryObj:
-      let dict = cast[DictionaryObj](self)
-      let selfVal = dict.properties.getOrDefault("__value")
-      if selfVal.kind == vkString:
-        let selfStr = selfVal.strVal
-        # Get other string value
-        if other.kind == vkString:
-          return NodeValue(kind: vkString, strVal: selfStr & other.strVal)
-        elif other.kind == vkObject and other.objVal.isNimProxy and other.objVal.nimType == "string":
-          if other.objVal of DictionaryObj:
-            let otherDict = cast[DictionaryObj](other.objVal)
-            let otherVal = otherDict.properties.getOrDefault("__value")
-            if otherVal.kind == vkString:
-              return NodeValue(kind: vkString, strVal: selfStr & otherVal.strVal)
-
-  return nilValue()
-
-proc atCollectionImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Get element from array or table: arr at: index OR table at: key
-  ## Also handles DictionaryObj properties for regular objects
-  when not defined(release):
-    debug "atCollectionImpl called, nimType=", self.nimType, ", args.len=", args.len
-    if args.len > 0:
-      debug "  key kind=", args[0].kind, " value=", args[0].toString()
-  if args.len < 1:
-    return nilValue()
-
-  let key = args[0]
-
-  # Handle array access (1-based indexing like Smalltalk)
-  # Arrays are stored as DictionaryObj with numeric keys
-  if self.isNimProxy and self.nimType == "array":
-    when not defined(release):
-      debug "atCollectionImpl: array detected"
-    if key.kind == vkInt:
-      let idx = key.intVal - 1  # Convert to 0-based
-      when not defined(release):
-        debug "atCollectionImpl: key is int, idx=", idx
-      if self of DictionaryObj:
-        let dict = cast[DictionaryObj](self)
-        let keyStr = $idx
-        when not defined(release):
-          debug "atCollectionImpl: looking for key '", keyStr, "'"
-          for k in dict.properties.keys:
-            debug "  properties key: ", k
-        if dict.properties.hasKey(keyStr):
-          debug "atCollectionImpl: found!"
-          return dict.properties[keyStr]
-        debug "atCollectionImpl: not found, returning nil"
-    return nilValue()
-
-  # Handle table access
-  # Tables are stored as DictionaryObj with string keys
-  if self.isNimProxy and self.nimType == "table":
-    var keyStr: string
-    if key.kind == vkString:
-      keyStr = key.strVal
-    elif key.kind == vkSymbol:
-      keyStr = key.symVal
-    else:
-      return nilValue()
-    if self of DictionaryObj:
-      let dict = cast[DictionaryObj](self)
-      if dict.properties.hasKey(keyStr):
-        return dict.properties[keyStr]
-    return nilValue()
-
-  # Handle regular DictionaryObj property access
-  # This allows at: to work on any Dictionary-based object (not just proxies)
-  if self of DictionaryObj:
-    var keyStr: string
-    if key.kind == vkString:
-      keyStr = key.strVal
-    elif key.kind == vkSymbol:
-      keyStr = key.symVal
-    else:
-      return nilValue()
-    let dict = cast[DictionaryObj](self)
-    when not defined(release):
-      debug "atCollectionImpl: DictionaryObj property access for '", keyStr, "'"
-    if dict.properties.hasKey(keyStr):
-      return dict.properties[keyStr]
-    when not defined(release):
-      debug "atCollectionImpl: property not found"
-
-  return nilValue()
-
-proc sizeImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Get size of array: arr size
-  # Handle array size
-  if self.isNimProxy and self.nimType == "array":
-    if self of DictionaryObj:
-      let dict = cast[DictionaryObj](self)
-      # First check for __size property (used by arrayNewImpl)
-      if dict.properties.hasKey("__size"):
-        return dict.properties["__size"]
-      # Fallback: count contiguous elements starting from indices 0, 1, 2, ...
-      var size = 0
-      while dict.properties.hasKey($size):
-        size += 1
-      return NodeValue(kind: vkInt, intVal: size)
-  return nilValue()
-
-proc atCollectionPutImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Set element in array: arr at: index put: value
-  ## Also handles DictionaryObj properties for regular objects
-  if args.len < 2:
-    return nilValue()
-
-  let key = args[0]
-  let value = args[1]
-
-  # Handle array write (1-based indexing like Smalltalk)
-  if self.isNimProxy and self.nimType == "array":
-    if key.kind == vkInt:
-      let idx = key.intVal - 1  # Convert to 0-based
-      if idx >= 0 and self of DictionaryObj:
-        let dict = cast[DictionaryObj](self)
-        let keyStr = $idx
-        dict.properties[keyStr] = value
-        return value
-
-  # Handle table write
-  if self.isNimProxy and self.nimType == "table":
-    var keyStr: string
-    if key.kind == vkString:
-      keyStr = key.strVal
-    elif key.kind == vkSymbol:
-      keyStr = key.symVal
-    else:
-      return nilValue()
-    if self of DictionaryObj:
-      let dict = cast[DictionaryObj](self)
-      dict.properties[keyStr] = value
-      return value
-
-  # Handle regular DictionaryObj property write
-  # This allows at:put: to work on any Dictionary-based object (not just proxies)
-  if self of DictionaryObj:
-    var keyStr: string
-    if key.kind == vkString:
-      keyStr = key.strVal
-    elif key.kind == vkSymbol:
-      keyStr = key.symVal
-    else:
-      return nilValue()
-    when not defined(release):
-      debug "atCollectionPutImpl: setting property '", keyStr, "' = ", value.toString()
-    let dict = cast[DictionaryObj](self)
-    dict.properties[keyStr] = value
-    return value
-
-  return nilValue()
-
-proc randomNextImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Generate random integer: random next
-  ## Uses same LCG as SOM: seed = (seed * 1309 + 13849) & 65535
-  if self.tags.contains("Random") and self of DictionaryObj:
-    let dict = cast[DictionaryObj](self)
-    var seed: int
-    if dict.properties.hasKey("seed"):
-      seed = dict.properties["seed"].intVal
-      # SOM-style LCG
-      seed = ((seed * 1309) + 13849) and 65535
-      dict.properties["seed"] = NodeValue(kind: vkInt, intVal: seed)
-      return NodeValue(kind: vkInt, intVal: seed)
-  return nilValue()
-
-proc randomNewImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Create a new Random instance with fresh seed: Random new
-  if self.tags.contains("Random") and self of DictionaryObj:
-    let selfDict = cast[DictionaryObj](self)
-    let randObj = DictionaryObj()
-    randObj.methods = initTable[string, BlockNode]()
-    randObj.parents = @[selfDict.RuntimeObject]
-    randObj.tags = @["Random", "derived"]
-    randObj.isNimProxy = false
-    randObj.nimValue = nil
-    randObj.nimType = ""
-    randObj.hasSlots = false
-    randObj.slots = @[]
-    randObj.slotNames = initTable[string, int]()
-    randObj.properties = initTable[string, NodeValue]()
-    randObj.properties["seed"] = NodeValue(kind: vkInt, intVal: 74755)
-    return NodeValue(kind: vkObject, objVal: randObj.RuntimeObject)
-  return nilValue()
-
-# ============================================================================
-# Collection primitives for Array and Table
-# ============================================================================
-
-proc arrayNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Create new array with given size: Array new: 1000
-  var size = 0
-  if args.len >= 1 and args[0].kind == vkInt:
-    size = args[0].intVal
-
-  # Return empty array literal as vkArray
-  var elements = newSeq[NodeValue]()
-  if size > 0:
-    elements.setLen(size)
-    for i in 0..<size:
-      elements[i] = nilValue()
-  return NodeValue(kind: vkArray, arrayVal: elements)
-
-proc arraySizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return number of elements in array
-  if self.kind != ikArray:
-    return NodeValue(kind: vkInt, intVal: 0)
-  return NodeValue(kind: vkInt, intVal: self.elements.len)
-
-proc arrayAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Get element at index (1-based indexing for Smalltalk compatibility)
-  if self.kind != ikArray or args.len < 1 or args[0].kind != vkInt:
-    return nilValue()
-  # Convert from 1-based (Smalltalk) to 0-based (internal storage)
-  let idx = args[0].intVal - 1
-  if idx >= 0 and idx < self.elements.len:
-    return self.elements[idx]
-  return nilValue()
-
-proc arrayAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Set element at index (1-based indexing for Smalltalk compatibility)
-  if self.kind != ikArray or args.len < 2 or args[0].kind != vkInt:
-    return nilValue()
-  # Convert from 1-based (Smalltalk) to 0-based (internal storage)
-  let idx = args[0].intVal - 1
-  if idx >= 0:
-    # Expand array if needed
-    while idx >= self.elements.len:
-      self.elements.add(nilValue())
-    self.elements[idx] = args[1]
-  return args[1]
-
-proc arrayAddImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Add element to end of array
-  if self.kind != ikArray or args.len < 1:
-    return nilValue()
-  self.elements.add(args[0])
-  return args[0]
-
-proc arrayRemoveAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Remove element at index and return it (1-based indexing for Smalltalk compatibility)
-  if self.kind != ikArray or args.len < 1 or args[0].kind != vkInt:
-    return nilValue()
-
-  # Convert from 1-based (Smalltalk) to 0-based (internal storage)
-  let idx = args[0].intVal - 1
-  if idx < 0 or idx >= self.elements.len:
-    return nilValue()
-
-  # Get element to return
-  let removedElement = self.elements[idx]
-
-  # Remove element and shift remaining elements
-  self.elements.delete(idx)
-  return removedElement
-
-proc valuesEqual(v1, v2: NodeValue): bool =
-  ## Compare two NodeValues for equality (for basic types only)
-  if v1.kind != v2.kind:
-    return false
-  case v1.kind
-  of vkInt: return v1.intVal == v2.intVal
-  of vkFloat: return v1.floatVal == v2.floatVal
-  of vkString: return v1.strVal == v2.strVal
-  of vkSymbol: return v1.symVal == v2.symVal
-  of vkBool: return v1.boolVal == v2.boolVal
-  of vkNil: return true
-  of vkObject: return v1.objVal == v2.objVal
-  of vkBlock: return v1.blockVal == v2.blockVal
-  else: return false  # Arrays and tables - identity comparison only
-
-proc arrayIncludesImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Check if array includes element (using = comparison)
-  if self.kind != ikArray or args.len < 1:
-    return falseValue
-
-  let element = args[0]
-
-  for elem in self.elements:
-    # Use custom equality check
-    if valuesEqual(elem, element):
-      return trueValue
-
-  return falseValue
-
-proc arrayReverseImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return new array with elements reversed
-  if self.kind != ikArray:
-    return nilValue()
-
-  # Create new reversed array
-  var reversed = newSeq[NodeValue]()
-  for i in countdown(self.elements.len - 1, 0):
-    reversed.add(self.elements[i])
-
-  return NodeValue(kind: vkArray, arrayVal: reversed)
-
-proc tableNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Create new empty table: Table new
-  return NodeValue(kind: vkTable, tableVal: initTable[string, NodeValue]())
-
-proc tableKeysImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return array of all keys in table
-  if self.kind != ikTable:
-    return nilValue()
-
-  # Create array to hold keys
-  var keys = newSeq[NodeValue]()
-  for key in self.entries.keys:
-    keys.add(NodeValue(kind: vkString, strVal: key))
-
-  return NodeValue(kind: vkArray, arrayVal: keys)
-
-proc tableIncludesKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Check if table includes key
-  if self.kind != ikTable or args.len < 1:
-    return falseValue
-  var keyStr: string
-  if args[0].kind == vkString:
-    keyStr = args[0].strVal
-  elif args[0].kind == vkSymbol:
-    keyStr = args[0].symVal
-  else:
-    return falseValue
-
-  return toValue(keyStr in self.entries)
-
-proc tableRemoveKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Remove key from table and return value (or nil)
-  if self.kind != ikTable or args.len < 1:
-    return nilValue()
-  var keyStr: string
-  if args[0].kind == vkString:
-    keyStr = args[0].strVal
-  elif args[0].kind == vkSymbol:
-    keyStr = args[0].symVal
-  else:
-    return nilValue()
-
-  if keyStr in self.entries:
-    let removedValue = self.entries[keyStr]
-    self.entries.del(keyStr)
-    return removedValue
-  return nilValue()
-
-proc tableAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Get value at key: table at: 'key'
-  if self.kind != ikTable or args.len < 1:
-    return nilValue()
-  var keyStr: string
-  if args[0].kind == vkString:
-    keyStr = args[0].strVal
-  elif args[0].kind == vkSymbol:
-    keyStr = args[0].symVal
-  else:
-    return nilValue()
-
-  if keyStr in self.entries:
-    return self.entries[keyStr]
-  return nilValue()
-
-proc tableAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Set value at key: table at: 'key' put: value
-  if self.kind != ikTable or args.len < 2:
-    return nilValue()
-  var keyStr: string
-  if args[0].kind == vkString:
-    keyStr = args[0].strVal
-  elif args[0].kind == vkSymbol:
-    keyStr = args[0].symVal
-  else:
-    return nilValue()
-
-  self.entries[keyStr] = args[1]
-  return args[1]
-
-# ============================================================================
-# String primitives
-# ============================================================================
-
-proc getStringValue(obj: RuntimeObject): string =
-  ## Helper to extract string value from string proxy
-  if obj.isNimProxy and obj.nimType == "string":
-    if obj of DictionaryObj:
-      let dict = cast[DictionaryObj](obj)
-      if dict.properties.hasKey("__value"):
-        let val = dict.properties["__value"]
-        if val.kind == vkString:
-          return val.strVal
-  return ""
-
-proc stringConcatImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Concatenate strings: self , other
-  if args.len < 1:
-    return nilValue()
-  let selfStr = getStringValue(self)
-  var otherStr: string
-  if args[0].kind == vkString:
-    otherStr = args[0].strVal
-  elif args[0].kind == vkObject:
-    otherStr = getStringValue(args[0].objVal)
-  else:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: selfStr & otherStr)
-
-proc stringSizeImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return string length
-  let selfStr = getStringValue(self)
-  return NodeValue(kind: vkInt, intVal: selfStr.len)
-
-proc stringAtImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return character at index (1-based like Smalltalk)
-  if args.len < 1 or args[0].kind != vkInt:
-    return nilValue()
-  let selfStr = getStringValue(self)
-  let idx = args[0].intVal - 1  # Convert to 0-based
-  if idx < 0 or idx >= selfStr.len:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: $selfStr[idx])
-
-proc stringFromToImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return substring from start to end (1-based like Smalltalk)
-  if args.len < 2 or args[0].kind != vkInt or args[1].kind != vkInt:
-    return nilValue()
-  let selfStr = getStringValue(self)
-  let startIdx = args[0].intVal - 1  # Convert to 0-based
-  let endIdx = args[1].intVal  # End is inclusive in Smalltalk, exclusive in Nim
-  if startIdx < 0 or endIdx > selfStr.len or startIdx >= endIdx:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: selfStr[startIdx..<endIdx])
-
-proc stringIndexOfImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return index of substring (1-based, 0 if not found)
-  if args.len < 1:
-    return NodeValue(kind: vkInt, intVal: 0)
-  let selfStr = getStringValue(self)
-  var searchStr: string
-  if args[0].kind == vkString:
-    searchStr = args[0].strVal
-  elif args[0].kind == vkObject:
-    searchStr = getStringValue(args[0].objVal)
-  else:
-    return NodeValue(kind: vkInt, intVal: 0)
-  let idx = selfStr.find(searchStr)
-  if idx < 0:
-    return NodeValue(kind: vkInt, intVal: 0)
-  return NodeValue(kind: vkInt, intVal: idx + 1)  # 1-based
-
-proc stringIncludesSubStringImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Check if string includes substring
-  if args.len < 1:
-    return falseValue
-  let selfStr = getStringValue(self)
-  var searchStr: string
-  if args[0].kind == vkString:
-    searchStr = args[0].strVal
-  elif args[0].kind == vkObject:
-    searchStr = getStringValue(args[0].objVal)
-  else:
-    return falseValue
-  return toValue(selfStr.contains(searchStr))
-
-proc stringReplaceWithImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Replace all occurrences of old with new
-  if args.len < 2:
-    return nilValue()
-  let selfStr = getStringValue(self)
-  var oldStr, newStr: string
-  if args[0].kind == vkString: oldStr = args[0].strVal
-  elif args[0].kind == vkObject: oldStr = getStringValue(args[0].objVal)
-  else: return nilValue()
-  if args[1].kind == vkString: newStr = args[1].strVal
-  elif args[1].kind == vkObject: newStr = getStringValue(args[1].objVal)
-  else: return nilValue()
-  return NodeValue(kind: vkString, strVal: selfStr.replace(oldStr, newStr))
-
-proc stringUppercaseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return uppercase version
-  let selfStr = getStringValue(self)
-  return NodeValue(kind: vkString, strVal: selfStr.toUpperAscii())
-
-proc stringLowercaseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Return lowercase version
-  let selfStr = getStringValue(self)
-  return NodeValue(kind: vkString, strVal: selfStr.toLowerAscii())
-
-proc stringTrimImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Remove leading and trailing whitespace
-  let selfStr = getStringValue(self)
-  return NodeValue(kind: vkString, strVal: selfStr.strip())
-
-proc stringSplitImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Split string by delimiter, return array
-  if args.len < 1:
-    return nilValue()
-  let selfStr = getStringValue(self)
-  var delim: string
-  if args[0].kind == vkString: delim = args[0].strVal
-  elif args[0].kind == vkObject: delim = getStringValue(args[0].objVal)
-  else: delim = " "
-
-  # Create array proxy to hold results
-  let arr = DictionaryObj()
-  arr.methods = initTable[string, BlockNode]()
-  arr.parents = @[rootObject.RuntimeObject]
-  arr.tags = @["Array", "Collection"]
-  arr.isNimProxy = true
-  arr.nimType = "array"
-  arr.properties = initTable[string, NodeValue]()
-
-  let parts = selfStr.split(delim)
-  for i, part in parts:
-    arr.properties[$i] = NodeValue(kind: vkString, strVal: part)
-
-  arr.properties["__size"] = NodeValue(kind: vkInt, intVal: parts.len)
-  return NodeValue(kind: vkObject, objVal: arr.RuntimeObject)
-
-proc wrapIntAsObject*(value: int): NodeValue =
-  ## Wrap an integer as a Nim proxy object that can receive messages
-  let obj = RuntimeObject()
-  obj.methods = initTable[string, BlockNode]()
-  obj.parents = @[rootObject.RuntimeObject]
-  obj.tags = @["Integer", "Number"]
-  obj.isNimProxy = true
-  obj.nimValue = cast[pointer](alloc(sizeof(int)))
-  cast[ptr int](obj.nimValue)[] = value
-  obj.nimType = "int"
-  obj.hasSlots = false
-  obj.slots = @[]
-  obj.slotNames = initTable[string, int]()
-  return NodeValue(kind: vkObject, objVal: obj)
-
-proc wrapBoolAsObject*(value: bool): NodeValue =
-  ## Wrap a boolean as a Nim proxy object that can receive messages
-  ## Legacy - booleans are now vkBool, not wrapped objects
-  let obj = RuntimeObject()
-  obj.methods = initTable[string, BlockNode]()
-  # Note: trueClassCache/falseClassCache are now Class type, not RuntimeObject
-  # Use root object as parent for legacy compatibility
-  obj.parents = @[rootObject.RuntimeObject]
-  obj.tags = if value: @["Boolean", "True"] else: @["Boolean", "False"]
-  obj.isNimProxy = true
-  obj.nimValue = cast[pointer](alloc(sizeof(bool)))
-  cast[ptr bool](obj.nimValue)[] = value
-  obj.nimType = "bool"
-  obj.hasSlots = false
-  obj.slots = @[]
-  obj.slotNames = initTable[string, int]()
-  return NodeValue(kind: vkObject, objVal: obj)
-
-proc wrapBlockAsObject*(blockNode: BlockNode): NodeValue =
-  ## Wrap a block as a RuntimeObject that can receive messages (like whileTrue:)
-  ## The BlockNode is stored so it can be executed later
-  ## Legacy - blocks are now handled differently in class-based model
-  let obj = DictionaryObj()
-  obj.methods = initTable[string, BlockNode]()
-  # Note: blockClassCache is now Class type, not RuntimeObject
-  # Use root object as parent for legacy compatibility
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["Block", "Closure"]
-  obj.isNimProxy = false
-  obj.nimType = "block"
-  # Store block node in properties so whileTrue:/whileFalse: can access it
-  obj.properties = initTable[string, NodeValue]()
-  obj.properties["__blockNode"] = NodeValue(kind: vkBlock, blockVal: blockNode)
-  return NodeValue(kind: vkObject, objVal: obj.RuntimeObject)
-
-proc wrapStringAsObject*(s: string): NodeValue =
-  ## Wrap a string as a Nim proxy object that can receive messages
-  ## Legacy - use class-based newStringInstance instead
-  let obj = DictionaryObj()
-  obj.methods = initTable[string, BlockNode]()
-  # Note: stringClassCache is now Class type, not RuntimeObject
-  # Use root object as parent for legacy compatibility
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["String", "Text"]
-  obj.isNimProxy = true
-  obj.nimType = "string"
-  # Store string value
-  obj.properties = initTable[string, NodeValue]()
-  obj.properties["__value"] = NodeValue(kind: vkString, strVal: s)
-  return NodeValue(kind: vkObject, objVal: obj.RuntimeObject)
-
-proc wrapArrayAsObject*(arr: seq[NodeValue]): NodeValue =
-  ## Wrap an array (seq) as a Nim proxy object that can receive messages
-  ## Legacy - use class-based newArrayInstance instead
-  let obj = DictionaryObj()
-  obj.methods = initTable[string, BlockNode]()
-  # Note: arrayClassCache is now Class type, not RuntimeObject
-  # Use root object as parent for legacy compatibility
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["Array", "Collection"]
-  obj.isNimProxy = true
-  obj.nimType = "array"
-  # Store elements in properties with numeric keys
-  obj.properties = initTable[string, NodeValue]()
-  obj.properties["__size"] = NodeValue(kind: vkInt, intVal: arr.len)
-  for i, elem in arr:
-    obj.properties[$i] = elem  # 0-based index internally
-  return NodeValue(kind: vkObject, objVal: obj.RuntimeObject)
-
-proc wrapTableAsObject*(tab: Table[string, NodeValue]): NodeValue =
-  ## Wrap a table as a Nim proxy object that can receive messages
-  let obj = DictionaryObj()
-  obj.methods = initTable[string, BlockNode]()
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["Table", "Collection", "Dictionary"]
-  obj.isNimProxy = true
-  obj.nimType = "table"
-  # Store entries in properties
-  obj.properties = tab
-  return NodeValue(kind: vkObject, objVal: obj.RuntimeObject)
-
-proc wrapFloatAsObject*(value: float): NodeValue =
-  ## Wrap a float as a Nim proxy object that can receive messages
-  let obj = RuntimeObject()
-  obj.methods = initTable[string, BlockNode]()
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["Float", "Number"]
-  obj.isNimProxy = true
-  obj.nimValue = cast[pointer](alloc(sizeof(float)))
-  cast[ptr float](obj.nimValue)[] = value
-  obj.nimType = "float"
-  obj.hasSlots = false
-  obj.slots = @[]
-  obj.slotNames = initTable[string, int]()
-  return NodeValue(kind: vkObject, objVal: obj)
-
-proc newObject*(): RuntimeObject =
-  ## Create a new lightweight object (no property bag)
-  let obj = RuntimeObject()
-  obj.methods = initTable[string, BlockNode]()
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["derived"]
-  obj.isNimProxy = false
-  obj.nimValue = nil
-  obj.nimType = ""
-  obj.hasSlots = false
-  obj.slots = @[]
-  obj.slotNames = initTable[string, int]()
-  return obj
-
-proc newDictionary*(properties = initTable[string, NodeValue]()): DictionaryObj =
-  ## Create a new Dictionary object with property bag
-  let obj = DictionaryObj()
-  obj.methods = initTable[string, BlockNode]()
-  obj.parents = @[initRootObject().RuntimeObject]
-  obj.tags = @["Dictionary", "derived"]
-  obj.isNimProxy = false
-  obj.nimValue = nil
-  obj.nimType = ""
-  obj.hasSlots = false
-  obj.slots = @[]
-  obj.slotNames = initTable[string, int]()
-  obj.properties = properties
-  return obj
-
-# Object comparison
-proc isSame*(obj1, obj2: RuntimeObject): bool =
-  ## Check if two objects are the same (identity)
-  return obj1 == obj2
-
-proc inheritsFrom*(obj: RuntimeObject, parent: RuntimeObject): bool =
-  ## Check if object inherits from parent in class hierarchy
-  if obj.isSame(parent):
-    return true
-
-  for p in obj.parents:
-    if inheritsFrom(p, parent):
-      return true
-
-  return false
-
-# Display helpers
-proc printObject*(obj: RuntimeObject, indent: int = 0): string =
-  ## Pretty print object structure
-  let spaces = repeat(' ', indent * 2)
-  var output = spaces & "Object"
-
-  if obj.tags.len > 0:
-    output.add(" [" & obj.tags.join(", ") & "]")
-  output.add("\n")
-
-  if obj of DictionaryObj:
-    let dictObj = cast[DictionaryObj](obj)
-    if dictObj.properties.len > 0:
-      output.add(spaces & "  properties:\n")
-      for key, val in dictObj.properties:
-        output.add(spaces & "    " & key & ": " & val.toString() & "\n")
-
-  if obj.methods.len > 0:
-    output.add(spaces & "  methods:\n")
-    for selector in obj.methods.keys:
-      output.add(spaces & "    " & selector & "\n")
-
-  if obj.parents.len > 0:
-    output.add(spaces & "  parents:\n")
-    for parent in obj.parents:
-      output.add(printObject(parent, indent + 2))
-
-  return output
-
-# String interpolation and formatting
-proc formatString*(tmpl: string, args: Table[string, NodeValue]): string =
-  ## Simple string formatting with placeholders
-  result = tmpl
-  for key, val in args:
-    let placeholder = "{" & key & "}"
-    result = result.replace(placeholder, val.toString())
-
-# Create a simple test object hierarchy (commented out - needs proper method invocation)
-# proc makeTestObjects*(): (RootObject, RuntimeObject, RuntimeObject) =
-#   ## Create test object hierarchy for testing
-#   let root = initRootObject()
-#
-#   # Create Animal prototype
-#   let animal = newObject()
-#   animal.tags = @["Animal"]
-#   animal.properties = {
-#     "species": NodeValue(kind: vkString, strVal: "unknown"),
-#     "sound": NodeValue(kind: vkString, strVal: "silence")
-#   }.toTable
-#
-#   # Add makeSound method
-#   let makeSoundBlock = BlockNode(
-#     parameters: @[],
-#     temporaries: @[],
-#     body: @[LiteralNode(
-#       value: NodeValue(kind: vkNil)
-#     )],
-#     isMethod: true
-#   )
-#   addMethod(animal, "makeSound", makeSoundBlock)
-#
-#   # Create Dog instance
-#   let dog = newObject()
-#   dog.parents = @[animal]
-#   dog.properties["species"] = NodeValue(kind: vkString, strVal: "dog")
-#   dog.properties["breed"] = NodeValue(kind: vkString, strVal: "golden retriever")
-#
-#   return (root, animal, dog)
-
-# ============================================================================
-# File I/O primitives
-# ============================================================================
-
-proc getFileStreamFile(obj: RuntimeObject): File =
-  ## Helper to get File handle from FileStream object
-  if obj of FileStreamObj:
-    let fs = cast[FileStreamObj](obj)
-    if fs.isOpen:
-      result = fs.file
-  # Return nil file if not valid
-
-proc fileOpenImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Open a file: file open: filename mode: mode
-  if args.len < 2:
-    return nilValue()
-
-  var filename, mode: string
-  if args[0].kind == vkString:
-    filename = args[0].strVal
-  else:
-    return nilValue()
-
-  if args[1].kind == vkString:
-    mode = args[1].strVal
-  else:
-    return nilValue()
-
-  # Convert mode to FileMode
-  var fileMode: FileMode
-  case mode
-  of "r": fileMode = fmRead
-  of "w": fileMode = fmWrite
-  of "a": fileMode = fmAppend
-  of "r+": fileMode = fmReadWrite
-  of "w+": fileMode = fmReadWriteExisting
-  else: return nilValue()
-
-  # Check if self is a FileStreamObj
-  if not (self of FileStreamObj):
-    return nilValue()
-
-  let fs = cast[FileStreamObj](self)
-
-  # Open the file
-  var f: File
-  if open(f, filename, fileMode):
-    fs.file = f
-    fs.mode = mode
-    fs.isOpen = true
-    return self.toValue()
-  return nilValue()
-
-proc fileCloseImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Close a file: file close
-  if not (self of FileStreamObj):
-    return nilValue()
-
-  let fs = cast[FileStreamObj](self)
-  if fs.isOpen:
-    fs.file.close()
-    fs.isOpen = false
-  return nilValue()
-
-proc fileReadLineImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Read one line from file: file readLine
-  if not (self of FileStreamObj):
-    return nilValue()
-
-  let fs = cast[FileStreamObj](self)
-  if not fs.isOpen:
-    return nilValue()
-
-  if fs.file.endOfFile():
-    return nilValue()
-
-  let line = fs.file.readLine()
-  return NodeValue(kind: vkString, strVal: line)
-
-proc fileWriteImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Write string to file: file write: string
-  if args.len < 1 or args[0].kind != vkString:
-    return nilValue()
-
-  if not (self of FileStreamObj):
-    return nilValue()
-
-  let fs = cast[FileStreamObj](self)
-  if not fs.isOpen:
-    return nilValue()
-
-  fs.file.write(args[0].strVal)
-  return args[0]
-
-proc fileAtEndImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Check if at end of file: file atEnd
-  if not (self of FileStreamObj):
-    return trueValue
-
-  let fs = cast[FileStreamObj](self)
-  if not fs.isOpen:
-    return trueValue
-
-  return toValue(fs.file.endOfFile())
-
-proc fileReadAllImpl*(self: RuntimeObject, args: seq[NodeValue]): NodeValue =
-  ## Read entire file contents: file readAll
-  if not (self of FileStreamObj):
-    return nilValue()
-
-  let fs = cast[FileStreamObj](self)
-  if not fs.isOpen:
-    return nilValue()
-
-  let content = fs.file.readAll()
-  return NodeValue(kind: vkString, strVal: content)
-
-# ============================================================================
-# Class-Based Object System Implementation
-# ============================================================================
-
-proc mergeTables*(target: var Table[string, BlockNode], source: Table[string, BlockNode]) =
-  ## Merge source table into target (source values override target)
-  for key, value in source:
-    target[key] = value
-
-proc rebuildAllTables*(cls: Class) =
-  ## Rebuild allMethods, allClassMethods, and allSlotNames from parents
-  # Start with empty tables
-  cls.allMethods = initTable[string, BlockNode]()
-  cls.allClassMethods = initTable[string, BlockNode]()
-  cls.allSlotNames = @[]
-
-  # Merge from all parents using left-to-right priority (first parent wins)
+# Forward declarations for primitive implementations (all Instance-based now)
+proc doesNotUnderstandImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+
+# Build inheritance chain for a class (self first, then parents in DFS order)
+proc inheritanceChain*(cls: Class): seq[Class] =
+  result = @[cls]
   for parent in cls.parents:
-    # Merge methods (only add if not already present from earlier parent)
-    for selector, meth in parent.allMethods:
-      if selector notin cls.allMethods:
-        cls.allMethods[selector] = meth
-    # Merge class methods
-    for selector, meth in parent.allClassMethods:
-      if selector notin cls.allClassMethods:
-        cls.allClassMethods[selector] = meth
-    # Merge slot names (avoid duplicates)
-    for slot in parent.allSlotNames:
-      if slot notin cls.allSlotNames:
-        cls.allSlotNames.add(slot)
+    result.add(parent.inheritanceChain())
 
-  # Add own methods (override inherited)
-  for selector, meth in cls.methods:
-    cls.allMethods[selector] = meth
-  for selector, meth in cls.classMethods:
-    cls.allClassMethods[selector] = meth
+# Helper for NodeValue equality
+proc valuesEqual*(a, b: NodeValue): bool =
+  if a.kind != b.kind:
+    return false
+  case a.kind
+  of vkInt: return a.intVal == b.intVal
+  of vkFloat: return a.floatVal == b.floatVal
+  of vkString: return a.strVal == b.strVal
+  of vkSymbol: return a.symVal == b.symVal
+  of vkBool: return a.boolVal == b.boolVal
+  of vkNil: return true
+  of vkBlock: return cast[int](a.blockVal) == cast[int](b.blockVal)
+  of vkInstance: return unsafeAddr(a.instVal) == unsafeAddr(b.instVal)
+  of vkArray:
+    if a.arrayVal.len != b.arrayVal.len: return false
+    for i in 0..<a.arrayVal.len:
+      if not valuesEqual(a.arrayVal[i], b.arrayVal[i]): return false
+    return true
+  of vkTable:
+    if a.tableVal.len != b.tableVal.len: return false
+    for k, v in a.tableVal:
+      if k notin b.tableVal or not valuesEqual(v, b.tableVal[k]): return false
+    return true
+  of vkClass: return unsafeAddr(a.classVal) == unsafeAddr(b.classVal)
 
-  # Add own slot names (error on conflict)
-  for slot in cls.slotNames:
-    if slot in cls.allSlotNames:
-      raise newException(ValueError, "Slot name conflict: '" & slot & "' already defined in parent")
-    cls.allSlotNames.add(slot)
+# Helper to recursively rebuild all descendants
+proc rebuildAllDescendants*(cls: Class) =
+  ## Rebuild this class and all its descendants (in order: self first, then descendants)
+  rebuildAllTables(cls)
+  for subclass in cls.subclasses:
+    rebuildAllDescendants(subclass)
 
-  # Update hasSlots flag
-  cls.hasSlots = cls.allSlotNames.len > 0
-
-proc invalidateSubclasses*(cls: Class) =
-  ## Eagerly invalidate and rebuild all subclasses recursively
-  for sub in cls.subclasses:
-    rebuildAllTables(sub)
-    invalidateSubclasses(sub)
-
-proc addMethodToClass*(cls: Class, selector: string, methodBlock: BlockNode, isClassMethod: bool = false) =
-  ## Add a method to a class and trigger eager invalidation
+# Helper to add method to class
+proc addMethodToClass*(cls: Class, selector: string, meth: BlockNode, isClassMethod: bool = false) =
+  ## Add a method to a class (instance or class method)
   if isClassMethod:
-    # Add to class methods
-    cls.classMethods[selector] = methodBlock
-    cls.allClassMethods[selector] = methodBlock
+    cls.classMethods[selector] = meth
   else:
-    # Add to instance methods
-    cls.methods[selector] = methodBlock
-    cls.allMethods[selector] = methodBlock
-
-  # Eagerly invalidate all subclasses
-  invalidateSubclasses(cls)
-
-proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue =
-  ## Create a subclass: Class derive: #(slotNames)
-  var newSlotNames: seq[string] = @[]
-
-  # Extract slot names from argument
-  if args.len >= 1:
-    if args[0].kind == vkArray:
-      for val in args[0].arrayVal:
-        if val.kind == vkSymbol:
-          newSlotNames.add(val.symVal)
-        elif val.kind == vkString:
-          newSlotNames.add(val.strVal)
-    elif args[0].kind == vkSymbol:
-      newSlotNames.add(args[0].symVal)
-
-  # Create new class with self as parent
-  let newClass = newClass(parents = @[self], slotNames = newSlotNames)
-
-  # Copy parent's merged methods (shallow copy - BlockNodes are immutable)
-  newClass.allMethods = self.allMethods
-  newClass.allClassMethods = self.allClassMethods
-  newClass.allSlotNames = self.allSlotNames
-
-  # Start with empty own methods
-  newClass.methods = initTable[string, BlockNode]()
-  newClass.classMethods = initTable[string, BlockNode]()
-
-  # Build slot layout (add own slots to parent's)
-  for slot in newSlotNames:
-    if slot in newClass.allSlotNames:
-      raise newException(ValueError, "Slot name conflict: '" & slot & "' already defined in parent")
-    newClass.allSlotNames.add(slot)
-
-  # Update hasSlots flag
-  newClass.hasSlots = newClass.allSlotNames.len > 0
-
-  # Generate accessor methods for each new slot
-  for slot in newSlotNames:
-    # Create getter: slotName -> slots[index]
-    let getterIndex = newClass.allSlotNames.len - newSlotNames.len + newSlotNames.find(slot)
-    var getterBody: seq[Node] = @[]
-    getterBody.add(SlotAccessNode(
-      slotName: slot,
-      slotIndex: getterIndex,
-      isAssignment: false
-    ))
-    let getter = BlockNode(
-      parameters: @[],
-      temporaries: @[],
-      body: getterBody,
-      isMethod: true
-    )
-    newClass.methods[slot] = getter
-    newClass.allMethods[slot] = getter
-
-    # Create setter: slotName: value -> slots[index] := value
-    var setterBody: seq[Node] = @[]
-    setterBody.add(SlotAccessNode(
-      slotName: slot & ":",
-      slotIndex: getterIndex,
-      isAssignment: true
-    ))
-    let setter = BlockNode(
-      parameters: @["newValue"],
-      temporaries: @[],
-      body: setterBody,
-      isMethod: true
-    )
-    newClass.methods[slot & ":"] = setter
-    newClass.allMethods[slot & ":"] = setter
-
-  # Register as subclass with parent for efficient invalidation
-  self.subclasses.add(newClass)
-
-  # Return as vkClass value (no proxy needed)
-  return NodeValue(kind: vkClass, classVal: newClass)
-
-proc classNewImpl*(self: Class, args: seq[NodeValue]): NodeValue =
-  ## Create a new instance: Class new
-  let inst = newInstance(self)
-
-  # Return as vkInstance value (no proxy needed)
-  return NodeValue(kind: vkInstance, instVal: inst)
-
-proc classAddMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue =
-  ## Add instance method: Class selector: 'sel' put: [block]
-  if args.len < 2:
-    return nilValue()
-
-  var selector: string
-  if args[0].kind == vkSymbol:
-    selector = args[0].symVal
-  elif args[0].kind == vkString:
-    selector = args[0].strVal
-  else:
-    return nilValue()
-
-  if args[1].kind != vkBlock:
-    return nilValue()
-
-  let blockNode = args[1].blockVal
-  blockNode.isMethod = true
-
-  # Add to own methods
-  self.methods[selector] = blockNode
-
-  # Update allMethods
-  self.allMethods[selector] = blockNode
-
-  # Invalidate subclasses
-  invalidateSubclasses(self)
-
-  return args[1]
-
-proc classAddClassMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue =
-  ## Add class method: Class classSelector: 'sel' put: [block]
-  if args.len < 2:
-    return nilValue()
-
-  var selector: string
-  if args[0].kind == vkSymbol:
-    selector = args[0].symVal
-  elif args[0].kind == vkString:
-    selector = args[0].strVal
-  else:
-    return nilValue()
-
-  if args[1].kind != vkBlock:
-    return nilValue()
-
-  let blockNode = args[1].blockVal
-  blockNode.isMethod = true
-
-  # Add to own class methods
-  self.classMethods[selector] = blockNode
-
-  # Update allClassMethods
-  self.allClassMethods[selector] = blockNode
-
-  # Invalidate subclasses
-  invalidateSubclasses(self)
-
-  return args[1]
+    cls.methods[selector] = meth
+  # Rebuild all method tables for this class and all descendants
+  rebuildAllDescendants(cls)
 
 # ============================================================================
-# Instance-based String primitives (for new class system)
-# ============================================================================
-
-proc instStringConcatImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Concatenate strings (called via , operator)
-  if self.kind != ikString or args.len < 1:
-    return nilValue()
-  let otherStr = if args[0].kind == vkString: args[0].strVal
-                   elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
-                   else: ""
-  return NodeValue(kind: vkString, strVal: self.strVal & otherStr)
-
-proc instStringSizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return string length
-  if self.kind != ikString:
-    return nilValue()
-  return NodeValue(kind: vkInt, intVal: self.strVal.len)
-
-proc instStringAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return character at index (0-based)
-  if self.kind != ikString or args.len < 1:
-    return nilValue()
-  let idx = if args[0].kind == vkInt: args[0].intVal
-            elif args[0].kind == vkInstance and args[0].instVal.kind == ikInt: args[0].instVal.intVal
-            else: -1
-  if idx < 0 or idx >= self.strVal.len:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: $self.strVal[idx])
-
-proc instStringFromToImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return substring from start to end (inclusive, 1-based in Smalltalk style)
-  if self.kind != ikString or args.len < 2:
-    return nilValue()
-  let startIdx = if args[0].kind == vkInt: args[0].intVal - 1  # Convert to 0-based
-                 elif args[0].kind == vkInstance and args[0].instVal.kind == ikInt: args[0].instVal.intVal - 1
-                 else: 0
-  let endIdx = if args[1].kind == vkInt: args[1].intVal  # Inclusive, so use as-is for slicing
-               elif args[1].kind == vkInstance and args[1].instVal.kind == ikInt: args[1].instVal.intVal
-               else: self.strVal.len
-  if startIdx < 0 or endIdx > self.strVal.len or startIdx >= endIdx:
-    return NodeValue(kind: vkString, strVal: "")
-  return NodeValue(kind: vkString, strVal: self.strVal[startIdx ..< endIdx])
-
-proc instStringIndexOfImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return index of substring (0 if not found, 1-based in Smalltalk)
-  if self.kind != ikString or args.len < 1:
-    return NodeValue(kind: vkInt, intVal: 0)
-  let substr = if args[0].kind == vkString: args[0].strVal
-               elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
-               else: ""
-  if substr.len == 0:
-    return NodeValue(kind: vkInt, intVal: 0)
-  let idx = self.strVal.find(substr)
-  if idx < 0:
-    return NodeValue(kind: vkInt, intVal: 0)
-  return NodeValue(kind: vkInt, intVal: idx + 1)  # 1-based indexing for Smalltalk
-
-proc instStringIncludesSubStringImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Check if string includes substring
-  if self.kind != ikString or args.len < 1:
-    return NodeValue(kind: vkBool, boolVal: false)
-  let substr = if args[0].kind == vkString: args[0].strVal
-               elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
-               else: ""
-  return NodeValue(kind: vkBool, boolVal: self.strVal.contains(substr))
-
-proc instStringReplaceWithImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Replace all occurrences of old with new
-  if self.kind != ikString or args.len < 2:
-    return nilValue()
-  let oldStr = if args[0].kind == vkString: args[0].strVal
-               elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
-               else: ""
-  let newStr = if args[1].kind == vkString: args[1].strVal
-               elif args[1].kind == vkInstance and args[1].instVal.kind == ikString: args[1].instVal.strVal
-               else: ""
-  if oldStr.len == 0:
-    return NodeValue(kind: vkString, strVal: self.strVal)
-  return NodeValue(kind: vkString, strVal: self.strVal.replace(oldStr, newStr))
-
-proc instStringUppercaseImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return uppercase version
-  if self.kind != ikString:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: self.strVal.toUpperAscii())
-
-proc instStringLowercaseImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Return lowercase version
-  if self.kind != ikString:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: self.strVal.toLowerAscii())
-
-proc instStringTrimImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Remove leading and trailing whitespace
-  if self.kind != ikString:
-    return nilValue()
-  return NodeValue(kind: vkString, strVal: self.strVal.strip())
-
-proc instStringSplitImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Split string by delimiter, return array
-  if self.kind != ikString or args.len < 1:
-    return nilValue()
-  let delim = if args[0].kind == vkString: args[0].strVal
-              elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
-              else: " "
-  let parts = self.strVal.split(delim)
-  var result = newSeq[NodeValue]()
-  for part in parts:
-    result.add(NodeValue(kind: vkString, strVal: part))
-  return NodeValue(kind: vkArray, arrayVal: result)
-
-proc instStringAsIntegerImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Parse as integer
-  if self.kind != ikString:
-    return nilValue()
-  try:
-    return NodeValue(kind: vkInt, intVal: parseInt(self.strVal))
-  except ValueError:
-    return nilValue()
-
-proc instStringAsSymbolImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Convert to symbol
-  if self.kind != ikString:
-    return nilValue()
-  return NodeValue(kind: vkSymbol, symVal: self.strVal)
-
-proc instIdentityImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Identity comparison - true if same object (same memory address)
-  if args.len < 1:
-    return NodeValue(kind: vkBool, boolVal: false)
-  let other = args[0]
-  # For identity, we compare if they're the exact same object
-  # For value types, we compare values
-  var result = false
-  case self.kind
-  of ikObject:
-    if other.kind == vkInstance and other.instVal.kind == ikObject:
-      # Same object only if same reference
-      result = (self == other.instVal)  # Nim identity for refs
-    elif other.kind == vkObject:
-      result = false  # Can't be same as legacy type
-    else:
-      result = false
-  of ikInt:
-    if other.kind == vkInt:
-      result = self.intVal == other.intVal
-    elif other.kind == vkInstance and other.instVal.kind == ikInt:
-      result = self.intVal == other.instVal.intVal
-    else:
-      result = false
-  of ikFloat:
-    if other.kind == vkFloat:
-      result = self.floatVal == other.floatVal
-    elif other.kind == vkInstance and other.instVal.kind == ikFloat:
-      result = self.floatVal == other.instVal.floatVal
-    else:
-      result = false
-  of ikString:
-    if other.kind == vkString:
-      result = self.strVal == other.strVal
-    elif other.kind == vkInstance and other.instVal.kind == ikString:
-      result = self.strVal == other.instVal.strVal
-    else:
-      result = false
-  of ikArray:
-    if other.kind == vkArray:
-      result = false  # Arrays are not identical unless same ref
-    elif other.kind == vkInstance and other.instVal.kind == ikArray:
-      result = (self == other.instVal)
-    else:
-      result = false
-  of ikTable:
-    if other.kind == vkTable:
-      result = false  # Tables are not identical unless same ref
-    elif other.kind == vkInstance and other.instVal.kind == ikTable:
-      result = (self == other.instVal)
-    else:
-      result = false
-  else:
-    result = false
-  return NodeValue(kind: vkBool, boolVal: result)
-
-# ============================================================================
-# Core Classes Initialization (New Class-Based System)
+# Core Classes Initialization
 # ============================================================================
 
 proc initCoreClasses*(): Class =
@@ -2513,6 +262,11 @@ proc initCoreClasses*(): Class =
     let deriveWithSlotsMethod = createCoreMethod("derive:")
     deriveWithSlotsMethod.nativeImpl = cast[pointer](classDeriveImpl)
     addMethodToClass(objectClass, "derive:", deriveWithSlotsMethod, isClassMethod = true)
+
+    # derive:parents:ivarArray:methods: - create class from multiple parents with slots and methods
+    let deriveParentsIvarMethod = createCoreMethod("derive:parents:ivarArray:methods:")
+    deriveParentsIvarMethod.nativeImpl = cast[pointer](classDeriveParentsIvarArrayMethodsImpl)
+    addMethodToClass(objectClass, "derive:parents:ivarArray:methods:", deriveParentsIvarMethod, isClassMethod = true)
 
     # new method (class method)
     let newMethod = createCoreMethod("new")
@@ -2808,15 +562,575 @@ proc initCoreClasses*(): Class =
   types.blockClass = blockClass
   types.booleanClass = booleanClass
 
+  # Register primitive methods for declarative primitive syntax
+  # These are the internal primitive selectors that can be called via standard lookup
+  registerPrimitivesOnObjectClass(objectClass)
+
   return objectClass
 
+# ============================================================================
+# Instance-based primitive implementations
+# These are the actual implementations that core methods delegate to
+# ============================================================================
+
+proc plusImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Integer addition
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    return toValue(self.intVal + val)
+
+proc minusImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Integer subtraction
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    return toValue(self.intVal - val)
+
+proc starImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Integer multiplication
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    return toValue(self.intVal * val)
+
+proc slashImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Integer division (returns float)
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    if val == 0: return nilValue()
+    return toValue(self.intVal.float / val.float)
+
+proc sqrtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Square root
+  if self.kind == ikInt:
+    return toValue(sqrt(self.intVal.float))
+  elif self.kind == ikFloat:
+    return toValue(sqrt(self.floatVal))
+
+proc ltImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Less than comparison
+  let (ok, val) = args[0].tryGetInt()
+  if self.kind == ikInt and ok:
+    return toValue(self.intVal < val)
+
+proc gtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Greater than comparison
+  let (ok, val) = args[0].tryGetInt()
+  if self.kind == ikInt and ok:
+    return toValue(self.intVal > val)
+
+proc eqImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Equal comparison
+  let (ok, val) = args[0].tryGetInt()
+  if self.kind == ikInt and ok:
+    return toValue(self.intVal == val)
+
+proc leImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Less than or equal comparison
+  let (ok, val) = args[0].tryGetInt()
+  if self.kind == ikInt and ok:
+    return toValue(self.intVal <= val)
+
+proc geImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Greater than or equal comparison
+  let (ok, val) = args[0].tryGetInt()
+  if self.kind == ikInt and ok:
+    return toValue(self.intVal >= val)
+
+proc neImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Not equal comparison
+  let (ok, val) = args[0].tryGetInt()
+  if self.kind == ikInt and ok:
+    return toValue(self.intVal != val)
+
+proc intDivImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Integer division
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    if val == 0: return nilValue()
+    return toValue(self.intVal div val)
+
+proc moduloImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Modulo (backslash in Smalltalk)
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    if val == 0: return nilValue()
+    return toValue(self.intVal mod val)
+
+proc backslashModuloImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Modulo (backslash in Smalltalk) - alias for moduloImpl
+  return moduloImpl(self, args)
+
+proc modMethod*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Modulo with % operator
+  let (ok, val) = args[0].tryGetInt()
+  if ok and self.kind == ikInt:
+    if val == 0: return nilValue()
+    return toValue(self.intVal mod val)
+
+proc instIdentityImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Identity comparison - returns true only if same instance
+  if args[0].kind == vkInstance:
+    return toValue(unsafeAddr(self) == unsafeAddr(args[0].instVal))
+  return toValue(false)
+
+proc doesNotUnderstandImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Handle unrecognized messages
+  # For now, just return nil - could be enhanced to raise an error
+  return nilValue()
+
+proc writeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Write output without newline
+  if args.len > 0:
+    let s = args[0].toString()
+    stdout.write(s)
+  return nilValue()
+
+proc writelineImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Write output with newline
+  if args.len > 0:
+    let s = args[0].toString()
+    echo(s)
+  else:
+    echo()
+  return nilValue()
+
+proc printStringImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Convert to string representation
+  case self.kind
+  of ikInt: toValue($(self.intVal))
+  of ikFloat: toValue($(self.floatVal))
+  of ikString: toValue(self.strVal)
+  of ikArray: toValue("#(" & $self.elements.len & ")")
+  of ikTable: toValue("#{" & $self.entries.len & "}")
+  of ikObject: toValue("<instance of " & self.class.name & ">")
+  of ikMixin: toValue("<mixin " & self.class.name & ">")
+
+proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a new subclass with slot names
+  ## Note: For now use at:/at:put: for slot access; later we can generate SlotAccessNode at parse time
+  let newClass = newClass(parents = @[self], name = "Derived")
+  if args.len > 0 and args[0].kind == vkInstance and args[0].instVal.kind == ikArray:
+    let slotNames = args[0].instVal.elements
+    for slot in slotNames:
+      if slot.kind == vkSymbol:
+        newClass.slotNames.add(slot.symVal)
+  return NodeValue(kind: vkClass, classVal: newClass)
+
+proc classDeriveParentsIvarArrayMethodsImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a new class with multiple parents and define methods
+  ## args[0]: parents array
+  ## args[1]: slot names array  ## args[2]: methods block (optional, executed with self bound to new class)
+  if args.len < 2:
+    return nilValue()
+
+  # Extract parents array
+  var parents: seq[Class] = @[]
+  if args[0].kind == vkInstance and args[0].instVal.kind == ikArray:
+    for elem in args[0].instVal.elements:
+      if elem.kind == vkClass:
+        parents.add(elem.classVal)
+
+  # If no parents provided, use self as the parent
+  if parents.len == 0:
+    parents.add(self)
+
+  # Extract slot names
+  var slotNames: seq[string] = @[]
+  if args[1].kind == vkInstance and args[1].instVal.kind == ikArray:
+    for elem in args[1].instVal.elements:
+      if elem.kind == vkString or elem.kind == vkSymbol:
+        let name = if elem.kind == vkString: elem.strVal else: elem.symVal
+        if name.len > 0:
+          slotNames.add(name)
+
+  # Check type compatibility: first parent determines the instance type
+  # All other parents must have the same or compatible instance type
+  if parents.len > 1:
+    # For now, the constraint is: all must have no conflicting slots
+    # Slot name conflicts are already checked in newClass
+    # More specific type checking could be added here in future
+    discard
+
+  # Create the new class
+  # Note: we use self as base if parents array is empty
+  let actualParents = if args[0].kind == vkNil: @[self] else: parents
+  let newClass = newClass(parents = actualParents, slotNames = slotNames, name = "MixedDerived")
+
+  # Execute method block if provided (to define/override methods and resolve conflicts)
+  if args.len >= 3 and args[2].kind == vkBlock:
+    let methodBlock = args[2].blockVal
+    # Convert BlockNode to NodeValue for execution
+    let blockVal = NodeValue(kind: vkBlock, blockVal: methodBlock)
+    # Create an instance wrapper for the new Class to serve as self
+    # For now, skip block execution - it requires an interpreter context
+    # This could be enhanced later to support true method definition in the block
+    discard
+
+  return NodeValue(kind: vkClass, classVal: newClass)
+
+proc classNewImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a new instance of this class
+  let inst = self.newInstance()
+  return NodeValue(kind: vkInstance, instVal: inst)
+
+proc classAddMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Add an instance method to this class
+  if args.len >= 2:
+    let selector = if args[0].kind == vkString: args[0].strVal
+                   elif args[0].kind == vkSymbol: args[0].symVal
+                   else: ""
+    let meth: BlockNode = if args[1].kind == vkBlock: args[1].blockVal else: nil
+    if selector.len > 0 and meth != nil:
+      addMethodToClass(self, selector, meth)
+  return nilValue()
+
+proc classAddClassMethodImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Add a class method to this class
+  if args.len >= 2:
+    let selector = if args[0].kind == vkString: args[0].strVal
+                   elif args[0].kind == vkSymbol: args[0].symVal
+                   else: ""
+    let meth: BlockNode = if args[1].kind == vkBlock: args[1].blockVal else: nil
+    if selector.len > 0 and meth != nil:
+      addMethodToClass(self, selector, meth, isClassMethod = true)
+  return nilValue()
+
+proc sizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Get size of collections
+  case self.kind
+  of ikString: toValue(self.strVal.len)
+  of ikArray: toValue(self.elements.len)
+  of ikTable: toValue(self.entries.len)
+  else: toValue(0)
+
+proc atCollectionImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Get element at index (1-based for Smalltalk compatibility)
+  case self.kind
+  of ikString:
+    let (ok, val) = args[0].tryGetInt()
+    if ok and val >= 1 and val <= self.strVal.len:
+      return toValue($self.strVal[val - 1])
+  of ikArray:
+    let (ok, val) = args[0].tryGetInt()
+    if ok and val >= 1 and val <= self.elements.len:
+      return self.elements[val - 1]
+  of ikTable:
+    let key = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkSymbol: args[0].symVal
+              else: ""
+    if key in self.entries:
+      return self.entries[key]
+  of ikObject:
+    # Slot access for class-based objects
+    if self.class != nil and args.len > 0:
+      let slotName = if args[0].kind == vkString: args[0].strVal
+                      elif args[0].kind == vkSymbol: args[0].symVal
+                      else: ""
+      if slotName.len > 0:
+        for i, name in self.class.allSlotNames:
+          if name == slotName and i < self.slots.len:
+            return self.slots[i]
+  else:
+    discard
+  return nilValue()
+
+proc atCollectionPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Set element at index (1-based for Smalltalk compatibility)
+  if args.len < 2: return nilValue()
+  case self.kind
+  of ikArray:
+    let (ok, val) = args[0].tryGetInt()
+    if ok and val >= 1 and val <= self.elements.len:
+      self.elements[val - 1] = args[1]
+  of ikTable:
+    let key = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkSymbol: args[0].symVal
+              else: ""
+    self.entries[key] = args[1]
+  of ikObject:
+    # Slot set for class-based objects
+    if self.class != nil:
+      let slotName = if args[0].kind == vkString: args[0].strVal
+                      elif args[0].kind == vkSymbol: args[0].symVal
+                      else: ""
+      if slotName.len > 0:
+        for i, name in self.class.allSlotNames:
+          if name == slotName and i < self.slots.len:
+            self.slots[i] = args[1]
+            return args[1]
+  else:
+    discard
+  return nilValue()
+
+proc instStringConcatImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## String concatenation
+  if self.kind == ikString and args.len > 0:
+    let other = if args[0].kind == vkString: args[0].strVal
+                elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+                else: ""
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal & other))
+  return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
+
+proc instStringSizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## String size
+  if self.kind == ikString:
+    return toValue(self.strVal.len)
+  return toValue(0)
+
+proc instStringAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## String character at index
+  if self.kind == ikString and args.len > 0:
+    let (ok, val) = args[0].tryGetInt()
+    if ok and val >= 1 and val <= self.strVal.len:
+      return toValue($self.strVal[val-1])
+  return toValue("")
+
+proc concatImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## String concatenation
+  if self.kind == ikString and args.len > 0:
+    let other = if args[0].kind == vkString: args[0].strVal
+                elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+                else: ""
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal & other))
+  return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
+
+proc instStringFromToImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Substring from:to:
+  if self.kind == ikString and args.len >= 2:
+    let (ok1, fromIdx) = args[0].tryGetInt()
+    let (ok2, toIdx) = args[1].tryGetInt()
+    if ok1 and ok2 and fromIdx >= 1 and toIdx <= self.strVal.len and fromIdx <= toIdx:
+      return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal[fromIdx-1..<toIdx]))
+  return toValue("")
+
+proc instStringIndexOfImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Index of substring
+  if self.kind == ikString and args.len > 0:
+    let sub = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+              else: ""
+    if sub.len > 0:
+      let idx = self.strVal.find(sub) + 1  # 1-indexed
+      return toValue(idx)
+  return toValue(0)
+
+proc instStringIncludesSubStringImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Check if includes substring
+  if self.kind == ikString and args.len > 0:
+    let sub = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+              else: ""
+    return toValue(sub in self.strVal)
+  return toValue(false)
+
+proc instStringReplaceWithImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Replace substring with another
+  if self.kind == ikString and args.len >= 2:
+    let old = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+              else: ""
+    let new = if args[1].kind == vkString: args[1].strVal
+              elif args[1].kind == vkInstance and args[1].instVal.kind == ikString: args[1].instVal.strVal
+              else: ""
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal.replace(old, new)))
+  return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
+
+proc instStringUppercaseImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Convert to uppercase
+  if self.kind == ikString:
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal.toUpperAscii()))
+  return self.toValue()
+
+proc instStringLowercaseImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Convert to lowercase
+  if self.kind == ikString:
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal.toLowerAscii()))
+  return self.toValue()
+
+proc instStringTrimImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Trim whitespace
+  if self.kind == ikString:
+    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, strip(self.strVal)))
+  return self.toValue()
+
+proc instStringSplitImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Split string by delimiter
+  if self.kind == ikString and args.len > 0:
+    let delim = if args[0].kind == vkString: args[0].strVal
+                elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+                else: ""
+    if delim.len > 0:
+      let parts = self.strVal.split(delim)
+      var elements: seq[NodeValue] = @[]
+      for p in parts:
+        elements.add(toValue(p))
+      return NodeValue(kind: vkInstance, instVal: newArrayInstance(arrayClass, elements))
+  return NodeValue(kind: vkInstance, instVal: newArrayInstance(arrayClass, @[]))
+
+proc instStringAsIntegerImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Convert string to integer
+  if self.kind == ikString:
+    try:
+      let val = parseInt(self.strVal)
+      return toValue(val)
+    except:
+      discard
+  return toValue(0)
+
+proc instStringAsSymbolImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Convert string to symbol
+  if self.kind == ikString:
+    return toSymbol(self.strVal)
+  return self.toValue()
+
+# Array primitives
+proc arrayNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Create new array (class method)
+  var elements: seq[NodeValue] = @[]
+  if args.len > 0:
+    let (ok, val) = args[0].tryGetInt()
+    if ok:
+      for i in 0..<val:
+        elements.add(nilValue())
+  return NodeValue(kind: vkInstance, instVal: newArrayInstance(arrayClass, elements))
+
+proc arraySizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Array size
+  if self.kind == ikArray:
+    return toValue(self.elements.len)
+  return toValue(0)
+
+proc arrayAddImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Add element to array
+  if self.kind == ikArray and args.len > 0:
+    self.elements.add(args[0])
+  return self.toValue()
+
+proc arrayRemoveAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Remove element at index
+  if self.kind == ikArray and args.len > 0:
+    let (ok, val) = args[0].tryGetInt()
+    if ok and val >= 0 and val < self.elements.len:
+      self.elements.delete(val)
+  return self.toValue()
+
+proc arrayIncludesImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Check if array includes element
+  if self.kind == ikArray and args.len > 0:
+    for elem in self.elements:
+      if valuesEqual(elem, args[0]):
+        return toValue(true)
+  return toValue(false)
+
+proc arrayReverseImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Reverse array
+  if self.kind == ikArray:
+    for i in 0..<self.elements.len div 2:
+      let temp = self.elements[i]
+      self.elements[i] = self.elements[self.elements.len - 1 - i]
+      self.elements[self.elements.len - 1 - i] = temp
+  return self.toValue()
+
+proc arrayAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Get element at index
+  return atCollectionImpl(self, args)
+
+proc arrayAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Set element at index
+  return atCollectionPutImpl(self, args)
+
+# Table primitives
+proc tableNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Create new table
+  return NodeValue(kind: vkInstance, instVal: newTableInstance(tableClass, initTable[string, NodeValue]()))
+
+proc tableKeysImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Get table keys as array
+  if self.kind == ikTable:
+    var elements: seq[NodeValue] = @[]
+    for key in self.entries.keys():
+      elements.add(toValue(key))
+    return NodeValue(kind: vkInstance, instVal: newArrayInstance(arrayClass, elements))
+  return NodeValue(kind: vkInstance, instVal: newArrayInstance(arrayClass, @[]))
+
+proc tableIncludesKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Check if table includes key
+  if self.kind == ikTable and args.len > 0:
+    let key = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkSymbol: args[0].symVal
+              else: ""
+    return toValue(key in self.entries)
+  return toValue(false)
+
+proc tableRemoveKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Remove key from table
+  if self.kind == ikTable and args.len > 0:
+    let key = if args[0].kind == vkString: args[0].strVal
+              elif args[0].kind == vkSymbol: args[0].symVal
+              else: ""
+    self.entries.del(key)
+  return self.toValue()
+
+proc tableAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Get table value by key
+  return atCollectionImpl(self, args)
+
+proc tableAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Set table value by key
+  return atCollectionPutImpl(self, args)
+
+# ============================================================================
+# Class method helpers
+# ============================================================================
+
+proc invalidateSubclasses*(cls: Class) =
+  ## Invalidate cached method tables for all subclasses
+  for subclass in cls.subclasses:
+    subclass.allMethods = cls.allMethods
+    subclass.allClassMethods = cls.allClassMethods
+    invalidateSubclasses(subclass)
+
+proc rebuildAllTables*(cls: Class) =
+  ## Rebuild inherited method tables
+  var allMethods = initTable[string, BlockNode]()
+  var allClassMethods = initTable[string, BlockNode]()
+
+  # For the class itself, use directly-defined methods only
+  for sel, m in cls.methods:
+    allMethods[sel] = m
+  for sel, m in cls.classMethods:
+    allClassMethods[sel] = m
+
+  # For parent classes, use allMethods (includes what they inherited)
+  # This ensures we pick up manually-added methods from tests
+  for parent in cls.parents:
+    for c in parent.inheritanceChain():
+      for sel, m in c.allMethods:
+        if sel notin allMethods:  # Don't override if already defined
+          allMethods[sel] = m
+      for sel, m in c.allClassMethods:
+        if sel notin allClassMethods:
+          allClassMethods[sel] = m
+
+  # Also inherit slot names from parents
+  var allSlotNames = cls.slotNames
+  for parent in cls.parents:
+    for slotName in parent.allSlotNames:
+      if slotName notin allSlotNames:
+        allSlotNames.add(slotName)
+  cls.allSlotNames = allSlotNames
+  cls.hasSlots = allSlotNames.len > 0
+
+  cls.allMethods = allMethods
+  cls.allClassMethods = allClassMethods
+
+# ============================================================================
 # Instance clone implementation (for new class-based system)
 proc instanceCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
   ## Clone an instance - creates a new instance with same class and copied slots
   case self.kind
-  of ikObject:
-    let clone = Instance(kind: ikObject, class: self.class)
-    clone.slots = self.slots  # Copy slot values
+  of ikObject, ikMixin:
+    let clone = Instance(kind: self.kind, class: self.class)
+    clone.slots = self.slots  # Copy slot values (mixin slots are empty)
     clone.isNimProxy = self.isNimProxy
     clone.nimValue = self.nimValue
     return NodeValue(kind: vkInstance, instVal: clone)
@@ -2829,8 +1143,67 @@ proc instanceCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
     clone.entries = self.entries  # Copy entries
     return NodeValue(kind: vkInstance, instVal: clone)
   of ikInt:
-    return NodeValue(kind: vkInstance, instVal: newIntInstance(self.class, self.intVal))
+    return toValue(self.intVal)
   of ikFloat:
-    return NodeValue(kind: vkInstance, instVal: newFloatInstance(self.class, self.floatVal))
+    return toValue(self.floatVal)
   of ikString:
-    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
+    return toValue(self.strVal)
+
+# ============================================================================
+# Instance-based primitive wrapper functions
+# These allow the new Instance-based system to support the primitive syntax
+# ============================================================================
+
+proc primitiveCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Clone primitive for Instance - delegates to instanceCloneImpl
+  return instanceCloneImpl(self, args)
+
+proc primitiveAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Get slot value by name (for ikObject instances)
+  if args.len == 0:
+    return nilValue()
+  if self.kind != ikObject or self.class == nil:
+    return nilValue()
+  let slotName = if args[0].kind == vkString: args[0].strVal
+                 elif args[0].kind == vkSymbol: args[0].symVal
+                 elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+                 else: ""
+  let slotIdx = self.class.allSlotNames.find(slotName)
+  if slotIdx >= 0 and slotIdx < self.slots.len:
+    return self.slots[slotIdx]
+  return nilValue()
+
+proc primitiveAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Set slot value by name (for ikObject instances)
+  if args.len < 2:
+    return self.toValue()
+  if self.kind != ikObject or self.class == nil:
+    return args[1]
+  let slotName = if args[0].kind == vkString: args[0].strVal
+                 elif args[0].kind == vkSymbol: args[0].symVal
+                 elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
+                 else: ""
+  let slotIdx = self.class.allSlotNames.find(slotName)
+  if slotIdx >= 0 and slotIdx < self.slots.len:
+    self.slots[slotIdx] = args[1]
+  return args[1]
+
+# ============================================================================
+# Register primitive method wrappers on Object class
+# ============================================================================
+
+proc registerPrimitivesOnObjectClass*(objCls: Class) =
+  ## Register the internal primitive selector methods on Object class
+  # These allow the declarative primitive syntax to work via standard lookup
+
+  let primClone = createCoreMethod("primitiveClone")
+  primClone.nativeImpl = cast[pointer](primitiveCloneImpl)
+  addMethodToClass(objCls, "primitiveClone", primClone)
+
+  let primAt = createCoreMethod("primitiveAt:")
+  primAt.nativeImpl = cast[pointer](primitiveAtImpl)
+  addMethodToClass(objCls, "primitiveAt:", primAt)
+
+  let primAtPut = createCoreMethod("primitiveAt:put:")
+  primAtPut.nativeImpl = cast[pointer](primitiveAtPutImpl)
+  addMethodToClass(objCls, "primitiveAt:put:", primAtPut)
