@@ -16,7 +16,7 @@ Nimtalk's interpreter uses:
 
 - **Per-Interpreter activation stack** - Each `Interpreter` has `activationStack: seq[Activation]`, naturally isolating Process state
 - **Spaghetti stack** - Activations link via `sender` for non-local returns
-- **Ref objects** - `RuntimeObject` is GC-managed, safe to share between threads with synchronization
+- **Ref objects** - `Instance` is GC-managed, safe to share between threads with synchronization
 - **Native method interface** - Methods can have `nativeImpl` for compiled code or access interpreter state
 
 ## Concurrency Models Compared
@@ -34,7 +34,7 @@ Nimtalk's interpreter uses:
 **Nimtalk mapping**:
 ```nim
 type
-  Process* = ref object of RuntimeObject
+  Process* = ref object
     interpreter*: Interpreter     # Own interpreter with isolated stack
     state*: ProcessState          # running, ready, blocked, suspended
     priority*: int
@@ -77,7 +77,7 @@ Each `Activation` exposes:
 **Nimtalk mapping**:
 ```nim
 type
-  Pid* = ref object of RuntimeObject
+  Pid* = ref object
     id*: uint64
     mailbox*: Channel[Message]
     process*: Process
@@ -121,7 +121,7 @@ self receive: [
 **Nimtalk mapping**:
 ```nim
 type
-  Channel*[T] = ref object of RuntimeObject
+  Channel*[T] = ref object
     nimChannel*: NimChannel[T]
     closed*: bool
 
@@ -312,7 +312,7 @@ Scheduler runLoop: [
 
 ### Shared Object Access
 
-Since `RuntimeObject` is `ref object`, multiple threads can reference it:
+Since `Instance` is `ref object`, multiple threads can reference it:
 
 **Start with**: Explicit locks/mutexes (simple, predictable)
 ```smalltalk

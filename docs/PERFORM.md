@@ -93,19 +93,19 @@ The `perform:` methods are registered on the root object during interpreter init
 let performMethod = createCoreMethod("perform:")
 performMethod.nativeImpl = cast[pointer](performWithImpl)
 performMethod.hasInterpreterParam = true
-addMethod(result.rootObject.RuntimeObject, "perform:", performMethod)
+addMethod(result.rootObject.Instance, "perform:", performMethod)
 
 # Add perform:with: method to root object (interpreter-aware)
 let performWithMethod = createCoreMethod("perform:with:")
 performWithMethod.nativeImpl = cast[pointer](performWithImpl)
 performWithMethod.hasInterpreterParam = true
-addMethod(result.rootObject.RuntimeObject, "perform:with:", performWithMethod)
+addMethod(result.rootObject.Instance, "perform:with:", performWithMethod)
 
 # Add perform:with:with: method to root object (interpreter-aware)
 let performWithWithMethod = createCoreMethod("perform:with:with:")
 performWithWithMethod.nativeImpl = cast[pointer](performWithImpl)
 performWithWithMethod.hasInterpreterParam = true
-addMethod(result.rootObject.RuntimeObject, "perform:with:with:", performWithWithMethod)
+addMethod(result.rootObject.Instance, "perform:with:with:", performWithWithMethod)
 ```
 
 ## Primitives and `perform:`
