@@ -166,7 +166,7 @@ suite "Evaluator: Control Flow":
 
     check(result[1].len == 0)
     # Should return nil or false itself
-    check(result[0][^1].kind == vkNil or result[0][^1].kind == vkObject)
+    check(result[0][^1].kind == vkNil or result[0][^1].kind == vkInstance)
 
   test "ifFalse: executes block when receiver is false":
     let result = interp.evalStatements("""
@@ -183,7 +183,7 @@ suite "Evaluator: Control Flow":
     """)
 
     check(result[1].len == 0)
-    check(result[0][^1].kind == vkNil or result[0][^1].kind == vkObject)
+    check(result[0][^1].kind == vkNil or result[0][^1].kind == vkInstance)
 
   test "complex conditional logic":  # Requires string concatenation
     when false:  # DISABLED - uses slot syntax not fully implemented
@@ -239,8 +239,10 @@ suite "Evaluator: Block Evaluation":
 
   test "blocks can be stored and evaluated later":
     let result = interp.evalStatements("""
-    obj := Table derive.
-    obj at: #block put: [ ^42 ].
+    # Use new class-based model
+    MyClass := Object derive.
+    MyClass selector: #block put: [ ^42 ].
+    obj := MyClass new.
     result := obj block
     """)
 
@@ -250,9 +252,11 @@ suite "Evaluator: Block Evaluation":
 
   test "blocks with parameters capture arguments":  # Requires full closure implementation
     let result = interp.evalStatements("""
-      obj := Table derive.
-      obj at: #apply:to: put: [ :block :arg | ^block value: arg ].
+      # Use new class-based model
+      MyClass := Object derive.
+      MyClass selector: #apply:to: put: [ :block :arg | ^block value: arg ].
 
+      obj := MyClass new.
       doubler := [ :x | ^x * 2 ].
       result := obj apply: doubler to: 21
       """)
@@ -263,8 +267,9 @@ suite "Evaluator: Block Evaluation":
 
   test "blocks can close over variables":  # Requires full closure implementation
     let result = interp.evalStatements("""
-      Counter := Table derive.
-      Counter at: #makeCounter put: [ | count |
+      # Use new class-based model
+      Counter := Object derive.
+      Counter selector: #makeCounter put: [ | count |
         count := 0.
         ^[
           count := count + 1.
@@ -272,7 +277,7 @@ suite "Evaluator: Block Evaluation":
         ]
       ].
 
-      counter := Counter derive.
+      counter := Counter new.
       c := counter makeCounter.
       result1 := c value.
       result2 := c value.
@@ -389,8 +394,9 @@ suite "Evaluator: Lexical Closures":
 
   test "nested closures capture multiple levels" :
     let result = interp.evalStatements("""
-    Maker := Table derive.
-    Maker at: #makeAdder: put: [ :x |
+    # Use new class-based model
+    Maker := Object derive.
+    Maker selector: #makeAdder: put: [ :x |
       ^[ :y |
         ^[ :z |
           ^x + y + z
@@ -398,7 +404,7 @@ suite "Evaluator: Lexical Closures":
       ]
     ].
 
-    maker := Maker derive.
+    maker := Maker new.
     add5 := maker makeAdder: 5.
     add5and10 := add5 value: 10.
     result := add5and10 value: 15
@@ -545,30 +551,17 @@ suite "Evaluator: Global Variables":
     # Define global
     GlobalValue := 100.
 
-    obj := Table derive.
-    obj at: #getGlobal put: [ ^GlobalValue ].
+    # Use new class-based model: Object derive creates a class
+    MyClass := Object derive.
+    MyClass selector: #getGlobal put: [ ^GlobalValue ].
 
+    obj := MyClass new.
     result := obj getGlobal
     """)
 
     check(result[1].len == 0)
     check(result[0][^1].kind == vkInt)
     check(result[0][^1].intVal == 100)
-
-  test "class objects stored as globals":
-    let result = interp.evalStatements("""
-    Person := Table derive: #(name age).
-    Person at: #new put: [ ^self derive ].
-
-    p1 := Person new.
-    p1 name: "Alice".
-
-    p2 := Person new.
-    p2 name: "Bob"
-    """)
-
-    check(result[1].len == 0)
-    # Both instances should work independently
 
 suite "Evaluator: Collections":
   var interp: Interpreter
