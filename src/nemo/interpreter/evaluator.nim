@@ -1907,33 +1907,32 @@ proc primitiveAsSelfDoImpl(interp: var Interpreter, self: Instance, args: seq[No
 proc primitiveHasPropertyImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Check if object has a slots property (not inherited)
   if args.len < 1:
-    return falseValue()
+    return falseValue
   let key = if args[0].kind == vkString: args[0].strVal
             elif args[0].kind == vkSymbol: args[0].symVal
             else: ""
   if key.len == 0 or self.kind != ikObject or self.class == nil:
-    return falseValue()
+    return falseValue
   let slotIdx = self.class.slotNames.find(key)
   toValue(slotIdx >= 0 and slotIdx < self.slots.len)
 
 proc primitivePropertiesImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Return slot names as an array
-  if self.kind != ikObject or self.class == nil:
-    return Array.new().toValue()
   var slotNames: seq[NodeValue] = @[]
-  for name in self.class.slotNames:
-    slotNames.add(toSymbol(name))
+  if self.kind == ikObject and self.class != nil:
+    for name in self.class.slotNames:
+      slotNames.add(toSymbol(name))
   return newArrayInstance(arrayClass, slotNames).toValue()
 
 proc primitiveRespondsToImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Check if the class responds to a message
   if args.len < 1:
-    return falseValue()
+    return falseValue
   let selector = if args[0].kind == vkString: args[0].strVal
                   elif args[0].kind == vkSymbol: args[0].symVal
                   else: ""
   if selector.len == 0:
-    return falseValue()
+    return falseValue
   let lookup = lookupMethod(interp, self, selector)
   toValue(lookup.found)
 
@@ -1955,41 +1954,17 @@ proc primitiveErrorImpl(interp: var Interpreter, self: Instance, args: seq[NodeV
 proc primitiveIsKindOfImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Check if object is an instance of the given class or any superclass
   if args.len < 1 or args[0].kind != vkClass:
-    return falseValue()
+    return falseValue
   let targetClass = args[0].classVal
   var currentClass: Class = self.class
   while currentClass != nil:
     if currentClass == targetClass:
-      return trueValue()
+      return trueValue
     if currentClass.superclasses.len > 0:
       currentClass = currentClass.superclasses[0]
     else:
       break
   falseValue
-
-# Object primitive methods
-
-proc primitiveAsSelfDoImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Evaluate a block with self temporarily rebound to this object
-  ## Usage: self perform: #primitiveAsSelfDo: with: block
-  if args.len < 1 or args[0].kind != vkBlock:
-    return nilValue()
-
-  let blockNode = args[0].blockVal
-  debug("primitiveAsSelfDo called, evaluating block with self = ", self.class.name)
-
-  # Save current receiver
-  let savedReceiver = interp.currentReceiver
-
-  # Temporarily set receiver to self
-  interp.currentReceiver = self
-
-  try:
-    # Evaluate the block with new self
-    return evalBlock(interp, self, blockNode)
-  finally:
-    # Restore original receiver
-    interp.currentReceiver = savedReceiver
 
 # Block value methods
 proc primitiveValueImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
