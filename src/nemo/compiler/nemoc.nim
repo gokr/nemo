@@ -179,17 +179,20 @@ proc compileFile(config: Config): bool =
   echo "Generated: ", outputPath
   return true
 
+proc computeOutputPath(config: Config): string =
+  ## Compute the output Nim file path
+  if config.outputFile.len > 0:
+    result = config.outputFile
+  else:
+    let moduleName = changeFileExt(extractFilename(config.inputFile), "")
+    result = config.outputDir / moduleName & ".nim"
+
 proc buildFile(config: Config): bool =
   ## Compile Nemo and build with Nim compiler
   if not config.compileFile():
     return false
 
-  var outputFile = if config.outputFile.len > 0:
-                     config.outputFile
-                   else:
-                     let moduleName = changeFileExt(extractFilename(config.inputFile), "")
-                     config.outputDir / moduleName & ".nim"
-
+  let outputFile = computeOutputPath(config)
   let baseName = changeFileExt(outputFile, "")
   let releaseFlag = if config.release: " --release" else: ""
   let cmd = fmt("nim c{releaseFlag} -o:{baseName} {outputFile}")
@@ -209,12 +212,7 @@ proc runFile(config: Config): bool =
   if not config.buildFile():
     return false
 
-  var outputFile = if config.outputFile.len > 0:
-                     config.outputFile
-                   else:
-                     let moduleName = changeFileExt(extractFilename(config.inputFile), "")
-                     config.outputDir / moduleName & ".nim"
-
+  let outputFile = computeOutputPath(config)
   let baseName = changeFileExt(outputFile, "")
 
   echo "Running: ", baseName
@@ -225,6 +223,12 @@ proc runFile(config: Config): bool =
   else:
     echo "Program exited with code: ", exitCode
     return false
+
+proc setupLogging(config: Config) =
+  ## Configure logging based on config
+  var consoleLogger = newConsoleLogger()
+  consoleLogger.levelThreshold = config.logLevel
+  addHandler(consoleLogger)
 
 proc main() =
   let args = commandLineParams()
@@ -256,10 +260,7 @@ proc main() =
       showUsage()
       quit(0)
 
-    # Configure logging
-    var consoleLogger = newConsoleLogger()
-    consoleLogger.levelThreshold = config.logLevel
-    addHandler(consoleLogger)
+    setupLogging(config)
 
     let success = config.compileFile()
     quit(if success: 0 else: 1)
@@ -278,10 +279,7 @@ proc main() =
       showUsage()
       quit(0)
 
-    # Configure logging
-    var consoleLogger = newConsoleLogger()
-    consoleLogger.levelThreshold = config.logLevel
-    addHandler(consoleLogger)
+    setupLogging(config)
 
     let success = config.buildFile()
     quit(if success: 0 else: 1)
@@ -300,10 +298,7 @@ proc main() =
       showUsage()
       quit(0)
 
-    # Configure logging
-    var consoleLogger = newConsoleLogger()
-    consoleLogger.levelThreshold = config.logLevel
-    addHandler(consoleLogger)
+    setupLogging(config)
 
     let success = config.runFile()
     quit(if success: 0 else: 1)
@@ -323,10 +318,7 @@ proc main() =
         showUsage()
         quit(0)
 
-      # Configure logging for backward compat mode
-      var consoleLogger = newConsoleLogger()
-      consoleLogger.levelThreshold = config.logLevel
-      addHandler(consoleLogger)
+      setupLogging(config)
 
       let success = config.compileFile()
       quit(if success: 0 else: 1)
