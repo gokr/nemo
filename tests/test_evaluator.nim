@@ -4,10 +4,10 @@
 # Tests all language mechanisms and evaluator features
 #
 
-import std/[unittest, tables, strutils, sequtils, logging]
+import std/[unittest, tables, strutils, logging]
 import ../src/nemo/core/types
 import ../src/nemo/parser/[lexer, parser]
-import ../src/nemo/interpreter/[evaluator, objects, activation]
+import ../src/nemo/interpreter/[evaluator, objects]
 
 # Helper to check for errors
 proc checkError(interp: var Interpreter, source: string, expectedError: string = "") =

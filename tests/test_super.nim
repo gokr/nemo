@@ -2,7 +2,7 @@
 # test_super.nim - Tests for super syntax (unqualified and qualified)
 #
 
-import std/[unittest, tables, strutils]
+import std/[unittest, tables]
 import ../src/nemo/core/types
 import ../src/nemo/parser/[lexer, parser]
 import ../src/nemo/interpreter/[evaluator, objects]
@@ -82,7 +82,7 @@ suite "Super Method Lookup":
     parent.allMethods["test"] = parentMeth
 
     # Create child class inheriting from parent
-    let child = newClass(parents = @[parent], name = "Child")
+    let child = newClass(superclasses = @[parent], name = "Child")
     child.allMethods = parent.allMethods
 
     # Create instance of child
@@ -105,7 +105,7 @@ suite "Super Method Lookup":
     parentB.allMethods["methodB"] = methB
 
     # Create child with multiple parents (no conflict - different methods)
-    let child = newClass(parents = @[parentA, parentB], name = "Child")
+    let child = newClass(superclasses = @[parentA, parentB], name = "Child")
 
     # Lookup via parent should find correct method
     check(lookupInstanceMethod(parentA, "methodA") == methA)

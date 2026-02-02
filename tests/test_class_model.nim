@@ -2,7 +2,7 @@
 # test_class_model.nim - Unit tests for Object Model
 #
 
-import std/[unittest, tables, strutils]
+import std/[unittest, tables]
 import ../src/nemo/core/types
 import ../src/nemo/interpreter/[objects, activation]
 
@@ -17,7 +17,7 @@ suite "Class Object Model":
   test "Class creation with basic fields":
     let cls = newClass(name = "TestClass")
     check(cls.name == "TestClass")
-    check(cls.parents.len == 0)
+    check(cls.superclasses.len == 0)
     check(cls.subclasses.len == 0)
     check(cls.slotNames.len == 0)
     check(cls.allSlotNames.len == 0)
@@ -64,7 +64,7 @@ suite "Class Object Model":
     let parent = newClass(slotNames = @["x"], name = "Parent")
     parent.allSlotNames = @["x"]
 
-    let child = newClass(parents = @[parent], slotNames = @["y"], name = "Child")
+    let child = newClass(superclasses = @[parent], slotNames = @["y"], name = "Child")
     child.allSlotNames = parent.allSlotNames & child.slotNames
 
     check(child.allSlotNames.len == 2)
@@ -78,11 +78,11 @@ suite "Class Object Model":
 
     # Should raise error during class creation due to slot name conflict
     expect ValueError:
-      discard newClass(parents = @[parent], slotNames = @["name"], name = "Child")
+      discard newClass(superclasses = @[parent], slotNames = @["name"], name = "Child")
 
   test "Subclass registration":
     let parent = newClass(name = "Parent")
-    let child = newClass(parents = @[parent], name = "Child")
+    let child = newClass(superclasses = @[parent], name = "Child")
 
     # newClass automatically registers child as subclass
     check(parent.subclasses.len == 1)
@@ -94,7 +94,7 @@ suite "Class Object Model":
     meth1.isMethod = true
     parent.allMethods["greet"] = meth1
 
-    let child = newClass(parents = @[parent], name = "Child")
+    let child = newClass(superclasses = @[parent], name = "Child")
     # Copy parent's merged methods (shallow copy)
     child.allMethods = parent.allMethods
 
@@ -107,7 +107,7 @@ suite "Class Object Model":
     parentMeth.isMethod = true
     parent.allMethods["greet"] = parentMeth
 
-    let child = newClass(parents = @[parent], name = "Child")
+    let child = newClass(superclasses = @[parent], name = "Child")
     child.allMethods = parent.allMethods
 
     let childMeth = BlockNode()
@@ -119,8 +119,8 @@ suite "Class Object Model":
 
   test "Invalidation propagates to subclasses":
     let grandparent = newClass(name = "Grandparent")
-    let parent = newClass(parents = @[grandparent], name = "Parent")
-    let child = newClass(parents = @[parent], name = "Child")
+    let parent = newClass(superclasses = @[grandparent], name = "Parent")
+    let child = newClass(superclasses = @[parent], name = "Child")
 
     # Add initial method to grandparent
     let meth1 = BlockNode()
@@ -155,7 +155,7 @@ suite "Class Object Model":
 
     # Deriving from both parents with conflicting methods should error
     expect ValueError:
-      discard newClass(parents = @[trait1, trait2], name = "Child")
+      discard newClass(superclasses = @[trait1, trait2], name = "Child")
 
   test "Multiple inheritance with child override":
     let trait1 = newClass(name = "Trait1")
@@ -170,7 +170,7 @@ suite "Class Object Model":
     trait2.allMethods["bar"] = meth2
 
     # No conflict - each parent has different methods
-    let child = newClass(parents = @[trait1, trait2], name = "Child")
+    let child = newClass(superclasses = @[trait1, trait2], name = "Child")
 
     # Child should inherit both methods
     check(child.allMethods["foo"] == meth1)
@@ -231,7 +231,7 @@ suite "Class Object Model":
     parent2.allMethods["method2"] = BlockNode()
     parent2.allMethods["method2"].isMethod = true
 
-    let child = newClass(parents = @[parent1, parent2], name = "Child")
+    let child = newClass(superclasses = @[parent1, parent2], name = "Child")
     rebuildAllTables(child)
 
     check("method1" in child.allMethods)
@@ -244,7 +244,7 @@ suite "Class Object Model":
     let parent2 = newClass(slotNames = @["b"], name = "Parent2")
     parent2.allSlotNames = @["b"]
 
-    let child = newClass(parents = @[parent1, parent2], slotNames = @["c"], name = "Child")
+    let child = newClass(superclasses = @[parent1, parent2], slotNames = @["c"], name = "Child")
     rebuildAllTables(child)
 
     check(child.allSlotNames.len == 3)
