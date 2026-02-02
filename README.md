@@ -2,7 +2,7 @@
 
 Smalltalk semantics, Nim performance, modern tooling.
 
-Nimtalk is a class-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing syntax and live programming feel while adding native compilation, Nim ecosystem access, and familiar Unix tooling.
+Nimtalk is a Smalltalk dialect written in Nim. It preserves Smalltalk's message-passing syntax and live programming feel while adding native compilation, Nim ecosystem access, and familiar Unix tooling.
 
 ## Quick Example
 
