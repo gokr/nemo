@@ -76,7 +76,6 @@ proc constraintForNode*(kind: ValueKind): TypeConstraint =
   of vkFloat: tcFloat
   of vkString: tcString
   of vkBool: tcBool
-  of vkObject: tcObject
   of vkBlock: tcBlock
   of vkArray: tcArray
   of vkTable: tcTable
