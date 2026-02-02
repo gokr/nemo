@@ -3,24 +3,17 @@ import ../core/types
 import ../core/process
 import ../interpreter/objects
 import ../interpreter/activation
+import ../interpreter/evaluator  # Interpreter functionality
 
 # ============================================================================
 # Scheduler Integration with Interpreter
 # This module connects the green threads scheduler with the Nemo interpreter
 # ============================================================================
 
-# Forward declarations for procs defined in this module but called from evaluator
+# Forward declarations for functions defined later in this file
 proc createProcessClass*(): Class
 proc createSchedulerClass*(): Class
-
-# Forward declarations for procs defined in evaluator.nim
-proc newInterpreter(): Interpreter
-proc newInterpreterWithShared(globals: ref Table[string, NodeValue],
-                              root: Instance): Interpreter
-proc initGlobals(interp: Interpreter)
 proc initProcessorGlobal*(interp: var Interpreter)
-proc nilValue(): NodeValue
-proc eval(interp: Interpreter, node: Node): NodeValue
 
 proc newSchedulerContext*(): SchedulerContext =
   ## Create a new scheduler context with a main interpreter
@@ -37,15 +30,15 @@ proc newSchedulerContext*(): SchedulerContext =
   mainInterp.schedulerContextPtr = cast[pointer](result)
 
   # Create scheduler with shared globals and rootObject
-  result.scheduler = newScheduler(
+  result.theScheduler = newScheduler(
     globals = mainInterp.globals,
     root = mainInterp.rootObject
   )
 
   # Create main process
-  result.mainProcess = result.scheduler.newProcess("main")
+  result.mainProcess = result.theScheduler.newProcess("main")
   result.mainProcess.interpreter = cast[InterpreterRef](mainInterp)
-  result.scheduler.addProcess(result.mainProcess)
+  result.theScheduler.addProcess(result.mainProcess)
 
 proc getInterpreter*(process: Process): Interpreter =
   ## Get the interpreter for a process
@@ -66,7 +59,7 @@ proc forkProcess*(ctx: SchedulerContext, blockNode: BlockNode,
   ## Create a new green process from a Nemo block
   ## The new process will execute the block when scheduled
 
-  let sched = ctx.scheduler
+  let sched = ctx.theScheduler
 
   # Create new interpreter sharing globals and rootObject
   let newInterp = newInterpreterWithShared(
@@ -99,7 +92,7 @@ proc forkProcess*(ctx: SchedulerContext, blockNode: BlockNode,
 proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   ## Run one evaluation step on the current process
   ## Returns the result of the last evaluated expression
-  let sched = ctx.scheduler
+  let sched = ctx.theScheduler
   if sched.currentProcess == nil:
     return nilValue()
 
@@ -130,7 +123,7 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   try:
     result = interp.eval(stmt)
     interp.lastResult = result
-  except EvalError as e:
+  except ValueError as e:
     # Process encountered an error - terminate it
     debug("Process ", sched.currentProcess.name, " error: ", e.msg)
     sched.terminateProcess(sched.currentProcess)
@@ -143,7 +136,7 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
 proc runOneSlice*(ctx: SchedulerContext): bool =
   ## Run one complete time slice (one statement from one process)
   ## Returns true if something was executed, false if no ready processes
-  let sched = ctx.scheduler
+  let sched = ctx.theScheduler
 
   if not sched.hasReadyProcesses():
     return false
@@ -173,7 +166,7 @@ proc runToCompletion*(ctx: SchedulerContext, maxSteps: int = 100000): int =
   ## Run all processes until all are terminated or maxSteps reached
   ## Returns number of steps executed
   result = 0
-  let sched = ctx.scheduler
+  let sched = ctx.theScheduler
   while result < maxSteps:
     if not ctx.runOneSlice():
       # No ready processes - check if any are blocked
@@ -330,10 +323,10 @@ proc processStateImpl(interp: var Interpreter, self: Instance, args: seq[NodeVal
 proc processYieldImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Yield the current process
   let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
-  if ctx != nil and ctx.scheduler.currentProcess != nil:
+  if ctx != nil and ctx.theScheduler.currentProcess != nil:
     let proxy = self.asProcessProxy()
-    if proxy != nil and proxy.process == ctx.scheduler.currentProcess:
-      ctx.scheduler.yieldCurrentProcess()
+    if proxy != nil and proxy.process == ctx.theScheduler.currentProcess:
+      ctx.theScheduler.yieldCurrentProcess()
   return nilValue()
 
 proc processSuspendImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
@@ -342,7 +335,7 @@ proc processSuspendImpl(interp: var Interpreter, self: Instance, args: seq[NodeV
   if ctx != nil:
     let proxy = self.asProcessProxy()
     if proxy != nil:
-      ctx.scheduler.suspendProcess(proxy.process)
+      ctx.theScheduler.suspendProcess(proxy.process)
   return nilValue()
 
 proc processResumeImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
@@ -351,7 +344,7 @@ proc processResumeImpl(interp: var Interpreter, self: Instance, args: seq[NodeVa
   if ctx != nil:
     let proxy = self.asProcessProxy()
     if proxy != nil:
-      ctx.scheduler.resumeProcess(proxy.process)
+      ctx.theScheduler.resumeProcess(proxy.process)
   return nilValue()
 
 proc processTerminateImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
@@ -360,7 +353,7 @@ proc processTerminateImpl(interp: var Interpreter, self: Instance, args: seq[Nod
   if ctx != nil:
     let proxy = self.asProcessProxy()
     if proxy != nil:
-      ctx.scheduler.terminateProcess(proxy.process)
+      ctx.theScheduler.terminateProcess(proxy.process)
   return nilValue()
 
 proc createProcessClass*(): Class =
@@ -426,12 +419,12 @@ proc createProcessClass*(): Class =
 
 type
   SchedulerProxy* = ref object
-    scheduler*: Scheduler
+    theScheduler*: Scheduler  # 'theScheduler' to avoid naming conflict
     context*: SchedulerContext
 
 proc createSchedulerProxy*(ctx: SchedulerContext): NodeValue =
   ## Create a proxy object that wraps a Nim Scheduler
-  let proxy = SchedulerProxy(scheduler: ctx.scheduler, context: ctx)
+  let proxy = SchedulerProxy(theScheduler: ctx.theScheduler, context: ctx)
   let obj = Instance(kind: ikObject, class: schedulerClass, slots: @[])
   obj.isNimProxy = true
   obj.nimValue = cast[pointer](proxy)
@@ -449,28 +442,28 @@ proc schedulerProcessCountImpl(interp: var Interpreter, self: Instance, args: se
   ## Get total number of processes
   let proxy = self.asSchedulerProxy()
   if proxy != nil:
-    return toValue(proxy.scheduler.processCount())
+    return toValue(proxy.theScheduler.processCount())
   return nilValue()
 
 proc schedulerReadyCountImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Get number of ready processes
   let proxy = self.asSchedulerProxy()
   if proxy != nil:
-    return toValue(proxy.scheduler.readyCount())
+    return toValue(proxy.theScheduler.readyCount())
   return nilValue()
 
 proc schedulerBlockedCountImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Get number of blocked processes
   let proxy = self.asSchedulerProxy()
   if proxy != nil:
-    return toValue(proxy.scheduler.blockedCount())
+    return toValue(proxy.theScheduler.blockedCount())
   return nilValue()
 
 proc schedulerCurrentProcessImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Get the current process
   let proxy = self.asSchedulerProxy()
-  if proxy != nil and proxy.scheduler.currentProcess != nil:
-    return createProcessProxy(proxy.scheduler.currentProcess)
+  if proxy != nil and proxy.theScheduler.currentProcess != nil:
+    return createProcessProxy(proxy.theScheduler.currentProcess)
   return nilValue()
 
 proc schedulerForkNameImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
