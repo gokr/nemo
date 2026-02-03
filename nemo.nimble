@@ -5,7 +5,7 @@ description = "Modern Smalltalk dialect written in Nim"
 license = "MIT"
 
 srcDir = "src"
-bin = @["nemo/repl/nemo", "nemo/compiler/nemoc"]
+bin = @["nemo/repl/nemo", "nemo/compiler/nemoc", "nemo/gui/ide"]
 
 # Current Nim version
 requires "nim == 2.2.6"
@@ -34,6 +34,16 @@ task local, "Build and copy binaries to root directory":
   exec "nim c -o:nemo src/nemo/repl/nemo.nim"
   exec "nim c -o:nemoc src/nemo/compiler/nemoc.nim"
   echo "Binaries available in root directory as nemo and nemoc"
+
+task gui, "Build the GUI IDE with GTK4":
+  # Build the GUI IDE with GTK4 (default)
+  exec "nim c -d:gtk4 -o:nemo-gui src/nemo/gui/ide.nim"
+  echo "GUI binary available as nemo-gui (GTK4)"
+
+task gui3, "Build the GUI IDE with GTK3":
+  # Build the GUI IDE with GTK3
+  exec "nim c -o:nemo-gui src/nemo/gui/ide.nim"
+  echo "GUI binary available as nemo-gui (GTK3)"
 
 task clean, "Clean build artifacts using build.nims":
   exec "nim e build.nims clean"
