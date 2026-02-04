@@ -2907,35 +2907,48 @@ proc initGlobals*(interp: var Interpreter) =
   initNemoGlobal(interp)
 
 
-proc loadStdlib*(interp: var Interpreter, basePath: string = "") =
-  ## Load core library files from lib/core/
-  ## basePath allows specifying a different root (e.g., for tests or installed location)
-  let libPath = if basePath.len > 0: basePath / "lib" / "core" else: "lib" / "core"
+proc loadStdlib*(interp: var Interpreter, bootstrapFile: string = "") =
+  ## Load core library files
+  ## If bootstrapFile is provided and exists, it will be loaded and should use
+  ## Nemo load: to load other files. Otherwise, uses the default hardcoded list.
 
-  let stdlibFiles = [
-    "Object.nemo",
-    "Boolean.nemo",
-    "Block.nemo",
-    "Number.nemo",
-    "Collections.nemo",
-    "String.nemo",
-    "FileStream.nemo",
-    "Exception.nemo",
-    "TestCase.nemo"
-  ]
-
-  for filename in stdlibFiles:
-    let filepath = libPath / filename
-    if fileExists(filepath):
-      debug("Loading stdlib file: ", filepath)
-      let source = readFile(filepath)
-      let (_, err) = interp.evalStatements(source)
-      if err.len > 0:
-        warn("Failed to load ", filepath, ": ", err)
-      else:
-        debug("Successfully loaded: ", filepath)
+  # If bootstrap file is specified and exists, use it
+  if bootstrapFile.len > 0 and fileExists(bootstrapFile):
+    debug("Loading bootstrap file: ", bootstrapFile)
+    let source = readFile(bootstrapFile)
+    let (_, err) = interp.evalStatements(source)
+    if err.len > 0:
+      warn("Failed to load bootstrap file ", bootstrapFile, ": ", err)
     else:
-      warn("Stdlib file not found: ", filepath)
+      debug("Successfully loaded bootstrap: ", bootstrapFile)
+  else:
+    # Fall back to hardcoded list (for backward compatibility)
+    let libPath = interp.nemoHome / "lib" / "core"
+
+    let stdlibFiles = [
+      "Object.nemo",
+      "Boolean.nemo",
+      "Block.nemo",
+      "Number.nemo",
+      "Collections.nemo",
+      "String.nemo",
+      "FileStream.nemo",
+      "Exception.nemo",
+      "TestCase.nemo"
+    ]
+
+    for filename in stdlibFiles:
+      let filepath = libPath / filename
+      if fileExists(filepath):
+        debug("Loading stdlib file: ", filepath)
+        let source = readFile(filepath)
+        let (_, err) = interp.evalStatements(source)
+        if err.len > 0:
+          warn("Failed to load ", filepath, ": ", err)
+        else:
+          debug("Successfully loaded: ", filepath)
+      else:
+        warn("Stdlib file not found: ", filepath)
 
   # Set up class caches for primitive types
   # These allow wrapped primitives to inherit methods from stdlib
