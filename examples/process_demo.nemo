@@ -45,9 +45,15 @@ Stdout writeline: ("   After resume - Process 1 state: " , p1 state).
 
 Stdout writeline: "".
 Stdout writeline: "5. Running processes...".
-Stdout writeline: "   (In REPL, processes don't auto-run - they need Scheduler)".
+steps := Scheduler runToCompletion: 1000.
+Stdout writeline: ("   Steps executed: " , steps asString).
+
+Stdout writeline: "".
+Stdout writeline: "6. Final process states:".
+Stdout writeline: ("   Process 1 state: " , p1 state).
+Stdout writeline: ("   Process 2 state: " , p2 state).
+Stdout writeline: ("   Final counter: " , (Nemo at: "counter") asString).
 
 Stdout writeline: "".
 Stdout writeline: "=== Demo Complete ===".
-Stdout writeline: "   Note: Full process execution requires SchedulerContext.runToCompletion()".
-Stdout writeline: "   This demo shows the Process API works in the REPL!".
+Stdout writeline: "   Processes now execute in the REPL using Scheduler runToCompletion:".
