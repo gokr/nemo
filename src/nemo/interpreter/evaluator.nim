@@ -879,8 +879,18 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
       debug("Return check: isMethod=", currentMethod.isMethod, " homeActivation nil?=", currentMethod.homeActivation == nil)
       if not currentMethod.isMethod and currentMethod.homeActivation != nil:
         # We're in a block (not a method) - return from the block's home activation
+        # Keep going up the chain until we find a method (not another block)
         targetActivation = currentMethod.homeActivation
-        debug("Non-local return from block to home activation")
+        var safetyCount = 0
+        while targetActivation != nil and targetActivation.currentMethod != nil and
+              not targetActivation.currentMethod.isMethod and
+              targetActivation.currentMethod.homeActivation != nil:
+          inc safetyCount
+          if safetyCount > 1000:
+            raise newException(EvalError, "Non-local return exceeded 1000 nested blocks - possible infinite loop")
+          targetActivation = targetActivation.currentMethod.homeActivation
+          debug("Following nested block home activation")
+        debug("Non-local return from block to method activation")
       else:
         # We're in a method - local return from current method
         targetActivation = interp.currentActivation
@@ -2796,26 +2806,9 @@ proc initGlobals*(interp: var Interpreter) =
   let nilInst = Instance(kind: ikObject, class: undefinedObjCls, slots: @[])
   nilInstance = nilInst  # Set global variable in types module
 
-  # Create FileStream class (derives from Object) - minimal version for stdout
-  let fileStreamCls = newClass(superclasses = @[objectCls], name = "FileStream")
-  fileStreamCls.tags = @["FileStream"]
-
-  # Register FileStream methods using existing writeImpl/writelineImpl from objects.nim
-  let fileStreamWriteMethod = createCoreMethod("write:")
-  fileStreamWriteMethod.nativeImpl = cast[pointer](writeImpl)
-  fileStreamCls.methods["write:"] = fileStreamWriteMethod
-  fileStreamCls.allMethods["write:"] = fileStreamWriteMethod
-
-  let fileStreamWritelineMethod = createCoreMethod("writeline:")
-  fileStreamWritelineMethod.nativeImpl = cast[pointer](writelineImpl)
-  fileStreamCls.methods["writeline:"] = fileStreamWritelineMethod
-  fileStreamCls.allMethods["writeline:"] = fileStreamWritelineMethod
-
-  # Create Stdout instance - a FileStream instance for standard output
-  let stdoutInstance = Instance(kind: ikObject, class: fileStreamCls, slots: @[])
-
-  # Add Stdout as a global
-  interp.globals[]["Stdout"] = stdoutInstance.toValue()
+  # Note: FileStream class and Stdout instance are created in loadStdlib after
+  # loading FileStream.nemo. We avoid creating them here to prevent class
+  # identity issues where the .nemo file would replace the Nim-created class.
 
   # Create Class instance for each class so it can be stored as a value
   # Add global bindings for classes
@@ -2831,7 +2824,6 @@ proc initGlobals*(interp: var Interpreter) =
   interp.globals[]["True"] = trueCls.toValue()
   interp.globals[]["False"] = falseCls.toValue()
   interp.globals[]["Block"] = blockCls.toValue()
-  interp.globals[]["FileStream"] = fileStreamCls.toValue()
   interp.globals[]["UndefinedObject"] = undefinedObjCls.toValue()
 
   # Add primitive values
@@ -2928,6 +2920,28 @@ proc loadStdlib*(interp: var Interpreter, basePath: string = "") =
       tableClassCache = tableVal.classVal
       debug("Set tableClassCache from Table global")
 
+  # Set up FileStream class and Stdout instance after loading FileStream.nemo
+  # This ensures Stdout uses the class defined in the .nemo file, not a separate
+  # Nim-created class that would cause method lookup issues.
+  if "FileStream" in interp.globals[]:
+    let fsVal = interp.globals[]["FileStream"]
+    if fsVal.kind == vkClass:
+      let fileStreamCls = fsVal.classVal
+      # Register native write: and writeline: methods on the FileStream class
+      let fsWriteMethod = createCoreMethod("write:")
+      fsWriteMethod.nativeImpl = cast[pointer](writeImpl)
+      fileStreamCls.methods["write:"] = fsWriteMethod
+      fileStreamCls.allMethods["write:"] = fsWriteMethod
+      let fsWritelineMethod = createCoreMethod("writeline:")
+      fsWritelineMethod.nativeImpl = cast[pointer](writelineImpl)
+      fileStreamCls.methods["writeline:"] = fsWritelineMethod
+      fileStreamCls.allMethods["writeline:"] = fsWritelineMethod
+      debug("Registered native FileStream methods")
+      # Create Stdout instance from the FileStream class
+      let stdoutInstance = fileStreamCls.newInstance()
+      interp.globals[]["Stdout"] = stdoutInstance.toValue()
+      debug("Created Stdout instance from FileStream class")
+
 # Simple test function (incomplete - commented out)
 ## proc testBasicArithmetic*(): bool =
 ##   ## Test basic arithmetic: 3 + 4 = 7
@@ -2954,6 +2968,10 @@ proc execWithOutput*(interp: var Interpreter, source: string): (string, string) 
 type
   GlobalTableProxy* = ref object
     globals*: ref Table[string, NodeValue]
+
+# Keep GlobalTableProxy references alive - stored as raw pointer in nimValue,
+# the GC needs to see actual Nim refs to prevent collection
+var globalTableProxies: seq[GlobalTableProxy] = @[]
 
 proc createGlobalTableClass*(): Class =
   ## Create the GlobalTable class - a subclass of Table that wraps the globals table
@@ -2992,6 +3010,7 @@ proc initNemoGlobal*(interp: var Interpreter) =
 
   # Create a GlobalTable proxy instance
   let proxy = GlobalTableProxy(globals: interp.globals)
+  globalTableProxies.add(proxy)  # Keep reference alive for GC
   let globalTableInstance = Instance(kind: ikObject, class: globalTableClass, slots: @[])
   globalTableInstance.isNimProxy = true
   globalTableInstance.nimValue = cast[pointer](proxy)
