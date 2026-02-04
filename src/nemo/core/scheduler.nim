@@ -22,6 +22,9 @@ var processProxies: seq[ProcessProxy] = @[]
 # the GC needs to see actual Nim refs to prevent collection
 var interpreterRefs: seq[Interpreter] = @[]
 
+# Exception thrown when Processor yield is called for immediate context switch
+type YieldException = object of CatchableError
+
 # Forward declarations for functions defined later in this file
 proc createProcessClass*(): Class
 proc createSchedulerClass*(): Class
@@ -155,6 +158,11 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   try:
     result = interp.eval(stmt)
     interp.lastResult = result
+  except YieldException:
+    # Process yielded - put it back in ready queue for later
+    debug("Process ", sched.currentProcess.name, " yielded")
+    sched.yieldCurrentProcess()
+    return nilValue()
   except ValueError as e:
     # Process encountered an error - terminate it
     debug("Process ", sched.currentProcess.name, " error: ", e.msg)
@@ -215,11 +223,10 @@ proc runToCompletion*(ctx: SchedulerContext, maxSteps: int = 100000): int =
 # Processor yield implementation
 proc processorYieldImpl(interp: var Interpreter, self: Instance,
                         args: seq[NodeValue]): NodeValue =
-  ## Processor yield - yields the current process
-  ## This is called from Nemo code and triggers a context switch
-  ## The actual yield happens in the scheduler loop, so we just return nil
-  ## and the scheduler will handle the yield after this method returns
-  debug("Processor yield called")
+  ## Processor yield - sets flag for immediate context switch
+  ## The flag is checked after each message send in evalMessage
+  debug("Processor yield called - setting shouldYield flag")
+  interp.shouldYield = true
   return nilValue()
 
 # Forward declarations for proxy creation functions
