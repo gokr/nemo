@@ -1,5 +1,5 @@
 # Nemo - Modern Smalltalk dialect
-version = "0.2.0"
+version = "0.3.0"
 author = "Göran Krampe"
 description = "Modern Smalltalk dialect written in Nim"
 license = "MIT"
