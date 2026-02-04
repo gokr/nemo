@@ -19,7 +19,8 @@ type
     showResults*: bool
 
 # Create a REPL context
-proc newDoitContext*(trace: bool = false, maxStackDepth: int = 10000): DoitContext =
+proc newDoitContext*(trace: bool = false, maxStackDepth: int = 10000,
+                     nemoHome: string = ".", bootstrapFile: string = ""): DoitContext =
   ## Create new REPL context with scheduler support for processes
   # Create scheduler context (initializes Processor, Process, Scheduler globals)
   let schedCtx = newSchedulerContext()
@@ -33,8 +34,11 @@ proc newDoitContext*(trace: bool = false, maxStackDepth: int = 10000): DoitConte
     showResults: true
   )
 
-  # Load standard library
-  loadStdlib(result.interpreter)
+  # Set nemoHome on the interpreter
+  result.interpreter.nemoHome = nemoHome
+
+  # Load standard library (using bootstrap file if provided)
+  loadStdlib(result.interpreter, bootstrapFile)
 
 # Print welcome message
 proc printWelcomeRepl() =
@@ -153,9 +157,10 @@ proc main*() =
   runREPL(ctx)
 
 # File-based script execution
-proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxStackDepth: int = 10000): (string, string) =
+proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxStackDepth: int = 10000,
+                nemoHome: string = ".", bootstrapFile: string = ""): (string, string) =
   ## Run a Nemo script file
-  var scriptCtx = if ctx != nil: ctx else: newDoitContext(maxStackDepth = maxStackDepth)
+  var scriptCtx = if ctx != nil: ctx else: newDoitContext(maxStackDepth = maxStackDepth, nemoHome = nemoHome, bootstrapFile = bootstrapFile)
 
   if not fileExists(filename):
     return ("", "File not found: " & filename)
@@ -190,9 +195,11 @@ proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxSt
       return ("", "")
 
 # Convenience function to run script and print result
-proc execScript*(filename: string, dumpAst = false, maxStackDepth: int = 10000) =
+proc execScript*(filename: string, dumpAst = false, maxStackDepth: int = 10000,
+                 nemoHome: string = ".", bootstrapFile: string = "") =
   ## Execute script and print result
-  let (output, err) = runScript(filename, dumpAst = dumpAst, maxStackDepth = maxStackDepth)
+  let (output, err) = runScript(filename, dumpAst = dumpAst, maxStackDepth = maxStackDepth,
+                                nemoHome = nemoHome, bootstrapFile = bootstrapFile)
   if err.len > 0:
     stderr.writeLine(err)
     quit(1)
@@ -206,24 +213,23 @@ proc testREPL*(): (bool, string) =
   try:
     var ctx = newDoitContext()
 
-    # Test 1: Simple integer
-    let (r1, e1) = ctx.doit("42")
+    # Test 1: Simple integer plus
+    let (r1, e1) = ctx.doit("3 + 4")
     if e1.len > 0:
       return (false, "Test 1 failed: " & e1)
-    if r1.kind != vkInt or r1.intVal != 42:
-      return (false, "Test 1 failed: expected 42, got " & r1.toString())
+    if r1.kind != vkInt or r1.intVal != 7:
+      return (false, "Test 1 failed: expected 7, got " & r1.toString())
 
-    # Test 2: String literal (when strings work)
-    let (r2, e2) = ctx.doit("'hello'")
+    # Test 2: String literal
+    let (r2, e2) = ctx.doit("\"hello\"")
     if e2.len > 0:
-      # Strings might not work yet
-      echo "Note: String test failed as expected: " & e2
+      return (false, "Test 2 failed: " & e2)
     else:
       if r2.kind != vkString or r2.strVal != "hello":
         return (false, "Test 2 failed: expected 'hello', got " & r2.toString())
 
-    # Test 3: Object allocation
-    let (r3, e3) = ctx.doit("Object clone")
+    # Test 3: Object instantiation
+    let (r3, e3) = ctx.doit("Object new")
     if e3.len > 0:
       return (false, "Test 3 failed: " & e3)
     if r3.kind != vkInstance:
@@ -233,21 +239,3 @@ proc testREPL*(): (bool, string) =
   except Exception as e:
     return (false, "Test failed with exception: " & e.msg)
 
-# Example script content for testing
-const exampleScript* = """
-# Example Nemo script
-# This demonstrates basic functionality
-
-# Create objects
-obj1 := Object clone
-obj1 at: 'name' put: 'Alice'
-obj1 at: 'age' put: 30
-
-obj2 := Object clone
-obj2 at: 'name' put: 'Bob'
-obj2 at: 'age' put: 25
-
-# Print values (when print is implemented)
-obj1 name
-obj2 age
-"""

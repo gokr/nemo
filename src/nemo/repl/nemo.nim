@@ -5,196 +5,121 @@
 
 import std/[os, strutils, logging]
 import ../repl/doit
+import ../repl/cli
 import ../core/types
 
 # ============================================================================
 # Main entry point for Nemo REPL
 # ============================================================================
 
-# Version constant
-const VERSION* = block:
-  const nimblePath = currentSourcePath().parentDir().parentDir().parentDir().parentDir() / "nemo.nimble"
-  const nimbleContent = staticRead(nimblePath)
-  var versionStr = "unknown"
-  for line in nimbleContent.splitLines():
-    let trimmed = line.strip()
-    if trimmed.startsWith("version"):
-      let parts = trimmed.split("=")
-      if parts.len >= 2:
-        versionStr = parts[1].strip().strip(chars={'\"', '\''})
-        break
-  versionStr
+const
+  AppName = "nemo"
+  AppDesc = "Nemo REPL - Modern Smalltalk in Nim"
 
-proc parseLogLevel(levelStr: string): Level =
-  ## Parse log level string to Level enum
-  case levelStr.toUpperAscii()
-  of "DEBUG":
-    return lvlDebug
-  of "INFO":
-    return lvlInfo
-  of "WARN", "WARNING":
-    return lvlWarn
-  of "ERROR":
-    return lvlError
-  of "FATAL":
-    return lvlFatal
+let Examples = @[
+  "nemo                              # Start REPL interactively",
+  "nemo examples/demo.nemo           # Run a script file",
+  "nemo -e \"3 + 4\"                  # Evaluate expression (prints: 7)",
+  "nemo --ast examples/test.nemo     # Show AST then execute",
+  "nemo --loglevel DEBUG script.nemo # Run with debug logging",
+  "nemo --home /opt/nemo             # Use custom home directory",
+  "nemo --bootstrap custom.nemo      # Use custom bootstrap file"
+]
+
+proc runTests(maxStackDepth: int): int =
+  ## Run built-in tests, returns exit code
+  echo "Running Nemo tests..."
+  var passed, failed = 0
+
+  # Test 1: Basic arithmetic (3 + 4 = 7)
+  let (t1ok, t1msg) = testREPL()
+  if t1ok:
+    inc passed
+    echo "✓ Test 1: Basic REPL functionality"
   else:
-    echo "Invalid log level: ", levelStr
-    echo "Valid levels: DEBUG, INFO, WARN, ERROR, FATAL"
-    quit(1)
+    inc failed
+    echo "✗ Test 1: " & t1msg
 
-proc showUsage() =
-  echo "Nemo REPL - Modern Smalltalk in Nim"
+  # Test 2: Expression evaluation
+  try:
+    var ctx = newDoitContext(maxStackDepth = maxStackDepth)
+    let (result, err) = ctx.doit("42")
+    if err.len == 0 and result.kind == vkInt and result.intVal == 42:
+      inc passed
+      echo "✓ Test 2: Expression evaluation"
+    else:
+      inc failed
+      echo "✗ Test 2: Expected 42, got: " & result.toString()
+  except:
+    inc failed
+    echo "✗ Test 2: Exception during evaluation"
+
+  # Test 3: Object creation
+  try:
+    var ctx = newDoitContext(maxStackDepth = maxStackDepth)
+    discard ctx.doit("obj := Object clone")
+    let (name, err) = ctx.doit("obj printString")
+    if err.len == 0:
+      inc passed
+      echo "✓ Test 3: Object creation and messaging"
+    else:
+      inc failed
+      echo "✗ Test 3: " & err
+  except:
+    inc failed
+    echo "✗ Test 3: Exception during object test"
+
+  # Summary
   echo ""
-  echo "Usage:"
-  echo "  nemo [options]                    # Start interactive REPL"
-  echo "  nemo [options] <file.nemo>          # Run script file"
-  echo "  nemo [options] -e \"<code>\"       # Evaluate expression"
-  echo "  nemo --test                       # Run built-in tests"
-  echo "  nemo --help                       # Show this help"
-  echo "  nemo --version                    # Show version"
-  echo ""
-  echo "Options:"
-  echo "  --ast              Dump AST after parsing and continue execution"
-  echo "  --loglevel <level> Set log level: DEBUG, INFO, WARN, ERROR (default: ERROR)"
-  echo "  --stack-depth <n>  Set maximum stack depth (default: 10000)"
-  echo ""
-  echo "Examples:"
-  echo "  nemo                              # Start REPL interactively"
-  echo "  nemo examples/demo.nemo             # Run a script file"
-  echo "  nemo -e \"3 + 4\"                 # Evaluate expression (prints: 7)"
-  echo "  nemo --ast examples/test.nemo       # Show AST then execute"
-  echo "  nemo --loglevel DEBUG script.nemo   # Run with debug logging"
-  echo "  nemo --stack-depth 50000 deep.nemo  # Run with increased stack limit"
-  echo ""
+  echo "Tests: " & $passed & " passed, " & $failed & " failed"
+  if failed == 0:
+    echo "All tests passed! ✨"
+    return 0
+  else:
+    echo "Some tests failed. ⚠"
+    return 1
 
 proc main() =
-  # Check command line arguments
-  let allArgs = commandLineParams()
+  # Parse command line arguments
+  let opts = parseCliOptions(commandLineParams(), AppName, AppDesc)
 
-  # Configure logging (default to ERROR level)
-  var logLevel = lvlError
-  var dumpAst = false
-  var maxStackDepth = 10000
-  var positionalArgs: seq[string] = @[]
+  # Configure logging
+  setupLogging(opts.logLevel)
 
-  # Parse flags and collect positional arguments
-  var i = 0
-  while i < allArgs.len:
-    case allArgs[i]
-    of "--loglevel":
-      if i + 1 < allArgs.len:
-        logLevel = parseLogLevel(allArgs[i + 1])
-        inc i  # Skip the value
-      else:
-        echo "Error: --loglevel requires a value"
-        quit(1)
-    of "--stack-depth":
-      if i + 1 < allArgs.len:
-        try:
-          maxStackDepth = parseInt(allArgs[i + 1])
-          if maxStackDepth < 100:
-            echo "Error: --stack-depth must be at least 100"
-            quit(1)
-        except ValueError:
-          echo "Error: --stack-depth requires an integer value"
-          quit(1)
-        inc i  # Skip the value
-      else:
-        echo "Error: --stack-depth requires a value"
-        quit(1)
-    of "--ast":
-      dumpAst = true
-    of "--help", "-h", "--version", "-v", "--test":
-      # These will be handled later
-      positionalArgs.add(allArgs[i])
-    else:
-      # Collect positional arguments
-      positionalArgs.add(allArgs[i])
-    inc i
-
-  # Add console logger with specified level
-  var consoleLogger = newConsoleLogger()
-  consoleLogger.levelThreshold = logLevel
-  addHandler(consoleLogger)
-
-  # Now handle commands based on positional arguments
-  if positionalArgs.len == 0:
-    # Start REPL
-    var ctx = newDoitContext(maxStackDepth = maxStackDepth)
-    runREPL(ctx)
-  elif positionalArgs.len == 1:
-    case positionalArgs[0]:
+  # Handle help and version first
+  if opts.positionalArgs.len == 1:
+    case opts.positionalArgs[0]:
     of "--help", "-h":
-      showUsage()
+      showUsage(AppName, AppDesc, Examples)
+      quit(0)
     of "--version", "-v":
       echo "Nemo " & VERSION
+      quit(0)
     of "--test":
-      # Run tests
-      echo "Running Nemo tests..."
-      var passed, failed = 0
+      quit(runTests(opts.maxStackDepth))
 
-      # Test 1: Basic arithmetic (3 + 4 = 7)
-      let (t1ok, t1msg) = testREPL()
-      if t1ok:
-        inc passed
-        echo "✓ Test 1: Basic REPL functionality"
-      else:
-        inc failed
-        echo "✗ Test 1: " & t1msg
+  # Set NEMO_HOME environment for child processes
+  putEnv("NEMO_HOME", opts.nemoHome)
 
-      # Test 2: Expression evaluation
-      try:
-        var ctx = newDoitContext(maxStackDepth = maxStackDepth)
-        let (result, err) = ctx.doit("42")
-        if err.len == 0 and result.kind == vkInt and result.intVal == 42:
-          inc passed
-          echo "✓ Test 2: Expression evaluation"
-        else:
-          inc failed
-          echo "✗ Test 2: Expected 42, got: " & result.toString()
-      except:
-        inc failed
-        echo "✗ Test 2: Exception during evaluation"
-
-      # Test 3: Object creation
-      try:
-        var ctx = newDoitContext(maxStackDepth = maxStackDepth)
-        discard ctx.doit("obj := Object clone")
-        let (name, err) = ctx.doit("obj printString")
-        if err.len == 0:
-          inc passed
-          echo "✓ Test 3: Object creation and messaging"
-        else:
-          inc failed
-          echo "✗ Test 3: " & err
-      except:
-        inc failed
-        echo "✗ Test 3: Exception during object test"
-
-      # Summary
-      echo ""
-      echo "Tests: " & $passed & " passed, " & $failed & " failed"
-      if failed == 0:
-        echo "All tests passed! ✨"
-        quit(0)
-      else:
-        echo "Some tests failed. ⚠"
-        quit(1)
+  # Now handle commands based on positional arguments
+  if opts.positionalArgs.len == 0:
+    # Start REPL
+    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome, bootstrapFile = opts.bootstrapFile)
+    runREPL(ctx)
+  elif opts.positionalArgs.len == 1:
+    # Check if it's a file
+    if fileExists(opts.positionalArgs[0]):
+      # Run script file
+      execScript(opts.positionalArgs[0], opts.dumpAst, opts.maxStackDepth, opts.nemoHome, opts.bootstrapFile)
     else:
-      # Check if it's a file (any extension, not just .nemo)
-      if fileExists(positionalArgs[0]):
-        # Run script file
-        execScript(positionalArgs[0], dumpAst, maxStackDepth)
-      else:
-        # Unrecognized argument
-        echo "Unknown option or file not found: " & positionalArgs[0]
-        echo "Use --help for usage information"
-        quit(1)
-  elif positionalArgs.len == 2 and positionalArgs[0] == "-e":
+      # Unrecognized argument
+      echo "Unknown option or file not found: " & opts.positionalArgs[0]
+      echo "Use --help for usage information"
+      quit(1)
+  elif opts.positionalArgs.len == 2 and opts.positionalArgs[0] == "-e":
     # Evaluate expression
-    var ctx = newDoitContext(maxStackDepth = maxStackDepth)
-    let (result, err) = ctx.doit(positionalArgs[1], dumpAst)
+    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome, bootstrapFile = opts.bootstrapFile)
+    let (result, err) = ctx.doit(opts.positionalArgs[1], opts.dumpAst)
     if err.len > 0:
       stderr.writeLine("Error: " & err)
       quit(1)
@@ -204,7 +129,7 @@ proc main() =
       quit(0)
   else:
     echo "Invalid arguments"
-    showUsage()
+    showUsage(AppName, AppDesc, Examples)
     quit(1)
 
 # Entry point
