@@ -34,6 +34,7 @@ type
     nemoHome*: string
     bootstrapFile*: string
     positionalArgs*: seq[string]
+    stackless*: bool
 
 proc parseLogLevel*(levelStr: string): Level =
   ## Parse log level string to Level enum
@@ -62,7 +63,8 @@ proc parseCliOptions*(allArgs: seq[string], appName: string, appDesc: string,
     maxStackDepth: DefaultStackDepth,
     nemoHome: getEnv("NEMO_HOME", DefaultNemoHome),
     bootstrapFile: "",
-    positionalArgs: @[]
+    positionalArgs: @[],
+    stackless: false
   )
 
   var i = 0
@@ -105,6 +107,8 @@ proc parseCliOptions*(allArgs: seq[string], appName: string, appDesc: string,
         quit(1)
     of "--ast":
       result.dumpAst = true
+    of "--stackless":
+      result.stackless = true
     of "--help", "-h", "--version", "-v", "--test":
       result.positionalArgs.add(allArgs[i])
     else:
@@ -135,6 +139,7 @@ proc showUsage*(appName: string, appDesc: string, examples: seq[string] = @[],
   echo "  --stack-depth <n>  Set maximum stack depth (default: 10000)"
   if appName == "nemo":
     echo "  --ast              Dump AST after parsing and continue execution"
+    echo "  --stackless        Use stackless VM with explicit work queue (experimental)"
   if extraOptions.len > 0:
     echo extraOptions
   echo ""

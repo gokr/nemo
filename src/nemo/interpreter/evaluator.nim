@@ -422,12 +422,12 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
   return (false, nilValue())
 
 # Backward-compatible wrapper
-proc lookupVariable(interp: Interpreter, name: string): NodeValue =
+proc lookupVariable*(interp: Interpreter, name: string): NodeValue =
   ## Look up variable (returns nilValue if not found)
   lookupVariableWithStatus(interp, name).value
 
 # Variable assignment
-proc setVariable(interp: var Interpreter, name: string, value: NodeValue) =
+proc setVariable*(interp: var Interpreter, name: string, value: NodeValue) =
   ## Set variable in current activation, captured environment, or create global
   debug("Setting variable: ", name, " = ", value.toString(), " (activation: ", interp.currentActivation != nil, ")")
 
@@ -662,7 +662,7 @@ type
     definingClass*: Class       # class where method was found (for super)
     found*: bool
 
-proc lookupMethod(interp: Interpreter, receiver: Instance, selector: string): MethodResult =
+proc lookupMethod*(interp: Interpreter, receiver: Instance, selector: string): MethodResult =
   ## Look up method in receiver's class using O(1) class lookup
   if receiver == nil or receiver.class == nil:
     debug("Method not found: ", selector, " (receiver or class is nil)")
@@ -684,7 +684,7 @@ proc lookupMethod(interp: Interpreter, receiver: Instance, selector: string): Me
   debug("Method not found: ", selector)
   return MethodResult(currentMethod: nil, receiver: receiver, definingClass: nil, found: false)
 
-proc lookupClassMethod(cls: Class, selector: string): MethodResult =
+proc lookupClassMethod*(cls: Class, selector: string): MethodResult =
   ## Look up class method in class (fast O(1) lookup)
   if cls == nil:
     return MethodResult(currentMethod: nil, receiver: nil, definingClass: nil, found: false)

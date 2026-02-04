@@ -104,13 +104,14 @@ proc main() =
   # Now handle commands based on positional arguments
   if opts.positionalArgs.len == 0:
     # Start REPL
-    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome, bootstrapFile = opts.bootstrapFile)
+    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome,
+                             bootstrapFile = opts.bootstrapFile, stackless = opts.stackless)
     runREPL(ctx)
   elif opts.positionalArgs.len == 1:
     # Check if it's a file
     if fileExists(opts.positionalArgs[0]):
       # Run script file
-      execScript(opts.positionalArgs[0], opts.dumpAst, opts.maxStackDepth, opts.nemoHome, opts.bootstrapFile)
+      execScript(opts.positionalArgs[0], opts.dumpAst, opts.maxStackDepth, opts.nemoHome, opts.bootstrapFile, opts.stackless)
     else:
       # Unrecognized argument
       echo "Unknown option or file not found: " & opts.positionalArgs[0]
@@ -118,7 +119,8 @@ proc main() =
       quit(1)
   elif opts.positionalArgs.len == 2 and opts.positionalArgs[0] == "-e":
     # Evaluate expression
-    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome, bootstrapFile = opts.bootstrapFile)
+    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome,
+                             bootstrapFile = opts.bootstrapFile, stackless = opts.stackless)
     let (result, err) = ctx.doit(opts.positionalArgs[1], opts.dumpAst)
     if err.len > 0:
       stderr.writeLine("Error: " & err)
