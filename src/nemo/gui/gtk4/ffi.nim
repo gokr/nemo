@@ -22,6 +22,13 @@ type
   GObject* = pointer
   GCallback* = pointer
   GClosureNotify* = pointer
+  GtkMenuBar* = pointer
+  GtkMenu* = pointer
+  GtkMenuItem* = pointer
+  GtkTextView* = pointer
+  GtkTextBuffer* = pointer
+  GtkTextIter* = pointer
+  GtkScrolledWindow* = pointer
 
   GType* = csize_t
   GConnectFlags* = cint
@@ -125,3 +132,50 @@ when defined(gtk4):
 else:
   proc initGtk*() =
     gtkInit(nil, nil)
+
+# GTK MenuBar
+proc gtkMenuBarNew*(): GtkMenuBar {.cdecl, importc: "gtk_menu_bar_new".}
+
+# GTK Menu
+proc gtkMenuNew*(): GtkMenu {.cdecl, importc: "gtk_menu_new".}
+proc gtkMenuPopupAtPointer*(menu: GtkMenu, triggerEvent: pointer) {.cdecl, importc: "gtk_menu_popup_at_pointer".}
+
+# GTK MenuItem
+proc gtkMenuItemNew*(): GtkMenuItem {.cdecl, importc: "gtk_menu_item_new".}
+proc gtkMenuItemNewWithLabel*(label: cstring): GtkMenuItem {.cdecl, importc: "gtk_menu_item_new_with_label".}
+
+# MenuBar operations (GTK3)
+when not defined(gtk4):
+  proc gtkShellAppend*(menuShell: pointer, child: GtkWidget) {.cdecl, importc: "gtk_shell_append".}
+
+# MenuItem operations (GTK4)
+when defined(gtk4):
+  # GTK4 uses different menu API with GMenuModel
+  # For simplicity, we'll use the simpler approach with buttons for now
+  # Full GTK4 popover menus require GAction*
+  discard
+
+# TextView and TextBuffer
+proc gtkTextViewNew*(): GtkTextView {.cdecl, importc: "gtk_text_view_new".}
+proc gtkTextViewGetBuffer*(view: GtkTextView): GtkTextBuffer {.cdecl, importc: "gtk_text_view_get_buffer".}
+proc gtkTextViewSetBuffer*(view: GtkTextView, buffer: GtkTextBuffer) {.cdecl, importc: "gtk_text_view_set_buffer".}
+
+proc gtkTextBufferNew*(tagTable: pointer = nil): GtkTextBuffer {.cdecl, importc: "gtk_text_buffer_new".}
+proc gtkTextBufferSetText*(buffer: GtkTextBuffer, text: cstring, len: cint = -1) {.cdecl, importc: "gtk_text_buffer_set_text".}
+proc gtkTextBufferGetText*(buffer: GtkTextBuffer, start: GtkTextIter, endIter: GtkTextIter,
+                          includeHidden: cint): cstring {.cdecl, importc: "gtk_text_buffer_get_text".}
+proc gtkTextBufferGetStartIter*(buffer: GtkTextBuffer, iter: GtkTextIter) {.cdecl, importc: "gtk_text_buffer_get_start_iter".}
+proc gtkTextBufferGetEndIter*(buffer: GtkTextBuffer, iter: GtkTextIter) {.cdecl, importc: "gtk_text_buffer_get_end_iter".}
+proc gtkTextBufferInsertAtCursor*(buffer: GtkTextBuffer, text: cstring, len: cint = -1) {.cdecl, importc: "gtk_text_buffer_insert_at_cursor".}
+
+# GtkTextIter operations
+proc gtkTextIterGetOffset*(iter: GtkTextIter): cint {.cdecl, importc: "gtk_text_iter_get_offset".}
+proc gtkTextBufferGetIterAtOffset*(buffer: GtkTextBuffer, iter: GtkTextIter, charOffset: cint) {.cdecl, importc: "gtk_text_buffer_get_iter_at_offset".}
+proc gtkTextBufferDelete*(buffer: GtkTextBuffer, start: GtkTextIter, endIter: GtkTextIter) {.cdecl, importc: "gtk_text_buffer_delete".}
+
+# ScrolledWindow (for wrapping TextView)
+proc gtkScrolledWindowNew*(): GtkScrolledWindow {.cdecl, importc: "gtk_scrolled_window_new".}
+when defined(gtk4):
+  proc gtkScrolledWindowSetChild*(scrolled: GtkScrolledWindow, child: GtkWidget) {.cdecl, importc: "gtk_scrolled_window_set_child".}
+else:
+  proc gtkContainerAdd*(container: pointer, widget: GtkWidget) {.cdecl, importc: "gtk_container_add".}

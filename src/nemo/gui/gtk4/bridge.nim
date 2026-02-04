@@ -12,6 +12,12 @@ import ./widget
 import ./window
 import ./button
 import ./box
+import ./menubar
+import ./menu
+import ./menuitem
+import ./textview
+import ./textbuffer
+import ./label
 
 ## Forward declarations
 proc initGtkBridge*(interp: var Interpreter)
@@ -207,6 +213,176 @@ proc initGtkBridge*(interp: var Interpreter) =
   interp.globals[]["GtkBox"] = boxCls.toValue()
   debug("Registered GtkBox class")
 
+  # Create Label class (for display widgets)
+  let labelCls = newClass(superclasses = @[widgetCls], name = "GtkLabel")
+  labelCls.tags = @["GTK", "Label", "Display"]
+  labelCls.isNimProxy = true
+  labelCls.nemoType = "GtkLabel"
+
+  # Add Label class methods
+  let labelNewMethod = createCoreMethod("new")
+  labelNewMethod.nativeImpl = cast[pointer](labelNewImpl)
+  labelNewMethod.hasInterpreterParam = true
+  addMethodToClass(labelCls, "new", labelNewMethod, isClassMethod = true)
+
+  let labelNewLabelMethod = createCoreMethod("newLabel:")
+  labelNewLabelMethod.nativeImpl = cast[pointer](labelNewLabelImpl)
+  labelNewLabelMethod.hasInterpreterParam = true
+  addMethodToClass(labelCls, "newLabel:", labelNewLabelMethod, isClassMethod = true)
+
+  # Add Label instance methods
+  let labelSetTextMethod = createCoreMethod("text:")
+  labelSetTextMethod.nativeImpl = cast[pointer](labelSetTextImpl)
+  labelSetTextMethod.hasInterpreterParam = true
+  addMethodToClass(labelCls, "text:", labelSetTextMethod)
+
+  let labelGetTextMethod = createCoreMethod("text")
+  labelGetTextMethod.nativeImpl = cast[pointer](labelGetTextImpl)
+  labelGetTextMethod.hasInterpreterParam = true
+  addMethodToClass(labelCls, "text", labelGetTextMethod)
+
+  interp.globals[]["GtkLabel"] = labelCls.toValue()
+  debug("Registered GtkLabel class")
+
+  # Create TextView class (for multiple line text editing)
+  let textViewCls = newClass(superclasses = @[widgetCls], name = "GtkTextView")
+  textViewCls.tags = @["GTK", "TextView", "Editor"]
+  textViewCls.isNimProxy = true
+  textViewCls.nemoType = "GtkTextView"
+
+  # Add TextView class methods
+  let textViewNewMethod = createCoreMethod("new")
+  textViewNewMethod.nativeImpl = cast[pointer](textViewNewImpl)
+  textViewNewMethod.hasInterpreterParam = true
+  addMethodToClass(textViewCls, "new", textViewNewMethod, isClassMethod = true)
+
+  # Add TextView instance methods
+  let textViewGetBufferMethod = createCoreMethod("getBuffer:")
+  textViewGetBufferMethod.nativeImpl = cast[pointer](textViewGetBufferImpl)
+  textViewGetBufferMethod.hasInterpreterParam = true
+  addMethodToClass(textViewCls, "getBuffer:", textViewGetBufferMethod)
+
+  let textViewSetBufferMethod = createCoreMethod("setBuffer:")
+  textViewSetBufferMethod.nativeImpl = cast[pointer](textViewSetBufferImpl)
+  textViewSetBufferMethod.hasInterpreterParam = true
+  addMethodToClass(textViewCls, "setBuffer:", textViewSetBufferMethod)
+
+  let textViewGetTextMethod = createCoreMethod("getText:")
+  textViewGetTextMethod.nativeImpl = cast[pointer](textViewGetTextImpl)
+  textViewGetTextMethod.hasInterpreterParam = true
+  addMethodToClass(textViewCls, "getText:", textViewGetTextMethod)
+
+  let textViewSetTextMethod = createCoreMethod("setText:")
+  textViewSetTextMethod.nativeImpl = cast[pointer](textViewSetTextImpl)
+  textViewSetTextMethod.hasInterpreterParam = true
+  addMethodToClass(textViewCls, "setText:", textViewSetTextMethod)
+
+  interp.globals[]["GtkTextView"] = textViewCls.toValue()
+  debug("Registered GtkTextView class")
+
+  # Create TextBuffer class (for TextView text storage)
+  let textBufferCls = newClass(superclasses = @[objectClass], name = "GtkTextBuffer")
+  textBufferCls.tags = @["GTK", "TextBuffer"]
+  textBufferCls.isNimProxy = true
+  textBufferCls.nemoType = "GtkTextBuffer"
+
+  # Add TextBuffer class methods
+  let textBufferNewMethod = createCoreMethod("new")
+  textBufferNewMethod.nativeImpl = cast[pointer](textBufferNewImpl)
+  textBufferNewMethod.hasInterpreterParam = true
+  addMethodToClass(textBufferCls, "new", textBufferNewMethod, isClassMethod = true)
+
+  # Add TextBuffer instance methods
+  let textBufferSetTextMethod = createCoreMethod("setText:")
+  textBufferSetTextMethod.nativeImpl = cast[pointer](textBufferSetTextImpl)
+  textBufferSetTextMethod.hasInterpreterParam = true
+  addMethodToClass(textBufferCls, "setText:", textBufferSetTextMethod)
+
+  let textBufferGetTextMethod = createCoreMethod("getText:")
+  textBufferGetTextMethod.nativeImpl = cast[pointer](textBufferGetTextImpl)
+  textBufferGetTextMethod.hasInterpreterParam = true
+  addMethodToClass(textBufferCls, "getText:", textBufferGetTextMethod)
+
+  let textBufferInsertAtMethod = createCoreMethod("insert:at:")
+  textBufferInsertAtMethod.nativeImpl = cast[pointer](textBufferInsertAtImpl)
+  textBufferInsertAtMethod.hasInterpreterParam = true
+  addMethodToClass(textBufferCls, "insert:at:", textBufferInsertAtMethod)
+
+  let textBufferDeleteToMethod = createCoreMethod("delete:to:")
+  textBufferDeleteToMethod.nativeImpl = cast[pointer](textBufferDeleteToImpl)
+  textBufferDeleteToMethod.hasInterpreterParam = true
+  addMethodToClass(textBufferCls, "delete:to:", textBufferDeleteToMethod)
+
+  interp.globals[]["GtkTextBuffer"] = textBufferCls.toValue()
+  debug("Registered GtkTextBuffer class")
+
+  # Create MenuItem class
+  let menuItemCls = newClass(superclasses = @[widgetCls], name = "GtkMenuItem")
+  menuItemCls.tags = @["GTK", "MenuItem", "Menu"]
+  menuItemCls.isNimProxy = true
+  menuItemCls.nemoType = "GtkMenuItem"
+
+  # Add MenuItem class methods
+  let menuItemNewMethod = createCoreMethod("new")
+  menuItemNewMethod.nativeImpl = cast[pointer](menuItemNewImpl)
+  menuItemNewMethod.hasInterpreterParam = true
+  addMethodToClass(menuItemCls, "new", menuItemNewMethod, isClassMethod = true)
+
+  let menuItemNewLabelMethod = createCoreMethod("newLabel:")
+  menuItemNewLabelMethod.nativeImpl = cast[pointer](menuItemNewLabelImpl)
+  menuItemNewLabelMethod.hasInterpreterParam = true
+  addMethodToClass(menuItemCls, "newLabel:", menuItemNewLabelMethod, isClassMethod = true)
+
+  # Add MenuItem instance methods
+  let menuItemActivateMethod = createCoreMethod("activate:")
+  menuItemActivateMethod.nativeImpl = cast[pointer](menuItemActivateImpl)
+  menuItemActivateMethod.hasInterpreterParam = true
+  addMethodToClass(menuItemCls, "activate:", menuItemActivateMethod)
+
+  interp.globals[]["GtkMenuItem"] = menuItemCls.toValue()
+  debug("Registered GtkMenuItem class")
+
+  # Create Menu class
+  let menuCls = newClass(superclasses = @[objectClass], name = "GtkMenu")
+  menuCls.tags = @["GTK", "Menu"]
+  menuCls.isNimProxy = true
+  menuCls.nemoType = "GtkMenu"
+
+  # Add Menu instance methods
+  let menuAppendMethod = createCoreMethod("append:")
+  menuAppendMethod.nativeImpl = cast[pointer](menuAppendImpl)
+  menuAppendMethod.hasInterpreterParam = true
+  addMethodToClass(menuCls, "append:", menuAppendMethod)
+
+  let menuPopupAtPointerMethod = createCoreMethod("popup")
+  menuPopupAtPointerMethod.nativeImpl = cast[pointer](menuPopupAtPointerImpl)
+  menuPopupAtPointerMethod.hasInterpreterParam = true
+  addMethodToClass(menuCls, "popup", menuPopupAtPointerMethod)
+
+  interp.globals[]["GtkMenu"] = menuCls.toValue()
+  debug("Registered GtkMenu class")
+
+  # Create MenuBar class
+  let menuBarCls = newClass(superclasses = @[widgetCls], name = "GtkMenuBar")
+  menuBarCls.tags = @["GTK", "MenuBar", "Menu"]
+  menuBarCls.isNimProxy = true
+  menuBarCls.nemoType = "GtkMenuBar"
+
+  # Add MenuBar class method
+  let menuBarNewMethod = createCoreMethod("new")
+  menuBarNewMethod.nativeImpl = cast[pointer](gtkMenuBarNew)
+  menuBarNewMethod.hasInterpreterParam = false
+  addMethodToClass(menuBarCls, "new", menuBarNewMethod, isClassMethod = true)
+
+  # Add MenuBar instance method
+  let menuBarAppendMethod = createCoreMethod("append:")
+  menuBarAppendMethod.nativeImpl = cast[pointer](menuBarAppendImpl)
+  menuBarAppendMethod.hasInterpreterParam = true
+  addMethodToClass(menuBarCls, "append:", menuBarAppendMethod)
+
+  interp.globals[]["GtkMenuBar"] = menuBarCls.toValue()
+  debug("Registered GtkMenuBar class")
+
   # Register Launcher class (derived from GtkWindow)
   let launcherCls = newClass(superclasses = @[windowCls], name = "Launcher")
   launcherCls.tags = @["GTK", "Window", "Launcher", "IDE"]
@@ -235,7 +411,13 @@ proc loadGtkWrapperFiles*(interp: var Interpreter, basePath: string = "") =
     "Widget.nemo",
     "Window.nemo",
     "Button.nemo",
-    "Box.nemo"
+    "Box.nemo",
+    "Label.nemo",
+    "TextView.nemo",
+    "TextBuffer.nemo",
+    "MenuItem.nemo",
+    "Menu.nemo",
+    "MenuBar.nemo"
   ]
 
   for filename in wrapperFiles:
@@ -260,6 +442,7 @@ proc loadIdeToolFiles*(interp: var Interpreter, basePath: string = "") =
 
   let toolFiles = [
     "Transcript.nemo",
+    "Workspace.nemo",
     "Launcher.nemo"
   ]
 
