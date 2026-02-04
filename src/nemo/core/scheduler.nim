@@ -301,6 +301,11 @@ proc initProcessorGlobal*(interp: var Interpreter) =
   if schedulerCls != nil:
     interp.globals[]["Scheduler"] = schedulerCls.toValue()
 
+  # Protect process-related globals
+  protectGlobal("Processor")
+  protectGlobal("Process")
+  protectGlobal("Scheduler")
+
 # ============================================================================
 # Process Proxy and Class
 # ============================================================================

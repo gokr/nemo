@@ -18,6 +18,20 @@ import ../interpreter/activation
 # Interprets AST nodes and executes currentMethods
 # ============================================================================
 
+# Protected globals that cannot be reassigned
+var protectedGlobals*: seq[string] = @["Nemo", "GlobalTable", "Object", "Root", "Mixin", "nil", "true", "false"]
+
+# Add a global to the protected list
+proc protectGlobal*(name: string) =
+  ## Protect a global variable from being reassigned
+  if name notin protectedGlobals:
+    protectedGlobals.add(name)
+
+# Check if a name is a protected global
+proc isProtectedGlobal*(name: string): bool =
+  ## Check if a global variable is protected from reassignment
+  name in protectedGlobals
+
 type
   EvalError* = object of ValueError
     node*: Node
@@ -457,6 +471,9 @@ proc setVariable(interp: var Interpreter, name: string, value: NodeValue) =
 
     # Check if variable exists in globals - if so, update it there
     if name in interp.globals[]:
+      # Check for protected global
+      if isProtectedGlobal(name):
+        raise newException(EvalError, "Cannot reassign protected global: " & name)
       interp.globals[][name] = value
       debug("Global updated: ", name, " = ", value.toString())
       return
@@ -474,6 +491,14 @@ proc setVariable(interp: var Interpreter, name: string, value: NodeValue) =
     return
 
   # Set as global
+  # Check for protected global
+  if isProtectedGlobal(name):
+    raise newException(EvalError, "Cannot reassign protected global: " & name)
+
+  # Check capitalization: globals must start with uppercase (except special values)
+  if name.len > 0 and name[0] notin {'A'..'Z'}:
+    raise newException(EvalError, "Global variables must start with uppercase letter: " & name)
+
   # If assigning a Class, set its name to the variable name
   if value.kind == vkClass and value.classVal != nil:
     value.classVal.name = name
@@ -2463,6 +2488,32 @@ proc initGlobals*(interp: var Interpreter) =
   objectCls.methods["println"] = printlnMethod
   objectCls.allMethods["println"] = printlnMethod
 
+  # Add eval class primitive for evaluating code strings
+  proc primitiveEvalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+    ## Evaluate a Nemo code string and return the result
+    ## Takes one argument: the code string to evaluate
+    if args.len < 1 or args[0].kind != vkString:
+      return nilValue()
+
+    let code = args[0].strVal
+    let (results, err) = interp.evalStatements(code)
+    if err.len > 0:
+      # Return error as string
+      return err.toValue()
+    if results.len > 0:
+      # Return the last result
+      return results[^1]
+    return nilValue()
+
+  let evalMethod = createCoreMethod("eval:")
+  evalMethod.nativeImpl = cast[pointer](primitiveEvalImpl)
+  evalMethod.hasInterpreterParam = true
+  objectCls.classMethods["eval:"] = evalMethod
+  objectCls.allClassMethods["eval:"] = evalMethod
+  # Also register as primitiveEval: for declarative syntax
+  objectCls.classMethods["primitiveEval:"] = evalMethod
+  objectCls.allClassMethods["primitiveEval:"] = evalMethod
+
   # Create Number class (derives from Object)
   let numberCls = newClass(superclasses = @[objectCls], name = "Number")
   numberCls.tags = @["Number"]
@@ -2831,6 +2882,25 @@ proc initGlobals*(interp: var Interpreter) =
   interp.globals[]["false"] = NodeValue(kind: vkBool, boolVal: false)
   interp.globals[]["nil"] = nilValue()
 
+  # Protect core classes and values from reassignment
+  protectGlobal("Class")
+  protectGlobal("Root")
+  protectGlobal("Object")
+  protectGlobal("Number")
+  protectGlobal("Integer")
+  protectGlobal("Float")
+  protectGlobal("String")
+  protectGlobal("Array")
+  protectGlobal("Table")
+  protectGlobal("Boolean")
+  protectGlobal("True")
+  protectGlobal("False")
+  protectGlobal("Block")
+  protectGlobal("UndefinedObject")
+  protectGlobal("true")
+  protectGlobal("false")
+  protectGlobal("nil")
+
   # Initialize the Nemo global - an instance of GlobalTable that wraps global namespace
   # Note: Process and Scheduler classes are initialized by initProcessorGlobal
   # which is called by newSchedulerContext in the scheduler module
@@ -3015,9 +3085,8 @@ proc initNemoGlobal*(interp: var Interpreter) =
   globalTableInstance.isNimProxy = true
   globalTableInstance.nimValue = cast[pointer](proxy)
 
-  # Add to globals as 'Nemo' and 'Global' for convenience
+  # Add to globals as 'Nemo' (the global namespace accessor)
   interp.globals[]["Nemo"] = globalTableInstance.toValue()
-  interp.globals[]["Global"] = globalTableInstance.toValue()
 
   # Also add the GlobalTable class itself to globals for reflection
   interp.globals[]["GlobalTable"] = globalTableClass.toValue()
@@ -3104,6 +3173,46 @@ proc globalTableIncludesKeyImpl(interp: var Interpreter, self: Instance, args: s
     # Fall through to regular Table behavior
     return tableIncludesKeyImpl(self, args)
 
+proc globalTableLoadImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## GlobalTable load: - load and evaluate a Nemo file
+  ## Resolves paths relative to NEMO_HOME if not absolute
+  if args.len < 1:
+    return nilValue()
+
+  # Get the file path from arguments
+  let pathArg = args[0]
+  let filePath = case pathArg.kind
+    of vkString: pathArg.strVal
+    of vkSymbol: pathArg.symVal
+    else: ""
+
+  if filePath.len == 0:
+    return nilValue()
+
+  # Resolve path relative to nemoHome if not absolute
+  let resolvedPath = if filePath.isAbsolute:
+                       filePath
+                     else:
+                       interp.nemoHome / filePath
+
+  # Check if file exists
+  if not fileExists(resolvedPath):
+    stderr.writeLine("Error: File not found: ", resolvedPath)
+    return nilValue()
+
+  # Read and evaluate the file
+  try:
+    let source = readFile(resolvedPath)
+    let (_, err) = interp.evalStatements(source)
+    if err.len > 0:
+      stderr.writeLine("Error loading ", resolvedPath, ": ", err)
+      return nilValue()
+    debug("Successfully loaded: ", resolvedPath)
+    return toValue(true)
+  except Exception as e:
+    stderr.writeLine("Error reading ", resolvedPath, ": ", e.msg)
+    return nilValue()
+
 # Patch GlobalTable methods after class creation
 proc installGlobalTableMethods*(globalTableClass: Class) =
   ## Install special GlobalTable methods that wrap the globals table
@@ -3133,3 +3242,9 @@ proc installGlobalTableMethods*(globalTableClass: Class) =
   includesKeyMethod.nativeImpl = cast[pointer](globalTableIncludesKeyImpl)
   includesKeyMethod.hasInterpreterParam = true
   addMethodToClass(globalTableClass, "includesKey:", includesKeyMethod)
+
+  # Add load: method for loading Nemo files
+  let loadMethod = createCoreMethod("load:")
+  loadMethod.nativeImpl = cast[pointer](globalTableLoadImpl)
+  loadMethod.hasInterpreterParam = true
+  addMethodToClass(globalTableClass, "load:", loadMethod)

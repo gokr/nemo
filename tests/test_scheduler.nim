@@ -176,10 +176,10 @@ suite "Green Threads - Scheduler Integration":
     initGlobals(interp)
 
     # Set up some state
-    discard interp.doit("x := 10")
+    discard interp.doit("X := 10")
 
     # Verify state persists
-    let (result, err) = interp.doit("x")
+    let (result, err) = interp.doit("X")
     check err.len == 0
     check result.kind == vkInt
     check result.intVal == 10

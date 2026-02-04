@@ -9,7 +9,7 @@ Nemo at: "counter" put: 0.
 
 Stdout writeline: "2. Forking worker processes...".
 
-p1 := Processor fork: [
+P1 := Processor fork: [
     Stdout writeline: "Worker 1 starting".
     1 to: 3 do: [:i |
         current := Nemo at: "counter".
@@ -20,7 +20,7 @@ p1 := Processor fork: [
     Stdout writeline: "Worker 1 done"
 ].
 
-p2 := Processor fork: [
+P2 := Processor fork: [
     Stdout writeline: "Worker 2 starting".
     1 to: 3 do: [:i |
         current := Nemo at: "counter".
@@ -33,25 +33,25 @@ p2 := Processor fork: [
 
 Stdout writeline: "".
 Stdout writeline: "3. Process info:".
-Stdout writeline: ("   Process 1 - PID: " , (p1 pid asString) , ", Name: " , p1 name , ", State: " , p1 state).
-Stdout writeline: ("   Process 2 - PID: " , (p2 pid asString) , ", Name: " , p2 name , ", State: " , p2 state).
+Stdout writeline: ("   Process 1 - PID: " , (P1 pid asString) , ", Name: " , P1 name , ", State: " , P1 state).
+Stdout writeline: ("   Process 2 - PID: " , (P2 pid asString) , ", Name: " , P2 name , ", State: " , P2 state).
 
 Stdout writeline: "".
 Stdout writeline: "4. Demonstrating suspend/resume...".
-p1 suspend.
-Stdout writeline: ("   After suspend - Process 1 state: " , p1 state).
-p1 resume.
-Stdout writeline: ("   After resume - Process 1 state: " , p1 state).
+P1 suspend.
+Stdout writeline: ("   After suspend - Process 1 state: " , P1 state).
+P1 resume.
+Stdout writeline: ("   After resume - Process 1 state: " , P1 state).
 
 Stdout writeline: "".
 Stdout writeline: "5. Running processes...".
-steps := Scheduler runToCompletion: 1000.
-Stdout writeline: ("   Steps executed: " , steps asString).
+Steps := Scheduler runToCompletion: 1000.
+Stdout writeline: ("   Steps executed: " , Steps asString).
 
 Stdout writeline: "".
 Stdout writeline: "6. Final process states:".
-Stdout writeline: ("   Process 1 state: " , p1 state).
-Stdout writeline: ("   Process 2 state: " , p2 state).
+Stdout writeline: ("   Process 1 state: " , P1 state).
+Stdout writeline: ("   Process 2 state: " , P2 state).
 Stdout writeline: ("   Final counter: " , (Nemo at: "counter") asString).
 
 Stdout writeline: "".

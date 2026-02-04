@@ -96,7 +96,7 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    let (result, err) = interp.doit("p := Processor fork: [42]")
+    let (result, err) = interp.doit("P := Processor fork: [42]")
     check err.len == 0
     check result.kind == vkInstance
     check result.instVal.class.nemoType == "Process"
@@ -111,9 +111,9 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
+    discard interp.doit("P := Processor fork: [42]")
 
-    let (pid, err) = interp.doit("p pid")
+    let (pid, err) = interp.doit("P pid")
     check err.len == 0
     check pid.kind == vkInt
     check pid.intVal == 2  # First forked process gets pid 2 (main is 1)
@@ -122,9 +122,9 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
+    discard interp.doit("P := Processor fork: [42]")
 
-    let (name, err) = interp.doit("p name")
+    let (name, err) = interp.doit("P name")
     check err.len == 0
     check name.kind == vkString
     check "Process-" in name.strVal
@@ -133,9 +133,9 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
+    discard interp.doit("P := Processor fork: [42]")
 
-    let (state, err) = interp.doit("p state")
+    let (state, err) = interp.doit("P state")
     check err.len == 0
     check state.kind == vkString
     check state.strVal == "ready"
@@ -144,12 +144,12 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
+    discard interp.doit("P := Processor fork: [42]")
 
     # Run one slice - process becomes running
     discard ctx.runOneSlice()
 
-    let (state, err) = interp.doit("p state")
+    let (state, err) = interp.doit("P state")
     check err.len == 0
     check state.kind == vkString
     # Process may be running, ready (if yielded), or terminated (if finished)
@@ -159,12 +159,12 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
+    discard interp.doit("P := Processor fork: [42]")
 
-    let (result, err) = interp.doit("p suspend")
+    let (result, err) = interp.doit("P suspend")
     check err.len == 0
 
-    let (state, stateErr) = interp.doit("p state")
+    let (state, stateErr) = interp.doit("P state")
     check stateErr.len == 0
     check state.kind == vkString
     check state.strVal == "suspended"
@@ -173,13 +173,13 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
-    discard interp.doit("p suspend")
+    discard interp.doit("P := Processor fork: [42]")
+    discard interp.doit("P suspend")
 
-    let (resumeResult, resumeErr) = interp.doit("p resume")
+    let (resumeResult, resumeErr) = interp.doit("P resume")
     check resumeErr.len == 0
 
-    let (state, stateErr) = interp.doit("p state")
+    let (state, stateErr) = interp.doit("P state")
     check stateErr.len == 0
     check state.kind == vkString
     check state.strVal == "ready"
@@ -188,12 +188,12 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p := Processor fork: [42]")
+    discard interp.doit("P := Processor fork: [42]")
 
-    let (result, err) = interp.doit("p terminate")
+    let (result, err) = interp.doit("P terminate")
     check err.len == 0
 
-    let (state, stateErr) = interp.doit("p state")
+    let (state, stateErr) = interp.doit("P state")
     check stateErr.len == 0
     check state.kind == vkString
     check state.strVal == "terminated"
@@ -202,22 +202,22 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
 
-    discard interp.doit("p1 := Processor fork: [1]")
-    discard interp.doit("p2 := Processor fork: [2]")
-    discard interp.doit("p3 := Processor fork: [3]")
+    discard interp.doit("P1 := Processor fork: [1]")
+    discard interp.doit("P2 := Processor fork: [2]")
+    discard interp.doit("P3 := Processor fork: [3]")
 
     check ctx.theScheduler.processCount == 4  # main + 3 forked
 
     # Check pids - verify they are unique and positive
-    let (p1pid, err1) = interp.doit("p1 pid")
+    let (p1pid, err1) = interp.doit("P1 pid")
     check err1.len == 0
     check p1pid.intVal > 0
 
-    let (p2pid, err2) = interp.doit("p2 pid")
+    let (p2pid, err2) = interp.doit("P2 pid")
     check err2.len == 0
     check p2pid.intVal > 0
 
-    let (p3pid, err3) = interp.doit("p3 pid")
+    let (p3pid, err3) = interp.doit("P3 pid")
     check err3.len == 0
     check p3pid.intVal > 0
 
@@ -231,8 +231,8 @@ suite "Nemo-side Process, Scheduler, and GlobalTable":
     var interp = ctx.mainProcess.getInterpreter()
 
     # Create and suspend a process first so main can run
-    discard interp.doit("other := Processor fork: [100]")
-    discard interp.doit("other suspend")
+    discard interp.doit("Other := Processor fork: [100]")
+    discard interp.doit("Other suspend")
 
     # Yield should work on main process
     let (result, err) = interp.doit("Processor yield")
