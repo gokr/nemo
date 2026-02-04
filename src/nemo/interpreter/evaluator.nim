@@ -233,7 +233,9 @@ proc newInterpreterWithShared*(globals: ref Table[string, NodeValue],
     maxStackDepth: maxStackDepth,
     traceExecution: trace,
     lastResult: nilValue(),
-    rootObject: rootObject
+    rootObject: rootObject,
+    exceptionHandlers: @[],
+    schedulerContextPtr: nil
   )
 
   # Use the shared root class and root object
