@@ -9,53 +9,36 @@ import nemo/core/scheduler
 import nemo/interpreter/evaluator
 import nemo/interpreter/objects
 import nemo/repl/doit
+import nemo/repl/cli
 import nemo/gui/gtk4/bridge
 import nemo/gui/gtk4/ffi
 import nemo/gui/gtk4/widget
 
-## Version constant
-const VERSION* = "0.1.0"
+const
+  AppName = "nemo-ide"
+  AppDesc = "Nemo IDE - GTK-based graphical IDE"
 
-proc showUsage() =
-  echo "Nemo IDE - GTK-based graphical IDE"
-  echo ""
-  echo "Usage:"
-  echo "  nemo-ide [options]                # Start the IDE"
-  echo "  nemo-ide --help                   # Show this help"
-  echo "  nemo-ide --version                # Show version"
-  echo ""
-  echo "Options:"
-  echo "  --loglevel <level>  Set log level: DEBUG, INFO, WARN, ERROR (default: ERROR)"
-  echo ""
-
-proc parseLogLevel(levelStr: string): Level =
-  case levelStr.toUpperAscii()
-  of "DEBUG":
-    return lvlDebug
-  of "INFO":
-    return lvlInfo
-  of "WARN", "WARNING":
-    return lvlWarn
-  of "ERROR":
-    return lvlError
-  of "FATAL":
-    return lvlFatal
-  else:
-    echo "Invalid log level: ", levelStr
-    echo "Valid levels: DEBUG, INFO, WARN, ERROR, FATAL"
-    quit(1)
-
-proc runIde*(logLevel: Level = lvlError) =
+proc runIde*(opts: CliOptions) =
   ## Main IDE entry point - initializes interpreter and launches IDE
 
   echo "Starting Nemo IDE..."
   debug("Initializing Nemo IDE")
 
+  # Set NEMO_HOME environment
+  putEnv("NEMO_HOME", opts.nemoHome)
+
   # Create scheduler context (this also initializes the interpreter)
   var ctx = newSchedulerContext()
   var interp = cast[Interpreter](ctx.mainProcess.interpreter)
 
+  # Set nemoHome on the interpreter
+  interp.nemoHome = opts.nemoHome
+
   debug("Scheduler context created")
+
+  # Load standard library
+  loadStdlib(interp, opts.bootstrapFile)
+  debug("Standard library loaded")
 
   # Initialize GTK bridge
   initGtkBridge(interp)
@@ -107,40 +90,24 @@ proc runIde*(logLevel: Level = lvlError) =
 proc main() =
   ## Main entry point
 
-  # Default log level
-  var logLevel = lvlError
-
   # Parse command line arguments
-  let allArgs = commandLineParams()
-  var i = 0
-  while i < allArgs.len:
-    case allArgs[i]
+  let opts = parseCliOptions(commandLineParams(), AppName, AppDesc)
+
+  # Handle help and version first
+  if opts.positionalArgs.len == 1:
+    case opts.positionalArgs[0]:
     of "--help", "-h":
-      showUsage()
+      showUsage(AppName, AppDesc)
       quit(0)
     of "--version", "-v":
       echo "Nemo IDE ", VERSION
       quit(0)
-    of "--loglevel":
-      if i + 1 < allArgs.len:
-        logLevel = parseLogLevel(allArgs[i + 1])
-        inc i
-      else:
-        echo "Error: --loglevel requires a value"
-        quit(1)
-    else:
-      echo "Unknown option: ", allArgs[i]
-      showUsage()
-      quit(1)
-    inc i
 
   # Configure logging
-  var consoleLogger = newConsoleLogger()
-  consoleLogger.levelThreshold = logLevel
-  addHandler(consoleLogger)
+  setupLogging(opts.logLevel)
 
   # Run the IDE
-  runIde(logLevel)
+  runIde(opts)
 
 # Entry point
 when isMainModule:
