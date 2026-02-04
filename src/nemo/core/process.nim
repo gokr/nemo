@@ -230,9 +230,10 @@ proc stop*(sched: Scheduler) =
 
 proc newProcess*(sched: Scheduler, name: string = ""): Process =
   ## Create a new process (interpreter must be set separately)
+  let pid = sched.getNextPid()
   result = Process(
-    pid: sched.getNextPid(),
-    name: if name.len > 0: name else: "Process-" & $result.pid,
+    pid: pid,
+    name: if name.len > 0: name else: "Process-" & $pid,
     interpreter: nil,
     state: psReady,
     blockedOn: WaitCondition(kind: wkNone),
