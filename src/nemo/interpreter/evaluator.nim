@@ -37,7 +37,7 @@ type
     node*: Node
 
 # Forward declarations
-proc eval*(interp: var Interpreter, node: Node): NodeValue
+proc evalOld*(interp: var Interpreter, node: Node): NodeValue
 proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue
 proc evalCascade(interp: var Interpreter, cascadeNode: CascadeNode): NodeValue
 proc evalSuperSend(interp: var Interpreter, superNode: SuperSendNode): NodeValue
@@ -635,7 +635,7 @@ proc invokeBlock*(interp: var Interpreter, blockNode: BlockNode, args: seq[NodeV
   var blockResult = nilValue()
   try:
     for stmt in blockNode.body:
-      blockResult = interp.eval(stmt)
+      blockResult = interp.evalOld(stmt)
       if activation.hasReturned:
         # Non-local return - the return value is already set in activation
         blockResult = activation.returnValue.unwrap()
@@ -718,9 +718,11 @@ proc lookupClassMethod*(cls: Class, selector: string): MethodResult =
 # Execute a currentMethod
 proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
                   receiver: Instance, arguments: seq[NodeValue],
-                  definingClass: Class = nil): NodeValue =
+                  definingClass: Class = nil,
+                  isClassMethod: bool = false): NodeValue =
   ## Execute a currentMethod with given receiver and already-evaluated arguments
   ## definingClass is where the method was found (for super sends)
+  ## isClassMethod: true if this is a class method (self returns the class)
   interp.checkStackDepth()
 
   debug("Executing method with ", arguments.len, " arguments")
@@ -754,7 +756,7 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
   if currentMethod.isMethod:
     currentMethod.homeActivation = interp.currentActivation
 
-  let activation = newActivation(currentMethod, receiver, interp.currentActivation, definingClass)
+  let activation = newActivation(currentMethod, receiver, interp.currentActivation, definingClass, isClassMethod)
 
   # Bind parameters
   if currentMethod.parameters.len != arguments.len:
@@ -785,7 +787,7 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
       if activation.hasReturned:
         debug("Already marked as returned, breaking before statement")
         break
-      retVal = interp.eval(stmt)
+      retVal = interp.evalOld(stmt)
       debug("After evaluating statement " & $i & ", hasReturned: " & $activation.hasReturned & ", retVal: " & retVal.toString())
       if activation.hasReturned:
         debug("Breaking out of loop due to return")
@@ -812,7 +814,7 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
     return retVal.unwrap()
 
 # Evaluation functions
-proc eval*(interp: var Interpreter, node: Node): NodeValue =
+proc evalOld*(interp: var Interpreter, node: Node): NodeValue =
   ## Evaluate an AST node
   if node == nil:
     return nilValue()
@@ -842,14 +844,9 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
         debug("currentReceiver is nil, returning nil")
         return nilValue()
       debug("currentReceiver class: ", interp.currentReceiver.class.name, " kind: ", interp.currentReceiver.kind)
-      # Special case: for class methods, self should return the Class object
-      # The hidden class receiver is an ikObject with empty slots and no nimValue
-      # BUT: nil instance also matches this, so we must exclude it explicitly
-      if interp.currentReceiver.kind == ikObject and
-         interp.currentReceiver.slots.len == 0 and
-         interp.currentReceiver.isNimProxy == false and
-         interp.currentReceiver.nimValue == nil and
-         interp.currentReceiver != nilInstance:
+      # For class methods, self should return the Class object
+      # We track this via activation.isClassMethod rather than structural checks
+      if interp.currentActivation != nil and interp.currentActivation.isClassMethod:
         debug("self returning as class: <class ", interp.currentReceiver.class.name, ">")
         return interp.currentReceiver.class.toValue()
       result = interp.currentReceiver.toValue().unwrap()
@@ -894,7 +891,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     # Variable assignment
     let assign = node.AssignNode
     debug("Variable assignment: ", assign.variable)
-    let value = interp.eval(assign.expression)
+    let value = interp.evalOld(assign.expression)
     setVariable(interp, assign.variable, value)
     return value
 
@@ -904,7 +901,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     let ret = node.ReturnNode
     var value = nilValue()
     if ret.expression != nil:
-      value = interp.eval(ret.expression).unwrap()
+      value = interp.evalOld(ret.expression).unwrap()
       debug("Non-local return value: ", value.toString())
     else:
       value = interp.currentReceiver.toValue().unwrap()
@@ -1044,7 +1041,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
             elements.add(interp.globals[]["Object"])
         continue
       # Normal evaluation for other elements
-      elements.add(interp.eval(elem))
+      elements.add(interp.evalOld(elem))
     debug("Array result: ", elements.len, " elements")
     # Return array as Instance (ikArray variant)
     if arrayClass == nil:
@@ -1057,8 +1054,8 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     var table = initTable[NodeValue, NodeValue]()
     for entry in tab.entries:
       # Keys can be any NodeValue (int, string, symbol, instance, etc.)
-      let keyVal = interp.eval(entry.key)
-      let valueVal = interp.eval(entry.value)
+      let keyVal = interp.evalOld(entry.key)
+      let valueVal = interp.evalOld(entry.value)
       table[keyVal] = valueVal
     # Return table as Instance (ikTable variant)
     if tableClass == nil:
@@ -1073,7 +1070,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     # Property names are strings, convert to NodeValue for table keys
     var entries = initTable[NodeValue, NodeValue]()
     for prop in objLit.properties:
-      let valueVal = interp.eval(prop.value)
+      let valueVal = interp.evalOld(prop.value)
       entries[toValue(prop.name)] = valueVal
     return toValue(newTableInstance(tableClass, entries))
 
@@ -1083,7 +1080,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     var fallbackResult = nilValue()
     # Evaluate fallback statements sequentially
     for stmt in prim.fallback:
-      fallbackResult = interp.eval(stmt)
+      fallbackResult = interp.evalOld(stmt)
     return fallbackResult
 
   of nkPrimitiveCall:
@@ -1094,7 +1091,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     # Evaluate arguments
     var argValues: seq[NodeValue] = @[]
     for argNode in primCall.arguments:
-      argValues.add(interp.eval(argNode))
+      argValues.add(interp.evalOld(argNode))
 
     # Look up the method - primitives are registered as standard methods
     let lookup = lookupMethod(interp, receiver, primCall.selector)
@@ -1119,7 +1116,7 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
           if slotNode.isAssignment:
             # Assignment: evaluate valueExpr and store in slot
             if slotNode.valueExpr != nil:
-              let newValue = interp.eval(slotNode.valueExpr)
+              let newValue = interp.evalOld(slotNode.valueExpr)
               inst.slots[slotNode.slotIndex] = newValue
               return newValue
             # Legacy: get value from activation's locals (for generated setter methods)
@@ -1145,7 +1142,7 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
 
   # Evaluate receiver
   let receiverVal = if msgNode.receiver != nil:
-                      interp.eval(msgNode.receiver)
+                      interp.evalOld(msgNode.receiver)
                     else:
                       if interp.currentReceiver == nil:
                         nilValue()
@@ -1164,25 +1161,25 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
       # One argument - evaluate arguments first
       var argValues: seq[NodeValue] = @[]
       for argNode in msgNode.arguments:
-        argValues.add(interp.eval(argNode))
+        argValues.add(interp.evalOld(argNode))
       return invokeBlock(interp, receiverVal.blockVal, argValues)
     of "value:value:":
       # Two arguments
       var argValues: seq[NodeValue] = @[]
       for argNode in msgNode.arguments:
-        argValues.add(interp.eval(argNode))
+        argValues.add(interp.evalOld(argNode))
       return invokeBlock(interp, receiverVal.blockVal, argValues)
     of "value:value:value:":
       # Three arguments
       var argValues: seq[NodeValue] = @[]
       for argNode in msgNode.arguments:
-        argValues.add(interp.eval(argNode))
+        argValues.add(interp.evalOld(argNode))
       return invokeBlock(interp, receiverVal.blockVal, argValues)
     of "value:value:value:value:":
       # Four arguments
       var argValues: seq[NodeValue] = @[]
       for argNode in msgNode.arguments:
-        argValues.add(interp.eval(argNode))
+        argValues.add(interp.evalOld(argNode))
       return invokeBlock(interp, receiverVal.blockVal, argValues)
     else:
       # Non-value: message sent to block - continue with normal dispatch
@@ -1197,7 +1194,7 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
     # Evaluate arguments
     var arguments = newSeq[NodeValue]()
     for argNode in msgNode.arguments:
-      arguments.add(interp.eval(argNode))
+      arguments.add(interp.evalOld(argNode))
 
     debug("Looking up class method: ", msgNode.selector, " on class: ", cls.name)
 
@@ -1247,7 +1244,7 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
         debug("Calling native class method implementation (direct)")
         var argValues = newSeq[NodeValue]()
         for argNode in msgNode.arguments:
-          argValues.add(interp.eval(argNode))
+          argValues.add(interp.evalOld(argNode))
 
         type ClassMethodProc = proc(self: Class, args: seq[NodeValue]): NodeValue {.nimcall.}
         let nativeProc = cast[ClassMethodProc](currentMethodNode.nativeImpl)
@@ -1256,7 +1253,7 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
       # For class methods, pass the class wrapped in a minimal Instance as receiver
       # This allows native methods to know which class they were called on
       let classReceiver = Instance(kind: ikObject, class: cls, slots: @[], isNimProxy: false, nimValue: nil)
-      return interp.executeMethod(currentMethodNode, classReceiver, arguments, lookup.definingClass)
+      return interp.executeMethod(currentMethodNode, classReceiver, arguments, lookup.definingClass, isClassMethod = true)
     else:
       # Class method not found - fall through to instance method lookup
       # by changing receiverVal from vkClass to create an instance wrapper
@@ -1327,7 +1324,7 @@ proc evalMessage(interp: var Interpreter, msgNode: MessageNode): NodeValue =
   # Evaluate arguments
   var arguments = newSeq[NodeValue]()
   for argNode in msgNode.arguments:
-    arguments.add(interp.eval(argNode))
+    arguments.add(interp.evalOld(argNode))
 
   debug("Looking up method: ", msgNode.selector)
 
@@ -1401,7 +1398,7 @@ proc evalSuperSend(interp: var Interpreter, superNode: SuperSendNode): NodeValue
   # Evaluate arguments
   var arguments = newSeq[NodeValue]()
   for argNode in superNode.arguments:
-    arguments.add(interp.eval(argNode))
+    arguments.add(interp.evalOld(argNode))
 
   # Execute the method with current receiver, passing targetParent as the defining class
   # This is crucial: the defining class for the super method execution is targetParent
@@ -1413,7 +1410,7 @@ proc evalCascade(interp: var Interpreter, cascadeNode: CascadeNode): NodeValue =
   ## Return the result of the last message
 
   # Evaluate receiver once
-  let receiverVal = interp.eval(cascadeNode.receiver)
+  let receiverVal = interp.evalOld(cascadeNode.receiver)
   var cascadeResult = receiverVal
 
   # Convert receiver to Instance - same logic as evalMessage
@@ -1536,7 +1533,7 @@ proc doit*(interp: var Interpreter, source: string, dumpAst = false): (NodeValue
   try:
     var lastResult = nilValue()
     for node in nodes:
-      lastResult = interp.eval(node)
+      lastResult = interp.evalOld(node)
     interp.lastResult = lastResult
     return (lastResult, "")
   except ValueError as e:
@@ -1591,7 +1588,7 @@ proc evalStatements*(interp: var Interpreter, source: string): (seq[NodeValue], 
       try:
         for i, node in nodes:
           debug("evalStatements: evaluating node ", i, " of ", nodes.len)
-          let evalResult = interp.eval(node)
+          let evalResult = interp.evalOld(node)
           results.add(evalResult)
       finally:
         discard interp.popActivation()
@@ -1633,7 +1630,7 @@ proc evalBlock*(interp: var Interpreter, receiver: Instance, blockNode: BlockNod
   var blockResult = nilValue()
   try:
     for stmt in blockNode.body:
-      blockResult = interp.eval(stmt)
+      blockResult = interp.evalOld(stmt)
       if activation.hasReturned:
         blockResult = activation.returnValue.unwrap()
         break
@@ -1668,7 +1665,7 @@ proc evalBlockWithArg(interp: var Interpreter, receiver: Instance, blockNode: Bl
   var blockResult = nilValue()
   try:
     for stmt in blockNode.body:
-      blockResult = interp.eval(stmt)
+      blockResult = interp.evalOld(stmt)
       if activation.hasReturned:
         blockResult = activation.returnValue.unwrap()
         break
@@ -1704,7 +1701,7 @@ proc evalBlockWithTwoArgs(interp: var Interpreter, receiver: Instance, blockNode
   var nonLocalReturn = false
   try:
     for stmt in blockNode.body:
-      blockResult = interp.eval(stmt)
+      blockResult = interp.evalOld(stmt)
       if activation.hasReturned:
         blockResult = activation.returnValue.unwrap()
         nonLocalReturn = true
@@ -1741,7 +1738,7 @@ proc evalBlockWithThreeArgs(interp: var Interpreter, receiver: Instance, blockNo
   var blockResult = nilValue()
   try:
     for stmt in blockNode.body:
-      blockResult = interp.eval(stmt)
+      blockResult = interp.evalOld(stmt)
       if activation.hasReturned:
         blockResult = activation.returnValue.unwrap()
         break
@@ -1815,7 +1812,7 @@ proc doCollectionImpl(interp: var Interpreter, self: Instance, args: seq[NodeVal
         activation.locals[blockNode.parameters[0]] = elem
       # Execute block body
       for stmt in blockNode.body:
-        discard interp.eval(stmt)
+        discard interp.evalOld(stmt)
         if activation.hasReturned:
           break
       if activation.hasReturned:
@@ -1834,7 +1831,7 @@ proc doCollectionImpl(interp: var Interpreter, self: Instance, args: seq[NodeVal
         activation.locals[blockNode.parameters[1]] = val
       # Execute block body
       for stmt in blockNode.body:
-        discard interp.eval(stmt)
+        discard interp.evalOld(stmt)
         if activation.hasReturned:
           break
       if activation.hasReturned:
@@ -2107,6 +2104,19 @@ proc primitiveIsKindOfImpl(interp: var Interpreter, self: Instance, args: seq[No
     else:
       break
   falseValue
+
+proc primitiveEqualsImpl(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Identity/value equality for Object
+  ## For primitive types, compares values; for objects, compares identity (same instance)
+  if args.len < 1:
+    return falseValue
+  let other = args[0]
+  # Unwrap self to get the underlying primitive value for comparison
+  let selfVal = self.toValue().unwrap()
+  let otherVal = other.unwrap()
+  if selfVal == otherVal:
+    return trueValue
+  return falseValue
 
 proc primitiveSlotNamesImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Return slot names of this class as an array of symbols
@@ -2485,6 +2495,12 @@ proc initGlobals*(interp: var Interpreter) =
   objErrorMethod.hasInterpreterParam = true
   objectCls.methods["primitiveError:"] = objErrorMethod
   objectCls.allMethods["primitiveError:"] = objErrorMethod
+
+  # Add primitiveEquals: for == implementation
+  let objEqualsMethod = createCoreMethod("primitiveEquals:")
+  objEqualsMethod.nativeImpl = cast[pointer](primitiveEqualsImpl)
+  objectCls.methods["primitiveEquals:"] = objEqualsMethod
+  objectCls.allMethods["primitiveEquals:"] = objEqualsMethod
 
   # Add primitiveIsKindOf: for isKindOf: implementation
   let objIsKindOfMethod = createCoreMethod("primitiveIsKindOf:")
