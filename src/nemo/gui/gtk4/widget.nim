@@ -38,6 +38,10 @@ proc signalCallbackProc*(widget: GtkWidget, userData: pointer) {.cdecl.} =
   try:
     echo "DEBUG signalCallback: globals count=", interp.globals[].len
     echo "DEBUG signalCallback: GtkBox in globals=", "GtkBox" in interp.globals[]
+    echo "DEBUG signalCallback: Transcript in globals=", "Transcript" in interp.globals[]
+    if "Transcript" in interp.globals[]:
+      let transcriptVal = interp.globals[]["Transcript"]
+      echo "DEBUG signalCallback: Transcript kind=", $transcriptVal.kind
     if "GtkBox" in interp.globals[]:
       let boxClass = interp.globals[]["GtkBox"]
       echo "DEBUG signalCallback: GtkBox kind=", $boxClass.kind
