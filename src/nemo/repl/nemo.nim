@@ -104,7 +104,8 @@ proc main() =
   # Now handle commands based on positional arguments
   if opts.positionalArgs.len == 0:
     # Start REPL
-    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome, bootstrapFile = opts.bootstrapFile)
+    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome,
+                             bootstrapFile = opts.bootstrapFile)
     runREPL(ctx)
   elif opts.positionalArgs.len == 1:
     # Check if it's a file
@@ -118,7 +119,8 @@ proc main() =
       quit(1)
   elif opts.positionalArgs.len == 2 and opts.positionalArgs[0] == "-e":
     # Evaluate expression
-    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome, bootstrapFile = opts.bootstrapFile)
+    var ctx = newDoitContext(maxStackDepth = opts.maxStackDepth, nemoHome = opts.nemoHome,
+                             bootstrapFile = opts.bootstrapFile)
     let (result, err) = ctx.doit(opts.positionalArgs[1], opts.dumpAst)
     if err.len > 0:
       stderr.writeLine("Error: " & err)

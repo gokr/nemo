@@ -3,6 +3,7 @@ import ../core/types
 import ../core/scheduler
 import ../parser/[lexer, parser]
 import ../interpreter/evaluator
+import ../interpreter/vm
 
 # ============================================================================
 # Nemo REPL and Interactive Evaluation
@@ -20,8 +21,10 @@ type
 
 # Create a REPL context
 proc newDoitContext*(trace: bool = false, maxStackDepth: int = 10000,
-                     nemoHome: string = ".", bootstrapFile: string = ""): DoitContext =
+                     nemoHome: string = ".", bootstrapFile: string = "",
+                     stackless: bool = true): DoitContext =
   ## Create new REPL context with scheduler support for processes
+  ## Note: stackless VM is now the default and only evaluator
   # Create scheduler context (initializes Processor, Process, Scheduler globals)
   let schedCtx = newSchedulerContext()
 
@@ -100,8 +103,8 @@ proc doit*(ctx: DoitContext, source: string, dumpAst = false): (NodeValue, strin
     ctx.history.add(code)
 
   try:
-    # Use the interpreter's doit
-    return ctx.interpreter.doit(code, dumpAst)
+    # Use stackless VM (now the default and only evaluator)
+    return ctx.interpreter.doitStackless(code, dumpAst)
   except Exception as e:
     return (nilValue(), "Error: " & e.msg)
 
@@ -158,9 +161,11 @@ proc main*() =
 
 # File-based script execution
 proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxStackDepth: int = 10000,
-                nemoHome: string = ".", bootstrapFile: string = ""): (string, string) =
+                nemoHome: string = ".", bootstrapFile: string = "", stackless: bool = true): (string, string) =
   ## Run a Nemo script file
-  var scriptCtx = if ctx != nil: ctx else: newDoitContext(maxStackDepth = maxStackDepth, nemoHome = nemoHome, bootstrapFile = bootstrapFile)
+  ## Note: stackless VM is now the default and only evaluator
+  var scriptCtx = if ctx != nil: ctx else: newDoitContext(maxStackDepth = maxStackDepth, nemoHome = nemoHome,
+                                                           bootstrapFile = bootstrapFile)
 
   if not fileExists(filename):
     return ("", "File not found: " & filename)
@@ -182,8 +187,10 @@ proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxSt
       echo printAST(node)
     echo ""
 
-  # Execute the script
-  let (results, err) = scriptCtx.interpreter.evalStatements(source)
+  # Execute the script using stackless VM (now the default and only evaluator)
+  var results: seq[NodeValue]
+  var err: string
+  (results, err) = scriptCtx.interpreter.evalStatementsStackless(source)
 
   if err.len > 0:
     return ("", "Script error: " & err)
