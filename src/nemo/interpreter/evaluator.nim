@@ -365,8 +365,9 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
 
     # Then check locals (temporaries defined in this activation)
     if name in activation.locals:
-      debug("Found variable in activation: ", name)
-      return (true, activation.locals[name])
+      let val = activation.locals[name]
+      echo "DEBUG lookupVariable: found ", name, " in locals kind=", $val.kind
+      return (true, val)
 
     # If this is a block activation and variable not found yet, check globals BEFORE
     # walking up the chain. This prevents blocks from inadvertently capturing variables
@@ -606,7 +607,9 @@ proc invokeBlock*(interp: var Interpreter, blockNode: BlockNode, args: seq[NodeV
   # Bind captured environment variables to the new activation
   # This makes captured variables available in the block's scope
   if isCapturedEnvInitialized(blockNode) and blockNode.capturedEnv.len > 0:
+    echo "DEBUG invokeBlock: capturedEnv has ", blockNode.capturedEnv.len, " entries"
     for name, cell in blockNode.capturedEnv:
+      echo "DEBUG invokeBlock: binding ", name, " kind=", $cell.value.kind
       activation.locals[name] = cell.value
       capturedVarNames.add(name)
       debug("Bound captured variable: ", name, " = ", cell.value.toString())
@@ -703,7 +706,6 @@ proc lookupMethod(interp: Interpreter, receiver: Instance, selector: string): Me
 proc lookupClassMethod(cls: Class, selector: string): MethodResult =
   ## Look up class method in class (fast O(1) lookup)
   if cls == nil:
-    debug("lookupClassMethod: cls is nil for selector=", selector)
     return MethodResult(currentMethod: nil, receiver: nil, definingClass: nil, found: false)
 
   if selector in cls.allClassMethods:
@@ -830,7 +832,13 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
     # Identifier - look up as variable
     let ident = cast[IdentNode](node)
     debug("Identifier lookup: ", ident.name)
-    return lookupVariable(interp, ident.name)
+    let result = lookupVariable(interp, ident.name)
+    if result.kind == vkInstance:
+      if result.instVal == nil:
+        echo "DEBUG: Variable ", ident.name, " has nil instVal!"
+      else:
+        echo "DEBUG: Variable ", ident.name, " instVal.kind=", $result.instVal.kind, " class=", (if result.instVal.class == nil: "nil" else: result.instVal.class.name)
+    return result
 
   of nkPseudoVar:
     # Pseudo-variable (self, nil, true, false)
@@ -970,7 +978,6 @@ proc eval*(interp: var Interpreter, node: Node): NodeValue =
           current.nonLocalReturnTarget = targetActivation
         # Note: We intentionally do NOT set returnValue on intermediate activations.
         # Only the target activation should have the return value set.
-        debug("Marked intermediate activation as returned")
         current = current.sender
 
       debug("Set return on target activation")
