@@ -84,12 +84,12 @@ Launcher>>createFileMenu [
 
 Launcher>>addWindow: aWindow [
   windows add: aWindow.
-  Transcript showCr: "Window added, count: " , windows size toString
+  Transcript showCr: ("Window added, count: " , (windows size printString))
 ].
 
 Launcher>>removeWindow: aWindow [
   windows := windows reject: [ :w | w == aWindow ].
-  Transcript showCr: "Window removed, count: " , windows size toString
+  Transcript showCr: ("Window removed, count: " , (windows size printString))
 ].
 
 Launcher>>openWorkspace [

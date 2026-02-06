@@ -48,7 +48,7 @@ Workspace>>onDestroy [
 Workspace>>doIt: codeString [
   | result |
   result := Object eval: codeString.
-  Transcript showCr: result toString.
+  Transcript showCr: result printString.
   ^result
 ]
 
