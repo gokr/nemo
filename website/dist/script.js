@@ -198,9 +198,9 @@ p distanceFromOrigin println`
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 100) {
-            navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+            navbar.style.background = 'rgba(15, 23, 41, 0.95)';
         } else {
-            navbar.style.background = 'rgba(10, 10, 15, 0.8)';
+            navbar.style.background = 'rgba(15, 23, 41, 0.85)';
         }
 
         lastScroll = currentScroll;
