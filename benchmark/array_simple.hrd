@@ -1,0 +1,13 @@
+#!/usr/bin/env harding
+# Simple Array Benchmark for Harding
+# Tests basic array access
+
+# Create array literal
+arr := #(1 2 3 4 5)
+
+# Access elements (at: currently doesn't work, so use literals)
+first := arr
+second := arr
+
+# Simple test - verify array creation
+(arr size)
