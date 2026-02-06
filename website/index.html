@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nemo - Smalltalk Semantics, Nim Performance</title>
+    <title>Harding - Smalltalk Semantics, Nim Performance</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
         <div class="container">
             <a href="#" class="logo">
                 <span class="logo-icon">◉</span>
-                <span class="logo-text">nemo</span>
+                <span class="logo-text">harding</span>
             </a>
             <button class="nav-toggle" aria-label="Toggle navigation">
                 <span></span>
@@ -27,7 +27,7 @@
                 <li><a href="#examples">Examples</a></li>
                 <li><a href="#playground">Try It</a></li>
                 <li><a href="#install">Install</a></li>
-                <li><a href="https://github.com/gokr/nemo" class="nav-cta">GitHub</a></li>
+                <li><a href="https://github.com/gokr/harding" class="nav-cta">GitHub</a></li>
             </ul>
         </div>
     </nav>
@@ -50,7 +50,7 @@
                     <span class="gradient-text">Nim performance.</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Nemo is a prototype-based Smalltalk dialect that compiles to native code.
+                    Harding is a prototype-based Smalltalk dialect that compiles to native code.
                     File-based, git-friendly, and designed for the modern era.
                 </p>
                 <div class="hero-cta">
@@ -66,7 +66,7 @@
                             <span></span>
                             <span></span>
                         </div>
-                        <span class="code-title">example.nemo</span>
+                        <span class="code-title">example.harding</span>
                     </div>
                     <div class="code-body">
                         <pre><code><span class="comment">"Define a Point class with x and y slots"</span>
@@ -139,7 +139,7 @@ p distanceFromOrigin println</code></pre>
                         </svg>
                     </div>
                     <h3>File-Based & Git-Friendly</h3>
-                    <p>No image files. Source code lives in .nemo files you can version control, diff, and edit with any editor.</p>
+                    <p>No image files. Source code lives in .harding files you can version control, diff, and edit with any editor.</p>
                 </div>
 
                 <div class="feature-card">
@@ -321,21 +321,21 @@ worker terminate
                                 <span>Shared state</span>
                             </div>
                             <pre><code><span class="comment">"Globals for inter-process communication"</span>
-<span class="type">Nemo</span> at: <span class="string">"counter"</span> put: <span class="number">0</span>
+<span class="type">Harding</span> at: <span class="string">"counter"</span> put: <span class="number">0</span>
 
 <span class="comment">"Two processes updating shared counter"</span>
 p1 := <span class="type">Processor</span> fork: [
     <span class="number">1</span> to: <span class="number">5</span> do: [ <span class="keyword">:i</span> <span class="keyword">|</span>
-        current := <span class="type">Nemo</span> at: <span class="string">"counter"</span>
-        <span class="type">Nemo</span> at: <span class="string">"counter"</span> put: (current <span class="operator">+</span> <span class="number">1</span>)
+        current := <span class="type">Harding</span> at: <span class="string">"counter"</span>
+        <span class="type">Harding</span> at: <span class="string">"counter"</span> put: (current <span class="operator">+</span> <span class="number">1</span>)
         <span class="type">Processor</span> yield
     ]
 ]
 
 p2 := <span class="type">Processor</span> fork: [
     <span class="number">1</span> to: <span class="number">5</span> do: [ <span class="keyword">:i</span> <span class="keyword">|</span>
-        current := <span class="type">Nemo</span> at: <span class="string">"counter"</span>
-        <span class="type">Nemo</span> at: <span class="string">"counter"</span> put: (current <span class="operator">+</span> <span class="number">1</span>)
+        current := <span class="type">Harding</span> at: <span class="string">"counter"</span>
+        <span class="type">Harding</span> at: <span class="string">"counter"</span> put: (current <span class="operator">+</span> <span class="number">1</span>)
         <span class="type">Processor</span> yield
     ]
 ]</code></pre>
@@ -392,14 +392,14 @@ firstEven := numbers detect: [ <span class="keyword">:n</span> <span class="keyw
         <div class="container">
             <div class="section-header">
                 <span class="section-label">Interactive</span>
-                <h2>Try Nemo in your browser.</h2>
-                <p class="section-subtitle">(Simulated demo - actual Nemo execution coming soon)</p>
+                <h2>Try Harding in your browser.</h2>
+                <p class="section-subtitle">(Simulated demo - actual Harding execution coming soon)</p>
             </div>
 
             <div class="playground-container">
                 <div class="playground-editor">
                     <div class="editor-header">
-                        <span>playground.nemo</span>
+                        <span>playground.harding</span>
                         <button class="run-btn" id="run-btn">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z"/>
@@ -407,7 +407,7 @@ firstEven := numbers detect: [ <span class="keyword">:n</span> <span class="keyw
                             Run
                         </button>
                     </div>
-                    <textarea class="editor-textarea" id="playground-code" spellcheck="false">"Welcome to Nemo!"
+                    <textarea class="editor-textarea" id="playground-code" spellcheck="false">"Welcome to Harding!"
 
 "Create a simple counter class"
 Counter := Object derive: #(#count)
@@ -459,7 +459,7 @@ c value println</textarea>
         <div class="container">
             <div class="section-header">
                 <span class="section-label">Get Started</span>
-                <h2>Install Nemo.</h2>
+                <h2>Install Harding.</h2>
             </div>
 
             <div class="install-options">
@@ -473,11 +473,11 @@ c value println</textarea>
                     </div>
                     <h3>Build from Source</h3>
                     <div class="code-snippet">
-                        <pre><code>git clone https://github.com/gokr/nemo.git
-cd nemo
+                        <pre><code>git clone https://github.com/gokr/harding.git
+cd harding
 nimble local</code></pre>
-                        <button class="copy-btn" data-clipboard="git clone https://github.com/gokr/nemo.git
-cd nemo
+                        <button class="copy-btn" data-clipboard="git clone https://github.com/gokr/harding.git
+cd harding
 nimble local">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
@@ -497,12 +497,12 @@ nimble local">
                     </div>
                     <h3>Quick Start</h3>
                     <div class="code-snippet">
-                        <pre><code>nemo                           <span class="comment"># Start REPL</span>
-nemo script.nemo               <span class="comment"># Run a script</span>
-nemoc compile prog.nemo        <span class="comment"># Compile to binary</span></code></pre>
-                        <button class="copy-btn" data-clipboard="nemo                           # Start REPL
-nemo script.nemo               # Run a script
-nemoc compile prog.nemo        # Compile to binary">
+                        <pre><code>harding                           <span class="comment"># Start REPL</span>
+harding script.harding               <span class="comment"># Run a script</span>
+hardingc compile prog.harding        <span class="comment"># Compile to binary</span></code></pre>
+                        <button class="copy-btn" data-clipboard="harding                           # Start REPL
+harding script.harding               # Run a script
+hardingc compile prog.harding        # Compile to binary">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -522,7 +522,7 @@ nemoc compile prog.nemo        # Compile to binary">
                 <div class="footer-brand">
                     <a href="#" class="logo">
                         <span class="logo-icon">◉</span>
-                        <span class="logo-text">nemo</span>
+                        <span class="logo-text">harding</span>
                     </a>
                     <p>Smalltalk semantics, Nim performance.<br>File-based, git-friendly, modern tooling.</p>
                 </div>
@@ -530,7 +530,7 @@ nemoc compile prog.nemo        # Compile to binary">
                     <div class="footer-column">
                         <h4>Resources</h4>
                         <ul>
-                            <li><a href="https://github.com/gokr/nemo">GitHub</a></li>
+                            <li><a href="https://github.com/gokr/harding">GitHub</a></li>
                             <li><a href="/docs/MANUAL.md">Documentation</a></li>
                             <li><a href="/docs/SPECIFICATION.md">Language Spec</a></li>
                             <li><a href="/examples/">Examples</a></li>
@@ -539,16 +539,16 @@ nemoc compile prog.nemo        # Compile to binary">
                     <div class="footer-column">
                         <h4>Community</h4>
                         <ul>
-                            <li><a href="https://github.com/gokr/nemo/issues">Issues</a></li>
-                            <li><a href="https://github.com/gokr/nemo/discussions">Discussions</a></li>
-                            <li><a href="https://github.com/gokr/nemo/blob/main/CLAUDE.md">Contributing</a></li>
+                            <li><a href="https://github.com/gokr/harding/issues">Issues</a></li>
+                            <li><a href="https://github.com/gokr/harding/discussions">Discussions</a></li>
+                            <li><a href="https://github.com/gokr/harding/blob/main/CLAUDE.md">Contributing</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>Released under the MIT License.</p>
-                <p>Made with ♥ by the Nemo team.</p>
+                <p>Made with ♥ by the Harding team.</p>
             </div>
         </div>
     </footer>

@@ -1,5 +1,5 @@
 // ============================================
-// Nemo Website JavaScript
+// Harding Website JavaScript
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -208,7 +208,7 @@ p distanceFromOrigin println`
 });
 
 // ============================================
-// Simulated Nemo Execution
+// Simulated Harding Execution
 // ============================================
 function simulateExecution(code) {
     const output = [];

@@ -1,6 +1,6 @@
-# Nemo Website
+# Harding Website
 
-This directory contains the static website for the Nemo programming language, hosted at [nemo-lang.org](https://nemo-lang.org).
+This directory contains the static website for the Harding programming language, hosted at [harding-lang.org](https://harding-lang.org).
 
 ## Overview
 
@@ -44,10 +44,10 @@ The website is automatically deployed to GitHub Pages when changes are pushed to
 
 ## Custom Domain
 
-The site is configured to use `nemo-lang.org`. To set this up:
+The site is configured to use `harding-lang.org`. To set this up:
 
 1. In your GitHub repository, go to Settings → Pages
-2. Under "Custom domain", enter `nemo-lang.org`
+2. Under "Custom domain", enter `harding-lang.org`
 3. Save and wait for DNS verification
 4. Configure your DNS provider with the following records:
    - A records pointing to GitHub Pages IPs:
@@ -60,11 +60,11 @@ The site is configured to use `nemo-lang.org`. To set this up:
 ## Features
 
 - **Hero Section**: Animated gradient background with code preview
-- **Features Grid**: 6 key Nemo features with icons
+- **Features Grid**: 6 key Harding features with icons
 - **Code Examples**: Tabbed interface showing different language features
 - **Interactive Playground**: Browser-based code editor (simulated execution)
 - **Installation Guide**: Copy-paste ready commands
 
 ## License
 
-Same as the Nemo project (MIT).
+Same as the Harding project (MIT).
