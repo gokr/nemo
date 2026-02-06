@@ -77,3 +77,12 @@ task install, "Install harding to ~/.local/bin/":
     exec "mkdir -p " & (getHomeDir() / ".local" / "bin")
     exec "cp " & binPath & " " & dest & " && chmod +x " & dest
     echo "Installed to: " & dest
+
+task vsix, "Build the VS Code extension (vsix file)":
+  ## Build the Harding VS Code extension package
+  ## Requires vsce to be installed: npm install -g vsce
+  if not "package.json".fileExists:
+    echo "Error: package.json not found in current directory"
+    system.quit(1)
+  exec "vsce package"
+  echo "VSIX file built successfully"
