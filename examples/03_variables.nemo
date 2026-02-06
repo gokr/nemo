@@ -1,32 +1,37 @@
 #!/usr/bin/env nemo
 #
-# Variables and assignment
+# Variable assignment and usage
 #
 
-'=== Variable Assignment ===' println
+"=== Variable Assignment ===" println
 
 x := 42
-y := 'Hello'
+y := "Hello"
 
-('x = ' , x asString) println
-('y = ' , y) println
+("x = " , x asString) println
+("y = " , y) println
 
-'' println
-'=== Variable Reassignment ===' println
+"" println
+"=== Variable Reassignment ===" println
 
 counter := 0
-counter := counter + 1
-counter := counter + 1
+("Counter: " , counter asString) println
 
-('Counter after increments: ' , counter asString) println
+counter := counter + 1
+("Counter after increment: " , counter asString) println
 
-'' println
-'=== Multiple Variables ===' println
+counter := counter + 1
+("Counter after increments: " , counter asString) println
+
+"" println
+"=== Multiple Variables ===" println
 
 a := 10
 b := 20
-sum := a + b
-product := a * b
+c := 30
 
-('Sum: ' , sum asString) println
-('Product: ' , product asString) println
+sum := a + b + c
+product := a * b * c
+
+("Sum: " , sum asString) println
+("Product: " , product asString) println

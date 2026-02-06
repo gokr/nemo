@@ -3,29 +3,29 @@
 # Basic object creation and property access
 #
 
-'=== Creating Objects ===' println
+"=== Creating Objects ===" println
 
-obj := Object derive
+obj := Object new
 
-'Object created successfully' println
+"Object created successfully" println
 
-'' println
-'=== Property Access ===' println
+"" println
+"=== Property Access ===" println
 
-obj at: 'name' put: 'Alice'
-obj at: 'age' put: 30
+obj at: #name put: "Alice"
+obj at: #age put: 30
 
-('Name: ' , (obj at: 'name')) println
-('Age: ' , (obj at: 'age') asString) println
+("Name: " , (obj at: #name)) println
+("Age: " , (obj at: #age) asString) println
 
-'' println
-'=== Checking Properties ===' println
+"" println
+"=== Checking Properties ===" println
 
-('Has name property: ' , (obj hasProperty: 'name') asString) println
-('Has city property: ' , (obj hasProperty: 'city') asString) println
+("Has name property: " , (obj hasProperty: #name) asString) println
+("Has city property: " , (obj hasProperty: #city) asString) println
 
-'' println
-'=== Property List ===' println
+"" println
+"=== Property List ===" println
 
-'Properties: ' print
+"Properties: " print
 obj properties println

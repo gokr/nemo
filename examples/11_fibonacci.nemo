@@ -29,7 +29,7 @@ Math>>fibonacciIterative: n [
   ^ b
 ]
 
-math := Math derive
+math := Math new
 
 '' println
 'Recursive Fibonacci:' println

@@ -3,7 +3,7 @@
 # Method definition and calling
 #
 
-'=== Defining Methods ===' println
+"=== Defining Methods ===" println
 
 Calculator := Object derive
 
@@ -20,28 +20,28 @@ Calculator>>factorial: n [
   ^ n * (self factorial: (n - 1))
 ]
 
-calc := Calculator derive
+calc := Calculator new
 
-'' println
-'=== Calling Methods ===' println
+"" println
+"=== Calling Methods ===" println
 
 result1 := calc add: 3 and: 4
-('3 + 4 = ' , result1 asString) println
+("3 + 4 = " , result1 asString) println
 
 result2 := calc subtract: 5 from: 20
-('20 - 5 = ' , result2 asString) println
+("20 - 5 = " , result2 asString) println
 
 result3 := calc factorial: 5
-('5! = ' , result3 asString) println
+("5! = " , result3 asString) println
 
-'' println
-'=== Method Batching with extend: ===' println
+"" println
+"=== Method Batching with extend: ===" println
 
 Greeter := Object derive: #(#greeting)
 
 Greeter extend: [
   self >> greet: name [
-    ^ (self greeting) , ', ' , name , '!'
+    ^ (self greeting) , ", " , name , "!"
   ]
 
   self >> setGreeting: text [
@@ -49,7 +49,7 @@ Greeter extend: [
   ]
 ]
 
-greeter := Greeter derive
-greeter setGreeting: 'Hello'
+greeter := Greeter new
+greeter setGreeting: "Hello"
 
-('Greeting: ' , (greeter greet: 'World')) println
+("Greeting: " , (greeter greet: "World")) println
