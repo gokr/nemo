@@ -4,14 +4,14 @@ title: Features
 
 ## Language Features
 
-### Pure Smalltalk Semantics
+### Smalltalk Semantics
 
 Harding preserves the essence of Smalltalk:
 
 - **Everything is an object** - Numbers, strings, blocks, classes
 - **Everything happens via message passing** - No function calls, only messages
 - **Late binding** - Method lookup happens at message send time
-- **Blocks with non-local returns** - True closures with `^` return
+- **Blocks with non-local returns** - True lexical closures with `^` return
 
 ```harding
 # Message passing
@@ -33,12 +33,12 @@ findPositive := [:arr |
 Optional periods, hash comments, double-quoted strings:
 
 ```harding
-# This is a comment
+# This is a comment, as long as it has a space after hash
 x := 1                  # No period needed at end of line
 y := 2
 z := x + y              # But periods work too if you prefer
 
-"Double quotes for strings"
+"Double quotes for strings" # More standard for most languages
 ```
 
 ### Class-Based with Multiple Inheritance
@@ -46,15 +46,19 @@ z := x + y              # But periods work too if you prefer
 Create classes dynamically with slots and methods:
 
 ```harding
-# Define a class
+# Create a new class with two instance variables
 Point := Object derive: #(x y)
 
 # Add methods
 Point extend: [
+    self >> x: anX y: aY [
+        x := anX
+        y := aY
+    ]
+
     self >> moveBy: dx and: dy [
         x := x + dx
         y := y + dy
-        ^ self
     ]
 
     self >> distanceFromOrigin [
@@ -122,10 +126,8 @@ Interactive development environment:
 
 ```bash
 $ harding
-Harding Smalltalk REPL
-Type 'exit' to quit, 'help' for commands
-
-> 3 + 4
+Harding REPL (:help for commands, :quit to exit)
+harding> 3 + 4
 7
 
 > Point := Object derive: #(x y)
@@ -146,9 +148,6 @@ Point instance
 Source code lives in `.hrd` files:
 
 ```bash
-# Edit with any editor
-vim myprogram.hrd
-
 # Run it
 harding myprogram.hrd
 

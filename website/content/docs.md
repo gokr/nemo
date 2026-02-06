@@ -19,8 +19,7 @@ nimble install
 ```
 
 Requirements:
-- Nim 2.0 or later
-- nimble (comes with Nim)
+- Nim 2.2.6 or later
 
 ### Quick Start
 

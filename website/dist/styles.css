@@ -115,6 +115,12 @@ a:hover {
     color: var(--color-primary-light);
 }
 
+.logo-img {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+}
+
 .logo-text {
     font-size: 22px;
     font-weight: 700;

@@ -42,4 +42,6 @@ This is my experiment, my tribute, my small contribution to a tradition that Dan
 
 ---
 
-*Harding Smalltalk — An Introduction*
+https://www.youtube.com/watch?v=1vEEH-eJYUM - video with talk from Dan Ingalls
+
+Quote from Dan Ingalls: "Languages and systems that are of sound design will persist, to be supplanted only by better ones."

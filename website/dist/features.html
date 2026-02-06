@@ -14,7 +14,7 @@
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
-                <span class="logo-icon">◉</span>
+                <img src="images/harding-simple.png" alt="Harding" class="logo-img" width="32" height="32">
                 <span class="logo-text">harding</span>
             </a>
             <button class="nav-toggle" aria-label="Toggle navigation">
@@ -111,13 +111,19 @@ z := x + y              <span class="comment"># But periods work too</span>
                 <div class="feature-code">
                     <div class="code-block">
                         <div class="code-header">Class Definition</div>
-                        <pre><code><span class="type">Point</span> := <span class="type">Object</span> derive: <span class="keyword">#</span>(x y)
+                        <pre><code><span class="comment"># Create a new class with two instance variables</span>
+<span class="type">Point</span> := <span class="type">Object</span> derive: <span class="keyword">#</span>(x y)
 
+<span class="comment"># Add methods</span>
 <span class="type">Point</span> extend: [
+    <span class="keyword">self</span> <span class="operator">>></span> x: anX y: aY [
+        x := anX
+        y := aY
+    ]
+
     <span class="keyword">self</span> <span class="operator">>></span> moveBy: dx and: dy [
         x := x <span class="operator">+</span> dx
         y := y <span class="operator">+</span> dy
-        <span class="keyword">^</span> <span class="keyword">self</span>
     ]
 
     <span class="keyword">self</span> <span class="operator">>></span> distanceFromOrigin [
@@ -125,6 +131,7 @@ z := x + y              <span class="comment"># But periods work too</span>
     ]
 ]
 
+<span class="comment"># Use it</span>
 p := <span class="type">Point</span> new
 p x: <span class="number">3</span> y: <span class="number">4</span>
 p distanceFromOrigin println   <span class="comment"># 5.0</span></code></pre>
@@ -183,11 +190,20 @@ worker terminate</code></pre>
                     <h3>Live REPL</h3>
                     <p>Interactive development with immediate feedback:</p>
                     <pre><code>$ harding
+Harding REPL (:help for commands, :quit to exit)
+harding> 3 + 4
+7
+
 > Point := Object derive: #(x y)
 Point
+
 > p := Point new
 Point instance
+
 > p x: 10
+10
+
+> p x
 10</code></pre>
                 </div>
             </div>
