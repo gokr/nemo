@@ -2,21 +2,21 @@
 
 ## Overview
 
-The GTK bridge provides a way to create and manipulate GTK widgets from Nemo code. It enables building GUI applications and development tools (like an IDE) directly in Nemo.
+The GTK bridge provides a way to create and manipulate GTK widgets from Harding code. It enables building GUI applications and development tools (like an IDE) directly in Harding.
 
 ### Key Design Principles
 
-1. **Malleability** - GUI tools are written in Nemo and can be modified at runtime
-2. **Thin Bridge** - Only a thin Nim wrapper exposes GTK to Nemo
-3. **Signal Integration** - GTK signals connect to Nemo blocks
-4. **Safety** - Error handling prevents GTK crashes from Nemo exceptions
+1. **Malleability** - GUI tools are written in Harding and can be modified at runtime
+2. **Thin Bridge** - Only a thin Nim wrapper exposes GTK to Harding
+3. **Signal Integration** - GTK signals connect to Harding blocks
+4. **Safety** - Error handling prevents GTK crashes from Harding exceptions
 
 ### Architecture
 
 ```
 +--------------------------------------------------------+
-|                   Nemo Layer                            |
-|           (All written in .nemo files)                  |
+|                   Harding Layer                            |
+|           (All written in .harding files)                  |
 |  +------------+  +------------+  +-------------------+ |
 |  |  Widgets   |  |   IDE      |  |   Application     | |
 |  | (GTK4/...) |  |  Tools     |  |     Logic         | |
@@ -39,12 +39,12 @@ The GTK bridge provides a way to create and manipulate GTK widgets from Nemo cod
 
 ### GTK4 Bridge Layer (Nim)
 
-The bridge consists of several components in `src/nemo/gui/gtk4/`:
+The bridge consists of several components in `src/harding/gui/gtk4/`:
 
 1. **ffi.nim** - Raw GTK4 C function bindings
 2. **widget.nim** - Base widget proxy and two-table system
 3. **window.nim**, **button.nim**, **box.nim**, etc. - Widget-specific wrappers
-4. **bridge.nim** - Class registration with Nemo interpreter
+4. **bridge.nim** - Class registration with Harding interpreter
 
 ### Two-Table System
 
@@ -61,7 +61,7 @@ The bridge uses two complementary tables to solve the GC issue:
 ### Widget Creation Flow
 
 ```
-Nemo code (e.g., GtkButton newLabel: "X")
+Harding code (e.g., GtkButton newLabel: "X")
     ↓
 Nim native method (buttonNewLabelImpl)
     ↓
@@ -69,14 +69,14 @@ GTK function (gtk_button_new_with_label)
     ↓
 Create proxy and store in both tables
     ↓
-Return Instance to Nemo with isNimProxy = true
+Return Instance to Harding with isNimProxy = true
 ```
 
-## Creating Widgets from Nemo
+## Creating Widgets from Harding
 
 ### Basic Window and Layout
 
-```nemo
+```harding
 # Create window
 window := GtkWindow new.
 window title: "My App".
@@ -104,9 +104,9 @@ window present
 
 ### Signal Handling
 
-Connect GTK signals to Nemo blocks:
+Connect GTK signals to Harding blocks:
 
-```nemo
+```harding
 # Simple signal (no arguments)
 button clicked: [
     Transcript showCr: "Clicked!"
@@ -160,7 +160,7 @@ When a GTK widget is destroyed:
 ### Rules
 
 1. **GTK owns widget lifetime** via GObject refcount
-2. **Nemo proxy tracks destroyed state**
+2. **Harding proxy tracks destroyed state**
 3. **Methods validate** before operating
 4. **Explicit destroy available** for manual cleanup
 5. **Closing window** destroys child widgets automatically
@@ -183,7 +183,7 @@ proc safeEvalBlock(interp: ptr Interpreter, blockNode: BlockNode,
     result = nilValue()
 ```
 
-**Implication**: Nemo exceptions in signal handlers will not crash the GTK event loop.
+**Implication**: Harding exceptions in signal handlers will not crash the GTK event loop.
 
 ## Current Status
 
@@ -214,7 +214,7 @@ proc safeEvalBlock(interp: ptr Interpreter, blockNode: BlockNode,
 
 Provide typed helpers for common signal patterns:
 
-```nemo
+```harding
 # Motion - passes x, y
 connectMotion: [:x :y | ...]
 
@@ -229,7 +229,7 @@ connectRowActivated: [:path | ...]
 
 Load UI definitions from Glade XML files:
 
-```nemo
+```harding
 builder := GtkBuilder new.
 builder addFromFile: 'ui/app.glade'.
 window := builder getObject: 'mainWindow'.

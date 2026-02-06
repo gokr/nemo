@@ -1,4 +1,4 @@
-# Nemo Object Model - Implementation Plan
+# Harding Object Model - Implementation Plan
 
 ## Overview
 This document outlines the implementation steps for the new object model with declared instance variables and the `>>` method definition syntax.
@@ -215,10 +215,10 @@ MethodDefinitionNode(
 
 ## File Format Specification
 
-### .nemo Files (Nemo Definition Files)
+### .harding Files (Harding Definition Files)
 
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 #
 # Comments can use single #
 
@@ -271,7 +271,7 @@ Person>>newWithName: aName age: anAge [
 ### Execution Flow
 
 ```
-.nemo file
+.harding file
     ↓
 Parser (File Definition Mode)
     ↓
@@ -302,7 +302,7 @@ person name: "Alice"
 person greet
 
 "Load other files (future)"
-Person := load: "models/Person.nemo"
+Person := load: "models/Person.harding"
 ```
 
 ### For Implementers
@@ -402,8 +402,8 @@ test "generated accessors":
 
 ### Integration Tests
 ```nim
-# Load and execute .nemo files
-let result = loadAndRun("examples/Person.nemo")
+# Load and execute .harding files
+let result = loadAndRun("examples/Person.harding")
 check result.isPrototype()
 check result.hasMethod("greet")
 ```
@@ -441,9 +441,9 @@ check result.hasMethod("greet")
 ✅ Direct ivar access is **149x faster** than property bag (exceeded 10x goal!)
 ✅ All 22+ new tests pass plus integration tests
 ✅ 100% code coverage for new functionality
-✅ Examples updated to use new syntax (demo_slots.nemo, lib/)
+✅ Examples updated to use new syntax (demo_slots.harding, lib/)
 ✅ Documentation complete and up-to-date
-✅ Native method dispatch working from Nemo code
+✅ Native method dispatch working from Harding code
 ✅ Base library created with Object, Boolean, Collections
 ✅ Symbol canonicalization implemented
 ✅ Globals table for class management

@@ -1,10 +1,10 @@
-# Nemo vs Smalltalk-80 Compatibility Assessment
+# Harding vs Smalltalk-80 Compatibility Assessment
 
-This document compares Nemo's current implementation against the Smalltalk-80 standard library (based on the Xerox PARC Smalltalk-80, version 2, April 1, 1983).
+This document compares Harding's current implementation against the Smalltalk-80 standard library (based on the Xerox PARC Smalltalk-80, version 2, April 1, 1983).
 
 ## Overview
 
-Nemo is a Smalltalk dialect that compiles to Nim. While it captures much of the Smalltalk "feel" with message passing, blocks, and collection protocols, there are significant gaps compared to the full Smalltalk-80 class library.
+Harding is a Smalltalk dialect that compiles to Nim. While it captures much of the Smalltalk "feel" with message passing, blocks, and collection protocols, there are significant gaps compared to the full Smalltalk-80 class library.
 
 ## What's Already Implemented Well
 
@@ -30,7 +30,7 @@ Nemo is a Smalltalk dialect that compiles to Nim. While it captures much of the 
 
 ### 1. Missing Collection Classes
 
-Smalltalk-80 has a rich, hierarchical collection framework that Nemo lacks:
+Smalltalk-80 has a rich, hierarchical collection framework that Harding lacks:
 
 ```
 Object
@@ -146,8 +146,8 @@ Smalltalk-80 uses `Magnitude` as an abstract superclass for comparable objects (
 |--------|-------------|
 | `to:` | Create Interval (e.g., `1 to: 10`) |
 | `to:by:` | Create Interval with step |
-| `to:do:` | Iterate (Nemo has this) |
-| `to:by:do:` | Iterate with step (Nemo has this) |
+| `to:do:` | Iterate (Harding has this) |
+| `to:by:do:` | Iterate with step (Harding has this) |
 | `gcd:` | Greatest common divisor |
 | `lcm:` | Least common multiple |
 | `squared` | Square |
@@ -380,9 +380,9 @@ Smalltalk-80 has `Date` and `Time` as subclasses of `Magnitude`:
 
 ### Class Model
 
-Smalltalk-80 is class-based with metaclasses. Nemo is class-based. Some adaptations:
+Smalltalk-80 is class-based with metaclasses. Harding is class-based. Some adaptations:
 
-- `species` in Smalltalk returns a class; in Nemo it returns a class object
+- `species` in Smalltalk returns a class; in Harding it returns a class object
 - Class methods become constructor methods on classes
 - Instance variables become object properties
 
@@ -394,7 +394,7 @@ Array with: 1 with: 2 with: 3.
 OrderedCollection new: 10.
 ```
 
-Nemo can use:
+Harding can use:
 ```smalltalk
 Array with: 1 with: 2 with: 3.
 OrderedCollection new: 10.
@@ -408,7 +408,7 @@ Smalltalk-80 uses `nil` as the default value and has explicit nil testing:
 obj ifNil: [ ... ] ifNotNil: [ :val | ... ].
 ```
 
-Nemo should add these for compatibility.
+Harding should add these for compatibility.
 
 ## References
 

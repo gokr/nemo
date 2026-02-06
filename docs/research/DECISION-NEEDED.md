@@ -1,6 +1,6 @@
-# Design Decisions Needed for Nemo
+# Design Decisions Needed for Harding
 
-*This document tracks key design decisions that need to be made during Nemo development.*
+*This document tracks key design decisions that need to be made during Harding development.*
 
 ## Open Decisions
 

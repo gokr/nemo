@@ -1,12 +1,12 @@
-# Nemo for Smalltalkers
+# Harding for Smalltalkers
 
-A guide for experienced Smalltalk programmers coming to Nemo. This document covers the key differences in syntax, semantics, and available features.
+A guide for experienced Smalltalk programmers coming to Harding. This document covers the key differences in syntax, semantics, and available features.
 
 ## Quick Summary
 
-Nemo is a class-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing semantics and syntax feel while making pragmatic changes for a modern implementation.
+Harding is a class-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing semantics and syntax feel while making pragmatic changes for a modern implementation.
 
-| Feature | Smalltalk-80 | Nemo |
+| Feature | Smalltalk-80 | Harding |
 |---------|-------------|---------|
 | Object model | Classes + metaclasses | Classes only (no metaclasses) |
 | Statement separator | Period (`.`) only | Period or newline |
@@ -30,13 +30,13 @@ y := 2.
 z := x + y.
 ```
 
-**Nemo:**
-```nemo
+**Harding:**
+```harding
 * Periods work (Smalltalk-compatible)
 x := 1.
 y := 2.
 
-* Line endings also work (Nemo-style)
+* Line endings also work (Harding-style)
 x := 1
 y := 2
 
@@ -53,8 +53,8 @@ z := x + y.
 'Hello World'       "Single quotes only"
 ```
 
-**Nemo:**
-```nemo
+**Harding:**
+```harding
 "Hello World"       # Double quotes only
 ```
 
@@ -67,8 +67,8 @@ z := x + y.
 "This is a comment - double quotes"
 ```
 
-**Nemo:**
-```nemo
+**Harding:**
+```harding
 # This is a comment - hash style
 #==== Section header
 ```
@@ -86,9 +86,9 @@ z := x + y.
 ]
 ```
 
-**Nemo:**
-```nemo
-# Optional | after parameters (Nemo-specific)
+**Harding:**
+```harding
+# Optional | after parameters (Harding-specific)
 [ :x :y
   x + y
 ]
@@ -126,8 +126,8 @@ name: aName
 ! !
 ```
 
-**Nemo:**
-```nemo
+**Harding:**
+```harding
 # Define class with slots
 Person := Object derive: #(#name #age).
 
@@ -152,8 +152,8 @@ dictionary
     ifAbsent: [ default ]
 ```
 
-**Nemo:**
-```nemo
+**Harding:**
+```harding
 # Same syntax, but note that newlines act as separators
 # except when continuing a keyword message chain
 dictionary
@@ -167,9 +167,9 @@ dictionary
 
 **Smalltalk:** Every class is an instance of a metaclass. Class methods are defined on the metaclass.
 
-**Nemo:** Classes are objects, but there are no metaclasses. Class methods are stored directly on the class object.
+**Harding:** Classes are objects, but there are no metaclasses. Class methods are stored directly on the class object.
 
-```nemo
+```harding
 # Instance method
 Person>>greet [ ^ "Hello" ].
 
@@ -185,9 +185,9 @@ The `class` message returns the class object itself, and methods can be stored t
 
 **Smalltalk:** Instance variables are named slots accessed by name.
 
-**Nemo:** Instance variables are indexed slots for O(1) access. The class maintains `slotNames` (declared on class) and `allSlotNames` (inherited layout).
+**Harding:** Instance variables are indexed slots for O(1) access. The class maintains `slotNames` (declared on class) and `allSlotNames` (inherited layout).
 
-```nemo
+```harding
 Person := Object derive: #(#name #age).
 
 # Inside methods, access by name (converted to slot index at compile time)
@@ -209,9 +209,9 @@ Performance comparison (per 100k ops):
 
 **Smalltalk:** Single inheritance only. Traits provide code sharing.
 
-**Nemo:** Currently single inheritance, with multiple parents planned:
+**Harding:** Currently single inheritance, with multiple parents planned:
 
-```nemo
+```harding
 # Single inheritance
 Employee := Person derive: #(salary).
 
@@ -227,12 +227,12 @@ The internal class model stores `parents: seq[Class]`. The first parent defines 
 
 ### Conflict Detection for Multiple Inheritance
 
-When creating a class with multiple parents (or adding parents via `addParent:`), Nemo checks for conflicts:
+When creating a class with multiple parents (or adding parents via `addParent:`), Harding checks for conflicts:
 
 - **Slot name conflicts**: If any slot name exists in multiple parent hierarchies, an error is raised
 - **Method selector conflicts**: If directly-defined method selectors conflict between parents, an error is raised
 
-```nemo
+```harding
 # This will raise an error:
 Parent1 := Object derive: #(shared)
 Parent2 := Object derive: #(shared)
@@ -245,7 +245,7 @@ Child := Object derive: #(x)
 
 To work with conflicting parent methods, override the method in the child class first, then use `addParent:`:
 
-```nemo
+```harding
 Parent1 := Object derive: #(a)
 Parent1 >> foo [ ^ "foo1" ]
 
@@ -269,9 +269,9 @@ Child addParent: Parent2
 
 **Smalltalk:** `super` starts method lookup in the parent class.
 
-**Nemo:** `super` works similarly, but supports qualified super for multiple inheritance:
+**Harding:** `super` works similarly, but supports qualified super for multiple inheritance:
 
-```nemo
+```harding
 # Unqualified super (uses first parent)
 Employee>>calculatePay [
     base := super calculatePay.
@@ -289,9 +289,9 @@ Employee>>calculatePay [
 
 **Smalltalk:** Primitives are VM-specific numbered operations (e.g., `<primitive: 1>`).
 
-**Nemo:** Primitives embed Nim code directly:
+**Harding:** Primitives embed Nim code directly:
 
-```nemo
+```harding
 Object>>primitiveClone [
     <primitive>
     ## Create a shallow copy in Nim
@@ -306,9 +306,9 @@ The Nim code has access to the interpreter context and can manipulate objects di
 
 **Smalltalk:** `nil` is a special primitive value defined by the VM.
 
-**Nemo:** `nil` is a singleton instance of the `UndefinedObject` class, which inherits from `Object`:
+**Harding:** `nil` is a singleton instance of the `UndefinedObject` class, which inherits from `Object`:
 
-```nemo
+```harding
 nil class           # Returns UndefinedObject
 nil isNil           # Returns true
 nil className       # Returns "UndefinedObject"
@@ -325,12 +325,12 @@ This design allows `nil` to respond to all Object messages and be inspected like
 ```smalltalk
 Object subclass: #MyClass
     instanceVariableNames: ''
-    classVariableNames: 'SharedVar'    "Not in Nemo"
+    classVariableNames: 'SharedVar'    "Not in Harding"
 ```
 
-**Nemo:** Not implemented. Use class methods with captured state or global objects:
+**Harding:** Not implemented. Use class methods with captured state or global objects:
 
-```nemo
+```harding
 # Workaround: Store in class method closure
 MyClass>>sharedCounter [
     | count |
@@ -347,22 +347,22 @@ Registry at: #MyClassCounter put: 0.
 **Smalltalk:** Instance variables on the class object (metaclass instance variables):
 ```smalltalk
 Object class>>initialize
-    classInstVar := 0.    "Not in Nemo"
+    classInstVar := 0.    "Not in Harding"
 ```
 
-**Nemo:** Not implemented. Classes don't have instance variables separate from their instances.
+**Harding:** Not implemented. Classes don't have instance variables separate from their instances.
 
 ### 3. Pool Dictionaries
 
 **Smalltalk:** Shared dictionaries for constants:
 ```smalltalk
 Object subclass: #MyClass
-    poolDictionaries: 'MyPool'    "Not in Nemo"
+    poolDictionaries: 'MyPool'    "Not in Harding"
 ```
 
-**Nemo:** Not implemented. Use global tables or symbols:
+**Harding:** Not implemented. Use global tables or symbols:
 
-```nemo
+```harding
 # Workaround: Global table
 Constants := #{
   #MaxSize -> 100
@@ -376,7 +376,7 @@ Constants := #{
 
 **Smalltalk:** Rich metaclass hierarchy with `Class`, `ClassDescription`, `Behavior`, etc.
 
-**Nemo:** Classes are simple objects. The hierarchy is flat:
+**Harding:** Classes are simple objects. The hierarchy is flat:
 - `Class` - defines structure and behavior
 - `Instance` - pure data with reference to class
 
@@ -389,33 +389,33 @@ No `Behavior`, `ClassDescription`, or metaclass chain.
 !MyClass methodsFor: 'accessing'!
 ```
 
-**Nemo:** Not implemented. Methods are stored in a flat table. Organization is by convention only.
+**Harding:** Not implemented. Methods are stored in a flat table. Organization is by convention only.
 
 ### 6. Change Sets and Version Control
 
 **Smalltalk:** Image-based with change sets, versions, and Monticello.
 
-**Nemo:** File-based source code (`.nemo` files) with traditional version control (git).
+**Harding:** File-based source code (`.harding` files) with traditional version control (git).
 
 ### 7. Refactoring Tools
 
 **Smalltalk:** Rich refactoring browser with rename, extract method, push up/down, etc.
 
-**Nemo:** Basic text editing. No specialized refactoring tools yet.
+**Harding:** Basic text editing. No specialized refactoring tools yet.
 
 ### 8. Debugger
 
 **Smalltalk:** Full debugger with stack inspection, variable examination, step-through.
 
-**Nemo:** Basic error messages with line numbers. Stack traces available but limited.
+**Harding:** Basic error messages with line numbers. Stack traces available but limited.
 
-## Additional Nemo Features
+## Additional Harding Features
 
 ### 1. Cascade Operator
 
-Nemo implements Smalltalk's cascade using `;`:
+Harding implements Smalltalk's cascade using `;`:
 
-```nemo
+```harding
 obj
   at: #x put: 0;
   at: #y put: 0;
@@ -430,7 +430,7 @@ obj at: #z put: 0.
 
 Create objects with literal syntax:
 
-```nemo
+```harding
 point := {| x: 10 y: 20 |}.
 ```
 
@@ -438,15 +438,15 @@ point := {| x: 10 y: 20 |}.
 
 Hash table literals with arrow syntax:
 
-```nemo
+```harding
 dict := #{ "name" -> "Alice" "age" -> 30 }.
 ```
 
 ### 4. Stdout Global
 
-Nemo provides a `Stdout` global for console output:
+Harding provides a `Stdout` global for console output:
 
-```nemo
+```harding
 Stdout write: "Hello"           # Print without newline
 Stdout writeline: "World"       # Print with newline
 ```
@@ -455,7 +455,7 @@ Stdout writeline: "World"       # Print with newline
 
 Repeat a string multiple times:
 
-```nemo
+```harding
 "ab" repeat: 3                  # Returns "ababab"
 "  " repeat: level              # Useful for indentation
 ```
@@ -464,7 +464,7 @@ Repeat a string multiple times:
 
 Concatenate array elements with a separator:
 
-```nemo
+```harding
 #(1 2 3) join: ", "             # Returns "1, 2, 3"
 ```
 
@@ -493,8 +493,8 @@ Singleton class>>instance
     ^ Instance
 ```
 
-**Nemo singleton:**
-```nemo
+**Harding singleton:**
+```harding
 # Using captured variable
 Singleton class>>instance [
     | inst |
@@ -516,7 +516,7 @@ Singleton class>>instance [
 
 ## Summary
 
-Nemo preserves the essence of Smalltalk (message passing, blocks, live programming) while simplifying the object model and adding modern conveniences. The main adjustments for Smalltalkers are:
+Harding preserves the essence of Smalltalk (message passing, blocks, live programming) while simplifying the object model and adding modern conveniences. The main adjustments for Smalltalkers are:
 
 1. No metaclasses - classes are just objects
 2. No class variables - use globals or closures
@@ -524,4 +524,4 @@ Nemo preserves the essence of Smalltalk (message passing, blocks, live programmi
 4. Nim primitives - embed native code directly
 5. Use double quotes for strings - hash `#` for comments
 
-The trade-off is simplicity over completeness - Nemo is smaller and compiles to native code through Nim, but lacks some of Smalltalk's advanced reflective features.
+The trade-off is simplicity over completeness - Harding is smaller and compiles to native code through Nim, but lacks some of Smalltalk's advanced reflective features.

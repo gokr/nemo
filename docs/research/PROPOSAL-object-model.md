@@ -1,10 +1,10 @@
-# Object Model Proposal for Nemo
+# Object Model Proposal for Harding
 
 *This file consolidates the object model design proposals from other documents.*
 
 ## Overview
 
-This document describes the proposed evolution of Nemo's object model from a pure property bag system to a hybrid model supporting both dynamic properties and declared instance variables (slots).
+This document describes the proposed evolution of Harding's object model from a pure property bag system to a hybrid model supporting both dynamic properties and declared instance variables (slots).
 
 ## Current Implementation Status
 
@@ -15,10 +15,10 @@ The slot-based instance variable system is **fully implemented and complete**:
 - `initSlotObject`, `getSlot`, `setSlot`, `hasSlotIVars`, `getSlotNames` procs
 - `derive:` method added to root object as a regular message send
 - **149x performance improvement** over property bag access
-- Test files `tests/test_slot_ivars.nim` and `tests/test_derive_from_nemo.nim` created
+- Test files `tests/test_slot_ivars.nim` and `tests/test_derive_from_harding.nim` created
 - Parser supports `derive: #(ivar1 ivar2)` syntax as a regular message
 - Direct slot access via automatically generated getter/setter methods
-- Native method dispatch from Nemo code integrated
+- Native method dispatch from Harding code integrated
 - Base library with Object, Boolean, and Collections implemented
 - Symbol canonicalization for identity checks
 - Globals table for class management

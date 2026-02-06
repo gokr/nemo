@@ -1,10 +1,10 @@
-# Newline Handling in Nemo
+# Newline Handling in Harding
 
-This document describes how Nemo handles newlines and statement separation.
+This document describes how Harding handles newlines and statement separation.
 
 ## Overview
 
-In Smalltalk, the period `.` is the only statement separator. However, Nemo takes a more pragmatic approach:
+In Smalltalk, the period `.` is the only statement separator. However, Harding takes a more pragmatic approach:
 
 - **Periods** explicitly terminate statements
 - **Line endings** act as statement separators (except when continuing a keyword message chain)
@@ -117,7 +117,7 @@ Temporary variables must be declared at the beginning of a block, before any sta
 
 ## Comments
 
-Nemo uses `#` for single-line comments:
+Harding uses `#` for single-line comments:
 
 ```smalltalk
 # This is a comment

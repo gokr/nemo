@@ -1,8 +1,8 @@
-# Nemo Implementation Guide
+# Harding Implementation Guide
 
 ## Overview
 
-This document describes Nemo's implementation internals, architecture, and development details.
+This document describes Harding's implementation internals, architecture, and development details.
 
 ## Table of Contents
 
@@ -18,24 +18,24 @@ This document describes Nemo's implementation internals, architecture, and devel
 
 ## Architecture
 
-Nemo consists of several subsystems:
+Harding consists of several subsystems:
 
 | Component | Location | Purpose |
 |-----------|----------|---------|
-| Lexer | `src/nemo/parser/lexer.nim` | Tokenization of source code |
-| Parser | `src/nemo/parser/parser.nim` | AST construction |
-| Core Types | `src/nemo/core/types.nim` | Node, Instance, Class definitions |
-| Interpreter | `src/nemo/interpreter/vm.nim` | Stackless VM execution |
-| Evaluator | `src/nemo/interpreter/objects.nim` | Method lookup and invocation |
-| Scheduler | `src/nemo/interpreter/scheduler.nim` | Green thread scheduling |
-| REPL | `src/nemo/repl/` | Interactive interface |
-| Compiler | `src/nemo/compiler/` | Nemo to Nim code generation |
-| GTK Bridge | `src/nemo/gui/gtk4/` | GTK widget integration |
+| Lexer | `src/harding/parser/lexer.nim` | Tokenization of source code |
+| Parser | `src/harding/parser/parser.nim` | AST construction |
+| Core Types | `src/harding/core/types.nim` | Node, Instance, Class definitions |
+| Interpreter | `src/harding/interpreter/vm.nim` | Stackless VM execution |
+| Evaluator | `src/harding/interpreter/objects.nim` | Method lookup and invocation |
+| Scheduler | `src/harding/interpreter/scheduler.nim` | Green thread scheduling |
+| REPL | `src/harding/repl/` | Interactive interface |
+| Compiler | `src/harding/compiler/` | Harding to Nim code generation |
+| GTK Bridge | `src/harding/gui/gtk4/` | GTK widget integration |
 
 ### Data Flow
 
 ```
-Source Code (.nemo)
+Source Code (.harding)
        ↓
    Lexer
        ↓
@@ -62,10 +62,10 @@ Source Code (.nemo)
 
 ### Overview
 
-The Nemo VM implements an iterative AST interpreter using an explicit work queue instead of recursive Nim procedure calls. This enables:
+The Harding VM implements an iterative AST interpreter using an explicit work queue instead of recursive Nim procedure calls. This enables:
 
 1. **True cooperative multitasking** - yield within statements
-2. **Stack reification** - `thisContext` accessible from Nemo
+2. **Stack reification** - `thisContext` accessible from Harding
 3. **No Nim stack overflow** - on deep recursion
 4. **Easier debugging and profiling** - flat execution loop
 
@@ -164,7 +164,7 @@ The VM returns a `VMStatus` indicating execution outcome:
 
 4. **No Stack Overflow**: Deep recursion won't crash the Nim interpreter
 
-5. **Stack Reification**: The entire Nemo call stack is accessible as data
+5. **Stack Reification**: The entire Harding call stack is accessible as data
 
 ---
 
@@ -172,7 +172,7 @@ The VM returns a `VMStatus` indicating execution outcome:
 
 ### NodeValue
 
-Wrapper for all Nemo values:
+Wrapper for all Harding values:
 
 ```nim
 type
@@ -263,7 +263,7 @@ proc invokeSuper(interp: var Interpreter, method: Method,
 
 ### Native Methods
 
-Native methods are Nim functions that implement Nemo methods:
+Native methods are Nim functions that implement Harding methods:
 
 ```nim
 type
@@ -412,7 +412,7 @@ When a method accesses a variable:
 ## Directory Structure
 
 ```
-src/nemo/
+src/harding/
 ├── core/                # Core type definitions
 │   └── types.nim        # Node, Instance, Class
 ├── parser/              # Lexer and parser
@@ -425,7 +425,7 @@ src/nemo/
 ├── repl/                # Interactive interface
 │   ├── doit.nim
 │   └── interact.nim
-├── compiler/            # Nemo to Nim compilation
+├── compiler/            # Harding to Nim compilation
 │   └── ...
 └── gui/                 # GTK bridge
     ├── gtk4/           # GTK4 wrappers

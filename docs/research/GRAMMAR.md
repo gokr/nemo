@@ -1,10 +1,10 @@
-# Nemo BNF Grammar
+# Harding BNF Grammar
 
-This document provides a formal BNF (Backus-Naur Form) grammar for the Nemo language, derived from the lexer (`src/nemo/parser/lexer.nim`) and parser (`src/nemo/parser/parser.nim`) implementations.
+This document provides a formal BNF (Backus-Naur Form) grammar for the Harding language, derived from the lexer (`src/harding/parser/lexer.nim`) and parser (`src/harding/parser/parser.nim`) implementations.
 
 ## Overview
 
-Nemo uses a Smalltalk-style syntax with the following precedence (highest to lowest):
+Harding uses a Smalltalk-style syntax with the following precedence (highest to lowest):
 1. Primary expressions (literals, parentheses, blocks)
 2. Unary messages (left-to-right)
 3. Binary operators (left-to-right)
@@ -91,7 +91,7 @@ Keywords are identifiers followed by a colon. Multi-part keywords like `at:put:`
 
 ### Primitives
 
-Nemo supports a unified primitive syntax that works for both declarative and inline use:
+Harding supports a unified primitive syntax that works for both declarative and inline use:
 
 ```bnf
 (* XML-style primitive with Nim code embedding *)
@@ -227,7 +227,7 @@ For declarative primitives, argument names in the primitive tag must match the m
 <block>        ::= "[" <block-params>? <block-temps>? <statements> "]"
 
 <block-params> ::= ":" <identifier> (":" <identifier>)* "|"
-                 | ":" <identifier> (":" <identifier>)*   (* Nemo-style: | optional *)
+                 | ":" <identifier> (":" <identifier>)*   (* Harding-style: | optional *)
 
 <block-temps>  ::= "|" <identifier>+ "|"
 ```
@@ -339,7 +339,7 @@ Message(
 
 ## Newline Handling and Statement Separation
 
-Nemo takes a pragmatic approach to statement separation that differs from traditional Smalltalk:
+Harding takes a pragmatic approach to statement separation that differs from traditional Smalltalk:
 
 ### Statement Separators
 
@@ -354,7 +354,7 @@ Both periods (`.`) and line endings act as statement separators:
 x := 1.
 y := 2.
 
-# Implicit line endings (Nemo-style)
+# Implicit line endings (Harding-style)
 x := 1
 y := 2
 
@@ -448,9 +448,9 @@ Temporary variables must be declared at the beginning of a block, before any sta
 ## Relationship to Implementation
 
 This grammar corresponds to:
-- **Lexer**: `src/nemo/parser/lexer.nim` - Token production rules
-- **Parser**: `src/nemo/parser/parser.nim` - Recursive descent implementation
-- **AST Types**: `src/nemo/core/types.nim` - Node type definitions
+- **Lexer**: `src/harding/parser/lexer.nim` - Token production rules
+- **Parser**: `src/harding/parser/parser.nim` - Recursive descent implementation
+- **AST Types**: `src/harding/core/types.nim` - Node type definitions
 
 The parser uses recursive descent with the following entry points:
 - `parseExpression()` - Parses expressions with message chains

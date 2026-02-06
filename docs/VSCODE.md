@@ -1,24 +1,24 @@
-# VSCode Extension for Nemo
+# VSCode Extension for Harding
 
 ## Overview
 
-The Nemo repository includes a VSCode extension that provides syntax highlighting for `.nemo` files. This allows developers to get immediate syntax highlighting without needing to install a separate extension from the marketplace.
+The Harding repository includes a VSCode extension that provides syntax highlighting for `.harding` files. This allows developers to get immediate syntax highlighting without needing to install a separate extension from the marketplace.
 
 ## Installation
 
 ### From the Repository
 
-The extension file is included in the repository as `nemo-lang-0.1.0.vsix`.
+The extension file is included in the repository as `harding-lang-0.1.0.vsix`.
 
 **Command line:**
 ```bash
-code --install-extension nemo-lang-0.1.0.vsix
+code --install-extension harding-lang-0.1.0.vsix
 ```
 
 **From VSCode:**
 1. Press `Ctrl+Shift+P` (Cmd+Shift+P on Mac)
 2. Type "Extensions: Install from VSIX..."
-3. Select `nemo-lang-0.1.0.vsix`
+3. Select `harding-lang-0.1.0.vsix`
 4. Reload VSCode when prompted
 
 ### Rebuilding the Extension
@@ -38,49 +38,49 @@ The grammar provides scopes for the following constructs:
 
 | Construct | Scope | Example |
 |-----------|-------|---------|
-| Comments | `comment.line.nemo` | `# This is a comment` |
-| Strings | `string.quoted.double.nemo` | `"hello"` |
-| Symbols | `entity.name.tag.symbol.nemo` | `#foo`, `#bar:baz:` |
-| Symbols (quoted) | `entity.name.tag.symbol.quoted.nemo` | `"symbol with spaces"` |
-| Numbers | `constant.numeric.nemo` | `42`, `3.14`, `-10` |
-| Booleans | `constant.language.nemo` | `true`, `false` |
-| Nil | `constant.language.nemo` | `nil` |
-| Self/Super | `constant.language.nemo` | `self`, `super` |
-| Globals (classes) | `constant.other.class.nemo` | `Object`, `Point` |
-| Variables | `variable.other.nemo` | `x`, `message` |
-| Block parameters | `variable.parameter.nemo` | `:param`, `:x :y` |
-| Block temps | `variable.other.temporary.nemo` | `| temp1 temp2` |
-| Keywords | `keyword.control.nemo` | `ifTrue:`, `at:put:` |
-| Assignment | `keyword.operator.assignment.nemo` | `:=` |
-| Return | `keyword.operator.return.nemo` | `^` |
-| Method def | `keyword.operator.method-definition.nemo` | `>>` |
-| Arrow | `keyword.operator.arrow.nemo` | `->` |
-| Operators | `keyword.operator.nemo` | `+`, `-`, `*`, `/`, `&`, `\|` |
-| Arrays | `meta.array.literal.nemo` | `#(1 2 3)` |
-| Tables | `meta.table.literal.nemo` | `#{"key" -> "value"}` |
-| Objects | `meta.object.literal.nemo` | `{| x: 1 \|}` |
-| Primitives | `support.function.primitive.nemo` | `<primitive>...</primitive>` |
+| Comments | `comment.line.harding` | `# This is a comment` |
+| Strings | `string.quoted.double.harding` | `"hello"` |
+| Symbols | `entity.name.tag.symbol.harding` | `#foo`, `#bar:baz:` |
+| Symbols (quoted) | `entity.name.tag.symbol.quoted.harding` | `"symbol with spaces"` |
+| Numbers | `constant.numeric.harding` | `42`, `3.14`, `-10` |
+| Booleans | `constant.language.harding` | `true`, `false` |
+| Nil | `constant.language.harding` | `nil` |
+| Self/Super | `constant.language.harding` | `self`, `super` |
+| Globals (classes) | `constant.other.class.harding` | `Object`, `Point` |
+| Variables | `variable.other.harding` | `x`, `message` |
+| Block parameters | `variable.parameter.harding` | `:param`, `:x :y` |
+| Block temps | `variable.other.temporary.harding` | `| temp1 temp2` |
+| Keywords | `keyword.control.harding` | `ifTrue:`, `at:put:` |
+| Assignment | `keyword.operator.assignment.harding` | `:=` |
+| Return | `keyword.operator.return.harding` | `^` |
+| Method def | `keyword.operator.method-definition.harding` | `>>` |
+| Arrow | `keyword.operator.arrow.harding` | `->` |
+| Operators | `keyword.operator.harding` | `+`, `-`, `*`, `/`, `&`, `\|` |
+| Arrays | `meta.array.literal.harding` | `#(1 2 3)` |
+| Tables | `meta.table.literal.harding` | `#{"key" -> "value"}` |
+| Objects | `meta.object.literal.harding` | `{| x: 1 \|}` |
+| Primitives | `support.function.primitive.harding` | `<primitive>...</primitive>` |
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `.vscode/syntaxes/nt.tmLanguage.json` | TextMate grammar definition |
+| `.vscode/syntaxes/harding.tmLanguage.json` | TextMate grammar definition |
 | `.vscode/language-configuration.json` | Bracket matching, word patterns |
-| `.vscode/settings.json` | File association for `.nemo` files |
+| `.vscode/settings.json` | File association for `.harding` files |
 | `package.json` | Extension manifest |
 | `.vscodeignore` | Files to exclude from `.vsix` |
-| `nemo-lang-0.1.0.vsix` | Packaged extension |
+| `harding-lang-0.1.0.vsix` | Packaged extension |
 
 ## Verifying Syntax Highlighting
 
 To check that syntax highlighting is working correctly:
 
-1. Open any `.nemo` file in VSCode
+1. Open any `.harding` file in VSCode
 2. Press `Ctrl+Shift+P` (Cmd+Shift+P on Mac)
 3. Type "Developer: Inspect Editor Tokens and Scopes"
 4. Move your cursor over different code elements
-5. A popup will show the scopes applied (e.g., `source.nemo keyword.control.nemo`)
+5. A popup will show the scopes applied (e.g., `source.harding keyword.control.harding`)
 
 ## Customizing Colors
 
@@ -91,13 +91,13 @@ To customize the colors in your VSCode settings (`settings.json`):
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
-        "scope": "entity.name.tag.symbol.nemo",
+        "scope": "entity.name.tag.symbol.harding",
         "settings": {
           "foreground": "#ff5555"
         }
       },
       {
-        "scope": "constant.other.class.nemo",
+        "scope": "constant.other.class.harding",
         "settings": {
           "foreground": "#8be9fd",
           "fontStyle": "bold"
@@ -120,8 +120,8 @@ This prevents cases like `#primitiveIsKindOf:` from being incorrectly highlighte
 
 ### Identifiers vs Globals
 
-- Identifiers starting with lowercase: `variable.other.nemo`
-- Identifiers starting with uppercase: `constant.other.class.nemo`
+- Identifiers starting with lowercase: `variable.other.harding`
+- Identifiers starting with uppercase: `constant.other.class.harding`
 
 This convention makes class references stand out from local variables.
 
@@ -129,7 +129,7 @@ This convention makes class references stand out from local variables.
 
 **Extension not loading:**
 - Ensure VSCode is reloaded after installation
-- Check that the `.nemo` file extension is associated with Nemo (should happen automatically)
+- Check that the `.harding` file extension is associated with Harding (should happen automatically)
 
 **Incorrect highlighting:**
 - Use "Developer: Inspect Editor Tokens and Scopes" to verify which scopes are applied

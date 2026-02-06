@@ -1,8 +1,8 @@
-# Nemo New Object Model - Summary
+# Harding New Object Model - Summary
 
 ## What We're Building
 
-A new prototype-based object model for Nemo that:
+A new prototype-based object model for Harding that:
 - **Eliminates property bags** in favor of declared instance variables
 - **Improves performance** with direct slot access (no dictionary lookup)
 - **Maintains prototype flexibility** with structured object definitions
@@ -120,7 +120,7 @@ newline := '\n'                         # Escaped characters
 
 ### File Definition Mode
 ```smalltalk
-# File: src/models/Person.nemo
+# File: src/models/Person.harding
 # Parsed with extended parser that recognizes special syntax
 
 Person := Object derive: #(name age)
@@ -196,13 +196,13 @@ project/
 │   ├── parser/                 # Lexer and parser
 │   └── primitives/             # Built-in methods
 ├── models/                     # Application models
-│   ├── Person.nemo
-│   ├── Employee.nemo
-│   └── Company.nemo
-├── main.nemo                     # Application entry
+│   ├── Person.harding
+│   ├── Employee.harding
+│   └── Company.harding
+├── main.harding                     # Application entry
 ├── tests/
-│   ├── test_person.nemo
-│   └── test_employee.nemo
+│   ├── test_person.harding
+│   └── test_employee.harding
 └── README.md
 ```
 
@@ -282,7 +282,7 @@ Start implementing:
 
 ## What's Different from Traditional Smalltalk?
 
-| Aspect | Smalltalk-80 | Nemo |
+| Aspect | Smalltalk-80 | Harding |
 |--------|--------------|---------|
 | Object Model | Class-based | Prototype-based |
 | Inheritance | Subclassing | Derivation / chain |
@@ -291,9 +291,9 @@ Start implementing:
 | Collections | OrderedCollection | seq/Table (Nim) |
 | Compilation | Usually bytecode | Nim native |
 
-## What's Different from Old Nemo?
+## What's Different from Old Harding?
 
-| Aspect | Old Nemo | New Nemo |
+| Aspect | Old Harding | New Harding |
 |--------|-------------|-------------|
 | Instance Variables | Arbitrary properties on Object | Declared slots on Object, property bag on Dictionary |
 | Access Pattern | Dictionary lookup | Direct slot access or Dictionary lookup |

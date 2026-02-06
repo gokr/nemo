@@ -1,6 +1,6 @@
 # Multiple Inheritance and Conflict Resolution
 
-Nemo's class model supports multiple parents for flexible inheritance. This document explains how conflicts are detected and resolved.
+Harding's class model supports multiple parents for flexible inheritance. This document explains how conflicts are detected and resolved.
 
 ## Multiple Parents
 
@@ -27,7 +27,7 @@ c bar  # Returns "bar2"
 
 ## Conflict Detection
 
-When adding multiple parents (via `derive:` with multiple parents or `addParent:`), Nemo checks for two types of conflicts:
+When adding multiple parents (via `derive:` with multiple parents or `addParent:`), Harding checks for two types of conflicts:
 
 ### Slot Name Conflicts
 
@@ -106,7 +106,7 @@ However, a method defined directly on the child class always takes precedence ov
 
 ## Example Program
 
-See `examples/test_conflict_detection.nemo` for a complete example demonstrating conflict detection and the use of `addParent:` for resolution.
+See `examples/test_conflict_detection.harding` for a complete example demonstrating conflict detection and the use of `addParent:` for resolution.
 
 ## See Also
 

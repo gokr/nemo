@@ -1,4 +1,4 @@
-# Nemo Syntax Quick Reference - Object Model & Parsing
+# Harding Syntax Quick Reference - Object Model & Parsing
 
 ## Instance Variable Declaration
 
@@ -83,7 +83,7 @@ Person selector: #greet put: [ ^ "Hello, " , name ]
 ### Definition Syntax (Files Only - SPECIAL PARSING)
 ```smalltalk
 # This syntax requires special parsing - NOT executable in REPL
-# Use in .nemo files for class definitions
+# Use in .harding files for class definitions
 
 # Unary method (no parameters)
 Person>>greet [ ^ "Hello, " , name ]
@@ -245,14 +245,14 @@ The `super` keyword refers to the parent of the class where the current method w
 # One class per file (recommended)
 src/
   models/
-    Person.nemo            # Defines Person class
-    Employee.nemo          # Defines Employee
-    Company.nemo           # Defines Company
-  main.nemo                # Application entry point
+    Person.harding            # Defines Person class
+    Employee.harding          # Defines Employee
+    Company.harding           # Defines Company
+  main.harding                # Application entry point
 
 # Multi-class files also supported
 src/
-  models.nemo              # Person, Employee, Company all defined here
+  models.harding              # Person, Employee, Company all defined here
 ```
 
 ## Parsing Modes
@@ -268,7 +268,7 @@ src/
 
 ### File Definition Mode
 ```smalltalk
-# File: src/models/Person.nemo
+# File: src/models/Person.harding
 # Special parsing for method definitions
 
 Person := Object derive: #(#name #age)                    # Executable
@@ -337,9 +337,9 @@ tags isNil
 
 See [NEWLINE_RULES.md](NEWLINE_RULES.md) for complete newline handling rules.
 
-## Comparison: Smalltalk vs Nemo
+## Comparison: Smalltalk vs Harding
 
-| Feature | Smalltalk | Nemo |
+| Feature | Smalltalk | Harding |
 |---------|-----------|---------|
 | Object Model | Class-based | Class-based |
 | Inheritance | Classes | Class chain |
@@ -410,7 +410,7 @@ collection do: [ :each | block ].
 #=== Comments ================================
 # This is a comment
 #==== Section header
-#!/usr/bin/env nemo                         # Shebang at start of file
+#!/usr/bin/env harding                         # Shebang at start of file
 
 #=== Strings =================================
 "double quoted"                             # String literal
@@ -449,11 +449,11 @@ Object>>at: key <primitive primitiveAt: key>
 
 ## Method Definition Approaches
 
-Nemo supports multiple approaches for defining methods:
+Harding supports multiple approaches for defining methods:
 
 ### Approach 1: Individual Definition (>> syntax)
 ```smalltalk
-# In .nemo files only - transformed by parser
+# In .harding files only - transformed by parser
 Person>>greet [ ^ "Hello, " , name ]
 Person>>name: aName [ name := aName ]
 ```
@@ -530,7 +530,7 @@ obj properties     # Returns array of symbols
 6. ✅ Both REPL and File Definition modes work
 7. ✅ Comprehensive test suite written and passing
 8. ✅ Cascade syntax implemented (`;` operator)
-9. ✅ Native method dispatch from Nemo code
+9. ✅ Native method dispatch from Harding code
 10. ✅ Base library with Object, Boolean, Collections
 11. ✅ Multi-character binary operators (`==`, `//`, `\`, `<=`, `>=`, `~=`, `~~`)
 12. ✅ Enhanced comment handling (`#====` section headers)
@@ -545,7 +545,7 @@ obj properties     # Returns array of symbols
 
 ### Multi-Character Binary Operators
 
-Nemo supports multi-character binary operators, matched longest-first:
+Harding supports multi-character binary operators, matched longest-first:
 
 ```smalltalk
 a == b      # Equality comparison
@@ -561,7 +561,7 @@ a | b       # Logical OR
 
 ### Cascading Messages
 
-Nemo supports Smalltalk's cascade syntax using `;` to send multiple messages to the same receiver:
+Harding supports Smalltalk's cascade syntax using `;` to send multiple messages to the same receiver:
 
 ```smalltalk
 # Send multiple messages to the same object

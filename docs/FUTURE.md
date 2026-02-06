@@ -1,14 +1,14 @@
-# Nemo Future Plans and Roadmap
+# Harding Future Plans and Roadmap
 
 ## Overview
 
-This document outlines planned features, architectural decisions under consideration, and the development roadmap for Nemo.
+This document outlines planned features, architectural decisions under consideration, and the development roadmap for Harding.
 
 ---
 
 ## Concurrency Models
 
-Nemo aims to support multiple concurrency approaches for different use cases:
+Harding aims to support multiple concurrency approaches for different use cases:
 
 ### Green Threads (Current Foundation)
 
@@ -54,7 +54,7 @@ value := ch receive.
 
 ### Current Status
 
-The GTK bridge provides basic widget support. GUI tools can be written in Nemo and modified at runtime.
+The GTK bridge provides basic widget support. GUI tools can be written in Harding and modified at runtime.
 
 **Implemented:**
 - Basic widget wrappers (Window, Button, Box, Label, Entry)
@@ -89,7 +89,7 @@ After MVP, add:
 
 ### Key Design Principle
 
-All GUI tools are written in Nemo code, making them malleable at runtime. Only a thin Nim wrapper (~20 core GTK widgets) is static.
+All GUI tools are written in Harding code, making them malleable at runtime. Only a thin Nim wrapper (~20 core GTK widgets) is static.
 
 ---
 
@@ -229,7 +229,7 @@ pid send: #compute with: 42.
 
 ### Why Multiple Inheritance?
 
-Nemo supports multiple inheritance for flexibility, unlike Smalltalk's single inheritance with mixins approach. This enables:
+Harding supports multiple inheritance for flexibility, unlike Smalltalk's single inheritance with mixins approach. This enables:
 - Sharing behavior from multiple sources
 - Clearer separation of concerns
 - Easier integration with Nim's type system

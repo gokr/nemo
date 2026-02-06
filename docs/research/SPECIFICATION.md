@@ -1,10 +1,10 @@
-# Nemo Language Specification
+# Harding Language Specification
 
-Nemo is a class-based Smalltalk dialect that compiles to Nim code. This document specifies the complete language syntax, semantics, and behavior.
+Harding is a class-based Smalltalk dialect that compiles to Nim code. This document specifies the complete language syntax, semantics, and behavior.
 
 ## Overview
 
-Nemo combines Smalltalk's message-passing semantics with Nim's compilation and performance characteristics. Key features include:
+Harding combines Smalltalk's message-passing semantics with Nim's compilation and performance characteristics. Key features include:
 
 - Class-based object system with single inheritance (multiple parents planned)
 - Message-passing semantics (unary, binary, keyword)
@@ -177,7 +177,7 @@ Employee := Person derive: #(salary) withParents: #(Enumerable)
 
 ### Conflict Detection
 
-When creating a class with multiple parents, Nemo checks for conflicts:
+When creating a class with multiple parents, Harding checks for conflicts:
 
 - **Slot name conflicts**: If any slot name exists in multiple parent hierarchies, an error is raised
 - **Method selector conflicts**: If directly-defined method selectors conflict between parents, an error is raised
@@ -501,16 +501,16 @@ obj := Object derive
 - `terminate` - Terminate the process
 - `yield` - Yield the process (only valid for current process)
 
-### Nemo Global (GlobalTable)
+### Harding Global (GlobalTable)
 
-The `Nemo` object provides access to the global namespace:
+The `Harding` object provides access to the global namespace:
 
-- `Nemo keys` - Get array of all global variable names
-- `Nemo at: "name"` - Get the value of a global variable
-- `Nemo at: "name" put: value` - Set a global variable
-- `Nemo includesKey: "name"` - Check if a global exists
+- `Harding keys` - Get array of all global variable names
+- `Harding at: "name"` - Get the value of a global variable
+- `Harding at: "name" put: value` - Set a global variable
+- `Harding includesKey: "name"` - Check if a global exists
 
-All processes share the same global namespace via `Nemo`, enabling inter-process communication.
+All processes share the same global namespace via `Harding`, enabling inter-process communication.
 
 ## Execution Models
 
@@ -523,7 +523,7 @@ AST-based interpreter for REPL and development:
 
 ### Compiler (In Development)
 
-Translates Nemo to Nim source:
+Translates Harding to Nim source:
 - Generates Nim procedures for methods
 - Inline optimization for known operations
 - Compiles to native binaries
@@ -533,16 +533,16 @@ Translates Nemo to Nim source:
 ### Command-Line
 
 ```bash
-nemo                  # Interactive REPL
-nemo script.nemo        # Run script
-nemo -e "3 + 4"       # Evaluate expression
-nemo --ast script.nemo  # Show AST
-nemo --loglevel DEBUG # Debug output
+harding                  # Interactive REPL
+harding script.harding        # Run script
+harding -e "3 + 4"       # Evaluate expression
+harding --ast script.harding  # Show AST
+harding --loglevel DEBUG # Debug output
 ```
 
 ### Logging
 
-Both `nemo` supports `--loglevel`:
+Both `harding` supports `--loglevel`:
 - `DEBUG` - Detailed execution trace
 - `INFO` - General information
 - `WARN` - Warnings only
@@ -550,7 +550,7 @@ Both `nemo` supports `--loglevel`:
 
 ### VSCode Extension
 
-Syntax highlighting for `.nemo` files is available via the included VSCode extension. See [VSCODE.md](VSCODE.md) for installation instructions.
+Syntax highlighting for `.harding` files is available via the included VSCode extension. See [VSCODE.md](VSCODE.md) for installation instructions.
 
 ## Performance
 

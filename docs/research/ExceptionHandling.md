@@ -1,15 +1,15 @@
-# Exception Handling in Nemo
+# Exception Handling in Harding
 
-Nemo provides exception handling through the `on:do:` mechanism, which allows blocks of code to be protected with exception handlers.
+Harding provides exception handling through the `on:do:` mechanism, which allows blocks of code to be protected with exception handlers.
 
 ## Basic Syntax
 
-```nemo
+```harding
 [ protectedBlock ] on: ExceptionClass do: [ :ex | handlerBlock ]
 ```
 
 Example:
-```nemo
+```harding
 [ "Hello" / 3 ] on: Error do: [ :ex |
     Transcript showCr: "Error occurred: " + ex message
 ]
@@ -19,7 +19,7 @@ Example:
 
 ### Architecture
 
-Nemo's exception handling is built directly on top of Nim's exception mechanism. The interpreter maintains a stack of `ExceptionHandler` records:
+Harding's exception handling is built directly on top of Nim's exception mechanism. The interpreter maintains a stack of `ExceptionHandler` records:
 
 ```nim
 type
@@ -63,7 +63,7 @@ finally:
 
 ## Benefits of Nim Integration
 
-The protected block is executed inside a native Nim `try/except/finally` block. When Nemo code calls `error: 'message'`, it ultimately executes:
+The protected block is executed inside a native Nim `try/except/finally` block. When Harding code calls `error: 'message'`, it ultimately executes:
 
 ```nim
 raise newException(EvalError, msg)
@@ -71,8 +71,8 @@ raise newException(EvalError, msg)
 
 ### 1. Seamless Interop
 
-- Nim libraries that raise exceptions can be caught in Nemo with `on:do:`
-- Nemo exceptions propagate naturally through Nim code
+- Nim libraries that raise exceptions can be caught in Harding with `on:do:`
+- Harding exceptions propagate naturally through Nim code
 - No translation layer between exception systems
 
 ### 2. No Custom Unwinding Logic
@@ -110,11 +110,11 @@ Can access Nim's native stack trace info if needed.
 
 The current implementation immediately unwinds the stack to the handler (standard Nim behavior). This differs from Smalltalk's more sophisticated mechanism where handlers could theoretically inspect the stack and decide to resume.
 
-For integration with Nim libraries, this is the right choice - it matches Nim's semantics and lets exceptions flow naturally between Nemo and Nim code.
+For integration with Nim libraries, this is the right choice - it matches Nim's semantics and lets exceptions flow naturally between Harding and Nim code.
 
 ## Differences from Smalltalk
 
-| Feature | Nemo | Smalltalk |
+| Feature | Harding | Smalltalk |
 |---------|------|-----------|
 | Implementation | Built on Nim exceptions | Custom VM mechanism |
 | Stack unwinding | Immediate (Nim default) | Immediate |
@@ -122,13 +122,13 @@ For integration with Nim libraries, this is the right choice - it matches Nim's 
 | Handler execution | After full unwind | In handler context |
 | Nim interop | Native | Not applicable |
 
-Nemo trades Smalltalk's advanced features (resumable exceptions) for seamless integration with Nim's ecosystem.
+Harding trades Smalltalk's advanced features (resumable exceptions) for seamless integration with Nim's ecosystem.
 
 ## Raising Exceptions
 
 Use `error:` to raise an exception:
 
-```nemo
+```harding
 someCondition ifTrue: [
     Error error: "Something went wrong"
 ]
@@ -141,7 +141,7 @@ When caught, exception objects have:
 - `stackTrace` - String representation of the call stack
 
 Example:
-```nemo
+```harding
 [ riskyOperation ] on: Error do: [ :ex |
     Transcript showCr: "Message: " + ex message.
     Transcript showCr: "Stack: " + ex stackTrace
@@ -151,7 +151,7 @@ Example:
 ## Best Practices
 
 1. **Catch specific exceptions** - Use specific exception classes rather than catching all errors
-2. **Clean up resources** - Use `on:do:` for resource cleanup (though Nemo doesn't have a direct equivalent to `ensure:` yet)
+2. **Clean up resources** - Use `on:do:` for resource cleanup (though Harding doesn't have a direct equivalent to `ensure:` yet)
 3. **Don't swallow exceptions** - Either handle properly or re-raise
 4. **Provide context** - Include helpful messages when raising exceptions
 
@@ -160,4 +160,4 @@ Example:
 - Handlers are stored in `Interpreter.exceptionHandlers` (a `seq[ExceptionHandler]`)
 - Class matching is currently simple equality check
 - The activation stack is unwound to the handler's depth when an exception is caught
-- Nim's `ValueError` is used as the underlying exception type for Nemo errors
+- Nim's `ValueError` is used as the underlying exception type for Harding errors

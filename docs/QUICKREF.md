@@ -1,4 +1,4 @@
-# N Syntax Quick Reference
+# Harding Syntax Quick Reference
 
 ## Literals
 
@@ -82,7 +82,7 @@ obj
 
 ```smalltalk
 [ code ]                         # No params, no temps
-[ :x | x * 2 ]                   # With params (no temps - Nemo style)
+[ :x | x * 2 ]                   # With params (no temps - Harding style)
 [ :x | | x * 2 ]                 # With params (explicit)
 [ | temp1 temp2 | code ]         # With temps, no params
 [ :x :y | t1 t2 | code ]         # With params and temps
@@ -324,7 +324,7 @@ Employee>>calculatePay [
 x := 1.
 y := 2.
 
-# Line endings also work (Nemo-style)
+# Line endings also work (Harding-style)
 x := 1
 y := 2
 

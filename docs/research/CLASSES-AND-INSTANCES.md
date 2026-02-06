@@ -1,8 +1,8 @@
-# Nemo Classes and Instances - Design Document
+# Harding Classes and Instances - Design Document
 
 ## Core Concept
 
-In Nemo, we maintain **Smalltalk-style conventions** where:
+In Harding, we maintain **Smalltalk-style conventions** where:
 - **Classes** are prototypes that start with capital letters and serve as templates
 - **Instances** are objects created from classes that represent actual data/entities
 - **The distinction is purely conventional** - technically everything is a prototype
@@ -21,7 +21,7 @@ Company := Object derive
 
 **Characteristics:**
 - Start with capital letter (convention)
-- Stored in global `Nemo` table
+- Stored in global `Harding` table
 - Define structure and behavior
 - Typically don't hold instance data
 - Used to create instances
@@ -42,19 +42,19 @@ acme := Company new
 
 ## Global Storage
 
-### Nemo Global Table
+### Harding Global Table
 ```smalltalk
-# All "classes" get stored in Nemo global
-Nemo := Table new.
+# All "classes" get stored in Harding global
+Harding := Table new.
 
 # When we assign to a capitalized variable at top level:
 Person := Object derive
 
-# It's automatically added to Nemo
-Nemo at: "Person" put: Person
+# It's automatically added to Harding
+Harding at: "Person" put: Person
 
 # Can reference as:
-Nemo Person
+Harding Person
 # or just
 Person
 ```
@@ -66,7 +66,7 @@ Person
 #
 # It generates:
 # 1. var Person = classDeriveImpl(Object, ["name", "age"])
-# 2. Nemo["Person"] = Person
+# 2. Harding["Person"] = Person
 ```
 
 ## Instance Creation
@@ -154,9 +154,9 @@ Person>>greet [ ^ "Hello" ].       # With period (for familiarity)
 
 ## Example: Complete Class Definition
 
-### File: src/Person.nemo
+### File: src/Person.harding
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 #
 # Person - Represents a person
 #
@@ -224,7 +224,7 @@ Person at: "description" put: [
 
 ### Alternative: Using Parser Sugar
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 #
 # Person - Using >> syntax
 #
@@ -272,14 +272,14 @@ Person>>description [
 ].
 ```
 
-### Usage: main.nemo
+### Usage: main.harding
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 #
 # Main application
 
-# Load Person (future: will auto-register in Nemo global)
-load: "src/Person.nemo".
+# Load Person (future: will auto-register in Harding global)
+load: "src/Person.harding".
 
 # Create instances using class method
 alice := Person newWithName: "Alice" age: 30.
@@ -301,12 +301,12 @@ alice description print.                   # "Alice (age 31)"
 
 ### Employee extends Person
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 #
 # Employee extends Person
 
 # Load parent
-load: "src/Person.nemo".
+load: "src/Person.harding".
 
 # Derive with additional ivars
 Employee := Person derive: #(employeeID department salary).
@@ -399,11 +399,11 @@ MessageSendNode(
 
 ## Class Methods vs Instance Methods
 
-Nemo uses a **simplified class model** compared to full Smalltalk. Understanding this distinction is important:
+Harding uses a **simplified class model** compared to full Smalltalk. Understanding this distinction is important:
 
 ### The Model
 
-In Nemo, each `Class` has two separate method tables:
+In Harding, each `Class` has two separate method tables:
 - **`methods` / `allMethods`** - Instance methods (sent to instances of the class)
 - **`classMethods` / `allClassMethods`** - Class methods (sent to the class itself)
 
@@ -450,7 +450,7 @@ Object>>printString [ ^"<instance of " , self class name , ">" ]
 
 ### Comparison with Full Smalltalk
 
-| Feature | Full Smalltalk | Nemo |
+| Feature | Full Smalltalk | Harding |
 |---------|---------------|---------|
 | Metaclass hierarchy | Yes (each class has its own metaclass) | No (single Class type) |
 | Class methods | Inherited via metaclass chain | Inherited via allClassMethods |
@@ -459,7 +459,7 @@ Object>>printString [ ^"<instance of " , self class name , ">" ]
 
 ### Why This Simplified Approach?
 
-For Nemo's goals, this simplified approach should be sufficient:
+For Harding's goals, this simplified approach should be sufficient:
 
 ✅ **Easier to understand** - No metaclass confusion
 ✅ **Easier to implement** - No complex metaclass chain
@@ -475,7 +475,7 @@ The full Smalltalk metaclass system is powerful but complex. Most of its benefit
 1. **No new parser for derivation** - `derive:` is just a message
 2. **Optional `>>` syntax** - Parser sugar that converts to `at:put:`
 3. **Conventional distinction** - Classes (capitalized) vs instances (lowercase)
-4. **Global Nemo table** - Stores all "classes"
+4. **Global Harding table** - Stores all "classes"
 5. **Multiple creation patterns** - direct, factory methods, new, cascading
 6. **Full keyword support** - `Person>>moveX: x y: y [...]`
 7. **Optional trailing `.`** - Flexible syntax
@@ -487,7 +487,7 @@ The full Smalltalk metaclass system is powerful but complex. Most of its benefit
 ✅ **Flexible instance creation** - Multiple patterns supported
 ✅ **Familiar conventions** - Matches Smalltalk style
 ✅ **Optional sugar** - `>>` syntax is just convenience
-✅ **Encapsulated classes** - Stored in Nemo global
+✅ **Encapsulated classes** - Stored in Harding global
 ✅ **Clear structure** - Class vs instance distinction
 ✅ **Simpler than metaclasses** - Easier to understand and implement
 

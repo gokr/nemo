@@ -1,4 +1,4 @@
-# Nemo Language Manual
+# Harding Language Manual
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@
 
 ## Introduction
 
-Nemo is a class-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing semantics and syntax while making pragmatic changes for a modern implementation.
+Harding is a class-based Smalltalk dialect that compiles to Nim. It preserves Smalltalk's message-passing semantics and syntax while making pragmatic changes for a modern implementation.
 
 ### Key Features
 
@@ -33,7 +33,7 @@ Nemo is a class-based Smalltalk dialect that compiles to Nim. It preserves Small
 
 ### Quick Comparison with Smalltalk-80
 
-| Feature | Smalltalk-80 | Nemo |
+| Feature | Smalltalk-80 | Harding |
 |---------|-------------|---------|
 | Object model | Classes + metaclasses | Classes only (no metaclasses) |
 | Statement separator | Period (`.`) only | Period or newline |
@@ -79,10 +79,10 @@ Nemo is a class-based Smalltalk dialect that compiles to Nim. It preserves Small
 
 ### Shebang Support
 
-Nemo scripts can include shebang lines at the beginning:
+Harding scripts can include shebang lines at the beginning:
 
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 # This script can be made executable and run directly
 ```
 
@@ -90,14 +90,14 @@ When the kernel executes the script, the shebang line is automatically skipped b
 
 ### Statement Separation
 
-Nemo takes a pragmatic approach to statement separation:
+Harding takes a pragmatic approach to statement separation:
 
 ```smalltalk
 # Periods work (Smalltalk-compatible)
 x := 1.
 y := 2.
 
-# Line endings also work (Nemo-style)
+# Line endings also work (Harding-style)
 x := 1
 y := 2
 
@@ -205,7 +205,7 @@ c bar  # Returns "bar2"
 
 ### Conflict Detection
 
-When adding multiple parents (via `derive:` with multiple parents or `addParent:`), Nemo checks for:
+When adding multiple parents (via `derive:` with multiple parents or `addParent:`), Harding checks for:
 
 **Slot name conflicts**: If any slot name exists in multiple parent hierarchies, an error is raised.
 
@@ -258,7 +258,7 @@ Child addParent: Parent2
 
 ### Super Sends
 
-Nemo supports both qualified and unqualified super sends for multiple inheritance:
+Harding supports both qualified and unqualified super sends for multiple inheritance:
 
 ```smalltalk
 # Unqualified super (uses first parent)
@@ -408,10 +408,10 @@ obj perform: #at:put: with: #x with: 5  # Same as: obj at: #x put: 5
 
 The `|` separator marks the boundary between parameters/temporaries and the body.
 
-**Nemo-specific feature**: Unlike most Smalltalk implementations, Nemo allows you to omit the `|` when a block has parameters but no temporaries:
+**Harding-specific feature**: Unlike most Smalltalk implementations, Harding allows you to omit the `|` when a block has parameters but no temporaries:
 
 ```smalltalk
-# Nemo - valid and concise
+# Harding - valid and concise
 [ :x | x * 2 ]
 
 # Traditional style also works
@@ -523,7 +523,7 @@ collection detect: [:each | each > 5]
 
 ## Exception Handling
 
-Nemo provides exception handling through the `on:do:` mechanism:
+Harding provides exception handling through the `on:do:` mechanism:
 
 ### Basic Syntax
 
@@ -563,19 +563,19 @@ someCondition ifTrue: [
 
 ### Differences from Smalltalk
 
-| Feature | Nemo | Smalltalk |
+| Feature | Harding | Smalltalk |
 |---------|------|-----------|
 | Implementation | Built on Nim exceptions | Custom VM mechanism |
 | Stack unwinding | Immediate (Nim default) | Immediate |
 | Resume capability | No | Yes |
 
-Nemo trades Smalltalk's advanced features (resumable exceptions) for seamless integration with Nim's ecosystem.
+Harding trades Smalltalk's advanced features (resumable exceptions) for seamless integration with Nim's ecosystem.
 
 ---
 
 ## Green Threads and Processes
 
-Nemo supports cooperative green processes:
+Harding supports cooperative green processes:
 
 ### Forking Processes
 
@@ -621,7 +621,7 @@ Processor yield
 - Explicit yield with `Processor yield`
 - Process state introspection (pid, name, state)
 - Process control (suspend, resume, terminate)
-- Shared globals via `Nemo` GlobalTable for inter-process communication
+- Shared globals via `Harding` GlobalTable for inter-process communication
 
 **Planned but not implemented:**
 - Monitor synchronization primitive
@@ -634,7 +634,7 @@ All processes share the same globals and class hierarchy, enabling inter-process
 
 ## Primitives
 
-Nemo provides a unified syntax for direct primitive invocation.
+Harding provides a unified syntax for direct primitive invocation.
 
 ### Unified Syntax
 
@@ -668,7 +668,7 @@ Object>>at: key put: value <primitive primitiveAt: key put: value>
 
 ### Inline Form
 
-Use `<<primitive>>` within a method body when you need to execute Nemo code before or after the primitive call. Arguments can be any variable reference: method parameters, temporaries, slots, or computed values.
+Use `<<primitive>>` within a method body when you need to execute Harding code before or after the primitive call. Arguments can be any variable reference: method parameters, temporaries, slots, or computed values.
 
 ```smalltalk
 # Validation before primitive
@@ -716,7 +716,7 @@ x := 1.
 y := 2.
 ```
 
-**Nemo:**
+**Harding:**
 ```smalltalk
 x := 1.
 y := 2.
@@ -732,7 +732,7 @@ y := 2
 'Hello World'       "Single quotes"
 ```
 
-**Nemo:**
+**Harding:**
 ```smalltalk
 "Hello World"       "Double quotes only"
 ```
@@ -746,7 +746,7 @@ y := 2
 "Double quotes for comments"
 ```
 
-**Nemo:**
+**Harding:**
 ```smalltalk
 # Hash for comments
 ```
@@ -757,7 +757,7 @@ y := 2
 
 **Smalltalk:** Every class is an instance of a metaclass.
 
-**Nemo:** Classes are objects, but there are no metaclasses. Class methods are stored directly on the class object.
+**Harding:** Classes are objects, but there are no metaclasses. Class methods are stored directly on the class object.
 
 ```smalltalk
 # Instance method
@@ -769,7 +769,7 @@ Person class>>newPerson [ ^ self new ]
 
 #### Multiple Inheritance
 
-Nemo supports multiple inheritance with conflict detection, unlike Smalltalk's single inheritance.
+Harding supports multiple inheritance with conflict detection, unlike Smalltalk's single inheritance.
 
 ```smalltalk
 Child := Object derive: #(x)
@@ -781,7 +781,7 @@ Child addParent: Parent2
 
 **Smalltalk:** Primitives are VM-specific numbered operations.
 
-**Nemo:** Primitives embed Nim code directly using unified syntax.
+**Harding:** Primitives embed Nim code directly using unified syntax.
 
 ```smalltalk
 Object>>at: key <primitive primitiveAt: key>
@@ -791,7 +791,7 @@ Object>>at: key <primitive primitiveAt: key>
 
 **Smalltalk:** `nil` is a special primitive value.
 
-**Nemo:** `nil` is a singleton instance of `UndefinedObject`:
+**Harding:** `nil` is a singleton instance of `UndefinedObject`:
 
 ```smalltalk
 nil class           # Returns UndefinedObject

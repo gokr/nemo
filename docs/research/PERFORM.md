@@ -1,6 +1,6 @@
-# The `perform:` Mechanism in Nemo
+# The `perform:` Mechanism in Harding
 
-This document explains how `perform:` works for dynamic message sending in Nemo, including its implementation details and performance characteristics.
+This document explains how `perform:` works for dynamic message sending in Harding, including its implementation details and performance characteristics.
 
 ## Overview
 
@@ -13,7 +13,7 @@ This document explains how `perform:` works for dynamic message sending in Nemo,
 
 ## Usage
 
-```nemo
+```harding
 "object perform: #selector"
 "object perform: #selector with: arg"
 "object perform: #selector with: arg1 with: arg2"
@@ -21,7 +21,7 @@ This document explains how `perform:` works for dynamic message sending in Nemo,
 
 Examples:
 
-```nemo
+```harding
 obj perform: #clone                    "Same as: obj clone"
 obj perform: #at:put: with: #x with: 5  "Same as: obj at: #x put: 5"
 ```
@@ -30,7 +30,7 @@ obj perform: #at:put: with: #x with: 5  "Same as: obj at: #x put: 5"
 
 ### Parser Level
 
-`perform:` is **not** handled specially by the parser. It is parsed as a regular keyword message via `parseKeywordMessage()` in `src/nemo/parser/parser.nim`. There is no special AST node type for `perform:` - it creates a standard `MessageNode` with the selector `"perform:"`, `"perform:with:"`, etc.
+`perform:` is **not** handled specially by the parser. It is parsed as a regular keyword message via `parseKeywordMessage()` in `src/harding/parser/parser.nim`. There is no special AST node type for `perform:` - it creates a standard `MessageNode` with the selector `"perform:"`, `"perform:with:"`, etc.
 
 ### Runtime Level
 
@@ -41,12 +41,12 @@ The implementation involves a two-level message send:
 When `obj perform: #selector with: arg` is evaluated:
 
 1. The evaluator looks up `perform:with:` in the receiver's class (O(1) lookup in the `allMethods` table)
-2. Finds the native implementation `performWithImpl` (registered in `src/nemo/interpreter/evaluator.nim:92-95`)
+2. Finds the native implementation `performWithImpl` (registered in `src/harding/interpreter/evaluator.nim:92-95`)
 3. Calls this native method with the interpreter as a parameter
 
 #### Level 2: Dynamic Dispatch
 
-Inside `performWithImpl` (`src/nemo/interpreter/evaluator.nim:1318-1346`):
+Inside `performWithImpl` (`src/harding/interpreter/evaluator.nim:1318-1346`):
 
 1. Extracts the selector from the first argument (must be a symbol or string)
 2. Calls `lookupMethod()` again to find the target method
@@ -86,7 +86,7 @@ proc performWithImpl(interp: var Interpreter, self: Instance, args: seq[NodeValu
 
 ## Registration
 
-The `perform:` methods are registered on the root object during interpreter initialization (`src/nemo/interpreter/evaluator.nim:85-101`):
+The `perform:` methods are registered on the root object during interpreter initialization (`src/harding/interpreter/evaluator.nim:85-101`):
 
 ```nim
 # Add perform: method to root object (interpreter-aware)
@@ -110,7 +110,7 @@ addMethod(result.rootObject.Instance, "perform:with:with:", performWithWithMetho
 
 ## Primitives and `perform:`
 
-Primitives (native methods) can be invoked via `perform:` using their internal selector names. These are registered in `src/nemo/interpreter/objects.nim:247-282`:
+Primitives (native methods) can be invoked via `perform:` using their internal selector names. These are registered in `src/harding/interpreter/objects.nim:247-282`:
 
 | Primitive | Internal Selector |
 |-----------|-------------------|
@@ -127,7 +127,7 @@ Primitives (native methods) can be invoked via `perform:` using their internal s
 
 Example:
 
-```nemo
+```harding
 obj perform: #primitiveClone    "Same as: obj clone (primitive version)"
 ```
 
@@ -155,7 +155,7 @@ Every `perform:` goes through the full two-level dispatch. This is a straightfor
 
 ### Message Forwarding
 
-```nemo
+```harding
 Object extend: [
   doesNotUnderstand: message withArgs: args [
     "Forward to another object"
@@ -166,7 +166,7 @@ Object extend: [
 
 ### Dynamic Method Invocation
 
-```nemo
+```harding
 "Invoke a method based on user input"
 selector := #someMethod.
 obj perform: selector with: argument
@@ -174,7 +174,7 @@ obj perform: selector with: argument
 
 ### Proxy Objects
 
-```nemo
+```harding
 Proxy extend: [
   "Intercept all messages and log them"
   doesNotUnderstand: selector withArgs: args [

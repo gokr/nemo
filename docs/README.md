@@ -1,10 +1,10 @@
-# Nemo Documentation
+# Harding Documentation
 
-This directory contains documentation for the Nemo programming language.
+This directory contains documentation for the Harding programming language.
 
 ## User Documentation
 
-These are the primary documents for learning and using Nemo:
+These are the primary documents for learning and using Harding:
 
 | Document | Description | Audience |
 |----------|-------------|----------|
@@ -12,17 +12,17 @@ These are the primary documents for learning and using Nemo:
 | [QUICKREF.md](QUICKREF.md) | Quick syntax cheat sheet | Quick lookup |
 | [GTK.md](GTK.md) | GTK bridge and GUI development | GUI developers |
 | [IMPLEMENTATION.md](IMPLEMENTATION.md) | VM internals and architecture | Contributors |
-| [TOOLS_AND_DEBUGGING.md](TOOLS_AND_DEBUGGING.md) | Tool usage (`nemo`, `nemoc`) and debugging | All users |
+| [TOOLS_AND_DEBUGGING.md](TOOLS_AND_DEBUGGING.md) | Tool usage (`harding`, `hardingc`) and debugging | All users |
 | [FUTURE.md](FUTURE.md) | Future plans and roadmap | Contributors |
 | [VSCODE.md](VSCODE.md) | VSCode syntax highlighting extension | VSCode users |
 
 ## Getting Started
 
-New to Nemo? Start with these documents in order:
+New to Harding? Start with these documents in order:
 
 1. [MANUAL.md](MANUAL.md) - Complete language manual
 2. [QUICKREF.md](QUICKREF.md) - Quick reference when you're coding
-3. [TOOLS_AND_DEBUGGING.md](TOOLS_AND_DEBUGGING.md) - How to use `nemo` and `nemoc`
+3. [TOOLS_AND_DEBUGGING.md](TOOLS_AND_DEBUGGING.md) - How to use `harding` and `hardingc`
 
 ## Specialized Topics
 

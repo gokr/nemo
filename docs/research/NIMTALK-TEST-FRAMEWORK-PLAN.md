@@ -1,10 +1,10 @@
-# Nemo Unit Test Framework Plan
+# Harding Unit Test Framework Plan
 
 Based on sUnit (the original Smalltalk unit testing framework by Kent Beck)
 
 ## Overview
 
-The Nemo test framework follows the xUnit family pattern established by sUnit. It provides a simple, consistent way to write and run tests entirely in Nemo code.
+The Harding test framework follows the xUnit family pattern established by sUnit. It provides a simple, consistent way to write and run tests entirely in Harding code.
 
 ## Core Classes
 
@@ -207,9 +207,9 @@ runner run: MyTest.
 ## Example: Complete Test File
 
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 #
-# test_array.nemo - Array collection tests
+# test_array.harding - Array collection tests
 #
 
 ArrayTest := TestCase derive category: 'Collections-Tests'.
@@ -304,7 +304,7 @@ Advanced features (TestSuite, categories, XML output) can be added later.
 
 ## Comparison with Other Frameworks
 
-| Feature | sUnit (original) | Nemo Test | Notes |
+| Feature | sUnit (original) | Harding Test | Notes |
 |---------|------------------|--------------|-------|
 | assert: | ✅ | ✅ | Basic assertion |
 | assert:equals: | ✅ | ✅ | Equality check |

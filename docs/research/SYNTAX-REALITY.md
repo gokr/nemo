@@ -1,6 +1,6 @@
-# Nemo Syntax - Current Implementation
+# Harding Syntax - Current Implementation
 
-This document describes the **actual implemented syntax** in the current Nemo interpreter. Key updates:
+This document describes the **actual implemented syntax** in the current Harding interpreter. Key updates:
 - ✅ Slot-based instance variable system fully implemented (149x performance improvement)
 - ✅ Binary operators implemented as regular messages
 - ✅ Cascade syntax working (`;` operator)
@@ -13,7 +13,7 @@ This document describes the **actual implemented syntax** in the current Nemo in
 
 **Double quotes** for string literals:
 
-```nemo
+```harding
 "This is a string"
 ```
 
@@ -21,9 +21,9 @@ Single quotes are reserved for future use.
 
 ## Comments
 
-Nemo uses **hash-style comments**:
+Harding uses **hash-style comments**:
 
-```nemo
+```harding
 # This is a comment
 
 # Create a shallow copy of this object
@@ -43,10 +43,10 @@ Nemo uses **hash-style comments**:
 
 ## Shebang Support
 
-Nemo scripts can include shebang lines at the beginning:
+Harding scripts can include shebang lines at the beginning:
 
 ```smalltalk
-#!/usr/bin/env nemo
+#!/usr/bin/env harding
 # This script can be made executable and run directly
 
 calculator := Object derive.
@@ -99,10 +99,10 @@ The vertical bar `|` **only appears when you have block parameters or temporarie
 ]
 ```
 
-**Nemo-specific feature**: Unlike most Smalltalk implementations, Nemo allows you to omit the `|` when a block has parameters but no temporaries. This is more concise while remaining unambiguous:
+**Harding-specific feature**: Unlike most Smalltalk implementations, Harding allows you to omit the `|` when a block has parameters but no temporaries. This is more concise while remaining unambiguous:
 
 ```smalltalk
-# Nemo - valid and concise
+# Harding - valid and concise
 Object at: #error: put: [
   :message
   self error: "Message not understood: " + message asString
@@ -131,7 +131,7 @@ When there's no second `|` block (temporaries), the first `|` acts as the separa
 # No params, no temps
 [ code ]
 
-# Params, no temps (Nemo style - optional |)
+# Params, no temps (Harding style - optional |)
 [ :x :y | code ]
 
 # Params, no temps (explicit - also valid)
@@ -148,7 +148,7 @@ When there's no second `|` block (temporaries), the first `|` acts as the separa
 
 ### >> Syntax (Implemented)
 
-Nemo supports the `>>` method definition syntax for cleaner method declarations:
+Harding supports the `>>` method definition syntax for cleaner method declarations:
 
 ```smalltalk
 # Unary method (no parameters)
@@ -232,7 +232,7 @@ name := "Alice".
 
 ## Message Passing
 
-Nemo uses Smalltalk-style message passing:
+Harding uses Smalltalk-style message passing:
 
 ```smalltalk
 # Unary messages
@@ -259,7 +259,7 @@ tab at: #name        # returns "Alice"
 
 ## Cascading
 
-Nemo implements the Smalltalk cascade syntax using `;` to send multiple messages to the same receiver:
+Harding implements the Smalltalk cascade syntax using `;` to send multiple messages to the same receiver:
 
 ```smalltalk
 # Send multiple messages to the same object
@@ -278,7 +278,7 @@ The receiver is evaluated once, then each message in the cascade is sent to that
 
 ## Primitive Syntax
 
-Nemo supports a unified primitive syntax that works for both declarative method bodies and inline usage:
+Harding supports a unified primitive syntax that works for both declarative method bodies and inline usage:
 
 ### Unified Syntax
 
@@ -316,10 +316,10 @@ Object at: #primitiveClone put: <primitive>
 
 ## Key Files Reference
 
-- **Lexer**: `src/nemo/parser/lexer.nim` - Tokenization rules
-- **Parser**: `src/nemo/parser/parser.nim` - Syntax parsing
-- **Examples**: `examples/*.nemo` - Working syntax examples
-- **Core objects**: `lib/core/*.nemo` - Standard library implementations
+- **Lexer**: `src/harding/parser/lexer.nim` - Tokenization rules
+- **Parser**: `src/harding/parser/parser.nim` - Syntax parsing
+- **Examples**: `examples/*.hrd` - Working syntax examples
+- **Core objects**: `lib/core/*.hrd` - Standard library implementations
 
 ---
 

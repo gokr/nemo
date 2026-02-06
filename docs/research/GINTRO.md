@@ -1,13 +1,13 @@
-# Nemo GUI IDE Implementation Plan
+# Harding GUI IDE Implementation Plan
 
 ## Executive Summary
 
-Build a classic Smalltalk-style GUI IDE where **the GUI tools themselves are written in Nemo**, making them malleable at runtime. Use gintro (Salewski's GTK4 binding) as a thin wrapper layer to expose GTK objects to Nemo.
+Build a classic Smalltalk-style GUI IDE where **the GUI tools themselves are written in Harding**, making them malleable at runtime. Use gintro (Salewski's GTK4 binding) as a thin wrapper layer to expose GTK objects to Harding.
 
 **Why this approach wins:**
 - GUI tools are modifiable from within the system (true Smalltalk philosophy)
 - Only the low-level GTK binding is static Nim code
-- Future evolution: GTK wrapper can be reimplemented in Nemo via FFI
+- Future evolution: GTK wrapper can be reimplemented in Harding via FFI
 
 ---
 
@@ -41,7 +41,7 @@ proc activate(app: Application) =
 **Pros:**
 - Direct GTK4 access - full API coverage, no limitations
 - Go directly from Nim to GTK without abstraction layers
-- Easier to expose to Nemo: just wrap gintro objects
+- Easier to expose to Harding: just wrap gintro objects
 - Signals use standard GTK connect mechanism
 - No compile-time macro magic - straightforward Nim code
 - Smaller runtime overhead
@@ -90,10 +90,10 @@ brew(gui(App()))
 - Good for static, pre-defined interfaces
 
 **Cons:**
-- Compile-time DSL (macros) - cannot be generated at runtime from Nemo
-- Harder to bridge to Nemo: the `gui:` macro and `viewable` types are compile-time constructs
+- Compile-time DSL (macros) - cannot be generated at runtime from Harding
+- Harder to bridge to Harding: the `gui:` macro and `viewable` types are compile-time constructs
 - Limited by what Owlkettle supports (subset of GTK)
-- Views are static Nim code - not malleable from Nemo
+- Views are static Nim code - not malleable from Harding
 
 ---
 
@@ -104,12 +104,12 @@ brew(gui(App()))
 | **Style** | Imperative | Declarative |
 | **GTK Coverage** | Complete (~100k functions) | Subset (common widgets) |
 | **Runtime Malleability** | Can wrap and expose | Compile-time macros |
-| **Bridge to Nemo** | Straightforward | Complex/abstraction mismatch |
+| **Bridge to Harding** | Straightforward | Complex/abstraction mismatch |
 | **State Management** | Manual | Automatic |
 | **Boilerplate** | More | Less |
-| **IDE Tools in Nemo** | Yes | Tools must be in Nim |
+| **IDE Tools in Harding** | Yes | Tools must be in Nim |
 
-**Verdict for Nemo IDE:** gintro is the clear choice because it enables the core requirement - **GUI tools written in malleable Nemo code**.
+**Verdict for Harding IDE:** gintro is the clear choice because it enables the core requirement - **GUI tools written in malleable Harding code**.
 
 ---
 
@@ -119,17 +119,17 @@ brew(gui(App()))
 
 Instead of:
 ```
-Nemo Model -> Nim Bridge -> Owlkettle View (static Nim)
+Harding Model -> Nim Bridge -> Owlkettle View (static Nim)
 ```
 
 We do:
 ```
-Nemo GUI Tool -> gintro Wrapper -> GTK4
+Harding GUI Tool -> gintro Wrapper -> GTK4
      ^                              |
-     +------  Nemo code  --------+
+     +------  Harding code  --------+
 ```
 
-The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are **all written in Nemo**. Only the thin gintro wrapper layer is static Nim code.
+The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are **all written in Harding**. Only the thin gintro wrapper layer is static Nim code.
 
 ### Architecture Diagram
 
@@ -146,7 +146,7 @@ The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are **all wr
 |  |    (GUI)     |  |    (GUI)     |  |   (GUI)      |           |
 |  +--------------+  +--------------+  +--------------+           |
 |                                                                  |
-|  All written in Nemo (.nemo files)                              |
+|  All written in Harding (.harding files)                              |
 |  Can be edited live from within the IDE                          |
 +--------------------------+---------------------------------------+
                            |
@@ -174,17 +174,17 @@ The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are **all wr
 Instead of implementing widget behavior in Nim, we only expose:
 1. GTK widget constructors (create window, button, textview, etc.)
 2. Property getters/setters (set text, get text, etc.)
-3. Signal connection (when button clicked, call this Nemo block)
+3. Signal connection (when button clicked, call this Harding block)
 4. Container operations (add child, remove child)
 
-All the **logic** (layout, event handling, state management) lives in Nemo.
+All the **logic** (layout, event handling, state management) lives in Harding.
 
 ---
 
 ## Part 3: Directory Structure
 
 ```
-src/nemo/gui/
+src/harding/gui/
 ├── gtk4/                       # GTK4 bridge layer
 │   ├── bridge.nim              # Main bridge initialization
 │   ├── widget.nim              # Base Widget wrapper
@@ -200,31 +200,31 @@ src/nemo/gui/
 │   ├── signal.nim              # Signal handling utilities
 │   └── application.nim         # GtkApplication wrapper
 │
-└── ide.nim                     # IDE entry point - loads Nemo GUI code
+└── ide.nim                     # IDE entry point - loads Harding GUI code
 
-lib/nemo/gui/                # GUI tools written in Nemo
-├── Gtk4/                       # GTK4 wrapper classes (Nemo)
-│   ├── Widget.nemo               # Base widget class
-│   ├── Window.nemo               # Window wrapper
-│   ├── Button.nemo               # Button wrapper
-│   ├── TextView.nemo             # TextView wrapper
-│   ├── Box.nemo                  # Box layout
-│   ├── ScrolledWindow.nemo       # Scrolled container
-│   ├── TreeView.nemo             # Tree view wrapper
-│   ├── ListBox.nemo              # List box wrapper
-│   ├── HeaderBar.nemo            # Header bar wrapper
-│   └── Application.nemo          # Application wrapper
+lib/harding/gui/                # GUI tools written in Harding
+├── Gtk4/                       # GTK4 wrapper classes (Harding)
+│   ├── Widget.harding               # Base widget class
+│   ├── Window.harding               # Window wrapper
+│   ├── Button.harding               # Button wrapper
+│   ├── TextView.harding             # TextView wrapper
+│   ├── Box.harding                  # Box layout
+│   ├── ScrolledWindow.harding       # Scrolled container
+│   ├── TreeView.harding             # Tree view wrapper
+│   ├── ListBox.harding              # List box wrapper
+│   ├── HeaderBar.harding            # Header bar wrapper
+│   └── Application.harding          # Application wrapper
 │
 ├── Ide/                        # IDE tool implementations
-│   ├── BaseTool.nemo             # Base class for all tools
-│   ├── Launcher.nemo             # Main launcher window
-│   ├── Transcript.nemo           # Transcript tool
-│   ├── Workspace.nemo            # Workspace tool
-│   ├── Inspector.nemo            # Inspector tool
-│   ├── Browser.nemo              # System browser
-│   └── Debugger.nemo             # Debugger tool
+│   ├── BaseTool.harding             # Base class for all tools
+│   ├── Launcher.harding             # Main launcher window
+│   ├── Transcript.harding           # Transcript tool
+│   ├── Workspace.harding            # Workspace tool
+│   ├── Inspector.harding            # Inspector tool
+│   ├── Browser.harding              # System browser
+│   └── Debugger.harding             # Debugger tool
 │
-└── main.nemo                     # IDE startup script
+└── main.harding                     # IDE startup script
 ```
 
 ---
@@ -233,15 +233,15 @@ lib/nemo/gui/                # GUI tools written in Nemo
 
 This is the only static Nim code. It's a thin wrapper that:
 1. Creates gintro GTK objects
-2. Exposes them to Nemo as proxy objects
-3. Forwards signals from GTK to Nemo
+2. Exposes them to Harding as proxy objects
+3. Forwards signals from GTK to Harding
 
 ### 4.1 Widget Wrapper Base
 
-**File:** `src/nemo/gui/gtk4/widget.nim`
+**File:** `src/harding/gui/gtk4/widget.nim`
 
 ```nim
-## Base widget wrapper - exposes GTK widget to Nemo
+## Base widget wrapper - exposes GTK widget to Harding
 
 import gintro/[gtk4, gobject]
 import ../../core/types
@@ -249,9 +249,9 @@ import ../../interpreter/objects
 
 type
   GtkWidgetProxy* = ref object
-    ## Wraps a GTK widget for Nemo access
+    ## Wraps a GTK widget for Harding access
     widget*: gtk4.Widget
-    interp*: ptr Interpreter  # For calling back to Nemo
+    interp*: ptr Interpreter  # For calling back to Harding
     signalHandlers*: Table[string, seq[BlockNode]]  # signal -> blocks
     destroyed*: bool  # Track if GTK widget was destroyed
 
@@ -269,10 +269,10 @@ proc asWidgetProxy*(obj: Instance): GtkWidgetProxy =
     raise newException(ValueError, "GTK widget has been destroyed")
 
 proc createWidgetProxy*(widget: gtk4.Widget, interp: ptr Interpreter): NodeValue =
-  ## Create a Nemo object that wraps a GTK widget
+  ## Create a Harding object that wraps a GTK widget
   let proxy = GtkWidgetProxy(widget: widget, interp: interp, destroyed: false)
 
-  # Create Nemo object
+  # Create Harding object
   let obj = Instance(class: rootObj, slots: @[])
   obj.nimProxy = proxy
 
@@ -306,7 +306,7 @@ proc destroyMethodImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 # Safe block evaluation wrapper - catches exceptions to prevent GTK crashes
 proc safeEvalBlock(interp: ptr Interpreter, blockNode: BlockNode,
                    args: seq[NodeValue] = @[]): NodeValue =
-  ## Evaluate a Nemo block safely within a GTK signal handler.
+  ## Evaluate a Harding block safely within a GTK signal handler.
   ## Exceptions are caught and reported to the Transcript instead of crashing.
   try:
     result = interp[].evalBlock(blockNode, args)
@@ -324,7 +324,7 @@ proc safeEvalBlock(interp: ptr Interpreter, blockNode: BlockNode,
     result = nilValue()
 
 proc connectDoImpl(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Connect a GTK signal to a Nemo block
+  ## Connect a GTK signal to a Harding block
   ## args[0] = signal name (string)
   ## args[1] = block to execute
   let proxy = self.asWidgetProxy()
@@ -338,7 +338,7 @@ proc connectDoImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
   # Connect GTK signal with safe evaluation
   proxy.widget.connect(signalName, proc(widget: gtk4.Widget) =
-    # Call all Nemo blocks for this signal
+    # Call all Harding blocks for this signal
     for handler in proxy.signalHandlers[signalName]:
       discard safeEvalBlock(proxy.interp, handler)
   )
@@ -348,7 +348,7 @@ proc connectDoImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
 ### 4.2 Window Wrapper
 
-**File:** `src/nemo/gui/gtk4/window.nim`
+**File:** `src/harding/gui/gtk4/window.nim`
 
 ```nim
 ## GtkWindow wrapper
@@ -359,7 +359,7 @@ import ../../interpreter/objects
 import ./widget
 
 proc createWindowWrapper*(interp: ptr Interpreter, app: Application): NodeValue =
-  ## Create a Nemo Window object
+  ## Create a Harding Window object
   let window = newApplicationWindow(app)
   let proxy = GtkWidgetProxy(widget: window, interp: interp)
 
@@ -396,7 +396,7 @@ proc presentImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
 ### 4.3 Button Wrapper
 
-**File:** `src/nemo/gui/gtk4/button.nim`
+**File:** `src/harding/gui/gtk4/button.nim`
 
 ```nim
 ## GtkButton wrapper
@@ -410,7 +410,7 @@ type
   ButtonProxy* = ref object of GtkWidgetProxy
 
 proc newButtonWrapper*(interp: ptr Interpreter, label: string): NodeValue =
-  ## Create a Nemo Button object
+  ## Create a Harding Button object
   let button = newButton(label)
   let proxy = ButtonProxy(widget: button, interp: interp)
 
@@ -435,12 +435,12 @@ proc getLabelImpl(self: Instance, args: seq[NodeValue]): NodeValue =
   return wrapString(button.getLabel())
 
 proc connectClickedImpl(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Connect "clicked" signal to a Nemo block
+  ## Connect "clicked" signal to a Harding block
   let proxy = cast[ButtonProxy](self.nimProxy)
   let button = cast[gtk4.Button](proxy.widget)
   let blockNode = args[0].toBlock()
 
-  # Connect GTK signal -> Nemo callback
+  # Connect GTK signal -> Harding callback
   button.connect("clicked", proc(btn: Button) =
     discard proxy.interp[].evalBlock(blockNode)
   )
@@ -452,7 +452,7 @@ proc connectClickedImpl(self: Instance, args: seq[NodeValue]): NodeValue =
 
 GTK signals have varying signatures. The generic `connect:do:` works for simple signals, but signals like `motion-notify` pass coordinates. Provide typed helpers for common patterns:
 
-**File:** `src/nemo/gui/gtk4/signal.nim`
+**File:** `src/harding/gui/gtk4/signal.nim`
 
 ```nim
 ## Typed signal connection helpers
@@ -493,7 +493,7 @@ proc connectRowActivated*(proxy: GtkWidgetProxy, blockNode: BlockNode) =
   )
 ```
 
-**Nemo usage:**
+**Harding usage:**
 ```smalltalk
 button connectClicked: [ self doSomething ].
 canvas connectMotion: [ :x :y | self drawAt: x @ y ].
@@ -511,7 +511,7 @@ entry connectKeyPressed: [ :keyval :keycode :mods |
 
 ### 5.1 Widget Lifecycle and Memory Management
 
-GTK widgets are reference-counted via GObject. When a Nemo `GtkWidget` object is garbage collected, the underlying GTK widget must be properly released.
+GTK widgets are reference-counted via GObject. When a Harding `GtkWidget` object is garbage collected, the underlying GTK widget must be properly released.
 
 **Strategy:** Track widget ownership and destruction state:
 
@@ -525,26 +525,26 @@ type
 # When GTK widget is destroyed (window closed, etc.), mark proxy
 widget.connect("destroy", proc(w: gtk4.Widget) =
   proxy.destroyed = true
-  proxy.signalHandlers.clear()  # Release Nemo blocks
+  proxy.signalHandlers.clear()  # Release Harding blocks
 )
 
-# When Nemo object is GC'd, the proxy ref drops
+# When Harding object is GC'd, the proxy ref drops
 # GTK's refcount handles the rest - we DON'T explicitly destroy
 # because user might still have GTK references
 ```
 
 **Rules:**
 1. GTK owns widget lifetime (via refcount)
-2. Nemo proxy tracks destroyed state
+2. Harding proxy tracks destroyed state
 3. Methods check `destroyed` flag before operating
 4. Explicit `widget destroy` available for manual cleanup
 5. Closing a window destroys child widgets automatically
 
 ### 5.2 Event Loop Integration
 
-The GTK main loop and Nemo evaluation must cooperate. When a signal handler runs Nemo code, the UI is blocked until evaluation completes.
+The GTK main loop and Harding evaluation must cooperate. When a signal handler runs Harding code, the UI is blocked until evaluation completes.
 
-**Approach:** Run Nemo in the GTK main thread (simple, predictable):
+**Approach:** Run Harding in the GTK main thread (simple, predictable):
 
 ```
 GTK Main Loop
@@ -553,7 +553,7 @@ Signal Emitted (e.g., button clicked)
     ↓
 Signal Handler Called
     ↓
-Nemo Block Evaluated (UI blocked)
+Harding Block Evaluated (UI blocked)
     ↓
 Handler Returns
     ↓
@@ -581,7 +581,7 @@ proc longOperationChunked(interp: ptr Interpreter, chunks: seq[Node]) =
 
 Option B: Background thread with channel (future enhancement):
 ```nim
-# Worker thread evaluates Nemo
+# Worker thread evaluates Harding
 # Results sent via channel
 # Main thread picks up via idle callback
 ```
@@ -590,7 +590,7 @@ Option B: Background thread with channel (future enhancement):
 
 ### 5.3 Error Handling in Signal Callbacks
 
-GTK signal handlers cannot propagate exceptions. If a Nemo block raises an error, we must catch it and report gracefully.
+GTK signal handlers cannot propagate exceptions. If a Harding block raises an error, we must catch it and report gracefully.
 
 **Implementation:** (shown in 4.1 `safeEvalBlock`)
 
@@ -599,7 +599,7 @@ GTK signal handlers cannot propagate exceptions. If a Nemo block raises an error
 - Attempt to show in Transcript
 - Never crash the GTK event loop
 
-**Nemo-level error handling:**
+**Harding-level error handling:**
 
 ```smalltalk
 button clicked: [
@@ -611,17 +611,17 @@ button clicked: [
 
 ---
 
-## Part 6: The Nemo GUI Layer
+## Part 6: The Harding GUI Layer
 
-This is where the actual IDE tools live. All written in Nemo - fully malleable!
+This is where the actual IDE tools live. All written in Harding - fully malleable!
 
-### 6.1 GTK4 Base Classes (Nemo)
+### 6.1 GTK4 Base Classes (Harding)
 
-**File:** `lib/nemo/gui/Gtk4/Widget.nemo`
+**File:** `lib/harding/gui/Gtk4/Widget.harding`
 
 ```smalltalk
 "Base class for all GTK widgets
- This is a Nemo wrapper around the Nim GTK proxy"
+ This is a Harding wrapper around the Nim GTK proxy"
 
 GtkWidget := Object derive: #(
     proxy           "The underlying Nim GTK proxy object"
@@ -663,9 +663,9 @@ GtkWidget at: #addCssClass: put: [ :className |
 ].
 ```
 
-### 6.2 Window Class (Nemo)
+### 6.2 Window Class (Harding)
 
-**File:** `lib/nemo/gui/Gtk4/Window.nemo`
+**File:** `lib/harding/gui/Gtk4/Window.harding`
 
 ```smalltalk
 "GTK Window - top-level window"
@@ -720,9 +720,9 @@ GtkWindow at: #defaultSize: put: [ :aPoint |
 ].
 ```
 
-### 6.3 Button Class (Nemo)
+### 6.3 Button Class (Harding)
 
-**File:** `lib/nemo/gui/Gtk4/Button.nemo`
+**File:** `lib/harding/gui/Gtk4/Button.harding`
 
 ```smalltalk
 "GTK Button widget"
@@ -771,9 +771,9 @@ GtkButton at: #clicked: put: [ :aBlock |
 ].
 ```
 
-### 6.4 Box Layout (Nemo)
+### 6.4 Box Layout (Harding)
 
-**File:** `lib/nemo/gui/Gtk4/Box.nemo`
+**File:** `lib/harding/gui/Gtk4/Box.harding`
 
 ```smalltalk
 "GTK Box - layout container"
@@ -823,11 +823,11 @@ GtkBox at: #remove: put: [ :aWidget |
 
 ---
 
-## Part 7: IDE Tool Implementations (All in Nemo!)
+## Part 7: IDE Tool Implementations (All in Harding!)
 
 ### 7.1 Launcher Window
 
-**File:** `lib/nemo/gui/Ide/Launcher.nemo`
+**File:** `lib/harding/gui/Ide/Launcher.harding`
 
 ```smalltalk
 "Main IDE launcher window with Transcript"
@@ -840,7 +840,7 @@ IdeLauncher := GtkWindow derive: #(
 
 IdeLauncher at: #initialize put: [
     super initialize.
-    self title: 'Nemo IDE'.
+    self title: 'Harding IDE'.
     self defaultSize: 800 @ 600.
     self buildUI.
     ^self
@@ -926,7 +926,7 @@ IdeLauncher at: #showLine: put: [ :text |
 
 ### 7.2 Workspace Window
 
-**File:** `lib/nemo/gui/Ide/Workspace.nemo`
+**File:** `lib/harding/gui/Ide/Workspace.harding`
 
 ```smalltalk
 "Workspace - code editor with Do It / Print It / Inspect It"
@@ -1037,7 +1037,7 @@ IdeWorkspace at: #clear put: [
 
 ### 7.3 Inspector Window
 
-**File:** `lib/nemo/gui/Ide/Inspector.nemo`
+**File:** `lib/harding/gui/Ide/Inspector.harding`
 
 ```smalltalk
 "Inspector - view object internals"
@@ -1121,11 +1121,11 @@ IdeInspector at: #refresh put: [
 
 ## Part 8: IDE Entry Point
 
-**File:** `src/nemo/gui/ide.nim`
+**File:** `src/harding/gui/ide.nim`
 
 ```nim
 ## IDE Entry Point
-## Loads Nemo GUI code and starts the application
+## Loads Harding GUI code and starts the application
 
 import gintro/[gtk4, gobject, gio]
 import ../core/types
@@ -1136,7 +1136,7 @@ import gtk4/[bridge, widget, window, button, textview, box]
 proc initGtkBridge(interp: var Interpreter) =
   ## Register GTK wrapper functions with interpreter
 
-  # Create GtkBridge object in Nemo globals
+  # Create GtkBridge object in Harding globals
   let bridgeObj = Instance(class: rootObj, slots: @[])
   addMethod(bridgeObj, "createWindow", createWindowNative)
   addMethod(bridgeObj, "createButton:", createButtonNative)
@@ -1148,21 +1148,21 @@ proc initGtkBridge(interp: var Interpreter) =
   interp.globals["IdeBridge"] = NodeValue(kind: vkObject, objVal: createIdeBridge())
 
 proc loadGuiCode(interp: var Interpreter) =
-  ## Load all Nemo GUI files
+  ## Load all Harding GUI files
   let guiFiles = [
-    "lib/nemo/gui/Gtk4/Widget.nemo",
-    "lib/nemo/gui/Gtk4/Window.nemo",
-    "lib/nemo/gui/Gtk4/Button.nemo",
-    "lib/nemo/gui/Gtk4/Box.nemo",
-    "lib/nemo/gui/Gtk4/TextView.nemo",
-    "lib/nemo/gui/Gtk4/TreeView.nemo",
-    "lib/nemo/gui/Ide/BaseTool.nemo",
-    "lib/nemo/gui/Ide/Launcher.nemo",
-    "lib/nemo/gui/Ide/Workspace.nemo",
-    "lib/nemo/gui/Ide/Inspector.nemo",
-    "lib/nemo/gui/Ide/Browser.nemo",
-    "lib/nemo/gui/Ide/Debugger.nemo",
-    "lib/nemo/gui/main.nemo"  # Entry point
+    "lib/harding/gui/Gtk4/Widget.harding",
+    "lib/harding/gui/Gtk4/Window.harding",
+    "lib/harding/gui/Gtk4/Button.harding",
+    "lib/harding/gui/Gtk4/Box.harding",
+    "lib/harding/gui/Gtk4/TextView.harding",
+    "lib/harding/gui/Gtk4/TreeView.harding",
+    "lib/harding/gui/Ide/BaseTool.harding",
+    "lib/harding/gui/Ide/Launcher.harding",
+    "lib/harding/gui/Ide/Workspace.harding",
+    "lib/harding/gui/Ide/Inspector.harding",
+    "lib/harding/gui/Ide/Browser.harding",
+    "lib/harding/gui/Ide/Debugger.harding",
+    "lib/harding/gui/main.harding"  # Entry point
   ]
 
   for file in guiFiles:
@@ -1180,10 +1180,10 @@ proc main =
   # Initialize GTK bridge
   initGtkBridge(interp)
 
-  # Load Nemo GUI code
+  # Load Harding GUI code
   loadGuiCode(interp)
 
-  # Launch the IDE by calling Nemo entry point
+  # Launch the IDE by calling Harding entry point
   discard interp.doit("IdeLauncher new present")
 
   # Run GTK main loop
@@ -1216,10 +1216,10 @@ Ship a usable Transcript + Workspace first, then iterate.
 - Entry (text input) wrapper
 - Label wrapper
 
-**Phase 3: Nemo GTK Classes (1-2 weeks)**
-- Write Widget.nemo, Window.nemo, Button.nemo, Box.nemo
-- Write TextView.nemo, ScrolledWindow.nemo
-- Write signal handling in Nemo
+**Phase 3: Harding GTK Classes (1-2 weeks)**
+- Write Widget.harding, Window.harding, Button.harding, Box.harding
+- Write TextView.harding, ScrolledWindow.harding
+- Write signal handling in Harding
 
 **Phase 4: Transcript + Workspace (2-3 weeks)**
 - Launcher window with Transcript
@@ -1229,7 +1229,7 @@ Ship a usable Transcript + Workspace first, then iterate.
 
 **MVP Total: 7-9 weeks**
 
-**MVP Deliverable:** A working IDE where you can write Nemo code in a Workspace, evaluate it, and see output in the Transcript.
+**MVP Deliverable:** A working IDE where you can write Harding code in a Workspace, evaluate it, and see output in the Transcript.
 
 ---
 
@@ -1264,21 +1264,21 @@ After MVP is stable and usable, continue with:
 ## Part 10: Benefits of This Architecture
 
 ### 1. True Malleability
-All IDE tools are Nemo code. Modify the browser layout live. Change colors, add buttons, rearrange panes - all from within the running IDE.
+All IDE tools are Harding code. Modify the browser layout live. Change colors, add buttons, rearrange panes - all from within the running IDE.
 
 ### 2. Evolution Path
 ```
-Phase 1 (Now):      Nim GTK wrapper -> Nemo GUI tools
-Phase 2 (Future):   FFI to GTK -> Pure Nemo GTK binding
+Phase 1 (Now):      Nim GTK wrapper -> Harding GUI tools
+Phase 2 (Future):   FFI to GTK -> Pure Harding GTK binding
 ```
 
-Eventually, even the wrapper can be replaced with FFI calls from Nemo.
+Eventually, even the wrapper can be replaced with FFI calls from Harding.
 
 ### 3. Teaching Tool
-Students can read and modify the IDE itself to learn Nemo.
+Students can read and modify the IDE itself to learn Harding.
 
 ### 4. Community Contributions
-Users can share custom IDE tools as Nemo packages.
+Users can share custom IDE tools as Harding packages.
 
 ### 5. Multiple UIs
 The same bridge supports:
@@ -1290,11 +1290,11 @@ The same bridge supports:
 
 ## Part 11: Glade/XML UI Definition Support (Optional Enhancement)
 
-**Note:** This is an optional feature for UI prototyping. The primary workflow is code-based construction in Nemo, which provides full malleability. Glade can be used to quickly prototype layouts, then import them into Nemo for further refinement and dynamic behavior.
+**Note:** This is an optional feature for UI prototyping. The primary workflow is code-based construction in Harding, which provides full malleability. Glade can be used to quickly prototype layouts, then import them into Harding for further refinement and dynamic behavior.
 
 For visual UI design, add support for Glade XML files:
 
-**File:** `lib/nemo/gui/Gtk4/Builder.nemo`
+**File:** `lib/harding/gui/Gtk4/Builder.harding`
 
 ```smalltalk
 "GtkBuilder - load UIs from Glade XML"
@@ -1334,7 +1334,7 @@ GtkBuilder at: #connectSignals: put: [ :signalDict |
 ```smalltalk
 "Load a Glade-designed UI"
 builder := GtkBuilder new.
-builder addFromFile: 'lib/nemo/gui/glade/Workspace.glade'.
+builder addFromFile: 'lib/harding/gui/glade/Workspace.glade'.
 
 "Get widgets by ID"
 window := builder getObject: 'workspaceWindow'.
@@ -1347,7 +1347,7 @@ doItButton clicked: [ self doIt ].
 
 **Benefits:**
 - Design UIs visually in Glade
-- Load and hook up in Nemo
+- Load and hook up in Harding
 - Completely malleable
 
 ---
@@ -1362,7 +1362,7 @@ doItButton clicked: [ self doIt ].
 | Widget lifecycle bugs | Track destroyed state, validate before operations |
 | Type-unsafe proxy casts | Type-checking `asWidgetProxy` helper |
 | Performance | Lazy widget creation, virtual scrolling |
-| GTK learning curve | Mirror GTK API closely in Nemo |
+| GTK learning curve | Mirror GTK API closely in Harding |
 | Debugging bridge issues | Extensive logging in bridge layer |
 
 ---
@@ -1371,11 +1371,11 @@ doItButton clicked: [ self doIt ].
 
 This revised plan uses **gintro** instead of Owlkettle because:
 
-1. **gintro enables malleability** - GTK objects can be exposed to Nemo
+1. **gintro enables malleability** - GTK objects can be exposed to Harding
 2. **Owlkettle prevents malleability** - its declarative macros are compile-time only
 3. **gintro is more direct** - simpler bridge, less abstraction
 
-The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are all written in **Nemo itself**, making them fully malleable at runtime. Only a thin bridge layer (~20 core GTK widgets) is static Nim code.
+The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are all written in **Harding itself**, making them fully malleable at runtime. Only a thin bridge layer (~20 core GTK widgets) is static Nim code.
 
 **Timeline:**
 - **MVP (Transcript + Workspace): 7-9 weeks**
@@ -1384,7 +1384,7 @@ The GUI tools (Transcript, Workspace, Inspector, Browser, Debugger) are all writ
 **Critical Success Metric:** A user can open a Workspace, modify the `IdeLauncher` class, and see the changes immediately in the running IDE.
 
 **Why NOT Owlkettle?**
-Owlkettle uses its own custom GTK bindings (not gintro). Its value is in compile-time macros (`gui:`, `viewable`) that generate code at compile time. Since we want GUI construction to happen in Nemo at runtime, Owlkettle's declarative layer cannot be used. We'd only access its low-level bindings, offering no advantage over gintro.
+Owlkettle uses its own custom GTK bindings (not gintro). Its value is in compile-time macros (`gui:`, `viewable`) that generate code at compile time. Since we want GUI construction to happen in Harding at runtime, Owlkettle's declarative layer cannot be used. We'd only access its low-level bindings, offering no advantage over gintro.
 
 **Why gintro?**
-gintro exposes GTK directly. We can wrap its objects in Nim proxies and pass them to Nemo. This enables true malleability - Nemo code creates and manages GTK widgets at runtime.
+gintro exposes GTK directly. We can wrap its objects in Nim proxies and pass them to Harding. This enables true malleability - Harding code creates and manages GTK widgets at runtime.

@@ -1,37 +1,37 @@
-# Nemo Tools and Debugging Guide
+# Harding Tools and Debugging Guide
 
 ## Overview
 
-Nemo provides several command-line tools to support development, debugging, and deployment:
+Harding provides several command-line tools to support development, debugging, and deployment:
 
-- `nemo` - REPL and interpreter for interactive development
-- `nemoc` - Compiler for transforming Nemo to Nim code
+- `harding` - REPL and interpreter for interactive development
+- `hardingc` - Compiler for transforming Harding to Nim code
 - `build.nims` - Build automation script
 
-## The REPL: nemo
+## The REPL: harding
 
-The `nemo` command provides both interactive REPL and script execution capabilities.
+The `harding` command provides both interactive REPL and script execution capabilities.
 
 ### Usage
 
 ```bash
 # Start interactive REPL
-nemo
+harding
 
 # Run a script file
-nemo script.nemo
+harding script.harding
 
 # Evaluate an expression
-nemo -e "3 + 4"
+harding -e "3 + 4"
 
 # Show AST without executing (parse only)
-nemo --ast script.nemo
+harding --ast script.harding
 
 # Run with debug logging
-nemo --loglevel DEBUG script.nemo
+harding --loglevel DEBUG script.harding
 
 # Combine flags
-nemo --ast --loglevel DEBUG -e "Object clone"
+harding --ast --loglevel DEBUG -e "Object clone"
 ```
 
 ### Command-Line Options
@@ -54,7 +54,7 @@ nemo --ast --loglevel DEBUG -e "Object clone"
 
 ### Debug Logging Output
 
-When using `--loglevel DEBUG`, nemo provides detailed execution tracing:
+When using `--loglevel DEBUG`, harding provides detailed execution tracing:
 
 ```
 DEBUG Evaluating node: nkMessage
@@ -86,32 +86,32 @@ Inside the REPL, these commands are available:
 - `:clear` - Clear the screen
 - `:trace` - Toggle execution tracing
 
-## The Compiler: nemoc
+## The Compiler: hardingc
 
-The `nemoc` command compiles Nemo source to Nim code.
+The `hardingc` command compiles Harding source to Nim code.
 
 ### Usage
 
 ```bash
 # Compile to Nim source
-nemoc compile input.nemo -o output.nim
+hardingc compile input.harding -o output.nim
 
 # Compile and build executable
-nemoc build input.nemo -d build/
+hardingc build input.harding -d build/
 
 # Compile, build, and run
-nemoc run input.nemo --release
+hardingc run input.harding --release
 
 # Show AST before compiling
-nemoc compile input.nemo --ast
+hardingc compile input.harding --ast
 
 # Compile with debug logging
-nemoc compile input.nemo --loglevel DEBUG
+hardingc compile input.harding --loglevel DEBUG
 ```
 
 ### Commands
 
-**compile**: Transform Nemo to Nim source code
+**compile**: Transform Harding to Nim source code
 **build**: Compile to Nim and build executable
 **run**: Compile, build, and execute the result
 **help**: Show usage information
@@ -132,7 +132,7 @@ nemoc compile input.nemo --loglevel DEBUG
 Nimble provides convenient build automation.
 
 ```bash
-# Build both nemo and nemoc (binaries in subdirectories)
+# Build both harding and hardingc (binaries in subdirectories)
 nimble build
 
 # Build and copy binaries to root directory
@@ -156,10 +156,10 @@ Use `--ast` to understand how code is parsed:
 
 ```bash
 # See AST for expression
-nemo --ast -e "3 + 4"
+harding --ast -e "3 + 4"
 
 # See AST for complex code
-nemo --ast script.nemo
+harding --ast script.harding
 ```
 
 AST output shows the structure:
@@ -177,10 +177,10 @@ Use `--loglevel DEBUG` to trace execution:
 
 ```bash
 # Trace message sends and method execution
-nemo --loglevel DEBUG script.nemo
+harding --loglevel DEBUG script.harding
 
 # Combine with AST output
-nemo --ast --loglevel DEBUG script.nemo
+harding --ast --loglevel DEBUG script.harding
 ```
 
 ### 3. Interactive Exploration
@@ -188,7 +188,7 @@ nemo --ast --loglevel DEBUG script.nemo
 Use the REPL to test small pieces of code:
 
 ```bash
-$ nemo
+$ harding
 nt> obj := Object derive
 nt> obj at: #test put: 42
 nt> obj at: #test
@@ -200,13 +200,13 @@ nt> obj at: #test
 Create test files to isolate and reproduce issues:
 
 ```smalltalk
-# test_debug.nemo
+# test_debug.harding
 test := Object derive.
 test at: #value put: 3 + 4.
 test at: #value  "Should be 7"
 ```
 
-Then run: `nemo --ast --loglevel DEBUG test_debug.nemo`
+Then run: `harding --ast --loglevel DEBUG test_debug.harding`
 
 ## Common Issues and Solutions
 
@@ -216,10 +216,10 @@ This means the method doesn't exist on the receiver:
 
 ```bash
 # Debug with --loglevel DEBUG
-nemo --loglevel DEBUG script.nemo
+harding --loglevel DEBUG script.harding
 
 # Check what the receiver actually is
-nemo -e "obj := Object clone. obj unknownMessage"
+harding -e "obj := Object clone. obj unknownMessage"
 ```
 
 Debug output shows:
@@ -234,10 +234,10 @@ Use `--ast` to see if code is parsed correctly:
 
 ```bash
 # See parse error details
-nemo --ast script_with_error.nemo
+harding --ast script_with_error.harding
 
 # Compare with working code
-nemo --ast working_script.nemo
+harding --ast working_script.harding
 ```
 
 ### Execution Differences
@@ -246,11 +246,11 @@ If interpreter and compiler behave differently:
 
 ```bash
 # Test with interpreter
-nemo --loglevel DEBUG script.nemo
+harding --loglevel DEBUG script.harding
 
 # Test AST (same for both)
-nemo --ast script.nemo
-nemoc compile script.nemo --ast
+harding --ast script.harding
+hardingc compile script.harding --ast
 ```
 
 ## Best Practices
@@ -265,7 +265,7 @@ nemoc compile script.nemo --ast
 
 ### Editor Integration
 
-- Configure your editor to run `nemo --ast` on current file
+- Configure your editor to run `harding --ast` on current file
 - Set up keyboard shortcuts for quick REPL access
 - Use `--loglevel DEBUG` in build scripts for CI debugging
 
@@ -276,7 +276,7 @@ nemoc compile script.nemo --ast
 nim e build.nims test --loglevel DEBUG
 
 # Test specific file with AST output
-nemo --ast tests/test_specific.nim
+harding --ast tests/test_specific.nim
 ```
 
 ### Continuous Integration
@@ -287,20 +287,20 @@ nemo --ast tests/test_specific.nim
 set -e
 
 # Verify AST parses correctly
-nemo --ast examples/*.nemo
+harding --ast examples/*.harding
 
 # Run all tests with info logging
 nim e build.nims test --loglevel INFO
 
 # Run any example scripts
-nemo examples/demo.nemo
+harding examples/demo.harding
 ```
 
 ## Advanced Debugging
 
 ### Adding Custom Debug Logging
 
-When developing Nemo itself, add debug statements:
+When developing Harding itself, add debug statements:
 
 ```nim
 import std/logging
@@ -317,7 +317,7 @@ For tests and embedded usage, control logging programmatically:
 
 ```nim
 import std/logging
-import nemo/core/types
+import harding/core/types
 
 # Configure logging with specific level
 configureLogging(lvlError)  # Suppress debug output
@@ -337,28 +337,28 @@ If debugging tools themselves have issues:
 
 ```bash
 # Check tool versions
-nemo --version
-nemoc --version
+harding --version
+hardingc --version
 
 # Verify installation
-which nemo
-which nemoc
+which harding
+which hardingc
 
 # Test minimal case
-nemo -e "42"
+harding -e "42"
 ```
 
 ### Performance Profiling
 
 ```bash
 # Use Nim's profiler with compiled code
-nemoc compile script.nemo -o profile_me.nim
+hardingc compile script.harding -o profile_me.nim
 nim c -r -d:release --profiler:on --stackTrace:on profile_me.nim
 ```
 
 ## Summary
 
-Nemo provides comprehensive debugging tools:
+Harding provides comprehensive debugging tools:
 - `--ast` for parsing inspection
 - `--loglevel DEBUG` for execution tracing
 - REPL for interactive exploration

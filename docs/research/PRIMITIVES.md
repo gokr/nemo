@@ -1,10 +1,10 @@
-# Primitive Syntax in Nemo
+# Primitive Syntax in Harding
 
-This document describes the unified syntax for direct primitive invocation in Nemo.
+This document describes the unified syntax for direct primitive invocation in Harding.
 
 ## Overview
 
-Nemo provides a single unified syntax for calling primitives that works for both declarative method bodies and inline usage:
+Harding provides a single unified syntax for calling primitives that works for both declarative method bodies and inline usage:
 
 ```smalltalk
 <primitive selector: arg1 keyword2: arg2>
@@ -67,7 +67,7 @@ Object>>at: key put: value <primitive primitiveAt: key>
 
 ### Inline Form
 
-Use `<<primitive>>` within a method body when you need to execute Nemo code before or after the primitive call. Arguments can be any variable reference: method parameters, temporaries, slots, or computed values.
+Use `<<primitive>>` within a method body when you need to execute Harding code before or after the primitive call. Arguments can be any variable reference: method parameters, temporaries, slots, or computed values.
 
 ```smalltalk
 # Validation before primitive
