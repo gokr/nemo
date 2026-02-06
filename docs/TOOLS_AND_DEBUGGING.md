@@ -6,7 +6,7 @@ Harding provides several command-line tools to support development, debugging, a
 
 - `harding` - REPL and interpreter for interactive development
 - `hardingc` - Compiler for transforming Harding to Nim code
-- `build.nims` - Build automation script
+- `nimble` - Build automation and package management
 
 ## The REPL: harding
 
@@ -272,8 +272,8 @@ hardingc compile script.harding --ast
 ### Testing
 
 ```bash
-# Run all tests with debug logging
-nim e build.nims test --loglevel DEBUG
+# Run all tests
+nimble test
 
 # Test specific file with AST output
 harding --ast tests/test_specific.nim
@@ -289,8 +289,8 @@ set -e
 # Verify AST parses correctly
 harding --ast examples/*.harding
 
-# Run all tests with info logging
-nim e build.nims test --loglevel INFO
+# Run all tests
+nimble test
 
 # Run any example scripts
 harding examples/demo.harding
@@ -362,6 +362,6 @@ Harding provides comprehensive debugging tools:
 - `--ast` for parsing inspection
 - `--loglevel DEBUG` for execution tracing
 - REPL for interactive exploration
-- `build.nims` for automation
+- `nimble` for build automation
 
 Combine these tools to quickly identify and resolve issues during development.
