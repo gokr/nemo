@@ -129,6 +129,61 @@ This is parsed as: `tags isNil ifTrue: [...] ifFalse: [...]` - a single statemen
 
 ---
 
+## Script Files
+
+Harding scripts are stored in `.hrd` or `.harding` files and executed with:
+
+```bash
+harding script.hrd
+```
+
+### Temporary Variables in Scripts
+
+Scripts are automatically wrapped in a block, enabling Smalltalk-style temporary variable declarations at the file level:
+
+```smalltalk
+# script.hrd
+| counter total |
+counter := 0
+total := 0
+1 to: 5 do: [:i |
+  counter := counter + 1
+  total := total + i
+]
+total  "Returns 15"
+```
+
+This eliminates the need to use uppercase global variables (`Counter`, `Total`) for simple scripts.
+
+### Execution Context
+
+Script blocks execute with `self = nil`, following the Smalltalk workspace convention (like a do-it in a Workspace). This provides consistent behavior between the REPL and script execution.
+
+```
+# In script.hrd or REPL do-it:
+self printString  "Returns: 'an UndefinedObject'"
+self isNil         "Returns: true"
+```
+
+### Shebang Support
+
+Scripts can be made executable with a shebang line:
+
+```smalltalk
+#!/usr/bin/env harding
+| sum |
+sum := 0
+1 to: 100 do: [:i | sum := sum + i]
+sum
+```
+
+```bash
+chmod +x script.hrd
+./script.hrd
+```
+
+---
+
 ## Object System
 
 ### Creating Classes

@@ -262,6 +262,35 @@ process terminate
 process state                      # ready, running, blocked, etc.
 ```
 
+## Script Files
+
+```smalltalk
+# script.hrd - File with temporary variables
+| counter total |
+counter := 0
+total := 0
+
+1 to: 5 do: [:i |
+  counter := counter + 1
+  total := total + i
+]
+
+total  "Returns 15"
+```
+
+**Execution:**
+```bash
+harding script.hrd
+chmod +x script.hrd  # For shebang: #!/usr/bin/env harding
+./script.hrd
+```
+
+**Script features:**
+- Auto-wrapped in `[ ... ]` before parsing
+- Temporary variables: `| var1 var2 |` at file level
+- Executed with `self = nil` (Smalltalk workspace style)
+- File extension: `.hrd`, `.harding`, or none
+
 ## Exception Handling
 
 ```smalltalk

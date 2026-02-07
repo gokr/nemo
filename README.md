@@ -23,7 +23,7 @@ cd harding
 nimble local  # Build and copy binaries to root directory
 ```
 
-Binaries: `harding` (REPL/interpreter), `hardingc` (compiler stub)
+Binaries: `harding` (REPL/interpreter), `granite` (compiler stub)
 
 ## Usage
 
@@ -34,6 +34,24 @@ harding -e "3 + 4"         # Evaluate expression
 harding --ast script.hrd   # Show AST, then execute
 harding --loglevel DEBUG   # Verbose execution trace
 ```
+
+### Script Execution
+
+Script files are automatically wrapped in a block, enabling Smalltalk-style temporary variable declarations:
+
+```smalltalk
+# script.hrd
+| counter total |
+counter := 0
+total := 0
+1 to: 5 do: [:i |
+  counter := counter + 1
+  total := total + i
+]
+total  "Returns 15"
+```
+
+Scripts execute with `self = nil`, following the Smalltalk workspace convention.
 
 ### Environment Variables
 
@@ -108,7 +126,7 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - Dynamic message sending: `perform:`, `perform:with:`
 
 **In progress:**
-- Compiler to Nim (hardingc is stub)
+- Compiler to Nim (granite is stub)
 - FFI to Nim
 - Standard library expansion
 
