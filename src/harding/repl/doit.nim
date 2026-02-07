@@ -162,6 +162,8 @@ proc main*() =
 proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxStackDepth: int = 10000,
                 hardingHome: string = ".", bootstrapFile: string = "", stackless: bool = true): (string, string) =
   ## Run a Harding script file
+  ## Scripts are auto-wrapped in [ ... ] to enable temporary variable declarations
+  ## using Smalltalk syntax: | temp1 temp2 |
   ## Note: stackless VM is now the default and only evaluator
   var scriptCtx = if ctx != nil: ctx else: newDoitContext(maxStackDepth = maxStackDepth, hardingHome = hardingHome,
                                                            bootstrapFile = bootstrapFile)
@@ -171,10 +173,14 @@ proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxSt
 
   let source = readFile(filename)
 
+  # Auto-wrap script source in a block for execution
+  # This enables temporary variable declarations like | counter total |
+  let wrappedSource = "[" & source & "]"
+
   # Handle AST dumping if requested
   if dumpAst:
     # Parse and dump AST before execution
-    let tokens = lex(source)
+    let tokens = lex(wrappedSource)
     var parser = initParser(tokens)
     let nodes = parser.parseStatements()
 
@@ -186,19 +192,16 @@ proc runScript*(filename: string, ctx: DoitContext = nil, dumpAst = false, maxSt
       echo printAST(node)
     echo ""
 
-  # Execute the script using stackless VM (now the default and only evaluator)
-  var results: seq[NodeValue]
+  # Execute the script as a block with self = nil (Smalltalk workspace convention)
+  var result: NodeValue
   var err: string
-  (results, err) = scriptCtx.interpreter.evalStatementsStackless(source)
+  (result, err) = scriptCtx.interpreter.evalScriptBlock(wrappedSource)
 
   if err.len > 0:
     return ("", "Script error: " & err)
   else:
-    # Return last result as string if available
-    if results.len > 0:
-      return (results[^1].toString(), "")
-    else:
-      return ("", "")
+    # Return result as string
+    return (result.toString(), "")
 
 # Convenience function to run script and print result
 proc execScript*(filename: string, dumpAst = false, maxStackDepth: int = 10000,

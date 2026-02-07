@@ -326,6 +326,7 @@ type
 # Forward declarations for closure-related procs
 proc captureEnvironment*(interp: Interpreter, blockNode: BlockNode)
 proc invokeBlock*(interp: var Interpreter, blockNode: BlockNode, args: seq[NodeValue]): NodeValue
+proc evalScriptBlock*(interp: var Interpreter, source: string): (NodeValue, string)
 
 proc isCapturedEnvInitialized(blk: BlockNode): bool =
   ## Check if capturedEnv is initialized using the explicit flag
@@ -1610,6 +1611,44 @@ proc evalStatements*(interp: var Interpreter, source: string): (seq[NodeValue], 
     return (@[], "Runtime error: " & e.msg)
   except Exception as e:
     return (@[], "Error: " & e.msg)
+
+proc evalScriptBlock*(interp: var Interpreter, source: string): (NodeValue, string) =
+  ## Evaluate source as a block with self = nil (Smalltalk workspace convention)
+  ## Source should be wrapped in [ ... ] by the caller
+  ## This allows temporary variable declarations like | counter total |
+  let tokens = lex(source)
+  var parser = initParser(tokens)
+  let nodes = parser.parseStatements()
+
+  if parser.hasError:
+    return (nilValue(), "Parse error: " & parser.errorMsg)
+
+  if nodes.len == 0:
+    return (nilValue(), "No expression to evaluate")
+
+  # We expect a single block node
+  var blockNode: BlockNode
+  if nodes.len == 1 and nodes[0].kind == nkBlock:
+    blockNode = nodes[0].BlockNode
+  else:
+    return (nilValue(), "Expected a single block expression")
+
+  try:
+    # Save current receiver and set to nilInstance (Smalltalk workspace convention)
+    let savedReceiver = interp.currentReceiver
+    interp.currentReceiver = nilInstance
+
+    # Invoke the block with no arguments
+    let result = interp.invokeBlock(blockNode, @[])
+
+    # Restore original receiver
+    interp.currentReceiver = savedReceiver
+
+    return (result, "")
+  except EvalError as e:
+    return (nilValue(), "Runtime error: " & e.msg)
+  except Exception as e:
+    return (nilValue(), "Error: " & e.msg)
 
 # Block evaluation helper
 proc evalBlock*(interp: var Interpreter, receiver: Instance, blockNode: BlockNode): NodeValue =
