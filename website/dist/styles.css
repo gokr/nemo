@@ -77,6 +77,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -86,6 +87,7 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 a {
@@ -1093,6 +1095,11 @@ section {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        backdrop-filter: none;
+        background: rgba(10, 15, 26, 0.98);
+    }
+
     .nav-menu {
         position: fixed;
         top: 72px;
@@ -1125,6 +1132,21 @@ section {
 
     .install-options {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .install-card {
+        padding: 24px;
+    }
+
+    .install-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .install-icon svg {
+        width: 24px;
+        height: 24px;
     }
 
     .footer-grid {
@@ -1202,6 +1224,21 @@ section {
         width: 400px;
         height: 400px;
         opacity: 0.02;
+    }
+
+    /* Smaller gradient orbs on mobile to prevent overflow */
+    .orb-1 {
+        width: 400px;
+        height: 400px;
+        top: -150px;
+        right: -150px;
+    }
+
+    .orb-2 {
+        width: 300px;
+        height: 300px;
+        bottom: -100px;
+        left: -100px;
     }
 }
 
