@@ -36,8 +36,12 @@ This document tracks current work items and future directions for Harding develo
 - **Green threads with Processor fork: and Processor yield** ✅
 - **Harding load: method for loading .harding files** ✅
 - **--home and --bootstrap CLI options** ✅
+- **Script files auto-wrapped in [ ... ] blocks** ✅
+- **Temporary variable declarations in scripts: | var1 var2 |** ✅
+- **Scripts execute with self = nil (Smalltalk workspace convention)** ✅
+- **DEBUG echo statements converted to proper debug() logging** ✅
 
-**Still Needed**: Compiler (hardingc is stub), FFI to Nim, standard library expansion.
+**Still Needed**: Compiler (granite is stub), FFI to Nim, standard library expansion.
 
 ## High Priority
 
@@ -45,7 +49,7 @@ This document tracks current work items and future directions for Harding develo
 - [ ] Method compilation from AST to Nim procedures
 - [ ] Nim type definitions for Class and Instance
 - [ ] Symbol export for compiled methods
-- [ ] Working `hardingc` (currently stub)
+- [ ] Working `granite` (currently stub)
 
 ### FFI Integration
 - [ ] Nim type marshaling
@@ -96,7 +100,7 @@ This document tracks current work items and future directions for Harding develo
 - Block body corruption in forked processes when running in test suite (works in isolation)
 - Memory management for circular references
 - Error handling improvements needed
-- Compiler implementation (hardingc is stub)
+- Compiler implementation (granite is stub)
 
 ## Documentation Needs
 
@@ -112,7 +116,7 @@ This document tracks current work items and future directions for Harding develo
 
 ```bash
 nimble local       # Build and copy binaries to root directory (recommended)
-nimble build       # Build harding and hardingc
+nimble build       # Build harding and granite
 nimble test        # Run tests
 nimble clean       # Clean artifacts
 nimble install     # Install harding to ~/.local/bin/
@@ -139,6 +143,21 @@ harding --loglevel ERROR script.harding    # Errors only (default)
 
 ## Recent Completed Work
 
+### Script Files and Temporary Variables (2025-02-07)
+- Script files auto-wrapped in `[ ... ]` blocks before parsing
+- Temporary variables can be declared at file level: `| var1 var2 |`
+- Scripts execute with `self = nil` (Smalltalk workspace convention)
+- No need for uppercase globals in simple scripts
+- Shebang support for executable scripts: `#!/usr/bin/env harding`
+- evalScriptBlock implementation in VM
+- Documentation updates for script execution in MANUAL.md and QUICKREF.md
+
+### Debug Logging Improvements (2025-02-07)
+- Converted DEBUG echo statements to proper debug() logging calls
+- Debug output now respects --loglevel option
+- Cleaner normal script execution (no unwanted debug prints)
+- Logging updates across VM and codebase
+
 ### Documentation and Cleanup (2025-02-06)
 - Updated README.md with concise example and proper documentation links
 - Fixed all example files to use `new` for instance creation (not `derive`)
@@ -147,7 +166,7 @@ harding --loglevel ERROR script.harding    # Errors only (default)
 - Renamed .nemo files to .hrd extension throughout codebase
 - Fixed QUICKREF.md title (was "N Syntax")
 - Fixed VSCODE.md to reference correct grammar file (harding.tmLanguage.json)
-- Updated README to use `hardingc` consistently (was `granite`)
+- Updated README to use `granite` consistently (was `granite`)
 - Updated all shebang lines from `nemo` to `harding`
 - Fixed examples/README.md with correct binary and extension names
 
@@ -205,4 +224,4 @@ harding --loglevel ERROR script.harding    # Errors only (default)
 
 ---
 
-*Last Updated: 2025-02-06*
+*Last Updated: 2025-02-07*

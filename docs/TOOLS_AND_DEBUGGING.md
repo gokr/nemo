@@ -5,7 +5,7 @@
 Harding provides several command-line tools to support development, debugging, and deployment:
 
 - `harding` - REPL and interpreter for interactive development
-- `hardingc` - Compiler for transforming Harding to Nim code
+- `granite` - Compiler for transforming Harding to Nim code
 - `nimble` - Build automation and package management
 
 ## The REPL: harding
@@ -52,6 +52,29 @@ harding --ast --loglevel DEBUG -e "Object clone"
 **--version:** Show version information
 **--help:** Display usage information
 
+### Script Files
+
+Harding script files (`.hrd` extension) are executed as blocks, enabling temporary variable declarations:
+
+```smalltalk
+# script.hrd
+| counter total |
+counter := 0
+total := 0
+1 to: 5 do: [:i |
+  counter := counter + 1
+  total := total + i
+]
+total  "Returns sum of 1+2+3+4+5 = 15"
+```
+
+**Script execution details:**
+- Scripts are auto-wrapped in `[... ]` before parsing
+- Temporary variables are declared with `| var1 var2 |` at the start
+- Scripts execute with `self = nil` (Smalltalk workspace convention)
+- No need for uppercase globals in simple scripts - use lowercase temporaries
+- File extension can be `.hrd`, `.harding`, or no extension
+
 ### Debug Logging Output
 
 When using `--loglevel DEBUG`, harding provides detailed execution tracing:
@@ -86,27 +109,27 @@ Inside the REPL, these commands are available:
 - `:clear` - Clear the screen
 - `:trace` - Toggle execution tracing
 
-## The Compiler: hardingc
+## The Compiler: granite
 
-The `hardingc` command compiles Harding source to Nim code.
+The `granite` command compiles Harding source to Nim code.
 
 ### Usage
 
 ```bash
 # Compile to Nim source
-hardingc compile input.harding -o output.nim
+granite compile input.harding -o output.nim
 
 # Compile and build executable
-hardingc build input.harding -d build/
+granite build input.harding -d build/
 
 # Compile, build, and run
-hardingc run input.harding --release
+granite run input.harding --release
 
 # Show AST before compiling
-hardingc compile input.harding --ast
+granite compile input.harding --ast
 
 # Compile with debug logging
-hardingc compile input.harding --loglevel DEBUG
+granite compile input.harding --loglevel DEBUG
 ```
 
 ### Commands
@@ -132,7 +155,7 @@ hardingc compile input.harding --loglevel DEBUG
 Nimble provides convenient build automation.
 
 ```bash
-# Build both harding and hardingc (binaries in subdirectories)
+# Build both harding and granite (binaries in subdirectories)
 nimble build
 
 # Build and copy binaries to root directory
@@ -250,7 +273,7 @@ harding --loglevel DEBUG script.harding
 
 # Test AST (same for both)
 harding --ast script.harding
-hardingc compile script.harding --ast
+granite compile script.harding --ast
 ```
 
 ## Best Practices
@@ -338,11 +361,11 @@ If debugging tools themselves have issues:
 ```bash
 # Check tool versions
 harding --version
-hardingc --version
+granite --version
 
 # Verify installation
 which harding
-which hardingc
+which granite
 
 # Test minimal case
 harding -e "42"
@@ -352,7 +375,7 @@ harding -e "42"
 
 ```bash
 # Use Nim's profiler with compiled code
-hardingc compile script.harding -o profile_me.nim
+granite compile script.harding -o profile_me.nim
 nim c -r -d:release --profiler:on --stackTrace:on profile_me.nim
 ```
 

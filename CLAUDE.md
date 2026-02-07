@@ -22,13 +22,13 @@ nimble clean             # Clean build artifacts and binaries
 nimble install           # Install harding binary to ~/.local/bin/
 ```
 
-**IMPORTANT**: Always use `nimble local` when developing. This is the only command that updates the `./harding` and `./hardingc` binaries in the root directory. Using `nimble build` alone will NOT update the root directory binaries.
+**IMPORTANT**: Always use `nimble local` when developing. This is the only command that updates the `./harding` and `./granite` binaries in the root directory. Using `nimble build` alone will NOT update the root directory binaries.
 
 ### Convenience Tasks
 
 The following nimble tasks provide convenient shortcuts for common development tasks:
 
-- **`nimble local`**: Builds the project using `nimble build` and copies the `harding` and `hardingc` binaries to the root directory for easy access. **Always use this when developing.**
+- **`nimble local`**: Builds the project using `nimble build` and copies the `harding` and `granite` binaries to the root directory for easy access. **Always use this when developing.**
 - **`nimble clean`**: Removes build artifacts including nimcache, build directories, and binaries from all locations
 - **`nimble install`**: Copies the `harding` binary to `~/.local/bin` (Unix/Linux/macOS) or appropriate Windows location
 
@@ -44,7 +44,7 @@ nim c -r tests/test_core.nim
 
 ## Logging and Debugging
 
-Both `harding` and `hardingc` support a `--loglevel` option to control logging output. This is useful for debugging execution flow and tracing interpreter behavior.
+Both `harding` and `granite` support a `--loglevel` option to control logging output. This is useful for debugging execution flow and tracing interpreter behavior.
 
 ### Available Log Levels
 
@@ -68,16 +68,16 @@ harding --loglevel DEBUG myprogram.harding
 harding --loglevel INFO -e "3 + 4"
 ```
 
-**For the compiler (hardingc):**
+**For the compiler (granite):**
 ```bash
 # Compile with debug logging
-hardingc compile myprogram.harding --loglevel DEBUG
+granite compile myprogram.harding --loglevel DEBUG
 
 # Build with info logging
-hardingc build myprogram.harding --loglevel INFO
+granite build myprogram.harding --loglevel INFO
 
 # Run with debug logging
-hardingc run myprogram.harding --loglevel DEBUG
+granite run myprogram.harding --loglevel DEBUG
 ```
 
 ### Debug Logging Output
@@ -120,7 +120,7 @@ The `debug` statements are only active when the log level is set to DEBUG or low
 
 ### AST Debugging
 
-Both `harding` and `hardingc` support an `--ast` flag to dump the Abstract Syntax Tree after parsing. This is useful for understanding how your Harding code is being parsed before execution or compilation.
+Both `harding` and `granite` support an `--ast` flag to dump the Abstract Syntax Tree after parsing. This is useful for understanding how your Harding code is being parsed before execution or compilation.
 
 **For the REPL (harding):**
 ```bash
@@ -134,13 +134,13 @@ harding --ast -e "3 + 4"
 harding --ast --loglevel DEBUG script.harding
 ```
 
-**For the compiler (hardingc):**
+**For the compiler (granite):**
 ```bash
 # Show AST before compiling
-hardingc compile myprog.harding --ast
+granite compile myprog.harding --ast
 
 # Show AST with debug logging
-hardingc compile myprog.harding --ast --loglevel DEBUG
+granite compile myprog.harding --ast --loglevel DEBUG
 ```
 
 The AST output shows the hierarchical structure of parsed expressions, making it easier to understand how messages, literals, and other constructs are represented.
@@ -178,7 +178,7 @@ Add to your `harding.nimble`:
 ```nim
 task debug, "Build with debug symbols":
   exec "nim c -d:debug --debugger:native --debuginfo --lineDir:on --stackTrace:on -o:harding_debug src/harding/repl/harding.nim"
-  exec "nim c -d:debug --debugger:native -o:hardingc_debug src/harding/compiler/hardingc.nim"
+  exec "nim c -d:debug --debugger:native -o:granite_debug src/harding/compiler/granite.nim"
 ```
 
 ### Debugger Integration
