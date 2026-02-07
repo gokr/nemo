@@ -87,6 +87,10 @@ proc classImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instIdentityImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instanceCloneImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 
+# Class derivation methods
+proc classDeriveWithAccessorsImpl*(self: Class, args: seq[NodeValue]): NodeValue
+proc classDeriveGettersSettersImpl*(self: Class, args: seq[NodeValue]): NodeValue
+
 # Slot accessors are implemented in evaluator.nim to avoid circular import
 
 # ============================================================================
@@ -344,6 +348,16 @@ proc initCoreClasses*(): Class =
     let deriveParentsIvarMethod = createCoreMethod("derive:parents:ivarArray:methods:")
     deriveParentsIvarMethod.nativeImpl = cast[pointer](classDeriveParentsIvarArrayMethodsImpl)
     addMethodToClass(objectClass, "derive:parents:ivarArray:methods:", deriveParentsIvarMethod, isClassMethod = true)
+
+    # deriveWithAccessors: - create class with auto-generated getters and setters
+    let deriveWithAccessorsMethod = createCoreMethod("deriveWithAccessors:")
+    deriveWithAccessorsMethod.nativeImpl = cast[pointer](classDeriveWithAccessorsImpl)
+    addMethodToClass(objectClass, "deriveWithAccessors:", deriveWithAccessorsMethod, isClassMethod = true)
+
+    # derive:getters:setters: - create class with selective accessor generation
+    let deriveGettersSettersMethod = createCoreMethod("derive:getters:setters:")
+    deriveGettersSettersMethod.nativeImpl = cast[pointer](classDeriveGettersSettersImpl)
+    addMethodToClass(objectClass, "derive:getters:setters:", deriveGettersSettersMethod, isClassMethod = true)
 
     # new method (class method)
     let newMethod = createCoreMethod("new")
@@ -813,6 +827,140 @@ proc classDeriveImpl*(self: Class, args: seq[NodeValue]): NodeValue =
   let className = if self.name.len > 0: self.name & "+Derived" else: "Anonymous"
   let newClass = newClass(superclasses = @[self], slotNames = slotNames, name = className)
   return NodeValue(kind: vkClass, classVal: newClass)
+
+proc extractSlotNamesFromArray(arr: NodeValue): seq[string] =
+  ## Extract slot names from an array NodeValue
+  result = @[]
+  if arr.kind == vkInstance and arr.instVal.kind == ikArray:
+    for elem in arr.instVal.elements:
+      if elem.kind == vkSymbol:
+        result.add(elem.symVal)
+      elif elem.kind == vkString:
+        result.add(elem.strVal)
+
+proc createGetterMethod*(cls: Class, slotName: string): BlockNode =
+  ## Create a getter method for a slot: slotName [ ^slotName ]
+  ## Uses SlotAccessNode for O(1) direct access
+  let slotIndex = cls.getSlotIndex(slotName)
+  if slotIndex < 0:
+    return nil
+
+  # Create SlotAccessNode for the slot read
+  let slotAccess = SlotAccessNode(
+    slotName: slotName,
+    slotIndex: slotIndex,
+    isAssignment: false,
+    valueExpr: nil
+  )
+
+  # Create return node with the slot access
+  let returnNode = ReturnNode(expression: cast[Node](slotAccess))
+
+  # Create the method block
+  let meth = BlockNode()
+  meth.parameters = @[]
+  meth.temporaries = @[]
+  meth.body = @[cast[Node](returnNode)]
+  meth.isMethod = true
+  meth.nativeImpl = nil
+  meth.capturedEnv = initTable[string, MutableCell]()
+  meth.capturedEnvInitialized = true
+
+  return meth
+
+proc createSetterMethod*(cls: Class, slotName: string): BlockNode =
+  ## Create a setter method for a slot: slotName: value [ slotName := value ]
+  ## Uses SlotAccessNode for O(1) direct access
+  let slotIndex = cls.getSlotIndex(slotName)
+  if slotIndex < 0:
+    return nil
+
+  # Parameter name for the setter (e.g., "aValue" or just "value")
+  let paramName = "aValue"
+
+  # Create the parameter node as an IdentNode
+  let paramNode = IdentNode(name: paramName)
+
+  # Create SlotAccessNode for the slot assignment
+  let slotAccess = SlotAccessNode(
+    slotName: slotName,
+    slotIndex: slotIndex,
+    isAssignment: true,
+    valueExpr: cast[Node](paramNode)
+  )
+
+  # Create the method block
+  let meth = BlockNode()
+  meth.parameters = @[paramName]
+  meth.temporaries = @[]
+  meth.body = @[cast[Node](slotAccess)]
+  meth.isMethod = true
+  meth.nativeImpl = nil
+  meth.capturedEnv = initTable[string, MutableCell]()
+  meth.capturedEnvInitialized = true
+
+  return meth
+
+proc classDeriveWithAccessorsImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a new subclass with slot names and auto-generate accessors
+  ## args[0]: array of slot names
+  ## Generates both getters and setters for each slot
+  var slotNames: seq[string] = @[]
+  if args.len > 0:
+    slotNames = extractSlotNamesFromArray(args[0])
+
+  let className = if self.name.len > 0: self.name & "+Derived" else: "Anonymous"
+  let newCls = newClass(superclasses = @[self], slotNames = slotNames, name = className)
+
+  # Generate getters and setters for each slot
+  for slotName in slotNames:
+    # Create and add getter: slotName
+    let getter = createGetterMethod(newCls, slotName)
+    if getter != nil:
+      addMethodToClass(newCls, slotName, getter, isClassMethod = false)
+
+    # Create and add setter: slotName:
+    let setterName = slotName & ":"
+    let setter = createSetterMethod(newCls, slotName)
+    if setter != nil:
+      addMethodToClass(newCls, setterName, setter, isClassMethod = false)
+
+  return NodeValue(kind: vkClass, classVal: newCls)
+
+proc classDeriveGettersSettersImpl*(self: Class, args: seq[NodeValue]): NodeValue =
+  ## Create a new subclass with selective accessor generation
+  ## args[0]: array of all slot names
+  ## args[1]: array of slot names to generate getters for
+  ## args[2]: array of slot names to generate setters for
+  if args.len < 3:
+    return nilValue()
+
+  # Extract all slot names
+  let allSlotNames = extractSlotNamesFromArray(args[0])
+
+  # Extract getter slot names
+  let getterSlotNames = extractSlotNamesFromArray(args[1])
+
+  # Extract setter slot names
+  let setterSlotNames = extractSlotNamesFromArray(args[2])
+
+  let className = if self.name.len > 0: self.name & "+Derived" else: "Anonymous"
+  let newCls = newClass(superclasses = @[self], slotNames = allSlotNames, name = className)
+
+  # Generate getters for specified slots
+  for slotName in getterSlotNames:
+    let getter = createGetterMethod(newCls, slotName)
+    if getter != nil:
+      addMethodToClass(newCls, slotName, getter, isClassMethod = false)
+
+  # Generate setters for specified slots
+  for slotName in setterSlotNames:
+    let setterName = slotName & ":"
+    let setter = createSetterMethod(newCls, slotName)
+    if setter != nil:
+      addMethodToClass(newCls, setterName, setter, isClassMethod = false)
+
+  return NodeValue(kind: vkClass, classVal: newCls)
 
 proc classDeriveParentsIvarArrayMethodsImpl*(self: Class, args: seq[NodeValue]): NodeValue =
   ## Create a new class with multiple parents and define methods
