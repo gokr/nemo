@@ -184,7 +184,7 @@ p distanceFromOrigin println   <span class="comment"># 223.6068...</span></code>
                         <li><code>slots:</code> - Extra slots</li>
                         <li><code>methods:</code> - Method dictionary</li>
                     </ul>
-                    <h3>Comprehensive Constructor</h3>
+                    <h3>Class Construction</h3>
                     <p>For complete control with selective getters and setters:</p>
                     <ul>
                         <li><code>derive:parents:slots:getters:setters:methods:</code> - Full control</li>
@@ -203,20 +203,20 @@ p distanceFromOrigin println   <span class="comment"># 223.6068...</span></code>
 <span class="type">MyClass</span> := <span class="type">Object</span> derive: <span class="keyword">#</span>(slot1 slot2)
     parents: <span class="keyword">#</span>(<span class="type">Parent1</span> <span class="type">Parent2</span>)
     slots: <span class="keyword">#</span>(extraSlot)
-    methods: <span class="keyword">#{</span>
-        #method1 -> [:arg | ...],
-        #method2 -> [:a :b | ...]
-    <span class="keyword">}</span>
+    methods: [
+        <span class="keyword">self</span><span class="operator">>></span>method1 [ ... ]
+        <span class="keyword">self</span><span class="operator">>></span>method2 [ ... ]
+    ]
 
-<span class="comment"># Comprehensive with selective accessors</span>
+<span class="comment"># Class Construction with selective accessors</span>
 <span class="type">MyClass</span> := <span class="type">Object</span> derive: <span class="keyword">#</span>(slot1 slot2)
     parents: <span class="keyword">#</span>(<span class="type">Parent1</span> <span class="type">Parent2</span>)
     slots: <span class="keyword">#</span>(extraSlot)
     getters: <span class="keyword">#</span>(slot1 extraSlot)
     setters: <span class="keyword">#</span>(slot2)
-    methods: <span class="keyword">#{</span>
-        #method1 -> [:arg | ...]
-    <span class="keyword">}</span>
+    methods: [
+        <span class="keyword">self</span><span class="operator">>></span>method1 [ ... ]
+    ]
 
 <span class="comment"># Mixin for slotless composition</span>
 <span class="type">Comparable</span> := <span class="type">Mixin</span> derive: <span class="keyword">#</span>()
