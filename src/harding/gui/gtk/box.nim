@@ -33,18 +33,18 @@ proc createGtkBox*(interp: var Interpreter, orientation: cint, spacing: cint = 0
 
   # Look up the GtkBox class
   var boxClass: Class = nil
-  echo "DEBUG createGtkBox: interp.globals.len=", interp.globals[].len
+  debug("createGtkBox: interp.globals.len=", interp.globals[].len)
   if "GtkBox" in interp.globals[]:
     let boxVal = interp.globals[]["GtkBox"]
-    echo "DEBUG createGtkBox: GtkBox found, kind=", $boxVal.kind
+    debug("createGtkBox: GtkBox found, kind=", $boxVal.kind)
     if boxVal.kind == vkClass:
       boxClass = boxVal.classVal
-      echo "DEBUG createGtkBox: using GtkBox class"
+      debug("createGtkBox: using GtkBox class")
   else:
-    echo "DEBUG createGtkBox: GtkBox NOT in globals!"
+    debug("createGtkBox: GtkBox NOT in globals!")
 
   if boxClass == nil:
-    echo "DEBUG createGtkBox: falling back to objectClass"
+    debug("createGtkBox: falling back to objectClass")
     boxClass = objectClass
 
   let obj = newInstance(boxClass)
@@ -52,7 +52,7 @@ proc createGtkBox*(interp: var Interpreter, orientation: cint, spacing: cint = 0
   storeInstanceWidget(obj, box)
   obj.nimValue = cast[pointer](box)
 
-  echo "DEBUG createGtkBox: created instance ptr=", cast[int](obj), " class=", boxClass.name
+  debug("createGtkBox: created instance ptr=", cast[int](obj), " class=", boxClass.name)
   return obj.toValue()
 
 ## Native method: new (class method) - creates vertical box by default
@@ -79,7 +79,7 @@ proc boxAppendImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue
     var boxWidget = getInstanceWidget(self)
     if boxWidget == nil and self.nimValue != nil:
       boxWidget = cast[GtkBox](self.nimValue)
-    echo "DEBUG boxAppend: boxWidget=", repr(boxWidget)
+    debug("boxAppend: boxWidget=", repr(boxWidget))
 
     if childInstance.isNimProxy:
       # Try to get widget from instance->widget table first (more reliable)
