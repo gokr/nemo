@@ -737,10 +737,12 @@ Processor yield
 - Process control (suspend, resume, terminate)
 - Shared globals via `Harding` GlobalTable for inter-process communication
 
-**Planned but not implemented:**
-- Monitor synchronization primitive
-- SharedQueue for producer-consumer patterns
-- Semaphore for counting/binary locks
+**Synchronization Primitives:**
+- Monitor - Mutual exclusion with condition variables
+- SharedQueue - Producer-consumer communication
+- Semaphore - Counting and binary locks
+
+See examples in lib/core/Monitor.hrd, lib/core/SharedQueue.hrd, and lib/core/Semaphore.hrd
 
 All processes share the same globals and class hierarchy, enabling inter-process communication.
 

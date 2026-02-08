@@ -27,7 +27,8 @@ Harding consists of several subsystems:
 | Core Types | `src/harding/core/types.nim` | Node, Instance, Class definitions |
 | VM | `src/harding/interpreter/vm.nim` | Stackless VM execution and method dispatch |
 | Objects | `src/harding/interpreter/objects.nim` | Object system, class creation, native methods |
-| Scheduler | `src/harding/interpreter/scheduler.nim` | Green thread scheduling |
+| Scheduler | `src/harding/core/scheduler.nim` | Green thread scheduling |
+| Process | `src/harding/core/process.nim` | Process type definitions |
 | REPL | `src/harding/repl/` | Interactive interface |
 | Compiler | `src/harding/compiler/` | Harding to Nim code generation |
 | GTK Bridge | `src/harding/gui/gtk/` | GTK widget integration |
@@ -414,7 +415,11 @@ src/harding/
 │   ├── vm.nim           # Stackless VM, method dispatch, native methods
 │   ├── objects.nim      # Object system, class creation
 │   ├── activation.nim   # Activation records
-│   └── scheduler.nim    # Green thread scheduler
+│   └── process.nim      # Process and scheduler types
+├── core/                # Core type definitions
+│   ├── types.nim        # Node, Instance, Class, WorkFrame
+│   ├── process.nim      # Process type for green threads
+│   └── scheduler.nim    # Green thread scheduler implementation
 ├── repl/                # Interactive interface
 │   ├── doit.nim         # REPL context and script execution
 │   └── interact.nim     # Line editing

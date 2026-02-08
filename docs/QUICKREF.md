@@ -294,6 +294,50 @@ process terminate
 process state                      # ready, running, blocked, etc.
 ```
 
+## Synchronization Primitives
+
+### Monitor (Mutex with Condition Variable)
+
+```smalltalk
+monitor := Monitor new.
+
+# Acquire lock
+monitor critical: [
+    # Protected code
+    sharedResource := sharedResource + 1
+]
+
+# With timeout
+acquired := monitor critical: [
+    # Protected code
+] ifTimedOut: ["timeout action"]
+```
+
+### SharedQueue
+
+```smalltalk
+queue := SharedQueue new.
+
+# Producer
+queue nextPut: "item"
+
+# Consumer
+item := queue next
+item := queue nextOrNil  # Non-blocking
+```
+
+### Semaphore
+
+```smalltalk
+sem := Semaphore new.           # Binary semaphore (count=1)
+sem := Semaphore forMutualExclusion.
+sem := Semaphore newSignals: 5. # Counting semaphore
+
+# Acquire/release
+sem wait
+sem signal
+```
+
 ## Script Files
 
 ```smalltalk
@@ -453,6 +497,36 @@ arr := #(1 2 3)
 
 ```smalltalk
 dict := #{"name" -> "Alice", "age" -> 30}
+```
+
+### Interval
+
+```smalltalk
+# Create numeric intervals
+interval := 1 to: 10              # 1, 2, 3, ..., 10
+interval := 1 to: 10 by: 2        # 1, 3, 5, 7, 9
+
+# Iterate
+interval do: [:i | i print]
+
+# Reverse
+interval := 10 to: 1 by: -1       # 10, 9, 8, ..., 1
+```
+
+### SortedCollection
+
+```smalltalk
+# Default sort (ascending)
+sorted := SortedCollection new.
+sorted add: 5.
+sorted add: 2.
+sorted add: 8.
+sorted first  # Returns 2
+
+# Custom sort block
+sorted := SortedCollection sortBlock: [:a :b | a > b].  # Descending
+sorted addAll: #(3 1 4 1 5).
+sorted asArray  # Returns #(5 4 3 1 1)
 ```
 
 ## Type Checking Pattern

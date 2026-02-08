@@ -29,7 +29,7 @@ Processor yield
 - Process control (suspend, resume, terminate)
 - Shared globals for inter-process communication
 
-**Planned:**
+**Implemented:**
 - Monitor synchronization primitive
 - SharedQueue for producer-consumer patterns
 - Semaphore for counting/binary locks
@@ -119,9 +119,9 @@ All GUI tools are written in Harding code, making them malleable at runtime. Onl
 
 ### Medium Priority
 
-- **`SortedCollection`** with configurable sort blocks
+- **`SortedCollection`** with configurable sort blocks ✅ (implemented)
 - **`Bag`** for counting occurrences
-- **`Interval`** to replace `to:do:` with collection iteration
+- **`Interval`** to replace `to:do:` with collection iteration ✅ (implemented)
 - **Stream hierarchy** (ReadStream, WriteStream)
 - **`hash`** method on Object
 
@@ -198,9 +198,10 @@ pid send: #compute with: 42.
 
 ### Near Term (0-3 months)
 
-- Complete green threads (Monitor, SharedQueue, Semaphore)
-- Fill high-priority Smalltalk gaps
+- ✅ Complete green threads (Monitor, SharedQueue, Semaphore)
+- ✅ Fill high-priority Smalltalk gaps (Interval, SortedCollection)
 - Start test framework implementation
+- Complete GTK IDE tools (Workspace, Transcript, Launcher)
 
 ### Medium Term (3-6 months)
 

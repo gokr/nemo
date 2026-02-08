@@ -31,7 +31,7 @@ cd harding
 nimble local  # Build and copy binaries to root directory
 ```
 
-Binaries: `harding` (REPL/interpreter), `granite` (compiler stub)
+Binaries: `harding` (REPL/interpreter), `granite` (compiler stub), `bona` (GTK IDE)
 
 ## Usage
 
@@ -132,9 +132,11 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - Multi-character operators (`==`, `//`, `<=`, `>=`, `~=`, `~~`)
 - Standard library (Object, Boolean, Block, Number, Collections, String)
 - Green threads: `Processor fork:`, `Processor yield`
+- Synchronization primitives: Monitor, SharedQueue, Semaphore
 - Multiple inheritance with conflict detection and scoped super send
 - Dynamic message sending: `perform:`, `perform:with:`
 - Automatic accessor generation: `deriveWithAccessors:`, `derive:getters:setters:`
+- GTK-based IDE (`bona`) with Workspace and Transcript
 
 **In progress:**
 - Compiler to Nim (granite is stub)
@@ -158,6 +160,9 @@ harding examples/01_hello.hrd
 harding examples/05_classes.hrd
 harding examples/10_blocks.hrd
 harding examples/process_demo.hrd
+
+# Launch the GTK IDE
+bona
 ```
 
 See the `examples/` directory for more examples covering arithmetic, variables, objects, classes, methods, inheritance, collections, control flow, and blocks.

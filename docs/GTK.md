@@ -192,6 +192,7 @@ except Exception as e:
 
 ### In Progress
 
+- IDE tools (Workspace, Transcript, Launcher via `bona` command)
 - TreeView for hierarchical data
 - HeaderBar
 - Menu system

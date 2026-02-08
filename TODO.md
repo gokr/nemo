@@ -33,6 +33,9 @@ This document tracks current work items and future directions for Harding develo
 - **perform:** family for dynamic message sending ✅
 - **Process, Scheduler, and GlobalTable as Harding-side objects** ✅
 - **Harding global for accessing global namespace** ✅
+- **Interval for numeric range iteration** ✅
+- **SortedCollection for ordered collections** ✅
+- **Monitor, SharedQueue, Semaphore synchronization primitives** ✅
 - **Process introspection (pid, name, state)** ✅
 - **Process control (suspend, resume, terminate)** ✅
 - **Green threads with Processor fork: and Processor yield** ✅
@@ -80,9 +83,9 @@ This document tracks current work items and future directions for Harding develo
 - [ ] Better error messages
 
 ### Green Threads
-- [ ] Monitor synchronization primitive
-- [ ] SharedQueue for producer-consumer patterns
-- [ ] Semaphore for counting/binary locks
+- [x] Monitor synchronization primitive
+- [x] SharedQueue for producer-consumer patterns
+- [x] Semaphore for counting/binary locks
 
 ## Low Priority
 

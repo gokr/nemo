@@ -6,6 +6,7 @@ Harding provides several command-line tools to support development, debugging, a
 
 - `harding` - REPL and interpreter for interactive development
 - `granite` - Compiler for transforming Harding to Nim code
+- `bona` - GTK-based graphical IDE (Bonadventure)
 - `nimble` - Build automation and package management
 
 ## The REPL: harding
@@ -150,6 +151,42 @@ granite compile input.harding --loglevel DEBUG
 **-h, --help**: Show help
 **-v, --version**: Show version
 
+## The IDE: bona
+
+The `bona` command launches the Bonadventure IDE, a GTK-based graphical development environment.
+
+### Usage
+
+```bash
+# Launch the IDE
+bona
+
+# With custom home directory
+bona --home /path/to/harding/home
+
+# With custom bootstrap file
+bona --bootstrap /path/to/bootstrap.hrd
+
+# With debug logging
+bona --loglevel DEBUG
+```
+
+### IDE Features
+
+- **Launcher** - Main IDE window with menu bar
+- **Workspace** - Code editor with do-it/print-it functionality
+- **Transcript** - Output console for logging and results
+
+### Building the IDE
+
+```bash
+# Build bona (GTK4 version, default)
+nimble gui
+
+# Build GTK3 version (if GTK4 not available)
+nimble gui3
+```
+
 ## Nimble Tasks
 
 Nimble provides convenient build automation.
@@ -160,6 +197,9 @@ nimble build
 
 # Build and copy binaries to root directory
 nimble local
+
+# Build GUI IDE
+nimble gui
 
 # Run tests
 nimble test
