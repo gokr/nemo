@@ -1,4 +1,4 @@
-import std/[tables, logging]
+import std/[tables, deques, logging]
 import ../core/types
 import ../core/process
 import ../interpreter/objects
@@ -25,6 +25,9 @@ var interpreterRefs: seq[Interpreter] = @[]
 # Forward declarations for functions defined later in this file
 proc createProcessClass*(): Class
 proc createSchedulerClass*(): Class
+proc createMonitorClass*(): Class
+proc createSharedQueueClass*(): Class
+proc createSemaphoreClass*(): Class
 proc initProcessorGlobal*(interp: var Interpreter)
 
 proc newSchedulerContext*(): SchedulerContext =
@@ -318,10 +321,26 @@ proc initProcessorGlobal*(interp: var Interpreter) =
   if schedulerCls != nil:
     interp.globals[]["Scheduler"] = schedulerCls.toValue()
 
+  # Add synchronization primitives
+  let monitorCls = createMonitorClass()
+  if monitorCls != nil:
+    interp.globals[]["Monitor"] = monitorCls.toValue()
+
+  let sharedQueueCls = createSharedQueueClass()
+  if sharedQueueCls != nil:
+    interp.globals[]["SharedQueue"] = sharedQueueCls.toValue()
+
+  let semaphoreCls = createSemaphoreClass()
+  if semaphoreCls != nil:
+    interp.globals[]["Semaphore"] = semaphoreCls.toValue()
+
   # Protect process-related globals
   protectGlobal("Processor")
   protectGlobal("Process")
   protectGlobal("Scheduler")
+  protectGlobal("Monitor")
+  protectGlobal("SharedQueue")
+  protectGlobal("Semaphore")
 
 # ============================================================================
 # Process Proxy and Class
@@ -611,3 +630,559 @@ proc createSchedulerClass*(): Class =
   addMethodToClass(schedulerClass, "runToCompletion:", runToCompletionMethod, isClassMethod = true)
 
   return schedulerClass
+
+# ============================================================================
+# Monitor - Mutual Exclusion with Condition Variables
+# ============================================================================
+
+type
+  Monitor* = ref object
+    owner*: Process        ## Process currently holding the lock
+    count*: int            ## Reentrancy count (for recursive locking)
+    waitingQueue*: Deque[Process]  ## Queue of processes waiting for lock
+
+  MonitorProxy* = ref object
+    monitor*: Monitor
+
+var monitorClass*: Class = nil
+
+# Keep MonitorProxy references alive - since nimValue is a raw pointer,
+# the GC doesn't know about these references and may reclaim the memory
+var monitorProxies: seq[MonitorProxy] = @[]
+
+proc newMonitor*(): Monitor =
+  ## Create a new monitor (unlocked initially)
+  result = Monitor(
+    owner: nil,
+    count: 0,
+    waitingQueue: initDeque[Process]()
+  )
+
+proc acquire*(monitor: Monitor, process: Process, sched: Scheduler): bool =
+  ## Acquire the monitor lock. Returns true if acquired, false if blocked.
+  if monitor.owner == nil:
+    # Lock is free, acquire it
+    monitor.owner = process
+    monitor.count = 1
+    return true
+  elif monitor.owner.pid == process.pid:
+    # Reentrant lock - same process, increment count
+    inc monitor.count
+    return true
+  else:
+    # Lock held by another process - block this process
+    monitor.waitingQueue.addLast(process)
+    sched.blockProcess(process, WaitCondition(kind: wkMonitor, target: cast[pointer](monitor)))
+    return false
+
+proc release*(monitor: Monitor, process: Process, sched: Scheduler): bool =
+  ## Release the monitor lock. Returns true if released successfully.
+  if monitor.owner == nil or monitor.owner.pid != process.pid:
+    # Not the owner - can't release
+    return false
+
+  dec monitor.count
+  if monitor.count > 0:
+    # Still holding lock (reentrant case)
+    return true
+
+  # Fully released, check if anyone is waiting
+  monitor.owner = nil
+  if monitor.waitingQueue.len > 0:
+    # Wake up next waiting process
+    let nextProcess = monitor.waitingQueue.popFirst()
+    monitor.owner = nextProcess
+    monitor.count = 1
+    sched.unblockProcess(nextProcess)
+  return true
+
+# Monitor proxy creation
+proc createMonitorProxy*(monitor: Monitor): NodeValue =
+  ## Create a proxy object that wraps a Nim Monitor
+  let proxy = MonitorProxy(monitor: monitor)
+  monitorProxies.add(proxy)  # Keep reference alive for GC
+  let obj = Instance(kind: ikObject, class: monitorClass, slots: @[])
+  obj.isNimProxy = true
+  obj.nimValue = cast[pointer](proxy)
+  return obj.toValue()
+
+proc asMonitorProxy*(inst: Instance): MonitorProxy =
+  ## Extract MonitorProxy from a Harding instance
+  if inst.isNimProxy and inst.nimValue != nil:
+    return cast[MonitorProxy](inst.nimValue)
+  return nil
+
+# Native method implementations
+
+proc monitorCriticalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Monitor critical: aBlock - execute block with mutual exclusion
+  ## Uses evalWithVM to run the block in a nested VM session, then releases lock
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil or args.len < 1 or args[0].kind != vkBlock:
+    return nilValue()
+
+  let proxy = self.asMonitorProxy()
+  if proxy == nil or proxy.monitor == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  let currentProc = sched.currentProcess
+  if currentProc == nil:
+    return nilValue()
+
+  # Try to acquire lock
+  if not proxy.monitor.acquire(currentProc, sched):
+    # We were blocked - return nil (will retry when unblocked)
+    return nilValue()
+
+  # We have the lock - execute the block using evalWithVM
+  let blockNode = args[0].blockVal
+  var resultValue = nilValue()
+
+  # Execute each statement in the block body
+  if blockNode.body.len > 0:
+    try:
+      for stmt in blockNode.body:
+        resultValue = interp.evalWithVM(stmt)
+    except:
+      # Block raised an error - still need to release lock
+      discard proxy.monitor.release(currentProc, sched)
+      raise
+
+  # Always release the lock (ensure: pattern in Nim)
+  discard proxy.monitor.release(currentProc, sched)
+
+  return resultValue
+
+proc monitorAcquireImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Monitor acquire - acquire the lock
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    return nilValue()
+
+  let proxy = self.asMonitorProxy()
+  if proxy == nil or proxy.monitor == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  let currentProc = sched.currentProcess
+  if currentProc == nil:
+    return nilValue()
+
+  if proxy.monitor.acquire(currentProc, sched):
+    return trueValue
+  return nilValue()
+
+proc monitorReleaseImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Monitor release - release the lock
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    return nilValue()
+
+  let proxy = self.asMonitorProxy()
+  if proxy == nil or proxy.monitor == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  let currentProc = sched.currentProcess
+  if currentProc == nil:
+    return nilValue()
+
+  if proxy.monitor.release(currentProc, sched):
+    return trueValue
+  return nilValue()
+
+proc monitorNewImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Monitor new - create a new monitor instance
+  let monitor = newMonitor()
+  return createMonitorProxy(monitor)
+
+proc createMonitorClass*(): Class =
+  ## Create the Monitor class with native methods
+  if monitorClass != nil:
+    return monitorClass
+
+  discard initCoreClasses()
+
+  monitorClass = newClass(superclasses = @[objectClass], name = "Monitor")
+  monitorClass.tags = @["Monitor", "Synchronization"]
+  monitorClass.isNimProxy = true
+  monitorClass.hardingType = "Monitor"
+
+  # Add new method (class method)
+  let newMethod = createCoreMethod("new")
+  newMethod.nativeImpl = cast[pointer](monitorNewImpl)
+  newMethod.hasInterpreterParam = true
+  addMethodToClass(monitorClass, "new", newMethod, isClassMethod = true)
+
+  # Add critical: method
+  let criticalMethod = createCoreMethod("critical:")
+  criticalMethod.nativeImpl = cast[pointer](monitorCriticalImpl)
+  criticalMethod.hasInterpreterParam = true
+  addMethodToClass(monitorClass, "critical:", criticalMethod)
+
+  # Add acquire method
+  let acquireMethod = createCoreMethod("acquire")
+  acquireMethod.nativeImpl = cast[pointer](monitorAcquireImpl)
+  acquireMethod.hasInterpreterParam = true
+  addMethodToClass(monitorClass, "acquire", acquireMethod)
+
+  # Add release method
+  let releaseMethod = createCoreMethod("release")
+  releaseMethod.nativeImpl = cast[pointer](monitorReleaseImpl)
+  releaseMethod.hasInterpreterParam = true
+  addMethodToClass(monitorClass, "release", releaseMethod)
+
+  return monitorClass
+
+# ============================================================================
+# SharedQueue - Thread-safe queue with blocking
+# ============================================================================
+
+type
+  SharedQueue* = ref object
+    items*: seq[NodeValue]       ## Queue storage
+    maxSize*: int                ## 0 = unlimited, >0 = capacity limit
+    waitingWriters*: Deque[Process]  ## Processes blocked on full queue
+    waitingReaders*: Deque[Process]  ## Processes blocked on empty queue
+
+  SharedQueueProxy* = ref object
+    queue*: SharedQueue
+
+var sharedQueueClass*: Class = nil
+var sharedQueueProxies: seq[SharedQueueProxy] = @[]
+
+proc newSharedQueue*(maxSize: int = 0): SharedQueue =
+  ## Create a new shared queue
+  result = SharedQueue(
+    items: @[],
+    maxSize: maxSize,
+    waitingWriters: initDeque[Process](),
+    waitingReaders: initDeque[Process]()
+  )
+
+proc nextPut*(queue: SharedQueue, item: NodeValue, process: Process, sched: Scheduler): bool =
+  ## Add item to queue. Returns true if added, false if blocked.
+  if queue.maxSize > 0 and queue.items.len >= queue.maxSize:
+    # Queue is full - block the writer
+    queue.waitingWriters.addLast(process)
+    sched.blockProcess(process, WaitCondition(kind: wkQueueFull, target: cast[pointer](queue)))
+    return false
+  # Add item
+  queue.items.add(item)
+  # Wake up a waiting reader if any
+  if queue.waitingReaders.len > 0:
+    let reader = queue.waitingReaders.popFirst()
+    sched.unblockProcess(reader)
+  return true
+
+proc next*(queue: SharedQueue, process: Process, sched: Scheduler): tuple[item: NodeValue, gotItem: bool] =
+  ## Remove and return item from queue. Blocks if empty.
+  if queue.items.len == 0:
+    # Queue is empty - block the reader
+    queue.waitingReaders.addLast(process)
+    sched.blockProcess(process, WaitCondition(kind: wkQueueEmpty, target: cast[pointer](queue)))
+    return (nilValue(), false)
+  # Remove first item
+  result.item = queue.items[0]
+  result.gotItem = true
+  queue.items.delete(0)
+  # Wake up a waiting writer if any
+  if queue.waitingWriters.len > 0:
+    let writer = queue.waitingWriters.popFirst()
+    sched.unblockProcess(writer)
+
+proc size*(queue: SharedQueue): int =
+  queue.items.len
+
+proc isEmpty*(queue: SharedQueue): bool =
+  queue.items.len == 0
+
+# SharedQueue proxy creation
+proc createSharedQueueProxy*(queue: SharedQueue): NodeValue =
+  let proxy = SharedQueueProxy(queue: queue)
+  sharedQueueProxies.add(proxy)
+  let obj = Instance(kind: ikObject, class: sharedQueueClass, slots: @[])
+  obj.isNimProxy = true
+  obj.nimValue = cast[pointer](proxy)
+  return obj.toValue()
+
+proc asSharedQueueProxy*(inst: Instance): SharedQueueProxy =
+  if inst.isNimProxy and inst.nimValue != nil:
+    return cast[SharedQueueProxy](inst.nimValue)
+  return nil
+
+# Native method implementations
+
+proc sharedQueueNewImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## SharedQueue new - create unbounded queue
+  ## SharedQueue new: maxSize - create bounded queue
+  let maxSize = if args.len > 0 and args[0].kind == vkInt: args[0].intVal else: 0
+  let queue = newSharedQueue(maxSize)
+  return createSharedQueueProxy(queue)
+
+proc sharedQueueNextPutImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## SharedQueue nextPut: item - add item to queue
+  if args.len < 1:
+    return nilValue()
+
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    return nilValue()
+
+  let proxy = self.asSharedQueueProxy()
+  if proxy == nil or proxy.queue == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  let currentProc = sched.currentProcess
+  if currentProc == nil:
+    return nilValue()
+
+  if proxy.queue.nextPut(args[0], currentProc, sched):
+    return args[0]  # Return the item added
+  return nilValue()  # Blocked
+
+proc sharedQueueNextImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## SharedQueue next - remove and return item (blocks if empty)
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    return nilValue()
+
+  let proxy = self.asSharedQueueProxy()
+  if proxy == nil or proxy.queue == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  let currentProc = sched.currentProcess
+  if currentProc == nil:
+    return nilValue()
+
+  let (item, gotItem) = proxy.queue.next(currentProc, sched)
+  if gotItem:
+    return item
+  return nilValue()  # Blocked
+
+proc sharedQueueSizeImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## SharedQueue size
+  let proxy = self.asSharedQueueProxy()
+  if proxy == nil or proxy.queue == nil:
+    return toValue(0)
+  return toValue(proxy.queue.size())
+
+proc sharedQueueIsEmptyImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## SharedQueue isEmpty
+  let proxy = self.asSharedQueueProxy()
+  if proxy == nil or proxy.queue == nil:
+    return trueValue
+  return toValue(proxy.queue.isEmpty())
+
+proc createSharedQueueClass*(): Class =
+  ## Create the SharedQueue class with native methods
+  if sharedQueueClass != nil:
+    return sharedQueueClass
+
+  discard initCoreClasses()
+
+  sharedQueueClass = newClass(superclasses = @[objectClass], name = "SharedQueue")
+  sharedQueueClass.tags = @["SharedQueue", "Synchronization"]
+  sharedQueueClass.isNimProxy = true
+  sharedQueueClass.hardingType = "SharedQueue"
+
+  # Add new method (class method) - unbounded
+  let newMethod = createCoreMethod("new")
+  newMethod.nativeImpl = cast[pointer](sharedQueueNewImpl)
+  newMethod.hasInterpreterParam = true
+  addMethodToClass(sharedQueueClass, "new", newMethod, isClassMethod = true)
+
+  # Add new: method (class method) - bounded
+  let newBoundedMethod = createCoreMethod("new:")
+  newBoundedMethod.nativeImpl = cast[pointer](sharedQueueNewImpl)
+  newBoundedMethod.hasInterpreterParam = true
+  addMethodToClass(sharedQueueClass, "new:", newBoundedMethod, isClassMethod = true)
+
+  # Add nextPut: method
+  let nextPutMethod = createCoreMethod("nextPut:")
+  nextPutMethod.nativeImpl = cast[pointer](sharedQueueNextPutImpl)
+  nextPutMethod.hasInterpreterParam = true
+  addMethodToClass(sharedQueueClass, "nextPut:", nextPutMethod)
+
+  # Add next method
+  let nextMethod = createCoreMethod("next")
+  nextMethod.nativeImpl = cast[pointer](sharedQueueNextImpl)
+  nextMethod.hasInterpreterParam = true
+  addMethodToClass(sharedQueueClass, "next", nextMethod)
+
+  # Add size method
+  let sizeMethod = createCoreMethod("size")
+  sizeMethod.nativeImpl = cast[pointer](sharedQueueSizeImpl)
+  sizeMethod.hasInterpreterParam = true
+  addMethodToClass(sharedQueueClass, "size", sizeMethod)
+
+  # Add isEmpty method
+  let isEmptyMethod = createCoreMethod("isEmpty")
+  isEmptyMethod.nativeImpl = cast[pointer](sharedQueueIsEmptyImpl)
+  isEmptyMethod.hasInterpreterParam = true
+  addMethodToClass(sharedQueueClass, "isEmpty", isEmptyMethod)
+
+  return sharedQueueClass
+
+# ============================================================================
+# Semaphore - Counting semaphore for resource control
+# ============================================================================
+
+type
+  Semaphore* = ref object
+    count*: int                  ## Current count
+    waitingQueue*: Deque[Process]  ## Processes waiting for signal
+
+  SemaphoreProxy* = ref object
+    semaphore*: Semaphore
+
+var semaphoreClass*: Class = nil
+var semaphoreProxies: seq[SemaphoreProxy] = @[]
+
+proc newSemaphore*(initialCount: int = 0): Semaphore =
+  ## Create a new semaphore with given initial count
+  result = Semaphore(
+    count: initialCount,
+    waitingQueue: initDeque[Process]()
+  )
+
+proc wait*(sem: Semaphore, process: Process, sched: Scheduler): bool =
+  ## Wait on semaphore (decrement). Returns true if acquired, false if blocked.
+  if sem.count > 0:
+    dec sem.count
+    return true
+  # Need to block
+  sem.waitingQueue.addLast(process)
+  sched.blockProcess(process, WaitCondition(kind: wkSemaphore, target: cast[pointer](sem)))
+  return false
+
+proc signal*(sem: Semaphore, sched: Scheduler) =
+  ## Signal semaphore (increment). Unblocks waiting process if any.
+  if sem.waitingQueue.len > 0:
+    # Unblock a waiting process
+    let process = sem.waitingQueue.popFirst()
+    sched.unblockProcess(process)
+  else:
+    # No waiters, just increment count
+    inc sem.count
+
+# Semaphore proxy creation
+proc createSemaphoreProxy*(sem: Semaphore): NodeValue =
+  let proxy = SemaphoreProxy(semaphore: sem)
+  semaphoreProxies.add(proxy)
+  let obj = Instance(kind: ikObject, class: semaphoreClass, slots: @[])
+  obj.isNimProxy = true
+  obj.nimValue = cast[pointer](proxy)
+  return obj.toValue()
+
+proc asSemaphoreProxy*(inst: Instance): SemaphoreProxy =
+  if inst.isNimProxy and inst.nimValue != nil:
+    return cast[SemaphoreProxy](inst.nimValue)
+  return nil
+
+# Native method implementations
+
+proc semaphoreNewImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Semaphore new - create semaphore with count 0
+  ## Semaphore new: n - create semaphore with count n
+  let initialCount = if args.len > 0 and args[0].kind == vkInt: args[0].intVal else: 0
+  let sem = newSemaphore(initialCount)
+  return createSemaphoreProxy(sem)
+
+proc semaphoreForMutualExclusionImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Semaphore forMutualExclusion - create binary semaphore (count 1)
+  let sem = newSemaphore(1)
+  return createSemaphoreProxy(sem)
+
+proc semaphoreWaitImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Semaphore wait - decrement, block if would go negative
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    return nilValue()
+
+  let proxy = self.asSemaphoreProxy()
+  if proxy == nil or proxy.semaphore == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  let currentProc = sched.currentProcess
+  if currentProc == nil:
+    return nilValue()
+
+  if proxy.semaphore.wait(currentProc, sched):
+    return trueValue  # Acquired immediately
+  return nilValue()  # Blocked
+
+proc semaphoreSignalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Semaphore signal - increment, unblock waiter if any
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    return nilValue()
+
+  let proxy = self.asSemaphoreProxy()
+  if proxy == nil or proxy.semaphore == nil:
+    return nilValue()
+
+  let sched = ctx.theScheduler
+  proxy.semaphore.signal(sched)
+  return trueValue
+
+proc semaphoreCountImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Semaphore count - return current count
+  let proxy = self.asSemaphoreProxy()
+  if proxy == nil or proxy.semaphore == nil:
+    return toValue(0)
+  return toValue(proxy.semaphore.count)
+
+proc createSemaphoreClass*(): Class =
+  ## Create the Semaphore class with native methods
+  if semaphoreClass != nil:
+    return semaphoreClass
+
+  discard initCoreClasses()
+
+  semaphoreClass = newClass(superclasses = @[objectClass], name = "Semaphore")
+  semaphoreClass.tags = @["Semaphore", "Synchronization"]
+  semaphoreClass.isNimProxy = true
+  semaphoreClass.hardingType = "Semaphore"
+
+  # Add new method (class method) - count 0
+  let newMethod = createCoreMethod("new")
+  newMethod.nativeImpl = cast[pointer](semaphoreNewImpl)
+  newMethod.hasInterpreterParam = true
+  addMethodToClass(semaphoreClass, "new", newMethod, isClassMethod = true)
+
+  # Add new: method (class method) - specific count
+  let newCountMethod = createCoreMethod("new:")
+  newCountMethod.nativeImpl = cast[pointer](semaphoreNewImpl)
+  newCountMethod.hasInterpreterParam = true
+  addMethodToClass(semaphoreClass, "new:", newCountMethod, isClassMethod = true)
+
+  # Add forMutualExclusion method (class method) - binary semaphore
+  let forMutualExclusionMethod = createCoreMethod("forMutualExclusion")
+  forMutualExclusionMethod.nativeImpl = cast[pointer](semaphoreForMutualExclusionImpl)
+  forMutualExclusionMethod.hasInterpreterParam = true
+  addMethodToClass(semaphoreClass, "forMutualExclusion", forMutualExclusionMethod, isClassMethod = true)
+
+  # Add wait method
+  let waitMethod = createCoreMethod("wait")
+  waitMethod.nativeImpl = cast[pointer](semaphoreWaitImpl)
+  waitMethod.hasInterpreterParam = true
+  addMethodToClass(semaphoreClass, "wait", waitMethod)
+
+  # Add signal method
+  let signalMethod = createCoreMethod("signal")
+  signalMethod.nativeImpl = cast[pointer](semaphoreSignalImpl)
+  signalMethod.hasInterpreterParam = true
+  addMethodToClass(semaphoreClass, "signal", signalMethod)
+
+  # Add count method
+  let countMethod = createCoreMethod("count")
+  countMethod.nativeImpl = cast[pointer](semaphoreCountImpl)
+  countMethod.hasInterpreterParam = true
+  addMethodToClass(semaphoreClass, "count", countMethod)
+
+  return semaphoreClass
