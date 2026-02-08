@@ -153,21 +153,21 @@ proc getInstanceWidget*(inst: Instance): GtkWidget =
   return nil
 
 ## Native method: show
-proc widgetShowImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetShowImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if self.isNimProxy and self.nimValue != nil:
     let widget = cast[GtkWidget](self.nimValue)
     gtkWidgetShow(widget)
   nilValue()
 
 ## Native method: hide
-proc widgetHideImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetHideImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if self.isNimProxy and self.nimValue != nil:
     let widget = cast[GtkWidget](self.nimValue)
     gtkWidgetHide(widget)
   nilValue()
 
 ## Native method: setSizeRequest:
-proc widgetSetSizeRequestImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetSetSizeRequestImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if args.len < 2:
     return nilValue()
 
@@ -180,7 +180,7 @@ proc widgetSetSizeRequestImpl*(interp: var Interpreter, self: Instance, args: se
   nilValue()
 
 ## Native method: addCssClass:
-proc widgetAddCssClassImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetAddCssClassImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   when not defined(gtk3):
     if args.len < 1 or args[0].kind != vkString:
       return nilValue()
@@ -193,7 +193,7 @@ proc widgetAddCssClassImpl*(interp: var Interpreter, self: Instance, args: seq[N
   nilValue()
 
 ## Native method: removeCssClass:
-proc widgetRemoveCssClassImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetRemoveCssClassImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   when not defined(gtk3):
     if args.len < 1 or args[0].kind != vkString:
       return nilValue()
@@ -206,7 +206,7 @@ proc widgetRemoveCssClassImpl*(interp: var Interpreter, self: Instance, args: se
   nilValue()
 
 ## Native method: connect:do:
-proc widgetConnectDoImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetConnectDoImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Connect a signal to a block
   ## Takes two arguments: signal name (string) and block to execute
   if args.len < 2:
@@ -251,7 +251,7 @@ proc widgetConnectDoImpl*(interp: var Interpreter, self: Instance, args: seq[Nod
   nilValue()
 
 ## Native method: setVexpand:
-proc widgetSetVexpandImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetSetVexpandImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Set vertical expand property (GTK4 only)
   when not defined(gtk3):
     if args.len < 1 or args[0].kind != vkBool:
@@ -265,7 +265,7 @@ proc widgetSetVexpandImpl*(interp: var Interpreter, self: Instance, args: seq[No
   nilValue()
 
 ## Native method: setHexpand:
-proc widgetSetHexpandImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetSetHexpandImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Set horizontal expand property (GTK4 only)
   when not defined(gtk3):
     if args.len < 1 or args[0].kind != vkBool:

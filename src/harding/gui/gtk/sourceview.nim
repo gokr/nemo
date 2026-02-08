@@ -32,7 +32,7 @@ proc initSourceView*() =
   debug("GtkSourceView ready")
 
 ## Native class method: new
-proc sourceViewNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc sourceViewNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Create a new source view with Harding syntax highlighting
   let widget = gtkSourceViewNew()
   let proxy = newGtkSourceViewProxy(widget, addr(interp))
@@ -87,7 +87,7 @@ proc sourceViewNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeV
   return obj.toValue()
 
 ## Native instance method: getText:
-proc sourceViewGetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc sourceViewGetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Get all text from the source view
   if not (self.isNimProxy and self.nimValue != nil):
     return nilValue()
@@ -109,7 +109,7 @@ proc sourceViewGetTextImpl*(interp: var Interpreter, self: Instance, args: seq[N
   result = toValue($text)
 
 ## Native instance method: setText:
-proc sourceViewSetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc sourceViewSetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Set text in the source view
   if args.len < 1 or args[0].kind != vkString:
     return nilValue()
@@ -130,7 +130,7 @@ proc sourceViewSetTextImpl*(interp: var Interpreter, self: Instance, args: seq[N
   nilValue()
 
 ## Native instance method: getSelectedText:
-proc sourceViewGetSelectedTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc sourceViewGetSelectedTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Get selected text or current line if no selection
   if not (self.isNimProxy and self.nimValue != nil):
     return nilValue()
@@ -160,7 +160,7 @@ proc sourceViewGetSelectedTextImpl*(interp: var Interpreter, self: Instance, arg
   result = toValue($text)
 
 ## Native instance method: showLineNumbers:
-proc sourceViewShowLineNumbersImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc sourceViewShowLineNumbersImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Show or hide line numbers
   if args.len < 1 or args[0].kind != vkBool:
     return nilValue()
@@ -173,7 +173,7 @@ proc sourceViewShowLineNumbersImpl*(interp: var Interpreter, self: Instance, arg
   return nilValue()
 
 ## Native instance method: setTabWidth:
-proc sourceViewSetTabWidthImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc sourceViewSetTabWidthImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Set tab width in spaces
   if args.len < 1 or args[0].kind != vkInt:
     return nilValue()
