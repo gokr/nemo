@@ -25,7 +25,7 @@ proc newGtkTextBufferProxy*(buffer: GtkTextBuffer, interp: ptr Interpreter): Gtk
                              destroyed: false)
 
 ## Native class method: new
-proc textBufferNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc textBufferNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Create a new text buffer
   let buffer = gtkTextBufferNew()
   let proxy = newGtkTextBufferProxy(buffer, addr(interp))
@@ -45,7 +45,7 @@ proc textBufferNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeV
   return obj.toValue()
 
 ## Native instance method: setText:
-proc textBufferSetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc textBufferSetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Set text in the buffer
   if args.len < 1 or args[0].kind != vkString:
     return nilValue()
@@ -64,7 +64,7 @@ proc textBufferSetTextImpl*(interp: var Interpreter, self: Instance, args: seq[N
   nilValue()
 
 ## Native instance method: getText:
-proc textBufferGetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc textBufferGetTextImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Get all text from the buffer
   if not (self.isNimProxy and self.nimValue != nil):
     return nilValue()
@@ -86,7 +86,7 @@ proc textBufferGetTextImpl*(interp: var Interpreter, self: Instance, args: seq[N
   result = toValue($text)
 
 ## Native instance method: insert:at:
-proc textBufferInsertAtImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc textBufferInsertAtImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Insert text at position
   if args.len < 2:
     return nilValue()
@@ -110,7 +110,7 @@ proc textBufferInsertAtImpl*(interp: var Interpreter, self: Instance, args: seq[
   nilValue()
 
 ## Native instance method: delete:to:
-proc textBufferDeleteToImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc textBufferDeleteToImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Delete text from start to end position
   if args.len < 2:
     return nilValue()

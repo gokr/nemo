@@ -40,7 +40,7 @@ proc getGtkApplication*(): GtkApplication =
   gtkApp
 
 ## Forward declaration for launcher new implementation
-proc launcherNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.cdecl.}
+proc launcherNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
 
 ## Initialize GTK and register all GTK classes
 proc initGtkBridge*(interp: var Interpreter) =
@@ -586,7 +586,7 @@ proc loadIdeToolFiles*(interp: var Interpreter, basePath: string = "") =
       debug("IDE tool file not found (optional): ", filepath)
 
 ## Launcher new implementation - separated to avoid closure capture issues
-proc launcherNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.cdecl.} =
+proc launcherNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   when not defined(gtk3):
     # Use GtkApplicationWindow if we have an app, otherwise fallback to regular window
     var window: GtkWindow

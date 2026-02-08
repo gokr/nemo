@@ -18,7 +18,7 @@ proc newGtkMenuProxy*(widget: GtkMenu, interp: ptr Interpreter): GtkMenuProxy =
   result = GtkMenuProxy()
 
 ## Native method: append:
-proc menuAppendImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuAppendImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Append an item to the menu
   if args.len < 1:
     return nilValue()
@@ -50,7 +50,7 @@ proc menuAppendImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValu
   nilValue()
 
 ## Native method: popup
-proc menuPopupAtPointerImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuPopupAtPointerImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Show the menu at the current pointer position
   if not (self.isNimProxy and self.nimValue != nil):
     return nilValue()

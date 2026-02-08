@@ -60,7 +60,7 @@ proc keyPressedCallback(controller: GtkEventControllerKey, keyval: cuint, keycod
   return 0  # Not handled, propagate
 
 ## Native method: installKeyController on GtkWidget
-proc widgetInstallKeyControllerImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetInstallKeyControllerImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Install a keyboard event controller on this widget
   ## This enables key-pressed signals to be handled
   when not defined(gtk3):
@@ -101,7 +101,7 @@ proc widgetInstallKeyControllerImpl*(interp: var Interpreter, self: Instance, ar
   nilValue()
 
 ## Native method: onKey:modifiers:do: on GtkWidget
-proc widgetOnKeyModifiersDoImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc widgetOnKeyModifiersDoImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Register a key handler for a specific key and modifier combination
   ## Args: keyval (int), modifiers (int), block
   if args.len < 3:
@@ -141,7 +141,7 @@ proc widgetOnKeyModifiersDoImpl*(interp: var Interpreter, self: Instance, args: 
   nilValue()
 
 ## Native class method to get GDK key constants
-proc eventControllerGetGdkKeyImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc eventControllerGetGdkKeyImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Get GDK key value by name
   ## Supported: "d", "p", "Return", "Escape", "Tab", "Control"
   if args.len < 1 or args[0].kind != vkString:
@@ -166,6 +166,6 @@ proc eventControllerGetGdkKeyImpl*(interp: var Interpreter, self: Instance, args
       return nilValue()
 
 ## Native class method to get GDK modifier mask for Control
-proc eventControllerGetControlMaskImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc eventControllerGetControlMaskImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Get GDK_CONTROL_MASK value
   return NodeValue(kind: vkInt, intVal: GDKCONTROLDMASK.int)

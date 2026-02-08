@@ -50,11 +50,11 @@ proc createGtkMenuBar*(interp: var Interpreter): NodeValue =
   return obj.toValue()
 
 ## Native method: new (class method)
-proc menuBarNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuBarNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   createGtkMenuBar(interp)
 
 ## Native method: append:
-proc menuBarAppendImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuBarAppendImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Append a menu item to the menu bar
   if args.len < 1:
     return nilValue()

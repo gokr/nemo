@@ -24,7 +24,7 @@ proc newGtkMenuItemProxy*(widget: GtkMenuItem, interp: ptr Interpreter): GtkMenu
   proxyTable[cast[GtkWidget](widget)] = result
 
 ## Native class method: new
-proc menuItemNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuItemNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Create a new menu item
   let widget = gtkMenuItemNew()
   discard newGtkMenuItemProxy(widget, addr(interp))
@@ -48,7 +48,7 @@ proc menuItemNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeVal
   return obj.toValue()
 
 ## Native class method: newLabel:
-proc menuItemNewLabelImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuItemNewLabelImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Create a new menu item with a label
   if args.len < 1 or args[0].kind != vkString:
     return nilValue()
@@ -75,7 +75,7 @@ proc menuItemNewLabelImpl*(interp: var Interpreter, self: Instance, args: seq[No
   return obj.toValue()
 
 ## Native instance method: activate:
-proc menuItemActivateImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc menuItemActivateImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Set activate handler - alias for connect:do: with "activate" (or "clicked" for GTK4)
   if args.len < 1:
     return nilValue()
