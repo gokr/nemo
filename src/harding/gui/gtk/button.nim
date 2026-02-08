@@ -57,11 +57,11 @@ proc createGtkButton*(interp: var Interpreter, label: string = ""): NodeValue =
   return obj.toValue()
 
 ## Native method: new (class method)
-proc buttonNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc buttonNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   createGtkButton(interp, "")
 
 ## Native method: label:
-proc buttonSetLabelImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc buttonSetLabelImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if args.len < 1 or args[0].kind != vkString:
     return nilValue()
 
@@ -73,7 +73,7 @@ proc buttonSetLabelImpl*(interp: var Interpreter, self: Instance, args: seq[Node
   nilValue()
 
 ## Native method: label
-proc buttonGetLabelImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc buttonGetLabelImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if self.isNimProxy and self.nimValue != nil:
     let button = cast[GtkButton](self.nimValue)
     let label = gtkButtonGetLabel(button)
@@ -82,7 +82,7 @@ proc buttonGetLabelImpl*(interp: var Interpreter, self: Instance, args: seq[Node
   nilValue()
 
 ## Native method: clicked:
-proc buttonClickedImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc buttonClickedImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Connect clicked signal to a block
   if args.len < 1 or args[0].kind != vkBlock:
     return nilValue()
