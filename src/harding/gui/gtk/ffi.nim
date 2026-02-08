@@ -7,7 +7,7 @@
 when defined(gtk3):
   {.passl: "-lgtk-3 -lgtksourceview-4 -lgio-2.0 -lgobject-2.0 -lglib-2.0".}
 else:
-  {.passl: "-lgtk-4 -lgtksourceview-5 -lgio-2.0 -lgobject-2.0 -lglib-2.0".-}
+  {.passl: "-lgtk-4 -L/usr/lib/x86_64-linux-gnu -l:libgtksourceview-5.so.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0".}
 
 ## Types
 type
@@ -28,6 +28,8 @@ type
   GtkTextView* = pointer
   GtkTextBuffer* = pointer
   GtkTextIter* = pointer
+  GtkTextMark* = pointer
+  GtkAdjustment* = pointer
   GtkScrolledWindow* = pointer
   GtkSourceView* = pointer
   GtkSourceBuffer* = pointer
@@ -36,6 +38,10 @@ type
   GtkEventController* = pointer
   GtkEventControllerKey* = pointer
   GtkPopover* = pointer
+  GtkPopoverMenu* = pointer
+  GMenuModel* = pointer
+  GMenu* = pointer
+  GMenuItem* = pointer
 
   GType* = csize_t
   GConnectFlags* = cint
@@ -98,6 +104,13 @@ proc gtkWidgetShow*(widget: GtkWidget) {.cdecl, importc: "gtk_widget_show".}
 proc gtkWidgetHide*(widget: GtkWidget) {.cdecl, importc: "gtk_widget_hide".}
 proc gtkWidgetShowAll*(widget: GtkWidget) {.cdecl, importc: "gtk_widget_show_all".}
 proc gtkWidgetSetSizeRequest*(widget: GtkWidget, width: cint, height: cint) {.cdecl, importc: "gtk_widget_set_size_request".}
+
+# GTK4 widget expand properties
+when not defined(gtk3):
+  proc gtkWidgetSetVexpand*(widget: GtkWidget, expand: cint) {.cdecl, importc: "gtk_widget_set_vexpand".}
+  proc gtkWidgetSetHexpand*(widget: GtkWidget, expand: cint) {.cdecl, importc: "gtk_widget_set_hexpand".}
+  proc gtkWidgetSetVexpandSet*(widget: GtkWidget, set: cint) {.cdecl, importc: "gtk_widget_set_vexpand_set".}
+  proc gtkWidgetSetHexpandSet*(widget: GtkWidget, set: cint) {.cdecl, importc: "gtk_widget_set_hexpand_set".}
 
 # GObject signals
 proc gSignalConnectData*(instance: GObject, detailedSignal: cstring, cHandler: GCallback,
@@ -182,17 +195,28 @@ proc gtkTextBufferGetStartIter*(buffer: GtkTextBuffer, iter: GtkTextIter) {.cdec
 proc gtkTextBufferGetEndIter*(buffer: GtkTextBuffer, iter: GtkTextIter) {.cdecl, importc: "gtk_text_buffer_get_end_iter".}
 proc gtkTextBufferInsertAtCursor*(buffer: GtkTextBuffer, text: cstring, len: cint = -1) {.cdecl, importc: "gtk_text_buffer_insert_at_cursor".}
 
+# TextBuffer selection and marks
+proc gtkTextBufferGetInsert*(buffer: GtkTextBuffer): GtkTextMark {.cdecl, importc: "gtk_text_buffer_get_insert".}
+proc gtkTextBufferGetSelectionBound*(buffer: GtkTextBuffer): GtkTextMark {.cdecl, importc: "gtk_text_buffer_get_selection_bound".}
+proc gtkTextBufferGetIterAtMark*(buffer: GtkTextBuffer, iter: GtkTextIter, mark: GtkTextMark) {.cdecl, importc: "gtk_text_buffer_get_iter_at_mark".}
+proc gtkTextBufferGetSelectionBounds*(buffer: GtkTextBuffer, start: GtkTextIter, endIter: GtkTextIter): cint {.cdecl, importc: "gtk_text_buffer_get_selection_bounds".}
+
 # GtkTextIter operations
 proc gtkTextIterGetOffset*(iter: GtkTextIter): cint {.cdecl, importc: "gtk_text_iter_get_offset".}
 proc gtkTextBufferGetIterAtOffset*(buffer: GtkTextBuffer, iter: GtkTextIter, charOffset: cint) {.cdecl, importc: "gtk_text_buffer_get_iter_at_offset".}
 proc gtkTextBufferDelete*(buffer: GtkTextBuffer, start: GtkTextIter, endIter: GtkTextIter) {.cdecl, importc: "gtk_text_buffer_delete".}
+proc gtkTextIterCompare*(lhs: GtkTextIter, rhs: GtkTextIter): cint {.cdecl, importc: "gtk_text_iter_compare".}
+proc gtkTextIterSetLineOffset*(iter: GtkTextIter, charOnLine: cint) {.cdecl, importc: "gtk_text_iter_set_line_offset".}
+proc gtkTextIterForwardToLineEnd*(iter: GtkTextIter): cint {.cdecl, importc: "gtk_text_iter_forward_to_line_end".}
 
 # ScrolledWindow (for wrapping TextView)
-proc gtkScrolledWindowNew*(): GtkScrolledWindow {.cdecl, importc: "gtk_scrolled_window_new".}
 when not defined(gtk3):
+  proc gtkScrolledWindowNew*(): GtkScrolledWindow {.cdecl, importc: "gtk_scrolled_window_new".}
   proc gtkScrolledWindowSetChild*(scrolled: GtkScrolledWindow, child: GtkWidget) {.cdecl, importc: "gtk_scrolled_window_set_child".}
   # GLib main loop iteration for GTK4 event processing
   proc gMainContextIteration*(context: pointer = nil, mayBlock: cint): cint {.cdecl, importc: "g_main_context_iteration".}
+else:
+  proc gtkScrolledWindowNew*(hadjustment: GtkAdjustment, vadjustment: GtkAdjustment): GtkScrolledWindow {.cdecl, importc: "gtk_scrolled_window_new".}
 
 # GtkSourceView - Source code editor widget
 when not defined(gtk3):
@@ -234,6 +258,38 @@ proc gtkSourceLanguageManagerSetSearchPath*(manager: GtkSourceLanguageManager, d
 when not defined(gtk3):
   proc gtkEventControllerKeyNew*(): GtkEventControllerKey {.cdecl, importc: "gtk_event_controller_key_new".}
   proc gtkWidgetAddController*(widget: GtkWidget, controller: GtkEventController) {.cdecl, importc: "gtk_widget_add_controller".}
+
+# GtkPopover and Menu (GTK4)
+when not defined(gtk3):
+  proc gtkPopoverMenuNewFromModel*(model: GMenuModel): GtkPopoverMenu {.cdecl, importc: "gtk_popover_menu_new_from_model".}
+  proc gtkPopoverSetParent*(popover: GtkPopover, parent: GtkWidget) {.cdecl, importc: "gtk_popover_set_parent".}
+  proc gtkPopoverPopup*(popover: GtkPopover) {.cdecl, importc: "gtk_popover_popup".}
+  proc gtkPopoverSetPointingTo*(popover: GtkPopover, rect: pointer) {.cdecl, importc: "gtk_popover_set_pointing_to".}
+  proc gtkPopoverSetHasArrow*(popover: GtkPopover, hasArrow: cint) {.cdecl, importc: "gtk_popover_set_has_arrow".}
+
+# GMenu (GTK4 menu model)
+when not defined(gtk3):
+  proc gMenuNew*(): GMenu {.cdecl, importc: "g_menu_new".}
+  proc gMenuAppendItem*(menu: GMenu, item: GMenuItem) {.cdecl, importc: "g_menu_append_item".}
+  proc gMenuAppend*(menu: GMenu, label: cstring, detailedAction: cstring) {.cdecl, importc: "g_menu_append".}
+  proc gMenuInsert*(menu: GMenu, position: cint, label: cstring, detailedAction: cstring) {.cdecl, importc: "g_menu_insert".}
+
+# GMenuItem
+when not defined(gtk3):
+  proc gMenuItemNew*(label: cstring, detailedAction: cstring): GMenuItem {.cdecl, importc: "g_menu_item_new".}
+  proc gMenuItemSetLabel*(item: GMenuItem, label: cstring) {.cdecl, importc: "g_menu_item_set_label".}
+  proc gMenuItemSetActionAndTargetValue*(item: GMenuItem, action: cstring, targetValue: pointer) {.cdecl, importc: "g_menu_item_set_action_and_target_value".}
+
+# Gesture for right-click context menu
+when not defined(gtk3):
+  type
+    GtkGesture* = pointer
+    GtkGestureClick* = pointer
+    GdkEventButton* = pointer
+
+  proc gtkGestureClickNew*(): GtkGestureClick {.cdecl, importc: "gtk_gesture_click_new".}
+  proc gtkGestureSingleSetButton*(gesture: GtkGestureClick, button: cuint) {.cdecl, importc: "gtk_gesture_single_set_button".}
+    # button: 0 = any, 1 = left, 2 = middle, 3 = right
 
 # Key constants for event handling
 const

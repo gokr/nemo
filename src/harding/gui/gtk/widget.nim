@@ -249,3 +249,31 @@ proc widgetConnectDoImpl*(interp: var Interpreter, self: Instance, args: seq[Nod
   debug("Connected signal '", signalStr, "' on widget")
 
   nilValue()
+
+## Native method: setVexpand:
+proc widgetSetVexpandImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Set vertical expand property (GTK4 only)
+  when not defined(gtk3):
+    if args.len < 1 or args[0].kind != vkBool:
+      return nilValue()
+
+    if self.isNimProxy and self.nimValue != nil:
+      let widget = cast[GtkWidget](self.nimValue)
+      gtkWidgetSetVexpand(widget, if args[0].boolVal: 1 else: 0)
+      debug("Set vexpand on widget")
+
+  nilValue()
+
+## Native method: setHexpand:
+proc widgetSetHexpandImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Set horizontal expand property (GTK4 only)
+  when not defined(gtk3):
+    if args.len < 1 or args[0].kind != vkBool:
+      return nilValue()
+
+    if self.isNimProxy and self.nimValue != nil:
+      let widget = cast[GtkWidget](self.nimValue)
+      gtkWidgetSetHexpand(widget, if args[0].boolVal: 1 else: 0)
+      debug("Set hexpand on widget")
+
+  nilValue()

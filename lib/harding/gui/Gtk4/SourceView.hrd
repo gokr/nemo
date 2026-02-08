@@ -1,0 +1,48 @@
+# GTK SourceView - Source code editor widget with syntax highlighting
+# Note: GtkSourceView class is registered by Nim bridge, we just add methods here
+# No derive: needed - we extend the existing class
+
+# Native methods (registered in Nim bridge):
+# Class methods:
+# - new (create new source view with Harding syntax highlighting)
+#
+# Instance methods:
+# - getText: (get all text, returns array [text])
+# - setText: (set text in the view)
+# - getSelectedText: (get selected text or current line)
+# - showLineNumbers: (show/hide line numbers)
+# - setTabWidth: (set tab width in spaces)
+
+# Convenience accessors
+GtkSourceView>>text [
+    # Get all text - native method returns the string directly
+    ^self getText: nil
+].
+
+GtkSourceView>>text: aString [
+    self setText: aString
+].
+
+GtkSourceView>>selectedText [
+    # Get selected text - native method returns the string directly
+    ^self getSelectedText: nil
+].
+
+# Signal conveniences
+GtkSourceView>>onChanged: aBlock [
+    # Connect to buffer's changed signal
+    | buf |
+    buf := self buffer.
+    buf notNil ifTrue: [ buf connect: "changed" do: aBlock ]
+].
+
+GtkSourceView>>onTextChanged: aBlock [
+    # Alias for onChanged:
+    self onChanged: aBlock
+].
+
+# Buffer access (inherits from GtkTextView)
+GtkSourceView>>buffer [
+    # Get buffer - native method returns it directly
+    ^self getBuffer: nil
+].

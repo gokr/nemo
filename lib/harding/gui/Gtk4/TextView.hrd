@@ -7,16 +7,15 @@
 # - new (create new text view)
 #
 # Instance methods:
-# - getBuffer: (get the text buffer, returns array [buffer])
+# - getBuffer: (get the text buffer, returns the buffer directly)
 # - setBuffer: (set the text buffer)
-# - getText: (get all text, returns array [text])
+# - getText: (get all text, returns the string directly)
 # - setText: (set text in the view)
 
 # Convenience accessors
 GtkTextView>>text [
-    | result |
-    self getText: result.
-    ^result first
+    # Get all text - native method returns the string directly
+    ^self getText: nil
 ].
 
 GtkTextView>>text: aString [
@@ -24,9 +23,8 @@ GtkTextView>>text: aString [
 ].
 
 GtkTextView>>buffer [
-    | result |
-    self getBuffer: result.
-    ^result first
+    # Get buffer - native method returns it directly
+    ^self getBuffer: nil
 ].
 
 # Signal conveniences
@@ -34,7 +32,7 @@ GtkTextView>>onChanged: aBlock [
     # Connect to buffer's changed signal
     | buf |
     buf := self buffer.
-    buf connect: "changed" do: aBlock
+    buf notNil ifTrue: [ buf connect: "changed" do: aBlock ]
 ].
 
 GtkTextView>>onTextChanged: aBlock [

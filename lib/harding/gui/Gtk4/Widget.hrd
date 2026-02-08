@@ -52,3 +52,14 @@ GtkWidget>>removeClass: aClassName [
     # Remove a CSS class
     self removeCssClass: aClassName
 ].
+
+# Expand properties (GTK4 only) - control how widget fills available space
+GtkWidget>>vexpand: aBoolean [
+    # Set vertical expand property
+    self setVexpand: aBoolean
+].
+
+GtkWidget>>hexpand: aBoolean [
+    # Set horizontal expand property
+    self setHexpand: aBoolean
+].

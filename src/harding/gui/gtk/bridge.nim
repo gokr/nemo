@@ -12,6 +12,7 @@ import ./widget
 import ./window
 import ./button
 import ./box
+import ./scrolledwindow
 when defined(gtk3):
   import ./menubar
   import ./menu
@@ -19,6 +20,8 @@ when defined(gtk3):
 import ./textview
 import ./textbuffer
 import ./label
+import ./sourceview
+import ./eventcontroller
 
 ## Forward declarations
 proc initGtkBridge*(interp: var Interpreter)
@@ -87,6 +90,16 @@ proc initGtkBridge*(interp: var Interpreter) =
   widgetConnectDoMethod.nativeImpl = cast[pointer](widgetConnectDoImpl)
   widgetConnectDoMethod.hasInterpreterParam = true
   addMethodToClass(widgetCls, "connect:do:", widgetConnectDoMethod)
+
+  let widgetSetVexpandMethod = createCoreMethod("setVexpand:")
+  widgetSetVexpandMethod.nativeImpl = cast[pointer](widgetSetVexpandImpl)
+  widgetSetVexpandMethod.hasInterpreterParam = true
+  addMethodToClass(widgetCls, "setVexpand:", widgetSetVexpandMethod)
+
+  let widgetSetHexpandMethod = createCoreMethod("setHexpand:")
+  widgetSetHexpandMethod.nativeImpl = cast[pointer](widgetSetHexpandImpl)
+  widgetSetHexpandMethod.hasInterpreterParam = true
+  addMethodToClass(widgetCls, "setHexpand:", widgetSetHexpandMethod)
 
   interp.globals[]["GtkWidget"] = widgetCls.toValue()
   debug("Registered GtkWidget class")
@@ -214,6 +227,27 @@ proc initGtkBridge*(interp: var Interpreter) =
   interp.globals[]["GtkBox"] = boxCls.toValue()
   debug("Registered GtkBox class")
 
+  # Create ScrolledWindow class (for scrollable containers)
+  let scrolledWindowCls = newClass(superclasses = @[widgetCls], name = "GtkScrolledWindow")
+  scrolledWindowCls.tags = @["GTK", "ScrolledWindow", "Container"]
+  scrolledWindowCls.isNimProxy = true
+  scrolledWindowCls.hardingType = "GtkScrolledWindow"
+
+  # Add ScrolledWindow class methods
+  let scrolledWindowNewMethod = createCoreMethod("new")
+  scrolledWindowNewMethod.nativeImpl = cast[pointer](scrolledWindowNewImpl)
+  scrolledWindowNewMethod.hasInterpreterParam = true
+  addMethodToClass(scrolledWindowCls, "new", scrolledWindowNewMethod, isClassMethod = true)
+
+  # Add ScrolledWindow instance methods
+  let scrolledWindowSetChildMethod = createCoreMethod("setChild:")
+  scrolledWindowSetChildMethod.nativeImpl = cast[pointer](scrolledWindowSetChildImpl)
+  scrolledWindowSetChildMethod.hasInterpreterParam = true
+  addMethodToClass(scrolledWindowCls, "setChild:", scrolledWindowSetChildMethod)
+
+  interp.globals[]["GtkScrolledWindow"] = scrolledWindowCls.toValue()
+  debug("Registered GtkScrolledWindow class")
+
   # Create Label class (for display widgets)
   let labelCls = newClass(superclasses = @[widgetCls], name = "GtkLabel")
   labelCls.tags = @["GTK", "Label", "Display"]
@@ -277,6 +311,78 @@ proc initGtkBridge*(interp: var Interpreter) =
 
   interp.globals[]["GtkTextView"] = textViewCls.toValue()
   debug("Registered GtkTextView class")
+
+  # Create GtkSourceView class (for source code editing with syntax highlighting)
+  let sourceViewCls = newClass(superclasses = @[widgetCls], name = "GtkSourceView")
+  sourceViewCls.tags = @["GTK", "SourceView", "Editor"]
+  sourceViewCls.isNimProxy = true
+  sourceViewCls.hardingType = "GtkSourceView"
+
+  # Add SourceView class methods
+  let sourceViewNewMethod = createCoreMethod("new")
+  sourceViewNewMethod.nativeImpl = cast[pointer](sourceViewNewImpl)
+  sourceViewNewMethod.hasInterpreterParam = true
+  addMethodToClass(sourceViewCls, "new", sourceViewNewMethod, isClassMethod = true)
+
+  # Add SourceView instance methods
+  let sourceViewGetTextMethod = createCoreMethod("getText:")
+  sourceViewGetTextMethod.nativeImpl = cast[pointer](sourceViewGetTextImpl)
+  sourceViewGetTextMethod.hasInterpreterParam = true
+  addMethodToClass(sourceViewCls, "getText:", sourceViewGetTextMethod)
+
+  let sourceViewSetTextMethod = createCoreMethod("setText:")
+  sourceViewSetTextMethod.nativeImpl = cast[pointer](sourceViewSetTextImpl)
+  sourceViewSetTextMethod.hasInterpreterParam = true
+  addMethodToClass(sourceViewCls, "setText:", sourceViewSetTextMethod)
+
+  let sourceViewGetSelectedTextMethod = createCoreMethod("getSelectedText:")
+  sourceViewGetSelectedTextMethod.nativeImpl = cast[pointer](sourceViewGetSelectedTextImpl)
+  sourceViewGetSelectedTextMethod.hasInterpreterParam = true
+  addMethodToClass(sourceViewCls, "getSelectedText:", sourceViewGetSelectedTextMethod)
+
+  let sourceViewShowLineNumbersMethod = createCoreMethod("showLineNumbers:")
+  sourceViewShowLineNumbersMethod.nativeImpl = cast[pointer](sourceViewShowLineNumbersImpl)
+  sourceViewShowLineNumbersMethod.hasInterpreterParam = true
+  addMethodToClass(sourceViewCls, "showLineNumbers:", sourceViewShowLineNumbersMethod)
+
+  let sourceViewSetTabWidthMethod = createCoreMethod("setTabWidth:")
+  sourceViewSetTabWidthMethod.nativeImpl = cast[pointer](sourceViewSetTabWidthImpl)
+  sourceViewSetTabWidthMethod.hasInterpreterParam = true
+  addMethodToClass(sourceViewCls, "setTabWidth:", sourceViewSetTabWidthMethod)
+
+  interp.globals[]["GtkSourceView"] = sourceViewCls.toValue()
+  debug("Registered GtkSourceView class")
+
+  # Create GtkEventController class for keyboard handling
+  let eventControllerCls = newClass(superclasses = @[objectClass], name = "GtkEventController")
+  eventControllerCls.tags = @["GTK", "EventController"]
+  eventControllerCls.isNimProxy = true
+  eventControllerCls.hardingType = "GtkEventController"
+
+  # Add EventController class methods for GDK key constants
+  let eventControllerGetGdkKeyMethod = createCoreMethod("getGdkKey:")
+  eventControllerGetGdkKeyMethod.nativeImpl = cast[pointer](eventControllerGetGdkKeyImpl)
+  eventControllerGetGdkKeyMethod.hasInterpreterParam = true
+  addMethodToClass(eventControllerCls, "getGdkKey:", eventControllerGetGdkKeyMethod, isClassMethod = true)
+
+  let eventControllerGetControlMaskMethod = createCoreMethod("getControlMask")
+  eventControllerGetControlMaskMethod.nativeImpl = cast[pointer](eventControllerGetControlMaskImpl)
+  eventControllerGetControlMaskMethod.hasInterpreterParam = true
+  addMethodToClass(eventControllerCls, "getControlMask", eventControllerGetControlMaskMethod, isClassMethod = true)
+
+  # Add EventController methods to GtkWidget class (since controllers are installed on widgets)
+  let widgetInstallKeyControllerMethod = createCoreMethod("installKeyController")
+  widgetInstallKeyControllerMethod.nativeImpl = cast[pointer](widgetInstallKeyControllerImpl)
+  widgetInstallKeyControllerMethod.hasInterpreterParam = true
+  addMethodToClass(widgetCls, "installKeyController", widgetInstallKeyControllerMethod)
+
+  let widgetOnKeyModifiersDoMethod = createCoreMethod("onKey:modifiers:do:")
+  widgetOnKeyModifiersDoMethod.nativeImpl = cast[pointer](widgetOnKeyModifiersDoImpl)
+  widgetOnKeyModifiersDoMethod.hasInterpreterParam = true
+  addMethodToClass(widgetCls, "onKey:modifiers:do:", widgetOnKeyModifiersDoMethod)
+
+  interp.globals[]["GtkEventController"] = eventControllerCls.toValue()
+  debug("Registered GtkEventController class")
 
   # Create TextBuffer class (for TextView text storage)
   let textBufferCls = newClass(superclasses = @[objectClass], name = "GtkTextBuffer")
@@ -411,9 +517,12 @@ proc loadGtkWrapperFiles*(interp: var Interpreter, basePath: string = "") =
     "Window.hrd",
     "Button.hrd",
     "Box.hrd",
+    "ScrolledWindow.hrd",
     "Label.hrd",
     "TextView.hrd",
-    "TextBuffer.hrd"
+    "TextBuffer.hrd",
+    "SourceView.hrd",
+    "EventController.hrd"
   ]
 
   when defined(gtk3):

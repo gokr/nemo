@@ -1,0 +1,34 @@
+# GTK EventController - Keyboard and event handling for GTK4
+# Note: GtkEventController class is registered by Nim bridge
+
+# Native class methods (registered in Nim bridge):
+# - getGdkKey: (get GDK key value by name)
+# - getControlMask (get GDK_CONTROL_MASK value)
+
+# Native instance methods on GtkWidget:
+# - installKeyController (install keyboard event controller)
+# - onKey:modifiers:do: (register key handler)
+
+# Convenience methods
+GtkEventController class>>key: keyName [
+    # Get GDK key value for named key
+    ^self getGdkKey: keyName
+].
+
+GtkEventController class>>controlMask [
+    # Get GDK_CONTROL_MASK modifier
+    ^self getControlMask
+].
+
+GtkWidget>>onControlKey: keyName do: aBlock [
+    # Register a handler for Control+key combination
+    | keyVal controlMask |
+    keyVal := GtkEventController key: keyName.
+    controlMask := GtkEventController controlMask.
+    self onKey: keyVal modifiers: controlMask do: aBlock
+].
+
+GtkWidget>>enableKeyboardShortcuts [
+    # Enable keyboard shortcuts on this widget
+    self installKeyController
+].
