@@ -68,6 +68,12 @@ proc tableIncludesKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc tableRemoveKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc tableAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc tableAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+# Library primitives (Instance-based)
+proc libraryNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc libraryAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc libraryAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc libraryKeysImpl*(self: Instance, args: seq[NodeValue]): NodeValue
+proc libraryIncludesKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 # String primitives (Instance-based)
 proc instStringConcatImpl*(self: Instance, args: seq[NodeValue]): NodeValue
 proc instStringSizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue
@@ -642,6 +648,35 @@ proc initCoreClasses*(): Class =
 
     addGlobal("Table", NodeValue(kind: vkClass, classVal: tableClass))
 
+  # Create Library class (composition: ikObject with bindings Table slot)
+  if libraryClass == nil:
+    libraryClass = newClass(superclasses = @[objectClass],
+                            slotNames = @["bindings", "imports", "name"],
+                            name = "Library")
+    libraryClass.tags = @["Library", "Namespace"]
+
+    let libAtMethod = createCoreMethod("at:")
+    libAtMethod.nativeImpl = cast[pointer](libraryAtImpl)
+    addMethodToClass(libraryClass, "at:", libAtMethod)
+
+    let libAtPutMethod = createCoreMethod("at:put:")
+    libAtPutMethod.nativeImpl = cast[pointer](libraryAtPutImpl)
+    addMethodToClass(libraryClass, "at:put:", libAtPutMethod)
+
+    let libKeysMethod = createCoreMethod("keys")
+    libKeysMethod.nativeImpl = cast[pointer](libraryKeysImpl)
+    addMethodToClass(libraryClass, "keys", libKeysMethod)
+
+    let libIncludesKeyMethod = createCoreMethod("includesKey:")
+    libIncludesKeyMethod.nativeImpl = cast[pointer](libraryIncludesKeyImpl)
+    addMethodToClass(libraryClass, "includesKey:", libIncludesKeyMethod)
+
+    let libNewMethod = createCoreMethod("new")
+    libNewMethod.nativeImpl = cast[pointer](libraryNewImpl)
+    addMethodToClass(libraryClass, "new", libNewMethod, isClassMethod = true)
+
+    addGlobal("Library", NodeValue(kind: vkClass, classVal: libraryClass))
+
   # Create Block class
   if blockClass == nil:
     blockClass = newClass(superclasses = @[objectClass], name = "Block")
@@ -665,6 +700,7 @@ proc initCoreClasses*(): Class =
   types.tableClass = tableClass
   types.blockClass = blockClass
   types.booleanClass = booleanClass
+  types.libraryClass = libraryClass
 
   # Register primitive methods for declarative primitive syntax
   # These are the internal primitive selectors that can be called via standard lookup
@@ -1111,13 +1147,15 @@ proc atCollectionPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
   return nilValue()
 
 proc instStringConcatImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## String concatenation
-  if self.kind == ikString and args.len > 0:
-    let other = if args[0].kind == vkString: args[0].strVal
-                elif args[0].kind == vkInstance and args[0].instVal.kind == ikString: args[0].instVal.strVal
-                else: ""
-    return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal & other))
-  return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
+  ## String concatenation with auto-conversion using asString
+  if self.kind == ikString:
+    if args.len > 0:
+      # Convert argument to string using toString (which handles all types)
+      let otherStr = args[0].toString()
+      return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal & otherStr))
+    else:
+      return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, self.strVal))
+  return NodeValue(kind: vkInstance, instVal: newStringInstance(self.class, ""))
 
 proc instStringSizeImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
   ## String size
@@ -1343,6 +1381,55 @@ proc tableAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
 proc tableAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
   ## Set table value by key
   return atCollectionPutImpl(self, args)
+
+# Library primitives (composition: delegates to bindings table in slot 0)
+
+proc getLibraryBindings*(self: Instance): Instance =
+  ## Get the bindings Table instance from a Library's slot 0
+  if self.kind == ikObject and self.slots.len > 0:
+    let bindingsVal = self.slots[0]
+    if bindingsVal.kind == vkInstance and bindingsVal.instVal != nil and bindingsVal.instVal.kind == ikTable:
+      return bindingsVal.instVal
+  return nil
+
+proc libraryNewImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Create a new Library instance with empty bindings table and imports array
+  var inst = newInstance(libraryClass)
+  inst.slots[0] = newTableInstance(tableClass, initTable[NodeValue, NodeValue]()).toValue()
+  inst.slots[1] = newArrayInstance(arrayClass, @[]).toValue()
+  inst.slots[2] = toValue("")
+  return inst.toValue()
+
+proc libraryAtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Library at: - delegate to bindings table
+  let bindings = getLibraryBindings(self)
+  if bindings != nil and args.len > 0:
+    return getTableValue(bindings, args[0])
+  return nilValue()
+
+proc libraryAtPutImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Library at:put: - delegate to bindings table
+  let bindings = getLibraryBindings(self)
+  if bindings != nil and args.len >= 2:
+    setTableValue(bindings, args[0], args[1])
+  return self.toValue()
+
+proc libraryKeysImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Library keys - delegate to bindings table
+  let bindings = getLibraryBindings(self)
+  if bindings != nil:
+    var elements: seq[NodeValue] = @[]
+    for key in bindings.entries.keys():
+      elements.add(key)
+    return newArrayInstance(arrayClass, elements).toValue()
+  return newArrayInstance(arrayClass, @[]).toValue()
+
+proc libraryIncludesKeyImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Library includesKey: - delegate to bindings table
+  let bindings = getLibraryBindings(self)
+  if bindings != nil and args.len > 0:
+    return toValue(args[0] in bindings.entries)
+  return toValue(false)
 
 # ============================================================================
 # Class method helpers
