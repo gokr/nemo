@@ -1229,6 +1229,53 @@ proc primitiveAsSelfDoImpl(interp: var Interpreter, self: Instance, args: seq[No
     # Restore original receiver
     interp.currentReceiver = savedReceiver
 
+proc primitiveOnDoImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Install exception handler and execute block
+  ## Called from Block>>on:do: - usage: block on: Exception do: handlerBlock
+  if args.len < 2:
+    return nilValue()
+
+  # Get exception class
+  let exceptionClass = if args[0].kind == vkClass: args[0].classVal
+                       else: nil
+
+  # Get handler block
+  let handlerBlock = if args[1].kind == vkBlock: args[1].blockVal
+                     else: nil
+
+  if exceptionClass == nil or handlerBlock == nil:
+    return nilValue()
+
+  # For now, just evaluate the block without exception handling
+  # Full exception handling requires more complex control flow changes
+  debug("primitiveOnDo: called but not fully implemented - evaluating block directly")
+
+  # Get the block to execute (self is a Block instance here)
+  if self.kind == ikObject and self.class == blockClass and self.nimValue != nil:
+    let blockNode = cast[ptr BlockNode](self.nimValue)[]
+    return invokeBlock(interp, blockNode, @[])
+
+  return nilValue()
+
+proc primitiveSignalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Signal/raise an exception
+  ## Called from Exception>>signal - usage: Exception signal: "message"
+  #
+  # For now, this is a placeholder - full exception handling requires:
+  # 1. Traversing the exception handler stack
+  # 2. Matching exception types
+  # 3. Unwinding the call stack
+  # 4. Resuming in the handler block
+
+  let message = if args.len > 0 and args[0].kind == vkString: args[0].strVal
+                else: "Exception"
+
+  debug("primitiveSignal: called - raising exception: ", message)
+
+  # For now, just print the error and return
+  stderr.writeLine("Exception: ", message)
+  return nilValue()
+
 proc primitiveHasPropertyImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Check if object has a slots property (not inherited)
   if args.len < 1:
@@ -1502,6 +1549,19 @@ proc initGlobals*(interp: var Interpreter) =
   classNewMethod.hasInterpreterParam = true
   objectCls.classMethods["new"] = classNewMethod
   objectCls.allClassMethods["new"] = classNewMethod
+
+  # Register Object class>>newInstance - creates instance without calling initialize
+  proc objectClassNewInstanceImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
+    # self.class is the class receiving the message
+    if self != nil and self.class != nil:
+      return newInstance(self.class).toValue()
+    return newInstance(objectClass).toValue()
+
+  let classNewInstanceMethod = createCoreMethod("newInstance")
+  classNewInstanceMethod.nativeImpl = cast[pointer](objectClassNewInstanceImpl)
+  classNewInstanceMethod.hasInterpreterParam = true
+  objectCls.classMethods["newInstance"] = classNewInstanceMethod
+  objectCls.allClassMethods["newInstance"] = classNewInstanceMethod
 
   # Add perform: methods to Object class (for primitive dispatch from Smalltalk)
   let objPerformMethod = createCoreMethod("perform:")
@@ -2014,6 +2074,13 @@ proc initGlobals*(interp: var Interpreter) =
   primitiveValueWithThreeArgsMethod.hasInterpreterParam = true
   blockCls.methods["primitiveValue:value:value:"] = primitiveValueWithThreeArgsMethod
   blockCls.allMethods["primitiveValue:value:value:"] = primitiveValueWithThreeArgsMethod
+
+  # Register Block exception handling method (primitiveOnDo: for on:do: support)
+  let primitiveOnDoMethod = createCoreMethod("primitiveOnDo:")
+  primitiveOnDoMethod.nativeImpl = cast[pointer](primitiveOnDoImpl)
+  primitiveOnDoMethod.hasInterpreterParam = true
+  blockCls.methods["primitiveOnDo:"] = primitiveOnDoMethod
+  blockCls.allMethods["primitiveOnDo:"] = primitiveOnDoMethod
 
   # Create UndefinedObject class (derives from Object) - the class of nil
   let undefinedObjCls = newClass(superclasses = @[objectCls], name = "UndefinedObject")
@@ -3085,7 +3152,131 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
 
         return true
       else:
-        raise newException(ValueError, "Class method not found: " & frame.selector)
+        # Class method not found - try instance methods on the Class class
+        # This allows methods like asSelfDo: to work on class receivers
+        let classReceiver = Instance(kind: ikObject, class: cls, slots: @[], isNimProxy: false, nimValue: nil)
+        let instanceLookup = lookupMethod(interp, classReceiver, frame.selector)
+
+        if instanceLookup.found:
+          let currentMethod = instanceLookup.currentMethod
+          debug("VM: Found instance method '", frame.selector, "' on Class class")
+
+          # Handle native implementations
+          if currentMethod.nativeImpl != nil:
+            let savedReceiver = interp.currentReceiver
+            interp.currentReceiver = classReceiver
+            try:
+              var resultVal: NodeValue
+              if currentMethod.hasInterpreterParam:
+                type NativeProcWithInterp = proc(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
+                let nativeProc = cast[NativeProcWithInterp](currentMethod.nativeImpl)
+                resultVal = nativeProc(interp, classReceiver, args)
+              else:
+                type NativeProc = proc(self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
+                let nativeProc = cast[NativeProc](currentMethod.nativeImpl)
+                resultVal = nativeProc(classReceiver, args)
+              interp.pushValue(resultVal)
+            finally:
+              interp.currentReceiver = savedReceiver
+            return true
+
+          # Interpreted method - create activation
+          if currentMethod.parameters.len != args.len:
+            raise newException(ValueError,
+              "Wrong number of arguments: expected " & $currentMethod.parameters.len &
+              ", got " & $args.len)
+
+          let activation = newActivation(currentMethod, classReceiver, interp.currentActivation, instanceLookup.definingClass)
+
+          for i in 0..<currentMethod.parameters.len:
+            activation.locals[currentMethod.parameters[i]] = args[i]
+
+          for tempName in currentMethod.temporaries:
+            if tempName notin activation.locals:
+              activation.locals[tempName] = nilValue()
+
+          let savedReceiver = interp.currentReceiver
+          interp.activationStack.add(activation)
+          interp.currentActivation = activation
+          interp.currentReceiver = classReceiver
+
+          if currentMethod.isMethod:
+            currentMethod.homeActivation = activation
+
+          interp.pushWorkFrame(newPopActivationFrame(savedReceiver, isBlock = false, evalStackDepth = interp.evalStack.len))
+
+          if currentMethod.body.len > 0:
+            for i in countdown(currentMethod.body.len - 1, 0):
+              if i < currentMethod.body.len - 1:
+                interp.pushWorkFrame(WorkFrame(kind: wfAfterArg, pendingSelector: "discard"))
+              interp.pushWorkFrame(newEvalFrame(currentMethod.body[i]))
+          else:
+            interp.pushValue(nilValue())
+
+          return true
+        else:
+          # Instance method not found - try class methods on the class itself
+          # This allows class methods like selector:put: to work when called via self in blocks
+          let classMethodLookup = lookupClassMethod(cls, frame.selector)
+          if classMethodLookup.found:
+            let currentMethod = classMethodLookup.currentMethod
+            debug("VM: Found class method '", frame.selector, "' on class ", cls.name)
+
+            # Handle native implementations
+            if currentMethod.nativeImpl != nil:
+              let savedReceiver = interp.currentReceiver
+              interp.currentReceiver = classReceiver
+              try:
+                var resultVal: NodeValue
+                if currentMethod.hasInterpreterParam:
+                  type NativeProcWithInterp = proc(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
+                  let nativeProc = cast[NativeProcWithInterp](currentMethod.nativeImpl)
+                  resultVal = nativeProc(interp, classReceiver, args)
+                else:
+                  type ClassMethodProc = proc(self: Class, args: seq[NodeValue]): NodeValue {.nimcall.}
+                  let nativeProc = cast[ClassMethodProc](currentMethod.nativeImpl)
+                  resultVal = nativeProc(cls, args)
+                interp.pushValue(resultVal)
+              finally:
+                interp.currentReceiver = savedReceiver
+              return true
+
+            # Interpreted class method - create activation with class wrapper as receiver
+            if currentMethod.parameters.len != args.len:
+              raise newException(ValueError,
+                "Wrong number of arguments: expected " & $currentMethod.parameters.len &
+                ", got " & $args.len)
+
+            let activation = newActivation(currentMethod, classReceiver, interp.currentActivation, classMethodLookup.definingClass, isClassMethod = true)
+
+            for i in 0..<currentMethod.parameters.len:
+              activation.locals[currentMethod.parameters[i]] = args[i]
+
+            for tempName in currentMethod.temporaries:
+              if tempName notin activation.locals:
+                activation.locals[tempName] = nilValue()
+
+            let savedReceiver = interp.currentReceiver
+            interp.activationStack.add(activation)
+            interp.currentActivation = activation
+            interp.currentReceiver = classReceiver
+
+            if currentMethod.isMethod:
+              currentMethod.homeActivation = activation
+
+            interp.pushWorkFrame(newPopActivationFrame(savedReceiver, isBlock = false, evalStackDepth = interp.evalStack.len))
+
+            if currentMethod.body.len > 0:
+              for i in countdown(currentMethod.body.len - 1, 0):
+                if i < currentMethod.body.len - 1:
+                  interp.pushWorkFrame(WorkFrame(kind: wfAfterArg, pendingSelector: "discard"))
+                interp.pushWorkFrame(newEvalFrame(currentMethod.body[i]))
+            else:
+              interp.pushValue(nilValue())
+
+            return true
+          else:
+            raise newException(ValueError, "Method not found: " & frame.selector)
     of vkBlock:
       # Create Block instance with the BlockNode stored in nimValue
       var blockInst: Instance
