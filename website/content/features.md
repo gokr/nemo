@@ -97,7 +97,7 @@ MyClass := Object derive: #(slot1 slot2)
     ]
 ```
 
-**Comprehensive Constructor:**
+**Class Construction:**
 
 For complete control with selective getters and setters:
 
@@ -108,10 +108,10 @@ MyClass := Object derive: #(slot1 slot2)
     slots: #(extraSlot)
     getters: #(slot1 extraSlot)
     setters: #(slot2)
-    methods: #{
-        #method1 -> [:arg | ...],
-        #method2 -> [:a :b | ... ]
-    }
+    methods: [
+        self>>method1 [ ...]
+        self>>method2 [ ...]
+    ]
 ```
 
 **Mixin Class:**
