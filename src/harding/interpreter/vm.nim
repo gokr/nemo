@@ -41,6 +41,7 @@ proc evalWithVM*(interp: var Interpreter, node: Node): NodeValue
 proc doit*(interp: var Interpreter, source: string, dumpAst = false): (NodeValue, string)
 proc evalStatements*(interp: var Interpreter, source: string): (seq[NodeValue], string)
 proc installGlobalTableMethods*(globalTableClass: Class)
+proc installLibraryMethods*()
 proc initHardingGlobal*(interp: var Interpreter)
 
 # ============================================================================
@@ -407,7 +408,16 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
     # walking up the chain. This prevents blocks from inadvertently capturing variables
     # from the calling method's local scope, which would break lexical scoping.
     if activation.currentMethod != nil and activation.currentMethod.isMethod == false:
-      # This is a block - check globals first
+      # This is a block - check imported libraries then globals first
+      for i in countdown(interp.importedLibraries.high, 0):
+        let lib = interp.importedLibraries[i]
+        if lib != nil and lib.kind == ikObject and lib.class == libraryClass:
+          let bindingsVal = lib.slots[0]
+          if bindingsVal.kind == vkInstance and bindingsVal.instVal != nil and bindingsVal.instVal.kind == ikTable:
+            let key = toValue(name)
+            if key in bindingsVal.instVal.entries:
+              debug("Found variable in imported library (in block): ", name)
+              return (true, bindingsVal.instVal.entries[key])
       if name in interp.globals[]:
         debug("Found variable in globals (in block): ", name, " = ", interp.globals[][name].toString())
         let val = interp.globals[][name]
@@ -436,6 +446,17 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
       return (true, activation.locals[name])
 
     activation = activation.sender
+
+  # Check imported libraries (most recently imported first)
+  for i in countdown(interp.importedLibraries.high, 0):
+    let lib = interp.importedLibraries[i]
+    if lib != nil and lib.kind == ikObject and lib.class == libraryClass:
+      let bindingsVal = lib.slots[0]
+      if bindingsVal.kind == vkInstance and bindingsVal.instVal != nil and bindingsVal.instVal.kind == ikTable:
+        let key = toValue(name)
+        if key in bindingsVal.instVal.entries:
+          debug("Found variable in imported library: ", name)
+          return (true, bindingsVal.instVal.entries[key])
 
   # Check globals
   if name in interp.globals[]:
@@ -2018,6 +2039,7 @@ proc initGlobals*(interp: var Interpreter) =
   interp.globals[]["False"] = falseCls.toValue()
   interp.globals[]["Block"] = blockCls.toValue()
   interp.globals[]["UndefinedObject"] = undefinedObjCls.toValue()
+  interp.globals[]["Library"] = libraryClass.toValue()
 
   # Add primitive values
   interp.globals[]["true"] = NodeValue(kind: vkBool, boolVal: true)
@@ -2043,6 +2065,12 @@ proc initGlobals*(interp: var Interpreter) =
   protectGlobal("false")
   protectGlobal("nil")
 
+  # Protect Library global
+  protectGlobal("Library")
+
+  # Install Library methods that need interpreter access
+  installLibraryMethods()
+
   # Initialize the Harding global - an instance of GlobalTable that wraps global namespace
   # Note: Process and Scheduler classes are initialized by initProcessorGlobal
   # which is called by newSchedulerContext in the scheduler module
@@ -2052,52 +2080,26 @@ proc initGlobals*(interp: var Interpreter) =
 proc loadStdlib*(interp: var Interpreter, bootstrapFile: string = "") =
   ## Load core library files
   ## If bootstrapFile is provided and exists, it will be loaded and should use
-  ## Harding load: to load other files. Otherwise, uses the default hardcoded list.
+  ## Harding load: to load other files. Otherwise, uses the default Bootstrap.hrd.
 
-  # If bootstrap file is specified and exists, use it
-  if bootstrapFile.len > 0 and fileExists(bootstrapFile):
-    debug("Loading bootstrap file: ", bootstrapFile)
-    let source = readFile(bootstrapFile)
+  # Use lib/core/Bootstrap.hrd as default if no bootstrapFile provided
+  let actualBootstrapFile = if bootstrapFile.len > 0 and fileExists(bootstrapFile):
+                             bootstrapFile
+                           else:
+                             interp.hardingHome / "lib" / "core" / "Bootstrap.hrd"
+
+  if fileExists(actualBootstrapFile):
+    debug("Loading bootstrap file: ", actualBootstrapFile)
+    let source = readFile(actualBootstrapFile)
     let (_, err) = interp.evalStatements(source)
     if err.len > 0:
-      warn("Failed to load bootstrap file ", bootstrapFile, ": ", err)
+      warn("Failed to load bootstrap file ", actualBootstrapFile, ": ", err)
     else:
-      debug("Successfully loaded bootstrap: ", bootstrapFile)
+      debug("Successfully loaded bootstrap: ", actualBootstrapFile)
   else:
-    # Fall back to hardcoded list (for backward compatibility)
-    let libPath = interp.hardingHome / "lib" / "core"
-
-    let stdlibFiles = [
-      "Object.hrd",
-      "Boolean.hrd",
-      "Block.hrd",
-      "Number.hrd",
-      "Collections.hrd",
-      "SortedCollection.hrd",
-      "Interval.hrd",
-      "String.hrd",
-      "FileStream.hrd",
-      "Exception.hrd",
-      "TestCase.hrd"
-    ]
-
-    for filename in stdlibFiles:
-      let filepath = libPath / filename
-      if fileExists(filepath):
-        debug("Loading stdlib file: ", filepath)
-        let source = readFile(filepath)
-        let (_, err) = interp.evalStatements(source)
-        if err.len > 0:
-          warn("Failed to load ", filepath, ": ", err)
-        else:
-          debug("Successfully loaded: ", filepath)
-      else:
-        warn("Stdlib file not found: ", filepath)
+    warn("Bootstrap file not found: ", actualBootstrapFile)
 
   # Set up class caches for primitive types
-  # These allow wrapped primitives to inherit methods from stdlib
-
-  # Number hierarchy: Number -> Integer, Float
   if "Number" in interp.globals[]:
     let numVal = interp.globals[]["Number"]
     if numVal.kind == vkClass:
@@ -2116,7 +2118,6 @@ proc loadStdlib*(interp: var Interpreter, bootstrapFile: string = "") =
       stringClassCache = strVal.classVal
       debug("Set stringClassCache from String global")
 
-  # Boolean hierarchy: Boolean -> True, False
   if "Boolean" in interp.globals[]:
     let boolVal = interp.globals[]["Boolean"]
     if boolVal.kind == vkClass:
@@ -2147,27 +2148,38 @@ proc loadStdlib*(interp: var Interpreter, bootstrapFile: string = "") =
       tableClassCache = tableVal.classVal
       debug("Set tableClassCache from Table global")
 
-  # Set up FileStream class and Stdout instance after loading FileStream.hrd
-  # This ensures Stdout uses the class defined in the .hrd file, not a separate
-  # Nim-created class that would cause method lookup issues.
-  if "FileStream" in interp.globals[]:
-    let fsVal = interp.globals[]["FileStream"]
-    if fsVal.kind == vkClass:
-      let fileStreamCls = fsVal.classVal
-      # Register native write: and writeline: methods on the FileStream class
-      let fsWriteMethod = createCoreMethod("write:")
-      fsWriteMethod.nativeImpl = cast[pointer](writeImpl)
-      fileStreamCls.methods["write:"] = fsWriteMethod
-      fileStreamCls.allMethods["write:"] = fsWriteMethod
-      let fsWritelineMethod = createCoreMethod("writeline:")
-      fsWritelineMethod.nativeImpl = cast[pointer](writelineImpl)
-      fileStreamCls.methods["writeline:"] = fsWritelineMethod
-      fileStreamCls.allMethods["writeline:"] = fsWritelineMethod
-      debug("Registered native FileStream methods")
-      # Create Stdout instance from the FileStream class
-      let stdoutInstance = fileStreamCls.newInstance()
-      interp.globals[]["Stdout"] = stdoutInstance.toValue()
-      debug("Created Stdout instance from FileStream class")
+  # Set up FileStream class and Stdout instance
+  proc findClassInLibraries(interp: Interpreter, name: string): Class =
+    for lib in interp.importedLibraries:
+      if lib.kind == ikObject and lib.class == libraryClass:
+        let bindingsVal = lib.slots[0]
+        if bindingsVal.kind == vkInstance and bindingsVal.instVal.kind == ikTable:
+          let classVal = bindingsVal.instVal.entries[toValue(name)]
+          if classVal.kind == vkClass:
+            return classVal.classVal
+    return nil
+
+  let fileStreamCls = if "FileStream" in interp.globals[]:
+                         let fsVal = interp.globals[]["FileStream"]
+                         if fsVal.kind == vkClass: fsVal.classVal else: nil
+                       else:
+                         findClassInLibraries(interp, "FileStream")
+
+  if fileStreamCls != nil:
+    let fsWriteMethod = createCoreMethod("write:")
+    fsWriteMethod.nativeImpl = cast[pointer](writeImpl)
+    fileStreamCls.methods["write:"] = fsWriteMethod
+    fileStreamCls.allMethods["write:"] = fsWriteMethod
+
+    let fsWritelineMethod = createCoreMethod("writeline:")
+    fsWritelineMethod.nativeImpl = cast[pointer](writelineImpl)
+    fileStreamCls.methods["writeline:"] = fsWritelineMethod
+    fileStreamCls.allMethods["writeline:"] = fsWritelineMethod
+    debug("Registered native FileStream methods")
+
+    let stdoutInstance = fileStreamCls.newInstance()
+    interp.globals[]["Stdout"] = stdoutInstance.toValue()
+    debug("Created Stdout instance from FileStream class")
 
 # Simple test function (incomplete - commented out)
 ## proc testBasicArithmetic*(): bool =
@@ -2370,6 +2382,97 @@ proc globalTableLoadImpl(interp: var Interpreter, self: Instance, args: seq[Node
     stderr.writeLine("Error reading ", resolvedPath, ": ", e.msg)
     return nilValue()
 
+# ============================================================================
+# Library methods (need interpreter access)
+# ============================================================================
+
+proc libraryLoadImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Library load: - load and evaluate a file, capturing new globals into this Library's bindings
+  if args.len < 1:
+    return nilValue()
+
+  let pathArg = args[0]
+  let filePath = case pathArg.kind
+    of vkString: pathArg.strVal
+    of vkSymbol: pathArg.symVal
+    else: ""
+
+  if filePath.len == 0:
+    return nilValue()
+
+  let resolvedPath = if filePath.isAbsolute:
+                       filePath
+                     else:
+                       interp.hardingHome / filePath
+
+  if not fileExists(resolvedPath):
+    stderr.writeLine("Error: File not found: ", resolvedPath)
+    return nilValue()
+
+  # Save original globals and create a copy for capturing new definitions
+  let originalGlobals = interp.globals
+  var tempGlobals: ref Table[string, NodeValue]
+  new(tempGlobals)
+  tempGlobals[] = originalGlobals[]
+
+  # Swap globals to temp table so new definitions go there
+  interp.globals = tempGlobals
+
+  try:
+    let source = readFile(resolvedPath)
+    let (_, err) = interp.evalStatements(source)
+    if err.len > 0:
+      stderr.writeLine("Error loading ", resolvedPath, ": ", err)
+      interp.globals = originalGlobals
+      return nilValue()
+
+    # Restore original globals
+    interp.globals = originalGlobals
+
+    # Copy new entries into the Library's bindings table
+    let bindings = getLibraryBindings(self)
+    if bindings != nil:
+      for key, val in tempGlobals[]:
+        if key notin originalGlobals[]:
+          setTableValue(bindings, toValue(key), val)
+          debug("Library captured: ", key)
+
+    debug("Successfully loaded into library: ", resolvedPath)
+    return toValue(true)
+  except Exception as e:
+    interp.globals = originalGlobals
+    stderr.writeLine("Error reading ", resolvedPath, ": ", e.msg)
+    return nilValue()
+
+proc globalTableImportImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+  ## Harding import: - add a Library to the interpreter's imported libraries list
+  if args.len < 1:
+    return nilValue()
+
+  let libArg = args[0]
+  if libArg.kind != vkInstance or libArg.instVal == nil:
+    stderr.writeLine("Error: import: argument must be a Library instance")
+    return nilValue()
+
+  let lib = libArg.instVal
+  if lib.class != libraryClass:
+    stderr.writeLine("Error: import: argument must be a Library instance")
+    return nilValue()
+
+  interp.importedLibraries.add(lib)
+  debug("Imported library, total imports: ", $interp.importedLibraries.len)
+  return toValue(true)
+
+proc installLibraryMethods*() =
+  ## Install Library methods that need interpreter access
+  if libraryClass == nil:
+    return
+
+  let loadMethod = createCoreMethod("load:")
+  loadMethod.nativeImpl = cast[pointer](libraryLoadImpl)
+  loadMethod.hasInterpreterParam = true
+  addMethodToClass(libraryClass, "load:", loadMethod)
+
 # Patch GlobalTable methods after class creation
 proc installGlobalTableMethods*(globalTableClass: Class) =
   ## Install special GlobalTable methods that wrap the globals table
@@ -2405,6 +2508,12 @@ proc installGlobalTableMethods*(globalTableClass: Class) =
   loadMethod.nativeImpl = cast[pointer](globalTableLoadImpl)
   loadMethod.hasInterpreterParam = true
   addMethodToClass(globalTableClass, "load:", loadMethod)
+
+  # Add import: method for importing Libraries into the interpreter
+  let importMethod = createCoreMethod("import:")
+  importMethod.nativeImpl = cast[pointer](globalTableImportImpl)
+  importMethod.hasInterpreterParam = true
+  addMethodToClass(globalTableClass, "import:", importMethod)
 
 # ============================================================================
 # Explicit Stack AST Interpreter (VM)
