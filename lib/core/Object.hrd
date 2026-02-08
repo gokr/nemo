@@ -29,14 +29,14 @@ Object>>clone <primitive primitiveClone>
 # Class-side methods (using class>> syntax)
 #====================================================================
 
-Object class>>derive: ivarArray methods: methodBlock [
-  # Create a subclass with instance variables AND define methods in one expression.
+Object class>>derive: slotsArray methods: methodBlock [
+  # Create a subclass with extra slots AND define methods in one expression.
   # Usage: Person := Object derive: #(name age) methods: [
   #   self >> greet [ "Hello, I am " + name ]
   #   self >> haveBirthday [ age := age + 1 ]
   # ]
   | newClass |
-  newClass := self derive: ivarArray.
+  newClass := self derive: slotsArray.
   newClass extend: methodBlock.
   ^ newClass
 ]

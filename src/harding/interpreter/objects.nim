@@ -1051,27 +1051,39 @@ proc classDeriveParentsSlotsMethodsImpl*(self: Class, args: seq[NodeValue]): Nod
                     self.name & "+Derived"
                   else:
                     "Anonymous"
-  let newClass = newClass(superclasses =actualParents, slotNames = slotNames, name = className)
+  let theClass = newClass(superclasses =actualParents, slotNames = slotNames, name = className)
 
   # Execute method block if provided (to define/override methods and resolve conflicts)
   # For now, skip block execution - it requires an interpreter context
   # This could be enhanced later to support true method definition in the block
   discard
 
+  return NodeValue(kind: vkClass, classVal: theClass)
+
 proc classDeriveParentsSlotsGettersSettersMethodsImpl*(self: Class, args: seq[NodeValue]): NodeValue =
   ## Create a new class with multiple parents, slots, selective getters/setters, and methods
-  ## args[0]: parents array
-  ## args[1]: slot names array (all slots)
-  ## args[2]: getters array (slots to generate getters for)
-  ## args[3]: setters array (slots to generate setters for)
-  ## args[4]: methods dictionary (optional)
-  if args.len < 4:
+  ## args[0]: slot names array (all slots)
+  ## args[1]: parents array
+  ## args[2]: slots array (extra slots)
+  ## args[3]: getters array (slots to generate getters for)
+  ## args[4]: setters array (slots to generate setters for)
+  ## args[5]: methods dictionary (optional)
+  if args.len < 5:
     return nilValue()
+
+  # Extract slot names (from derive: parameter)
+  var slotNames: seq[string] = @[]
+  if args[0].kind == vkInstance and args[0].instVal.kind == ikArray:
+    for elem in args[0].instVal.elements:
+      if elem.kind == vkString or elem.kind == vkSymbol:
+        let name = if elem.kind == vkString: elem.strVal else: elem.symVal
+        if name.len > 0:
+          slotNames.add(name)
 
   # Extract parents array
   var parents: seq[Class] = @[]
-  if args[0].kind == vkInstance and args[0].instVal.kind == ikArray:
-    for elem in args[0].instVal.elements:
+  if args[1].kind == vkInstance and args[1].instVal.kind == ikArray:
+    for elem in args[1].instVal.elements:
       if elem.kind == vkClass:
         parents.add(elem.classVal)
 
@@ -1079,19 +1091,18 @@ proc classDeriveParentsSlotsGettersSettersMethodsImpl*(self: Class, args: seq[No
   if parents.len == 0:
     parents.add(self)
 
-  # Extract all slot names
-  var slotNames: seq[string] = @[]
-  if args[1].kind == vkInstance and args[1].instVal.kind == ikArray:
-    for elem in args[1].instVal.elements:
+  # Extract additional slot names (from slots: parameter)
+  if args[2].kind == vkInstance and args[2].instVal.kind == ikArray:
+    for elem in args[2].instVal.elements:
       if elem.kind == vkString or elem.kind == vkSymbol:
         let name = if elem.kind == vkString: elem.strVal else: elem.symVal
-        if name.len > 0:
+        if name.len > 0 and name notin slotNames:
           slotNames.add(name)
 
   # Extract getter slot names
   var getterSlotNames: seq[string] = @[]
-  if args[2].kind == vkInstance and args[2].instVal.kind == ikArray:
-    for elem in args[2].instVal.elements:
+  if args[3].kind == vkInstance and args[3].instVal.kind == ikArray:
+    for elem in args[3].instVal.elements:
       if elem.kind == vkString or elem.kind == vkSymbol:
         let name = if elem.kind == vkString: elem.strVal else: elem.symVal
         if name.len > 0:
@@ -1099,15 +1110,15 @@ proc classDeriveParentsSlotsGettersSettersMethodsImpl*(self: Class, args: seq[No
 
   # Extract setter slot names
   var setterSlotNames: seq[string] = @[]
-  if args[3].kind == vkInstance and args[3].instVal.kind == ikArray:
-    for elem in args[3].instVal.elements:
+  if args[4].kind == vkInstance and args[4].instVal.kind == ikArray:
+    for elem in args[4].instVal.elements:
       if elem.kind == vkString or elem.kind == vkSymbol:
         let name = if elem.kind == vkString: elem.strVal else: elem.symVal
         if name.len > 0:
           setterSlotNames.add(name)
 
   # Create the new class
-  let actualParents = if args[0].kind == vkNil: @[self] else: parents
+  let actualParents = if args[1].kind == vkNil: @[self] else: parents
   let className = if parents.len > 0 and parents[0].name.len > 0:
                     parents[0].name & "+Derived"
                   elif self.name.len > 0:
@@ -1130,8 +1141,8 @@ proc classDeriveParentsSlotsGettersSettersMethodsImpl*(self: Class, args: seq[No
       addMethodToClass(newClass, setterName, setter, isClassMethod = false)
 
   # Extract and add methods from dictionary if provided
-  if args.len >= 5 and args[4].kind == vkInstance and args[4].instVal.kind == ikTable:
-    let methodTable = args[4].instVal
+  if args.len >= 6 and args[5].kind == vkInstance and args[5].instVal.kind == ikTable:
+    let methodTable = args[5].instVal
     for key, value in methodTable.entries.pairs:
       if key.kind == vkSymbol and value.kind == vkBlock:
         let selector = key.symVal

@@ -751,13 +751,13 @@ proc newClass*(superclasses: seq[Class] = @[], slotNames: seq[string] = @[], nam
 
   # Check for method selector conflicts between superclasses (only for directly-defined methods)
   # Inherited methods should not cause conflicts
-  # Note: use derive:superclasses:ivarArray:methods: to specify method overrides
+  # Note: use derive:parents:slots:methods: to specify method overrides
   var seenInstanceMethods: seq[string] = @[]
   var seenClassMethods: seq[string] = @[]
   for parent in superclasses:
     for selector in parent.methods.keys:  # Only check directly-defined instance methods
       if selector in seenInstanceMethods:
-        raise newException(ValueError, "Method selector conflict: '" & selector & "' exists in multiple superclasses (use derive:superclasses:ivarArray:methods: to specify method overrides)")
+        raise newException(ValueError, "Method selector conflict: '" & selector & "' exists in multiple superclasses (use derive:parents:slots:methods: to specify method overrides)")
       seenInstanceMethods.add(selector)
     for selector in parent.classMethods.keys:  # Only check directly-defined class methods
       if selector in seenClassMethods:

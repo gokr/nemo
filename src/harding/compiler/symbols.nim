@@ -46,12 +46,14 @@ proc mangleSelector*(selector: string): string =
   result = result.replace("+", "plus")
   result = result.replace("*", "star")
   result = result.replace("/", "slash")
+  result = result.replace("\\", "backslash")
   result = result.replace("<", "lt")
   result = result.replace(">", "gt")
   result = result.replace("=", "eq")
   result = result.replace("~", "tilde")
   result = result.replace("@", "at")
   result = result.replace("|", "pipe")
+  result = result.replace("%", "percent")
   # Add nt_ prefix
   result = "nt_" & result
 

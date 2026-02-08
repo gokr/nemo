@@ -204,8 +204,17 @@ proc genModule*(ctx: var CompilerContext, nodes: seq[Node],
   output.add("# Comparison Operators\n")
   output.add("#####################\n\n")
 
-  for op in ["<", "<=", ">", ">=", "="]:
+  for op in ["<", "<=", ">", ">=", "=", "==", "~="]:
     output.add(genComparisonMethod(op))
+
+  # Generate integer division and modulo operators
+  output.add("\n")
+  output.add("# Integer Division and Modulo\n")
+  output.add("#############################\n\n")
+
+  output.add(genBinaryOpMethod("//"))
+  output.add(genBinaryOpMethod("\\"))
+  output.add(genBinaryOpMethod("%"))
 
   # Generate main proc for top-level statements
   output.add(genMainProc(ctx, topLevel, moduleName))
