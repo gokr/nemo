@@ -131,7 +131,7 @@ proc classParentsImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc classSlotsImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc classGettersImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc classSettersImpl*(self: Class, args: seq[NodeValue]): NodeValue
-proc classMethodsBlockImpl*(self: Class, args: seq[NodeValue], interp: var Interpreter): NodeValue
+proc classMethodsImpl*(self: Class, args: seq[NodeValue]): NodeValue
 proc invalidateSubclasses*(cls: Class)
 proc rebuildAllTables*(cls: Class)
 proc registerPrimitivesOnObjectClass*(objCls: Class)

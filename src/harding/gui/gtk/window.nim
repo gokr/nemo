@@ -54,11 +54,11 @@ proc createGtkWindow*(interp: var Interpreter): NodeValue =
   return obj.toValue()
 
 ## Native method: new (class method for Window)
-proc windowNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   createGtkWindow(interp)
 
 ## Native method: title:
-proc windowSetTitleImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowSetTitleImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if args.len < 1 or args[0].kind != vkString:
     return nilValue()
 
@@ -73,7 +73,7 @@ proc windowSetTitleImpl*(interp: var Interpreter, self: Instance, args: seq[Node
   nilValue()
 
 ## Native method: setDefaultSize:height:
-proc windowSetDefaultSizeImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowSetDefaultSizeImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if args.len < 2:
     return nilValue()
 
@@ -89,7 +89,7 @@ proc windowSetDefaultSizeImpl*(interp: var Interpreter, self: Instance, args: se
   nilValue()
 
 ## Native method: setChild: (GTK3/GTK4 compatible)
-proc windowSetChildImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowSetChildImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if args.len < 1 or args[0].kind != vkInstance:
     return nilValue()
 
@@ -113,7 +113,7 @@ proc windowSetChildImpl*(interp: var Interpreter, self: Instance, args: seq[Node
   nilValue()
 
 ## Native method: present
-proc windowPresentImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowPresentImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if self.isNimProxy:
     var window = getInstanceWidget(self)
     if window == nil and self.nimValue != nil:
@@ -125,7 +125,7 @@ proc windowPresentImpl*(interp: var Interpreter, self: Instance, args: seq[NodeV
   nilValue()
 
 ## Native method: close
-proc windowCloseImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowCloseImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   if self.isNimProxy:
     var window = getInstanceWidget(self)
     if window == nil and self.nimValue != nil:
@@ -141,7 +141,7 @@ proc onWindowDestroy(widget: GtkWidget, userData: pointer) {.cdecl.} =
   quit(0)
 
 ## Native method: connectDestroy (to auto-exit on close)
-proc windowConnectDestroyImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowConnectDestroyImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Connect destroy signal to exit the application
   if self.isNimProxy:
     var window = getInstanceWidget(self)
@@ -155,7 +155,7 @@ proc windowConnectDestroyImpl*(interp: var Interpreter, self: Instance, args: se
   nilValue()
 
 ## Native method: destroyed: (block-based destroy signal)
-proc windowDestroyedImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
+proc windowDestroyedImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.} =
   ## Connect destroy signal to a Harding block
   if args.len < 1 or args[0].kind != vkBlock:
     return nilValue()
