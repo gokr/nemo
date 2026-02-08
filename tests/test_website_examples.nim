@@ -6,7 +6,7 @@
 
 import std/[unittest, strutils]
 import ../src/harding/core/types
-import ../src/harding/interpreter/[vm, objects]
+import ../src/harding/interpreter/vm
 
 suite "Website Examples - docs.md Example Code":
   var interp: Interpreter
@@ -359,3 +359,302 @@ suite "Website Examples - differences from Smalltalk":
     check(results[0][^1].intVal == 3)
     check(results[0][0].intVal == 1)
     check(results[0][1].intVal == 2)
+
+suite "Website Examples - docs.md Factorial":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "Factorial (docs.md)":
+    let results = interp.evalStatements("""
+      | factorial |
+      factorial := [:n |
+          (n <= 1) ifTrue: [^ 1].
+          ^ n * (factorial value: (n - 1))
+      ]
+      Result := factorial value: 5
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].kind == vkInt)
+    check(results[0][^1].intVal == 120)
+
+suite "Website Examples - docs.md Counter Class":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "Counter class (docs.md)":
+    let results = interp.evalStatements("""
+      | c |
+      Counter := Object derive: #(count)
+      Counter >> initialize [ count := 0 ]
+      Counter >> value [ ^count ]
+      Counter >> increment [ ^count := count + 1]
+
+      c := Counter new
+      c initialize
+      c increment
+      Result := c value
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].kind == vkInt)
+    check(results[0][^1].intVal == 1)
+
+suite "Website Examples - docs.md Table":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "Table literal with entries (docs.md)":
+    let results = interp.evalStatements("""
+      scores := #{"Alice" -> 95, "Bob" -> 87}
+      Result := scores at: "Alice"
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 95)
+
+suite "Website Examples - index.md deriveWithAccessors":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "deriveWithAccessors creates getters and setters":
+    let results = interp.evalStatements("""
+      Point := Object deriveWithAccessors: #(x y)
+      p := Point new
+      p x: 100
+      p y: 200
+      Result := p x
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 100)
+
+  test "Point + operator with aPoint x syntax":
+    let results = interp.evalStatements("""
+      Point := Object deriveWithAccessors: #(x y)
+      Point >>+ aPoint [
+          x := x + aPoint x
+          y := y + aPoint y
+      ]
+      p1 := Point new x: 10; y: 20
+      p2 := Point new x: 5; y: 10
+      p1 + p2
+      Result := p1 x
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 15)
+
+suite "Website Examples - features.md Point Class":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "Point class with extend: for multiple methods":
+    let results = interp.evalStatements("""
+      | p |
+      Point := Object derive: #(x y)
+      Point >> x: val [ x := val ]
+      Point >> y: val [ y := val ]
+
+      Point extend: [
+          self >> moveBy: dx and: dy [
+              x := x + dx.
+              y := y + dy
+          ]
+          self >> distanceFromOrigin [
+              ^ ((x * x) + (y * y)) sqrt
+          ]
+      ]
+
+      p := Point new
+      p x: 100; y: 200
+      Result := p distanceFromOrigin
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].kind == vkFloat)
+
+suite "Website Examples - features.md Collection Methods":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "collect: transformation":
+    let results = interp.evalStatements("""
+      numbers := #(1 2 3 4 5)
+      squares := numbers collect: [:n | n * n]
+      Result := squares at: 3
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 9)
+
+  test "select: filter with modulus":
+    let results = interp.evalStatements("""
+      numbers := #(1 2 3 4 5)
+      evens := numbers select: [:n | (n % 2) = 0]
+      Result := evens size
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 2)
+
+  test "inject:into: reduce":
+    let results = interp.evalStatements("""
+      numbers := #(1 2 3 4 5)
+      sum := numbers inject: 0 into: [:acc :n | acc + n]
+      Result := sum
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 15)
+
+  test "do: iteration":
+    let results = interp.evalStatements("""
+      | sum |
+      sum := 0.
+      #(1 2 3) do: [:n | sum := sum + n].
+      Result := sum
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 6)
+
+  test "detect: find first matching":
+    let results = interp.evalStatements("""
+      numbers := #(1 2 3 4 5)
+      three := numbers detect: [:n | n = 3]
+      Result := three
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 3)
+
+suite "Website Examples - features.md Class-Side Methods":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "class>> defines class-side method":
+    let results = interp.evalStatements("""
+      Person := Object derive: #(name age)
+      Person >> initialize [ name := ""; age := 0 ]
+      Person >> name: n aged: a [ name := n; age := a ]
+      Person class >> newNamed: n aged: a [
+        | p |
+        p := self new.
+        p name: n.
+        p age: a.
+        ^ p
+      ]
+      alice := Person newNamed: "Alice" aged: 30
+      Result := alice age
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 30)
+
+suite "Website Examples - features.md Dynamic Dispatch":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "perform: without arguments":
+    let results = interp.evalStatements("""
+      numbers := #(1 2 3)
+      Result := numbers perform: #size
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 3)
+
+  test "perform:with: with one argument":
+    let results = interp.evalStatements("""
+      numbers := #(10 20 30)
+      Result := numbers perform: #at: with: 2
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].intVal == 20)
+
+suite "Website Examples - Nil Object":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "nil isNil returns true":
+    let (result, err) = interp.doit("nil isNil")
+    check(err.len == 0)
+
+  test "nil class returns UndefinedObject":
+    let (result, err) = interp.doit("nil class name")
+    check(err.len == 0)
+    check(result.kind == vkString)
+    check(result.strVal == "UndefinedObject")
+
+suite "Website Examples - Math Operations":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "sqrt of number":
+    let results = interp.evalStatements("""
+      Result := 16 sqrt
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].kind == vkFloat)
+    check(results[0][^1].floatVal > 3.9)
+
+  test "distanceFromOrigin calculation":
+    let results = interp.evalStatements("""
+      | x y |
+      x := 3.
+      y := 4.
+      Result := ((x * x) + (y * y)) sqrt
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].floatVal > 4.9)
+
+suite "Website Examples - Block Return":
+  var interp: Interpreter
+
+  setup:
+    interp = newInterpreter()
+    initGlobals(interp)
+    loadStdlib(interp)
+
+  test "Non-local return from block":
+    let results = interp.evalStatements("""
+      | findPositive |
+      findPositive := [:arr |
+          arr do: [:n |
+              (n > 0) ifTrue: [^ n]
+          ].
+          ^ nil
+      ]
+      Result := findPositive value: #(-1 -2 5 -3)
+    """)
+    check(results[1].len == 0)
+    check(results[0][^1].kind == vkInt)
+    check(results[0][^1].intVal == 5)
