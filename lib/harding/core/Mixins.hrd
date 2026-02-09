@@ -1,0 +1,267 @@
+# ============================================================================
+# Mixins - Slotless composition for shared behavior
+# Mixin is a class with no slots, designed to be added as a parent
+# for behavior composition without the diamond problem
+#
+# Naming convention: Mixin classes start with "T" (Trait/Type)
+# Example: TComparable, TIterable, TPrintable
+# ============================================================================
+
+# ============================================================================
+# TComparable - Provides comparison operators based on compareTo:
+# ============================================================================
+
+TComparable := Mixin derive.
+
+TComparable>>compareTo: anObject [
+  # Subclasses must implement this to return:
+  # - negative if self < anObject
+  # - zero if self = anObject
+  # - positive if self > anObject
+  # Default implementation: use identity comparison
+  ^ self identityHash - anObject identityHash
+]
+
+TComparable>>= anObject [
+  ^ (self compareTo: anObject) = 0
+]
+
+TComparable>>~= anObject [
+  ^ (self compareTo: anObject) ~= 0
+]
+
+TComparable>>< anObject [
+  ^ (self compareTo: anObject) < 0
+]
+
+TComparable>><= anObject [
+  ^ (self compareTo: anObject) <= 0
+]
+
+TComparable>> anObject [
+  ^ (self compareTo: anObject) > 0
+]
+
+TComparable>>>= anObject [
+  ^ (self compareTo: anObject) >= 0
+]
+
+TComparable>>between: min and: max [
+  ^ (self >= min) and: [ self <= max ]
+]
+
+TComparable>>min: anObject [
+  ^ (self < anObject) ifTrue: [ self ] ifFalse: [ anObject ]
+]
+
+TComparable>>max: anObject [
+  ^ (self > anObject) ifTrue: [ self ] ifFalse: [ anObject ]
+]
+
+TComparable>>clampTo: min max: max [
+  ^ (self min: max) max: min
+]
+
+# ============================================================================
+# TIterable - Provides collection methods based on do:
+# Subclasses must implement do:
+# ============================================================================
+
+TIterable := Mixin derive.
+
+TIterable>>collect: block [
+  # Transform each element with the block, return new array
+  | result |
+  result := Array new.
+  self do: [ :each | result add: (block value: each) ].
+  ^ result
+]
+
+TIterable>>select: block [
+  # Return new array with elements where block returns true
+  | result |
+  result := Array new.
+  self do: [ :each |
+    (block value: each) ifTrue: [ result add: each ]
+  ].
+  ^ result
+]
+
+TIterable>>reject: block [
+  # Return new array with elements where block returns false
+  | result |
+  result := Array new.
+  self do: [ :each |
+    (block value: each) ifFalse: [ result add: each ]
+  ].
+  ^ result
+]
+
+TIterable>>detect: block [
+  # Find first element where block returns true
+  self do: [ :each |
+    (block value: each) ifTrue: [ ^ each ]
+  ].
+  ^ nil
+]
+
+TIterable>>detect: block ifNone: noneBlock [
+  # Find first element where block returns true, or evaluate noneBlock
+  self do: [ :each |
+    (block value: each) ifTrue: [ ^ each ]
+  ].
+  ^ noneBlock value
+]
+
+TIterable>>inject: initialValue into: block [
+  # Accumulate a result by iterating with block
+  | result |
+  result := initialValue.
+  self do: [ :each | result := block value: result value: each ].
+  ^ result
+]
+
+TIterable>>anySatisfy: block [
+  # Return true if any element satisfies the block
+  self do: [ :each |
+    (block value: each) ifTrue: [ ^ true ]
+  ].
+  ^ false
+]
+
+TIterable>>allSatisfy: block [
+  # Return true if all elements satisfy the block
+  self do: [ :each |
+    (block value: each) ifFalse: [ ^ false ]
+  ].
+  ^ true
+]
+
+TIterable>>noneSatisfy: block [
+  # Return true if no elements satisfy the block
+  self do: [ :each |
+    (block value: each) ifTrue: [ ^ false ]
+  ].
+  ^ true
+]
+
+TIterable>>sum [
+  # Return sum of all numeric elements
+  ^ self inject: 0 into: [ :sum :each | sum + each ]
+]
+
+TIterable>>count: block [
+  # Count elements satisfying the block
+  | count |
+  count := 0.
+  self do: [ :each |
+    (block value: each) ifTrue: [ count := count + 1 ]
+  ].
+  ^ count
+]
+
+# ============================================================================
+# TPrintable - Provides printString and related methods
+# Subclasses should implement printOn: for custom formatting
+# ============================================================================
+
+TPrintable := Mixin derive.
+
+TPrintable>>printOn: stream [
+  # Append a string representation to the stream
+  # Default: use class name with identity hash
+  stream show: (self class name).
+  stream show: "@".
+  stream show: (self identityHash printString)
+]
+
+TPrintable>>printString [
+  # Return a string representation
+  | stream |
+  stream := "" writeStream.
+  self printOn: stream.
+  ^ stream contents
+]
+
+TPrintable>>print [
+  # Print to stdout (or Transcript in IDE)
+  Transcript show: self printString
+]
+
+TPrintable>>printCr [
+  # Print to stdout with newline
+  Transcript showCr: self printString
+]
+
+TPrintable>>displayOn: stream [
+  # Append a user-friendly string to the stream
+  # Default: same as printOn:
+  self printOn: stream
+]
+
+TPrintable>>displayString [
+  # Return a user-friendly string
+  | stream |
+  stream := "" writeStream.
+  self displayOn: stream.
+  ^ stream contents
+]
+
+# ============================================================================
+# TSynchronizable - Interface for synchronization primitives
+# Implemented by Monitor, Semaphore for polymorphic synchronization
+# ============================================================================
+
+TSynchronizable := Mixin derive.
+
+TSynchronizable>>critical: aBlock [
+  # Execute block with mutual exclusion
+  # Subclasses must implement
+  self subclassResponsibility
+]
+
+TSynchronizable>>acquire [
+  # Acquire the lock/resource
+  # Subclasses must implement
+  self subclassResponsibility
+]
+
+TSynchronizable>>release [
+  # Release the lock/resource
+  # Subclasses must implement
+  self subclassResponsibility
+]
+
+# ============================================================================
+# Example usage of Mixins
+# ============================================================================
+#
+# # Adding comparability to a custom class:
+# Point := Object derive: #(x y).
+# Point addParent: TComparable.
+#
+# Point>>compareTo: other [
+#   # Compare by distance from origin
+#   | d1 d2 |
+#   d1 := (x * x) + (y * y).
+#   d2 := (other x * other x) + (other y * other y).
+#   ^ d1 - d2
+# ].
+#
+# # Now Point supports <, <=, >, >=, =, ~=, between:and:, min:, max:
+#
+# # Adding iterability:
+# LinkedList := Object derive: #(head tail).
+# LinkedList addParent: TIterable.
+#
+# LinkedList>>do: block [
+#   | current |
+#   current := head.
+#   [ current notNil ] whileTrue: [
+#     block value: current value.
+#     current := current next
+#   ]
+# ].
+#
+# # Now LinkedList supports collect:, select:, reject:, detect:, etc.
+#

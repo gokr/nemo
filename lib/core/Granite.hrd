@@ -1,0 +1,47 @@
+#!/usr/bin/env harding
+# Granite compiler integration
+
+Granite := Object derive: #()
+
+Granite class>>compile: sourceString <primitive primitiveGraniteCompile: sourceString>
+  # Compile Harding source to Nim code, return as String
+
+Granite class>>build: anApplication <primitive primitiveGraniteBuild: anApplication>
+  # Build an Application to binary
+  # Collects all referenced classes transitively
+  # Applies library scoping or dead code elimination
+
+Granite class>>collectFilesFor: anApplication [
+  # Starting from Application, collect all transitively referenced classes
+  | visited toProcess classes |
+  visited := Set new.
+  toProcess := Array with: anApplication class.
+  classes := Array new.
+
+  [toProcess isEmpty] whileFalse: [
+    | cls |
+    cls := toProcess removeFirst.
+    (visited includes: cls) ifFalse: [
+      visited add: cls.
+      classes add: cls.
+
+      # Add superclass if not Object
+      (cls superclass ~= Object) ifTrue: [
+        toProcess add: cls superclass
+      ].
+
+      # Add classes referenced in method bodies
+      cls methods do: [:meth |
+        toProcess addAll: (self classesReferencedIn: meth)
+      ]
+    ]
+  ].
+
+  ^classes
+]
+
+Granite class>>classesReferencedIn: aMethod [
+  # Find all class references in method body
+  # Returns collection of class names
+  ^ Array new
+]
