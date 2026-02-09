@@ -57,3 +57,14 @@ task vsix, "Build the VS Code extension (vsix file)":
     system.quit(1)
   exec "vsce package"
   echo "VSIX file built successfully"
+
+task js, "Compile Harding interpreter to JavaScript":
+  ## Build the Harding interpreter for JavaScript/Node.js
+  ## Output: website/dist/harding.js
+  exec "nim js -d:js -o:website/dist/harding.js src/harding/repl/hardingjs.nim"
+  echo "JavaScript build complete: website/dist/harding.js"
+
+task jsrelease, "Compile optimized JS for production":
+  ## Build optimized JavaScript for production
+  exec "nim js -d:js -d:release -o:website/dist/harding.js src/harding/repl/hardingjs.nim"
+  echo "JavaScript release build complete: website/dist/harding.js"
