@@ -116,6 +116,25 @@ proc tryGetInt*(value: NodeValue): (bool, int) =
     discard
   return (false, 0)
 
+proc tryGetFloat*(value: NodeValue): (bool, float) =
+  ## Try to extract a float from a NodeValue
+  ## Returns (true, value) if successful, (false, 0.0) otherwise
+  case value.kind
+  of vkFloat:
+    return (true, value.floatVal)
+  of vkInstance:
+    if value.instVal.kind == ikFloat:
+      return (true, value.instVal.floatVal)
+    elif value.instVal.kind == ikInt:
+      # Allow automatic promotion of integer to float
+      return (true, value.instVal.intVal.float)
+  of vkInt:
+    # Allow automatic promotion of integer to float
+    return (true, value.intVal.float)
+  else:
+    discard
+  return (false, 0.0)
+
 # ============================================================================
 # Object System
 # ============================================================================
@@ -540,6 +559,16 @@ proc initCoreClasses*(): Class =
     geMethod.nativeImpl = cast[pointer](geImpl)
     addMethodToClass(floatClass, ">=", geMethod)
 
+    # printString method for Float
+    let floatPrintStringMethod = createCoreMethod("printString")
+    floatPrintStringMethod.nativeImpl = cast[pointer](printStringImpl)
+    addMethodToClass(floatClass, "printString", floatPrintStringMethod)
+
+    # asString method for Float (calls printString)
+    let floatAsStringMethod = createCoreMethod("asString")
+    floatAsStringMethod.nativeImpl = cast[pointer](printStringImpl)
+    addMethodToClass(floatClass, "asString", floatAsStringMethod)
+
     addGlobal("Float", NodeValue(kind: vkClass, classVal: floatClass))
 
   # Create String class
@@ -746,29 +775,60 @@ proc initCoreClasses*(): Class =
 # ============================================================================
 
 proc plusImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Integer addition
-  let (ok, val) = args[0].tryGetInt()
-  if ok and self.kind == ikInt:
-    return toValue(self.intVal + val)
+  ## Addition with automatic promotion to float for mixed types
+  # Try integer addition first (most common case)
+  let (intOk, intVal) = args[0].tryGetInt()
+  if intOk and self.kind == ikInt:
+    return toValue(self.intVal + intVal)
+
+  # Handle mixed-type or float addition
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal + floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float + floatVal)
 
 proc minusImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Integer subtraction
-  let (ok, val) = args[0].tryGetInt()
-  if ok and self.kind == ikInt:
-    return toValue(self.intVal - val)
+  ## Subtraction with automatic promotion to float for mixed types
+  # Try integer subtraction first (most common case)
+  let (intOk, intVal) = args[0].tryGetInt()
+  if intOk and self.kind == ikInt:
+    return toValue(self.intVal - intVal)
+
+  # Handle mixed-type or float subtraction
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal - floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float - floatVal)
 
 proc starImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Integer multiplication
-  let (ok, val) = args[0].tryGetInt()
-  if ok and self.kind == ikInt:
-    return toValue(self.intVal * val)
+  ## Multiplication with automatic promotion to float for mixed types
+  # Try integer multiplication first (most common case)
+  let (intOk, intVal) = args[0].tryGetInt()
+  if intOk and self.kind == ikInt:
+    return toValue(self.intVal * intVal)
+
+  # Handle mixed-type or float multiplication
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal * floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float * floatVal)
 
 proc slashImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Integer division (returns float)
-  let (ok, val) = args[0].tryGetInt()
-  if ok and self.kind == ikInt:
-    if val == 0: return nilValue()
-    return toValue(self.intVal.float / val.float)
+  ## Division with automatic promotion to float
+  # Division always returns float
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if floatVal == 0.0: return nilValue()
+    if self.kind == ikFloat:
+      return toValue(self.floatVal / floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float / floatVal)
 
 proc sqrtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
   ## Square root
@@ -778,45 +838,99 @@ proc sqrtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
     return toValue(sqrt(self.floatVal))
 
 proc ltImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Less than comparison
-  let (ok, val) = args[0].tryGetInt()
-  if self.kind == ikInt and ok:
-    return toValue(self.intVal < val)
+  ## Less than comparison with automatic promotion to float for mixed types
+  # Try integer comparison first
+  let (intOk, intVal) = args[0].tryGetInt()
+  if self.kind == ikInt and intOk:
+    return toValue(self.intVal < intVal)
+
+  # Handle mixed-type or float comparison
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal < floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float < floatVal)
   return falseValue
 
 proc gtImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Greater than comparison
-  let (ok, val) = args[0].tryGetInt()
-  if self.kind == ikInt and ok:
-    return toValue(self.intVal > val)
+  ## Greater than comparison with automatic promotion to float for mixed types
+  # Try integer comparison first
+  let (intOk, intVal) = args[0].tryGetInt()
+  if self.kind == ikInt and intOk:
+    return toValue(self.intVal > intVal)
+
+  # Handle mixed-type or float comparison
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal > floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float > floatVal)
   return falseValue
 
 proc eqImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Equal comparison
-  let (ok, val) = args[0].tryGetInt()
-  if self.kind == ikInt and ok:
-    return toValue(self.intVal == val)
+  ## Equal comparison with automatic promotion to float for mixed types
+  # Try integer comparison first
+  let (intOk, intVal) = args[0].tryGetInt()
+  if self.kind == ikInt and intOk:
+    return toValue(self.intVal == intVal)
+
+  # Handle mixed-type or float comparison
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal == floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float == floatVal)
   return falseValue
 
 proc leImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Less than or equal comparison
-  let (ok, val) = args[0].tryGetInt()
-  if self.kind == ikInt and ok:
-    return toValue(self.intVal <= val)
+  ## Less than or equal comparison with automatic promotion to float for mixed types
+  # Try integer comparison first
+  let (intOk, intVal) = args[0].tryGetInt()
+  if self.kind == ikInt and intOk:
+    return toValue(self.intVal <= intVal)
+
+  # Handle mixed-type or float comparison
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal <= floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float <= floatVal)
   return falseValue
 
 proc geImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Greater than or equal comparison
-  let (ok, val) = args[0].tryGetInt()
-  if self.kind == ikInt and ok:
-    return toValue(self.intVal >= val)
+  ## Greater than or equal comparison with automatic promotion to float for mixed types
+  # Try integer comparison first
+  let (intOk, intVal) = args[0].tryGetInt()
+  if self.kind == ikInt and intOk:
+    return toValue(self.intVal >= intVal)
+
+  # Handle mixed-type or float comparison
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal >= floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float >= floatVal)
   return falseValue
 
 proc neImpl*(self: Instance, args: seq[NodeValue]): NodeValue =
-  ## Not equal comparison
-  let (ok, val) = args[0].tryGetInt()
-  if self.kind == ikInt and ok:
-    return toValue(self.intVal != val)
+  ## Not equal comparison with automatic promotion to float for mixed types
+  # Try integer comparison first
+  let (intOk, intVal) = args[0].tryGetInt()
+  if self.kind == ikInt and intOk:
+    return toValue(self.intVal != intVal)
+
+  # Handle mixed-type or float comparison
+  let (floatOk, floatVal) = args[0].tryGetFloat()
+  if floatOk:
+    if self.kind == ikFloat:
+      return toValue(self.floatVal != floatVal)
+    elif self.kind == ikInt:
+      return toValue(self.intVal.float != floatVal)
   return trueValue
 
 proc intDivImpl*(self: Instance, args: seq[NodeValue]): NodeValue =

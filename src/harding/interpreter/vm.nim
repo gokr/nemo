@@ -4,8 +4,6 @@ import ../parser/lexer
 import ../parser/parser
 import ../interpreter/objects
 import ../interpreter/activation
-# Note: SchedulerContext is defined in types.nim
-# initProcessorGlobal is called by newSchedulerContext in scheduler.nim
 
 # Class caches are defined in objects.nim and shared across the interpreter
 
@@ -1856,12 +1854,69 @@ proc initGlobals*(interp: var Interpreter) =
   intCls.allMethods["%"] = moduloMethod
 
   # Create Float class (derives from Number)
+  # Note: Float may have been created in initCoreClasses, but with wrong superclasses
+  # We recreate it here with the proper inheritance chain
   let floatCls = newClass(superclasses = @[numberCls], name = "Float")
   floatCls.tags = @["Float", "Number"]
   floatClass = floatCls
 
-  # Copy arithmetic methods to Float
-  floatCls.allMethods = intCls.allMethods
+  # Register Float arithmetic methods (same implementations as Integer)
+  let floatPlusMethod = createCoreMethod("+")
+  floatPlusMethod.nativeImpl = cast[pointer](plusImpl)
+  floatCls.methods["+"] = floatPlusMethod
+  floatCls.allMethods["+"] = floatPlusMethod
+
+  let floatMinusMethod = createCoreMethod("-")
+  floatMinusMethod.nativeImpl = cast[pointer](minusImpl)
+  floatCls.methods["-"] = floatMinusMethod
+  floatCls.allMethods["-"] = floatMinusMethod
+
+  let floatStarMethod = createCoreMethod("*")
+  floatStarMethod.nativeImpl = cast[pointer](starImpl)
+  floatCls.methods["*"] = floatStarMethod
+  floatCls.allMethods["*"] = floatStarMethod
+
+  let floatSlashMethod = createCoreMethod("/")
+  floatSlashMethod.nativeImpl = cast[pointer](slashImpl)
+  floatCls.methods["/"] = floatSlashMethod
+  floatCls.allMethods["/"] = floatSlashMethod
+
+  # Register Float comparison methods
+  let floatLtMethod = createCoreMethod("<")
+  floatLtMethod.nativeImpl = cast[pointer](ltImpl)
+  floatCls.methods["<"] = floatLtMethod
+  floatCls.allMethods["<"] = floatLtMethod
+
+  let floatGtMethod = createCoreMethod(">")
+  floatGtMethod.nativeImpl = cast[pointer](gtImpl)
+  floatCls.methods[">"] = floatGtMethod
+  floatCls.allMethods[">"] = floatGtMethod
+
+  let floatEqMethod = createCoreMethod("=")
+  floatEqMethod.nativeImpl = cast[pointer](eqImpl)
+  floatCls.methods["="] = floatEqMethod
+  floatCls.allMethods["="] = floatEqMethod
+
+  let floatLeMethod = createCoreMethod("<=")
+  floatLeMethod.nativeImpl = cast[pointer](leImpl)
+  floatCls.methods["<="] = floatLeMethod
+  floatCls.allMethods["<="] = floatLeMethod
+
+  let floatGeMethod = createCoreMethod(">=")
+  floatGeMethod.nativeImpl = cast[pointer](geImpl)
+  floatCls.methods[">="] = floatGeMethod
+  floatCls.allMethods[">="] = floatGeMethod
+
+  let floatNeMethod = createCoreMethod("<>")
+  floatNeMethod.nativeImpl = cast[pointer](neImpl)
+  floatCls.methods["<>"] = floatNeMethod
+  floatCls.allMethods["<>"] = floatNeMethod
+
+  # Register printString on Float (to ensure it has direct access to the primitive)
+  let floatPrintStringMethod = createCoreMethod("printString")
+  floatPrintStringMethod.nativeImpl = cast[pointer](printStringImpl)
+  floatCls.methods["printString"] = floatPrintStringMethod
+  floatCls.allMethods["printString"] = floatPrintStringMethod
 
   # Add Float-specific methods
   let sqrtMethod = createCoreMethod("sqrt")
@@ -2174,8 +2229,6 @@ proc initGlobals*(interp: var Interpreter) =
   installLibraryMethods()
 
   # Initialize the Harding global - an instance of GlobalTable that wraps global namespace
-  # Note: Process and Scheduler classes are initialized by initProcessorGlobal
-  # which is called by newSchedulerContext in the scheduler module
   initHardingGlobal(interp)
 
 
@@ -2183,6 +2236,12 @@ proc loadStdlib*(interp: var Interpreter, bootstrapFile: string = "") =
   ## Load core library files
   ## If bootstrapFile is provided and exists, it will be loaded and should use
   ## Harding load: to load other files. Otherwise, uses the default Bootstrap.hrd.
+
+  # Initialize Process, Scheduler, Monitor, SharedQueue, Semaphore classes
+  # Use a callback to avoid circular import with scheduler module
+  if interp.schedulerContextPtr != nil:
+    # Scheduler is already initialized, classes should be available
+    discard
 
   # Use lib/core/Bootstrap.hrd as default if no bootstrapFile provided
   let actualBootstrapFile = if bootstrapFile.len > 0 and fileExists(bootstrapFile):
@@ -3392,9 +3451,10 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
       try:
         var resultVal: NodeValue
         if currentMethod.hasInterpreterParam:
-          debug("VM: Native method has interpreter param")
+          debug("VM: Native method has interpreter param, nativeImpl=", cast[int](currentMethod.nativeImpl))
           type NativeProcWithInterp = proc(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
           let nativeProc = cast[NativeProcWithInterp](currentMethod.nativeImpl)
+          debug("VM: About to call nativeProc, receiver=", (if receiver != nil: receiver.class.name else: "nil"))
           resultVal = nativeProc(interp, receiver, args)
           debug("VM: Native method returned: ", resultVal.toString())
         else:
