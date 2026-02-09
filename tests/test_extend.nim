@@ -6,7 +6,7 @@
 # the receiver context. See GitHub issue for details.
 #
 
-import std/unittest
+import std/[unittest, strutils]
 import ../src/harding/core/types
 import ../src/harding/interpreter/[vm, objects]
 

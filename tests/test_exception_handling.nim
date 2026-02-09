@@ -9,7 +9,7 @@
 # These tests document the expected behavior once the primitives are implemented.
 #
 
-import std/unittest
+import std/[unittest, strutils]
 import ../src/harding/core/types
 import ../src/harding/interpreter/[vm, objects]
 
