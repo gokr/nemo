@@ -1,14 +1,16 @@
 #!/usr/bin/env harding
 #
-# SortedCollection.hrd - Array that maintains sorted order
+# SortedCollection.hrd - Collection that maintains sorted order
+# Uses composition with an internal Array, not inheritance
 #
 
-SortedCollection := Array derive: #(sortBlock).
+SortedCollection := Object derive: #(sortBlock elements).
 
 SortedCollection class>>new [
     | sc |
     sc := self newInstance.
     sc setSortBlock: [:a :b | a < b].
+    sc initElements.
     ^sc
 ]
 
@@ -16,12 +18,17 @@ SortedCollection class>>new: items sortBlock: aBlock [
     | sc |
     sc := self newInstance.
     sc setSortBlock: aBlock.
+    sc initElements.
     items do: [:item | sc add: item].
     ^sc
 ]
 
 SortedCollection class>>sortBlock: aBlock [
     ^self new: #() sortBlock: aBlock
+]
+
+SortedCollection>>initElements [
+    elements := Array new.
 ]
 
 SortedCollection>>setSortBlock: aBlock [
@@ -39,29 +46,29 @@ SortedCollection>>sortBlock: aBlock [
 
 SortedCollection>>add: anObject [
     # Add in sorted position using binary search for efficiency
-    | index low high mid |
+    | insertIndex low high mid |
     self size = 0 ifTrue: [
-        super add: anObject.
+        elements add: anObject.
         ^anObject
     ].
 
     # Binary search for insertion point
     low := 1.
     high := self size.
-    index := high + 1.  # Default to end
+    insertIndex := high + 1.  # Default to end
 
     [ low <= high ] whileTrue: [
         mid := (low + high) // 2.
         (sortBlock value: (self at: mid) value: anObject)
             ifTrue: [ low := mid + 1 ]
             ifFalse: [
-                index := mid.
+                insertIndex := mid.
                 high := mid - 1.
             ].
     ].
 
-    # Insert at index (1-based)
-    self insert: anObject at: index.
+    # Insert at insertIndex (1-based)
+    self insert: anObject at: insertIndex.
     ^anObject
 ]
 
@@ -69,7 +76,7 @@ SortedCollection>>insert: anObject at: index [
     # Insert object at specific index, shifting elements
     | i idx |
     i := self size.
-    super add: nil.  # Expand array by 1
+    elements add: nil.  # Expand array by 1
     idx := index.
     [ i >= idx ] whileTrue: [
         self at: (i + 1) put: (self at: i).
@@ -79,13 +86,40 @@ SortedCollection>>insert: anObject at: index [
     ^anObject
 ]
 
+SortedCollection>>size [
+    ^elements size
+]
+
+SortedCollection>>at: index [
+    ^elements at: index
+]
+
+SortedCollection>>at: index put: value [
+    elements at: index put: value.
+    ^value
+]
+
+SortedCollection>>do: aBlock [
+    elements do: aBlock.
+    ^self
+]
+
 SortedCollection>>resort [
     # Re-sort all elements after sortBlock change
     | sorted |
-    sorted := self sorted: sortBlock.
+    sorted := elements sorted: sortBlock.
     self removeAll.
-    sorted do: [:item | super add: item].
+    sorted do: [:item | elements add: item].
     ^self
+]
+
+SortedCollection>>removeAll [
+    elements removeAll.
+    ^self
+]
+
+SortedCollection>>removeAt: index [
+    ^elements removeAt: index
 ]
 
 SortedCollection>>includes: anObject [
@@ -156,6 +190,11 @@ SortedCollection>>reject: aBlock [
     ^self select: [:each | (aBlock value: each) not]
 ]
 
+SortedCollection>>collect: aBlock [
+    # Transform each element, return Array
+    ^elements collect: aBlock
+]
+
 SortedCollection>>copy [
     # Return copy with same sortBlock
     | copy |
@@ -166,6 +205,19 @@ SortedCollection>>copy [
 
 SortedCollection>>asSortedCollection [
     ^self
+]
+
+SortedCollection>>asArray [
+    # Return a copy of the elements as Array
+    | result |
+    result := Array new.
+    self do: [:item | result add: item].
+    ^result
+]
+
+SortedCollection>>printString [
+    # Return string representation showing elements
+    ^elements printString
 ]
 
 Array>>asSortedCollection [
