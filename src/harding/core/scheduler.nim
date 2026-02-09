@@ -717,18 +717,32 @@ proc asMonitorProxy*(inst: Instance): MonitorProxy =
 proc monitorCriticalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Monitor critical: aBlock - execute block with mutual exclusion
   ## Uses evalWithVM to run the block in a nested VM session, then releases lock
-  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
-  if ctx == nil or args.len < 1 or args[0].kind != vkBlock:
+  if args.len < 1 or args[0].kind != vkBlock:
     return nilValue()
 
   let proxy = self.asMonitorProxy()
   if proxy == nil or proxy.monitor == nil:
     return nilValue()
 
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  let blockNode = args[0].blockVal
+  var resultValue = nilValue()
+
+  if ctx == nil:
+    # No scheduler context - execute block without locking (for tests)
+    if blockNode.body.len > 0:
+      for stmt in blockNode.body:
+        resultValue = interp.evalWithVM(stmt)
+    return resultValue
+
   let sched = ctx.theScheduler
   let currentProc = sched.currentProcess
   if currentProc == nil:
-    return nilValue()
+    # No current process - execute block without locking (for tests)
+    if blockNode.body.len > 0:
+      for stmt in blockNode.body:
+        resultValue = interp.evalWithVM(stmt)
+    return resultValue
 
   # Try to acquire lock
   if not proxy.monitor.acquire(currentProc, sched):
@@ -736,9 +750,6 @@ proc monitorCriticalImpl(interp: var Interpreter, self: Instance, args: seq[Node
     return nilValue()
 
   # We have the lock - execute the block using evalWithVM
-  let blockNode = args[0].blockVal
-  var resultValue = nilValue()
-
   # Execute each statement in the block body
   if blockNode.body.len > 0:
     try:
@@ -926,37 +937,51 @@ proc sharedQueueNextPutImpl(interp: var Interpreter, self: Instance, args: seq[N
   if args.len < 1:
     return nilValue()
 
-  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
-  if ctx == nil:
-    return nilValue()
-
   let proxy = self.asSharedQueueProxy()
   if proxy == nil or proxy.queue == nil:
     return nilValue()
 
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    # No scheduler context - just add directly (non-blocking mode for tests)
+    proxy.queue.items.add(args[0])
+    return args[0]
+
   let sched = ctx.theScheduler
   let currentProc = sched.currentProcess
   if currentProc == nil:
-    return nilValue()
+    # No current process - add directly
+    proxy.queue.items.add(args[0])
+    return args[0]
 
   if proxy.queue.nextPut(args[0], currentProc, sched):
-    return args[0]  # Return the item added
-  return nilValue()  # Blocked
+    return args[0]
+  return nilValue()
 
 proc sharedQueueNextImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## SharedQueue next - remove and return item (blocks if empty)
-  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
-  if ctx == nil:
-    return nilValue()
-
   let proxy = self.asSharedQueueProxy()
   if proxy == nil or proxy.queue == nil:
     return nilValue()
 
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    # No scheduler context - just get directly (non-blocking mode for tests)
+    if proxy.queue.items.len == 0:
+      return nilValue()
+    let item = proxy.queue.items[0]
+    proxy.queue.items.delete(0)
+    return item
+
   let sched = ctx.theScheduler
   let currentProc = sched.currentProcess
   if currentProc == nil:
-    return nilValue()
+    # No current process - get directly
+    if proxy.queue.items.len == 0:
+      return nilValue()
+    let item = proxy.queue.items[0]
+    proxy.queue.items.delete(0)
+    return item
 
   let (item, gotItem) = proxy.queue.next(currentProc, sched)
   if gotItem:
@@ -1099,17 +1124,25 @@ proc semaphoreForMutualExclusionImpl(interp: var Interpreter, self: Instance, ar
 
 proc semaphoreWaitImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Semaphore wait - decrement, block if would go negative
-  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
-  if ctx == nil:
-    return nilValue()
-
   let proxy = self.asSemaphoreProxy()
   if proxy == nil or proxy.semaphore == nil:
+    return nilValue()
+
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    # No scheduler context - just decrement count if > 0 (for tests)
+    if proxy.semaphore.count > 0:
+      dec proxy.semaphore.count
+      return trueValue
     return nilValue()
 
   let sched = ctx.theScheduler
   let currentProc = sched.currentProcess
   if currentProc == nil:
+    # No current process - just decrement count if > 0 (for tests)
+    if proxy.semaphore.count > 0:
+      dec proxy.semaphore.count
+      return trueValue
     return nilValue()
 
   if proxy.semaphore.wait(currentProc, sched):
@@ -1118,13 +1151,15 @@ proc semaphoreWaitImpl(interp: var Interpreter, self: Instance, args: seq[NodeVa
 
 proc semaphoreSignalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Semaphore signal - increment, unblock waiter if any
-  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
-  if ctx == nil:
-    return nilValue()
-
   let proxy = self.asSemaphoreProxy()
   if proxy == nil or proxy.semaphore == nil:
     return nilValue()
+
+  let ctx = cast[SchedulerContext](interp.schedulerContextPtr)
+  if ctx == nil:
+    # No scheduler context - just increment count (for tests)
+    inc proxy.semaphore.count
+    return trueValue
 
   let sched = ctx.theScheduler
   proxy.semaphore.signal(sched)
