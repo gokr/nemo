@@ -5,11 +5,11 @@
 # ============================================================================
 
 Launcher class>>open [
-  ^self new openInstance
+  ^ self new openInstance
 ].
 
 Launcher>>openInstance [
-  | menuBar mainBox |
+  | mainBox headerBar |
 
   # Initialize window collection
   windows := #().
@@ -23,65 +23,60 @@ Launcher>>openInstance [
   mainBox := GtkBox vertical.
   mainBox setSpacing: 0.
 
-  # Create menu bar
-  menuBar := self createMenuBar.
+  # Create header bar with menu buttons (GTK4 style)
+  headerBar := self createHeaderBar.
 
   # Add widgets
-  mainBox append: menuBar.
+  mainBox append: headerBar.
   self setChild: mainBox.
   self present.
 
   Transcript showCr: "Harding IDE opened"
 ].
 
-Launcher>>createMenuBar [
-  | menuBar fileItem workspaceItem transcriptItem quitItem |
+Launcher>>createHeaderBar [
+  # Create a header bar with menu buttons in a horizontal box
+  # GTK4 style: buttons in header area instead of traditional menu bar
+  | headerBar fileMenuButton workspaceButton transcriptButton quitButton spacer |
 
-  # Use horizontal box for menu bar (GTK4 compatible)
-  menuBar := GtkBox horizontal.
-  menuBar setSpacing: 5.
+  headerBar := GtkBox horizontal.
+  headerBar setSpacing: 0.
 
-  # File menu button
-  fileItem := GtkButton newLabel: "File".
-  fileItem clicked: [ Transcript showCr: "File menu clicked" ].
-  menuBar append: fileItem.
+  # Left section - File menu (using button with dropdown)
+  fileMenuButton := GtkButton newLabel: "File".
+  fileMenuButton clicked: [ self showFileMenu ].
+  headerBar append: fileMenuButton.
 
-  # Workspace button
-  workspaceItem := GtkButton newLabel: "Workspace".
-  workspaceItem clicked: [ self openWorkspace ].
-  menuBar append: workspaceItem.
+  # Spacer for visual separation
+  spacer := GtkLabel new: "  ".
+  headerBar append: spacer.
 
-  # Transcript button
-  transcriptItem := GtkButton newLabel: "Transcript".
-  transcriptItem clicked: [ self openTranscript ].
-  menuBar append: transcriptItem.
+  # Middle section - Window controls
+  workspaceButton := GtkButton newLabel: "Workspace".
+  workspaceButton clicked: [ self openWorkspace ].
+  headerBar append: workspaceButton.
 
-  # Quit button
-  quitItem := GtkButton newLabel: "Quit".
-  quitItem clicked: [ self quit ].
-  menuBar append: quitItem.
+  transcriptButton := GtkButton newLabel: "Transcript".
+  transcriptButton clicked: [ self openTranscript ].
+  headerBar append: transcriptButton.
 
-  Transcript showCr: "Created menu bar".
-  ^menuBar
+  # Right-aligned section with spacer
+  spacer := GtkLabel new: "  ".
+  headerBar vexpand: true.
+  headerBar hexpand: true.
+
+  # Quit button (right side, distinct styling)
+  quitButton := GtkButton newLabel: "Quit".
+  quitButton clicked: [ self quit ].
+  headerBar append: quitButton.
+
+  Transcript showCr: "Created header bar".
+  ^ headerBar
 ].
 
-Launcher>>createFileMenu [
-  | menu workspaceItem transcriptItem quitItem |
-  menu := GtkMenu new.
-
-  workspaceItem := GtkMenuItem newLabel: "Open Workspace".
-  workspaceItem activate: [ self openWorkspace ].
-  menu append: workspaceItem.
-
-  transcriptItem := GtkMenuItem newLabel: "Open Transcript".
-  transcriptItem activate: [ self openTranscript ].
-  menu append: transcriptItem.
-
-  quitItem := GtkMenuItem newLabel: "Quit".
-  quitItem activate: [ self quit ].
-  menu append: quitItem.
-
-  ^menu
+Launcher>>showFileMenu [
+  # For now, just log - could be expanded to show a popover menu
+  Transcript showCr: "File menu: Use Workspace or Transcript buttons below".
 ].
 
 Launcher>>addWindow: aWindow [
@@ -97,16 +92,16 @@ Launcher>>removeWindow: aWindow [
 Launcher>>openWorkspace [
   Transcript showCr: "Opening workspace...".
   Workspace openFor: self.
-  ^self
+  ^ self
 ].
 
 Launcher>>openTranscript [
   Transcript openFor: self.
-  ^self
+  ^ self
 ].
 
 Launcher>>quit [
   Transcript showCr: "Quitting Harding IDE...".
   self close.
-  ^self
+  ^ self
 ].
