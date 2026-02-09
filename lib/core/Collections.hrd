@@ -175,18 +175,55 @@ Array>>addLast: element [
 Array>>removeFirst [
   # Remove and return first element.
   | first |
-  first := self first
-  self removeAt: 0
+  first := self first.
+  self removeAt: 1.  # 1-based indexing for Harding arrays
   ^ first
 ]
 
 Array>>removeLast [
   # Remove and return last element.
   | last index |
-  index := self size
-  last := self at: index
-  self removeAt: index
+  index := self size.
+  last := self at: index.
+  self removeAt: index.
   ^ last
+]
+
+Array>>remove: anObject [
+  # Remove first occurrence of anObject, return it if found, nil if not.
+  ^ self remove: anObject ifAbsent: [ nil ]
+]
+
+Array>>remove: anObject ifAbsent: absentBlock [
+  # Remove first occurrence of anObject, evaluate absentBlock if not found.
+  | index |
+  index := self indexOf: anObject.
+  index notNil ifTrue: [
+    # removeAt: uses 0-based indexing, but indexOf: returns 1-based
+    self removeAt: (index - 1).
+    ^ anObject
+  ].
+  ^ absentBlock value
+]
+
+Array>>indexOf: anObject [
+  # Return 1-based index of first occurrence, nil if not found.
+  | index size |
+  index := 1.
+  size := self size.
+  [ index <= size ] whileTrue: [
+    (self at: index) = anObject ifTrue: [ ^ index ].
+    index := index + 1
+  ].
+  ^ nil
+]
+
+Array>>indexOf: anObject ifAbsent: absentBlock [
+  # Return 1-based index, or evaluate absentBlock if not found.
+  | index |
+  index := self indexOf: anObject.
+  index notNil ifTrue: [ ^ index ].
+  ^ absentBlock value
 ]
 
 Array>>addAll: collection [
@@ -287,59 +324,79 @@ Table>>at: key ifPresent: presentBlock ifAbsent: absentBlock [
 ]
 
 #====================================================================
-# Set (using HashSet)
+# Set (using Table as hash set)
+# Note: Set class is created in Nim (objects.nim) with primitive implementations
 #====================================================================
 
-Set := Object derive
+Set>>new <primitive primitiveSetNew>
+  # Create new empty set
 
-Set>>new [
-  # Create new empty set.
-  ^ self perform: #primitiveSetNew
-]
+Set>>add: element <primitive primitiveSetAdd: element>
+  # Add element to set
 
-Set>>add: element [
-  # Add element to set.
-  ^ self perform: #primitiveSetAdd: with: element
-]
+Set>>remove: element <primitive primitiveSetRemove: element>
+  # Remove element from set
 
-Set>>remove: element [
-  # Remove element from set.
-  ^ self perform: #primitiveSetRemove: with: element
-]
+Set>>includes: element <primitive primitiveSetIncludes: element>
+  # Check if set includes element
 
-Set>>includes: element [
-  # Check if set includes element.
-  ^ self perform: #primitiveSetIncludes: with: element
-]
-
-Set>>size [
-  # Return number of elements.
-  ^ self perform: #primitiveSetSize
-]
+Set>>size <primitive primitiveSetSize>
+  # Return number of elements
 
 Set>>isEmpty [
   # Check if set is empty.
   ^ self size = 0
 ]
 
-Set>>union: otherSet [
-  # Return union of self and otherSet.
-  ^ self perform: #primitiveSetUnion: with: otherSet
+Set>>union: otherSet <primitive primitiveSetUnion: otherSet>
+  # Return union of self and otherSet
+
+Set>>intersection: otherSet <primitive primitiveSetIntersection: otherSet>
+  # Return intersection of self and otherSet
+
+Set>>difference: otherSet <primitive primitiveSetDifference: otherSet>
+  # Return difference (self - otherSet)
+
+Set>>do: block <primitive primitiveSetDo: block>
+  # Iterate over all elements
+
+#====================================================================
+# Collection creation - class methods
+Array>>sorted [
+  # Return a new Array with elements sorted in ascending order.
+  ^ self sorted: [ :a :b | a < b ]
 ]
 
-Set>>intersection: otherSet [
-  # Return intersection of self and otherSet.
-  ^ self perform: #primitiveSetIntersection: with: otherSet
-]
+Array>>sorted: sortBlock [
+  # Return a new Array with elements sorted using the given sort block.
+  # Uses simple insertion sort - good for small arrays.
+  | result size i j key temp done |
+  size := self size.
+  result := Array new.
 
-Set>>difference: otherSet [
-  # Return difference (self - otherSet).
-  ^ self perform: #primitiveSetDifference: with: otherSet
-]
+  # Copy all elements to result
+  self do: [ :each | result add: each ].
 
-Set>>do: block [
-  # Iterate over all elements.
-  ^ self perform: #primitiveSetDo: with: block
+  # Sort using insertion sort (positions 1 to size)
+  i := 2.
+  [ i <= size ] whileTrue: [
+    j := i.
+    key := result at: i.
+    done := false.
+    [ (j > 1) and: [ done not ] ] whileTrue: [
+      temp := result at: (j - 1).
+      (sortBlock value: key value: temp) ifTrue: [
+        result at: j put: temp.
+        j := j - 1
+      ] ifFalse: [
+        done := true
+      ]
+    ].
+    result at: j put: key.
+    i := i + 1
+  ].
+
+  ^ result
 ]
 
 #====================================================================
