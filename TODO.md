@@ -102,7 +102,6 @@ This document tracks current work items and future directions for Harding develo
 
 ## Known Issues
 
-- Block body corruption in forked processes when running in test suite (works in isolation)
 - Memory management for circular references
 - Error handling improvements needed
 - Compiler implementation (granite is stub)
@@ -276,4 +275,12 @@ harding --loglevel ERROR script.harding    # Errors only (default)
 
 ---
 
-*Last Updated: 2026-02-08*
+### Synchronization Primitives Fix (2026-02-09)
+- Fixed blocking/unblocking in Monitor, Semaphore, and SharedQueue
+- Processes now properly yield when blocking on synchronization primitives
+- PC decrement on block ensures statements re-execute correctly when unblocked
+- Fixed runToCompletion to handle blocked processes properly
+- Added comprehensive multi-process tests (test_sync_primitives.nim)
+- Removed "Block body corruption" from known issues (fixed)
+
+*Last Updated: 2026-02-09*

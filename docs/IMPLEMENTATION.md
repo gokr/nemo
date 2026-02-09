@@ -309,7 +309,74 @@ proc runScheduler(interp: var Interpreter) =
 Yielding occurs at:
 - Explicit `Processor yield` calls
 - Message send boundaries (configurable)
-- Blocking operations (when implemented)
+- Blocking operations (Monitor acquire, Semaphore wait, SharedQueue next/nextPut:)
+
+### Synchronization Primitives
+
+Harding provides three synchronization primitives for coordinating between green processes:
+
+#### Monitor
+
+Monitor provides mutual exclusion with reentrant locking:
+
+```smalltalk
+monitor := Monitor new
+monitor critical: [
+    # Critical section - only one process at a time
+    sharedCounter := sharedCounter + 1
+]
+```
+
+Implementation details:
+- Tracks owning process and reentrancy count
+- Waiting queue for blocked processes
+- Automatically transfers ownership when releasing if waiters exist
+
+#### Semaphore
+
+Counting semaphore for resource control:
+
+```smalltalk
+sem := Semaphore new: 5          # Allow 5 concurrent accesses
+sem := Semaphore forMutualExclusion  # Binary semaphore (count 1)
+
+sem wait                          # Decrement, block if < 0
+sem signal                        # Increment, unblock waiter if any
+```
+
+Implementation details:
+- Maintains internal counter
+- FIFO queue for waiting processes
+- Signal unblocks first waiting process without incrementing if waiters exist
+
+#### SharedQueue
+
+Thread-safe queue with blocking operations:
+
+```smalltalk
+queue := SharedQueue new          # Unbounded queue
+queue := SharedQueue new: 10      # Bounded queue (capacity 10)
+
+queue nextPut: item               # Add item (blocks if bounded and full)
+item := queue next                # Remove and return (blocks if empty)
+```
+
+Implementation details:
+- Separate waiting queues for readers and writers
+- Bounded mode blocks writers when capacity reached
+- Writers unblock when items are consumed
+
+#### Blocking Implementation
+
+When a primitive blocks:
+
+1. Process state changes to `psBlocked`
+2. Process is added to appropriate waiting queue
+3. `interp.shouldYield` is set to stop execution
+4. Program counter is decremented so statement re-executes when unblocked
+5. When unblocked, process state returns to `psReady` and is added to ready queue
+
+This ensures proper resumption of blocked operations without losing state.
 
 ---
 
