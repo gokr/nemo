@@ -161,14 +161,22 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   result = evalResult
   interp.lastResult = result
 
+  # Check if process was blocked by a primitive (before status handling)
+  # If so, decrement PC so the statement will be re-executed when unblocked
+  let wasBlocked = sched.currentProcess.state == psBlocked
+  if wasBlocked:
+    dec activation.pc
+
   # Handle VM status
   case status
   of vmYielded:
-    # Process yielded - put back in ready queue
+    # Process yielded - put back in ready queue (unless it was blocked by a primitive)
     # The work queue preserves state, so we can resume later
     debug("Process ", sched.currentProcess.name, " yielded")
     interp.shouldYield = false
-    sched.yieldCurrentProcess()
+    # Only yield if not already blocked (primitives like Semaphore wait block directly)
+    if not wasBlocked:
+      sched.yieldCurrentProcess()
     return nilValue()
   of vmError:
     # Process encountered an error - terminate it
@@ -181,6 +189,10 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   of vmRunning:
     # Should not happen after runASTInterpreter returns
     discard
+
+  # If process was blocked, return now (don't check for termination)
+  if wasBlocked:
+    return nilValue()
 
   # Check if block finished
   if activation.pc >= body.len:
@@ -220,14 +232,27 @@ proc runToCompletion*(ctx: SchedulerContext, maxSteps: int = 100000): int =
   ## Returns number of steps executed
   result = 0
   let sched = ctx.theScheduler
+  var idleCount = 0
   while result < maxSteps:
-    if not ctx.runOneSlice():
-      # No ready processes - check if any are blocked
+    if ctx.runOneSlice():
+      idleCount = 0  # Made progress, reset idle counter
+      inc result
+    else:
+      # No ready processes
       if sched.blockedCount == 0:
         break  # All done
-      # Some are blocked - would need external event to unblock
-      break
-    inc result
+      # Some are blocked - check if main process can run
+      # The main process might need to execute to unblock others
+      if sched.currentProcess != nil and sched.currentProcess.state == psRunning:
+        # Main process is still running but not in ready queue
+        # Let it continue execution (it might unblock blocked processes)
+        discard ctx.runCurrentProcess()
+        inc result
+      else:
+        # No progress possible, increment idle count
+        inc idleCount
+        if idleCount > 10:  # Give up after several idle iterations
+          break
 
 # ============================================================================
 # Harding-side Processor Object
@@ -782,6 +807,8 @@ proc monitorAcquireImpl(interp: var Interpreter, self: Instance, args: seq[NodeV
 
   if proxy.monitor.acquire(currentProc, sched):
     return trueValue
+  # Blocked - set yield flag so interpreter stops execution
+  interp.shouldYield = true
   return nilValue()
 
 proc monitorReleaseImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
@@ -956,6 +983,8 @@ proc sharedQueueNextPutImpl(interp: var Interpreter, self: Instance, args: seq[N
 
   if proxy.queue.nextPut(args[0], currentProc, sched):
     return args[0]
+  # Blocked - set yield flag so interpreter stops execution
+  interp.shouldYield = true
   return nilValue()
 
 proc sharedQueueNextImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
@@ -986,7 +1015,9 @@ proc sharedQueueNextImpl(interp: var Interpreter, self: Instance, args: seq[Node
   let (item, gotItem) = proxy.queue.next(currentProc, sched)
   if gotItem:
     return item
-  return nilValue()  # Blocked
+  # Blocked - set yield flag so interpreter stops execution
+  interp.shouldYield = true
+  return nilValue()
 
 proc sharedQueueSizeImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## SharedQueue size
@@ -1147,7 +1178,9 @@ proc semaphoreWaitImpl(interp: var Interpreter, self: Instance, args: seq[NodeVa
 
   if proxy.semaphore.wait(currentProc, sched):
     return trueValue  # Acquired immediately
-  return nilValue()  # Blocked
+  # Blocked - set yield flag so interpreter stops execution
+  interp.shouldYield = true
+  return nilValue()
 
 proc semaphoreSignalImpl(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue =
   ## Semaphore signal - increment, unblock waiter if any
