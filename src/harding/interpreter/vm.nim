@@ -2387,17 +2387,19 @@ proc loadStdlib*(interp: var Interpreter, bootstrapFile: string = "") =
                        nil
 
     if graniteCls != nil:
-      # Register compile: primitive (class method)
-      let compileMethod = createCoreMethod("compile:")
-      compileMethod.nativeImpl = cast[pointer](graniteCompileImpl)
-      graniteCls.methods["compile:"] = compileMethod
-      graniteCls.allMethods["compile:"] = compileMethod
+      # Register primitiveGraniteCompile: primitive (class method)
+      # This is called when Granite class>>compile: sourceString <primitive primitiveGraniteCompile: sourceString>
+      let primCompileMethod = createCoreMethod("primitiveGraniteCompile:")
+      primCompileMethod.nativeImpl = cast[pointer](graniteCompileImpl)
+      graniteCls.methods["primitiveGraniteCompile:"] = primCompileMethod
+      graniteCls.allMethods["primitiveGraniteCompile:"] = primCompileMethod
 
-      # Register build: primitive (class method)
-      let buildMethod = createCoreMethod("build:")
-      buildMethod.nativeImpl = cast[pointer](graniteBuildImpl)
-      graniteCls.methods["build:"] = buildMethod
-      graniteCls.allMethods["build:"] = buildMethod
+      # Register primitiveGraniteBuild: primitive (class method)
+      # This is called when Granite class>>build: anApplication <primitive primitiveGraniteBuild: anApplication>
+      let primBuildMethod = createCoreMethod("primitiveGraniteBuild:")
+      primBuildMethod.nativeImpl = cast[pointer](graniteBuildImpl)
+      graniteCls.methods["primitiveGraniteBuild:"] = primBuildMethod
+      graniteCls.allMethods["primitiveGraniteBuild:"] = primBuildMethod
 
       # Set interpreter reference for primitives
       compiler_primitives.currentInterpreter = interp

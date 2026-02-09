@@ -289,7 +289,9 @@ type
   CompiledMethod* = ref object of RootObj
     selector*: string
     arity*: int
-    when not defined(js):
+    when defined(js):
+      nativeAddr*: int          # Dummy field for JS (native code not supported)
+    else:
       nativeAddr*: pointer      # compiled function pointer (not available in JS)
     symbolName*: string       # .so symbol name
 
@@ -840,6 +842,12 @@ proc addSuperclass*(cls: Class, parent: Class) =
   if cls.allSlotNames.len > 0:
     cls.hasSlots = true
 
+# Helper for nimValue initialization based on platform
+when defined(js):
+  const NimValueDefault = 0
+else:
+  const NimValueDefault = nil
+
 proc newInstance*(cls: Class): Instance =
   ## Create a new Instance of the given Class (ikObject variant)
   result = Instance(kind: ikObject, class: cls)
@@ -848,23 +856,23 @@ proc newInstance*(cls: Class): Instance =
   for i in 0..<result.slots.len:
     result.slots[i] = nilValue()
   result.isNimProxy = false
-  result.nimValue = nil
+  result.nimValue = NimValueDefault
 
 proc newIntInstance*(cls: Class, value: int): Instance =
   ## Create a new Integer instance with direct value storage
-  Instance(kind: ikInt, class: cls, intVal: value, isNimProxy: false, nimValue: nil)
+  Instance(kind: ikInt, class: cls, intVal: value, isNimProxy: false, nimValue: NimValueDefault)
 
 proc newFloatInstance*(cls: Class, value: float): Instance =
   ## Create a new Float instance with direct value storage
-  Instance(kind: ikFloat, class: cls, floatVal: value, isNimProxy: false, nimValue: nil)
+  Instance(kind: ikFloat, class: cls, floatVal: value, isNimProxy: false, nimValue: NimValueDefault)
 
 proc newStringInstance*(cls: Class, value: string): Instance =
   ## Create a new String instance with direct value storage
-  Instance(kind: ikString, class: cls, strVal: value, isNimProxy: false, nimValue: nil)
+  Instance(kind: ikString, class: cls, strVal: value, isNimProxy: false, nimValue: NimValueDefault)
 
 proc newArrayInstance*(cls: Class, elements: seq[NodeValue]): Instance =
   ## Create a new Array instance
-  Instance(kind: ikArray, class: cls, elements: elements, isNimProxy: false, nimValue: nil)
+  Instance(kind: ikArray, class: cls, elements: elements, isNimProxy: false, nimValue: NimValueDefault)
 
 proc newTableInstance*(cls: Class, entries: Table[NodeValue, NodeValue]): Instance =
   ## Create a new Table instance
