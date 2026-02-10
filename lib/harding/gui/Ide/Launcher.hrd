@@ -41,6 +41,7 @@ Launcher>>createHeaderBar [
 
   headerBar := GtkBox horizontal.
   headerBar setSpacing: 0.
+  headerBar vexpand: false.
 
   # Left section - File menu (using button with dropdown)
   fileMenuButton := GtkButton newLabel: "File".
@@ -68,8 +69,8 @@ Launcher>>createHeaderBar [
 
   # Right-aligned section with spacer
   spacer := GtkLabel new: "  ".
-  headerBar vexpand: true.
-  headerBar hexpand: true.
+  spacer vexpand: false.
+  spacer hexpand: true.
 
   # Quit button (right side, distinct styling)
   quitButton := GtkButton newLabel: "Quit".
