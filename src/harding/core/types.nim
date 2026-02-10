@@ -124,6 +124,7 @@ type
     # For wfSendMessage
     selector*: string
     argCount*: int
+    msgNode*: MessageNode  # Reference to AST node for inline cache
     # For wfApplyBlock
     blockVal*: BlockNode
     # For wfAfterReceiver/wfAfterArg - what message to send
@@ -229,6 +230,10 @@ type
     selector*: string
     arguments*: seq[Node]
     isCascade*: bool
+    # Monomorphic Inline Cache (MIC) fields
+    cachedClass*: Class      # Last receiver class seen at this call site
+    cachedMethod*: BlockNode # Cached method for cachedClass
+    callCount*: int          # Number of times this call site has been executed
 
   CascadeNode* = ref object of Node
     receiver*: Node
