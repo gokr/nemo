@@ -47,15 +47,13 @@ proc keyPressedCallback(controller: GtkEventControllerKey, keyval: cuint, keycod
           arguments: @[],
           isCascade: false
         )
-        let result = evalWithVM(proxy.interp[], msgNode)
+        discard evalWithVM(proxy.interp[], msgNode)
         GC_unref(handler.blockNode)
-        # If block returns true, stop propagation
-        if result.kind == vkBool and result.boolVal:
-          return 1  # Handled, stop propagation
-        return 0  # Continue propagation
+        # Stop propagation to prevent GTK from inserting the character
+        return 1  # Handled, stop propagation
       except Exception as e:
         error("Error in key handler: ", e.msg)
-        return 0
+        return 1  # Stop propagation even on error
 
   return 0  # Not handled, propagate
 
