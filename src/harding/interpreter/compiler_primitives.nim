@@ -148,6 +148,12 @@ when defined(granite):
 
     output.add("\n")
     output.add("  " & cls.name & "* = ref " & cls.name & "Obj\n\n")
+
+    # Generate toValue converter for this type
+    output.add("proc toValue*(self: " & cls.name & "): NodeValue =\n")
+    output.add("  ## Convert " & cls.name & " to NodeValue\n")
+    output.add("  return NodeValue(kind: vkTable, tableVal: initTable[NodeValue, NodeValue]())\n\n")
+
     return output
 
   proc generateMethodImpl*(cls: Class, selector: string, meth: BlockNode): string =
@@ -222,6 +228,56 @@ when defined(granite):
     output.add("import ../src/harding/core/[types]\n")
     output.add("import ../src/harding/interpreter/[objects]\n")
     output.add("import ../src/harding/runtime/[runtime]\n\n")
+
+    # Add runtime helper methods
+    output.add("# Runtime Helper Methods\n")
+    output.add("# ======================\n")
+    output.add("proc nt_println*(value: NodeValue): NodeValue =\n")
+    output.add("  echo value.toString()\n")
+    output.add("  return value\n\n")
+    output.add("proc nt_print*(value: NodeValue): NodeValue =\n")
+    output.add("  stdout.write(value.toString())\n")
+    output.add("  return value\n\n")
+    output.add("proc nt_asString*(value: NodeValue): NodeValue =\n")
+    output.add("  return NodeValue(kind: vkString, strVal: value.toString())\n\n")
+    output.add("proc nt_comma*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  return NodeValue(kind: vkString, strVal: a.toString() & b.toString())\n\n")
+    output.add("proc callPrimitive*(name: string, args: seq[NodeValue]): NodeValue =\n")
+    output.add("  ## Stub for primitive calls\n")
+    output.add("  return NodeValue(kind: vkNil)\n\n")
+
+    # Add basic operators
+    output.add("# Basic Operators\n")
+    output.add("proc nt_eq*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  return NodeValue(kind: vkBool, boolVal: a.toString() == b.toString())\n\n")
+    output.add("proc nt_eqeq*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  return NodeValue(kind: vkBool, boolVal: a.toString() == b.toString())\n\n")
+    output.add("proc nt_tildeeq*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  return NodeValue(kind: vkBool, boolVal: a.toString() != b.toString())\n\n")
+    output.add("proc nt_lt*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  if a.kind == vkInt and b.kind == vkInt:\n")
+    output.add("    return NodeValue(kind: vkBool, boolVal: a.intVal < b.intVal)\n")
+    output.add("  return NodeValue(kind: vkBool, boolVal: false)\n\n")
+    output.add("proc nt_gt*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  if a.kind == vkInt and b.kind == vkInt:\n")
+    output.add("    return NodeValue(kind: vkBool, boolVal: a.intVal > b.intVal)\n")
+    output.add("  return NodeValue(kind: vkBool, boolVal: false)\n\n")
+    output.add("proc nt_plus*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  if a.kind == vkInt and b.kind == vkInt:\n")
+    output.add("    return NodeValue(kind: vkInt, intVal: a.intVal + b.intVal)\n")
+    output.add("  return NodeValue(kind: vkNil)\n\n")
+    output.add("proc nt_minus*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  if a.kind == vkInt and b.kind == vkInt:\n")
+    output.add("    return NodeValue(kind: vkInt, intVal: a.intVal - b.intVal)\n")
+    output.add("  return NodeValue(kind: vkNil)\n\n")
+    output.add("proc nt_star*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  if a.kind == vkInt and b.kind == vkInt:\n")
+    output.add("    return NodeValue(kind: vkInt, intVal: a.intVal * b.intVal)\n")
+    output.add("  return NodeValue(kind: vkNil)\n\n")
+    output.add("proc nt_slash*(a: NodeValue, b: NodeValue): NodeValue =\n")
+    output.add("  if a.kind == vkInt and b.kind == vkInt:\n")
+    output.add("    return NodeValue(kind: vkInt, intVal: a.intVal div b.intVal)\n")
+    output.add("  return NodeValue(kind: vkNil)\n\n")
 
     # Generate type definitions for each class
     output.add("# Class Type Definitions\n")

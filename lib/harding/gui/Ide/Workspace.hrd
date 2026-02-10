@@ -188,3 +188,8 @@ Workspace>>text: aString [
     # Set all text in the editor
     sourceView text: aString
 ].
+
+Workspace>>checkSourceView [
+  # Debug method to see which sourceView we're using
+  ^ ("Workspace sourceView: ", sourceView text firstLine)
+]

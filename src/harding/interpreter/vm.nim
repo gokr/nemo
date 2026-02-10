@@ -180,8 +180,8 @@ when defined(js):
       # Signal an error
       if args.len > 0:
         let msg = args[0].toString()
-        raise newException(EvalError, msg)
-      raise newException(EvalError, "Unknown error")
+        raise newException(ValueError, msg)
+      raise newException(ValueError, "Unknown error")
 
     of "primitiveValue":
       # Execute a block with no arguments
@@ -254,8 +254,6 @@ proc evalStatements*(interp: var Interpreter, source: string): (seq[NodeValue], 
 proc installGlobalTableMethods*(globalTableClass: Class)
 proc installLibraryMethods*()
 proc initHardingGlobal*(interp: var Interpreter)
-when defined(js):
-  proc dispatchPrimitive(interp: var Interpreter, receiver: Instance, selector: string, args: seq[NodeValue]): NodeValue
 
 # ============================================================================
 # Stack Trace Printing
@@ -595,8 +593,9 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
     # Check captured environment FIRST - captured variables from outer lexical scope
     # should take precedence over local temporaries in the current activation
     # This is the key difference: blocks capture variables from where they were defined,
-    # not where they're executed
-    if activation.currentMethod != nil and activation.currentMethod.capturedEnvInitialized and activation.currentMethod.capturedEnv.len > 0:
+    # not where they're executed. IMPORTANT: Only apply to blocks, NOT methods.
+    # Methods should access slots on the receiver, not captured lexical variables.
+    if activation.currentMethod != nil and activation.currentMethod.capturedEnvInitialized and activation.currentMethod.capturedEnv.len > 0 and not activation.currentMethod.isMethod:
       if name in activation.currentMethod.capturedEnv:
         let value = activation.currentMethod.capturedEnv[name].value
         debug("Found variable in captured environment: ", name, " = ", value.toString())
@@ -640,8 +639,9 @@ proc lookupVariableWithStatus(interp: Interpreter, name: string): LookupResult =
   if activation != nil:
     activation = activation.sender
   while activation != nil:
-    # Check captured environment
-    if activation.currentMethod != nil and activation.currentMethod.capturedEnvInitialized and activation.currentMethod.capturedEnv.len > 0:
+    # Check captured environment - IMPORTANT: Only for blocks, NOT methods
+    # Methods should access slots on the receiver, not captured lexical variables
+    if activation.currentMethod != nil and activation.currentMethod.capturedEnvInitialized and activation.currentMethod.capturedEnv.len > 0 and not activation.currentMethod.isMethod:
       if name in activation.currentMethod.capturedEnv:
         let value = activation.currentMethod.capturedEnv[name].value
         debug("Found variable in captured environment (parent): ", name, " = ", value.toString())
@@ -938,17 +938,27 @@ proc executeMethod(interp: var Interpreter, currentMethod: BlockNode,
 
   # Check for native implementation first
   when defined(js):
-    # JS builds: use selector-based dispatch for primitives
-    if currentMethod.selector.startsWith("primitive"):
-      debug("JS: Calling primitive via dispatcher: ", currentMethod.selector)
-      let savedReceiver = interp.currentReceiver
-      try:
-        let result = dispatchPrimitive(interp, receiver, currentMethod.selector, arguments)
-        if result.kind != vkNil or currentMethod.selector == "primitiveClone":  # Some primitives return nil legitimately
-          return result
-      except:
-        debug("JS: Primitive dispatcher failed, falling through")
-    elif nativeImplIsSet(currentMethod):
+    # JS builds: try primitive dispatch first, then nativeImpl if set
+    # Note: We don't have the selector here, so we try dispatching with a lookup
+    debug("JS: Checking for primitive dispatch")
+    var jsSavedReceiver = interp.currentReceiver
+    try:
+      # Try to find the selector by looking up the method in the class
+      var selector = ""
+      if definingClass != nil:
+        for sel, meth in definingClass.allMethods:
+          if meth == currentMethod:
+            selector = sel
+            break
+      if selector.startsWith("primitive"):
+        debug("JS: Calling primitive via dispatcher: ", selector)
+        let primResult = dispatchPrimitive(interp, receiver, selector, arguments)
+        if primResult.kind != vkNil or selector == "primitiveClone":
+          return primResult
+    except:
+      debug("JS: Primitive dispatcher failed, falling through")
+    jsSavedReceiver = interp.currentReceiver
+    if nativeImplIsSet(currentMethod):
       debug("Calling native implementation")
       let savedReceiver = interp.currentReceiver
       try:

@@ -8,6 +8,7 @@ Transcript := Object derive: #(window box scrolledWindow sourceView owner)
 
 Transcript>>initialize [
   window := nil.
+  sourceView := nil.
   owner := nil
 ]
 
@@ -22,7 +23,7 @@ Transcript>>show: anObject [
 Transcript>>showCr: anObject [
   # Append anObject's printString followed by a newline.
   sourceView notNil ifTrue: [
-    sourceView insertTextAtEnd: ("Banana", (anObject printString)).
+    sourceView insertTextAtEnd: (anObject printString).
     sourceView insertTextAtEnd: "\n".
     self scrollToBottom
   ]
@@ -71,6 +72,14 @@ Transcript>>scrollToBottom [
   sourceView notNil ifTrue: [
     sourceView scrollToEnd
   ]
+]
+
+Transcript>>checkSourceView [
+  # Debug method to see which sourceView we're using
+  sourceView notNil ifTrue: [
+    ^ ("Transcript sourceView: ", sourceView text firstLine)
+  ].
+  ^ "Transcript sourceView: nil"
 ]
 
 Transcript>>openWindowFor: anOwner [

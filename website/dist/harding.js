@@ -32,20 +32,20 @@ var NTI1090519043 = {size: 0, kind: 14, base: null, node: null, finalizer: null}
 var NTI1090519053 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI134217763 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI1224738312 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
-var NTI1241514021 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
-var NTI1241514022 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
+var NTI1241514282 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1241514283 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
 var NTI134217753 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1241517236 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
-var NTI1241514010 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1241524977 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
+var NTI1241517493 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1241514271 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1241525264 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
 var NTI1157631562 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
-var NTI1241524968 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
-var NTI1241524964 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
-var NTI1241514591 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
-var NTI1241524927 = {size: 0, kind: 14, base: null, node: null, finalizer: null};
-var NTI1241524928 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1241525255 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
+var NTI1241525251 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
+var NTI1241514849 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1241525214 = {size: 0, kind: 14, base: null, node: null, finalizer: null};
+var NTI1241525215 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI1157633137 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
-var NTI1241526569 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
+var NTI1241526856 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
 var NTI1157628019 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
 var NTI1157627915 = {size: 0, kind: 14, base: null, node: null, finalizer: null};
 var NTI1157627999 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
@@ -54,7 +54,7 @@ var NTI1157627916 = {size: 0, kind: 14, base: null, node: null, finalizer: null}
 var NTI1157627997 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI1157627917 = {size: 0, kind: 22, base: null, node: null, finalizer: null};
 var NTI1157628018 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
-var NTI1241514018 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1241514279 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI1224738179 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
 var NTI1224738062 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
 var NTI1224737484 = {size: 0, kind: 24, base: null, node: null, finalizer: null};
@@ -525,9 +525,9 @@ NTI1224737367.base = NTI1157627907;
 NTI1224737484.base = NTI1157627924;
 NTI1224738062.base = NTI33554449;
 NTI1224738179.base = NTI1157627907;
-var NNI1241514018 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1157627922, name: "Field0", sons: null}, 
+var NNI1241514279 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1157627922, name: "Field0", sons: null}, 
 {kind: 1, offset: "Field1", len: 0, typ: NTI33554449, name: "Field1", sons: null}]};
-NTI1241514018.node = NNI1241514018;
+NTI1241514279.node = NNI1241514279;
 var NNI1157627916 = {kind: 2, offset: 0, typ: null, name: null, len: 15, sons: {"0": {kind: 1, offset: 0, typ: NTI1157627916, name: "wfEvalNode", len: 0, sons: null}, 
 "1": {kind: 1, offset: 1, typ: NTI1157627916, name: "wfSendMessage", len: 0, sons: null}, 
 "2": {kind: 1, offset: 2, typ: NTI1157627916, name: "wfApplyBlock", len: 0, sons: null}, 
@@ -577,39 +577,39 @@ NTI1157627997.node = NNI1157627997;
 NTI1157627917.base = NTI1157627997;
 NTI1157628018.base = NTI1157627917;
 NTI1157628019.base = NTI1157627922;
-NTI1241526569.base = NTI1157627917;
+NTI1241526856.base = NTI1157627917;
 NTI1157633137.base = NTI1157627922;
-var NNI1241524927 = {kind: 2, offset: 0, typ: null, name: null, len: 4, sons: {"0": {kind: 1, offset: 0, typ: NTI1241524927, name: "vmRunning", len: 0, sons: null}, 
-"1": {kind: 1, offset: 1, typ: NTI1241524927, name: "vmYielded", len: 0, sons: null}, 
-"2": {kind: 1, offset: 2, typ: NTI1241524927, name: "vmCompleted", len: 0, sons: null}, 
-"3": {kind: 1, offset: 3, typ: NTI1241524927, name: "vmError", len: 0, sons: null}}};
-NTI1241524927.node = NNI1241524927;
-var NNI1241524928 = {kind: 2, len: 3, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "status", len: 0, typ: NTI1241524927, name: "status", sons: null}, 
+var NNI1241525214 = {kind: 2, offset: 0, typ: null, name: null, len: 4, sons: {"0": {kind: 1, offset: 0, typ: NTI1241525214, name: "vmRunning", len: 0, sons: null}, 
+"1": {kind: 1, offset: 1, typ: NTI1241525214, name: "vmYielded", len: 0, sons: null}, 
+"2": {kind: 1, offset: 2, typ: NTI1241525214, name: "vmCompleted", len: 0, sons: null}, 
+"3": {kind: 1, offset: 3, typ: NTI1241525214, name: "vmError", len: 0, sons: null}}};
+NTI1241525214.node = NNI1241525214;
+var NNI1241525215 = {kind: 2, len: 3, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "status", len: 0, typ: NTI1241525214, name: "status", sons: null}, 
 {kind: 1, offset: "value", len: 0, typ: NTI1157627922, name: "value", sons: null}, 
 {kind: 1, offset: "error", len: 0, typ: NTI33554449, name: "error", sons: null}]};
-NTI1241524928.node = NNI1241524928;
-var NNI1241514591 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI33554466, name: "Field0", sons: null}, 
+NTI1241525215.node = NNI1241525215;
+var NNI1241514849 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI33554466, name: "Field0", sons: null}, 
 {kind: 1, offset: "Field1", len: 0, typ: NTI1157627922, name: "Field1", sons: null}]};
-NTI1241514591.node = NNI1241514591;
-NTI1241524964.base = NTI1157627907;
-NTI1241524968.base = NTI1157627907;
+NTI1241514849.node = NNI1241514849;
+NTI1241525251.base = NTI1157627907;
+NTI1241525255.base = NTI1157627907;
 NTI1157631562.base = NTI1157627922;
-NTI1241524977.base = NTI1157627924;
-var NNI1241514010 = {kind: 1, offset: "node", len: 0, typ: NTI1157627907, name: "node", sons: null};
-NTI1241514010.node = NNI1241514010;
-NTI1241514010.base = NTI134217746;
-var NNI1241517236 = {kind: 2, len: 4, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "currentMethod", len: 0, typ: NTI1157627919, name: "currentMethod", sons: null}, 
+NTI1241525264.base = NTI1157627924;
+var NNI1241514271 = {kind: 1, offset: "node", len: 0, typ: NTI1157627907, name: "node", sons: null};
+NTI1241514271.node = NNI1241514271;
+NTI1241514271.base = NTI134217746;
+var NNI1241517493 = {kind: 2, len: 4, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "currentMethod", len: 0, typ: NTI1157627919, name: "currentMethod", sons: null}, 
 {kind: 1, offset: "receiver", len: 0, typ: NTI1157627910, name: "receiver", sons: null}, 
 {kind: 1, offset: "definingClass", len: 0, typ: NTI1157627909, name: "definingClass", sons: null}, 
 {kind: 1, offset: "found", len: 0, typ: NTI33554466, name: "found", sons: null}]};
-NTI1241517236.node = NNI1241517236;
+NTI1241517493.node = NNI1241517493;
 var NNI134217753 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
 NTI134217753.node = NNI134217753;
 NTI134217753.base = NTI33555172;
-NTI1241514022.base = NTI1157627922;
-var NNI1241514021 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1241514022, name: "Field0", sons: null}, 
+NTI1241514283.base = NTI1157627922;
+var NNI1241514282 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1241514283, name: "Field0", sons: null}, 
 {kind: 1, offset: "Field1", len: 0, typ: NTI33554449, name: "Field1", sons: null}]};
-NTI1241514021.node = NNI1241514021;
+NTI1241514282.node = NNI1241514282;
 NTI1224738312.base = NTI1157627907;
 var NNI134217763 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
 NTI134217763.node = NNI134217763;
@@ -1522,54 +1522,78 @@ var ConstSet151 = setConstr(0);
 var ConstSet152 = setConstr(0);
 var ConstSet153 = setConstr(0);
 var ConstSet154 = setConstr(0);
-var ConstSet155 = setConstr([65, 90]);
-var ConstSet156 = setConstr(9);
-var ConstSet157 = setConstr(9);
-var ConstSet158 = setConstr([65, 90]);
-var ConstSet159 = setConstr(9);
-var ConstSet160 = setConstr(9);
-var ConstSet161 = setConstr(0);
+var ConstSet155 = setConstr(1);
+var ConstSet156 = setConstr(1);
+var ConstSet157 = setConstr(2);
+var ConstSet158 = setConstr(2);
+var ConstSet159 = setConstr(3);
+var ConstSet160 = setConstr(4);
+var ConstSet161 = setConstr(5);
 var ConstSet162 = setConstr(0);
-var ConstSet163 = setConstr(6);
-var ConstSet164 = setConstr(10);
+var ConstSet163 = setConstr(0);
+var ConstSet164 = setConstr(0);
 var ConstSet165 = setConstr(0);
-var ConstSet166 = setConstr(1);
-var ConstSet167 = setConstr(2);
+var ConstSet166 = setConstr(3);
+var ConstSet167 = setConstr(0);
 var ConstSet168 = setConstr(4);
-var ConstSet169 = setConstr(0);
-var ConstSet170 = setConstr(7);
-var ConstSet171 = setConstr(8);
-var ConstSet172 = setConstr(9);
-var ConstSet173 = setConstr(0);
-var ConstSet174 = setConstr(3);
-var ConstSet175 = setConstr(6);
-var ConstSet176 = setConstr(10);
+var ConstSet169 = setConstr(1);
+var ConstSet170 = setConstr(5);
+var ConstSet171 = setConstr(2);
+var ConstSet172 = setConstr(10);
+var ConstSet173 = setConstr(9);
+var ConstSet174 = setConstr(9);
+var ConstSet175 = setConstr(0);
+var ConstSet176 = setConstr(0);
 var ConstSet177 = setConstr(0);
-var ConstSet178 = setConstr(1);
-var ConstSet179 = setConstr(2);
-var ConstSet180 = setConstr(7);
-var ConstSet181 = setConstr(8);
-var ConstSet182 = setConstr(4);
-var ConstSet183 = setConstr(0);
-var ConstSet184 = setConstr(0);
+var ConstSet178 = setConstr(0);
+var ConstSet179 = setConstr([65, 90]);
+var ConstSet180 = setConstr(9);
+var ConstSet181 = setConstr(9);
+var ConstSet182 = setConstr([65, 90]);
+var ConstSet183 = setConstr(9);
+var ConstSet184 = setConstr(9);
 var ConstSet185 = setConstr(0);
-var ConstSet186 = setConstr(10);
-var ConstSet187 = setConstr(0);
-var ConstSet188 = setConstr(1);
-var ConstSet189 = setConstr(2);
-var ConstSet190 = setConstr(7);
-var ConstSet191 = setConstr(8);
+var ConstSet186 = setConstr(0);
+var ConstSet187 = setConstr(6);
+var ConstSet188 = setConstr(10);
+var ConstSet189 = setConstr(0);
+var ConstSet190 = setConstr(1);
+var ConstSet191 = setConstr(2);
 var ConstSet192 = setConstr(4);
 var ConstSet193 = setConstr(0);
-var ConstSet194 = setConstr(0);
-var ConstSet195 = setConstr(0);
-var ConstSet196 = setConstr(4);
+var ConstSet194 = setConstr(7);
+var ConstSet195 = setConstr(8);
+var ConstSet196 = setConstr(9);
 var ConstSet197 = setConstr(0);
-var ConstSet198 = setConstr(1);
-var ConstSet199 = setConstr(2);
-var ConstSet200 = setConstr(3);
-var ConstSet201 = setConstr(7);
-var ConstSet202 = setConstr(8);
+var ConstSet198 = setConstr(3);
+var ConstSet199 = setConstr(6);
+var ConstSet200 = setConstr(10);
+var ConstSet201 = setConstr(0);
+var ConstSet202 = setConstr(1);
+var ConstSet203 = setConstr(2);
+var ConstSet204 = setConstr(7);
+var ConstSet205 = setConstr(8);
+var ConstSet206 = setConstr(4);
+var ConstSet207 = setConstr(0);
+var ConstSet208 = setConstr(0);
+var ConstSet209 = setConstr(0);
+var ConstSet210 = setConstr(10);
+var ConstSet211 = setConstr(0);
+var ConstSet212 = setConstr(1);
+var ConstSet213 = setConstr(2);
+var ConstSet214 = setConstr(7);
+var ConstSet215 = setConstr(8);
+var ConstSet216 = setConstr(4);
+var ConstSet217 = setConstr(0);
+var ConstSet218 = setConstr(0);
+var ConstSet219 = setConstr(0);
+var ConstSet220 = setConstr(4);
+var ConstSet221 = setConstr(0);
+var ConstSet222 = setConstr(1);
+var ConstSet223 = setConstr(2);
+var ConstSet224 = setConstr(3);
+var ConstSet225 = setConstr(7);
+var ConstSet226 = setConstr(8);
 
 function reraiseException() {
     if ((lastJSError == null)) {
@@ -1589,19 +1613,19 @@ function reraiseException() {
 
   
 }
-var ConstSet203 = setConstr(10);
-var ConstSet204 = setConstr(10);
-var ConstSet205 = setConstr(9);
-var ConstSet206 = setConstr(9);
-var ConstSet207 = setConstr(9);
-var ConstSet208 = setConstr(9);
-var ConstSet209 = setConstr(9);
-var ConstSet210 = setConstr(9);
-var ConstSet211 = setConstr(9);
-var ConstSet212 = setConstr(9);
-var ConstSet213 = setConstr(9);
-var ConstSet214 = setConstr([97, 122], [65, 90], [48, 57], 95);
-var ConstSet215 = setConstr([65, 90]);
+var ConstSet227 = setConstr(10);
+var ConstSet228 = setConstr(10);
+var ConstSet229 = setConstr(9);
+var ConstSet230 = setConstr(9);
+var ConstSet231 = setConstr(9);
+var ConstSet232 = setConstr(9);
+var ConstSet233 = setConstr(9);
+var ConstSet234 = setConstr(9);
+var ConstSet235 = setConstr(9);
+var ConstSet236 = setConstr(9);
+var ConstSet237 = setConstr(9);
+var ConstSet238 = setConstr([97, 122], [65, 90], [48, 57], 95);
+var ConstSet239 = setConstr([65, 90]);
 
 function absInt(a_p0) {
     var Temporary1;
@@ -2024,11 +2048,11 @@ framePtr = F;
 framePtr = F.prev;
 var F = {procname: "module vm", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
 framePtr = F;
-F.line = 37;
+F.line = 232;
 F.filename = "vm.nim";
-var protectedGlobals_1241514005 = [[[72,97,114,100,105,110,103], [71,108,111,98,97,108,84,97,98,108,101], [79,98,106,101,99,116], [82,111,111,116], [77,105,120,105,110], [110,105,108], [116,114,117,101], [102,97,108,115,101]]];
-F.line = 2466;
-var globalTableProxies_1241532190 = [[]];
+var protectedGlobals_1241514334 = [[[72,97,114,100,105,110,103], [71,108,111,98,97,108,84,97,98,108,101], [79,98,106,101,99,116], [82,111,111,116], [77,105,120,105,110], [110,105,108], [116,114,117,101], [102,97,108,115,101]]];
+F.line = 2700;
+var globalTableProxies_1241532552 = [[]];
 framePtr = F.prev;
 var F = {procname: "module vm", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
 framePtr = F;
@@ -2040,24 +2064,24 @@ var F = {procname: "module jslib", prev: framePtr, filename: "/home/gokr/tankfeu
 framePtr = F;
 framePtr = F.prev;
 
-function new__OOZinterpreterZvm_u389() {
-  var result_1241514376 = null;
+function new__OOZinterpreterZvm_u718() {
+  var result_1241514705 = null;
 
   var F = {procname: "new.new", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     F.line = 838;
     F.filename = "system.nim";
-    var r_1241514378 = null;
+    var r_1241514707 = null;
     F.line = 839;
-    r_1241514378 = ({data: [], counter: 0});
+    r_1241514707 = ({data: [], counter: 0});
     F.line = 840;
-    result_1241514376 = r_1241514378;
+    result_1241514705 = r_1241514707;
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241514376;
+  return result_1241514705;
 
 }
 
@@ -5671,27 +5695,27 @@ function newInstance__OOZcoreZtypes_u6265(cls_p0) {
 
 }
 
-function newInterpreter__OOZinterpreterZvm_u383(trace_p0, maxStackDepth_p1) {
-  var result_1241514370 = null;
+function newInterpreter__OOZinterpreterZvm_u712(trace_p0, maxStackDepth_p1) {
+  var result_1241514699 = null;
 
   var F = {procname: "vm.newInterpreter", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 257;
+    F.line = 452;
     F.filename = "vm.nim";
-    result_1241514370 = {globals: new__OOZinterpreterZvm_u389(), activationStack: [], currentActivation: null, currentReceiver: null, maxStackDepth: maxStackDepth_p1, traceExecution: trace_p0, lastResult: nilValue__OOZcoreZtypes_u1406(), rootObject: null, rootClass: null, exceptionHandlers: [], schedulerContextPtr: 0, hardingHome: [], shouldYield: false, workQueue: [], evalStack: [], importedLibraries: []};
-    F.line = 269;
-    result_1241514370.globals = nimCopy(result_1241514370.globals, initTable__OOZcoreZtypes_u1618(32), NTI1157628008);
-    F.line = 273;
-    var objCls_1241514402 = initCoreClasses__OOZinterpreterZobjects_u2014();
-    F.line = 274;
-    result_1241514370.rootClass = objCls_1241514402;
-    F.line = 275;
-    result_1241514370.currentReceiver = newInstance__OOZcoreZtypes_u6265(objCls_1241514402);
-    F.line = 276;
-    result_1241514370.rootObject = result_1241514370.currentReceiver;
+    result_1241514699 = {globals: new__OOZinterpreterZvm_u718(), activationStack: [], currentActivation: null, currentReceiver: null, maxStackDepth: maxStackDepth_p1, traceExecution: trace_p0, lastResult: nilValue__OOZcoreZtypes_u1406(), rootObject: null, rootClass: null, exceptionHandlers: [], schedulerContextPtr: 0, hardingHome: [], shouldYield: false, workQueue: [], evalStack: [], importedLibraries: []};
+    F.line = 464;
+    result_1241514699.globals = nimCopy(result_1241514699.globals, initTable__OOZcoreZtypes_u1618(32), NTI1157628008);
+    F.line = 468;
+    var objCls_1241514731 = initCoreClasses__OOZinterpreterZobjects_u2014();
+    F.line = 469;
+    result_1241514699.rootClass = objCls_1241514731;
+    F.line = 470;
+    result_1241514699.currentReceiver = newInstance__OOZcoreZtypes_u6265(objCls_1241514731);
+    F.line = 471;
+    result_1241514699.rootObject = result_1241514699.currentReceiver;
   framePtr = F.prev;
 
-  return result_1241514370;
+  return result_1241514699;
 
 }
 
@@ -5709,14 +5733,14 @@ function toValue__OOZcoreZtypes_u1482(cls_p0) {
 
 }
 
-function protectGlobal__OOZinterpreterZvm_u22(name_p0) {
+function protectGlobal__OOZinterpreterZvm_u351(name_p0) {
   var F = {procname: "vm.protectGlobal", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    if (!(contains__stdZenumutils_u50(protectedGlobals_1241514005[0], name_p0))) {
-    F.line = 43;
+    if (!(contains__stdZenumutils_u50(protectedGlobals_1241514334[0], name_p0))) {
+    F.line = 238;
     F.filename = "vm.nim";
     var Temporary1 = nimCopy(null, name_p0, NTI33554449);
-    protectedGlobals_1241514005[0].push(Temporary1);;
+    protectedGlobals_1241514334[0].push(Temporary1);;
     }
     
   framePtr = F.prev;
@@ -5724,26 +5748,26 @@ function protectGlobal__OOZinterpreterZvm_u22(name_p0) {
   
 }
 
-function installLibraryMethods__OOZinterpreterZvm_u57() {
+function installLibraryMethods__OOZinterpreterZvm_u386() {
   var F = {procname: "vm.installLibraryMethods", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     if ((libraryClass_1157628218[0] == null)) {
-    F.line = 2734;
+    F.line = 2968;
     F.filename = "vm.nim";
     break BeforeRet;
     }
     
-    F.line = 2736;
-    var loadMethod_1241533193 = createCoreMethod__OOZinterpreterZobjects_u316([108,111,97,100,58]);
+    F.line = 2970;
+    var loadMethod_1241533555 = createCoreMethod__OOZinterpreterZobjects_u316([108,111,97,100,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    loadMethod_1241533193.nativeImpl = 0;
-    F.line = 2738;
+    loadMethod_1241533555.nativeImpl = 0;
+    F.line = 2972;
     F.filename = "vm.nim";
-    loadMethod_1241533193.hasInterpreterParam = true;
-    F.line = 2739;
-    addMethodToClass__OOZinterpreterZobjects_u1889(libraryClass_1157628218[0], [108,111,97,100,58], loadMethod_1241533193, false);
+    loadMethod_1241533555.hasInterpreterParam = true;
+    F.line = 2973;
+    addMethodToClass__OOZinterpreterZobjects_u1889(libraryClass_1157628218[0], [108,111,97,100,58], loadMethod_1241533555, false);
   };
   framePtr = F.prev;
 
@@ -5766,44 +5790,44 @@ function hasKey__OOZcoreZtypes_u1708(t_p0, key_p1) {
 
 }
 
-function contains__OOZinterpreterZvm_u1463(t_p0, key_p1) {
-  var result_1241515452 = false;
+function contains__OOZinterpreterZvm_u1792(t_p0, key_p1) {
+  var result_1241515781 = false;
 
   var F = {procname: "contains.contains", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     F.line = 381;
     F.filename = "tables.nim";
-    result_1241515452 = hasKey__OOZcoreZtypes_u1708(t_p0, key_p1);
+    result_1241515781 = hasKey__OOZcoreZtypes_u1708(t_p0, key_p1);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241515452;
+  return result_1241515781;
 
 }
 
-function createGlobalTableClass__OOZinterpreterZvm_u18207() {
+function createGlobalTableClass__OOZinterpreterZvm_u18569() {
               var Temporary5;
 
-  var result_1241532192 = null;
+  var result_1241532554 = null;
 
   var F = {procname: "vm.createGlobalTableClass", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     if (((tableClass_1157628216[0] == null) || (objectClass_1157628208[0] == null))) {
-    F.line = 2474;
+    F.line = 2708;
     F.filename = "vm.nim";
-    result_1241532192 = null;
+    result_1241532554 = null;
     break BeforeRet;
     }
     
-    if ((contains__OOZcoreZtypes_u4367(objectClass_1157628208[0].allClassMethods, [71,108,111,98,97,108,84,97,98,108,101]) || contains__OOZinterpreterZvm_u1463(globals_1493172616[0], [71,108,111,98,97,108,84,97,98,108,101]))) {
+    if ((contains__OOZcoreZtypes_u4367(objectClass_1157628208[0].allClassMethods, [71,108,111,98,97,108,84,97,98,108,101]) || contains__OOZinterpreterZvm_u1792(globals_1493172616[0], [71,108,111,98,97,108,84,97,98,108,101]))) {
     Label1: {
-      F.line = 2478;
-      var name_1241532291 = [];
-      F.line = 2478;
-      var val_1241532292 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+      F.line = 2712;
+      var name_1241532653 = [];
+      F.line = 2712;
+      var val_1241532654 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
       F.line = 767;
       F.filename = "tables.nim";
       var L_587202795 = len__OOZcoreZtypes_u1601(globals_1493172616[0]);
@@ -5827,16 +5851,16 @@ function createGlobalTableClass__OOZinterpreterZvm_u18207() {
               F.filename = "tables.nim";
               h_587202797 = res_587202799;
               if (isFilled__pureZcollectionsZtables_u31(globals_1493172616[0].data[chckIndx(h_587202797, 0, (globals_1493172616[0].data).length - 1)].Field0)) {
-              F.line = 2478;
+              F.line = 2712;
               F.filename = "vm.nim";
-              name_1241532291 = globals_1493172616[0].data[chckIndx(h_587202797, 0, (globals_1493172616[0].data).length - 1)].Field1;
-              F.line = 2478;
-              val_1241532292 = nimCopy(val_1241532292, globals_1493172616[0].data[chckIndx(h_587202797, 0, (globals_1493172616[0].data).length - 1)].Field2, NTI1157627922);
-              if ((eqStrings(name_1241532291, [71,108,111,98,97,108,84,97,98,108,101]) && (val_1241532292.kind == 9))) {
-              F.line = 2480;
-              var Temporary5 = val_1241532292;
+              name_1241532653 = globals_1493172616[0].data[chckIndx(h_587202797, 0, (globals_1493172616[0].data).length - 1)].Field1;
+              F.line = 2712;
+              val_1241532654 = nimCopy(val_1241532654, globals_1493172616[0].data[chckIndx(h_587202797, 0, (globals_1493172616[0].data).length - 1)].Field2, NTI1157627922);
+              if ((eqStrings(name_1241532653, [71,108,111,98,97,108,84,97,98,108,101]) && (val_1241532654.kind == 9))) {
+              F.line = 2714;
+              var Temporary5 = val_1241532654;
               if (ConstSet5[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
-              result_1241532192 = Temporary5.classVal;
+              result_1241532554 = Temporary5.classVal;
               break BeforeRet;
               }
               
@@ -5857,95 +5881,95 @@ function createGlobalTableClass__OOZinterpreterZvm_u18207() {
     };
     }
     
-    F.line = 2482;
+    F.line = 2716;
     F.filename = "vm.nim";
-    var globalTableClass_1241532301 = newClass__OOZcoreZtypes_u3447([tableClass_1157628216[0]], [], [71,108,111,98,97,108,84,97,98,108,101]);
-    F.line = 2483;
-    globalTableClass_1241532301.tags = nimCopy(null, [[71,108,111,98,97,108,84,97,98,108,101], [68,105,99,116,105,111,110,97,114,121]], NTI1157629971);
-    F.line = 2484;
-    globalTableClass_1241532301.isNimProxy = true;
-    F.line = 2485;
-    globalTableClass_1241532301.hardingType = nimCopy(null, [71,108,111,98,97,108,84,97,98,108,101], NTI33554449);
-    F.line = 2490;
-    result_1241532192 = globalTableClass_1241532301;
+    var globalTableClass_1241532663 = newClass__OOZcoreZtypes_u3447([tableClass_1157628216[0]], [], [71,108,111,98,97,108,84,97,98,108,101]);
+    F.line = 2717;
+    globalTableClass_1241532663.tags = nimCopy(null, [[71,108,111,98,97,108,84,97,98,108,101], [68,105,99,116,105,111,110,97,114,121]], NTI1157629971);
+    F.line = 2718;
+    globalTableClass_1241532663.isNimProxy = true;
+    F.line = 2719;
+    globalTableClass_1241532663.hardingType = nimCopy(null, [71,108,111,98,97,108,84,97,98,108,101], NTI33554449);
+    F.line = 2724;
+    result_1241532554 = globalTableClass_1241532663;
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241532192;
+  return result_1241532554;
 
 }
 
-function installGlobalTableMethods__OOZinterpreterZvm_u55(globalTableClass_p0) {
+function installGlobalTableMethods__OOZinterpreterZvm_u384(globalTableClass_p0) {
   var F = {procname: "vm.installGlobalTableMethods", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     if ((globalTableClass_p0 == null)) {
-    F.line = 2745;
+    F.line = 2979;
     F.filename = "vm.nim";
     break BeforeRet;
     }
     
-    F.line = 2748;
-    var atMethod_1241533200 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58]);
+    F.line = 2982;
+    var atMethod_1241533562 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    atMethod_1241533200.nativeImpl = 0;
-    F.line = 2750;
+    atMethod_1241533562.nativeImpl = 0;
+    F.line = 2984;
     F.filename = "vm.nim";
-    atMethod_1241533200.hasInterpreterParam = true;
-    F.line = 2751;
-    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [97,116,58], atMethod_1241533200, false);
-    F.line = 2754;
-    var atPutMethod_1241533201 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58,112,117,116,58]);
+    atMethod_1241533562.hasInterpreterParam = true;
+    F.line = 2985;
+    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [97,116,58], atMethod_1241533562, false);
+    F.line = 2988;
+    var atPutMethod_1241533563 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58,112,117,116,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    atPutMethod_1241533201.nativeImpl = 0;
-    F.line = 2756;
+    atPutMethod_1241533563.nativeImpl = 0;
+    F.line = 2990;
     F.filename = "vm.nim";
-    atPutMethod_1241533201.hasInterpreterParam = true;
-    F.line = 2757;
-    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [97,116,58,112,117,116,58], atPutMethod_1241533201, false);
-    F.line = 2760;
-    var keysMethod_1241533202 = createCoreMethod__OOZinterpreterZobjects_u316([107,101,121,115]);
+    atPutMethod_1241533563.hasInterpreterParam = true;
+    F.line = 2991;
+    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [97,116,58,112,117,116,58], atPutMethod_1241533563, false);
+    F.line = 2994;
+    var keysMethod_1241533564 = createCoreMethod__OOZinterpreterZobjects_u316([107,101,121,115]);
     F.line = 11;
     F.filename = "objects.nim";
-    keysMethod_1241533202.nativeImpl = 0;
-    F.line = 2762;
+    keysMethod_1241533564.nativeImpl = 0;
+    F.line = 2996;
     F.filename = "vm.nim";
-    keysMethod_1241533202.hasInterpreterParam = true;
-    F.line = 2763;
-    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [107,101,121,115], keysMethod_1241533202, false);
-    F.line = 2766;
-    var includesKeyMethod_1241533203 = createCoreMethod__OOZinterpreterZobjects_u316([105,110,99,108,117,100,101,115,75,101,121,58]);
+    keysMethod_1241533564.hasInterpreterParam = true;
+    F.line = 2997;
+    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [107,101,121,115], keysMethod_1241533564, false);
+    F.line = 3000;
+    var includesKeyMethod_1241533565 = createCoreMethod__OOZinterpreterZobjects_u316([105,110,99,108,117,100,101,115,75,101,121,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    includesKeyMethod_1241533203.nativeImpl = 0;
-    F.line = 2768;
+    includesKeyMethod_1241533565.nativeImpl = 0;
+    F.line = 3002;
     F.filename = "vm.nim";
-    includesKeyMethod_1241533203.hasInterpreterParam = true;
-    F.line = 2769;
-    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [105,110,99,108,117,100,101,115,75,101,121,58], includesKeyMethod_1241533203, false);
-    F.line = 2772;
-    var loadMethod_1241533204 = createCoreMethod__OOZinterpreterZobjects_u316([108,111,97,100,58]);
+    includesKeyMethod_1241533565.hasInterpreterParam = true;
+    F.line = 3003;
+    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [105,110,99,108,117,100,101,115,75,101,121,58], includesKeyMethod_1241533565, false);
+    F.line = 3006;
+    var loadMethod_1241533566 = createCoreMethod__OOZinterpreterZobjects_u316([108,111,97,100,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    loadMethod_1241533204.nativeImpl = 0;
-    F.line = 2774;
+    loadMethod_1241533566.nativeImpl = 0;
+    F.line = 3008;
     F.filename = "vm.nim";
-    loadMethod_1241533204.hasInterpreterParam = true;
-    F.line = 2775;
-    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [108,111,97,100,58], loadMethod_1241533204, false);
-    F.line = 2778;
-    var importMethod_1241533205 = createCoreMethod__OOZinterpreterZobjects_u316([105,109,112,111,114,116,58]);
+    loadMethod_1241533566.hasInterpreterParam = true;
+    F.line = 3009;
+    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [108,111,97,100,58], loadMethod_1241533566, false);
+    F.line = 3012;
+    var importMethod_1241533567 = createCoreMethod__OOZinterpreterZobjects_u316([105,109,112,111,114,116,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    importMethod_1241533205.nativeImpl = 0;
-    F.line = 2780;
+    importMethod_1241533567.nativeImpl = 0;
+    F.line = 3014;
     F.filename = "vm.nim";
-    importMethod_1241533205.hasInterpreterParam = true;
-    F.line = 2781;
-    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [105,109,112,111,114,116,58], importMethod_1241533205, false);
+    importMethod_1241533567.hasInterpreterParam = true;
+    F.line = 3015;
+    addMethodToClass__OOZinterpreterZobjects_u1889(globalTableClass_p0, [105,109,112,111,114,116,58], importMethod_1241533567, false);
   };
   framePtr = F.prev;
 
@@ -5966,1176 +5990,1176 @@ function toValue__OOZcoreZtypes_u1501(inst_p0) {
 
 }
 
-function initHardingGlobal__OOZinterpreterZvm_u58(interp_p0, interp_p0_Idx) {
+function initHardingGlobal__OOZinterpreterZvm_u387(interp_p0, interp_p0_Idx) {
   var F = {procname: "vm.initHardingGlobal", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
-    F.line = 2496;
+    F.line = 2730;
     F.filename = "vm.nim";
-    var globalTableClass_1241532308 = createGlobalTableClass__OOZinterpreterZvm_u18207();
-    if ((globalTableClass_1241532308 == null)) {
-    F.line = 2498;
+    var globalTableClass_1241532670 = createGlobalTableClass__OOZinterpreterZvm_u18569();
+    if ((globalTableClass_1241532670 == null)) {
+    F.line = 2732;
     break BeforeRet;
     }
     
-    F.line = 2501;
-    installGlobalTableMethods__OOZinterpreterZvm_u55(globalTableClass_1241532308);
-    F.line = 2504;
-    var proxy_1241532313 = {globals: interp_p0[interp_p0_Idx].globals};
-    F.line = 2505;
-    globalTableProxies_1241532190[0].push(proxy_1241532313);;
-    F.line = 2506;
-    var globalTableInstance_1241532322 = {kind: 0, class: globalTableClass_1241532308, slots: [], m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-    F.line = 2507;
-    globalTableInstance_1241532322.isNimProxy = true;
-    F.line = 2512;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [72,97,114,100,105,110,103], toValue__OOZcoreZtypes_u1501(globalTableInstance_1241532322));
-    F.line = 2515;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [71,108,111,98,97,108,84,97,98,108,101], toValue__OOZcoreZtypes_u1482(globalTableClass_1241532308));
+    F.line = 2735;
+    installGlobalTableMethods__OOZinterpreterZvm_u384(globalTableClass_1241532670);
+    F.line = 2738;
+    var proxy_1241532675 = {globals: interp_p0[interp_p0_Idx].globals};
+    F.line = 2739;
+    globalTableProxies_1241532552[0].push(proxy_1241532675);;
+    F.line = 2740;
+    var globalTableInstance_1241532684 = {kind: 0, class: globalTableClass_1241532670, slots: [], m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+    F.line = 2741;
+    globalTableInstance_1241532684.isNimProxy = true;
+    F.line = 2746;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [72,97,114,100,105,110,103], toValue__OOZcoreZtypes_u1501(globalTableInstance_1241532684));
+    F.line = 2749;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [71,108,111,98,97,108,84,97,98,108,101], toValue__OOZcoreZtypes_u1482(globalTableClass_1241532670));
   };
   framePtr = F.prev;
 
   
 }
 
-function initGlobals__OOZinterpreterZvm_u8031(interp_p0, interp_p0_Idx) {
+function initGlobals__OOZinterpreterZvm_u8393(interp_p0, interp_p0_Idx) {
   var F = {procname: "vm.initGlobals", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 1545;
+    F.line = 1779;
     F.filename = "vm.nim";
-    var rootCls_1241522017 = initRootClass__OOZcoreZtypes_u3459();
-    F.line = 1571;
-    var addSuperclassMethod_1241522050 = createCoreMethod__OOZinterpreterZobjects_u316([97,100,100,83,117,112,101,114,99,108,97,115,115,58]);
+    var rootCls_1241522379 = initRootClass__OOZcoreZtypes_u3459();
+    F.line = 1805;
+    var addSuperclassMethod_1241522412 = createCoreMethod__OOZinterpreterZobjects_u316([97,100,100,83,117,112,101,114,99,108,97,115,115,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    addSuperclassMethod_1241522050.nativeImpl = 0;
-    F.line = 1573;
+    addSuperclassMethod_1241522412.nativeImpl = 0;
+    F.line = 1807;
     F.filename = "vm.nim";
-    addSuperclassMethod_1241522050.hasInterpreterParam = true;
-    F.line = 1574;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(rootCls_1241522017.classMethods, [97,100,100,83,117,112,101,114,99,108,97,115,115,58], addSuperclassMethod_1241522050);
-    F.line = 1575;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(rootCls_1241522017.allClassMethods, [97,100,100,83,117,112,101,114,99,108,97,115,115,58], addSuperclassMethod_1241522050);
-    F.line = 1579;
-    var objectCls_1241522135 = null;
+    addSuperclassMethod_1241522412.hasInterpreterParam = true;
+    F.line = 1808;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(rootCls_1241522379.classMethods, [97,100,100,83,117,112,101,114,99,108,97,115,115,58], addSuperclassMethod_1241522412);
+    F.line = 1809;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(rootCls_1241522379.allClassMethods, [97,100,100,83,117,112,101,114,99,108,97,115,115,58], addSuperclassMethod_1241522412);
+    F.line = 1813;
+    var objectCls_1241522497 = null;
     if ((objectClass_1157628208[0] == null)) {
-    F.line = 1582;
-    objectCls_1241522135 = newClass__OOZcoreZtypes_u3447([rootCls_1241522017], [], [79,98,106,101,99,116]);
-    F.line = 1583;
-    objectCls_1241522135.tags = nimCopy(null, [[79,98,106,101,99,116]], NTI1157629904);
-    F.line = 1584;
-    objectClass_1157628208[0] = objectCls_1241522135;
+    F.line = 1816;
+    objectCls_1241522497 = newClass__OOZcoreZtypes_u3447([rootCls_1241522379], [], [79,98,106,101,99,116]);
+    F.line = 1817;
+    objectCls_1241522497.tags = nimCopy(null, [[79,98,106,101,99,116]], NTI1157629904);
+    F.line = 1818;
+    objectClass_1157628208[0] = objectCls_1241522497;
     }
     else {
-      F.line = 1587;
-      objectCls_1241522135 = objectClass_1157628208[0];
+      F.line = 1821;
+      objectCls_1241522497 = objectClass_1157628208[0];
     }
     
-    F.line = 1596;
-    var classNewMethod_1241522161 = createCoreMethod__OOZinterpreterZobjects_u316([110,101,119]);
+    F.line = 1830;
+    var classNewMethod_1241522523 = createCoreMethod__OOZinterpreterZobjects_u316([110,101,119]);
     F.line = 11;
     F.filename = "objects.nim";
-    classNewMethod_1241522161.nativeImpl = 0;
-    F.line = 1598;
+    classNewMethod_1241522523.nativeImpl = 0;
+    F.line = 1832;
     F.filename = "vm.nim";
-    classNewMethod_1241522161.hasInterpreterParam = true;
-    F.line = 1599;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [110,101,119], classNewMethod_1241522161);
-    F.line = 1600;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [110,101,119], classNewMethod_1241522161);
-    F.line = 1609;
-    var classNewInstanceMethod_1241522259 = createCoreMethod__OOZinterpreterZobjects_u316([110,101,119,73,110,115,116,97,110,99,101]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    classNewInstanceMethod_1241522259.nativeImpl = 0;
-    F.line = 1611;
-    F.filename = "vm.nim";
-    classNewInstanceMethod_1241522259.hasInterpreterParam = true;
-    F.line = 1612;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [110,101,119,73,110,115,116,97,110,99,101], classNewInstanceMethod_1241522259);
-    F.line = 1613;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [110,101,119,73,110,115,116,97,110,99,101], classNewInstanceMethod_1241522259);
-    F.line = 1616;
-    var objPerformMethod_1241522344 = createCoreMethod__OOZinterpreterZobjects_u316([112,101,114,102,111,114,109,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objPerformMethod_1241522344.nativeImpl = 0;
-    F.line = 1618;
-    F.filename = "vm.nim";
-    objPerformMethod_1241522344.hasInterpreterParam = true;
-    F.line = 1619;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,101,114,102,111,114,109,58], objPerformMethod_1241522344);
-    F.line = 1620;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,101,114,102,111,114,109,58], objPerformMethod_1241522344);
-    F.line = 1622;
-    var objPerformWithMethod_1241522429 = createCoreMethod__OOZinterpreterZobjects_u316([112,101,114,102,111,114,109,58,119,105,116,104,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objPerformWithMethod_1241522429.nativeImpl = 0;
-    F.line = 1624;
-    F.filename = "vm.nim";
-    objPerformWithMethod_1241522429.hasInterpreterParam = true;
-    F.line = 1625;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,101,114,102,111,114,109,58,119,105,116,104,58], objPerformWithMethod_1241522429);
-    F.line = 1626;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,101,114,102,111,114,109,58,119,105,116,104,58], objPerformWithMethod_1241522429);
-    F.line = 1628;
-    var objPerformWithWithMethod_1241522514 = createCoreMethod__OOZinterpreterZobjects_u316([112,101,114,102,111,114,109,58,119,105,116,104,58,119,105,116,104,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objPerformWithWithMethod_1241522514.nativeImpl = 0;
-    F.line = 1630;
-    F.filename = "vm.nim";
-    objPerformWithWithMethod_1241522514.hasInterpreterParam = true;
-    F.line = 1631;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,101,114,102,111,114,109,58,119,105,116,104,58,119,105,116,104,58], objPerformWithWithMethod_1241522514);
-    F.line = 1632;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,101,114,102,111,114,109,58,119,105,116,104,58,119,105,116,104,58], objPerformWithWithMethod_1241522514);
-    F.line = 1635;
-    var objIdentityMethod_1241522599 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,100,101,110,116,105,116,121,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objIdentityMethod_1241522599.nativeImpl = 0;
-    F.line = 1637;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,73,100,101,110,116,105,116,121,58], objIdentityMethod_1241522599);
-    F.line = 1638;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,73,100,101,110,116,105,116,121,58], objIdentityMethod_1241522599);
-    F.line = 1641;
-    var objAsSelfDoMethod_1241522684 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objAsSelfDoMethod_1241522684.nativeImpl = 0;
-    F.line = 1643;
-    F.filename = "vm.nim";
-    objAsSelfDoMethod_1241522684.hasInterpreterParam = true;
-    F.line = 1645;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241522684);
-    F.line = 1646;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241522684);
-    F.line = 1648;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241522684);
-    F.line = 1649;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241522684);
-    F.line = 1652;
-    var objHasPropertyMethod_1241522853 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,72,97,115,80,114,111,112,101,114,116,121,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objHasPropertyMethod_1241522853.nativeImpl = 0;
-    F.line = 1654;
-    F.filename = "vm.nim";
-    objHasPropertyMethod_1241522853.hasInterpreterParam = true;
-    F.line = 1655;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,72,97,115,80,114,111,112,101,114,116,121,58], objHasPropertyMethod_1241522853);
-    F.line = 1656;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,72,97,115,80,114,111,112,101,114,116,121,58], objHasPropertyMethod_1241522853);
-    F.line = 1659;
-    var objPropertiesMethod_1241522938 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,80,114,111,112,101,114,116,105,101,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objPropertiesMethod_1241522938.nativeImpl = 0;
-    F.line = 1661;
-    F.filename = "vm.nim";
-    objPropertiesMethod_1241522938.hasInterpreterParam = true;
-    F.line = 1662;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,80,114,111,112,101,114,116,105,101,115], objPropertiesMethod_1241522938);
-    F.line = 1663;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,80,114,111,112,101,114,116,105,101,115], objPropertiesMethod_1241522938);
-    F.line = 1666;
-    var objRespondsToMethod_1241523023 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,82,101,115,112,111,110,100,115,84,111,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objRespondsToMethod_1241523023.nativeImpl = 0;
-    F.line = 1668;
-    F.filename = "vm.nim";
-    objRespondsToMethod_1241523023.hasInterpreterParam = true;
-    F.line = 1669;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,82,101,115,112,111,110,100,115,84,111,58], objRespondsToMethod_1241523023);
-    F.line = 1670;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,82,101,115,112,111,110,100,115,84,111,58], objRespondsToMethod_1241523023);
-    F.line = 1673;
-    var objMethodsMethod_1241523108 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objMethodsMethod_1241523108.nativeImpl = 0;
-    F.line = 1675;
-    F.filename = "vm.nim";
-    objMethodsMethod_1241523108.hasInterpreterParam = true;
-    F.line = 1676;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115], objMethodsMethod_1241523108);
-    F.line = 1677;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115], objMethodsMethod_1241523108);
-    F.line = 1680;
-    var objAllInstanceMethodsMethod_1241523193 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,108,108,73,110,115,116,97,110,99,101,77,101,116,104,111,100,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objAllInstanceMethodsMethod_1241523193.nativeImpl = 0;
-    F.line = 1682;
-    F.filename = "vm.nim";
-    objAllInstanceMethodsMethod_1241523193.hasInterpreterParam = true;
-    F.line = 1683;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,65,108,108,73,110,115,116,97,110,99,101,77,101,116,104,111,100,115], objAllInstanceMethodsMethod_1241523193);
-    F.line = 1684;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,65,108,108,73,110,115,116,97,110,99,101,77,101,116,104,111,100,115], objAllInstanceMethodsMethod_1241523193);
-    F.line = 1687;
-    var objAllClassMethodsMethod_1241523278 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,108,108,67,108,97,115,115,77,101,116,104,111,100,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objAllClassMethodsMethod_1241523278.nativeImpl = 0;
-    F.line = 1689;
-    F.filename = "vm.nim";
-    objAllClassMethodsMethod_1241523278.hasInterpreterParam = true;
-    F.line = 1690;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,65,108,108,67,108,97,115,115,77,101,116,104,111,100,115], objAllClassMethodsMethod_1241523278);
-    F.line = 1691;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,65,108,108,67,108,97,115,115,77,101,116,104,111,100,115], objAllClassMethodsMethod_1241523278);
-    F.line = 1694;
-    var objClassMethod_1241523363 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,67,108,97,115,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objClassMethod_1241523363.nativeImpl = 0;
-    F.line = 1696;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115], objClassMethod_1241523363);
-    F.line = 1697;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115], objClassMethod_1241523363);
-    F.line = 1698;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115], objMethodsMethod_1241523108);
-    F.line = 1701;
-    var objErrorMethod_1241523490 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,69,114,114,111,114,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objErrorMethod_1241523490.nativeImpl = 0;
-    F.line = 1703;
-    F.filename = "vm.nim";
-    objErrorMethod_1241523490.hasInterpreterParam = true;
-    F.line = 1704;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,69,114,114,111,114,58], objErrorMethod_1241523490);
-    F.line = 1705;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,69,114,114,111,114,58], objErrorMethod_1241523490);
-    F.line = 1708;
-    var objEqualsMethod_1241523575 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,69,113,117,97,108,115,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objEqualsMethod_1241523575.nativeImpl = 0;
-    F.line = 1710;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,69,113,117,97,108,115,58], objEqualsMethod_1241523575);
-    F.line = 1711;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,69,113,117,97,108,115,58], objEqualsMethod_1241523575);
-    F.line = 1714;
-    var objIsKindOfMethod_1241523660 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,115,75,105,110,100,79,102,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objIsKindOfMethod_1241523660.nativeImpl = 0;
-    F.line = 1716;
-    F.filename = "vm.nim";
-    objIsKindOfMethod_1241523660.hasInterpreterParam = true;
-    F.line = 1717;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,73,115,75,105,110,100,79,102,58], objIsKindOfMethod_1241523660);
-    F.line = 1718;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,73,115,75,105,110,100,79,102,58], objIsKindOfMethod_1241523660);
-    F.line = 1721;
-    var objSlotNamesMethod_1241523745 = createCoreMethod__OOZinterpreterZobjects_u316([115,108,111,116,78,97,109,101,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objSlotNamesMethod_1241523745.nativeImpl = 0;
-    F.line = 1723;
-    F.filename = "vm.nim";
-    objSlotNamesMethod_1241523745.hasInterpreterParam = true;
-    F.line = 1724;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [115,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241523745);
-    F.line = 1725;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [115,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241523745);
-    F.line = 1727;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,83,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241523745);
-    F.line = 1728;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,83,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241523745);
-    F.line = 1731;
-    var objSuperclassNamesMethod_1241523914 = createCoreMethod__OOZinterpreterZobjects_u316([115,117,112,101,114,99,108,97,115,115,78,97,109,101,115]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    objSuperclassNamesMethod_1241523914.nativeImpl = 0;
-    F.line = 1733;
-    F.filename = "vm.nim";
-    objSuperclassNamesMethod_1241523914.hasInterpreterParam = true;
-    F.line = 1734;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [115,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241523914);
-    F.line = 1735;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [115,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241523914);
-    F.line = 1737;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,83,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241523914);
-    F.line = 1738;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,83,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241523914);
-    F.line = 1746;
-    var classNameMethod_1241524092 = createCoreMethod__OOZinterpreterZobjects_u316([99,108,97,115,115,78,97,109,101]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    classNameMethod_1241524092.nativeImpl = 0;
-    F.line = 1748;
-    F.filename = "vm.nim";
-    classNameMethod_1241524092.hasInterpreterParam = true;
-    F.line = 1750;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1751;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1753;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1754;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1756;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1757;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1758;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1759;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524092);
-    F.line = 1780;
-    var printMethod_1241524441 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    printMethod_1241524441.nativeImpl = 0;
-    F.line = 1782;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,110,116], printMethod_1241524441);
-    F.line = 1783;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,110,116], printMethod_1241524441);
-    F.line = 1785;
-    var printlnMethod_1241524526 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116,108,110]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    printlnMethod_1241524526.nativeImpl = 0;
-    F.line = 1787;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.methods, [112,114,105,110,116,108,110], printlnMethod_1241524526);
-    F.line = 1788;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allMethods, [112,114,105,110,116,108,110], printlnMethod_1241524526);
-    F.line = 1807;
-    var evalMethod_1241524656 = createCoreMethod__OOZinterpreterZobjects_u316([101,118,97,108,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    evalMethod_1241524656.nativeImpl = 0;
-    F.line = 1809;
-    F.filename = "vm.nim";
-    evalMethod_1241524656.hasInterpreterParam = true;
-    F.line = 1810;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [101,118,97,108,58], evalMethod_1241524656);
-    F.line = 1811;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [101,118,97,108,58], evalMethod_1241524656);
-    F.line = 1813;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.classMethods, [112,114,105,109,105,116,105,118,101,69,118,97,108,58], evalMethod_1241524656);
-    F.line = 1814;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522135.allClassMethods, [112,114,105,109,105,116,105,118,101,69,118,97,108,58], evalMethod_1241524656);
-    F.line = 1817;
-    var numberCls_1241524829 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [78,117,109,98,101,114]);
-    F.line = 1818;
-    numberCls_1241524829.tags = nimCopy(null, [[78,117,109,98,101,114]], NTI1157629904);
-    F.line = 1821;
-    var intCls_1241524838 = newClass__OOZcoreZtypes_u3447([numberCls_1241524829], [], [73,110,116,101,103,101,114]);
-    F.line = 1822;
-    intCls_1241524838.tags = nimCopy(null, [[73,110,116,101,103,101,114], [78,117,109,98,101,114]], NTI1157629971);
-    F.line = 1823;
-    integerClass_1157628212[0] = intCls_1241524838;
-    F.line = 1826;
-    var plusMethod_1241524843 = createCoreMethod__OOZinterpreterZobjects_u316([43]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    plusMethod_1241524843.nativeImpl = 0;
-    F.line = 1828;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [43], plusMethod_1241524843);
-    F.line = 1829;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [43], plusMethod_1241524843);
-    F.line = 1831;
-    var minusMethod_1241524928 = createCoreMethod__OOZinterpreterZobjects_u316([45]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    minusMethod_1241524928.nativeImpl = 0;
+    classNewMethod_1241522523.hasInterpreterParam = true;
     F.line = 1833;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [45], minusMethod_1241524928);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [110,101,119], classNewMethod_1241522523);
     F.line = 1834;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [45], minusMethod_1241524928);
-    F.line = 1836;
-    var starMethod_1241525013 = createCoreMethod__OOZinterpreterZobjects_u316([42]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    starMethod_1241525013.nativeImpl = 0;
-    F.line = 1838;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [42], starMethod_1241525013);
-    F.line = 1839;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [42], starMethod_1241525013);
-    F.line = 1841;
-    var slashMethod_1241525098 = createCoreMethod__OOZinterpreterZobjects_u316([47]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    slashMethod_1241525098.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [110,101,119], classNewMethod_1241522523);
     F.line = 1843;
+    var classNewInstanceMethod_1241522621 = createCoreMethod__OOZinterpreterZobjects_u316([110,101,119,73,110,115,116,97,110,99,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    classNewInstanceMethod_1241522621.nativeImpl = 0;
+    F.line = 1845;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [47], slashMethod_1241525098);
-    F.line = 1844;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [47], slashMethod_1241525098);
+    classNewInstanceMethod_1241522621.hasInterpreterParam = true;
+    F.line = 1846;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [110,101,119,73,110,115,116,97,110,99,101], classNewInstanceMethod_1241522621);
     F.line = 1847;
-    var ltMethod_1241525183 = createCoreMethod__OOZinterpreterZobjects_u316([60]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    ltMethod_1241525183.nativeImpl = 0;
-    F.line = 1849;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [60], ltMethod_1241525183);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [110,101,119,73,110,115,116,97,110,99,101], classNewInstanceMethod_1241522621);
     F.line = 1850;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [60], ltMethod_1241525183);
+    var objPerformMethod_1241522706 = createCoreMethod__OOZinterpreterZobjects_u316([112,101,114,102,111,114,109,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objPerformMethod_1241522706.nativeImpl = 0;
     F.line = 1852;
-    var gtMethod_1241525268 = createCoreMethod__OOZinterpreterZobjects_u316([62]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    gtMethod_1241525268.nativeImpl = 0;
+    F.filename = "vm.nim";
+    objPerformMethod_1241522706.hasInterpreterParam = true;
+    F.line = 1853;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,101,114,102,111,114,109,58], objPerformMethod_1241522706);
     F.line = 1854;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [62], gtMethod_1241525268);
-    F.line = 1855;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [62], gtMethod_1241525268);
-    F.line = 1857;
-    var eqMethod_1241525353 = createCoreMethod__OOZinterpreterZobjects_u316([61]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,101,114,102,111,114,109,58], objPerformMethod_1241522706);
+    F.line = 1856;
+    var objPerformWithMethod_1241522791 = createCoreMethod__OOZinterpreterZobjects_u316([112,101,114,102,111,114,109,58,119,105,116,104,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    eqMethod_1241525353.nativeImpl = 0;
+    objPerformWithMethod_1241522791.nativeImpl = 0;
+    F.line = 1858;
+    F.filename = "vm.nim";
+    objPerformWithMethod_1241522791.hasInterpreterParam = true;
     F.line = 1859;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [61], eqMethod_1241525353);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,101,114,102,111,114,109,58,119,105,116,104,58], objPerformWithMethod_1241522791);
     F.line = 1860;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [61], eqMethod_1241525353);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,101,114,102,111,114,109,58,119,105,116,104,58], objPerformWithMethod_1241522791);
     F.line = 1862;
-    var leMethod_1241525438 = createCoreMethod__OOZinterpreterZobjects_u316([60,61]);
+    var objPerformWithWithMethod_1241522876 = createCoreMethod__OOZinterpreterZobjects_u316([112,101,114,102,111,114,109,58,119,105,116,104,58,119,105,116,104,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    leMethod_1241525438.nativeImpl = 0;
+    objPerformWithWithMethod_1241522876.nativeImpl = 0;
     F.line = 1864;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [60,61], leMethod_1241525438);
+    objPerformWithWithMethod_1241522876.hasInterpreterParam = true;
     F.line = 1865;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [60,61], leMethod_1241525438);
-    F.line = 1867;
-    var geMethod_1241525523 = createCoreMethod__OOZinterpreterZobjects_u316([62,61]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    geMethod_1241525523.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,101,114,102,111,114,109,58,119,105,116,104,58,119,105,116,104,58], objPerformWithWithMethod_1241522876);
+    F.line = 1866;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,101,114,102,111,114,109,58,119,105,116,104,58,119,105,116,104,58], objPerformWithWithMethod_1241522876);
     F.line = 1869;
+    var objIdentityMethod_1241522961 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,100,101,110,116,105,116,121,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objIdentityMethod_1241522961.nativeImpl = 0;
+    F.line = 1871;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [62,61], geMethod_1241525523);
-    F.line = 1870;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [62,61], geMethod_1241525523);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,73,100,101,110,116,105,116,121,58], objIdentityMethod_1241522961);
     F.line = 1872;
-    var neMethod_1241525608 = createCoreMethod__OOZinterpreterZobjects_u316([60,62]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    neMethod_1241525608.nativeImpl = 0;
-    F.line = 1874;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [60,62], neMethod_1241525608);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,73,100,101,110,116,105,116,121,58], objIdentityMethod_1241522961);
     F.line = 1875;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [60,62], neMethod_1241525608);
-    F.line = 1878;
-    var intPrintStringMethod_1241525693 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116,83,116,114,105,110,103]);
+    var objAsSelfDoMethod_1241523046 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    intPrintStringMethod_1241525693.nativeImpl = 0;
+    objAsSelfDoMethod_1241523046.nativeImpl = 0;
+    F.line = 1877;
+    F.filename = "vm.nim";
+    objAsSelfDoMethod_1241523046.hasInterpreterParam = true;
+    F.line = 1879;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241523046);
     F.line = 1880;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [112,114,105,110,116,83,116,114,105,110,103], intPrintStringMethod_1241525693);
-    F.line = 1881;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [112,114,105,110,116,83,116,114,105,110,103], intPrintStringMethod_1241525693);
-    F.line = 1884;
-    var intDivMethod_1241525778 = createCoreMethod__OOZinterpreterZobjects_u316([47,47]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    intDivMethod_1241525778.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241523046);
+    F.line = 1882;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241523046);
+    F.line = 1883;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [112,114,105,109,105,116,105,118,101,65,115,83,101,108,102,68,111,58], objAsSelfDoMethod_1241523046);
     F.line = 1886;
+    var objHasPropertyMethod_1241523215 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,72,97,115,80,114,111,112,101,114,116,121,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objHasPropertyMethod_1241523215.nativeImpl = 0;
+    F.line = 1888;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [47,47], intDivMethod_1241525778);
-    F.line = 1887;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [47,47], intDivMethod_1241525778);
+    objHasPropertyMethod_1241523215.hasInterpreterParam = true;
     F.line = 1889;
-    var backslashModuloMethod_1241525863 = createCoreMethod__OOZinterpreterZobjects_u316([92]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,72,97,115,80,114,111,112,101,114,116,121,58], objHasPropertyMethod_1241523215);
+    F.line = 1890;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,72,97,115,80,114,111,112,101,114,116,121,58], objHasPropertyMethod_1241523215);
+    F.line = 1893;
+    var objPropertiesMethod_1241523300 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,80,114,111,112,101,114,116,105,101,115]);
     F.line = 11;
     F.filename = "objects.nim";
-    backslashModuloMethod_1241525863.nativeImpl = 0;
-    F.line = 1891;
+    objPropertiesMethod_1241523300.nativeImpl = 0;
+    F.line = 1895;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [92], backslashModuloMethod_1241525863);
-    F.line = 1892;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [92], backslashModuloMethod_1241525863);
-    F.line = 1894;
-    var moduloMethod_1241525948 = createCoreMethod__OOZinterpreterZobjects_u316([37]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    moduloMethod_1241525948.nativeImpl = 0;
+    objPropertiesMethod_1241523300.hasInterpreterParam = true;
     F.line = 1896;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.methods, [37], moduloMethod_1241525948);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,80,114,111,112,101,114,116,105,101,115], objPropertiesMethod_1241523300);
     F.line = 1897;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241524838.allMethods, [37], moduloMethod_1241525948);
-    F.line = 1902;
-    var floatCls_1241526037 = newClass__OOZcoreZtypes_u3447([numberCls_1241524829], [], [70,108,111,97,116]);
-    F.line = 1903;
-    floatCls_1241526037.tags = nimCopy(null, [[70,108,111,97,116], [78,117,109,98,101,114]], NTI1157629971);
-    F.line = 1904;
-    floatClass_1157628213[0] = floatCls_1241526037;
-    F.line = 1907;
-    var floatPlusMethod_1241526042 = createCoreMethod__OOZinterpreterZobjects_u316([43]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,80,114,111,112,101,114,116,105,101,115], objPropertiesMethod_1241523300);
+    F.line = 1900;
+    var objRespondsToMethod_1241523385 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,82,101,115,112,111,110,100,115,84,111,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    floatPlusMethod_1241526042.nativeImpl = 0;
+    objRespondsToMethod_1241523385.nativeImpl = 0;
+    F.line = 1902;
+    F.filename = "vm.nim";
+    objRespondsToMethod_1241523385.hasInterpreterParam = true;
+    F.line = 1903;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,82,101,115,112,111,110,100,115,84,111,58], objRespondsToMethod_1241523385);
+    F.line = 1904;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,82,101,115,112,111,110,100,115,84,111,58], objRespondsToMethod_1241523385);
+    F.line = 1907;
+    var objMethodsMethod_1241523470 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objMethodsMethod_1241523470.nativeImpl = 0;
     F.line = 1909;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [43], floatPlusMethod_1241526042);
+    objMethodsMethod_1241523470.hasInterpreterParam = true;
     F.line = 1910;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [43], floatPlusMethod_1241526042);
-    F.line = 1912;
-    var floatMinusMethod_1241526127 = createCoreMethod__OOZinterpreterZobjects_u316([45]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    floatMinusMethod_1241526127.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115], objMethodsMethod_1241523470);
+    F.line = 1911;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115], objMethodsMethod_1241523470);
     F.line = 1914;
+    var objAllInstanceMethodsMethod_1241523555 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,108,108,73,110,115,116,97,110,99,101,77,101,116,104,111,100,115]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objAllInstanceMethodsMethod_1241523555.nativeImpl = 0;
+    F.line = 1916;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [45], floatMinusMethod_1241526127);
-    F.line = 1915;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [45], floatMinusMethod_1241526127);
+    objAllInstanceMethodsMethod_1241523555.hasInterpreterParam = true;
     F.line = 1917;
-    var floatStarMethod_1241526212 = createCoreMethod__OOZinterpreterZobjects_u316([42]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,65,108,108,73,110,115,116,97,110,99,101,77,101,116,104,111,100,115], objAllInstanceMethodsMethod_1241523555);
+    F.line = 1918;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,65,108,108,73,110,115,116,97,110,99,101,77,101,116,104,111,100,115], objAllInstanceMethodsMethod_1241523555);
+    F.line = 1921;
+    var objAllClassMethodsMethod_1241523640 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,108,108,67,108,97,115,115,77,101,116,104,111,100,115]);
     F.line = 11;
     F.filename = "objects.nim";
-    floatStarMethod_1241526212.nativeImpl = 0;
-    F.line = 1919;
+    objAllClassMethodsMethod_1241523640.nativeImpl = 0;
+    F.line = 1923;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [42], floatStarMethod_1241526212);
-    F.line = 1920;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [42], floatStarMethod_1241526212);
-    F.line = 1922;
-    var floatSlashMethod_1241526297 = createCoreMethod__OOZinterpreterZobjects_u316([47]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    floatSlashMethod_1241526297.nativeImpl = 0;
+    objAllClassMethodsMethod_1241523640.hasInterpreterParam = true;
     F.line = 1924;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [47], floatSlashMethod_1241526297);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,65,108,108,67,108,97,115,115,77,101,116,104,111,100,115], objAllClassMethodsMethod_1241523640);
     F.line = 1925;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [47], floatSlashMethod_1241526297);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,65,108,108,67,108,97,115,115,77,101,116,104,111,100,115], objAllClassMethodsMethod_1241523640);
     F.line = 1928;
-    var floatLtMethod_1241526382 = createCoreMethod__OOZinterpreterZobjects_u316([60]);
+    var objClassMethod_1241523725 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,67,108,97,115,115]);
     F.line = 11;
     F.filename = "objects.nim";
-    floatLtMethod_1241526382.nativeImpl = 0;
+    objClassMethod_1241523725.nativeImpl = 0;
     F.line = 1930;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [60], floatLtMethod_1241526382);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115], objClassMethod_1241523725);
     F.line = 1931;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [60], floatLtMethod_1241526382);
-    F.line = 1933;
-    var floatGtMethod_1241526467 = createCoreMethod__OOZinterpreterZobjects_u316([62]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    floatGtMethod_1241526467.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115], objClassMethod_1241523725);
+    F.line = 1932;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,77,101,116,104,111,100,115], objMethodsMethod_1241523470);
     F.line = 1935;
+    var objErrorMethod_1241523852 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,69,114,114,111,114,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objErrorMethod_1241523852.nativeImpl = 0;
+    F.line = 1937;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [62], floatGtMethod_1241526467);
-    F.line = 1936;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [62], floatGtMethod_1241526467);
+    objErrorMethod_1241523852.hasInterpreterParam = true;
     F.line = 1938;
-    var floatEqMethod_1241526552 = createCoreMethod__OOZinterpreterZobjects_u316([61]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,69,114,114,111,114,58], objErrorMethod_1241523852);
+    F.line = 1939;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,69,114,114,111,114,58], objErrorMethod_1241523852);
+    F.line = 1942;
+    var objEqualsMethod_1241523937 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,69,113,117,97,108,115,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    floatEqMethod_1241526552.nativeImpl = 0;
-    F.line = 1940;
+    objEqualsMethod_1241523937.nativeImpl = 0;
+    F.line = 1944;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [61], floatEqMethod_1241526552);
-    F.line = 1941;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [61], floatEqMethod_1241526552);
-    F.line = 1943;
-    var floatLeMethod_1241526637 = createCoreMethod__OOZinterpreterZobjects_u316([60,61]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    floatLeMethod_1241526637.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,69,113,117,97,108,115,58], objEqualsMethod_1241523937);
     F.line = 1945;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [60,61], floatLeMethod_1241526637);
-    F.line = 1946;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [60,61], floatLeMethod_1241526637);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,69,113,117,97,108,115,58], objEqualsMethod_1241523937);
     F.line = 1948;
-    var floatGeMethod_1241526722 = createCoreMethod__OOZinterpreterZobjects_u316([62,61]);
+    var objIsKindOfMethod_1241524022 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,115,75,105,110,100,79,102,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    floatGeMethod_1241526722.nativeImpl = 0;
+    objIsKindOfMethod_1241524022.nativeImpl = 0;
     F.line = 1950;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [62,61], floatGeMethod_1241526722);
+    objIsKindOfMethod_1241524022.hasInterpreterParam = true;
     F.line = 1951;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [62,61], floatGeMethod_1241526722);
-    F.line = 1953;
-    var floatNeMethod_1241526807 = createCoreMethod__OOZinterpreterZobjects_u316([60,62]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    floatNeMethod_1241526807.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,73,115,75,105,110,100,79,102,58], objIsKindOfMethod_1241524022);
+    F.line = 1952;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,73,115,75,105,110,100,79,102,58], objIsKindOfMethod_1241524022);
     F.line = 1955;
+    var objSlotNamesMethod_1241524107 = createCoreMethod__OOZinterpreterZobjects_u316([115,108,111,116,78,97,109,101,115]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    objSlotNamesMethod_1241524107.nativeImpl = 0;
+    F.line = 1957;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [60,62], floatNeMethod_1241526807);
-    F.line = 1956;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [60,62], floatNeMethod_1241526807);
+    objSlotNamesMethod_1241524107.hasInterpreterParam = true;
+    F.line = 1958;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [115,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241524107);
     F.line = 1959;
-    var floatPrintStringMethod_1241526892 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116,83,116,114,105,110,103]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    floatPrintStringMethod_1241526892.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [115,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241524107);
     F.line = 1961;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [112,114,105,110,116,83,116,114,105,110,103], floatPrintStringMethod_1241526892);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,83,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241524107);
     F.line = 1962;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [112,114,105,110,116,83,116,114,105,110,103], floatPrintStringMethod_1241526892);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,83,108,111,116,78,97,109,101,115], objSlotNamesMethod_1241524107);
     F.line = 1965;
-    var sqrtMethod_1241526977 = createCoreMethod__OOZinterpreterZobjects_u316([115,113,114,116]);
+    var objSuperclassNamesMethod_1241524276 = createCoreMethod__OOZinterpreterZobjects_u316([115,117,112,101,114,99,108,97,115,115,78,97,109,101,115]);
     F.line = 11;
     F.filename = "objects.nim";
-    sqrtMethod_1241526977.nativeImpl = 0;
+    objSuperclassNamesMethod_1241524276.nativeImpl = 0;
     F.line = 1967;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.methods, [115,113,114,116], sqrtMethod_1241526977);
+    objSuperclassNamesMethod_1241524276.hasInterpreterParam = true;
     F.line = 1968;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526037.allMethods, [115,113,114,116], sqrtMethod_1241526977);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [115,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241524276);
+    F.line = 1969;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [115,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241524276);
     F.line = 1971;
-    var stringCls_1241527066 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [83,116,114,105,110,103]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,83,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241524276);
     F.line = 1972;
-    stringCls_1241527066.tags = nimCopy(null, [[83,116,114,105,110,103], [84,101,120,116]], NTI1157629971);
-    F.line = 1973;
-    stringClass_1157628214[0] = stringCls_1241527066;
-    F.line = 1976;
-    var stringConcatMethod_1241527071 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,67,111,110,99,97,116,58]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,83,117,112,101,114,99,108,97,115,115,78,97,109,101,115], objSuperclassNamesMethod_1241524276);
+    F.line = 1980;
+    var classNameMethod_1241524454 = createCoreMethod__OOZinterpreterZobjects_u316([99,108,97,115,115,78,97,109,101]);
     F.line = 11;
     F.filename = "objects.nim";
-    stringConcatMethod_1241527071.nativeImpl = 0;
-    F.line = 1978;
+    classNameMethod_1241524454.nativeImpl = 0;
+    F.line = 1982;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,67,111,110,99,97,116,58], stringConcatMethod_1241527071);
-    F.line = 1979;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,67,111,110,99,97,116,58], stringConcatMethod_1241527071);
-    F.line = 1981;
-    var stringSizeMethod_1241527156 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,83,105,122,101]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringSizeMethod_1241527156.nativeImpl = 0;
-    F.line = 1983;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,83,105,122,101], stringSizeMethod_1241527156);
+    classNameMethod_1241524454.hasInterpreterParam = true;
     F.line = 1984;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,83,105,122,101], stringSizeMethod_1241527156);
-    F.line = 1986;
-    var stringAtMethod_1241527241 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,65,116,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringAtMethod_1241527241.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
+    F.line = 1985;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
+    F.line = 1987;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
     F.line = 1988;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,65,116,58], stringAtMethod_1241527241);
-    F.line = 1989;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,65,116,58], stringAtMethod_1241527241);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
+    F.line = 1990;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
     F.line = 1991;
-    var stringSplitMethod_1241527326 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,112,108,105,116,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringSplitMethod_1241527326.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [99,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
+    F.line = 1992;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
     F.line = 1993;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,83,112,108,105,116,58], stringSplitMethod_1241527326);
-    F.line = 1994;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,83,112,108,105,116,58], stringSplitMethod_1241527326);
-    F.line = 1997;
-    var stringLowercaseMethod_1241527411 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,76,111,119,101,114,99,97,115,101]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringLowercaseMethod_1241527411.nativeImpl = 0;
-    F.line = 1999;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,76,111,119,101,114,99,97,115,101], stringLowercaseMethod_1241527411);
-    F.line = 2000;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,76,111,119,101,114,99,97,115,101], stringLowercaseMethod_1241527411);
-    F.line = 2002;
-    var stringUppercaseMethod_1241527496 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,85,112,112,101,114,99,97,115,101]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringUppercaseMethod_1241527496.nativeImpl = 0;
-    F.line = 2004;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,85,112,112,101,114,99,97,115,101], stringUppercaseMethod_1241527496);
-    F.line = 2005;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,85,112,112,101,114,99,97,115,101], stringUppercaseMethod_1241527496);
-    F.line = 2007;
-    var stringTrimMethod_1241527581 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,84,114,105,109]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringTrimMethod_1241527581.nativeImpl = 0;
-    F.line = 2009;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,84,114,105,109], stringTrimMethod_1241527581);
-    F.line = 2010;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,84,114,105,109], stringTrimMethod_1241527581);
-    F.line = 2012;
-    var stringFromToMethod_1241527666 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,70,114,111,109,84,111,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringFromToMethod_1241527666.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [112,114,105,109,105,116,105,118,101,67,108,97,115,115,78,97,109,101], classNameMethod_1241524454);
     F.line = 2014;
+    var printMethod_1241524803 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    printMethod_1241524803.nativeImpl = 0;
+    F.line = 2016;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,70,114,111,109,84,111,58], stringFromToMethod_1241527666);
-    F.line = 2015;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,70,114,111,109,84,111,58], stringFromToMethod_1241527666);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,110,116], printMethod_1241524803);
     F.line = 2017;
-    var stringIndexOfMethod_1241527751 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,110,100,101,120,79,102,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringIndexOfMethod_1241527751.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,110,116], printMethod_1241524803);
     F.line = 2019;
+    var printlnMethod_1241524888 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116,108,110]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    printlnMethod_1241524888.nativeImpl = 0;
+    F.line = 2021;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,73,110,100,101,120,79,102,58], stringIndexOfMethod_1241527751);
-    F.line = 2020;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,73,110,100,101,120,79,102,58], stringIndexOfMethod_1241527751);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.methods, [112,114,105,110,116,108,110], printlnMethod_1241524888);
     F.line = 2022;
-    var stringIncludesSubStringMethod_1241527836 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,110,99,108,117,100,101,115,83,117,98,83,116,114,105,110,103,58]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allMethods, [112,114,105,110,116,108,110], printlnMethod_1241524888);
+    F.line = 2041;
+    var evalMethod_1241525018 = createCoreMethod__OOZinterpreterZobjects_u316([101,118,97,108,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    stringIncludesSubStringMethod_1241527836.nativeImpl = 0;
-    F.line = 2024;
+    evalMethod_1241525018.nativeImpl = 0;
+    F.line = 2043;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,73,110,99,108,117,100,101,115,83,117,98,83,116,114,105,110,103,58], stringIncludesSubStringMethod_1241527836);
-    F.line = 2025;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,73,110,99,108,117,100,101,115,83,117,98,83,116,114,105,110,103,58], stringIncludesSubStringMethod_1241527836);
-    F.line = 2027;
-    var stringReplaceWithMethod_1241527921 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,82,101,112,108,97,99,101,87,105,116,104,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringReplaceWithMethod_1241527921.nativeImpl = 0;
-    F.line = 2029;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,82,101,112,108,97,99,101,87,105,116,104,58], stringReplaceWithMethod_1241527921);
-    F.line = 2030;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,82,101,112,108,97,99,101,87,105,116,104,58], stringReplaceWithMethod_1241527921);
-    F.line = 2032;
-    var stringAsIntegerMethod_1241528006 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,115,73,110,116,101,103,101,114]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringAsIntegerMethod_1241528006.nativeImpl = 0;
-    F.line = 2034;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,65,115,73,110,116,101,103,101,114], stringAsIntegerMethod_1241528006);
-    F.line = 2035;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,65,115,73,110,116,101,103,101,114], stringAsIntegerMethod_1241528006);
-    F.line = 2037;
-    var stringAsSymbolMethod_1241528091 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,115,83,121,109,98,111,108]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringAsSymbolMethod_1241528091.nativeImpl = 0;
-    F.line = 2039;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,65,115,83,121,109,98,111,108], stringAsSymbolMethod_1241528091);
-    F.line = 2040;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,65,115,83,121,109,98,111,108], stringAsSymbolMethod_1241528091);
-    F.line = 2042;
-    var stringRepeatMethod_1241528176 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,82,101,112,101,97,116,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    stringRepeatMethod_1241528176.nativeImpl = 0;
+    evalMethod_1241525018.hasInterpreterParam = true;
     F.line = 2044;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.methods, [112,114,105,109,105,116,105,118,101,82,101,112,101,97,116,58], stringRepeatMethod_1241528176);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [101,118,97,108,58], evalMethod_1241525018);
     F.line = 2045;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527066.allMethods, [112,114,105,109,105,116,105,118,101,82,101,112,101,97,116,58], stringRepeatMethod_1241528176);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [101,118,97,108,58], evalMethod_1241525018);
+    F.line = 2047;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.classMethods, [112,114,105,109,105,116,105,118,101,69,118,97,108,58], evalMethod_1241525018);
     F.line = 2048;
-    var arrayCls_1241528261 = null;
-    if (!((arrayClass_1157628215[0] == null))) {
-    F.line = 2050;
-    arrayCls_1241528261 = arrayClass_1157628215[0];
-    }
-    else {
-      F.line = 2052;
-      arrayCls_1241528261 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [65,114,114,97,121]);
-      F.line = 2053;
-      arrayCls_1241528261.tags = nimCopy(null, [[65,114,114,97,121], [67,111,108,108,101,99,116,105,111,110]], NTI1157629971);
-      F.line = 2054;
-      arrayClass_1157628215[0] = arrayCls_1241528261;
-    }
-    
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(objectCls_1241522497.allClassMethods, [112,114,105,109,105,116,105,118,101,69,118,97,108,58], evalMethod_1241525018);
+    F.line = 2051;
+    var numberCls_1241525191 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [78,117,109,98,101,114]);
+    F.line = 2052;
+    numberCls_1241525191.tags = nimCopy(null, [[78,117,109,98,101,114]], NTI1157629904);
+    F.line = 2055;
+    var intCls_1241525200 = newClass__OOZcoreZtypes_u3447([numberCls_1241525191], [], [73,110,116,101,103,101,114]);
+    F.line = 2056;
+    intCls_1241525200.tags = nimCopy(null, [[73,110,116,101,103,101,114], [78,117,109,98,101,114]], NTI1157629971);
     F.line = 2057;
-    var arraySizeMethod_1241528274 = createCoreMethod__OOZinterpreterZobjects_u316([115,105,122,101]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    arraySizeMethod_1241528274.nativeImpl = 0;
-    F.line = 2059;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [115,105,122,101], arraySizeMethod_1241528274);
+    integerClass_1157628212[0] = intCls_1241525200;
     F.line = 2060;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [115,105,122,101], arraySizeMethod_1241528274);
+    var plusMethod_1241525205 = createCoreMethod__OOZinterpreterZobjects_u316([43]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    plusMethod_1241525205.nativeImpl = 0;
     F.line = 2062;
-    var arrayAddMethod_1241528359 = createCoreMethod__OOZinterpreterZobjects_u316([97,100,100,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    arrayAddMethod_1241528359.nativeImpl = 0;
-    F.line = 2064;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [97,100,100,58], arrayAddMethod_1241528359);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [43], plusMethod_1241525205);
+    F.line = 2063;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [43], plusMethod_1241525205);
     F.line = 2065;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [97,100,100,58], arrayAddMethod_1241528359);
+    var minusMethod_1241525290 = createCoreMethod__OOZinterpreterZobjects_u316([45]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    minusMethod_1241525290.nativeImpl = 0;
     F.line = 2067;
-    var arrayAtMethod_1241528444 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    arrayAtMethod_1241528444.nativeImpl = 0;
-    F.line = 2069;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [97,116,58], arrayAtMethod_1241528444);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [45], minusMethod_1241525290);
+    F.line = 2068;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [45], minusMethod_1241525290);
     F.line = 2070;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [97,116,58], arrayAtMethod_1241528444);
+    var starMethod_1241525375 = createCoreMethod__OOZinterpreterZobjects_u316([42]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    starMethod_1241525375.nativeImpl = 0;
     F.line = 2072;
-    var arrayAtPutMethod_1241528529 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58,112,117,116,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    arrayAtPutMethod_1241528529.nativeImpl = 0;
-    F.line = 2074;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [97,116,58,112,117,116,58], arrayAtPutMethod_1241528529);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [42], starMethod_1241525375);
+    F.line = 2073;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [42], starMethod_1241525375);
     F.line = 2075;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [97,116,58,112,117,116,58], arrayAtPutMethod_1241528529);
+    var slashMethod_1241525460 = createCoreMethod__OOZinterpreterZobjects_u316([47]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    slashMethod_1241525460.nativeImpl = 0;
     F.line = 2077;
-    var arrayIncludesMethod_1241528614 = createCoreMethod__OOZinterpreterZobjects_u316([105,110,99,108,117,100,101,115,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    arrayIncludesMethod_1241528614.nativeImpl = 0;
-    F.line = 2079;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [105,110,99,108,117,100,101,115,58], arrayIncludesMethod_1241528614);
-    F.line = 2080;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [105,110,99,108,117,100,101,115,58], arrayIncludesMethod_1241528614);
-    F.line = 2082;
-    var arrayReverseMethod_1241528699 = createCoreMethod__OOZinterpreterZobjects_u316([114,101,118,101,114,115,101]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [47], slashMethod_1241525460);
+    F.line = 2078;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [47], slashMethod_1241525460);
+    F.line = 2081;
+    var ltMethod_1241525545 = createCoreMethod__OOZinterpreterZobjects_u316([60]);
     F.line = 11;
     F.filename = "objects.nim";
-    arrayReverseMethod_1241528699.nativeImpl = 0;
+    ltMethod_1241525545.nativeImpl = 0;
+    F.line = 2083;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [60], ltMethod_1241525545);
     F.line = 2084;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [114,101,118,101,114,115,101], arrayReverseMethod_1241528699);
-    F.line = 2085;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [114,101,118,101,114,115,101], arrayReverseMethod_1241528699);
-    F.line = 2087;
-    var arrayJoinMethod_1241528784 = createCoreMethod__OOZinterpreterZobjects_u316([106,111,105,110,58]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [60], ltMethod_1241525545);
+    F.line = 2086;
+    var gtMethod_1241525630 = createCoreMethod__OOZinterpreterZobjects_u316([62]);
     F.line = 11;
     F.filename = "objects.nim";
-    arrayJoinMethod_1241528784.nativeImpl = 0;
+    gtMethod_1241525630.nativeImpl = 0;
+    F.line = 2088;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [62], gtMethod_1241525630);
     F.line = 2089;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [106,111,105,110,58], arrayJoinMethod_1241528784);
-    F.line = 2090;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [106,111,105,110,58], arrayJoinMethod_1241528784);
-    F.line = 2092;
-    var arrayDoMethod_1241528869 = createCoreMethod__OOZinterpreterZobjects_u316([100,111,58]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [62], gtMethod_1241525630);
+    F.line = 2091;
+    var eqMethod_1241525715 = createCoreMethod__OOZinterpreterZobjects_u316([61]);
     F.line = 11;
     F.filename = "objects.nim";
-    arrayDoMethod_1241528869.nativeImpl = 0;
+    eqMethod_1241525715.nativeImpl = 0;
+    F.line = 2093;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [61], eqMethod_1241525715);
     F.line = 2094;
-    F.filename = "vm.nim";
-    arrayDoMethod_1241528869.hasInterpreterParam = true;
-    F.line = 2095;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.methods, [100,111,58], arrayDoMethod_1241528869);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [61], eqMethod_1241525715);
     F.line = 2096;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528261.allMethods, [100,111,58], arrayDoMethod_1241528869);
+    var leMethod_1241525800 = createCoreMethod__OOZinterpreterZobjects_u316([60,61]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    leMethod_1241525800.nativeImpl = 0;
+    F.line = 2098;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [60,61], leMethod_1241525800);
     F.line = 2099;
-    var tableCls_1241528954 = null;
-    if (!((tableClass_1157628216[0] == null))) {
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [60,61], leMethod_1241525800);
     F.line = 2101;
-    tableCls_1241528954 = tableClass_1157628216[0];
-    }
-    else {
-      F.line = 2103;
-      tableCls_1241528954 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [84,97,98,108,101]);
-      F.line = 2104;
-      tableCls_1241528954.tags = nimCopy(null, [[84,97,98,108,101], [68,105,99,116,105,111,110,97,114,121], [67,111,108,108,101,99,116,105,111,110]], NTI1493173506);
-      F.line = 2105;
-      tableClass_1157628216[0] = tableCls_1241528954;
-    }
-    
+    var geMethod_1241525885 = createCoreMethod__OOZinterpreterZobjects_u316([62,61]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    geMethod_1241525885.nativeImpl = 0;
+    F.line = 2103;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [62,61], geMethod_1241525885);
+    F.line = 2104;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [62,61], geMethod_1241525885);
+    F.line = 2106;
+    var neMethod_1241525970 = createCoreMethod__OOZinterpreterZobjects_u316([60,62]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    neMethod_1241525970.nativeImpl = 0;
     F.line = 2108;
-    var tableAtMethod_1241528967 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    tableAtMethod_1241528967.nativeImpl = 0;
-    F.line = 2110;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.methods, [97,116,58], tableAtMethod_1241528967);
-    F.line = 2111;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.allMethods, [97,116,58], tableAtMethod_1241528967);
-    F.line = 2113;
-    var tableAtPutMethod_1241529052 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58,112,117,116,58]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [60,62], neMethod_1241525970);
+    F.line = 2109;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [60,62], neMethod_1241525970);
+    F.line = 2112;
+    var intPrintStringMethod_1241526055 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116,83,116,114,105,110,103]);
     F.line = 11;
     F.filename = "objects.nim";
-    tableAtPutMethod_1241529052.nativeImpl = 0;
+    intPrintStringMethod_1241526055.nativeImpl = 0;
+    F.line = 2114;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [112,114,105,110,116,83,116,114,105,110,103], intPrintStringMethod_1241526055);
     F.line = 2115;
-    F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.methods, [97,116,58,112,117,116,58], tableAtPutMethod_1241529052);
-    F.line = 2116;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.allMethods, [97,116,58,112,117,116,58], tableAtPutMethod_1241529052);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [112,114,105,110,116,83,116,114,105,110,103], intPrintStringMethod_1241526055);
     F.line = 2118;
-    var tableKeysMethod_1241529137 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,75,101,121,115]);
+    var intDivMethod_1241526140 = createCoreMethod__OOZinterpreterZobjects_u316([47,47]);
     F.line = 11;
     F.filename = "objects.nim";
-    tableKeysMethod_1241529137.nativeImpl = 0;
+    intDivMethod_1241526140.nativeImpl = 0;
     F.line = 2120;
     F.filename = "vm.nim";
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.methods, [112,114,105,109,105,116,105,118,101,75,101,121,115], tableKeysMethod_1241529137);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [47,47], intDivMethod_1241526140);
     F.line = 2121;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.allMethods, [112,114,105,109,105,116,105,118,101,75,101,121,115], tableKeysMethod_1241529137);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [47,47], intDivMethod_1241526140);
+    F.line = 2123;
+    var backslashModuloMethod_1241526225 = createCoreMethod__OOZinterpreterZobjects_u316([92]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    backslashModuloMethod_1241526225.nativeImpl = 0;
+    F.line = 2125;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [92], backslashModuloMethod_1241526225);
+    F.line = 2126;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [92], backslashModuloMethod_1241526225);
+    F.line = 2128;
+    var moduloMethod_1241526310 = createCoreMethod__OOZinterpreterZobjects_u316([37]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    moduloMethod_1241526310.nativeImpl = 0;
     F.line = 2130;
-    var tableNewMethod_1241529252 = createCoreMethod__OOZinterpreterZobjects_u316([110,101,119]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    tableNewMethod_1241529252.nativeImpl = 0;
-    F.line = 2132;
     F.filename = "vm.nim";
-    tableNewMethod_1241529252.hasInterpreterParam = true;
-    F.line = 2133;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.classMethods, [110,101,119], tableNewMethod_1241529252);
-    F.line = 2134;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241528954.allClassMethods, [110,101,119], tableNewMethod_1241529252);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.methods, [37], moduloMethod_1241526310);
+    F.line = 2131;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(intCls_1241525200.allMethods, [37], moduloMethod_1241526310);
+    F.line = 2136;
+    var floatCls_1241526399 = newClass__OOZcoreZtypes_u3447([numberCls_1241525191], [], [70,108,111,97,116]);
     F.line = 2137;
-    var booleanCls_1241529341 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [66,111,111,108,101,97,110]);
+    floatCls_1241526399.tags = nimCopy(null, [[70,108,111,97,116], [78,117,109,98,101,114]], NTI1157629971);
     F.line = 2138;
-    booleanCls_1241529341.tags = nimCopy(null, [[66,111,111,108,101,97,110]], NTI1157629904);
-    F.line = 2139;
-    booleanClass_1157628211[0] = booleanCls_1241529341;
-    F.line = 2142;
-    var ifTrueMethod_1241529346 = createCoreMethod__OOZinterpreterZobjects_u316([105,102,84,114,117,101,58]);
+    floatClass_1157628213[0] = floatCls_1241526399;
+    F.line = 2141;
+    var floatPlusMethod_1241526404 = createCoreMethod__OOZinterpreterZobjects_u316([43]);
     F.line = 11;
     F.filename = "objects.nim";
-    ifTrueMethod_1241529346.nativeImpl = 0;
+    floatPlusMethod_1241526404.nativeImpl = 0;
+    F.line = 2143;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [43], floatPlusMethod_1241526404);
     F.line = 2144;
-    F.filename = "vm.nim";
-    ifTrueMethod_1241529346.hasInterpreterParam = true;
-    F.line = 2145;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529341.methods, [105,102,84,114,117,101,58], ifTrueMethod_1241529346);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [43], floatPlusMethod_1241526404);
     F.line = 2146;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529341.allMethods, [105,102,84,114,117,101,58], ifTrueMethod_1241529346);
+    var floatMinusMethod_1241526489 = createCoreMethod__OOZinterpreterZobjects_u316([45]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatMinusMethod_1241526489.nativeImpl = 0;
     F.line = 2148;
-    var ifFalseMethod_1241529431 = createCoreMethod__OOZinterpreterZobjects_u316([105,102,70,97,108,115,101,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    ifFalseMethod_1241529431.nativeImpl = 0;
-    F.line = 2150;
     F.filename = "vm.nim";
-    ifFalseMethod_1241529431.hasInterpreterParam = true;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [45], floatMinusMethod_1241526489);
+    F.line = 2149;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [45], floatMinusMethod_1241526489);
     F.line = 2151;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529341.methods, [105,102,70,97,108,115,101,58], ifFalseMethod_1241529431);
-    F.line = 2152;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529341.allMethods, [105,102,70,97,108,115,101,58], ifFalseMethod_1241529431);
-    F.line = 2155;
-    var trueCls_1241529520 = newClass__OOZcoreZtypes_u3447([booleanCls_1241529341], [], [84,114,117,101]);
+    var floatStarMethod_1241526574 = createCoreMethod__OOZinterpreterZobjects_u316([42]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatStarMethod_1241526574.nativeImpl = 0;
+    F.line = 2153;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [42], floatStarMethod_1241526574);
+    F.line = 2154;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [42], floatStarMethod_1241526574);
     F.line = 2156;
-    trueCls_1241529520.tags = nimCopy(null, [[84,114,117,101], [66,111,111,108,101,97,110]], NTI1157629971);
-    F.line = 2157;
-    trueClassCache_1493172530[0] = trueCls_1241529520;
-    F.line = 2160;
-    var falseCls_1241529529 = newClass__OOZcoreZtypes_u3447([booleanCls_1241529341], [], [70,97,108,115,101]);
-    F.line = 2161;
-    falseCls_1241529529.tags = nimCopy(null, [[70,97,108,115,101], [66,111,111,108,101,97,110]], NTI1157629971);
+    var floatSlashMethod_1241526659 = createCoreMethod__OOZinterpreterZobjects_u316([47]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatSlashMethod_1241526659.nativeImpl = 0;
+    F.line = 2158;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [47], floatSlashMethod_1241526659);
+    F.line = 2159;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [47], floatSlashMethod_1241526659);
     F.line = 2162;
-    falseClassCache_1493172531[0] = falseCls_1241529529;
+    var floatLtMethod_1241526744 = createCoreMethod__OOZinterpreterZobjects_u316([60]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatLtMethod_1241526744.nativeImpl = 0;
+    F.line = 2164;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [60], floatLtMethod_1241526744);
     F.line = 2165;
-    var blockCls_1241529538 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [66,108,111,99,107]);
-    F.line = 2166;
-    blockCls_1241529538.tags = nimCopy(null, [[66,108,111,99,107], [67,108,111,115,117,114,101]], NTI1157629971);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [60], floatLtMethod_1241526744);
     F.line = 2167;
-    blockClass_1157628217[0] = blockCls_1241529538;
+    var floatGtMethod_1241526829 = createCoreMethod__OOZinterpreterZobjects_u316([62]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatGtMethod_1241526829.nativeImpl = 0;
+    F.line = 2169;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [62], floatGtMethod_1241526829);
     F.line = 2170;
-    var whileTrueMethod_1241529543 = createCoreMethod__OOZinterpreterZobjects_u316([119,104,105,108,101,84,114,117,101,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    whileTrueMethod_1241529543.nativeImpl = 0;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [62], floatGtMethod_1241526829);
     F.line = 2172;
-    F.filename = "vm.nim";
-    whileTrueMethod_1241529543.hasInterpreterParam = true;
-    F.line = 2173;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [119,104,105,108,101,84,114,117,101,58], whileTrueMethod_1241529543);
+    var floatEqMethod_1241526914 = createCoreMethod__OOZinterpreterZobjects_u316([61]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatEqMethod_1241526914.nativeImpl = 0;
     F.line = 2174;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [119,104,105,108,101,84,114,117,101,58], whileTrueMethod_1241529543);
-    F.line = 2176;
-    var whileFalseMethod_1241529628 = createCoreMethod__OOZinterpreterZobjects_u316([119,104,105,108,101,70,97,108,115,101,58]);
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [61], floatEqMethod_1241526914);
+    F.line = 2175;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [61], floatEqMethod_1241526914);
+    F.line = 2177;
+    var floatLeMethod_1241526999 = createCoreMethod__OOZinterpreterZobjects_u316([60,61]);
     F.line = 11;
     F.filename = "objects.nim";
-    whileFalseMethod_1241529628.nativeImpl = 0;
-    F.line = 2178;
-    F.filename = "vm.nim";
-    whileFalseMethod_1241529628.hasInterpreterParam = true;
+    floatLeMethod_1241526999.nativeImpl = 0;
     F.line = 2179;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [119,104,105,108,101,70,97,108,115,101,58], whileFalseMethod_1241529628);
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [60,61], floatLeMethod_1241526999);
     F.line = 2180;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [119,104,105,108,101,70,97,108,115,101,58], whileFalseMethod_1241529628);
-    F.line = 2183;
-    var primitiveValueMethod_1241529713 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101]);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [60,61], floatLeMethod_1241526999);
+    F.line = 2182;
+    var floatGeMethod_1241527084 = createCoreMethod__OOZinterpreterZobjects_u316([62,61]);
     F.line = 11;
     F.filename = "objects.nim";
-    primitiveValueMethod_1241529713.nativeImpl = 0;
+    floatGeMethod_1241527084.nativeImpl = 0;
+    F.line = 2184;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [62,61], floatGeMethod_1241527084);
     F.line = 2185;
-    F.filename = "vm.nim";
-    primitiveValueMethod_1241529713.hasInterpreterParam = true;
-    F.line = 2186;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101], primitiveValueMethod_1241529713);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [62,61], floatGeMethod_1241527084);
     F.line = 2187;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101], primitiveValueMethod_1241529713);
+    var floatNeMethod_1241527169 = createCoreMethod__OOZinterpreterZobjects_u316([60,62]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatNeMethod_1241527169.nativeImpl = 0;
     F.line = 2189;
-    var primitiveValueWithArgMethod_1241529798 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    primitiveValueWithArgMethod_1241529798.nativeImpl = 0;
-    F.line = 2191;
     F.filename = "vm.nim";
-    primitiveValueWithArgMethod_1241529798.hasInterpreterParam = true;
-    F.line = 2192;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58], primitiveValueWithArgMethod_1241529798);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [60,62], floatNeMethod_1241527169);
+    F.line = 2190;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [60,62], floatNeMethod_1241527169);
     F.line = 2193;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58], primitiveValueWithArgMethod_1241529798);
+    var floatPrintStringMethod_1241527254 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,110,116,83,116,114,105,110,103]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    floatPrintStringMethod_1241527254.nativeImpl = 0;
     F.line = 2195;
-    var primitiveValueWithTwoArgsMethod_1241529883 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    primitiveValueWithTwoArgsMethod_1241529883.nativeImpl = 0;
-    F.line = 2197;
     F.filename = "vm.nim";
-    primitiveValueWithTwoArgsMethod_1241529883.hasInterpreterParam = true;
-    F.line = 2198;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithTwoArgsMethod_1241529883);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [112,114,105,110,116,83,116,114,105,110,103], floatPrintStringMethod_1241527254);
+    F.line = 2196;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [112,114,105,110,116,83,116,114,105,110,103], floatPrintStringMethod_1241527254);
     F.line = 2199;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithTwoArgsMethod_1241529883);
+    var sqrtMethod_1241527339 = createCoreMethod__OOZinterpreterZobjects_u316([115,113,114,116]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    sqrtMethod_1241527339.nativeImpl = 0;
     F.line = 2201;
-    var primitiveValueWithThreeArgsMethod_1241529968 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58,118,97,108,117,101,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    primitiveValueWithThreeArgsMethod_1241529968.nativeImpl = 0;
-    F.line = 2203;
     F.filename = "vm.nim";
-    primitiveValueWithThreeArgsMethod_1241529968.hasInterpreterParam = true;
-    F.line = 2204;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithThreeArgsMethod_1241529968);
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.methods, [115,113,114,116], sqrtMethod_1241527339);
+    F.line = 2202;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(floatCls_1241526399.allMethods, [115,113,114,116], sqrtMethod_1241527339);
     F.line = 2205;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithThreeArgsMethod_1241529968);
-    F.line = 2208;
-    var primitiveOnDoMethod_1241530053 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,79,110,68,111,58]);
-    F.line = 11;
-    F.filename = "objects.nim";
-    primitiveOnDoMethod_1241530053.nativeImpl = 0;
+    var stringCls_1241527428 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [83,116,114,105,110,103]);
+    F.line = 2206;
+    stringCls_1241527428.tags = nimCopy(null, [[83,116,114,105,110,103], [84,101,120,116]], NTI1157629971);
+    F.line = 2207;
+    stringClass_1157628214[0] = stringCls_1241527428;
     F.line = 2210;
-    F.filename = "vm.nim";
-    primitiveOnDoMethod_1241530053.hasInterpreterParam = true;
-    F.line = 2211;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.methods, [112,114,105,109,105,116,105,118,101,79,110,68,111,58], primitiveOnDoMethod_1241530053);
-    F.line = 2212;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529538.allMethods, [112,114,105,109,105,116,105,118,101,79,110,68,111,58], primitiveOnDoMethod_1241530053);
-    if (!((setClass_1157628219[0] == null))) {
-    F.line = 2217;
-    var setDoMethod_1241530142 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,101,116,68,111,58]);
+    var stringConcatMethod_1241527433 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,67,111,110,99,97,116,58]);
     F.line = 11;
     F.filename = "objects.nim";
-    setDoMethod_1241530142.nativeImpl = 0;
-    F.line = 2219;
+    stringConcatMethod_1241527433.nativeImpl = 0;
+    F.line = 2212;
     F.filename = "vm.nim";
-    setDoMethod_1241530142.hasInterpreterParam = true;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,67,111,110,99,97,116,58], stringConcatMethod_1241527433);
+    F.line = 2213;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,67,111,110,99,97,116,58], stringConcatMethod_1241527433);
+    F.line = 2215;
+    var stringSizeMethod_1241527518 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,83,105,122,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringSizeMethod_1241527518.nativeImpl = 0;
+    F.line = 2217;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,83,105,122,101], stringSizeMethod_1241527518);
+    F.line = 2218;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,83,105,122,101], stringSizeMethod_1241527518);
     F.line = 2220;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(setClass_1157628219[0].methods, [112,114,105,109,105,116,105,118,101,83,101,116,68,111,58], setDoMethod_1241530142);
-    F.line = 2221;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(setClass_1157628219[0].allMethods, [112,114,105,109,105,116,105,118,101,83,101,116,68,111,58], setDoMethod_1241530142);
+    var stringAtMethod_1241527603 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,65,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringAtMethod_1241527603.nativeImpl = 0;
+    F.line = 2222;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,65,116,58], stringAtMethod_1241527603);
+    F.line = 2223;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,83,116,114,105,110,103,65,116,58], stringAtMethod_1241527603);
+    F.line = 2225;
+    var stringSplitMethod_1241527688 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,112,108,105,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringSplitMethod_1241527688.nativeImpl = 0;
+    F.line = 2227;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,83,112,108,105,116,58], stringSplitMethod_1241527688);
+    F.line = 2228;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,83,112,108,105,116,58], stringSplitMethod_1241527688);
+    F.line = 2231;
+    var stringLowercaseMethod_1241527773 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,76,111,119,101,114,99,97,115,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringLowercaseMethod_1241527773.nativeImpl = 0;
+    F.line = 2233;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,76,111,119,101,114,99,97,115,101], stringLowercaseMethod_1241527773);
+    F.line = 2234;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,76,111,119,101,114,99,97,115,101], stringLowercaseMethod_1241527773);
+    F.line = 2236;
+    var stringUppercaseMethod_1241527858 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,85,112,112,101,114,99,97,115,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringUppercaseMethod_1241527858.nativeImpl = 0;
+    F.line = 2238;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,85,112,112,101,114,99,97,115,101], stringUppercaseMethod_1241527858);
+    F.line = 2239;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,85,112,112,101,114,99,97,115,101], stringUppercaseMethod_1241527858);
+    F.line = 2241;
+    var stringTrimMethod_1241527943 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,84,114,105,109]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringTrimMethod_1241527943.nativeImpl = 0;
+    F.line = 2243;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,84,114,105,109], stringTrimMethod_1241527943);
+    F.line = 2244;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,84,114,105,109], stringTrimMethod_1241527943);
+    F.line = 2246;
+    var stringFromToMethod_1241528028 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,70,114,111,109,84,111,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringFromToMethod_1241528028.nativeImpl = 0;
+    F.line = 2248;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,70,114,111,109,84,111,58], stringFromToMethod_1241528028);
+    F.line = 2249;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,70,114,111,109,84,111,58], stringFromToMethod_1241528028);
+    F.line = 2251;
+    var stringIndexOfMethod_1241528113 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,110,100,101,120,79,102,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringIndexOfMethod_1241528113.nativeImpl = 0;
+    F.line = 2253;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,73,110,100,101,120,79,102,58], stringIndexOfMethod_1241528113);
+    F.line = 2254;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,73,110,100,101,120,79,102,58], stringIndexOfMethod_1241528113);
+    F.line = 2256;
+    var stringIncludesSubStringMethod_1241528198 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,73,110,99,108,117,100,101,115,83,117,98,83,116,114,105,110,103,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringIncludesSubStringMethod_1241528198.nativeImpl = 0;
+    F.line = 2258;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,73,110,99,108,117,100,101,115,83,117,98,83,116,114,105,110,103,58], stringIncludesSubStringMethod_1241528198);
+    F.line = 2259;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,73,110,99,108,117,100,101,115,83,117,98,83,116,114,105,110,103,58], stringIncludesSubStringMethod_1241528198);
+    F.line = 2261;
+    var stringReplaceWithMethod_1241528283 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,82,101,112,108,97,99,101,87,105,116,104,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringReplaceWithMethod_1241528283.nativeImpl = 0;
+    F.line = 2263;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,82,101,112,108,97,99,101,87,105,116,104,58], stringReplaceWithMethod_1241528283);
+    F.line = 2264;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,82,101,112,108,97,99,101,87,105,116,104,58], stringReplaceWithMethod_1241528283);
+    F.line = 2266;
+    var stringAsIntegerMethod_1241528368 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,115,73,110,116,101,103,101,114]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringAsIntegerMethod_1241528368.nativeImpl = 0;
+    F.line = 2268;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,65,115,73,110,116,101,103,101,114], stringAsIntegerMethod_1241528368);
+    F.line = 2269;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,65,115,73,110,116,101,103,101,114], stringAsIntegerMethod_1241528368);
+    F.line = 2271;
+    var stringAsSymbolMethod_1241528453 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,65,115,83,121,109,98,111,108]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringAsSymbolMethod_1241528453.nativeImpl = 0;
+    F.line = 2273;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,65,115,83,121,109,98,111,108], stringAsSymbolMethod_1241528453);
+    F.line = 2274;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,65,115,83,121,109,98,111,108], stringAsSymbolMethod_1241528453);
+    F.line = 2276;
+    var stringRepeatMethod_1241528538 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,82,101,112,101,97,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    stringRepeatMethod_1241528538.nativeImpl = 0;
+    F.line = 2278;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.methods, [112,114,105,109,105,116,105,118,101,82,101,112,101,97,116,58], stringRepeatMethod_1241528538);
+    F.line = 2279;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(stringCls_1241527428.allMethods, [112,114,105,109,105,116,105,118,101,82,101,112,101,97,116,58], stringRepeatMethod_1241528538);
+    F.line = 2282;
+    var arrayCls_1241528623 = null;
+    if (!((arrayClass_1157628215[0] == null))) {
+    F.line = 2284;
+    arrayCls_1241528623 = arrayClass_1157628215[0];
+    }
+    else {
+      F.line = 2286;
+      arrayCls_1241528623 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [65,114,114,97,121]);
+      F.line = 2287;
+      arrayCls_1241528623.tags = nimCopy(null, [[65,114,114,97,121], [67,111,108,108,101,99,116,105,111,110]], NTI1157629971);
+      F.line = 2288;
+      arrayClass_1157628215[0] = arrayCls_1241528623;
     }
     
-    F.line = 2224;
-    var undefinedObjCls_1241530231 = newClass__OOZcoreZtypes_u3447([objectCls_1241522135], [], [85,110,100,101,102,105,110,101,100,79,98,106,101,99,116]);
-    F.line = 2225;
-    undefinedObjCls_1241530231.tags = nimCopy(null, [[85,110,100,101,102,105,110,101,100,79,98,106,101,99,116], [79,98,106,101,99,116]], NTI1157629971);
-    F.line = 2226;
-    undefinedObjectClass_1157628210[0] = undefinedObjCls_1241530231;
-    F.line = 2229;
-    var nilInst_1241530240 = {kind: 0, class: undefinedObjCls_1241530231, slots: [], m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-    F.line = 2230;
-    nilInstance_1157628220[0] = nilInst_1241530240;
-    F.line = 2238;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [82,111,111,116], toValue__OOZcoreZtypes_u1482(rootCls_1241522017));
-    F.line = 2239;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [79,98,106,101,99,116], toValue__OOZcoreZtypes_u1482(objectCls_1241522135));
-    F.line = 2240;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [78,117,109,98,101,114], toValue__OOZcoreZtypes_u1482(numberCls_1241524829));
-    F.line = 2241;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [73,110,116,101,103,101,114], toValue__OOZcoreZtypes_u1482(intCls_1241524838));
-    F.line = 2242;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [70,108,111,97,116], toValue__OOZcoreZtypes_u1482(floatCls_1241526037));
-    F.line = 2243;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [83,116,114,105,110,103], toValue__OOZcoreZtypes_u1482(stringCls_1241527066));
-    F.line = 2244;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [65,114,114,97,121], toValue__OOZcoreZtypes_u1482(arrayCls_1241528261));
-    F.line = 2245;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [84,97,98,108,101], toValue__OOZcoreZtypes_u1482(tableCls_1241528954));
-    F.line = 2246;
+    F.line = 2291;
+    var arraySizeMethod_1241528636 = createCoreMethod__OOZinterpreterZobjects_u316([115,105,122,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arraySizeMethod_1241528636.nativeImpl = 0;
+    F.line = 2293;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [115,105,122,101], arraySizeMethod_1241528636);
+    F.line = 2294;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [115,105,122,101], arraySizeMethod_1241528636);
+    F.line = 2296;
+    var arrayAddMethod_1241528721 = createCoreMethod__OOZinterpreterZobjects_u316([97,100,100,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayAddMethod_1241528721.nativeImpl = 0;
+    F.line = 2298;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [97,100,100,58], arrayAddMethod_1241528721);
+    F.line = 2299;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [97,100,100,58], arrayAddMethod_1241528721);
+    F.line = 2301;
+    var arrayAtMethod_1241528806 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayAtMethod_1241528806.nativeImpl = 0;
+    F.line = 2303;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [97,116,58], arrayAtMethod_1241528806);
+    F.line = 2304;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [97,116,58], arrayAtMethod_1241528806);
+    F.line = 2306;
+    var arrayAtPutMethod_1241528891 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58,112,117,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayAtPutMethod_1241528891.nativeImpl = 0;
+    F.line = 2308;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [97,116,58,112,117,116,58], arrayAtPutMethod_1241528891);
+    F.line = 2309;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [97,116,58,112,117,116,58], arrayAtPutMethod_1241528891);
+    F.line = 2311;
+    var arrayIncludesMethod_1241528976 = createCoreMethod__OOZinterpreterZobjects_u316([105,110,99,108,117,100,101,115,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayIncludesMethod_1241528976.nativeImpl = 0;
+    F.line = 2313;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [105,110,99,108,117,100,101,115,58], arrayIncludesMethod_1241528976);
+    F.line = 2314;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [105,110,99,108,117,100,101,115,58], arrayIncludesMethod_1241528976);
+    F.line = 2316;
+    var arrayReverseMethod_1241529061 = createCoreMethod__OOZinterpreterZobjects_u316([114,101,118,101,114,115,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayReverseMethod_1241529061.nativeImpl = 0;
+    F.line = 2318;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [114,101,118,101,114,115,101], arrayReverseMethod_1241529061);
+    F.line = 2319;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [114,101,118,101,114,115,101], arrayReverseMethod_1241529061);
+    F.line = 2321;
+    var arrayJoinMethod_1241529146 = createCoreMethod__OOZinterpreterZobjects_u316([106,111,105,110,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayJoinMethod_1241529146.nativeImpl = 0;
+    F.line = 2323;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [106,111,105,110,58], arrayJoinMethod_1241529146);
+    F.line = 2324;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [106,111,105,110,58], arrayJoinMethod_1241529146);
+    F.line = 2326;
+    var arrayDoMethod_1241529231 = createCoreMethod__OOZinterpreterZobjects_u316([100,111,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    arrayDoMethod_1241529231.nativeImpl = 0;
+    F.line = 2328;
+    F.filename = "vm.nim";
+    arrayDoMethod_1241529231.hasInterpreterParam = true;
+    F.line = 2329;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.methods, [100,111,58], arrayDoMethod_1241529231);
+    F.line = 2330;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(arrayCls_1241528623.allMethods, [100,111,58], arrayDoMethod_1241529231);
+    F.line = 2333;
+    var tableCls_1241529316 = null;
+    if (!((tableClass_1157628216[0] == null))) {
+    F.line = 2335;
+    tableCls_1241529316 = tableClass_1157628216[0];
+    }
+    else {
+      F.line = 2337;
+      tableCls_1241529316 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [84,97,98,108,101]);
+      F.line = 2338;
+      tableCls_1241529316.tags = nimCopy(null, [[84,97,98,108,101], [68,105,99,116,105,111,110,97,114,121], [67,111,108,108,101,99,116,105,111,110]], NTI1493173506);
+      F.line = 2339;
+      tableClass_1157628216[0] = tableCls_1241529316;
+    }
+    
+    F.line = 2342;
+    var tableAtMethod_1241529329 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    tableAtMethod_1241529329.nativeImpl = 0;
+    F.line = 2344;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.methods, [97,116,58], tableAtMethod_1241529329);
+    F.line = 2345;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.allMethods, [97,116,58], tableAtMethod_1241529329);
+    F.line = 2347;
+    var tableAtPutMethod_1241529414 = createCoreMethod__OOZinterpreterZobjects_u316([97,116,58,112,117,116,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    tableAtPutMethod_1241529414.nativeImpl = 0;
+    F.line = 2349;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.methods, [97,116,58,112,117,116,58], tableAtPutMethod_1241529414);
+    F.line = 2350;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.allMethods, [97,116,58,112,117,116,58], tableAtPutMethod_1241529414);
+    F.line = 2352;
+    var tableKeysMethod_1241529499 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,75,101,121,115]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    tableKeysMethod_1241529499.nativeImpl = 0;
+    F.line = 2354;
+    F.filename = "vm.nim";
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.methods, [112,114,105,109,105,116,105,118,101,75,101,121,115], tableKeysMethod_1241529499);
+    F.line = 2355;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.allMethods, [112,114,105,109,105,116,105,118,101,75,101,121,115], tableKeysMethod_1241529499);
+    F.line = 2364;
+    var tableNewMethod_1241529614 = createCoreMethod__OOZinterpreterZobjects_u316([110,101,119]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    tableNewMethod_1241529614.nativeImpl = 0;
+    F.line = 2366;
+    F.filename = "vm.nim";
+    tableNewMethod_1241529614.hasInterpreterParam = true;
+    F.line = 2367;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.classMethods, [110,101,119], tableNewMethod_1241529614);
+    F.line = 2368;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(tableCls_1241529316.allClassMethods, [110,101,119], tableNewMethod_1241529614);
+    F.line = 2371;
+    var booleanCls_1241529703 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [66,111,111,108,101,97,110]);
+    F.line = 2372;
+    booleanCls_1241529703.tags = nimCopy(null, [[66,111,111,108,101,97,110]], NTI1157629904);
+    F.line = 2373;
+    booleanClass_1157628211[0] = booleanCls_1241529703;
+    F.line = 2376;
+    var ifTrueMethod_1241529708 = createCoreMethod__OOZinterpreterZobjects_u316([105,102,84,114,117,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    ifTrueMethod_1241529708.nativeImpl = 0;
+    F.line = 2378;
+    F.filename = "vm.nim";
+    ifTrueMethod_1241529708.hasInterpreterParam = true;
+    F.line = 2379;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529703.methods, [105,102,84,114,117,101,58], ifTrueMethod_1241529708);
+    F.line = 2380;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529703.allMethods, [105,102,84,114,117,101,58], ifTrueMethod_1241529708);
+    F.line = 2382;
+    var ifFalseMethod_1241529793 = createCoreMethod__OOZinterpreterZobjects_u316([105,102,70,97,108,115,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    ifFalseMethod_1241529793.nativeImpl = 0;
+    F.line = 2384;
+    F.filename = "vm.nim";
+    ifFalseMethod_1241529793.hasInterpreterParam = true;
+    F.line = 2385;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529703.methods, [105,102,70,97,108,115,101,58], ifFalseMethod_1241529793);
+    F.line = 2386;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(booleanCls_1241529703.allMethods, [105,102,70,97,108,115,101,58], ifFalseMethod_1241529793);
+    F.line = 2389;
+    var trueCls_1241529882 = newClass__OOZcoreZtypes_u3447([booleanCls_1241529703], [], [84,114,117,101]);
+    F.line = 2390;
+    trueCls_1241529882.tags = nimCopy(null, [[84,114,117,101], [66,111,111,108,101,97,110]], NTI1157629971);
+    F.line = 2391;
+    trueClassCache_1493172530[0] = trueCls_1241529882;
+    F.line = 2394;
+    var falseCls_1241529891 = newClass__OOZcoreZtypes_u3447([booleanCls_1241529703], [], [70,97,108,115,101]);
+    F.line = 2395;
+    falseCls_1241529891.tags = nimCopy(null, [[70,97,108,115,101], [66,111,111,108,101,97,110]], NTI1157629971);
+    F.line = 2396;
+    falseClassCache_1493172531[0] = falseCls_1241529891;
+    F.line = 2399;
+    var blockCls_1241529900 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [66,108,111,99,107]);
+    F.line = 2400;
+    blockCls_1241529900.tags = nimCopy(null, [[66,108,111,99,107], [67,108,111,115,117,114,101]], NTI1157629971);
+    F.line = 2401;
+    blockClass_1157628217[0] = blockCls_1241529900;
+    F.line = 2404;
+    var whileTrueMethod_1241529905 = createCoreMethod__OOZinterpreterZobjects_u316([119,104,105,108,101,84,114,117,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    whileTrueMethod_1241529905.nativeImpl = 0;
+    F.line = 2406;
+    F.filename = "vm.nim";
+    whileTrueMethod_1241529905.hasInterpreterParam = true;
+    F.line = 2407;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [119,104,105,108,101,84,114,117,101,58], whileTrueMethod_1241529905);
+    F.line = 2408;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [119,104,105,108,101,84,114,117,101,58], whileTrueMethod_1241529905);
+    F.line = 2410;
+    var whileFalseMethod_1241529990 = createCoreMethod__OOZinterpreterZobjects_u316([119,104,105,108,101,70,97,108,115,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    whileFalseMethod_1241529990.nativeImpl = 0;
+    F.line = 2412;
+    F.filename = "vm.nim";
+    whileFalseMethod_1241529990.hasInterpreterParam = true;
+    F.line = 2413;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [119,104,105,108,101,70,97,108,115,101,58], whileFalseMethod_1241529990);
+    F.line = 2414;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [119,104,105,108,101,70,97,108,115,101,58], whileFalseMethod_1241529990);
+    F.line = 2417;
+    var primitiveValueMethod_1241530075 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    primitiveValueMethod_1241530075.nativeImpl = 0;
+    F.line = 2419;
+    F.filename = "vm.nim";
+    primitiveValueMethod_1241530075.hasInterpreterParam = true;
+    F.line = 2420;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101], primitiveValueMethod_1241530075);
+    F.line = 2421;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101], primitiveValueMethod_1241530075);
+    F.line = 2423;
+    var primitiveValueWithArgMethod_1241530160 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    primitiveValueWithArgMethod_1241530160.nativeImpl = 0;
+    F.line = 2425;
+    F.filename = "vm.nim";
+    primitiveValueWithArgMethod_1241530160.hasInterpreterParam = true;
+    F.line = 2426;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58], primitiveValueWithArgMethod_1241530160);
+    F.line = 2427;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58], primitiveValueWithArgMethod_1241530160);
+    F.line = 2429;
+    var primitiveValueWithTwoArgsMethod_1241530245 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    primitiveValueWithTwoArgsMethod_1241530245.nativeImpl = 0;
+    F.line = 2431;
+    F.filename = "vm.nim";
+    primitiveValueWithTwoArgsMethod_1241530245.hasInterpreterParam = true;
+    F.line = 2432;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithTwoArgsMethod_1241530245);
+    F.line = 2433;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithTwoArgsMethod_1241530245);
+    F.line = 2435;
+    var primitiveValueWithThreeArgsMethod_1241530330 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58,118,97,108,117,101,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    primitiveValueWithThreeArgsMethod_1241530330.nativeImpl = 0;
+    F.line = 2437;
+    F.filename = "vm.nim";
+    primitiveValueWithThreeArgsMethod_1241530330.hasInterpreterParam = true;
+    F.line = 2438;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithThreeArgsMethod_1241530330);
+    F.line = 2439;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [112,114,105,109,105,116,105,118,101,86,97,108,117,101,58,118,97,108,117,101,58,118,97,108,117,101,58], primitiveValueWithThreeArgsMethod_1241530330);
+    F.line = 2442;
+    var primitiveOnDoMethod_1241530415 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,79,110,68,111,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    primitiveOnDoMethod_1241530415.nativeImpl = 0;
+    F.line = 2444;
+    F.filename = "vm.nim";
+    primitiveOnDoMethod_1241530415.hasInterpreterParam = true;
+    F.line = 2445;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.methods, [112,114,105,109,105,116,105,118,101,79,110,68,111,58], primitiveOnDoMethod_1241530415);
+    F.line = 2446;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(blockCls_1241529900.allMethods, [112,114,105,109,105,116,105,118,101,79,110,68,111,58], primitiveOnDoMethod_1241530415);
+    if (!((setClass_1157628219[0] == null))) {
+    F.line = 2451;
+    var setDoMethod_1241530504 = createCoreMethod__OOZinterpreterZobjects_u316([112,114,105,109,105,116,105,118,101,83,101,116,68,111,58]);
+    F.line = 11;
+    F.filename = "objects.nim";
+    setDoMethod_1241530504.nativeImpl = 0;
+    F.line = 2453;
+    F.filename = "vm.nim";
+    setDoMethod_1241530504.hasInterpreterParam = true;
+    F.line = 2454;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(setClass_1157628219[0].methods, [112,114,105,109,105,116,105,118,101,83,101,116,68,111,58], setDoMethod_1241530504);
+    F.line = 2455;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u4639(setClass_1157628219[0].allMethods, [112,114,105,109,105,116,105,118,101,83,101,116,68,111,58], setDoMethod_1241530504);
+    }
+    
+    F.line = 2458;
+    var undefinedObjCls_1241530593 = newClass__OOZcoreZtypes_u3447([objectCls_1241522497], [], [85,110,100,101,102,105,110,101,100,79,98,106,101,99,116]);
+    F.line = 2459;
+    undefinedObjCls_1241530593.tags = nimCopy(null, [[85,110,100,101,102,105,110,101,100,79,98,106,101,99,116], [79,98,106,101,99,116]], NTI1157629971);
+    F.line = 2460;
+    undefinedObjectClass_1157628210[0] = undefinedObjCls_1241530593;
+    F.line = 2463;
+    var nilInst_1241530602 = {kind: 0, class: undefinedObjCls_1241530593, slots: [], m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+    F.line = 2464;
+    nilInstance_1157628220[0] = nilInst_1241530602;
+    F.line = 2472;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [82,111,111,116], toValue__OOZcoreZtypes_u1482(rootCls_1241522379));
+    F.line = 2473;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [79,98,106,101,99,116], toValue__OOZcoreZtypes_u1482(objectCls_1241522497));
+    F.line = 2474;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [78,117,109,98,101,114], toValue__OOZcoreZtypes_u1482(numberCls_1241525191));
+    F.line = 2475;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [73,110,116,101,103,101,114], toValue__OOZcoreZtypes_u1482(intCls_1241525200));
+    F.line = 2476;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [70,108,111,97,116], toValue__OOZcoreZtypes_u1482(floatCls_1241526399));
+    F.line = 2477;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [83,116,114,105,110,103], toValue__OOZcoreZtypes_u1482(stringCls_1241527428));
+    F.line = 2478;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [65,114,114,97,121], toValue__OOZcoreZtypes_u1482(arrayCls_1241528623));
+    F.line = 2479;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [84,97,98,108,101], toValue__OOZcoreZtypes_u1482(tableCls_1241529316));
+    F.line = 2480;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [83,101,116], toValue__OOZcoreZtypes_u1482(setClass_1157628219[0]));
-    F.line = 2247;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [66,111,111,108,101,97,110], toValue__OOZcoreZtypes_u1482(booleanCls_1241529341));
-    F.line = 2248;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [84,114,117,101], toValue__OOZcoreZtypes_u1482(trueCls_1241529520));
-    F.line = 2249;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [70,97,108,115,101], toValue__OOZcoreZtypes_u1482(falseCls_1241529529));
-    F.line = 2250;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [66,108,111,99,107], toValue__OOZcoreZtypes_u1482(blockCls_1241529538));
-    F.line = 2251;
-    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [85,110,100,101,102,105,110,101,100,79,98,106,101,99,116], toValue__OOZcoreZtypes_u1482(undefinedObjCls_1241530231));
-    F.line = 2252;
+    F.line = 2481;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [66,111,111,108,101,97,110], toValue__OOZcoreZtypes_u1482(booleanCls_1241529703));
+    F.line = 2482;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [84,114,117,101], toValue__OOZcoreZtypes_u1482(trueCls_1241529882));
+    F.line = 2483;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [70,97,108,115,101], toValue__OOZcoreZtypes_u1482(falseCls_1241529891));
+    F.line = 2484;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [66,108,111,99,107], toValue__OOZcoreZtypes_u1482(blockCls_1241529900));
+    F.line = 2485;
+    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [85,110,100,101,102,105,110,101,100,79,98,106,101,99,116], toValue__OOZcoreZtypes_u1482(undefinedObjCls_1241530593));
+    F.line = 2486;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [76,105,98,114,97,114,121], toValue__OOZcoreZtypes_u1482(libraryClass_1157628218[0]));
-    F.line = 2255;
+    F.line = 2489;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [116,114,117,101], {kind: 4, boolVal: true, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-    F.line = 2256;
+    F.line = 2490;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [102,97,108,115,101], {kind: 4, boolVal: false, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-    F.line = 2257;
+    F.line = 2491;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, [110,105,108], nilValue__OOZcoreZtypes_u1406());
-    F.line = 2260;
-    protectGlobal__OOZinterpreterZvm_u22([67,108,97,115,115]);
-    F.line = 2261;
-    protectGlobal__OOZinterpreterZvm_u22([82,111,111,116]);
-    F.line = 2262;
-    protectGlobal__OOZinterpreterZvm_u22([79,98,106,101,99,116]);
-    F.line = 2263;
-    protectGlobal__OOZinterpreterZvm_u22([78,117,109,98,101,114]);
-    F.line = 2264;
-    protectGlobal__OOZinterpreterZvm_u22([73,110,116,101,103,101,114]);
-    F.line = 2265;
-    protectGlobal__OOZinterpreterZvm_u22([70,108,111,97,116]);
-    F.line = 2266;
-    protectGlobal__OOZinterpreterZvm_u22([83,116,114,105,110,103]);
-    F.line = 2267;
-    protectGlobal__OOZinterpreterZvm_u22([65,114,114,97,121]);
-    F.line = 2268;
-    protectGlobal__OOZinterpreterZvm_u22([84,97,98,108,101]);
-    F.line = 2269;
-    protectGlobal__OOZinterpreterZvm_u22([66,111,111,108,101,97,110]);
-    F.line = 2270;
-    protectGlobal__OOZinterpreterZvm_u22([84,114,117,101]);
-    F.line = 2271;
-    protectGlobal__OOZinterpreterZvm_u22([70,97,108,115,101]);
-    F.line = 2272;
-    protectGlobal__OOZinterpreterZvm_u22([66,108,111,99,107]);
-    F.line = 2273;
-    protectGlobal__OOZinterpreterZvm_u22([85,110,100,101,102,105,110,101,100,79,98,106,101,99,116]);
-    F.line = 2274;
-    protectGlobal__OOZinterpreterZvm_u22([116,114,117,101]);
-    F.line = 2275;
-    protectGlobal__OOZinterpreterZvm_u22([102,97,108,115,101]);
-    F.line = 2276;
-    protectGlobal__OOZinterpreterZvm_u22([110,105,108]);
-    F.line = 2279;
-    protectGlobal__OOZinterpreterZvm_u22([76,105,98,114,97,114,121]);
-    F.line = 2282;
-    installLibraryMethods__OOZinterpreterZvm_u57();
-    F.line = 2285;
-    initHardingGlobal__OOZinterpreterZvm_u58(interp_p0, interp_p0_Idx);
+    F.line = 2494;
+    protectGlobal__OOZinterpreterZvm_u351([67,108,97,115,115]);
+    F.line = 2495;
+    protectGlobal__OOZinterpreterZvm_u351([82,111,111,116]);
+    F.line = 2496;
+    protectGlobal__OOZinterpreterZvm_u351([79,98,106,101,99,116]);
+    F.line = 2497;
+    protectGlobal__OOZinterpreterZvm_u351([78,117,109,98,101,114]);
+    F.line = 2498;
+    protectGlobal__OOZinterpreterZvm_u351([73,110,116,101,103,101,114]);
+    F.line = 2499;
+    protectGlobal__OOZinterpreterZvm_u351([70,108,111,97,116]);
+    F.line = 2500;
+    protectGlobal__OOZinterpreterZvm_u351([83,116,114,105,110,103]);
+    F.line = 2501;
+    protectGlobal__OOZinterpreterZvm_u351([65,114,114,97,121]);
+    F.line = 2502;
+    protectGlobal__OOZinterpreterZvm_u351([84,97,98,108,101]);
+    F.line = 2503;
+    protectGlobal__OOZinterpreterZvm_u351([66,111,111,108,101,97,110]);
+    F.line = 2504;
+    protectGlobal__OOZinterpreterZvm_u351([84,114,117,101]);
+    F.line = 2505;
+    protectGlobal__OOZinterpreterZvm_u351([70,97,108,115,101]);
+    F.line = 2506;
+    protectGlobal__OOZinterpreterZvm_u351([66,108,111,99,107]);
+    F.line = 2507;
+    protectGlobal__OOZinterpreterZvm_u351([85,110,100,101,102,105,110,101,100,79,98,106,101,99,116]);
+    F.line = 2508;
+    protectGlobal__OOZinterpreterZvm_u351([116,114,117,101]);
+    F.line = 2509;
+    protectGlobal__OOZinterpreterZvm_u351([102,97,108,115,101]);
+    F.line = 2510;
+    protectGlobal__OOZinterpreterZvm_u351([110,105,108]);
+    F.line = 2513;
+    protectGlobal__OOZinterpreterZvm_u351([76,105,98,114,97,114,121]);
+    F.line = 2516;
+    installLibraryMethods__OOZinterpreterZvm_u386();
+    F.line = 2519;
+    initHardingGlobal__OOZinterpreterZvm_u387(interp_p0, interp_p0_Idx);
   framePtr = F.prev;
 
   
@@ -10654,16 +10678,16 @@ function nsuCountChar(s_p0, sub_p1) {
       var c_956303113 = 0;
       F.line = 267;
       F.filename = "iterators.nim";
-      var i_1241514124 = 0;
+      var i_1241514453 = 0;
       F.line = 268;
-      var L_1241514125 = (s_p0).length;
+      var L_1241514454 = (s_p0).length;
       Label2: {
         F.line = 269;
           Label3: while (true) {
-          if (!(i_1241514124 < L_1241514125)) break Label3;
+          if (!(i_1241514453 < L_1241514454)) break Label3;
             F.line = 2126;
             F.filename = "strutils.nim";
-            c_956303113 = s_p0[chckIndx(i_1241514124, 0, (s_p0).length - 1)];
+            c_956303113 = s_p0[chckIndx(i_1241514453, 0, (s_p0).length - 1)];
             if ((c_956303113 == sub_p1)) {
             F.line = 2127;
             result_956303112 = addInt(result_956303112, 1);
@@ -10671,8 +10695,8 @@ function nsuCountChar(s_p0, sub_p1) {
             
             F.line = 13;
             F.filename = "iterators.nim";
-            i_1241514124 += 1;
-            if (!(((s_p0).length == L_1241514125))) {
+            i_1241514453 += 1;
+            if (!(((s_p0).length == L_1241514454))) {
             F.line = 272;
             failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(272, 11) `len(a) == L` the length of the string changed while iterating over it"));
             }
@@ -12875,106 +12899,106 @@ function printAST__OOZparserZparser_u2418(node_p0, indent_p1) {
 
 }
 
-function newEvalFrame__OOZinterpreterZvm_u19234(node_p0) {
-  var result_1241533220 = null;
+function newEvalFrame__OOZinterpreterZvm_u19596(node_p0) {
+  var result_1241533582 = null;
 
   var F = {procname: "vm.newEvalFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2801;
+    F.line = 3035;
     F.filename = "vm.nim";
-    result_1241533220 = {kind: 0, node: node_p0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533582 = {kind: 0, node: node_p0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533220;
+  return result_1241533582;
 
 }
 
-function hasWorkFrames__OOZinterpreterZvm_u19460(interp_p0) {
-  var result_1241533446 = false;
+function hasWorkFrames__OOZinterpreterZvm_u19822(interp_p0) {
+  var result_1241533808 = false;
 
   var F = {procname: "vm.hasWorkFrames", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2842;
+    F.line = 3076;
     F.filename = "vm.nim";
-    result_1241533446 = (0 < (interp_p0.workQueue).length);
+    result_1241533808 = (0 < (interp_p0.workQueue).length);
   framePtr = F.prev;
 
-  return result_1241533446;
+  return result_1241533808;
 
 }
 
-function HEX5BHEX5D__OOZinterpreterZvm_u19513(s_p0, i_p1) {
-  var result_1241533501 = null;
+function HEX5BHEX5D__OOZinterpreterZvm_u19875(s_p0, i_p1) {
+  var result_1241533863 = null;
 
   var F = {procname: "[].[]", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/indices.nim", line: 0};
   framePtr = F;
     F.line = 30;
     F.filename = "indices.nim";
-    result_1241533501 = s_p0[chckIndx(subInt((s_p0).length, i_p1), 0, (s_p0).length - 1)];
+    result_1241533863 = s_p0[chckIndx(subInt((s_p0).length, i_p1), 0, (s_p0).length - 1)];
   framePtr = F.prev;
 
-  return result_1241533501;
+  return result_1241533863;
 
 }
 
-function peekValue__OOZinterpreterZvm_u19506(interp_p0) {
-  var result_1241533492 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+function peekValue__OOZinterpreterZvm_u19868(interp_p0) {
+  var result_1241533854 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
 
   var F = {procname: "vm.peekValue", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2855;
+    F.line = 3089;
     F.filename = "vm.nim";
     if (((interp_p0.evalStack).length == 0)) {
-    F.line = 2856;
+    F.line = 3090;
     raiseException({message: [69,118,97,108,32,115,116,97,99,107,32,101,109,112,116,121], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
     }
     
-    result_1241533492 = nimCopy(result_1241533492, HEX5BHEX5D__OOZinterpreterZvm_u19513(interp_p0.evalStack, 1), NTI1157627922);
+    result_1241533854 = nimCopy(result_1241533854, HEX5BHEX5D__OOZinterpreterZvm_u19875(interp_p0.evalStack, 1), NTI1157627922);
   framePtr = F.prev;
 
-  return result_1241533492;
+  return result_1241533854;
 
 }
 
-function pop__OOZinterpreterZvm_u19448(s_p0, s_p0_Idx) {
-  var result_1241533435 = null;
+function pop__OOZinterpreterZvm_u19810(s_p0, s_p0_Idx) {
+  var result_1241533797 = null;
 
   var F = {procname: "pop.pop", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system.nim", line: 0};
   framePtr = F;
     F.line = 1795;
     F.filename = "system.nim";
-    var L_1241533439 = subInt((s_p0[s_p0_Idx]).length, 1);
+    var L_1241533801 = subInt((s_p0[s_p0_Idx]).length, 1);
     F.line = 1800;
-    result_1241533435 = s_p0[s_p0_Idx][chckIndx(L_1241533439, 0, (s_p0[s_p0_Idx]).length - 1)];
+    result_1241533797 = s_p0[s_p0_Idx][chckIndx(L_1241533801, 0, (s_p0[s_p0_Idx]).length - 1)];
     F.line = 1801;
-    if (s_p0[s_p0_Idx].length < chckRange(L_1241533439, 0, 2147483647)) { for (var i = s_p0[s_p0_Idx].length ; i < chckRange(L_1241533439, 0, 2147483647) ; ++i) s_p0[s_p0_Idx].push(null); }
-               else { s_p0[s_p0_Idx].length = chckRange(L_1241533439, 0, 2147483647); };
+    if (s_p0[s_p0_Idx].length < chckRange(L_1241533801, 0, 2147483647)) { for (var i = s_p0[s_p0_Idx].length ; i < chckRange(L_1241533801, 0, 2147483647) ; ++i) s_p0[s_p0_Idx].push(null); }
+               else { s_p0[s_p0_Idx].length = chckRange(L_1241533801, 0, 2147483647); };
   framePtr = F.prev;
 
-  return result_1241533435;
+  return result_1241533797;
 
 }
 
-function popWorkFrame__OOZinterpreterZvm_u19440(interp_p0, interp_p0_Idx) {
-  var result_1241533426 = null;
+function popWorkFrame__OOZinterpreterZvm_u19802(interp_p0, interp_p0_Idx) {
+  var result_1241533788 = null;
 
   var F = {procname: "vm.popWorkFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
     if (((interp_p0[interp_p0_Idx].workQueue).length == 0)) {
-    F.line = 2838;
+    F.line = 3072;
     F.filename = "vm.nim";
     raiseException({message: [87,111,114,107,32,113,117,101,117,101,32,117,110,100,101,114,102,108,111,119], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
     }
     
-    F.line = 2839;
-    result_1241533426 = pop__OOZinterpreterZvm_u19448(interp_p0[interp_p0_Idx], "workQueue");
+    F.line = 3073;
+    result_1241533788 = pop__OOZinterpreterZvm_u19810(interp_p0[interp_p0_Idx], "workQueue");
   framePtr = F.prev;
 
-  return result_1241533426;
+  return result_1241533788;
 
 }
 
-function pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, value_p1) {
+function pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, value_p1) {
   var F = {procname: "vm.pushValue", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
     if ((level_1090519067[0] <= 1)) {
@@ -12983,7 +13007,7 @@ function pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, value_p1)
     logLoop__pureZlogging_u148(1, [[86,77,58,32,112,117,115,104,86,97,108,117,101,32], toString__OOZcoreZtypes_u496(value_p1), [32,40,115,116,97,99,107,32,108,101,110,32,119,105,108,108,32,98,101,32], HEX24__systemZdollars_u14(addInt((interp_p0[interp_p0_Idx].evalStack).length, 1)), [41]]);
     }
     
-    F.line = 2846;
+    F.line = 3080;
     F.filename = "vm.nim";
     var Temporary1 = nimCopy(null, value_p1, NTI1157627922);
     interp_p0[interp_p0_Idx].evalStack.push(Temporary1);;
@@ -12992,22 +13016,22 @@ function pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, value_p1)
   
 }
 
-function len__OOZinterpreterZvm_u890(t_p0) {
-  var result_1241514878 = 0;
+function len__OOZinterpreterZvm_u1219(t_p0) {
+  var result_1241515207 = 0;
 
   var F = {procname: "len.len", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
     F.line = 495;
     F.filename = "tables.nim";
-    result_1241514878 = t_p0.counter;
+    result_1241515207 = t_p0.counter;
   framePtr = F.prev;
 
-  return result_1241514878;
+  return result_1241515207;
 
 }
 
-function rawGet__OOZinterpreterZvm_u961(t_p0, key_p1, hc_p2, hc_p2_Idx) {
-  var result_1241514951 = 0;
+function rawGet__OOZinterpreterZvm_u1290(t_p0, key_p1, hc_p2, hc_p2_Idx) {
+  var result_1241515280 = 0;
 
   var F = {procname: "rawGet.rawGet", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
   framePtr = F;
@@ -13022,82 +13046,82 @@ function rawGet__OOZinterpreterZvm_u961(t_p0, key_p1, hc_p2, hc_p2_Idx) {
     
     if (((t_p0.data).length == 0)) {
     F.line = 43;
-    result_1241514951 = (-1);
+    result_1241515280 = (-1);
     break BeforeRet;
     }
     
     F.line = 44;
-    var h_1241515002 = (hc_p2[hc_p2_Idx] & (t_p0.data).length - 1);
+    var h_1241515331 = (hc_p2[hc_p2_Idx] & (t_p0.data).length - 1);
     Label1: {
       F.line = 45;
         Label2: while (true) {
-        if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(h_1241515002, 0, (t_p0.data).length - 1)].Field0)) break Label2;
-          if (((t_p0.data[chckIndx(h_1241515002, 0, (t_p0.data).length - 1)].Field0 == hc_p2[hc_p2_Idx]) && eqStrings(t_p0.data[chckIndx(h_1241515002, 0, (t_p0.data).length - 1)].Field1, key_p1))) {
+        if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(h_1241515331, 0, (t_p0.data).length - 1)].Field0)) break Label2;
+          if (((t_p0.data[chckIndx(h_1241515331, 0, (t_p0.data).length - 1)].Field0 == hc_p2[hc_p2_Idx]) && eqStrings(t_p0.data[chckIndx(h_1241515331, 0, (t_p0.data).length - 1)].Field1, key_p1))) {
           F.line = 51;
-          result_1241514951 = h_1241515002;
+          result_1241515280 = h_1241515331;
           break BeforeRet;
           }
           
           F.line = 52;
-          h_1241515002 = nextTry__pureZcollectionsZtables_u34(h_1241515002, (t_p0.data).length - 1);
+          h_1241515331 = nextTry__pureZcollectionsZtables_u34(h_1241515331, (t_p0.data).length - 1);
         }
     };
     F.line = 53;
-    result_1241514951 = subInt((-1), h_1241515002);
+    result_1241515280 = subInt((-1), h_1241515331);
   };
   framePtr = F.prev;
 
-  return result_1241514951;
+  return result_1241515280;
 
 }
 
-function hasKey__OOZinterpreterZvm_u954(t_p0, key_p1) {
-  var result_1241514943 = false;
+function hasKey__OOZinterpreterZvm_u1283(t_p0, key_p1) {
+  var result_1241515272 = false;
 
   var F = {procname: "hasKey.hasKey", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
     F.line = 370;
     F.filename = "tables.nim";
-    var hc_1241514944 = [0];
+    var hc_1241515273 = [0];
     F.line = 371;
-    result_1241514943 = (0 <= rawGet__OOZinterpreterZvm_u961(t_p0, key_p1, hc_1241514944, 0));
+    result_1241515272 = (0 <= rawGet__OOZinterpreterZvm_u1290(t_p0, key_p1, hc_1241515273, 0));
   framePtr = F.prev;
 
-  return result_1241514943;
+  return result_1241515272;
 
 }
 
-function contains__OOZinterpreterZvm_u933(t_p0, key_p1) {
-  var result_1241514922 = false;
+function contains__OOZinterpreterZvm_u1262(t_p0, key_p1) {
+  var result_1241515251 = false;
 
   var F = {procname: "contains.contains", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     F.line = 381;
     F.filename = "tables.nim";
-    result_1241514922 = hasKey__OOZinterpreterZvm_u954(t_p0, key_p1);
+    result_1241515251 = hasKey__OOZinterpreterZvm_u1283(t_p0, key_p1);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241514922;
+  return result_1241515251;
 
 }
 
-function HEX5BHEX5D__OOZinterpreterZvm_u1233(t_p0, key_p1) {
-  var result_1241515222 = null;
-  var result_1241515222_Idx = 0;
+function HEX5BHEX5D__OOZinterpreterZvm_u1562(t_p0, key_p1) {
+  var result_1241515551 = null;
+  var result_1241515551_Idx = 0;
 
   var F = {procname: "[].[]", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
     F.line = 240;
     F.filename = "tables.nim";
-    var hcHEX60gensym22_1241515223 = [0];
+    var hcHEX60gensym22_1241515552 = [0];
     F.line = 241;
-    var indexHEX60gensym22_1241515230 = rawGet__OOZinterpreterZvm_u961(t_p0, key_p1, hcHEX60gensym22_1241515223, 0);
-    if ((0 <= indexHEX60gensym22_1241515230)) {
+    var indexHEX60gensym22_1241515559 = rawGet__OOZinterpreterZvm_u1290(t_p0, key_p1, hcHEX60gensym22_1241515552, 0);
+    if ((0 <= indexHEX60gensym22_1241515559)) {
     F.line = 242;
-    result_1241515222 = t_p0.data[chckIndx(indexHEX60gensym22_1241515230, 0, (t_p0.data).length - 1)]; result_1241515222_Idx = "Field2";
+    result_1241515551 = t_p0.data[chckIndx(indexHEX60gensym22_1241515559, 0, (t_p0.data).length - 1)]; result_1241515551_Idx = "Field2";
     }
     else {
       F.line = 244;
@@ -13106,7 +13130,7 @@ function HEX5BHEX5D__OOZinterpreterZvm_u1233(t_p0, key_p1) {
     
   framePtr = F.prev;
 
-  return [result_1241515222, result_1241515222_Idx];
+  return [result_1241515551, result_1241515551_Idx];
 
 }
 
@@ -14446,7 +14470,7 @@ function getSlot__OOZcoreZtypes_u6431(inst_p0, index_p1) {
 
 }
 
-function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
+function lookupVariableWithStatus__OOZinterpreterZvm_u1162(interp_p0, name_p1) {
     var Temporary1;
     var Temporary2;
     var Temporary3;
@@ -14476,7 +14500,7 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
             var Temporary35;
             var Temporary36;
 
-  var result_1241514820 = {Field0: false, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})};
+  var result_1241515149 = {Field0: false, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})};
 
   var F = {procname: "vm.lookupVariableWithStatus", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
@@ -14487,59 +14511,59 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
     logLoop__pureZlogging_u148(1, [[76,111,111,107,105,110,103,32,117,112,32,118,97,114,105,97,98,108,101,58,32], nimCopy(null, name_p1, NTI33554449)]);
     }
     
-    F.line = 394;
+    F.line = 589;
     F.filename = "vm.nim";
-    var activation_1241514825 = interp_p0.currentActivation;
-    if (!((activation_1241514825 == null))) {
-    if (((!((activation_1241514825.currentMethod == null)) && activation_1241514825.currentMethod.capturedEnvInitialized) && (0 < len__OOZinterpreterZvm_u890(activation_1241514825.currentMethod.capturedEnv)))) {
-    if (contains__OOZinterpreterZvm_u933(activation_1241514825.currentMethod.capturedEnv, name_p1)) {
-    F.line = 404;
-    var value_1241515299 = nimCopy(null, (Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u1233(activation_1241514825.currentMethod.capturedEnv, name_p1), Temporary1)[0][Temporary1[1]].value, NTI1157627922);
+    var activation_1241515154 = interp_p0.currentActivation;
+    if (!((activation_1241515154 == null))) {
+    if ((((!((activation_1241515154.currentMethod == null)) && activation_1241515154.currentMethod.capturedEnvInitialized) && (0 < len__OOZinterpreterZvm_u1219(activation_1241515154.currentMethod.capturedEnv))) && !(activation_1241515154.currentMethod.isMethod))) {
+    if (contains__OOZinterpreterZvm_u1262(activation_1241515154.currentMethod.capturedEnv, name_p1)) {
+    F.line = 600;
+    var value_1241515628 = nimCopy(null, (Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u1562(activation_1241515154.currentMethod.capturedEnv, name_p1), Temporary1)[0][Temporary1[1]].value, NTI1157627922);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
-    logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,99,97,112,116,117,114,101,100,32,101,110,118,105,114,111,110,109,101,110,116,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_1241515299)]);
+    logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,99,97,112,116,117,114,101,100,32,101,110,118,105,114,111,110,109,101,110,116,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_1241515628)]);
     }
     
-    F.line = 406;
+    F.line = 602;
     F.filename = "vm.nim";
     var colontmp__587203053 = true;
-    F.line = 406;
-    var colontmp__587203054 = nimCopy(null, value_1241515299, NTI1157627922);
-    F.line = 406;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203053, Field1: nimCopy(null, colontmp__587203054, NTI1157627922)}, NTI1241514591);
+    F.line = 602;
+    var colontmp__587203054 = nimCopy(null, value_1241515628, NTI1157627922);
+    F.line = 602;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203053, Field1: nimCopy(null, colontmp__587203054, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
     }
     
-    if (contains__OOZinterpreterZvm_u933(activation_1241514825.capturedVars, name_p1)) {
-    F.line = 412;
-    var val_1241515401 = nimCopy(null, (Temporary2 = HEX5BHEX5D__OOZinterpreterZvm_u1233(activation_1241514825.capturedVars, name_p1), Temporary2)[0][Temporary2[1]].value, NTI1157627922);
+    if (contains__OOZinterpreterZvm_u1262(activation_1241515154.capturedVars, name_p1)) {
+    F.line = 608;
+    var val_1241515730 = nimCopy(null, (Temporary2 = HEX5BHEX5D__OOZinterpreterZvm_u1562(activation_1241515154.capturedVars, name_p1), Temporary2)[0][Temporary2[1]].value, NTI1157627922);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
-    logLoop__pureZlogging_u148(1, [[108,111,111,107,117,112,86,97,114,105,97,98,108,101,58,32,102,111,117,110,100,32], nimCopy(null, name_p1, NTI33554449), [32,105,110,32,99,97,112,116,117,114,101,100,86,97,114,115,32,107,105,110,100,61], reprEnum(val_1241515401.kind, NTI1157627921)]);
+    logLoop__pureZlogging_u148(1, [[108,111,111,107,117,112,86,97,114,105,97,98,108,101,58,32,102,111,117,110,100,32], nimCopy(null, name_p1, NTI33554449), [32,105,110,32,99,97,112,116,117,114,101,100,86,97,114,115,32,107,105,110,100,61], reprEnum(val_1241515730.kind, NTI1157627921)]);
     }
     
-    F.line = 414;
+    F.line = 610;
     F.filename = "vm.nim";
     var colontmp__587203055 = true;
-    F.line = 414;
-    var colontmp__587203056 = nimCopy(null, val_1241515401, NTI1157627922);
-    F.line = 414;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203055, Field1: nimCopy(null, colontmp__587203056, NTI1157627922)}, NTI1241514591);
+    F.line = 610;
+    var colontmp__587203056 = nimCopy(null, val_1241515730, NTI1157627922);
+    F.line = 610;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203055, Field1: nimCopy(null, colontmp__587203056, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
-    if (contains__OOZinterpreterZvm_u1463(activation_1241514825.locals, name_p1)) {
-    F.line = 418;
-    var val_1241515527 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(activation_1241514825.locals, name_p1), NTI1157627922);
-    F.line = 419;
-      if (!(val_1241515527.kind == 10)) Temporary4 = false; else {        var Temporary5 = val_1241515527;
+    if (contains__OOZinterpreterZvm_u1792(activation_1241515154.locals, name_p1)) {
+    F.line = 614;
+    var val_1241515856 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(activation_1241515154.locals, name_p1), NTI1157627922);
+    F.line = 615;
+      if (!(val_1241515856.kind == 10)) Temporary4 = false; else {        var Temporary5 = val_1241515856;
         if (ConstSet79[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
         Temporary4 = !((Temporary5.instVal == null));      }    if (Temporary4) {
-    var Temporary6 = val_1241515527;
+    var Temporary6 = val_1241515856;
     if (ConstSet80[Temporary6.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary6.kind, NTI1157627921)); }
     Temporary3 = HEX24__systemZdollars_u14(Temporary6.instVal);
     }
@@ -14547,31 +14571,31 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
     Temporary3 = [110,47,97];
     }
     
-    var ptrStr_1241515536 = nimCopy(null, Temporary3, NTI33554449);
+    var ptrStr_1241515865 = nimCopy(null, Temporary3, NTI33554449);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
-    logLoop__pureZlogging_u148(1, [[108,111,111,107,117,112,86,97,114,105,97,98,108,101,58,32,102,111,117,110,100,32], nimCopy(null, name_p1, NTI33554449), [32,105,110,32,108,111,99,97,108,115,32,107,105,110,100,61], reprEnum(val_1241515527.kind, NTI1157627921), [32,112,116,114,61], nimCopy(null, ptrStr_1241515536, NTI33554449)]);
+    logLoop__pureZlogging_u148(1, [[108,111,111,107,117,112,86,97,114,105,97,98,108,101,58,32,102,111,117,110,100,32], nimCopy(null, name_p1, NTI33554449), [32,105,110,32,108,111,99,97,108,115,32,107,105,110,100,61], reprEnum(val_1241515856.kind, NTI1157627921), [32,112,116,114,61], nimCopy(null, ptrStr_1241515865, NTI33554449)]);
     }
     
-    F.line = 421;
+    F.line = 617;
     F.filename = "vm.nim";
     var colontmp__587203057 = true;
-    F.line = 421;
-    var colontmp__587203058 = nimCopy(null, val_1241515527, NTI1157627922);
-    F.line = 421;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203057, Field1: nimCopy(null, colontmp__587203058, NTI1157627922)}, NTI1241514591);
+    F.line = 617;
+    var colontmp__587203058 = nimCopy(null, val_1241515856, NTI1157627922);
+    F.line = 617;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203057, Field1: nimCopy(null, colontmp__587203058, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
-    if ((!((activation_1241514825.currentMethod == null)) && (activation_1241514825.currentMethod.isMethod == false))) {
+    if ((!((activation_1241515154.currentMethod == null)) && (activation_1241515154.currentMethod.isMethod == false))) {
     Label7: {
-      F.line = 428;
-      var i_1241515556 = 0;
+      F.line = 624;
+      var i_1241515885 = 0;
       F.line = 6;
       F.filename = "iterators_1.nim";
       var colontmp__587203062 = 0;
-      F.line = 428;
+      F.line = 624;
       F.filename = "vm.nim";
       colontmp__587203062 = (interp_p0.importedLibraries).length - 1;
       F.line = 33;
@@ -14581,45 +14605,45 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
         F.line = 34;
           Label9: while (true) {
           if (!(0 <= res_587203063)) break Label9;
-            F.line = 428;
+            F.line = 624;
             F.filename = "vm.nim";
-            i_1241515556 = res_587203063;
-            F.line = 429;
-            var lib_1241515557 = interp_p0.importedLibraries[chckIndx(i_1241515556, 0, (interp_p0.importedLibraries).length - 1)];
-            if (((!((lib_1241515557 == null)) && (lib_1241515557.kind == 0)) && (lib_1241515557.class == libraryClass_1157628218[0]))) {
-            F.line = 431;
-            var Temporary10 = lib_1241515557;
+            i_1241515885 = res_587203063;
+            F.line = 625;
+            var lib_1241515886 = interp_p0.importedLibraries[chckIndx(i_1241515885, 0, (interp_p0.importedLibraries).length - 1)];
+            if (((!((lib_1241515886 == null)) && (lib_1241515886.kind == 0)) && (lib_1241515886.class == libraryClass_1157628218[0]))) {
+            F.line = 627;
+            var Temporary10 = lib_1241515886;
             if (ConstSet81[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627908)); }
-            var bindingsVal_1241515570 = nimCopy(null, (Temporary11 = Temporary10.slots, Temporary11)[chckIndx(0, 0, (Temporary11).length - 1)], NTI1157627922);
-              if (!(bindingsVal_1241515570.kind == 10)) Temporary13 = false; else {                var Temporary14 = bindingsVal_1241515570;
+            var bindingsVal_1241515899 = nimCopy(null, (Temporary11 = Temporary10.slots, Temporary11)[chckIndx(0, 0, (Temporary11).length - 1)], NTI1157627922);
+              if (!(bindingsVal_1241515899.kind == 10)) Temporary13 = false; else {                var Temporary14 = bindingsVal_1241515899;
                 if (ConstSet82[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
-                Temporary13 = !((Temporary14.instVal == null));              }              if (!Temporary13) Temporary12 = false; else {                var Temporary15 = bindingsVal_1241515570;
+                Temporary13 = !((Temporary14.instVal == null));              }              if (!Temporary13) Temporary12 = false; else {                var Temporary15 = bindingsVal_1241515899;
                 if (ConstSet83[Temporary15.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary15.kind, NTI1157627921)); }
                 Temporary12 = (Temporary15.instVal.kind == 2);              }            if (Temporary12) {
-            F.line = 433;
-            var key_1241515583 = toValue__OOZcoreZtypes_u1397(name_p1);
-              var Temporary16 = bindingsVal_1241515570;
+            F.line = 629;
+            var key_1241515912 = toValue__OOZcoreZtypes_u1397(name_p1);
+              var Temporary16 = bindingsVal_1241515899;
               if (ConstSet122[Temporary16.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary16.kind, NTI1157627921)); }
               var Temporary17 = Temporary16.instVal;
               if (ConstSet121[Temporary17.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'entries\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary17.kind, NTI1157627908)); }
-            if (contains__OOZcoreZtypes_u6584(Temporary17.entries, key_1241515583)) {
+            if (contains__OOZcoreZtypes_u6584(Temporary17.entries, key_1241515912)) {
             if ((level_1090519067[0] <= 1)) {
             F.line = 701;
             F.filename = "logging.nim";
             logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,105,109,112,111,114,116,101,100,32,108,105,98,114,97,114,121,32,40,105,110,32,98,108,111,99,107,41,58,32], nimCopy(null, name_p1, NTI33554449)]);
             }
             
-            F.line = 436;
+            F.line = 632;
             F.filename = "vm.nim";
             var colontmp__587203060 = true;
-            F.line = 436;
-            var Temporary18 = bindingsVal_1241515570;
+            F.line = 632;
+            var Temporary18 = bindingsVal_1241515899;
             if (ConstSet131[Temporary18.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary18.kind, NTI1157627921)); }
             var Temporary19 = Temporary18.instVal;
             if (ConstSet130[Temporary19.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'entries\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary19.kind, NTI1157627908)); }
-            var colontmp__587203061 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u6869(Temporary19.entries, key_1241515583), NTI1157627922);
-            F.line = 436;
-            result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203060, Field1: nimCopy(null, colontmp__587203061, NTI1157627922)}, NTI1241514591);
+            var colontmp__587203061 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u6869(Temporary19.entries, key_1241515912), NTI1157627922);
+            F.line = 632;
+            result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203060, Field1: nimCopy(null, colontmp__587203061, NTI1157627922)}, NTI1241514849);
             break BeforeRet;
             }
             
@@ -14633,22 +14657,22 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
           }
       };
     };
-    if (contains__OOZinterpreterZvm_u1463(interp_p0.globals, name_p1)) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0.globals, name_p1)) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,103,108,111,98,97,108,115,32,40,105,110,32,98,108,111,99,107,41,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0.globals, name_p1))]);
     }
     
-    F.line = 439;
+    F.line = 635;
     F.filename = "vm.nim";
-    var val_1241515840 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0.globals, name_p1), NTI1157627922);
-    F.line = 440;
+    var val_1241516169 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0.globals, name_p1), NTI1157627922);
+    F.line = 636;
     var colontmp__587203065 = true;
-    F.line = 440;
-    var colontmp__587203066 = nimCopy(null, val_1241515840, NTI1157627922);
-    F.line = 440;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203065, Field1: nimCopy(null, colontmp__587203066, NTI1157627922)}, NTI1241514591);
+    F.line = 636;
+    var colontmp__587203066 = nimCopy(null, val_1241516169, NTI1157627922);
+    F.line = 636;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203065, Field1: nimCopy(null, colontmp__587203066, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
@@ -14656,84 +14680,84 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
     
     }
     
-    if (!((activation_1241514825 == null))) {
-    F.line = 444;
-    activation_1241514825 = activation_1241514825.sender;
+    if (!((activation_1241515154 == null))) {
+    F.line = 640;
+    activation_1241515154 = activation_1241515154.sender;
     }
     
     Label20: {
-      F.line = 445;
+      F.line = 641;
         Label21: while (true) {
-        if (!!((activation_1241514825 == null))) break Label21;
-          if (((!((activation_1241514825.currentMethod == null)) && activation_1241514825.currentMethod.capturedEnvInitialized) && (0 < len__OOZinterpreterZvm_u890(activation_1241514825.currentMethod.capturedEnv)))) {
-          if (contains__OOZinterpreterZvm_u933(activation_1241514825.currentMethod.capturedEnv, name_p1)) {
-          F.line = 449;
-          var value_1241515994 = nimCopy(null, (Temporary22 = HEX5BHEX5D__OOZinterpreterZvm_u1233(activation_1241514825.currentMethod.capturedEnv, name_p1), Temporary22)[0][Temporary22[1]].value, NTI1157627922);
+        if (!!((activation_1241515154 == null))) break Label21;
+          if ((((!((activation_1241515154.currentMethod == null)) && activation_1241515154.currentMethod.capturedEnvInitialized) && (0 < len__OOZinterpreterZvm_u1219(activation_1241515154.currentMethod.capturedEnv))) && !(activation_1241515154.currentMethod.isMethod))) {
+          if (contains__OOZinterpreterZvm_u1262(activation_1241515154.currentMethod.capturedEnv, name_p1)) {
+          F.line = 646;
+          var value_1241516323 = nimCopy(null, (Temporary22 = HEX5BHEX5D__OOZinterpreterZvm_u1562(activation_1241515154.currentMethod.capturedEnv, name_p1), Temporary22)[0][Temporary22[1]].value, NTI1157627922);
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
-          logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,99,97,112,116,117,114,101,100,32,101,110,118,105,114,111,110,109,101,110,116,32,40,112,97,114,101,110,116,41,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_1241515994)]);
+          logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,99,97,112,116,117,114,101,100,32,101,110,118,105,114,111,110,109,101,110,116,32,40,112,97,114,101,110,116,41,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_1241516323)]);
           }
           
-          F.line = 451;
+          F.line = 648;
           F.filename = "vm.nim";
           var colontmp__587203068 = true;
-          F.line = 451;
-          var colontmp__587203069 = nimCopy(null, value_1241515994, NTI1157627922);
-          F.line = 451;
-          result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203068, Field1: nimCopy(null, colontmp__587203069, NTI1157627922)}, NTI1241514591);
+          F.line = 648;
+          var colontmp__587203069 = nimCopy(null, value_1241516323, NTI1157627922);
+          F.line = 648;
+          result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203068, Field1: nimCopy(null, colontmp__587203069, NTI1157627922)}, NTI1241514849);
           break BeforeRet;
           }
           
           }
           
-          if (contains__OOZinterpreterZvm_u933(activation_1241514825.capturedVars, name_p1)) {
-          F.line = 455;
-          var val_1241516096 = nimCopy(null, (Temporary23 = HEX5BHEX5D__OOZinterpreterZvm_u1233(activation_1241514825.capturedVars, name_p1), Temporary23)[0][Temporary23[1]].value, NTI1157627922);
+          if (contains__OOZinterpreterZvm_u1262(activation_1241515154.capturedVars, name_p1)) {
+          F.line = 652;
+          var val_1241516425 = nimCopy(null, (Temporary23 = HEX5BHEX5D__OOZinterpreterZvm_u1562(activation_1241515154.capturedVars, name_p1), Temporary23)[0][Temporary23[1]].value, NTI1157627922);
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
-          logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,99,97,112,116,117,114,101,100,86,97,114,115,32,40,112,97,114,101,110,116,41,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(val_1241516096)]);
+          logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,99,97,112,116,117,114,101,100,86,97,114,115,32,40,112,97,114,101,110,116,41,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(val_1241516425)]);
           }
           
-          F.line = 457;
+          F.line = 654;
           F.filename = "vm.nim";
           var colontmp__587203070 = true;
-          F.line = 457;
-          var colontmp__587203071 = nimCopy(null, val_1241516096, NTI1157627922);
-          F.line = 457;
-          result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203070, Field1: nimCopy(null, colontmp__587203071, NTI1157627922)}, NTI1241514591);
+          F.line = 654;
+          var colontmp__587203071 = nimCopy(null, val_1241516425, NTI1157627922);
+          F.line = 654;
+          result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203070, Field1: nimCopy(null, colontmp__587203071, NTI1157627922)}, NTI1241514849);
           break BeforeRet;
           }
           
-          if (contains__OOZinterpreterZvm_u1463(activation_1241514825.locals, name_p1)) {
+          if (contains__OOZinterpreterZvm_u1792(activation_1241515154.locals, name_p1)) {
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
           logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,97,99,116,105,118,97,116,105,111,110,32,40,112,97,114,101,110,116,41,58,32], nimCopy(null, name_p1, NTI33554449)]);
           }
           
-          F.line = 462;
+          F.line = 659;
           F.filename = "vm.nim";
           var colontmp__587203072 = true;
-          F.line = 462;
-          var colontmp__587203073 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(activation_1241514825.locals, name_p1), NTI1157627922);
-          F.line = 462;
-          result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203072, Field1: nimCopy(null, colontmp__587203073, NTI1157627922)}, NTI1241514591);
+          F.line = 659;
+          var colontmp__587203073 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(activation_1241515154.locals, name_p1), NTI1157627922);
+          F.line = 659;
+          result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203072, Field1: nimCopy(null, colontmp__587203073, NTI1157627922)}, NTI1241514849);
           break BeforeRet;
           }
           
-          F.line = 464;
-          activation_1241514825 = activation_1241514825.sender;
+          F.line = 661;
+          activation_1241515154 = activation_1241515154.sender;
         }
     };
     Label24: {
-      F.line = 467;
-      var i_1241516210 = 0;
+      F.line = 664;
+      var i_1241516539 = 0;
       F.line = 6;
       F.filename = "iterators_1.nim";
       var colontmp__587203077 = 0;
-      F.line = 467;
+      F.line = 664;
       F.filename = "vm.nim";
       colontmp__587203077 = (interp_p0.importedLibraries).length - 1;
       F.line = 33;
@@ -14743,45 +14767,45 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
         F.line = 34;
           Label26: while (true) {
           if (!(0 <= res_587203078)) break Label26;
-            F.line = 467;
+            F.line = 664;
             F.filename = "vm.nim";
-            i_1241516210 = res_587203078;
-            F.line = 468;
-            var lib_1241516211 = interp_p0.importedLibraries[chckIndx(i_1241516210, 0, (interp_p0.importedLibraries).length - 1)];
-            if (((!((lib_1241516211 == null)) && (lib_1241516211.kind == 0)) && (lib_1241516211.class == libraryClass_1157628218[0]))) {
-            F.line = 470;
-            var Temporary27 = lib_1241516211;
+            i_1241516539 = res_587203078;
+            F.line = 665;
+            var lib_1241516540 = interp_p0.importedLibraries[chckIndx(i_1241516539, 0, (interp_p0.importedLibraries).length - 1)];
+            if (((!((lib_1241516540 == null)) && (lib_1241516540.kind == 0)) && (lib_1241516540.class == libraryClass_1157628218[0]))) {
+            F.line = 667;
+            var Temporary27 = lib_1241516540;
             if (ConstSet132[Temporary27.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary27.kind, NTI1157627908)); }
-            var bindingsVal_1241516224 = nimCopy(null, (Temporary28 = Temporary27.slots, Temporary28)[chckIndx(0, 0, (Temporary28).length - 1)], NTI1157627922);
-              if (!(bindingsVal_1241516224.kind == 10)) Temporary30 = false; else {                var Temporary31 = bindingsVal_1241516224;
+            var bindingsVal_1241516553 = nimCopy(null, (Temporary28 = Temporary27.slots, Temporary28)[chckIndx(0, 0, (Temporary28).length - 1)], NTI1157627922);
+              if (!(bindingsVal_1241516553.kind == 10)) Temporary30 = false; else {                var Temporary31 = bindingsVal_1241516553;
                 if (ConstSet133[Temporary31.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary31.kind, NTI1157627921)); }
-                Temporary30 = !((Temporary31.instVal == null));              }              if (!Temporary30) Temporary29 = false; else {                var Temporary32 = bindingsVal_1241516224;
+                Temporary30 = !((Temporary31.instVal == null));              }              if (!Temporary30) Temporary29 = false; else {                var Temporary32 = bindingsVal_1241516553;
                 if (ConstSet134[Temporary32.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary32.kind, NTI1157627921)); }
                 Temporary29 = (Temporary32.instVal.kind == 2);              }            if (Temporary29) {
-            F.line = 472;
-            var key_1241516237 = toValue__OOZcoreZtypes_u1397(name_p1);
-              var Temporary33 = bindingsVal_1241516224;
+            F.line = 669;
+            var key_1241516566 = toValue__OOZcoreZtypes_u1397(name_p1);
+              var Temporary33 = bindingsVal_1241516553;
               if (ConstSet136[Temporary33.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary33.kind, NTI1157627921)); }
               var Temporary34 = Temporary33.instVal;
               if (ConstSet135[Temporary34.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'entries\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary34.kind, NTI1157627908)); }
-            if (contains__OOZcoreZtypes_u6584(Temporary34.entries, key_1241516237)) {
+            if (contains__OOZcoreZtypes_u6584(Temporary34.entries, key_1241516566)) {
             if ((level_1090519067[0] <= 1)) {
             F.line = 701;
             F.filename = "logging.nim";
             logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,105,109,112,111,114,116,101,100,32,108,105,98,114,97,114,121,58,32], nimCopy(null, name_p1, NTI33554449)]);
             }
             
-            F.line = 475;
+            F.line = 672;
             F.filename = "vm.nim";
             var colontmp__587203075 = true;
-            F.line = 475;
-            var Temporary35 = bindingsVal_1241516224;
+            F.line = 672;
+            var Temporary35 = bindingsVal_1241516553;
             if (ConstSet138[Temporary35.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary35.kind, NTI1157627921)); }
             var Temporary36 = Temporary35.instVal;
             if (ConstSet137[Temporary36.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'entries\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary36.kind, NTI1157627908)); }
-            var colontmp__587203076 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u6869(Temporary36.entries, key_1241516237), NTI1157627922);
-            F.line = 475;
-            result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203075, Field1: nimCopy(null, colontmp__587203076, NTI1157627922)}, NTI1241514591);
+            var colontmp__587203076 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u6869(Temporary36.entries, key_1241516566), NTI1157627922);
+            F.line = 672;
+            result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203075, Field1: nimCopy(null, colontmp__587203076, NTI1157627922)}, NTI1241514849);
             break BeforeRet;
             }
             
@@ -14795,67 +14819,67 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
           }
       };
     };
-    if (contains__OOZinterpreterZvm_u1463(interp_p0.globals, name_p1)) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0.globals, name_p1)) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,118,97,114,105,97,98,108,101,32,105,110,32,103,108,111,98,97,108,115,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0.globals, name_p1))]);
     }
     
-    F.line = 480;
+    F.line = 677;
     F.filename = "vm.nim";
-    var val_1241516494 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0.globals, name_p1), NTI1157627922);
-    F.line = 481;
+    var val_1241516823 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0.globals, name_p1), NTI1157627922);
+    F.line = 678;
     var colontmp__587203080 = true;
-    F.line = 481;
-    var colontmp__587203081 = nimCopy(null, val_1241516494, NTI1157627922);
-    F.line = 481;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203080, Field1: nimCopy(null, colontmp__587203081, NTI1157627922)}, NTI1241514591);
+    F.line = 678;
+    var colontmp__587203081 = nimCopy(null, val_1241516823, NTI1157627922);
+    F.line = 678;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203080, Field1: nimCopy(null, colontmp__587203081, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
     if ((!((interp_p0.currentReceiver == null)) && (interp_p0.currentReceiver.kind == 2))) {
-    F.line = 485;
-    var val_1241516503 = getTableValue__OOZcoreZtypes_u6538(interp_p0.currentReceiver, toValue__OOZcoreZtypes_u1397(name_p1));
-    if (!((val_1241516503.kind == 5))) {
+    F.line = 682;
+    var val_1241516832 = getTableValue__OOZcoreZtypes_u6538(interp_p0.currentReceiver, toValue__OOZcoreZtypes_u1397(name_p1));
+    if (!((val_1241516832.kind == 5))) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,116,97,98,108,101,32,112,114,111,112,101,114,116,121,32,111,110,32,115,101,108,102,58,32], nimCopy(null, name_p1, NTI33554449)]);
     }
     
-    F.line = 488;
+    F.line = 685;
     F.filename = "vm.nim";
     var colontmp__587203082 = true;
-    F.line = 488;
-    var colontmp__587203083 = nimCopy(null, val_1241516503, NTI1157627922);
-    F.line = 488;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203082, Field1: nimCopy(null, colontmp__587203083, NTI1157627922)}, NTI1241514591);
+    F.line = 685;
+    var colontmp__587203083 = nimCopy(null, val_1241516832, NTI1157627922);
+    F.line = 685;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203082, Field1: nimCopy(null, colontmp__587203083, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
     }
     
     if ((!((interp_p0.currentReceiver == null)) && (interp_p0.currentReceiver.kind == 0))) {
-    F.line = 492;
-    var idx_1241516520 = getSlotIndex__OOZcoreZtypes_u6385(interp_p0.currentReceiver.class, name_p1);
-    if ((0 <= idx_1241516520)) {
-    F.line = 494;
-    var val_1241516521 = getSlot__OOZcoreZtypes_u6431(interp_p0.currentReceiver, idx_1241516520);
-    if (!((val_1241516521.kind == 5))) {
+    F.line = 689;
+    var idx_1241516849 = getSlotIndex__OOZcoreZtypes_u6385(interp_p0.currentReceiver.class, name_p1);
+    if ((0 <= idx_1241516849)) {
+    F.line = 691;
+    var val_1241516850 = getSlot__OOZcoreZtypes_u6431(interp_p0.currentReceiver, idx_1241516849);
+    if (!((val_1241516850.kind == 5))) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
-    logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,115,108,111,116,32,111,110,32,115,101,108,102,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(val_1241516521)]);
+    logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,115,108,111,116,32,111,110,32,115,101,108,102,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(val_1241516850)]);
     }
     
-    F.line = 497;
+    F.line = 694;
     F.filename = "vm.nim";
     var colontmp__587203084 = true;
-    F.line = 497;
-    var colontmp__587203085 = nimCopy(null, val_1241516521, NTI1157627922);
-    F.line = 497;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203084, Field1: nimCopy(null, colontmp__587203085, NTI1157627922)}, NTI1241514591);
+    F.line = 694;
+    var colontmp__587203085 = nimCopy(null, val_1241516850, NTI1157627922);
+    F.line = 694;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203084, Field1: nimCopy(null, colontmp__587203085, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
     }
     
@@ -14869,32 +14893,32 @@ function lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1) {
     logLoop__pureZlogging_u148(1, [[86,97,114,105,97,98,108,101,32,110,111,116,32,102,111,117,110,100,58,32], nimCopy(null, name_p1, NTI33554449)]);
     }
     
-    F.line = 500;
+    F.line = 697;
     F.filename = "vm.nim";
     var colontmp__587203086 = false;
-    F.line = 500;
+    F.line = 697;
     var colontmp__587203087 = nilValue__OOZcoreZtypes_u1406();
-    F.line = 500;
-    result_1241514820 = nimCopy(result_1241514820, {Field0: colontmp__587203086, Field1: nimCopy(null, colontmp__587203087, NTI1157627922)}, NTI1241514591);
+    F.line = 697;
+    result_1241515149 = nimCopy(result_1241515149, {Field0: colontmp__587203086, Field1: nimCopy(null, colontmp__587203087, NTI1157627922)}, NTI1241514849);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241514820;
+  return result_1241515149;
 
 }
 
-function lookupVariable__OOZinterpreterZvm_u2634(interp_p0, name_p1) {
-  var result_1241516621 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+function lookupVariable__OOZinterpreterZvm_u2963(interp_p0, name_p1) {
+  var result_1241516950 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
 
   var F = {procname: "vm.lookupVariable", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 504;
+    F.line = 701;
     F.filename = "vm.nim";
-    result_1241516621 = nimCopy(result_1241516621, lookupVariableWithStatus__OOZinterpreterZvm_u833(interp_p0, name_p1).Field1, NTI1157627922);
+    result_1241516950 = nimCopy(result_1241516950, lookupVariableWithStatus__OOZinterpreterZvm_u1162(interp_p0, name_p1).Field1, NTI1157627922);
   framePtr = F.prev;
 
-  return result_1241516621;
+  return result_1241516950;
 
 }
 
@@ -14969,8 +14993,8 @@ function unwrap__OOZcoreZtypes_u1504(val_p0) {
 
 }
 
-function mustRehash__OOZinterpreterZvm_u4375(t_p0) {
-  var result_1241518362 = false;
+function mustRehash__OOZinterpreterZvm_u4704(t_p0) {
+  var result_1241518691 = false;
 
   var F = {procname: "mustRehash.mustRehash", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
   framePtr = F;
@@ -14981,14 +15005,14 @@ function mustRehash__OOZinterpreterZvm_u4375(t_p0) {
     }
     
     F.line = 35;
-    result_1241518362 = (((t_p0.data).length < addInt(t_p0.counter, divInt(t_p0.counter, 2))) || (subInt((t_p0.data).length, t_p0.counter) < 4));
+    result_1241518691 = (((t_p0.data).length < addInt(t_p0.counter, divInt(t_p0.counter, 2))) || (subInt((t_p0.data).length, t_p0.counter) < 4));
   framePtr = F.prev;
 
-  return result_1241518362;
+  return result_1241518691;
 
 }
 
-function rawInsert__OOZinterpreterZvm_u4792(t_p0, data_p1, data_p1_Idx, key_p2, val_p3, hc_p4, h_p5) {
+function rawInsert__OOZinterpreterZvm_u5121(t_p0, data_p1, data_p1_Idx, key_p2, val_p3, hc_p4, h_p5) {
   var F = {procname: "rawInsert.rawInsert", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tableimpl.nim", line: 0};
   framePtr = F;
     F.line = 25;
@@ -15003,29 +15027,29 @@ function rawInsert__OOZinterpreterZvm_u4792(t_p0, data_p1, data_p1_Idx, key_p2, 
   
 }
 
-function enlarge__OOZinterpreterZvm_u4518(t_p0) {
+function enlarge__OOZinterpreterZvm_u4847(t_p0) {
   var F = {procname: "enlarge.enlarge", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
     F.line = 247;
     F.filename = "tables.nim";
-    var n_1241518508 = [];
+    var n_1241518837 = [];
     F.line = 248;
-    n_1241518508 = new Array(chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647)); for (var i = 0 ; i < chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647) ; ++i) { n_1241518508[i] = {Field0: 0, Field1: [], Field2: null}; }    F.line = 249;
+    n_1241518837 = new Array(chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647)); for (var i = 0 ; i < chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647) ; ++i) { n_1241518837[i] = {Field0: 0, Field1: [], Field2: null}; }    F.line = 249;
     F.line = 249;
     var HEX3Atmp_587203164 = nimCopy(null, t_p0.data, NTI1157628035);
     F.line = 249;
-    t_p0.data = n_1241518508;
+    t_p0.data = n_1241518837;
     F.line = 249;
-    n_1241518508 = HEX3Atmp_587203164;
+    n_1241518837 = HEX3Atmp_587203164;
     Label1: {
       F.line = 250;
-      var i_1241518568 = 0;
+      var i_1241518897 = 0;
       F.line = 46;
       F.filename = "iterators_1.nim";
       var colontmp__587203161 = 0;
       F.line = 250;
       F.filename = "tables.nim";
-      colontmp__587203161 = (n_1241518508).length - 1;
+      colontmp__587203161 = (n_1241518837).length - 1;
       F.line = 68;
       F.filename = "iterators_1.nim";
       var res_587203162 = 0;
@@ -15035,22 +15059,22 @@ function enlarge__OOZinterpreterZvm_u4518(t_p0) {
           if (!(res_587203162 <= colontmp__587203161)) break Label3;
             F.line = 250;
             F.filename = "tables.nim";
-            i_1241518568 = res_587203162;
+            i_1241518897 = res_587203162;
             F.line = 251;
-            var eh_1241518618 = n_1241518508[chckIndx(i_1241518568, 0, (n_1241518508).length - 1)].Field0;
-            if (isFilled__pureZcollectionsZtables_u31(eh_1241518618)) {
+            var eh_1241518947 = n_1241518837[chckIndx(i_1241518897, 0, (n_1241518837).length - 1)].Field0;
+            if (isFilled__pureZcollectionsZtables_u31(eh_1241518947)) {
             F.line = 253;
-            var j_1241518622 = (eh_1241518618 & (t_p0.data).length - 1);
+            var j_1241518951 = (eh_1241518947 & (t_p0.data).length - 1);
             Label4: {
               F.line = 254;
                 Label5: while (true) {
-                if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(j_1241518622, 0, (t_p0.data).length - 1)].Field0)) break Label5;
+                if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(j_1241518951, 0, (t_p0.data).length - 1)].Field0)) break Label5;
                   F.line = 255;
-                  j_1241518622 = nextTry__pureZcollectionsZtables_u34(j_1241518622, (t_p0.data).length - 1);
+                  j_1241518951 = nextTry__pureZcollectionsZtables_u34(j_1241518951, (t_p0.data).length - 1);
                 }
             };
             F.line = 257;
-            rawInsert__OOZinterpreterZvm_u4792(t_p0, t_p0, "data", n_1241518508[chckIndx(i_1241518568, 0, (n_1241518508).length - 1)].Field1, n_1241518508[chckIndx(i_1241518568, 0, (n_1241518508).length - 1)].Field2, eh_1241518618, j_1241518622);
+            rawInsert__OOZinterpreterZvm_u5121(t_p0, t_p0, "data", n_1241518837[chckIndx(i_1241518897, 0, (n_1241518837).length - 1)].Field1, n_1241518837[chckIndx(i_1241518897, 0, (n_1241518837).length - 1)].Field2, eh_1241518947, j_1241518951);
             }
             
             F.line = 74;
@@ -15064,8 +15088,8 @@ function enlarge__OOZinterpreterZvm_u4518(t_p0) {
   
 }
 
-function rawGetKnownHC__OOZinterpreterZvm_u4949(t_p0, key_p1, hc_p2) {
-  var result_1241518939 = 0;
+function rawGetKnownHC__OOZinterpreterZvm_u5278(t_p0, key_p1, hc_p2) {
+  var result_1241519268 = 0;
 
   var F = {procname: "rawGetKnownHC.rawGetKnownHC", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
   framePtr = F;
@@ -15073,75 +15097,75 @@ function rawGetKnownHC__OOZinterpreterZvm_u4949(t_p0, key_p1, hc_p2) {
     if (((t_p0.data).length == 0)) {
     F.line = 43;
     F.filename = "hashcommon.nim";
-    result_1241518939 = (-1);
+    result_1241519268 = (-1);
     break BeforeRet;
     }
     
     F.line = 44;
-    var h_1241518986 = (hc_p2 & (t_p0.data).length - 1);
+    var h_1241519315 = (hc_p2 & (t_p0.data).length - 1);
     Label1: {
       F.line = 45;
         Label2: while (true) {
-        if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(h_1241518986, 0, (t_p0.data).length - 1)].Field0)) break Label2;
-          if (((t_p0.data[chckIndx(h_1241518986, 0, (t_p0.data).length - 1)].Field0 == hc_p2) && eqStrings(t_p0.data[chckIndx(h_1241518986, 0, (t_p0.data).length - 1)].Field1, key_p1))) {
+        if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(h_1241519315, 0, (t_p0.data).length - 1)].Field0)) break Label2;
+          if (((t_p0.data[chckIndx(h_1241519315, 0, (t_p0.data).length - 1)].Field0 == hc_p2) && eqStrings(t_p0.data[chckIndx(h_1241519315, 0, (t_p0.data).length - 1)].Field1, key_p1))) {
           F.line = 51;
-          result_1241518939 = h_1241518986;
+          result_1241519268 = h_1241519315;
           break BeforeRet;
           }
           
           F.line = 52;
-          h_1241518986 = nextTry__pureZcollectionsZtables_u34(h_1241518986, (t_p0.data).length - 1);
+          h_1241519315 = nextTry__pureZcollectionsZtables_u34(h_1241519315, (t_p0.data).length - 1);
         }
     };
     F.line = 53;
-    result_1241518939 = subInt((-1), h_1241518986);
+    result_1241519268 = subInt((-1), h_1241519315);
   };
   framePtr = F.prev;
 
-  return result_1241518939;
+  return result_1241519268;
 
 }
 
-function HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4210(t_p0, key_p1, val_p2) {
+function HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4539(t_p0, key_p1, val_p2) {
   var F = {procname: "[]=.[]=", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
   framePtr = F;
     if (((t_p0.data).length == 0)) {
     F.line = 182;
     F.filename = "tableimpl.nim";
-    var correctSizeHEX60gensym197_1241518244 = slotsNeeded__pureZcollectionsZtables_u42(32);
+    var correctSizeHEX60gensym217_1241518573 = slotsNeeded__pureZcollectionsZtables_u42(32);
     F.line = 186;
     t_p0.counter = 0;
     F.line = 187;
-    t_p0.data = new Array(chckRange(correctSizeHEX60gensym197_1241518244, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym197_1241518244, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: [], Field2: null}; }    }
+    t_p0.data = new Array(chckRange(correctSizeHEX60gensym217_1241518573, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym217_1241518573, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: [], Field2: null}; }    }
     
     F.line = 59;
-    var hc_1241518253 = [0];
+    var hc_1241518582 = [0];
     F.line = 60;
-    var index_1241518260 = rawGet__OOZinterpreterZvm_u961(t_p0, key_p1, hc_1241518253, 0);
-    if ((0 <= index_1241518260)) {
+    var index_1241518589 = rawGet__OOZinterpreterZvm_u1290(t_p0, key_p1, hc_1241518582, 0);
+    if ((0 <= index_1241518589)) {
     F.line = 61;
-    t_p0.data[chckIndx(index_1241518260, 0, (t_p0.data).length - 1)].Field2 = val_p2;
+    t_p0.data[chckIndx(index_1241518589, 0, (t_p0.data).length - 1)].Field2 = val_p2;
     }
     else {
       if (((t_p0.data).length == 0)) {
       F.line = 182;
-      var correctSizeHEX60gensym200_1241518354 = slotsNeeded__pureZcollectionsZtables_u42(32);
+      var correctSizeHEX60gensym220_1241518683 = slotsNeeded__pureZcollectionsZtables_u42(32);
       F.line = 186;
       t_p0.counter = 0;
       F.line = 187;
-      t_p0.data = new Array(chckRange(correctSizeHEX60gensym200_1241518354, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym200_1241518354, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: [], Field2: null}; }      }
+      t_p0.data = new Array(chckRange(correctSizeHEX60gensym220_1241518683, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym220_1241518683, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: [], Field2: null}; }      }
       
-      if (mustRehash__OOZinterpreterZvm_u4375(t_p0)) {
+      if (mustRehash__OOZinterpreterZvm_u4704(t_p0)) {
       F.line = 51;
-      enlarge__OOZinterpreterZvm_u4518(t_p0);
+      enlarge__OOZinterpreterZvm_u4847(t_p0);
       F.line = 52;
-      index_1241518260 = rawGetKnownHC__OOZinterpreterZvm_u4949(t_p0, key_p1, hc_1241518253[0]);
+      index_1241518589 = rawGetKnownHC__OOZinterpreterZvm_u5278(t_p0, key_p1, hc_1241518582[0]);
       }
       
       F.line = 53;
-      index_1241518260 = subInt((-1), index_1241518260);
+      index_1241518589 = subInt((-1), index_1241518589);
       F.line = 54;
-      rawInsert__OOZinterpreterZvm_u4792(t_p0, t_p0, "data", key_p1, val_p2, hc_1241518253[0], index_1241518260);
+      rawInsert__OOZinterpreterZvm_u5121(t_p0, t_p0, "data", key_p1, val_p2, hc_1241518582[0], index_1241518589);
       F.line = 62;
       t_p0.counter = addInt(t_p0.counter, 1);
     }
@@ -15151,7 +15175,7 @@ function HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4210(t_p0, key_p1, val_p2) {
   
 }
 
-function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
+function captureEnvironment__OOZinterpreterZvm_u1156(interp_p0, blockNode_p1) {
                     var Temporary11;
 
   var F = {procname: "vm.captureEnvironment", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
@@ -15163,25 +15187,25 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
     }
     
     if (!(blockNode_p1.capturedEnvInitialized)) {
-    F.line = 629;
+    F.line = 826;
     F.filename = "vm.nim";
     blockNode_p1.capturedEnv = nimCopy(blockNode_p1.capturedEnv, initTable__OOZparserZparser_u1231(32), NTI1157628032);
-    F.line = 630;
+    F.line = 827;
     blockNode_p1.capturedEnvInitialized = true;
     }
     
     if ((!((interp_p0.currentActivation == null)) && !((interp_p0.currentActivation.currentMethod == null)))) {
-    F.line = 635;
-    var currentMethod_1241517825 = interp_p0.currentActivation.currentMethod;
-    if ((currentMethod_1241517825.capturedEnvInitialized && (0 < len__OOZinterpreterZvm_u890(currentMethod_1241517825.capturedEnv)))) {
+    F.line = 832;
+    var currentMethod_1241518154 = interp_p0.currentActivation.currentMethod;
+    if ((currentMethod_1241518154.capturedEnvInitialized && (0 < len__OOZinterpreterZvm_u1219(currentMethod_1241518154.capturedEnv)))) {
     Label1: {
-      F.line = 638;
-      var name_1241518156 = [];
-      F.line = 638;
-      var cell_1241518157 = null;
+      F.line = 835;
+      var name_1241518485 = [];
+      F.line = 835;
+      var cell_1241518486 = null;
       F.line = 767;
       F.filename = "tables.nim";
-      var L_587203144 = len__OOZinterpreterZvm_u890(currentMethod_1241517825.capturedEnv);
+      var L_587203144 = len__OOZinterpreterZvm_u1219(currentMethod_1241518154.capturedEnv);
       Label2: {
         F.line = 768;
         var h_587203146 = 0;
@@ -15190,7 +15214,7 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
         var colontmp__587203147 = 0;
         F.line = 768;
         F.filename = "tables.nim";
-        colontmp__587203147 = (currentMethod_1241517825.capturedEnv.data).length - 1;
+        colontmp__587203147 = (currentMethod_1241518154.capturedEnv.data).length - 1;
         F.line = 96;
         F.filename = "iterators_1.nim";
         var res_587203148 = 0;
@@ -15201,21 +15225,21 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
               F.line = 768;
               F.filename = "tables.nim";
               h_587203146 = res_587203148;
-              if (isFilled__pureZcollectionsZtables_u31(currentMethod_1241517825.capturedEnv.data[chckIndx(h_587203146, 0, (currentMethod_1241517825.capturedEnv.data).length - 1)].Field0)) {
-              F.line = 638;
+              if (isFilled__pureZcollectionsZtables_u31(currentMethod_1241518154.capturedEnv.data[chckIndx(h_587203146, 0, (currentMethod_1241518154.capturedEnv.data).length - 1)].Field0)) {
+              F.line = 835;
               F.filename = "vm.nim";
-              name_1241518156 = currentMethod_1241517825.capturedEnv.data[chckIndx(h_587203146, 0, (currentMethod_1241517825.capturedEnv.data).length - 1)].Field1;
-              F.line = 638;
-              cell_1241518157 = currentMethod_1241517825.capturedEnv.data[chckIndx(h_587203146, 0, (currentMethod_1241517825.capturedEnv.data).length - 1)].Field2;
-              F.line = 639;
-              HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4210(blockNode_p1.capturedEnv, name_1241518156, cell_1241518157);
+              name_1241518485 = currentMethod_1241518154.capturedEnv.data[chckIndx(h_587203146, 0, (currentMethod_1241518154.capturedEnv.data).length - 1)].Field1;
+              F.line = 835;
+              cell_1241518486 = currentMethod_1241518154.capturedEnv.data[chckIndx(h_587203146, 0, (currentMethod_1241518154.capturedEnv.data).length - 1)].Field2;
+              F.line = 836;
+              HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4539(blockNode_p1.capturedEnv, name_1241518485, cell_1241518486);
               if ((level_1090519067[0] <= 1)) {
               F.line = 701;
               F.filename = "logging.nim";
-              logLoop__pureZlogging_u148(1, [[73,110,104,101,114,105,116,101,100,32,99,97,112,116,117,114,101,100,32,118,97,114,105,97,98,108,101,32,102,114,111,109,32,111,117,116,101,114,32,98,108,111,99,107,58,32], nimCopy(null, name_1241518156, NTI33554449)]);
+              logLoop__pureZlogging_u148(1, [[73,110,104,101,114,105,116,101,100,32,99,97,112,116,117,114,101,100,32,118,97,114,105,97,98,108,101,32,102,114,111,109,32,111,117,116,101,114,32,98,108,111,99,107,58,32], nimCopy(null, name_1241518485, NTI33554449)]);
               }
               
-              if (!((len__OOZinterpreterZvm_u890(currentMethod_1241517825.capturedEnv) == L_587203144))) {
+              if (!((len__OOZinterpreterZvm_u1219(currentMethod_1241518154.capturedEnv) == L_587203144))) {
               F.line = 771;
               F.filename = "tables.nim";
               failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim(771, 13) `len(t) == L` the length of the table changed while iterating over it"));
@@ -15234,21 +15258,21 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
     
     }
     
-    F.line = 643;
+    F.line = 840;
     F.filename = "vm.nim";
-    var activation_1241519159 = interp_p0.currentActivation;
+    var activation_1241519488 = interp_p0.currentActivation;
     Label5: {
-      F.line = 644;
+      F.line = 841;
         Label6: while (true) {
-        if (!!((activation_1241519159 == null))) break Label6;
+        if (!!((activation_1241519488 == null))) break Label6;
           Label7: {
-            F.line = 646;
-            var name_1241519168 = [];
-            F.line = 646;
-            var value_1241519169 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+            F.line = 843;
+            var name_1241519497 = [];
+            F.line = 843;
+            var value_1241519498 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
             F.line = 767;
             F.filename = "tables.nim";
-            var L_587203152 = len__OOZcoreZtypes_u1601(activation_1241519159.locals);
+            var L_587203152 = len__OOZcoreZtypes_u1601(activation_1241519488.locals);
             Label8: {
               F.line = 768;
               var h_587203154 = 0;
@@ -15257,7 +15281,7 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
               var colontmp__587203155 = 0;
               F.line = 768;
               F.filename = "tables.nim";
-              colontmp__587203155 = (activation_1241519159.locals.data).length - 1;
+              colontmp__587203155 = (activation_1241519488.locals.data).length - 1;
               F.line = 96;
               F.filename = "iterators_1.nim";
               var res_587203156 = 0;
@@ -15268,48 +15292,48 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
                     F.line = 768;
                     F.filename = "tables.nim";
                     h_587203154 = res_587203156;
-                    if (isFilled__pureZcollectionsZtables_u31(activation_1241519159.locals.data[chckIndx(h_587203154, 0, (activation_1241519159.locals.data).length - 1)].Field0)) {
-                    F.line = 646;
+                    if (isFilled__pureZcollectionsZtables_u31(activation_1241519488.locals.data[chckIndx(h_587203154, 0, (activation_1241519488.locals.data).length - 1)].Field0)) {
+                    F.line = 843;
                     F.filename = "vm.nim";
-                    name_1241519168 = activation_1241519159.locals.data[chckIndx(h_587203154, 0, (activation_1241519159.locals.data).length - 1)].Field1;
-                    F.line = 646;
-                    value_1241519169 = nimCopy(value_1241519169, activation_1241519159.locals.data[chckIndx(h_587203154, 0, (activation_1241519159.locals.data).length - 1)].Field2, NTI1157627922);
-                    if ((!(eqStrings(name_1241519168, [115,101,108,102])) && !(eqStrings(name_1241519168, [115,117,112,101,114])))) {
-                    if (!(hasKey__OOZinterpreterZvm_u954(blockNode_p1.capturedEnv, name_1241519168))) {
-                    F.line = 652;
-                    var cell_1241519211 = null;
-                    if (hasKey__OOZinterpreterZvm_u954(activation_1241519159.capturedVars, name_1241519168)) {
-                    F.line = 655;
-                    cell_1241519211 = (Temporary11 = HEX5BHEX5D__OOZinterpreterZvm_u1233(activation_1241519159.capturedVars, name_1241519168), Temporary11)[0][Temporary11[1]];
+                    name_1241519497 = activation_1241519488.locals.data[chckIndx(h_587203154, 0, (activation_1241519488.locals.data).length - 1)].Field1;
+                    F.line = 843;
+                    value_1241519498 = nimCopy(value_1241519498, activation_1241519488.locals.data[chckIndx(h_587203154, 0, (activation_1241519488.locals.data).length - 1)].Field2, NTI1157627922);
+                    if ((!(eqStrings(name_1241519497, [115,101,108,102])) && !(eqStrings(name_1241519497, [115,117,112,101,114])))) {
+                    if (!(hasKey__OOZinterpreterZvm_u1283(blockNode_p1.capturedEnv, name_1241519497))) {
+                    F.line = 849;
+                    var cell_1241519540 = null;
+                    if (hasKey__OOZinterpreterZvm_u1283(activation_1241519488.capturedVars, name_1241519497)) {
+                    F.line = 852;
+                    cell_1241519540 = (Temporary11 = HEX5BHEX5D__OOZinterpreterZvm_u1562(activation_1241519488.capturedVars, name_1241519497), Temporary11)[0][Temporary11[1]];
                     if ((level_1090519067[0] <= 1)) {
                     F.line = 701;
                     F.filename = "logging.nim";
-                    logLoop__pureZlogging_u148(1, [[83,104,97,114,105,110,103,32,99,97,112,116,117,114,101,100,32,118,97,114,105,97,98,108,101,32,102,114,111,109,32,115,105,98,108,105,110,103,58,32], nimCopy(null, name_1241519168, NTI33554449)]);
+                    logLoop__pureZlogging_u148(1, [[83,104,97,114,105,110,103,32,99,97,112,116,117,114,101,100,32,118,97,114,105,97,98,108,101,32,102,114,111,109,32,115,105,98,108,105,110,103,58,32], nimCopy(null, name_1241519497, NTI33554449)]);
                     }
                     
                     }
                     else {
-                      F.line = 659;
+                      F.line = 856;
                       F.filename = "vm.nim";
-                      cell_1241519211 = {value: nimCopy(null, value_1241519169, NTI1157627922)};
-                      F.line = 660;
-                      HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4210(activation_1241519159.capturedVars, name_1241519168, cell_1241519211);
+                      cell_1241519540 = {value: nimCopy(null, value_1241519498, NTI1157627922)};
+                      F.line = 857;
+                      HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4539(activation_1241519488.capturedVars, name_1241519497, cell_1241519540);
                       if ((level_1090519067[0] <= 1)) {
                       F.line = 701;
                       F.filename = "logging.nim";
-                      logLoop__pureZlogging_u148(1, [[67,97,112,116,117,114,101,100,32,118,97,114,105,97,98,108,101,58,32], nimCopy(null, name_1241519168, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_1241519169)]);
+                      logLoop__pureZlogging_u148(1, [[67,97,112,116,117,114,101,100,32,118,97,114,105,97,98,108,101,58,32], nimCopy(null, name_1241519497, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_1241519498)]);
                       }
                       
                     }
                     
-                    F.line = 662;
+                    F.line = 859;
                     F.filename = "vm.nim";
-                    HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4210(blockNode_p1.capturedEnv, name_1241519168, cell_1241519211);
+                    HEX5BHEX5DHEX3D__OOZinterpreterZvm_u4539(blockNode_p1.capturedEnv, name_1241519497, cell_1241519540);
                     }
                     
                     }
                     
-                    if (!((len__OOZcoreZtypes_u1601(activation_1241519159.locals) == L_587203152))) {
+                    if (!((len__OOZcoreZtypes_u1601(activation_1241519488.locals) == L_587203152))) {
                     F.line = 771;
                     F.filename = "tables.nim";
                     failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim(771, 13) `len(t) == L` the length of the table changed while iterating over it"));
@@ -15324,38 +15348,38 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
               };
             };
           };
-          F.line = 664;
+          F.line = 861;
           F.filename = "vm.nim";
-          activation_1241519159 = activation_1241519159.sender;
+          activation_1241519488 = activation_1241519488.sender;
         }
     };
     if (!((interp_p0.currentActivation == null))) {
-    F.line = 671;
-    var act_1241519403 = interp_p0.currentActivation;
+    F.line = 868;
+    var act_1241519732 = interp_p0.currentActivation;
     Label12: {
-      F.line = 672;
+      F.line = 869;
         Label13: while (true) {
-        if (!!((act_1241519403 == null))) break Label13;
-          if ((!((act_1241519403.currentMethod == null)) && act_1241519403.currentMethod.isMethod)) {
-          F.line = 674;
-          blockNode_p1.homeActivation = act_1241519403;
-          F.line = 675;
+        if (!!((act_1241519732 == null))) break Label13;
+          if ((!((act_1241519732.currentMethod == null)) && act_1241519732.currentMethod.isMethod)) {
+          F.line = 871;
+          blockNode_p1.homeActivation = act_1241519732;
+          F.line = 872;
           break Label12;
           }
           
-          if (((!((act_1241519403.currentMethod == null)) && !(act_1241519403.currentMethod.isMethod)) && !((act_1241519403.currentMethod.homeActivation == null)))) {
-          F.line = 679;
-          blockNode_p1.homeActivation = act_1241519403.currentMethod.homeActivation;
-          F.line = 680;
+          if (((!((act_1241519732.currentMethod == null)) && !(act_1241519732.currentMethod.isMethod)) && !((act_1241519732.currentMethod.homeActivation == null)))) {
+          F.line = 876;
+          blockNode_p1.homeActivation = act_1241519732.currentMethod.homeActivation;
+          F.line = 877;
           break Label12;
           }
           
-          F.line = 681;
-          act_1241519403 = act_1241519403.sender;
+          F.line = 878;
+          act_1241519732 = act_1241519732.sender;
         }
     };
     if ((blockNode_p1.homeActivation == null)) {
-    F.line = 684;
+    F.line = 881;
     blockNode_p1.homeActivation = interp_p0.currentActivation;
     }
     
@@ -15372,10 +15396,10 @@ function captureEnvironment__OOZinterpreterZvm_u827(interp_p0, blockNode_p1) {
   
 }
 
-function pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, frame_p1) {
+function pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, frame_p1) {
   var F = {procname: "vm.pushWorkFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2834;
+    F.line = 3068;
     F.filename = "vm.nim";
     interp_p0[interp_p0_Idx].workQueue.push(frame_p1);;
   framePtr = F.prev;
@@ -15383,74 +15407,74 @@ function pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, frame
   
 }
 
-function HEX5BHEX5D__OOZinterpreterZvm_u19609(s_p0, i_p1) {
-  var result_1241533597 = null;
-  var result_1241533597_Idx = 0;
+function HEX5BHEX5D__OOZinterpreterZvm_u19971(s_p0, i_p1) {
+  var result_1241533959 = null;
+  var result_1241533959_Idx = 0;
 
   var F = {procname: "[].[]", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/indices.nim", line: 0};
   framePtr = F;
     F.line = 30;
     F.filename = "indices.nim";
-    result_1241533597 = s_p0; result_1241533597_Idx = chckIndx(subInt((s_p0).length, i_p1), 0, (s_p0).length - 1);
+    result_1241533959 = s_p0; result_1241533959_Idx = chckIndx(subInt((s_p0).length, i_p1), 0, (s_p0).length - 1);
   framePtr = F.prev;
 
-  return [result_1241533597, result_1241533597_Idx];
+  return [result_1241533959, result_1241533959_Idx];
 
 }
 
-function newAfterReceiverFrame__OOZinterpreterZvm_u19381(selector_p0, args_p1) {
-  var result_1241533368 = null;
+function newAfterReceiverFrame__OOZinterpreterZvm_u19743(selector_p0, args_p1) {
+  var result_1241533730 = null;
 
   var F = {procname: "vm.newAfterReceiverFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2807;
+    F.line = 3041;
     F.filename = "vm.nim";
-    result_1241533368 = {kind: 4, pendingSelector: nimCopy(null, selector_p0, NTI33554449), pendingArgs: nimCopy(null, args_p1, NTI1241524964), currentArgIndex: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533730 = {kind: 4, pendingSelector: nimCopy(null, selector_p0, NTI33554449), pendingArgs: nimCopy(null, args_p1, NTI1241525251), currentArgIndex: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533368;
+  return result_1241533730;
 
 }
 
-function newSendMessageFrame__OOZinterpreterZvm_u19377(selector_p0, argCount_p1) {
-  var result_1241533364 = null;
+function newSendMessageFrame__OOZinterpreterZvm_u19739(selector_p0, argCount_p1) {
+  var result_1241533726 = null;
 
   var F = {procname: "vm.newSendMessageFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2804;
+    F.line = 3038;
     F.filename = "vm.nim";
-    result_1241533364 = {kind: 1, selector: nimCopy(null, selector_p0, NTI33554449), argCount: argCount_p1, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533726 = {kind: 1, selector: nimCopy(null, selector_p0, NTI33554449), argCount: argCount_p1, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533364;
+  return result_1241533726;
 
 }
 
-function newAfterArgFrame__OOZinterpreterZvm_u19385(selector_p0, args_p1, currentIndex_p2) {
-  var result_1241533373 = null;
+function newAfterArgFrame__OOZinterpreterZvm_u19747(selector_p0, args_p1, currentIndex_p2) {
+  var result_1241533735 = null;
 
   var F = {procname: "vm.newAfterArgFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2810;
+    F.line = 3044;
     F.filename = "vm.nim";
-    result_1241533373 = {kind: 5, pendingSelector: nimCopy(null, selector_p0, NTI33554449), pendingArgs: nimCopy(null, args_p1, NTI1241524968), currentArgIndex: currentIndex_p2, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533735 = {kind: 5, pendingSelector: nimCopy(null, selector_p0, NTI33554449), pendingArgs: nimCopy(null, args_p1, NTI1241525255), currentArgIndex: currentIndex_p2, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533373;
+  return result_1241533735;
 
 }
 
-function newReturnValueFrame__OOZinterpreterZvm_u19394(value_p0) {
-  var result_1241533380 = null;
+function newReturnValueFrame__OOZinterpreterZvm_u19756(value_p0) {
+  var result_1241533742 = null;
 
   var F = {procname: "vm.newReturnValueFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2816;
+    F.line = 3050;
     F.filename = "vm.nim";
-    result_1241533380 = {kind: 3, returnValue: nimCopy(null, value_p0, NTI1157627922), cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533742 = {kind: 3, returnValue: nimCopy(null, value_p0, NTI1157627922), cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533380;
+  return result_1241533742;
 
 }
 
@@ -15502,17 +15526,17 @@ function initTable__OOZinterpreterZobjects_u4371(initialSize_p0) {
 
 }
 
-function newCascadeFrame__OOZinterpreterZvm_u19397(messages_p0, receiver_p1) {
-  var result_1241533384 = null;
+function newCascadeFrame__OOZinterpreterZvm_u19759(messages_p0, receiver_p1) {
+  var result_1241533746 = null;
 
   var F = {procname: "vm.newCascadeFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2819;
+    F.line = 3053;
     F.filename = "vm.nim";
-    result_1241533384 = {kind: 6, cascadeMessages: nimCopy(null, messages_p0, NTI1241524977), cascadeReceiver: nimCopy(null, receiver_p1, NTI1157627922), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533746 = {kind: 6, cascadeMessages: nimCopy(null, messages_p0, NTI1241525264), cascadeReceiver: nimCopy(null, receiver_p1, NTI1157627922), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533384;
+  return result_1241533746;
 
 }
 
@@ -15567,18 +15591,922 @@ function lookupInstanceMethod__OOZcoreZtypes_u8679(cls_p0, selector_p1) {
 
 }
 
-function checkStackDepth__OOZinterpreterZvm_u582(interp_p0, interp_p0_Idx) {
+function checkStackDepth__OOZinterpreterZvm_u911(interp_p0, interp_p0_Idx) {
   var F = {procname: "vm.checkStackDepth", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
     if ((interp_p0[interp_p0_Idx].maxStackDepth <= (interp_p0[interp_p0_Idx].activationStack).length)) {
-    F.line = 305;
+    F.line = 500;
     F.filename = "vm.nim";
-    raiseException({message: ([83,116,97,99,107,32,111,118,101,114,102,108,111,119,58,32,109,97,120,32,100,101,112,116,104,32]).concat(HEX24__systemZdollars_u14(interp_p0[interp_p0_Idx].maxStackDepth)), parent: null, m_type: NTI1241514010, node: null, name: null, trace: [], up: null}, "EvalError");
+    raiseException({message: ([83,116,97,99,107,32,111,118,101,114,102,108,111,119,58,32,109,97,120,32,100,101,112,116,104,32]).concat(HEX24__systemZdollars_u14(interp_p0[interp_p0_Idx].maxStackDepth)), parent: null, m_type: NTI1241514271, node: null, name: null, trace: [], up: null}, "EvalError");
     }
     
   framePtr = F.prev;
 
   
+}
+
+function toValue__OOZcoreZtypes_u1375(i_p0) {
+  var result_1157629281 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+
+  var F = {procname: "types.toValue", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/core/types.nim", line: 0};
+  framePtr = F;
+    F.line = 527;
+    F.filename = "types.nim";
+    result_1157629281 = nimCopy(result_1157629281, {kind: 0, intVal: i_p0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, NTI1157627922);
+  framePtr = F.prev;
+
+  return result_1157629281;
+
+}
+
+function toValue__OOZcoreZtypes_u1394(f_p0) {
+  var result_1157629300 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+
+  var F = {procname: "types.toValue", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/core/types.nim", line: 0};
+  framePtr = F;
+    F.line = 530;
+    F.filename = "types.nim";
+    result_1157629300 = nimCopy(result_1157629300, {kind: 1, floatVal: f_p0, intVal: 0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, NTI1157627922);
+  framePtr = F.prev;
+
+  return result_1157629300;
+
+}
+
+function find__OOZinterpreterZobjects_u6413(a_p0, item_p1) {
+  var result_1493178642 = 0;
+
+  var F = {procname: "find.find", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system.nim", line: 0};
+  framePtr = F;
+  BeforeRet: {
+    F.line = 1764;
+    F.filename = "system.nim";
+    result_1493178642 = 0;
+    Label1: {
+      F.line = 1765;
+      var i_1493178646 = [];
+      F.line = 249;
+      F.filename = "iterators.nim";
+      var i_587203206 = 0;
+      F.line = 250;
+      var L_587203207 = (a_p0).length;
+      Label2: {
+        F.line = 251;
+          Label3: while (true) {
+          if (!(i_587203206 < L_587203207)) break Label3;
+            F.line = 1765;
+            F.filename = "system.nim";
+            i_1493178646 = a_p0[chckIndx(i_587203206, 0, (a_p0).length - 1)];
+            if (eqStrings(i_1493178646, item_p1)) {
+            F.line = 1766;
+            break BeforeRet;
+            }
+            
+            F.line = 1767;
+            result_1493178642 = addInt(result_1493178642, 1);
+            F.line = 13;
+            F.filename = "iterators.nim";
+            i_587203206 += 1;
+            if (!(((a_p0).length == L_587203207))) {
+            F.line = 254;
+            failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+            }
+            
+          }
+      };
+    };
+    F.line = 1768;
+    F.filename = "system.nim";
+    result_1493178642 = (-1);
+  };
+  framePtr = F.prev;
+
+  return result_1493178642;
+
+}
+
+function mustRehash__OOZcoreZtypes_u7883(t_p0) {
+  var result_1157635790 = false;
+
+  var F = {procname: "mustRehash.mustRehash", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
+  framePtr = F;
+    if (!((t_p0.counter < (t_p0.data).length))) {
+    F.line = 34;
+    F.filename = "hashcommon.nim";
+    failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim(34, 9) `\x0At.counter < t.dataLen` "));
+    }
+    
+    F.line = 35;
+    result_1157635790 = (((t_p0.data).length < addInt(t_p0.counter, divInt(t_p0.counter, 2))) || (subInt((t_p0.data).length, t_p0.counter) < 4));
+  framePtr = F.prev;
+
+  return result_1157635790;
+
+}
+
+function rawInsert__OOZcoreZtypes_u8300(t_p0, data_p1, data_p1_Idx, key_p2, val_p3, hc_p4, h_p5) {
+  var F = {procname: "rawInsert.rawInsert", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tableimpl.nim", line: 0};
+  framePtr = F;
+    F.line = 25;
+    F.filename = "tableimpl.nim";
+    data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field1 = nimCopy(data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field1, key_p2, NTI1157627922);
+    F.line = 26;
+    data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field2 = nimCopy(data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field2, val_p3, NTI1157627922);
+    F.line = 27;
+    data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field0 = hc_p4;
+  framePtr = F.prev;
+
+  
+}
+
+function enlarge__OOZcoreZtypes_u8026(t_p0) {
+  var F = {procname: "enlarge.enlarge", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
+  framePtr = F;
+    F.line = 247;
+    F.filename = "tables.nim";
+    var n_1157635936 = [];
+    F.line = 248;
+    n_1157635936 = new Array(chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647)); for (var i = 0 ; i < chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647) ; ++i) { n_1157635936[i] = {Field0: 0, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field2: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})}; }    F.line = 249;
+    F.line = 249;
+    var HEX3Atmp_587203214 = nimCopy(null, t_p0.data, NTI1157627990);
+    F.line = 249;
+    t_p0.data = n_1157635936;
+    F.line = 249;
+    n_1157635936 = HEX3Atmp_587203214;
+    Label1: {
+      F.line = 250;
+      var i_1157635996 = 0;
+      F.line = 46;
+      F.filename = "iterators_1.nim";
+      var colontmp__587203211 = 0;
+      F.line = 250;
+      F.filename = "tables.nim";
+      colontmp__587203211 = (n_1157635936).length - 1;
+      F.line = 68;
+      F.filename = "iterators_1.nim";
+      var res_587203212 = 0;
+      Label2: {
+        F.line = 69;
+          Label3: while (true) {
+          if (!(res_587203212 <= colontmp__587203211)) break Label3;
+            F.line = 250;
+            F.filename = "tables.nim";
+            i_1157635996 = res_587203212;
+            F.line = 251;
+            var eh_1157636046 = n_1157635936[chckIndx(i_1157635996, 0, (n_1157635936).length - 1)].Field0;
+            if (isFilled__pureZcollectionsZtables_u31(eh_1157636046)) {
+            F.line = 253;
+            var j_1157636050 = (eh_1157636046 & (t_p0.data).length - 1);
+            Label4: {
+              F.line = 254;
+                Label5: while (true) {
+                if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(j_1157636050, 0, (t_p0.data).length - 1)].Field0)) break Label5;
+                  F.line = 255;
+                  j_1157636050 = nextTry__pureZcollectionsZtables_u34(j_1157636050, (t_p0.data).length - 1);
+                }
+            };
+            F.line = 257;
+            rawInsert__OOZcoreZtypes_u8300(t_p0, t_p0, "data", n_1157635936[chckIndx(i_1157635996, 0, (n_1157635936).length - 1)].Field1, n_1157635936[chckIndx(i_1157635996, 0, (n_1157635936).length - 1)].Field2, eh_1157636046, j_1157636050);
+            }
+            
+            F.line = 74;
+            F.filename = "iterators_1.nim";
+            res_587203212 = addInt(res_587203212, 1);
+          }
+      };
+    };
+  framePtr = F.prev;
+
+  
+}
+
+function rawGetKnownHC__OOZcoreZtypes_u8457(t_p0, key_p1, hc_p2) {
+  var result_1157636367 = 0;
+
+  var F = {procname: "rawGetKnownHC.rawGetKnownHC", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
+  framePtr = F;
+  BeforeRet: {
+    if (((t_p0.data).length == 0)) {
+    F.line = 43;
+    F.filename = "hashcommon.nim";
+    result_1157636367 = (-1);
+    break BeforeRet;
+    }
+    
+    F.line = 44;
+    var h_1157636414 = (hc_p2 & (t_p0.data).length - 1);
+    Label1: {
+      F.line = 45;
+        Label2: while (true) {
+        if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(h_1157636414, 0, (t_p0.data).length - 1)].Field0)) break Label2;
+          if (((t_p0.data[chckIndx(h_1157636414, 0, (t_p0.data).length - 1)].Field0 == hc_p2) && HEX3DHEX3D__OOZcoreZtypes_u1146(t_p0.data[chckIndx(h_1157636414, 0, (t_p0.data).length - 1)].Field1, key_p1))) {
+          F.line = 51;
+          result_1157636367 = h_1157636414;
+          break BeforeRet;
+          }
+          
+          F.line = 52;
+          h_1157636414 = nextTry__pureZcollectionsZtables_u34(h_1157636414, (t_p0.data).length - 1);
+        }
+    };
+    F.line = 53;
+    result_1157636367 = subInt((-1), h_1157636414);
+  };
+  framePtr = F.prev;
+
+  return result_1157636367;
+
+}
+
+function HEX5BHEX5DHEX3D__OOZcoreZtypes_u7718(t_p0, key_p1, val_p2) {
+  var F = {procname: "[]=.[]=", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
+  framePtr = F;
+    if (((t_p0.data).length == 0)) {
+    F.line = 182;
+    F.filename = "tableimpl.nim";
+    var correctSizeHEX60gensym183_1157635672 = slotsNeeded__pureZcollectionsZtables_u42(32);
+    F.line = 186;
+    t_p0.counter = 0;
+    F.line = 187;
+    t_p0.data = new Array(chckRange(correctSizeHEX60gensym183_1157635672, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym183_1157635672, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field2: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})}; }    }
+    
+    F.line = 59;
+    var hc_1157635681 = [0];
+    F.line = 60;
+    var index_1157635688 = rawGet__OOZcoreZtypes_u6612(t_p0, key_p1, hc_1157635681, 0);
+    if ((0 <= index_1157635688)) {
+    F.line = 61;
+    t_p0.data[chckIndx(index_1157635688, 0, (t_p0.data).length - 1)].Field2 = nimCopy(t_p0.data[chckIndx(index_1157635688, 0, (t_p0.data).length - 1)].Field2, val_p2, NTI1157627922);
+    }
+    else {
+      if (((t_p0.data).length == 0)) {
+      F.line = 182;
+      var correctSizeHEX60gensym186_1157635782 = slotsNeeded__pureZcollectionsZtables_u42(32);
+      F.line = 186;
+      t_p0.counter = 0;
+      F.line = 187;
+      t_p0.data = new Array(chckRange(correctSizeHEX60gensym186_1157635782, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym186_1157635782, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field2: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})}; }      }
+      
+      if (mustRehash__OOZcoreZtypes_u7883(t_p0)) {
+      F.line = 51;
+      enlarge__OOZcoreZtypes_u8026(t_p0);
+      F.line = 52;
+      index_1157635688 = rawGetKnownHC__OOZcoreZtypes_u8457(t_p0, key_p1, hc_1157635681[0]);
+      }
+      
+      F.line = 53;
+      index_1157635688 = subInt((-1), index_1157635688);
+      F.line = 54;
+      rawInsert__OOZcoreZtypes_u8300(t_p0, t_p0, "data", key_p1, val_p2, hc_1157635681[0], index_1157635688);
+      F.line = 62;
+      t_p0.counter = addInt(t_p0.counter, 1);
+    }
+    
+  framePtr = F.prev;
+
+  
+}
+
+function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, receiver_p1, selector_p2, args_p3) {
+        var Temporary1;
+        var Temporary2;
+        var Temporary3;
+        var Temporary4;
+        var Temporary5;
+        var Temporary6;
+        var Temporary7;
+        var Temporary8;
+        var Temporary9;
+        var Temporary10;
+          var Temporary11;
+      var Temporary12;
+      var Temporary13;
+        var Temporary14;
+          var Temporary15;
+      var Temporary16;
+      var Temporary17;
+      var Temporary18;
+        var Temporary19;
+        var Temporary20;
+      var Temporary21;
+        var Temporary22;
+        var Temporary23;
+      var Temporary24;
+        var Temporary25;
+        var Temporary26;
+      var Temporary27;
+        var Temporary28;
+              var Temporary31;
+                      var Temporary35;
+            var Temporary36;
+                var Temporary43;
+              var Temporary44;
+              var Temporary45;
+      var Temporary46;
+      var Temporary47;
+
+  var result_1241514006 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+
+  var F = {procname: "vm.dispatchPrimitive", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
+  framePtr = F;
+  BeforeRet: {
+    F.line = 36;
+    F.filename = "vm.nim";
+    switch (toJSStr(selector_p2)) {
+    case "primitiveClone":
+      F.line = 39;
+      switch (receiver_p1.kind) {
+      case 0:
+        F.line = 41;
+        var clone_1241514007 = {kind: 0, class: receiver_p1.class, slots: [], m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        var Temporary1 = clone_1241514007;
+        if (ConstSet153[Temporary1.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary1.kind, NTI1157627908)); }
+        F.line = 42;
+        var Temporary2 = receiver_p1;
+        if (ConstSet154[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627908)); }
+        Temporary1.slots = nimCopy(null, Temporary2.slots, NTI1157627978);
+        F.line = 43;
+        clone_1241514007.isNimProxy = receiver_p1.isNimProxy;
+        F.line = 44;
+        result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1501(clone_1241514007), NTI1157627922);
+        break BeforeRet;
+        break;
+      case 1:
+        F.line = 46;
+        var clone_1241514008 = {kind: 1, class: receiver_p1.class, elements: [], m_type: NTI1157627977, slots: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        var Temporary3 = clone_1241514008;
+        if (ConstSet155[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'elements\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627908)); }
+        F.line = 47;
+        var Temporary4 = receiver_p1;
+        if (ConstSet156[Temporary4.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'elements\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary4.kind, NTI1157627908)); }
+        Temporary3.elements = nimCopy(null, Temporary4.elements, NTI1157627979);
+        F.line = 48;
+        result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1501(clone_1241514008), NTI1157627922);
+        break BeforeRet;
+        break;
+      case 2:
+        F.line = 50;
+        var clone_1241514009 = {kind: 2, class: receiver_p1.class, entries: ({data: [], counter: 0}), m_type: NTI1157627977, slots: [], elements: [], intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        var Temporary5 = clone_1241514009;
+        if (ConstSet157[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'entries\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627908)); }
+        F.line = 51;
+        var Temporary6 = receiver_p1;
+        if (ConstSet158[Temporary6.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'entries\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary6.kind, NTI1157627908)); }
+        Temporary5.entries = nimCopy(Temporary5.entries, Temporary6.entries, NTI1157627987);
+        F.line = 52;
+        result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1501(clone_1241514009), NTI1157627922);
+        break BeforeRet;
+        break;
+      case 3:
+        F.line = 54;
+        var Temporary7 = receiver_p1;
+        if (ConstSet159[Temporary7.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary7.kind, NTI1157627908)); }
+        result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1375(Temporary7.intVal), NTI1157627922);
+        break BeforeRet;
+        break;
+      case 4:
+        F.line = 56;
+        var Temporary8 = receiver_p1;
+        if (ConstSet160[Temporary8.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary8.kind, NTI1157627908)); }
+        result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1394(Temporary8.floatVal), NTI1157627922);
+        break BeforeRet;
+        break;
+      case 5:
+        F.line = 58;
+        var Temporary9 = receiver_p1;
+        if (ConstSet161[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627908)); }
+        result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1397(Temporary9.strVal), NTI1157627922);
+        break BeforeRet;
+        break;
+      }
+      break;
+    case "primitiveAt:":
+      if (((args_p3).length == 0)) {
+      F.line = 63;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      if ((!((receiver_p1.kind == 0)) || (receiver_p1.class == null))) {
+      F.line = 65;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 66;
+      var slotName_1241514021 = toString__OOZcoreZtypes_u496(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
+      F.line = 67;
+      var slotIdx_1241514027 = find__OOZinterpreterZobjects_u6413(receiver_p1.class.allSlotNames, slotName_1241514021);
+        if (!(0 <= slotIdx_1241514027)) Temporary10 = false; else {          var Temporary11 = receiver_p1;
+          if (ConstSet162[Temporary11.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary11.kind, NTI1157627908)); }
+          Temporary10 = (slotIdx_1241514027 < (Temporary11.slots).length);        }      if (Temporary10) {
+      F.line = 69;
+      var Temporary12 = receiver_p1;
+      if (ConstSet163[Temporary12.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary12.kind, NTI1157627908)); }
+      result_1241514006 = nimCopy(result_1241514006, (Temporary13 = Temporary12.slots, Temporary13)[chckIndx(slotIdx_1241514027, 0, (Temporary13).length - 1)], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 70;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveAt:put:":
+      if (((args_p3).length < 2)) {
+      F.line = 75;
+      result_1241514006 = nimCopy(result_1241514006, args_p3[chckIndx(1, 0, (args_p3).length - 1)], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      if ((!((receiver_p1.kind == 0)) || (receiver_p1.class == null))) {
+      F.line = 77;
+      result_1241514006 = nimCopy(result_1241514006, args_p3[chckIndx(1, 0, (args_p3).length - 1)], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 78;
+      var slotName_1241514042 = toString__OOZcoreZtypes_u496(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
+      F.line = 79;
+      var slotIdx_1241514048 = find__OOZinterpreterZobjects_u6413(receiver_p1.class.allSlotNames, slotName_1241514042);
+        if (!(0 <= slotIdx_1241514048)) Temporary14 = false; else {          var Temporary15 = receiver_p1;
+          if (ConstSet164[Temporary15.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary15.kind, NTI1157627908)); }
+          Temporary14 = (slotIdx_1241514048 < (Temporary15.slots).length);        }      if (Temporary14) {
+      var Temporary16 = receiver_p1;
+      if (ConstSet165[Temporary16.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary16.kind, NTI1157627908)); }
+      F.line = 81;
+      (Temporary17 = Temporary16.slots, Temporary17)[chckIndx(slotIdx_1241514048, 0, (Temporary17).length - 1)] = nimCopy((Temporary17 = Temporary16.slots, Temporary17)[chckIndx(slotIdx_1241514048, 0, (Temporary17).length - 1)], args_p3[chckIndx(1, 0, (args_p3).length - 1)], NTI1157627922);
+      }
+      
+      F.line = 82;
+      result_1241514006 = nimCopy(result_1241514006, args_p3[chckIndx(1, 0, (args_p3).length - 1)], NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveEquals:":
+      if (((args_p3).length == 0)) {
+      F.line = 87;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      if (((receiver_p1.kind == 3) && (args_p3[chckIndx(0, 0, (args_p3).length - 1)].kind == 0))) {
+      F.line = 90;
+        var Temporary19 = receiver_p1;
+        if (ConstSet166[Temporary19.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary19.kind, NTI1157627908)); }
+        var Temporary20 = args_p3[chckIndx(0, 0, (args_p3).length - 1)];
+        if (ConstSet167[Temporary20.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary20.kind, NTI1157627921)); }
+      if ((Temporary19.intVal == Temporary20.intVal)) {
+      Temporary18 = trueValue_1493172527[0];
+      }
+      else {
+      Temporary18 = falseValue_1493172528[0];
+      }
+      
+      result_1241514006 = nimCopy(result_1241514006, Temporary18, NTI1157627922);
+      break BeforeRet;
+      }
+      
+      if (((receiver_p1.kind == 4) && (args_p3[chckIndx(0, 0, (args_p3).length - 1)].kind == 1))) {
+      F.line = 92;
+        var Temporary22 = receiver_p1;
+        if (ConstSet168[Temporary22.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary22.kind, NTI1157627908)); }
+        var Temporary23 = args_p3[chckIndx(0, 0, (args_p3).length - 1)];
+        if (ConstSet169[Temporary23.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary23.kind, NTI1157627921)); }
+      if ((Temporary22.floatVal == Temporary23.floatVal)) {
+      Temporary21 = trueValue_1493172527[0];
+      }
+      else {
+      Temporary21 = falseValue_1493172528[0];
+      }
+      
+      result_1241514006 = nimCopy(result_1241514006, Temporary21, NTI1157627922);
+      break BeforeRet;
+      }
+      
+      if (((receiver_p1.kind == 5) && (args_p3[chckIndx(0, 0, (args_p3).length - 1)].kind == 2))) {
+      F.line = 94;
+        var Temporary25 = receiver_p1;
+        if (ConstSet170[Temporary25.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary25.kind, NTI1157627908)); }
+        var Temporary26 = args_p3[chckIndx(0, 0, (args_p3).length - 1)];
+        if (ConstSet171[Temporary26.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary26.kind, NTI1157627921)); }
+      if (eqStrings(Temporary25.strVal, Temporary26.strVal)) {
+      Temporary24 = trueValue_1493172527[0];
+      }
+      else {
+      Temporary24 = falseValue_1493172528[0];
+      }
+      
+      result_1241514006 = nimCopy(result_1241514006, Temporary24, NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 95;
+        var Temporary28 = args_p3[chckIndx(0, 0, (args_p3).length - 1)];
+        if (ConstSet172[Temporary28.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary28.kind, NTI1157627921)); }
+      if ((receiver_p1 == Temporary28.instVal)) {
+      Temporary27 = trueValue_1493172527[0];
+      }
+      else {
+      Temporary27 = falseValue_1493172528[0];
+      }
+      
+      result_1241514006 = nimCopy(result_1241514006, Temporary27, NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveClass":
+      if (!((receiver_p1.class == null))) {
+      F.line = 100;
+      result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1482(receiver_p1.class), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 101;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveClassName":
+      if (!((receiver_p1.class == null))) {
+      F.line = 106;
+      result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1397(receiver_p1.class.name), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 107;
+      result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1397([79,98,106,101,99,116]), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveIsKindOf:":
+      if ((((args_p3).length == 0) || !((args_p3[chckIndx(0, 0, (args_p3).length - 1)].kind == 9)))) {
+      F.line = 112;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 114;
+      var cls_1241514098 = receiver_p1.class;
+      Label29: {
+        F.line = 115;
+          Label30: while (true) {
+          if (!!((cls_1241514098 == null))) break Label30;
+              var Temporary31 = args_p3[chckIndx(0, 0, (args_p3).length - 1)];
+              if (ConstSet173[Temporary31.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary31.kind, NTI1157627921)); }
+            if ((cls_1241514098 == Temporary31.classVal)) {
+            F.line = 117;
+            result_1241514006 = nimCopy(result_1241514006, trueValue_1493172527[0], NTI1157627922);
+            break BeforeRet;
+            }
+            
+            Label32: {
+              F.line = 119;
+              var parent_1241514110 = null;
+              F.line = 249;
+              F.filename = "iterators.nim";
+              var i_587203187 = 0;
+              F.line = 250;
+              var L_587203188 = (cls_1241514098.superclasses).length;
+              Label33: {
+                F.line = 251;
+                  Label34: while (true) {
+                  if (!(i_587203187 < L_587203188)) break Label34;
+                    F.line = 119;
+                    F.filename = "vm.nim";
+                    parent_1241514110 = cls_1241514098.superclasses[chckIndx(i_587203187, 0, (cls_1241514098.superclasses).length - 1)];
+                      var Temporary35 = args_p3[chckIndx(0, 0, (args_p3).length - 1)];
+                      if (ConstSet174[Temporary35.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary35.kind, NTI1157627921)); }
+                    if ((parent_1241514110 == Temporary35.classVal)) {
+                    F.line = 121;
+                    result_1241514006 = nimCopy(result_1241514006, trueValue_1493172527[0], NTI1157627922);
+                    break BeforeRet;
+                    }
+                    
+                    F.line = 13;
+                    F.filename = "iterators.nim";
+                    i_587203187 += 1;
+                    if (!(((cls_1241514098.superclasses).length == L_587203188))) {
+                    F.line = 254;
+                    failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+                    }
+                    
+                  }
+              };
+            };
+            F.line = 122;
+            F.filename = "vm.nim";
+            if ((0 < (cls_1241514098.superclasses).length)) {
+            Temporary36 = cls_1241514098.superclasses[chckIndx(0, 0, (cls_1241514098.superclasses).length - 1)];
+            }
+            else {
+            Temporary36 = null;
+            }
+            
+            cls_1241514098 = Temporary36;
+          }
+      };
+      F.line = 123;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveSlotNames":
+      if ((receiver_p1.class == null)) {
+      F.line = 128;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 129;
+      var slotNames_1241514126 = [];
+      Label37: {
+        F.line = 130;
+        var name_1241514130 = [];
+        F.line = 249;
+        F.filename = "iterators.nim";
+        var i_587203191 = 0;
+        F.line = 250;
+        var L_587203192 = (receiver_p1.class.allSlotNames).length;
+        Label38: {
+          F.line = 251;
+            Label39: while (true) {
+            if (!(i_587203191 < L_587203192)) break Label39;
+              F.line = 130;
+              F.filename = "vm.nim";
+              name_1241514130 = receiver_p1.class.allSlotNames[chckIndx(i_587203191, 0, (receiver_p1.class.allSlotNames).length - 1)];
+              F.line = 131;
+              slotNames_1241514126.push(toValue__OOZcoreZtypes_u1397(name_1241514130));;
+              F.line = 13;
+              F.filename = "iterators.nim";
+              i_587203191 += 1;
+              if (!(((receiver_p1.class.allSlotNames).length == L_587203192))) {
+              F.line = 254;
+              failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+              }
+              
+            }
+        };
+      };
+      if (!((arrayClassCache_1493172535[0] == null))) {
+      F.line = 134;
+      F.filename = "vm.nim";
+      result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1501(newArrayInstance__OOZcoreZtypes_u6375(arrayClassCache_1493172535[0], slotNames_1241514126)), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 135;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveProperties":
+      if ((receiver_p1.class == null)) {
+      F.line = 140;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 141;
+      var entries_1241514145 = [({data: [], counter: 0})];
+      Label40: {
+        F.line = 142;
+        var i_1241514151 = 0;
+        F.line = 142;
+        var name_1241514152 = [];
+        F.line = 182;
+        F.filename = "iterators.nim";
+        var i_587203195 = 0;
+        F.line = 183;
+        var L_587203196 = (receiver_p1.class.allSlotNames).length;
+        Label41: {
+          F.line = 184;
+            Label42: while (true) {
+            if (!(i_587203195 < L_587203196)) break Label42;
+              F.line = 142;
+              F.filename = "vm.nim";
+              i_1241514151 = i_587203195;
+              F.line = 142;
+              name_1241514152 = receiver_p1.class.allSlotNames[chckIndx(i_587203195, 0, (receiver_p1.class.allSlotNames).length - 1)];
+                var Temporary43 = receiver_p1;
+                if (ConstSet175[Temporary43.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary43.kind, NTI1157627908)); }
+              if ((i_1241514151 < (Temporary43.slots).length)) {
+              F.line = 144;
+              var Temporary44 = receiver_p1;
+              if (ConstSet176[Temporary44.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary44.kind, NTI1157627908)); }
+              HEX5BHEX5DHEX3D__OOZcoreZtypes_u7718(entries_1241514145[0], toValue__OOZcoreZtypes_u1397(name_1241514152), (Temporary45 = Temporary44.slots, Temporary45)[chckIndx(i_1241514151, 0, (Temporary45).length - 1)]);
+              }
+              
+              F.line = 13;
+              F.filename = "iterators.nim";
+              i_587203195 += 1;
+              if (!(((receiver_p1.class.allSlotNames).length == L_587203196))) {
+              F.line = 187;
+              failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(187, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+              }
+              
+            }
+        };
+      };
+      if (!((tableClassCache_1493172536[0] == null))) {
+      F.line = 146;
+      F.filename = "vm.nim";
+      result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClassCache_1493172536[0], entries_1241514145[0])), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 147;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveHasProperty:":
+      if (((args_p3).length == 0)) {
+      F.line = 152;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      if ((receiver_p1.class == null)) {
+      F.line = 154;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 155;
+      var propName_1241514209 = toString__OOZcoreZtypes_u496(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
+      F.line = 156;
+      if (contains__stdZenumutils_u50(receiver_p1.class.allSlotNames, propName_1241514209)) {
+      Temporary46 = trueValue_1493172527[0];
+      }
+      else {
+      Temporary46 = falseValue_1493172528[0];
+      }
+      
+      result_1241514006 = nimCopy(result_1241514006, Temporary46, NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveRespondsTo:":
+      if (((args_p3).length == 0)) {
+      F.line = 161;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 162;
+      var selector_1241514217 = toString__OOZcoreZtypes_u496(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
+      if ((receiver_p1.class == null)) {
+      F.line = 164;
+      result_1241514006 = nimCopy(result_1241514006, falseValue_1493172528[0], NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 166;
+      if (contains__OOZcoreZtypes_u4367(receiver_p1.class.allMethods, selector_1241514217)) {
+      Temporary47 = trueValue_1493172527[0];
+      }
+      else {
+      Temporary47 = falseValue_1493172528[0];
+      }
+      
+      result_1241514006 = nimCopy(result_1241514006, Temporary47, NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveMethods":
+      if ((receiver_p1.class == null)) {
+      F.line = 171;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 172;
+      var methodNames_1241514273 = [];
+      Label48: {
+        F.line = 173;
+        var selector_1241514278 = [];
+        F.line = 173;
+        var __1241514279 = null;
+        F.line = 767;
+        F.filename = "tables.nim";
+        var L_587203199 = len__OOZcoreZtypes_u3849(receiver_p1.class.allMethods);
+        Label49: {
+          F.line = 768;
+          var h_587203201 = 0;
+          F.line = 81;
+          F.filename = "iterators_1.nim";
+          var colontmp__587203202 = 0;
+          F.line = 768;
+          F.filename = "tables.nim";
+          colontmp__587203202 = (receiver_p1.class.allMethods.data).length - 1;
+          F.line = 96;
+          F.filename = "iterators_1.nim";
+          var res_587203203 = 0;
+          Label50: {
+            F.line = 97;
+              Label51: while (true) {
+              if (!(res_587203203 <= colontmp__587203202)) break Label51;
+                F.line = 768;
+                F.filename = "tables.nim";
+                h_587203201 = res_587203203;
+                if (isFilled__pureZcollectionsZtables_u31(receiver_p1.class.allMethods.data[chckIndx(h_587203201, 0, (receiver_p1.class.allMethods.data).length - 1)].Field0)) {
+                F.line = 173;
+                F.filename = "vm.nim";
+                selector_1241514278 = receiver_p1.class.allMethods.data[chckIndx(h_587203201, 0, (receiver_p1.class.allMethods.data).length - 1)].Field1;
+                F.line = 173;
+                __1241514279 = receiver_p1.class.allMethods.data[chckIndx(h_587203201, 0, (receiver_p1.class.allMethods.data).length - 1)].Field2;
+                F.line = 174;
+                methodNames_1241514273.push(toValue__OOZcoreZtypes_u1397(selector_1241514278));;
+                if (!((len__OOZcoreZtypes_u3849(receiver_p1.class.allMethods) == L_587203199))) {
+                F.line = 771;
+                F.filename = "tables.nim";
+                failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim(771, 13) `len(t) == L` the length of the table changed while iterating over it"));
+                }
+                
+                }
+                
+                F.line = 102;
+                F.filename = "iterators_1.nim";
+                res_587203203 = addInt(res_587203203, 1);
+              }
+          };
+        };
+      };
+      if (!((arrayClassCache_1493172535[0] == null))) {
+      F.line = 176;
+      F.filename = "vm.nim";
+      result_1241514006 = nimCopy(result_1241514006, toValue__OOZcoreZtypes_u1501(newArrayInstance__OOZcoreZtypes_u6375(arrayClassCache_1493172535[0], methodNames_1241514273)), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 177;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveError:":
+      if ((0 < (args_p3).length)) {
+      F.line = 182;
+      var msg_1241514291 = toString__OOZcoreZtypes_u496(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
+      F.line = 183;
+      raiseException({message: nimCopy(null, msg_1241514291, NTI33554449), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      }
+      
+      F.line = 184;
+      raiseException({message: [85,110,107,110,111,119,110,32,101,114,114,111,114], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      break;
+    case "primitiveValue":
+      if (((receiver_p1.class == blockClassCache_1493172537[0]) && (receiver_p1.kind == 0))) {
+      F.line = 194;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 195;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveValue:":
+      if (((receiver_p1.class == blockClassCache_1493172537[0]) && (receiver_p1.kind == 0))) {
+      F.line = 200;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 201;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveValue:value:":
+      if (((receiver_p1.class == blockClassCache_1493172537[0]) && (receiver_p1.kind == 0))) {
+      F.line = 206;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 207;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    case "primitiveValue:value:value:":
+      if (((receiver_p1.class == blockClassCache_1493172537[0]) && (receiver_p1.kind == 0))) {
+      F.line = 212;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      }
+      
+      F.line = 213;
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    default: 
+      if ((level_1090519067[0] <= 1)) {
+      F.line = 701;
+      F.filename = "logging.nim";
+      logLoop__pureZlogging_u148(1, [[74,83,58,32,85,110,107,110,111,119,110,32,112,114,105,109,105,116,105,118,101,58,32], nimCopy(null, selector_p2, NTI33554449)]);
+      }
+      
+      F.line = 218;
+      F.filename = "vm.nim";
+      result_1241514006 = nimCopy(result_1241514006, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+      break BeforeRet;
+      break;
+    }
+  };
+  framePtr = F.prev;
+
+  return result_1241514006;
+
 }
 
 function newActivation__OOZinterpreterZactivation_u6(blk_p0, receiver_p1, sender_p2, definingClass_p3, isClassMethod_p4) {
@@ -15614,87 +16542,198 @@ function newActivation__OOZinterpreterZactivation_u6(blk_p0, receiver_p1, sender
 
 }
 
-function pop__OOZinterpreterZvm_u661(s_p0, s_p0_Idx) {
-  var result_1241514648 = null;
+function pop__OOZinterpreterZvm_u990(s_p0, s_p0_Idx) {
+  var result_1241514977 = null;
 
   var F = {procname: "pop.pop", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system.nim", line: 0};
   framePtr = F;
     F.line = 1795;
     F.filename = "system.nim";
-    var L_1241514652 = subInt((s_p0[s_p0_Idx]).length, 1);
+    var L_1241514981 = subInt((s_p0[s_p0_Idx]).length, 1);
     F.line = 1800;
-    result_1241514648 = s_p0[s_p0_Idx][chckIndx(L_1241514652, 0, (s_p0[s_p0_Idx]).length - 1)];
+    result_1241514977 = s_p0[s_p0_Idx][chckIndx(L_1241514981, 0, (s_p0[s_p0_Idx]).length - 1)];
     F.line = 1801;
-    if (s_p0[s_p0_Idx].length < chckRange(L_1241514652, 0, 2147483647)) { for (var i = s_p0[s_p0_Idx].length ; i < chckRange(L_1241514652, 0, 2147483647) ; ++i) s_p0[s_p0_Idx].push(null); }
-               else { s_p0[s_p0_Idx].length = chckRange(L_1241514652, 0, 2147483647); };
+    if (s_p0[s_p0_Idx].length < chckRange(L_1241514981, 0, 2147483647)) { for (var i = s_p0[s_p0_Idx].length ; i < chckRange(L_1241514981, 0, 2147483647) ; ++i) s_p0[s_p0_Idx].push(null); }
+               else { s_p0[s_p0_Idx].length = chckRange(L_1241514981, 0, 2147483647); };
   framePtr = F.prev;
 
-  return result_1241514648;
+  return result_1241514977;
 
 }
 
-function HEX5BHEX5D__OOZinterpreterZvm_u677(s_p0, i_p1) {
-  var result_1241514665 = null;
-  var result_1241514665_Idx = 0;
+function HEX5BHEX5D__OOZinterpreterZvm_u1006(s_p0, i_p1) {
+  var result_1241514994 = null;
+  var result_1241514994_Idx = 0;
 
   var F = {procname: "[].[]", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/indices.nim", line: 0};
   framePtr = F;
     F.line = 30;
     F.filename = "indices.nim";
-    result_1241514665 = s_p0; result_1241514665_Idx = chckIndx(subInt((s_p0).length, i_p1), 0, (s_p0).length - 1);
+    result_1241514994 = s_p0; result_1241514994_Idx = chckIndx(subInt((s_p0).length, i_p1), 0, (s_p0).length - 1);
   framePtr = F.prev;
 
-  return [result_1241514665, result_1241514665_Idx];
+  return [result_1241514994, result_1241514994_Idx];
 
 }
 
-function executeMethod__OOZinterpreterZvm_u5752(interp_p0, interp_p0_Idx, currentMethod_p1, receiver_p2, arguments_p3, definingClass_p4, isClassMethod_p5) {
-    var Temporary12;
+function executeMethod__OOZinterpreterZvm_u6081(interp_p0, interp_p0_Idx, currentMethod_p1, receiver_p2, arguments_p3, definingClass_p4, isClassMethod_p5) {
+    var Temporary17;
 
-  var result_1241519743 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+  var result_1241520072 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
 
   var F = {procname: "vm.executeMethod", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
-    F.line = 738;
+    F.line = 935;
     F.filename = "vm.nim";
-    checkStackDepth__OOZinterpreterZvm_u582(interp_p0, interp_p0_Idx);
+    checkStackDepth__OOZinterpreterZvm_u911(interp_p0, interp_p0_Idx);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[69,120,101,99,117,116,105,110,103,32,109,101,116,104,111,100,32,119,105,116,104,32], HEX24__systemZdollars_u14((arguments_p3).length), [32,97,114,103,117,109,101,110,116,115]]);
     }
     
+    if ((level_1090519067[0] <= 1)) {
+    F.line = 701;
+    logLoop__pureZlogging_u148(1, [[74,83,58,32,67,104,101,99,107,105,110,103,32,102,111,114,32,112,114,105,109,105,116,105,118,101,32,100,105,115,112,97,116,99,104]]);
+    }
+    
+    F.line = 944;
+    F.filename = "vm.nim";
+    var jsSavedReceiver_1241520084 = interp_p0[interp_p0_Idx].currentReceiver;
+    F.line = 945;
+++excHandler;
+    try {
+    F.line = 947;
+    var selector_1241520085 = [];
+    if (!((definingClass_p4 == null))) {
+    Label2: {
+      F.line = 949;
+      var sel_1241520094 = [];
+      F.line = 949;
+      var meth_1241520095 = null;
+      F.line = 767;
+      F.filename = "tables.nim";
+      var L_587203167 = len__OOZcoreZtypes_u3849(definingClass_p4.allMethods);
+      Label3: {
+        F.line = 768;
+        var h_587203169 = 0;
+        F.line = 81;
+        F.filename = "iterators_1.nim";
+        var colontmp__587203170 = 0;
+        F.line = 768;
+        F.filename = "tables.nim";
+        colontmp__587203170 = (definingClass_p4.allMethods.data).length - 1;
+        F.line = 96;
+        F.filename = "iterators_1.nim";
+        var res_587203171 = 0;
+        Label4: {
+          F.line = 97;
+            Label5: while (true) {
+            if (!(res_587203171 <= colontmp__587203170)) break Label5;
+              F.line = 768;
+              F.filename = "tables.nim";
+              h_587203169 = res_587203171;
+              if (isFilled__pureZcollectionsZtables_u31(definingClass_p4.allMethods.data[chckIndx(h_587203169, 0, (definingClass_p4.allMethods.data).length - 1)].Field0)) {
+              F.line = 949;
+              F.filename = "vm.nim";
+              sel_1241520094 = definingClass_p4.allMethods.data[chckIndx(h_587203169, 0, (definingClass_p4.allMethods.data).length - 1)].Field1;
+              F.line = 949;
+              meth_1241520095 = definingClass_p4.allMethods.data[chckIndx(h_587203169, 0, (definingClass_p4.allMethods.data).length - 1)].Field2;
+              if ((meth_1241520095 == currentMethod_p1)) {
+              F.line = 951;
+              selector_1241520085 = nimCopy(null, sel_1241520094, NTI33554449);
+              F.line = 952;
+              break Label2;
+              }
+              
+              if (!((len__OOZcoreZtypes_u3849(definingClass_p4.allMethods) == L_587203167))) {
+              F.line = 771;
+              F.filename = "tables.nim";
+              failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim(771, 13) `len(t) == L` the length of the table changed while iterating over it"));
+              }
+              
+              }
+              
+              F.line = 102;
+              F.filename = "iterators_1.nim";
+              res_587203171 = addInt(res_587203171, 1);
+            }
+        };
+      };
+    };
+    }
+    
+    if (nsuStartsWith(selector_1241520085, [112,114,105,109,105,116,105,118,101])) {
+    if ((level_1090519067[0] <= 1)) {
+    F.line = 701;
+    F.filename = "logging.nim";
+    logLoop__pureZlogging_u148(1, [[74,83,58,32,67,97,108,108,105,110,103,32,112,114,105,109,105,116,105,118,101,32,118,105,97,32,100,105,115,112,97,116,99,104,101,114,58,32], nimCopy(null, selector_1241520085, NTI33554449)]);
+    }
+    
+    F.line = 955;
+    F.filename = "vm.nim";
+    var primResult_1241520104 = dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, receiver_p2, selector_1241520085, arguments_p3);
+    if ((!((primResult_1241520104.kind == 5)) || eqStrings(selector_1241520085, [112,114,105,109,105,116,105,118,101,67,108,111,110,101]))) {
+    F.line = 957;
+    result_1241520072 = nimCopy(result_1241520072, primResult_1241520104, NTI1157627922);
+    break BeforeRet;
+    }
+    
+    }
+    
+--excHandler;
+} catch (EXCEPTION) {
+ var prevJSError = lastJSError;
+ lastJSError = EXCEPTION;
+ --excHandler;
+    framePtr = F;
+    F.line = 959;
+    raiseDefect();
+    if ((level_1090519067[0] <= 1)) {
+    F.line = 701;
+    F.filename = "logging.nim";
+    logLoop__pureZlogging_u148(1, [[74,83,58,32,80,114,105,109,105,116,105,118,101,32,100,105,115,112,97,116,99,104,101,114,32,102,97,105,108,101,100,44,32,102,97,108,108,105,110,103,32,116,104,114,111,117,103,104]]);
+    }
+    
+    lastJSError = prevJSError;
+    } finally {
+    framePtr = F;
+    }
+    F.line = 960;
+    F.filename = "vm.nim";
+    jsSavedReceiver_1241520084 = interp_p0[interp_p0_Idx].currentReceiver;
     if (!((currentMethod_p1.nativeImpl == 0))) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
+    F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[67,97,108,108,105,110,103,32,110,97,116,105,118,101,32,105,109,112,108,101,109,101,110,116,97,116,105,111,110]]);
     }
     
-    F.line = 745;
+    F.line = 963;
     F.filename = "vm.nim";
-    var savedReceiver_1241519755 = interp_p0[interp_p0_Idx].currentReceiver;
-    F.line = 746;
+    var savedReceiver_1241520117 = interp_p0[interp_p0_Idx].currentReceiver;
+    F.line = 964;
     try {
     if (currentMethod_p1.hasInterpreterParam) {
-    F.line = 749;
-    var nativeProc_1241519762 = currentMethod_p1.nativeImpl;
-    F.line = 750;
-    result_1241519743 = nimCopy(result_1241519743, nativeProc_1241519762(interp_p0, interp_p0_Idx, receiver_p2, arguments_p3), NTI1157627922);
+    F.line = 967;
+    var nativeProc_1241520124 = currentMethod_p1.nativeImpl;
+    F.line = 968;
+    result_1241520072 = nimCopy(result_1241520072, nativeProc_1241520124(interp_p0, interp_p0_Idx, receiver_p2, arguments_p3), NTI1157627922);
     break BeforeRet;
     }
     else {
-      F.line = 753;
-      var nativeProc_1241519768 = currentMethod_p1.nativeImpl;
-      F.line = 754;
-      result_1241519743 = nimCopy(result_1241519743, nativeProc_1241519768(receiver_p2, arguments_p3), NTI1157627922);
+      F.line = 971;
+      var nativeProc_1241520130 = currentMethod_p1.nativeImpl;
+      F.line = 972;
+      result_1241520072 = nimCopy(result_1241520072, nativeProc_1241520130(receiver_p2, arguments_p3), NTI1157627922);
       break BeforeRet;
     }
     
     } finally {
     framePtr = F;
-    F.line = 756;
-    interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241519755;
+    F.line = 974;
+    interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241520117;
     }
     }
     
@@ -15705,74 +16744,74 @@ function executeMethod__OOZinterpreterZvm_u5752(interp_p0, interp_p0_Idx, curren
     }
     
     if (currentMethod_p1.isMethod) {
-    F.line = 762;
+    F.line = 996;
     F.filename = "vm.nim";
     currentMethod_p1.homeActivation = interp_p0[interp_p0_Idx].currentActivation;
     }
     
-    F.line = 764;
-    var activation_1241519776 = newActivation__OOZinterpreterZactivation_u6(currentMethod_p1, receiver_p2, interp_p0[interp_p0_Idx].currentActivation, definingClass_p4, isClassMethod_p5);
+    F.line = 998;
+    var activation_1241520138 = newActivation__OOZinterpreterZactivation_u6(currentMethod_p1, receiver_p2, interp_p0[interp_p0_Idx].currentActivation, definingClass_p4, isClassMethod_p5);
     if (!(((currentMethod_p1.parameters).length == (arguments_p3).length))) {
-    F.line = 767;
-    raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_p1.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((arguments_p3).length)), parent: null, m_type: NTI1241514010, node: null, name: null, trace: [], up: null}, "EvalError");
+    F.line = 1001;
+    raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_p1.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((arguments_p3).length)), parent: null, m_type: NTI1241514271, node: null, name: null, trace: [], up: null}, "EvalError");
     }
     
-    Label2: {
-      F.line = 771;
-      var i_1241519797 = 0;
+    Label7: {
+      F.line = 1005;
+      var i_1241520159 = 0;
       F.line = 126;
       F.filename = "iterators_1.nim";
-      var colontmp__587203167 = 0;
-      F.line = 771;
+      var colontmp__587203174 = 0;
+      F.line = 1005;
       F.filename = "vm.nim";
-      colontmp__587203167 = (currentMethod_p1.parameters).length;
+      colontmp__587203174 = (currentMethod_p1.parameters).length;
       F.line = 128;
       F.filename = "iterators_1.nim";
-      var i_587203168 = 0;
-      Label3: {
+      var i_587203175 = 0;
+      Label8: {
         F.line = 129;
-          Label4: while (true) {
-          if (!(i_587203168 < colontmp__587203167)) break Label4;
-            F.line = 771;
+          Label9: while (true) {
+          if (!(i_587203175 < colontmp__587203174)) break Label9;
+            F.line = 1005;
             F.filename = "vm.nim";
-            i_1241519797 = i_587203168;
-            F.line = 772;
-            var paramName_1241519798 = nimCopy(null, currentMethod_p1.parameters[chckIndx(i_1241519797, 0, (currentMethod_p1.parameters).length - 1)], NTI33554449);
-            F.line = 773;
-            var argValue_1241519799 = nimCopy(null, arguments_p3[chckIndx(i_1241519797, 0, (arguments_p3).length - 1)], NTI1157627922);
-            F.line = 774;
-            HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241519776.locals, paramName_1241519798, argValue_1241519799);
+            i_1241520159 = i_587203175;
+            F.line = 1006;
+            var paramName_1241520160 = nimCopy(null, currentMethod_p1.parameters[chckIndx(i_1241520159, 0, (currentMethod_p1.parameters).length - 1)], NTI33554449);
+            F.line = 1007;
+            var argValue_1241520161 = nimCopy(null, arguments_p3[chckIndx(i_1241520159, 0, (arguments_p3).length - 1)], NTI1157627922);
+            F.line = 1008;
+            HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241520138.locals, paramName_1241520160, argValue_1241520161);
             F.line = 131;
             F.filename = "iterators_1.nim";
-            i_587203168 = addInt(i_587203168, 1);
+            i_587203175 = addInt(i_587203175, 1);
           }
       };
     };
-    Label5: {
-      F.line = 776;
+    Label10: {
+      F.line = 1010;
       F.filename = "vm.nim";
-      var tempName_1241519845 = [];
+      var tempName_1241520207 = [];
       F.line = 249;
       F.filename = "iterators.nim";
-      var i_587203171 = 0;
+      var i_587203178 = 0;
       F.line = 250;
-      var L_587203172 = (currentMethod_p1.temporaries).length;
-      Label6: {
+      var L_587203179 = (currentMethod_p1.temporaries).length;
+      Label11: {
         F.line = 251;
-          Label7: while (true) {
-          if (!(i_587203171 < L_587203172)) break Label7;
-            F.line = 776;
+          Label12: while (true) {
+          if (!(i_587203178 < L_587203179)) break Label12;
+            F.line = 1010;
             F.filename = "vm.nim";
-            tempName_1241519845 = currentMethod_p1.temporaries[chckIndx(i_587203171, 0, (currentMethod_p1.temporaries).length - 1)];
-            if (!(contains__OOZinterpreterZvm_u1463(activation_1241519776.locals, tempName_1241519845))) {
-            F.line = 778;
-            HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241519776.locals, tempName_1241519845, nilValue__OOZcoreZtypes_u1406());
+            tempName_1241520207 = currentMethod_p1.temporaries[chckIndx(i_587203178, 0, (currentMethod_p1.temporaries).length - 1)];
+            if (!(contains__OOZinterpreterZvm_u1792(activation_1241520138.locals, tempName_1241520207))) {
+            F.line = 1012;
+            HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241520138.locals, tempName_1241520207, nilValue__OOZcoreZtypes_u1406());
             }
             
             F.line = 13;
             F.filename = "iterators.nim";
-            i_587203171 += 1;
-            if (!(((currentMethod_p1.temporaries).length == L_587203172))) {
+            i_587203178 += 1;
+            if (!(((currentMethod_p1.temporaries).length == L_587203179))) {
             F.line = 254;
             failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
@@ -15780,50 +16819,50 @@ function executeMethod__OOZinterpreterZvm_u5752(interp_p0, interp_p0_Idx, curren
           }
       };
     };
-    F.line = 780;
+    F.line = 1014;
     F.filename = "vm.nim";
-    var savedReceiver_1241519931 = interp_p0[interp_p0_Idx].currentReceiver;
-    F.line = 781;
-    interp_p0[interp_p0_Idx].activationStack.push(activation_1241519776);;
-    F.line = 782;
-    interp_p0[interp_p0_Idx].currentActivation = activation_1241519776;
-    F.line = 783;
+    var savedReceiver_1241520293 = interp_p0[interp_p0_Idx].currentReceiver;
+    F.line = 1015;
+    interp_p0[interp_p0_Idx].activationStack.push(activation_1241520138);;
+    F.line = 1016;
+    interp_p0[interp_p0_Idx].currentActivation = activation_1241520138;
+    F.line = 1017;
     interp_p0[interp_p0_Idx].currentReceiver = receiver_p2;
-    F.line = 785;
-    var retVal_1241519936 = nilValue__OOZcoreZtypes_u1406();
-    F.line = 786;
+    F.line = 1019;
+    var retVal_1241520298 = nilValue__OOZcoreZtypes_u1406();
+    F.line = 1020;
     try {
-    Label9: {
-      F.line = 787;
-      var stmt_1241519940 = null;
+    Label14: {
+      F.line = 1021;
+      var stmt_1241520302 = null;
       F.line = 249;
       F.filename = "iterators.nim";
-      var i_587203175 = 0;
+      var i_587203182 = 0;
       F.line = 250;
-      var L_587203176 = (currentMethod_p1.body).length;
-      Label10: {
+      var L_587203183 = (currentMethod_p1.body).length;
+      Label15: {
         F.line = 251;
-          Label11: while (true) {
-          if (!(i_587203175 < L_587203176)) break Label11;
-            F.line = 787;
+          Label16: while (true) {
+          if (!(i_587203182 < L_587203183)) break Label16;
+            F.line = 1021;
             F.filename = "vm.nim";
-            stmt_1241519940 = currentMethod_p1.body[chckIndx(i_587203175, 0, (currentMethod_p1.body).length - 1)];
-            if (activation_1241519776.hasReturned) {
-            F.line = 789;
-            break Label9;
+            stmt_1241520302 = currentMethod_p1.body[chckIndx(i_587203182, 0, (currentMethod_p1.body).length - 1)];
+            if (activation_1241520138.hasReturned) {
+            F.line = 1023;
+            break Label14;
             }
             
-            F.line = 790;
-            retVal_1241519936 = nimCopy(retVal_1241519936, evalWithVM__OOZinterpreterZvm_u45(interp_p0, interp_p0_Idx, stmt_1241519940), NTI1157627922);
-            if (activation_1241519776.hasReturned) {
-            F.line = 792;
-            break Label9;
+            F.line = 1024;
+            retVal_1241520298 = nimCopy(retVal_1241520298, evalWithVM__OOZinterpreterZvm_u374(interp_p0, interp_p0_Idx, stmt_1241520302), NTI1157627922);
+            if (activation_1241520138.hasReturned) {
+            F.line = 1026;
+            break Label14;
             }
             
             F.line = 13;
             F.filename = "iterators.nim";
-            i_587203175 += 1;
-            if (!(((currentMethod_p1.body).length == L_587203176))) {
+            i_587203182 += 1;
+            if (!(((currentMethod_p1.body).length == L_587203183))) {
             F.line = 254;
             failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
@@ -15833,200 +16872,200 @@ function executeMethod__OOZinterpreterZvm_u5752(interp_p0, interp_p0_Idx, curren
     };
     } finally {
     framePtr = F;
-    F.line = 794;
+    F.line = 1028;
     F.filename = "vm.nim";
-    (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
+    (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
     if ((0 < (interp_p0[interp_p0_Idx].activationStack).length)) {
-    F.line = 796;
-    interp_p0[interp_p0_Idx].currentActivation = (Temporary12 = HEX5BHEX5D__OOZinterpreterZvm_u677(interp_p0[interp_p0_Idx].activationStack, 1), Temporary12)[0][Temporary12[1]];
-    F.line = 797;
+    F.line = 1030;
+    interp_p0[interp_p0_Idx].currentActivation = (Temporary17 = HEX5BHEX5D__OOZinterpreterZvm_u1006(interp_p0[interp_p0_Idx].activationStack, 1), Temporary17)[0][Temporary17[1]];
+    F.line = 1031;
     interp_p0[interp_p0_Idx].currentReceiver = interp_p0[interp_p0_Idx].currentActivation.receiver;
     }
     else {
-      F.line = 799;
+      F.line = 1033;
       interp_p0[interp_p0_Idx].currentActivation = null;
-      F.line = 800;
-      interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241519931;
+      F.line = 1034;
+      interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241520293;
     }
     
     }
-    if (activation_1241519776.hasReturned) {
-    F.line = 803;
-    result_1241519743 = nimCopy(result_1241519743, unwrap__OOZcoreZtypes_u1504(activation_1241519776.returnValue), NTI1157627922);
+    if (activation_1241520138.hasReturned) {
+    F.line = 1037;
+    result_1241520072 = nimCopy(result_1241520072, unwrap__OOZcoreZtypes_u1504(activation_1241520138.returnValue), NTI1157627922);
     break BeforeRet;
     }
     else {
-      F.line = 805;
-      result_1241519743 = nimCopy(result_1241519743, unwrap__OOZcoreZtypes_u1504(retVal_1241519936), NTI1157627922);
+      F.line = 1039;
+      result_1241520072 = nimCopy(result_1241520072, unwrap__OOZcoreZtypes_u1504(retVal_1241520298), NTI1157627922);
       break BeforeRet;
     }
     
   };
   framePtr = F.prev;
 
-  return result_1241519743;
+  return result_1241520072;
 
 }
 
-function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, frame_p1) {
+function handleEvalNode__OOZinterpreterZvm_u19923(interp_p0, interp_p0_Idx, frame_p1) {
       var Temporary1;
         var Temporary2;
           var Temporary3;
         var Temporary4;
         var Temporary5;
 
-  var result_1241533548 = false;
+  var result_1241533910 = false;
 
   var F = {procname: "vm.handleEvalNode", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
-    F.line = 2873;
+    F.line = 3107;
     F.filename = "vm.nim";
-    var node_1241533549 = frame_p1.node;
-    if ((node_1241533549 == null)) {
-    F.line = 2875;
-    pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
-    F.line = 2876;
-    result_1241533548 = true;
+    var node_1241533911 = frame_p1.node;
+    if ((node_1241533911 == null)) {
+    F.line = 3109;
+    pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+    F.line = 3110;
+    result_1241533910 = true;
     break BeforeRet;
     }
     
-    F.line = 2878;
-    switch (kind__OOZcoreZtypes_u369(node_1241533549)) {
+    F.line = 3112;
+    switch (kind__OOZcoreZtypes_u369(node_1241533911)) {
     case 0:
-      F.line = 2880;
-      var lit_1241533554 = node_1241533549;
-      F.line = 2881;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, lit_1241533554.value);
-      F.line = 2882;
-      result_1241533548 = true;
+      F.line = 3114;
+      var lit_1241533916 = node_1241533911;
+      F.line = 3115;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, lit_1241533916.value);
+      F.line = 3116;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 1:
-      F.line = 2885;
-      var ident_1241533555 = node_1241533549;
-      F.line = 2886;
-      var value_1241533556 = lookupVariable__OOZinterpreterZvm_u2634(interp_p0[interp_p0_Idx], ident_1241533555.name);
-      F.line = 2887;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, value_1241533556);
-      F.line = 2888;
-      result_1241533548 = true;
+      F.line = 3119;
+      var ident_1241533917 = node_1241533911;
+      F.line = 3120;
+      var value_1241533918 = lookupVariable__OOZinterpreterZvm_u2963(interp_p0[interp_p0_Idx], ident_1241533917.name);
+      F.line = 3121;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, value_1241533918);
+      F.line = 3122;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 14:
-      F.line = 2891;
-      var pseudo_1241533557 = node_1241533549;
-      F.line = 2892;
-      switch (toJSStr(pseudo_1241533557.name)) {
+      F.line = 3125;
+      var pseudo_1241533919 = node_1241533911;
+      F.line = 3126;
+      switch (toJSStr(pseudo_1241533919.name)) {
       case "self":
         if ((interp_p0[interp_p0_Idx].currentReceiver == null)) {
-        F.line = 2895;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 3129;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         }
         else {
         if ((!((interp_p0[interp_p0_Idx].currentActivation == null)) && interp_p0[interp_p0_Idx].currentActivation.isClassMethod)) {
-        F.line = 2899;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1482(interp_p0[interp_p0_Idx].currentReceiver.class));
+        F.line = 3133;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1482(interp_p0[interp_p0_Idx].currentReceiver.class));
         }
         else {
-          F.line = 2901;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
+          F.line = 3135;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
         }
         }
         break;
       case "nil":
-        F.line = 2903;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 3137;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         break;
       case "true":
-        F.line = 2905;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, trueValue_1493172527[0]);
+        F.line = 3139;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, trueValue_1493172527[0]);
         break;
       case "false":
-        F.line = 2907;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, falseValue_1493172528[0]);
+        F.line = 3141;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, falseValue_1493172528[0]);
         break;
       case "super":
         if (!((interp_p0[interp_p0_Idx].currentReceiver == null))) {
-        F.line = 2910;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
+        F.line = 3144;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
         }
         else {
-          F.line = 2912;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+          F.line = 3146;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         }
         
         break;
       default: 
-        F.line = 2914;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 3148;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         break;
       }
-      F.line = 2915;
-      result_1241533548 = true;
+      F.line = 3149;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 3:
-      F.line = 2919;
-      var origBlock_1241533570 = node_1241533549;
-      F.line = 2920;
-      var blockNode_1241533587 = {parameters: nimCopy(null, origBlock_1241533570.parameters, NTI1157628022), temporaries: nimCopy(null, origBlock_1241533570.temporaries, NTI1157628023), body: nimCopy(null, origBlock_1241533570.body, NTI1157628024), isMethod: origBlock_1241533570.isMethod, capturedEnv: initTable__OOZparserZparser_u1231(32), capturedEnvInitialized: true, homeActivation: interp_p0[interp_p0_Idx].currentActivation, m_type: NTI1157628021, nativeImpl: 0, hasInterpreterParam: false, line: 0, col: 0};
-      F.line = 2929;
-      captureEnvironment__OOZinterpreterZvm_u827(interp_p0[interp_p0_Idx], blockNode_1241533587);
-      F.line = 2930;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, {kind: 6, blockVal: blockNode_1241533587, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-      F.line = 2931;
-      result_1241533548 = true;
+      F.line = 3153;
+      var origBlock_1241533932 = node_1241533911;
+      F.line = 3154;
+      var blockNode_1241533949 = {parameters: nimCopy(null, origBlock_1241533932.parameters, NTI1157628022), temporaries: nimCopy(null, origBlock_1241533932.temporaries, NTI1157628023), body: nimCopy(null, origBlock_1241533932.body, NTI1157628024), isMethod: origBlock_1241533932.isMethod, capturedEnv: initTable__OOZparserZparser_u1231(32), capturedEnvInitialized: true, homeActivation: interp_p0[interp_p0_Idx].currentActivation, m_type: NTI1157628021, nativeImpl: 0, hasInterpreterParam: false, line: 0, col: 0};
+      F.line = 3163;
+      captureEnvironment__OOZinterpreterZvm_u1156(interp_p0[interp_p0_Idx], blockNode_1241533949);
+      F.line = 3164;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, {kind: 6, blockVal: blockNode_1241533949, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+      F.line = 3165;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 4:
-      F.line = 2935;
-      var assign_1241533588 = node_1241533549;
-      F.line = 2937;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [95,95,97,115,115,105,103,110,95,95], pendingArgs: [], currentArgIndex: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
-      F.line = 2944;
-      (Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u19609(interp_p0[interp_p0_Idx].workQueue, 1), Temporary1)[0][Temporary1[1]].selector = nimCopy(null, assign_1241533588.variable, NTI33554449);
-      F.line = 2946;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(assign_1241533588.expression));
-      F.line = 2947;
-      result_1241533548 = true;
+      F.line = 3169;
+      var assign_1241533950 = node_1241533911;
+      F.line = 3171;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [95,95,97,115,115,105,103,110,95,95], pendingArgs: [], currentArgIndex: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+      F.line = 3178;
+      (Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u19971(interp_p0[interp_p0_Idx].workQueue, 1), Temporary1)[0][Temporary1[1]].selector = nimCopy(null, assign_1241533950.variable, NTI33554449);
+      F.line = 3180;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(assign_1241533950.expression));
+      F.line = 3181;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 12:
-      F.line = 2951;
-      var slotNode_1241533618 = node_1241533549;
+      F.line = 3185;
+      var slotNode_1241533980 = node_1241533911;
       if ((!((interp_p0[interp_p0_Idx].currentReceiver == null)) && (interp_p0[interp_p0_Idx].currentReceiver.kind == 0))) {
-      F.line = 2953;
-      var inst_1241533627 = interp_p0[interp_p0_Idx].currentReceiver;
-        if (!(0 <= slotNode_1241533618.slotIndex)) Temporary2 = false; else {          var Temporary3 = inst_1241533627;
+      F.line = 3187;
+      var inst_1241533989 = interp_p0[interp_p0_Idx].currentReceiver;
+        if (!(0 <= slotNode_1241533980.slotIndex)) Temporary2 = false; else {          var Temporary3 = inst_1241533989;
           if (ConstSet151[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627908)); }
-          Temporary2 = (slotNode_1241533618.slotIndex < (Temporary3.slots).length);        }      if (Temporary2) {
-      if (slotNode_1241533618.isAssignment) {
-      if (!((slotNode_1241533618.valueExpr == null))) {
-      F.line = 2959;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [58,61], currentArgIndex: slotNode_1241533618.slotIndex, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
-      F.line = 2964;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(slotNode_1241533618.valueExpr));
-      F.line = 2965;
-      result_1241533548 = true;
+          Temporary2 = (slotNode_1241533980.slotIndex < (Temporary3.slots).length);        }      if (Temporary2) {
+      if (slotNode_1241533980.isAssignment) {
+      if (!((slotNode_1241533980.valueExpr == null))) {
+      F.line = 3193;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [58,61], currentArgIndex: slotNode_1241533980.slotIndex, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+      F.line = 3198;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(slotNode_1241533980.valueExpr));
+      F.line = 3199;
+      result_1241533910 = true;
       break BeforeRet;
       }
       else {
-        F.line = 2967;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
-        F.line = 2968;
-        result_1241533548 = true;
+        F.line = 3201;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 3202;
+        result_1241533910 = true;
         break BeforeRet;
       }
       
       }
       else {
-        F.line = 2971;
-        var Temporary4 = inst_1241533627;
+        F.line = 3205;
+        var Temporary4 = inst_1241533989;
         if (ConstSet152[Temporary4.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary4.kind, NTI1157627908)); }
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, (Temporary5 = Temporary4.slots, Temporary5)[chckIndx(slotNode_1241533618.slotIndex, 0, (Temporary5).length - 1)]);
-        F.line = 2972;
-        result_1241533548 = true;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, (Temporary5 = Temporary4.slots, Temporary5)[chckIndx(slotNode_1241533980.slotIndex, 0, (Temporary5).length - 1)]);
+        F.line = 3206;
+        result_1241533910 = true;
         break BeforeRet;
       }
       
@@ -16034,99 +17073,99 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
       
       }
       
-      F.line = 2973;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
-      F.line = 2974;
-      result_1241533548 = true;
+      F.line = 3207;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+      F.line = 3208;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 2:
-      F.line = 2979;
-      var msg_1241533635 = node_1241533549;
-      if (!((msg_1241533635.receiver == null))) {
-      F.line = 2983;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newAfterReceiverFrame__OOZinterpreterZvm_u19381(msg_1241533635.selector, msg_1241533635.arguments));
-      F.line = 2984;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(msg_1241533635.receiver));
+      F.line = 3213;
+      var msg_1241533997 = node_1241533911;
+      if (!((msg_1241533997.receiver == null))) {
+      F.line = 3217;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newAfterReceiverFrame__OOZinterpreterZvm_u19743(msg_1241533997.selector, msg_1241533997.arguments));
+      F.line = 3218;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(msg_1241533997.receiver));
       }
       else {
         if ((interp_p0[interp_p0_Idx].currentReceiver == null)) {
-        F.line = 2988;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 3222;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         }
         else {
-          F.line = 2990;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
+          F.line = 3224;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
         }
         
-        if (((msg_1241533635.arguments).length == 0)) {
-        F.line = 2993;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19377(msg_1241533635.selector, 0));
+        if (((msg_1241533997.arguments).length == 0)) {
+        F.line = 3227;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19739(msg_1241533997.selector, 0));
         }
         else {
-          F.line = 2995;
-          pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19385(msg_1241533635.selector, msg_1241533635.arguments, 0));
-          F.line = 2996;
-          pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(msg_1241533635.arguments[chckIndx(0, 0, (msg_1241533635.arguments).length - 1)]));
+          F.line = 3229;
+          pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19747(msg_1241533997.selector, msg_1241533997.arguments, 0));
+          F.line = 3230;
+          pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(msg_1241533997.arguments[chckIndx(0, 0, (msg_1241533997.arguments).length - 1)]));
         }
         
       }
       
-      F.line = 2997;
-      result_1241533548 = true;
+      F.line = 3231;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 5:
-      F.line = 3001;
-      var ret_1241533647 = node_1241533549;
-      if (!((ret_1241533647.expression == null))) {
-      F.line = 3005;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 3, returnValue: {kind: 5, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
-      F.line = 3006;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(ret_1241533647.expression));
+      F.line = 3235;
+      var ret_1241534009 = node_1241533911;
+      if (!((ret_1241534009.expression == null))) {
+      F.line = 3239;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 3, returnValue: {kind: 5, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+      F.line = 3240;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(ret_1241534009.expression));
       }
       else {
         if (!((interp_p0[interp_p0_Idx].currentReceiver == null))) {
-        F.line = 3010;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newReturnValueFrame__OOZinterpreterZvm_u19394(unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver))));
+        F.line = 3244;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newReturnValueFrame__OOZinterpreterZvm_u19756(unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver))));
         }
         else {
-          F.line = 3012;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 3, returnValue: {kind: 5, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+          F.line = 3246;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 3, returnValue: {kind: 5, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
         }
         
       }
       
-      F.line = 3013;
-      result_1241533548 = true;
+      F.line = 3247;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 6:
-      F.line = 3017;
-      var arr_1241533656 = node_1241533549;
-      if (((arr_1241533656.elements).length == 0)) {
+      F.line = 3251;
+      var arr_1241534018 = node_1241533911;
+      if (((arr_1241534018.elements).length == 0)) {
       if (!((arrayClass_1157628215[0] == null))) {
-      F.line = 3020;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], [])));
+      F.line = 3254;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], [])));
       }
       else {
-        F.line = 3022;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, {kind: 7, arrayVal: [], intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+        F.line = 3256;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, {kind: 7, arrayVal: [], intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
       }
       
       }
       else {
-        F.line = 3025;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 8, argCount: (arr_1241533656.elements).length, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+        F.line = 3259;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 8, argCount: (arr_1241534018.elements).length, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
         Label6: {
-          F.line = 3027;
-          var i_1241533683 = 0;
+          F.line = 3261;
+          var i_1241534045 = 0;
           F.line = 6;
           F.filename = "iterators_1.nim";
           var colontmp__587203030 = 0;
-          F.line = 3027;
+          F.line = 3261;
           F.filename = "vm.nim";
-          colontmp__587203030 = subInt((arr_1241533656.elements).length, 1);
+          colontmp__587203030 = subInt((arr_1241534018.elements).length, 1);
           F.line = 33;
           F.filename = "iterators_1.nim";
           var res_587203031 = colontmp__587203030;
@@ -16134,37 +17173,37 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
             F.line = 34;
               Label8: while (true) {
               if (!(0 <= res_587203031)) break Label8;
-                F.line = 3027;
+                F.line = 3261;
                 F.filename = "vm.nim";
-                i_1241533683 = res_587203031;
-                F.line = 3028;
-                var elem_1241533684 = arr_1241533656.elements[chckIndx(i_1241533683, 0, (arr_1241533656.elements).length - 1)];
-                if ((kind__OOZcoreZtypes_u369(elem_1241533684) == 1)) {
-                F.line = 3031;
-                var ident_1241533690 = elem_1241533684;
-                F.line = 3032;
-                switch (toJSStr(ident_1241533690.name)) {
+                i_1241534045 = res_587203031;
+                F.line = 3262;
+                var elem_1241534046 = arr_1241534018.elements[chckIndx(i_1241534045, 0, (arr_1241534018.elements).length - 1)];
+                if ((kind__OOZcoreZtypes_u369(elem_1241534046) == 1)) {
+                F.line = 3265;
+                var ident_1241534052 = elem_1241534046;
+                F.line = 3266;
+                switch (toJSStr(ident_1241534052.name)) {
                 case "true":
-                  F.line = 3034;
-                  pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 0, node: {name: [116,114,117,101], m_type: NTI1157628079, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                  F.line = 3268;
+                  pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 0, node: {name: [116,114,117,101], m_type: NTI1157628079, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                   break;
                 case "false":
-                  F.line = 3036;
-                  pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 0, node: {name: [102,97,108,115,101], m_type: NTI1157628079, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                  F.line = 3270;
+                  pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 0, node: {name: [102,97,108,115,101], m_type: NTI1157628079, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                   break;
                 case "nil":
-                  F.line = 3038;
-                  pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 0, node: {name: [110,105,108], m_type: NTI1157628079, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                  F.line = 3272;
+                  pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 0, node: {name: [110,105,108], m_type: NTI1157628079, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                   break;
                 default: 
-                  F.line = 3041;
-                  pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 0, node: {value: getSymbol__OOZcoreZtypes_u1669(ident_1241533690.name), m_type: NTI1157628056, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                  F.line = 3275;
+                  pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 0, node: {value: getSymbol__OOZcoreZtypes_u1669(ident_1241534052.name), m_type: NTI1157628056, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                   break;
                 }
                 }
                 else {
-                  F.line = 3043;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(elem_1241533684));
+                  F.line = 3277;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(elem_1241534046));
                 }
                 
                 F.line = 39;
@@ -16175,37 +17214,37 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
         };
       }
       
-      F.line = 3044;
+      F.line = 3278;
       F.filename = "vm.nim";
-      result_1241533548 = true;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 7:
-      F.line = 3048;
-      var tab_1241533691 = node_1241533549;
-      if (((tab_1241533691.entries).length == 0)) {
+      F.line = 3282;
+      var tab_1241534053 = node_1241533911;
+      if (((tab_1241534053.entries).length == 0)) {
       if (!((tableClass_1157628216[0] == null))) {
-      F.line = 3051;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], initTable__OOZinterpreterZobjects_u4371(32))));
+      F.line = 3285;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], initTable__OOZinterpreterZobjects_u4371(32))));
       }
       else {
-        F.line = 3053;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, {kind: 8, tableVal: initTable__OOZinterpreterZobjects_u4371(32), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], classVal: null, instVal: null});
+        F.line = 3287;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, {kind: 8, tableVal: initTable__OOZinterpreterZobjects_u4371(32), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], classVal: null, instVal: null});
       }
       
       }
       else {
-        F.line = 3056;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 9, argCount: mulInt((tab_1241533691.entries).length, 2), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+        F.line = 3290;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 9, argCount: mulInt((tab_1241534053.entries).length, 2), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
         Label9: {
-          F.line = 3058;
-          var i_1241533742 = 0;
+          F.line = 3292;
+          var i_1241534104 = 0;
           F.line = 6;
           F.filename = "iterators_1.nim";
           var colontmp__587203034 = 0;
-          F.line = 3058;
+          F.line = 3292;
           F.filename = "vm.nim";
-          colontmp__587203034 = subInt((tab_1241533691.entries).length, 1);
+          colontmp__587203034 = subInt((tab_1241534053.entries).length, 1);
           F.line = 33;
           F.filename = "iterators_1.nim";
           var res_587203035 = colontmp__587203034;
@@ -16213,15 +17252,15 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
             F.line = 34;
               Label11: while (true) {
               if (!(0 <= res_587203035)) break Label11;
-                F.line = 3058;
+                F.line = 3292;
                 F.filename = "vm.nim";
-                i_1241533742 = res_587203035;
-                F.line = 3059;
-                var entry_1241533743 = nimCopy(null, tab_1241533691.entries[chckIndx(i_1241533742, 0, (tab_1241533691.entries).length - 1)], NTI1157628067);
-                F.line = 3060;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(entry_1241533743.Field1));
-                F.line = 3061;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(entry_1241533743.Field0));
+                i_1241534104 = res_587203035;
+                F.line = 3293;
+                var entry_1241534105 = nimCopy(null, tab_1241534053.entries[chckIndx(i_1241534104, 0, (tab_1241534053.entries).length - 1)], NTI1157628067);
+                F.line = 3294;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(entry_1241534105.Field1));
+                F.line = 3295;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(entry_1241534105.Field0));
                 F.line = 39;
                 F.filename = "iterators_1.nim";
                 res_587203035 = subInt(res_587203035, 1);
@@ -16230,82 +17269,82 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
         };
       }
       
-      F.line = 3062;
+      F.line = 3296;
       F.filename = "vm.nim";
-      result_1241533548 = true;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 11:
-      F.line = 3066;
-      var cascade_1241533744 = node_1241533549;
-      if (((cascade_1241533744.messages).length == 0)) {
-      F.line = 3069;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(cascade_1241533744.receiver));
+      F.line = 3300;
+      var cascade_1241534106 = node_1241533911;
+      if (((cascade_1241534106.messages).length == 0)) {
+      F.line = 3303;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(cascade_1241534106.receiver));
       }
       else {
-        F.line = 3072;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newCascadeFrame__OOZinterpreterZvm_u19397(cascade_1241533744.messages, nilValue__OOZcoreZtypes_u1406()));
-        F.line = 3074;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(cascade_1241533744.receiver));
+        F.line = 3306;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newCascadeFrame__OOZinterpreterZvm_u19759(cascade_1241534106.messages, nilValue__OOZcoreZtypes_u1406()));
+        F.line = 3308;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(cascade_1241534106.receiver));
       }
       
-      F.line = 3075;
-      result_1241533548 = true;
+      F.line = 3309;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 13:
-      F.line = 3079;
-      var superNode_1241533748 = node_1241533549;
+      F.line = 3313;
+      var superNode_1241534110 = node_1241533911;
       if ((interp_p0[interp_p0_Idx].currentReceiver == null)) {
-      F.line = 3082;
+      F.line = 3316;
       raiseException({message: [115,117,112,101,114,32,115,101,110,100,32,119,105,116,104,32,110,111,32,99,117,114,114,101,110,116,32,114,101,99,101,105,118,101,114], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
-      F.line = 3085;
-      var definingClass_1241533754 = null;
+      F.line = 3319;
+      var definingClass_1241534116 = null;
       if ((!((interp_p0[interp_p0_Idx].currentActivation == null)) && !((interp_p0[interp_p0_Idx].currentActivation.definingObject == null)))) {
-      F.line = 3087;
-      definingClass_1241533754 = interp_p0[interp_p0_Idx].currentActivation.definingObject;
+      F.line = 3321;
+      definingClass_1241534116 = interp_p0[interp_p0_Idx].currentActivation.definingObject;
       }
       else {
-        F.line = 3089;
-        definingClass_1241533754 = interp_p0[interp_p0_Idx].currentReceiver.class;
+        F.line = 3323;
+        definingClass_1241534116 = interp_p0[interp_p0_Idx].currentReceiver.class;
       }
       
-      if ((definingClass_1241533754 == null)) {
-      F.line = 3092;
+      if ((definingClass_1241534116 == null)) {
+      F.line = 3326;
       raiseException({message: [115,117,112,101,114,32,115,101,110,100,32,119,105,116,104,32,110,111,32,100,101,102,105,110,105,110,103,32,99,108,97,115,115], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
-      F.line = 3095;
-      var targetParent_1241533768 = null;
-      if ((0 < (superNode_1241533748.explicitParent).length)) {
+      F.line = 3329;
+      var targetParent_1241534130 = null;
+      if ((0 < (superNode_1241534110.explicitParent).length)) {
       Label12: {
-        F.line = 3098;
-        var parent_1241533772 = null;
+        F.line = 3332;
+        var parent_1241534134 = null;
         F.line = 249;
         F.filename = "iterators.nim";
         var i_587203038 = 0;
         F.line = 250;
-        var L_587203039 = (definingClass_1241533754.superclasses).length;
+        var L_587203039 = (definingClass_1241534116.superclasses).length;
         Label13: {
           F.line = 251;
             Label14: while (true) {
             if (!(i_587203038 < L_587203039)) break Label14;
-              F.line = 3098;
+              F.line = 3332;
               F.filename = "vm.nim";
-              parent_1241533772 = definingClass_1241533754.superclasses[chckIndx(i_587203038, 0, (definingClass_1241533754.superclasses).length - 1)];
-              if (eqStrings(parent_1241533772.name, superNode_1241533748.explicitParent)) {
-              F.line = 3100;
-              targetParent_1241533768 = parent_1241533772;
-              F.line = 3101;
+              parent_1241534134 = definingClass_1241534116.superclasses[chckIndx(i_587203038, 0, (definingClass_1241534116.superclasses).length - 1)];
+              if (eqStrings(parent_1241534134.name, superNode_1241534110.explicitParent)) {
+              F.line = 3334;
+              targetParent_1241534130 = parent_1241534134;
+              F.line = 3335;
               break Label12;
               }
               
               F.line = 13;
               F.filename = "iterators.nim";
               i_587203038 += 1;
-              if (!(((definingClass_1241533754.superclasses).length == L_587203039))) {
+              if (!(((definingClass_1241534116.superclasses).length == L_587203039))) {
               F.line = 254;
               failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
               }
@@ -16313,53 +17352,53 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
             }
         };
       };
-      if ((targetParent_1241533768 == null)) {
-      F.line = 3103;
+      if ((targetParent_1241534130 == null)) {
+      F.line = 3337;
       F.filename = "vm.nim";
-      raiseException({message: ([80,97,114,101,110,116,32,99,108,97,115,115,32,39]).concat(superNode_1241533748.explicitParent,[39,32,110,111,116,32,102,111,117,110,100,32,105,110,32,105,110,104,101,114,105,116,97,110,99,101,32,99,104,97,105,110]), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      raiseException({message: ([80,97,114,101,110,116,32,99,108,97,115,115,32,39]).concat(superNode_1241534110.explicitParent,[39,32,110,111,116,32,102,111,117,110,100,32,105,110,32,105,110,104,101,114,105,116,97,110,99,101,32,99,104,97,105,110]), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
       }
       else {
-        if (((definingClass_1241533754.superclasses).length == 0)) {
-        F.line = 3107;
+        if (((definingClass_1241534116.superclasses).length == 0)) {
+        F.line = 3341;
         raiseException({message: [115,117,112,101,114,32,115,101,110,100,32,105,110,32,99,108,97,115,115,32,119,105,116,104,32,110,111,32,112,97,114,101,110,116,115], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
         }
         
-        F.line = 3108;
-        targetParent_1241533768 = definingClass_1241533754.superclasses[chckIndx(0, 0, (definingClass_1241533754.superclasses).length - 1)];
+        F.line = 3342;
+        targetParent_1241534130 = definingClass_1241534116.superclasses[chckIndx(0, 0, (definingClass_1241534116.superclasses).length - 1)];
       }
       
-      F.line = 3111;
-      var methodBlock_1241533782 = lookupInstanceMethod__OOZcoreZtypes_u8679(targetParent_1241533768, superNode_1241533748.selector);
-      if ((methodBlock_1241533782 == null)) {
-      F.line = 3113;
-      raiseException({message: ([77,101,116,104,111,100,32,39]).concat(superNode_1241533748.selector,[39,32,110,111,116,32,102,111,117,110,100,32,105,110,32,115,117,112,101,114,32,99,108,97,115,115,32],targetParent_1241533768.name), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      F.line = 3345;
+      var methodBlock_1241534144 = lookupInstanceMethod__OOZcoreZtypes_u8679(targetParent_1241534130, superNode_1241534110.selector);
+      if ((methodBlock_1241534144 == null)) {
+      F.line = 3347;
+      raiseException({message: ([77,101,116,104,111,100,32,39]).concat(superNode_1241534110.selector,[39,32,110,111,116,32,102,111,117,110,100,32,105,110,32,115,117,112,101,114,32,99,108,97,115,115,32],targetParent_1241534130.name), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
-      F.line = 3117;
-      var arguments_1241533792 = [];
+      F.line = 3351;
+      var arguments_1241534154 = [];
       Label15: {
-        F.line = 3118;
-        var argNode_1241533796 = null;
+        F.line = 3352;
+        var argNode_1241534158 = null;
         F.line = 249;
         F.filename = "iterators.nim";
         var i_587203042 = 0;
         F.line = 250;
-        var L_587203043 = (superNode_1241533748.arguments).length;
+        var L_587203043 = (superNode_1241534110.arguments).length;
         Label16: {
           F.line = 251;
             Label17: while (true) {
             if (!(i_587203042 < L_587203043)) break Label17;
-              F.line = 3118;
+              F.line = 3352;
               F.filename = "vm.nim";
-              argNode_1241533796 = superNode_1241533748.arguments[chckIndx(i_587203042, 0, (superNode_1241533748.arguments).length - 1)];
-              F.line = 3119;
-              arguments_1241533792.push(evalWithVM__OOZinterpreterZvm_u45(interp_p0, interp_p0_Idx, argNode_1241533796));;
+              argNode_1241534158 = superNode_1241534110.arguments[chckIndx(i_587203042, 0, (superNode_1241534110.arguments).length - 1)];
+              F.line = 3353;
+              arguments_1241534154.push(evalWithVM__OOZinterpreterZvm_u374(interp_p0, interp_p0_Idx, argNode_1241534158));;
               F.line = 13;
               F.filename = "iterators.nim";
               i_587203042 += 1;
-              if (!(((superNode_1241533748.arguments).length == L_587203043))) {
+              if (!(((superNode_1241534110.arguments).length == L_587203043))) {
               F.line = 254;
               failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
               }
@@ -16367,41 +17406,41 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
             }
         };
       };
-      F.line = 3121;
+      F.line = 3355;
       F.filename = "vm.nim";
-      var methodResult_1241533801 = executeMethod__OOZinterpreterZvm_u5752(interp_p0, interp_p0_Idx, methodBlock_1241533782, interp_p0[interp_p0_Idx].currentReceiver, arguments_1241533792, targetParent_1241533768, false);
-      F.line = 3122;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, methodResult_1241533801);
-      F.line = 3123;
-      result_1241533548 = true;
+      var methodResult_1241534163 = executeMethod__OOZinterpreterZvm_u6081(interp_p0, interp_p0_Idx, methodBlock_1241534144, interp_p0[interp_p0_Idx].currentReceiver, arguments_1241534154, targetParent_1241534130, false);
+      F.line = 3356;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, methodResult_1241534163);
+      F.line = 3357;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 8:
-      F.line = 3127;
-      var objLit_1241533802 = node_1241533549;
-      if (((objLit_1241533802.properties).length == 0)) {
+      F.line = 3361;
+      var objLit_1241534164 = node_1241533911;
+      if (((objLit_1241534164.properties).length == 0)) {
       if (!((tableClass_1157628216[0] == null))) {
-      F.line = 3131;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], initTable__OOZinterpreterZobjects_u4371(32))));
+      F.line = 3365;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], initTable__OOZinterpreterZobjects_u4371(32))));
       }
       else {
-        F.line = 3133;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, {kind: 8, tableVal: initTable__OOZinterpreterZobjects_u4371(32), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], classVal: null, instVal: null});
+        F.line = 3367;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, {kind: 8, tableVal: initTable__OOZinterpreterZobjects_u4371(32), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], classVal: null, instVal: null});
       }
       
       }
       else {
-        F.line = 3136;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 9, argCount: mulInt((objLit_1241533802.properties).length, 2), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+        F.line = 3370;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 9, argCount: mulInt((objLit_1241534164.properties).length, 2), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
         Label18: {
-          F.line = 3138;
-          var i_1241533854 = 0;
+          F.line = 3372;
+          var i_1241534216 = 0;
           F.line = 6;
           F.filename = "iterators_1.nim";
           var colontmp__587203046 = 0;
-          F.line = 3138;
+          F.line = 3372;
           F.filename = "vm.nim";
-          colontmp__587203046 = subInt((objLit_1241533802.properties).length, 1);
+          colontmp__587203046 = subInt((objLit_1241534164.properties).length, 1);
           F.line = 33;
           F.filename = "iterators_1.nim";
           var res_587203047 = colontmp__587203046;
@@ -16409,15 +17448,15 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
             F.line = 34;
               Label20: while (true) {
               if (!(0 <= res_587203047)) break Label20;
-                F.line = 3138;
+                F.line = 3372;
                 F.filename = "vm.nim";
-                i_1241533854 = res_587203047;
-                F.line = 3139;
-                var prop_1241533855 = nimCopy(null, objLit_1241533802.properties[chckIndx(i_1241533854, 0, (objLit_1241533802.properties).length - 1)], NTI1157628070);
-                F.line = 3141;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 0, node: {value: toValue__OOZcoreZtypes_u1397(prop_1241533855.Field0), m_type: NTI1157628056, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
-                F.line = 3142;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(prop_1241533855.Field1));
+                i_1241534216 = res_587203047;
+                F.line = 3373;
+                var prop_1241534217 = nimCopy(null, objLit_1241534164.properties[chckIndx(i_1241534216, 0, (objLit_1241534164.properties).length - 1)], NTI1157628070);
+                F.line = 3375;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 0, node: {value: toValue__OOZcoreZtypes_u1397(prop_1241534217.Field0), m_type: NTI1157628056, line: 0, col: 0}, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                F.line = 3376;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(prop_1241534217.Field1));
                 F.line = 39;
                 F.filename = "iterators_1.nim";
                 res_587203047 = subInt(res_587203047, 1);
@@ -16426,24 +17465,24 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
         };
       }
       
-      F.line = 3143;
+      F.line = 3377;
       F.filename = "vm.nim";
-      result_1241533548 = true;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 9:
-      F.line = 3147;
-      var prim_1241533856 = node_1241533549;
-      if ((0 < (prim_1241533856.fallback).length)) {
+      F.line = 3381;
+      var prim_1241534218 = node_1241533911;
+      if ((0 < (prim_1241534218.fallback).length)) {
       Label21: {
-        F.line = 3150;
-        var i_1241533868 = 0;
+        F.line = 3384;
+        var i_1241534230 = 0;
         F.line = 6;
         F.filename = "iterators_1.nim";
         var colontmp__587203050 = 0;
-        F.line = 3150;
+        F.line = 3384;
         F.filename = "vm.nim";
-        colontmp__587203050 = subInt((prim_1241533856.fallback).length, 1);
+        colontmp__587203050 = subInt((prim_1241534218.fallback).length, 1);
         F.line = 33;
         F.filename = "iterators_1.nim";
         var res_587203051 = colontmp__587203050;
@@ -16451,16 +17490,16 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
           F.line = 34;
             Label23: while (true) {
             if (!(0 <= res_587203051)) break Label23;
-              F.line = 3150;
+              F.line = 3384;
               F.filename = "vm.nim";
-              i_1241533868 = res_587203051;
-              if ((i_1241533868 < subInt((prim_1241533856.fallback).length, 1))) {
-              F.line = 3153;
-              pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+              i_1241534230 = res_587203051;
+              if ((i_1241534230 < subInt((prim_1241534218.fallback).length, 1))) {
+              F.line = 3387;
+              pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
               }
               
-              F.line = 3154;
-              pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(prim_1241533856.fallback[chckIndx(i_1241533868, 0, (prim_1241533856.fallback).length - 1)]));
+              F.line = 3388;
+              pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(prim_1241534218.fallback[chckIndx(i_1241534230, 0, (prim_1241534218.fallback).length - 1)]));
               F.line = 39;
               F.filename = "iterators_1.nim";
               res_587203051 = subInt(res_587203051, 1);
@@ -16469,110 +17508,110 @@ function handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, fram
       };
       }
       else {
-        F.line = 3156;
+        F.line = 3390;
         F.filename = "vm.nim";
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
       }
       
-      F.line = 3157;
-      result_1241533548 = true;
+      F.line = 3391;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     case 10:
-      F.line = 3161;
-      var primCall_1241533872 = node_1241533549;
+      F.line = 3395;
+      var primCall_1241534234 = node_1241533911;
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      logLoop__pureZlogging_u148(1, [[86,77,58,32,80,114,105,109,105,116,105,118,101,32,99,97,108,108,32,35], nimCopy(null, primCall_1241533872.selector, NTI33554449), [32,119,105,116,104,32], HEX24__systemZdollars_u14((primCall_1241533872.arguments).length), [32,97,114,103,115]]);
+      logLoop__pureZlogging_u148(1, [[86,77,58,32,80,114,105,109,105,116,105,118,101,32,99,97,108,108,32,35], nimCopy(null, primCall_1241534234.selector, NTI33554449), [32,119,105,116,104,32], HEX24__systemZdollars_u14((primCall_1241534234.arguments).length), [32,97,114,103,115]]);
       }
       
       if (!((interp_p0[interp_p0_Idx].currentReceiver == null))) {
-      F.line = 3166;
+      F.line = 3400;
       F.filename = "vm.nim";
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(toValue__OOZcoreZtypes_u1501(interp_p0[interp_p0_Idx].currentReceiver)));
       }
       else {
-        F.line = 3168;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 3402;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
       }
       
-      if ((0 < (primCall_1241533872.arguments).length)) {
-      F.line = 3172;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newAfterReceiverFrame__OOZinterpreterZvm_u19381(primCall_1241533872.selector, primCall_1241533872.arguments));
+      if ((0 < (primCall_1241534234.arguments).length)) {
+      F.line = 3406;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newAfterReceiverFrame__OOZinterpreterZvm_u19743(primCall_1241534234.selector, primCall_1241534234.arguments));
       }
       else {
-        F.line = 3174;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19377(primCall_1241533872.selector, 0));
+        F.line = 3408;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19739(primCall_1241534234.selector, 0));
       }
       
-      F.line = 3175;
-      result_1241533548 = true;
+      F.line = 3409;
+      result_1241533910 = true;
       break BeforeRet;
       break;
     }
   };
   framePtr = F.prev;
 
-  return result_1241533548;
+  return result_1241533910;
 
 }
 
-function pop__OOZinterpreterZvm_u19487(s_p0, s_p0_Idx) {
-  var result_1241533474 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+function pop__OOZinterpreterZvm_u19849(s_p0, s_p0_Idx) {
+  var result_1241533836 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
 
   var F = {procname: "pop.pop", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system.nim", line: 0};
   framePtr = F;
     F.line = 1795;
     F.filename = "system.nim";
-    var L_1241533478 = subInt((s_p0[s_p0_Idx]).length, 1);
+    var L_1241533840 = subInt((s_p0[s_p0_Idx]).length, 1);
     F.line = 1800;
-    result_1241533474 = nimCopy(result_1241533474, s_p0[s_p0_Idx][chckIndx(L_1241533478, 0, (s_p0[s_p0_Idx]).length - 1)], NTI1157627922);
+    result_1241533836 = nimCopy(result_1241533836, s_p0[s_p0_Idx][chckIndx(L_1241533840, 0, (s_p0[s_p0_Idx]).length - 1)], NTI1157627922);
     F.line = 1801;
-    if (s_p0[s_p0_Idx].length < chckRange(L_1241533478, 0, 2147483647)) { for (var i = s_p0[s_p0_Idx].length ; i < chckRange(L_1241533478, 0, 2147483647) ; ++i) s_p0[s_p0_Idx].push(({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})); }
-               else { s_p0[s_p0_Idx].length = chckRange(L_1241533478, 0, 2147483647); };
+    if (s_p0[s_p0_Idx].length < chckRange(L_1241533840, 0, 2147483647)) { for (var i = s_p0[s_p0_Idx].length ; i < chckRange(L_1241533840, 0, 2147483647) ; ++i) s_p0[s_p0_Idx].push(({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})); }
+               else { s_p0[s_p0_Idx].length = chckRange(L_1241533840, 0, 2147483647); };
   framePtr = F.prev;
 
-  return result_1241533474;
+  return result_1241533836;
 
 }
 
-function popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx) {
-  var result_1241533466 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+function popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx) {
+  var result_1241533828 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
 
   var F = {procname: "vm.popValue", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
     if (((interp_p0[interp_p0_Idx].evalStack).length == 0)) {
-    F.line = 2850;
+    F.line = 3084;
     F.filename = "vm.nim";
     raiseException({message: [69,118,97,108,32,115,116,97,99,107,32,117,110,100,101,114,102,108,111,119], parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
     }
     
-    F.line = 2851;
-    result_1241533466 = nimCopy(result_1241533466, pop__OOZinterpreterZvm_u19487(interp_p0[interp_p0_Idx], "evalStack"), NTI1157627922);
+    F.line = 3085;
+    result_1241533828 = nimCopy(result_1241533828, pop__OOZinterpreterZvm_u19849(interp_p0[interp_p0_Idx], "evalStack"), NTI1157627922);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
-    logLoop__pureZlogging_u148(1, [[86,77,58,32,112,111,112,86,97,108,117,101,32], toString__OOZcoreZtypes_u496(result_1241533466), [32,40,115,116,97,99,107,32,108,101,110,32,110,111,119,32], HEX24__systemZdollars_u14((interp_p0[interp_p0_Idx].evalStack).length), [41]]);
+    logLoop__pureZlogging_u148(1, [[86,77,58,32,112,111,112,86,97,108,117,101,32], toString__OOZcoreZtypes_u496(result_1241533828), [32,40,115,116,97,99,107,32,108,101,110,32,110,111,119,32], HEX24__systemZdollars_u14((interp_p0[interp_p0_Idx].evalStack).length), [41]]);
     }
     
   framePtr = F.prev;
 
-  return result_1241533466;
+  return result_1241533828;
 
 }
 
-function isProtectedGlobal__OOZinterpreterZvm_u32(name_p0) {
-  var result_1241514018 = false;
+function isProtectedGlobal__OOZinterpreterZvm_u361(name_p0) {
+  var result_1241514347 = false;
 
   var F = {procname: "vm.isProtectedGlobal", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 47;
+    F.line = 242;
     F.filename = "vm.nim";
-    result_1241514018 = contains__stdZenumutils_u50(protectedGlobals_1241514005[0], name_p0);
+    result_1241514347 = contains__stdZenumutils_u50(protectedGlobals_1241514334[0], name_p0);
   framePtr = F.prev;
 
-  return result_1241514018;
+  return result_1241514347;
 
 }
 
@@ -16592,10 +17631,10 @@ function setSlot__OOZcoreZtypes_u6443(inst_p0, index_p1, value_p2) {
     }
     
       if (!(0 <= index_p1)) Temporary1 = false; else {        var Temporary2 = inst_p0;
-        if (ConstSet153[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627908)); }
+        if (ConstSet177[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627908)); }
         Temporary1 = (index_p1 < (Temporary2.slots).length);      }    if (Temporary1) {
     var Temporary3 = inst_p0;
-    if (ConstSet154[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627908)); }
+    if (ConstSet178[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627908)); }
     F.line = 905;
     (Temporary4 = Temporary3.slots, Temporary4)[chckIndx(index_p1, 0, (Temporary4).length - 1)] = nimCopy((Temporary4 = Temporary3.slots, Temporary4)[chckIndx(index_p1, 0, (Temporary4).length - 1)], value_p2, NTI1157627922);
     }
@@ -16606,7 +17645,7 @@ function setSlot__OOZcoreZtypes_u6443(inst_p0, index_p1, value_p2) {
   
 }
 
-function setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, name_p1, value_p2) {
+function setVariable__OOZinterpreterZvm_u2967(interp_p0, interp_p0_Idx, name_p1, value_p2) {
     var Temporary1;
     var Temporary2;
           var Temporary5;
@@ -16630,25 +17669,25 @@ function setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, name_p1,
     }
     
     if (!((interp_p0[interp_p0_Idx].currentActivation == null))) {
-    F.line = 517;
+    F.line = 714;
     F.filename = "vm.nim";
-    var currentMethod_1241516638 = interp_p0[interp_p0_Idx].currentActivation.currentMethod;
-    if ((!((currentMethod_1241516638 == null)) && currentMethod_1241516638.capturedEnvInitialized)) {
-    if (((0 < len__OOZinterpreterZvm_u890(currentMethod_1241516638.capturedEnv)) && contains__OOZinterpreterZvm_u933(currentMethod_1241516638.capturedEnv, name_p1))) {
-    F.line = 520;
-    (Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u1233(currentMethod_1241516638.capturedEnv, name_p1), Temporary1)[0][Temporary1[1]].value = nimCopy((Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u1233(currentMethod_1241516638.capturedEnv, name_p1), Temporary1)[0][Temporary1[1]].value, value_p2, NTI1157627922);
-    F.line = 522;
+    var currentMethod_1241516967 = interp_p0[interp_p0_Idx].currentActivation.currentMethod;
+    if ((!((currentMethod_1241516967 == null)) && currentMethod_1241516967.capturedEnvInitialized)) {
+    if (((0 < len__OOZinterpreterZvm_u1219(currentMethod_1241516967.capturedEnv)) && contains__OOZinterpreterZvm_u1262(currentMethod_1241516967.capturedEnv, name_p1))) {
+    F.line = 717;
+    (Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u1562(currentMethod_1241516967.capturedEnv, name_p1), Temporary1)[0][Temporary1[1]].value = nimCopy((Temporary1 = HEX5BHEX5D__OOZinterpreterZvm_u1562(currentMethod_1241516967.capturedEnv, name_p1), Temporary1)[0][Temporary1[1]].value, value_p2, NTI1157627922);
+    F.line = 719;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].currentActivation.locals, name_p1, value_p2);
-    F.line = 523;
+    F.line = 720;
     break BeforeRet;
     }
     
     }
     
-    if (contains__OOZinterpreterZvm_u933(interp_p0[interp_p0_Idx].currentActivation.capturedVars, name_p1)) {
-    F.line = 528;
-    (Temporary2 = HEX5BHEX5D__OOZinterpreterZvm_u1233(interp_p0[interp_p0_Idx].currentActivation.capturedVars, name_p1), Temporary2)[0][Temporary2[1]].value = nimCopy((Temporary2 = HEX5BHEX5D__OOZinterpreterZvm_u1233(interp_p0[interp_p0_Idx].currentActivation.capturedVars, name_p1), Temporary2)[0][Temporary2[1]].value, value_p2, NTI1157627922);
-    F.line = 529;
+    if (contains__OOZinterpreterZvm_u1262(interp_p0[interp_p0_Idx].currentActivation.capturedVars, name_p1)) {
+    F.line = 725;
+    (Temporary2 = HEX5BHEX5D__OOZinterpreterZvm_u1562(interp_p0[interp_p0_Idx].currentActivation.capturedVars, name_p1), Temporary2)[0][Temporary2[1]].value = nimCopy((Temporary2 = HEX5BHEX5D__OOZinterpreterZvm_u1562(interp_p0[interp_p0_Idx].currentActivation.capturedVars, name_p1), Temporary2)[0][Temporary2[1]].value, value_p2, NTI1157627922);
+    F.line = 726;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].currentActivation.locals, name_p1, value_p2);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -16656,91 +17695,91 @@ function setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, name_p1,
     logLoop__pureZlogging_u148(1, [[115,101,116,86,97,114,105,97,98,108,101,58,32,115,116,111,114,105,110,103,32], nimCopy(null, name_p1, NTI33554449), [32,105,110,32,99,97,112,116,117,114,101,100,86,97,114,115,32,99,101,108,108]]);
     }
     
-    F.line = 531;
+    F.line = 728;
     F.filename = "vm.nim";
     break BeforeRet;
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].currentActivation.locals, name_p1)) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].currentActivation.locals, name_p1)) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[115,101,116,86,97,114,105,97,98,108,101,58,32,115,116,111,114,105,110,103,32], nimCopy(null, name_p1, NTI33554449), [32,105,110,32,108,111,99,97,108,115]]);
     }
     
-    F.line = 536;
+    F.line = 733;
     F.filename = "vm.nim";
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].currentActivation.locals, name_p1, value_p2);
-    F.line = 537;
+    F.line = 734;
     break BeforeRet;
     }
     
-    F.line = 541;
-    var parentActivation_1241517058 = interp_p0[interp_p0_Idx].currentActivation.sender;
+    F.line = 738;
+    var parentActivation_1241517387 = interp_p0[interp_p0_Idx].currentActivation.sender;
     Label3: {
-      F.line = 542;
+      F.line = 739;
         Label4: while (true) {
-        if (!!((parentActivation_1241517058 == null))) break Label4;
-          if ((!((parentActivation_1241517058.currentMethod == null)) && parentActivation_1241517058.currentMethod.capturedEnvInitialized)) {
-          if (((0 < len__OOZinterpreterZvm_u890(parentActivation_1241517058.currentMethod.capturedEnv)) && contains__OOZinterpreterZvm_u933(parentActivation_1241517058.currentMethod.capturedEnv, name_p1))) {
-          F.line = 546;
-          (Temporary5 = HEX5BHEX5D__OOZinterpreterZvm_u1233(parentActivation_1241517058.currentMethod.capturedEnv, name_p1), Temporary5)[0][Temporary5[1]].value = nimCopy((Temporary5 = HEX5BHEX5D__OOZinterpreterZvm_u1233(parentActivation_1241517058.currentMethod.capturedEnv, name_p1), Temporary5)[0][Temporary5[1]].value, value_p2, NTI1157627922);
-          F.line = 547;
-          HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(parentActivation_1241517058.locals, name_p1, value_p2);
+        if (!!((parentActivation_1241517387 == null))) break Label4;
+          if ((!((parentActivation_1241517387.currentMethod == null)) && parentActivation_1241517387.currentMethod.capturedEnvInitialized)) {
+          if (((0 < len__OOZinterpreterZvm_u1219(parentActivation_1241517387.currentMethod.capturedEnv)) && contains__OOZinterpreterZvm_u1262(parentActivation_1241517387.currentMethod.capturedEnv, name_p1))) {
+          F.line = 743;
+          (Temporary5 = HEX5BHEX5D__OOZinterpreterZvm_u1562(parentActivation_1241517387.currentMethod.capturedEnv, name_p1), Temporary5)[0][Temporary5[1]].value = nimCopy((Temporary5 = HEX5BHEX5D__OOZinterpreterZvm_u1562(parentActivation_1241517387.currentMethod.capturedEnv, name_p1), Temporary5)[0][Temporary5[1]].value, value_p2, NTI1157627922);
+          F.line = 744;
+          HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(parentActivation_1241517387.locals, name_p1, value_p2);
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
           logLoop__pureZlogging_u148(1, [[86,97,114,105,97,98,108,101,32,117,112,100,97,116,101,100,32,105,110,32,112,97,114,101,110,116,32,99,97,112,116,117,114,101,100,32,101,110,118,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_p2)]);
           }
           
-          F.line = 549;
+          F.line = 746;
           F.filename = "vm.nim";
           break BeforeRet;
           }
           
           }
           
-          if (contains__OOZinterpreterZvm_u933(parentActivation_1241517058.capturedVars, name_p1)) {
-          F.line = 553;
-          (Temporary6 = HEX5BHEX5D__OOZinterpreterZvm_u1233(parentActivation_1241517058.capturedVars, name_p1), Temporary6)[0][Temporary6[1]].value = nimCopy((Temporary6 = HEX5BHEX5D__OOZinterpreterZvm_u1233(parentActivation_1241517058.capturedVars, name_p1), Temporary6)[0][Temporary6[1]].value, value_p2, NTI1157627922);
-          F.line = 554;
-          HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(parentActivation_1241517058.locals, name_p1, value_p2);
+          if (contains__OOZinterpreterZvm_u1262(parentActivation_1241517387.capturedVars, name_p1)) {
+          F.line = 750;
+          (Temporary6 = HEX5BHEX5D__OOZinterpreterZvm_u1562(parentActivation_1241517387.capturedVars, name_p1), Temporary6)[0][Temporary6[1]].value = nimCopy((Temporary6 = HEX5BHEX5D__OOZinterpreterZvm_u1562(parentActivation_1241517387.capturedVars, name_p1), Temporary6)[0][Temporary6[1]].value, value_p2, NTI1157627922);
+          F.line = 751;
+          HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(parentActivation_1241517387.locals, name_p1, value_p2);
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
           logLoop__pureZlogging_u148(1, [[86,97,114,105,97,98,108,101,32,117,112,100,97,116,101,100,32,105,110,32,112,97,114,101,110,116,32,99,97,112,116,117,114,101,100,86,97,114,115,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_p2)]);
           }
           
-          F.line = 556;
+          F.line = 753;
           F.filename = "vm.nim";
           break BeforeRet;
           }
           
-          if (contains__OOZinterpreterZvm_u1463(parentActivation_1241517058.locals, name_p1)) {
-          F.line = 560;
-          HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(parentActivation_1241517058.locals, name_p1, value_p2);
+          if (contains__OOZinterpreterZvm_u1792(parentActivation_1241517387.locals, name_p1)) {
+          F.line = 757;
+          HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(parentActivation_1241517387.locals, name_p1, value_p2);
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
           logLoop__pureZlogging_u148(1, [[86,97,114,105,97,98,108,101,32,117,112,100,97,116,101,100,32,105,110,32,112,97,114,101,110,116,32,97,99,116,105,118,97,116,105,111,110,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_p2)]);
           }
           
-          F.line = 562;
+          F.line = 759;
           F.filename = "vm.nim";
           break BeforeRet;
           }
           
-          F.line = 564;
-          parentActivation_1241517058 = parentActivation_1241517058.sender;
+          F.line = 761;
+          parentActivation_1241517387 = parentActivation_1241517387.sender;
         }
     };
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, name_p1)) {
-    if (isProtectedGlobal__OOZinterpreterZvm_u32(name_p1)) {
-    F.line = 570;
-    raiseException({message: ([67,97,110,110,111,116,32,114,101,97,115,115,105,103,110,32,112,114,111,116,101,99,116,101,100,32,103,108,111,98,97,108,58,32]).concat(name_p1), parent: null, m_type: NTI1241514010, node: null, name: null, trace: [], up: null}, "EvalError");
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, name_p1)) {
+    if (isProtectedGlobal__OOZinterpreterZvm_u361(name_p1)) {
+    F.line = 767;
+    raiseException({message: ([67,97,110,110,111,116,32,114,101,97,115,115,105,103,110,32,112,114,111,116,101,99,116,101,100,32,103,108,111,98,97,108,58,32]).concat(name_p1), parent: null, m_type: NTI1241514271, node: null, name: null, trace: [], up: null}, "EvalError");
     }
     
-    F.line = 571;
+    F.line = 768;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, name_p1, value_p2);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -16748,46 +17787,46 @@ function setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, name_p1,
     logLoop__pureZlogging_u148(1, [[71,108,111,98,97,108,32,117,112,100,97,116,101,100,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_p2)]);
     }
     
-    F.line = 573;
+    F.line = 770;
     F.filename = "vm.nim";
     break BeforeRet;
     }
     
     if ((!((interp_p0[interp_p0_Idx].currentReceiver == null)) && (interp_p0[interp_p0_Idx].currentReceiver.kind == 0))) {
-    F.line = 577;
-    var idx_1241517584 = getSlotIndex__OOZcoreZtypes_u6385(interp_p0[interp_p0_Idx].currentReceiver.class, name_p1);
-    if ((0 <= idx_1241517584)) {
-    F.line = 579;
-    setSlot__OOZcoreZtypes_u6443(interp_p0[interp_p0_Idx].currentReceiver, idx_1241517584, value_p2);
+    F.line = 774;
+    var idx_1241517913 = getSlotIndex__OOZcoreZtypes_u6385(interp_p0[interp_p0_Idx].currentReceiver.class, name_p1);
+    if ((0 <= idx_1241517913)) {
+    F.line = 776;
+    setSlot__OOZcoreZtypes_u6443(interp_p0[interp_p0_Idx].currentReceiver, idx_1241517913, value_p2);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
     logLoop__pureZlogging_u148(1, [[83,108,111,116,32,117,112,100,97,116,101,100,32,111,110,32,115,101,108,102,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_p2)]);
     }
     
-    F.line = 581;
+    F.line = 778;
     F.filename = "vm.nim";
     break BeforeRet;
     }
     
     }
     
-      if (!(0 < (name_p1).length)) Temporary7 = false; else {        Temporary7 = (ConstSet155[name_p1[chckIndx(0, 0, (name_p1).length - 1)]] != undefined);      }    if (Temporary7) {
-    if (isProtectedGlobal__OOZinterpreterZvm_u32(name_p1)) {
-    F.line = 588;
-    raiseException({message: ([67,97,110,110,111,116,32,114,101,97,115,115,105,103,110,32,112,114,111,116,101,99,116,101,100,32,103,108,111,98,97,108,58,32]).concat(name_p1), parent: null, m_type: NTI1241514010, node: null, name: null, trace: [], up: null}, "EvalError");
+      if (!(0 < (name_p1).length)) Temporary7 = false; else {        Temporary7 = (ConstSet179[name_p1[chckIndx(0, 0, (name_p1).length - 1)]] != undefined);      }    if (Temporary7) {
+    if (isProtectedGlobal__OOZinterpreterZvm_u361(name_p1)) {
+    F.line = 785;
+    raiseException({message: ([67,97,110,110,111,116,32,114,101,97,115,115,105,103,110,32,112,114,111,116,101,99,116,101,100,32,103,108,111,98,97,108,58,32]).concat(name_p1), parent: null, m_type: NTI1241514271, node: null, name: null, trace: [], up: null}, "EvalError");
     }
     
       if (!(value_p2.kind == 9)) Temporary8 = false; else {        var Temporary9 = value_p2;
-        if (ConstSet156[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627921)); }
+        if (ConstSet180[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627921)); }
         Temporary8 = !((Temporary9.classVal == null));      }    if (Temporary8) {
     var Temporary10 = value_p2;
-    if (ConstSet157[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627921)); }
-    F.line = 591;
+    if (ConstSet181[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627921)); }
+    F.line = 788;
     Temporary10.classVal.name = nimCopy(null, name_p1, NTI33554449);
     }
     
-    F.line = 592;
+    F.line = 789;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, name_p1, value_p2);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -16795,37 +17834,37 @@ function setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, name_p1,
     logLoop__pureZlogging_u148(1, [[71,108,111,98,97,108,32,115,101,116,32,40,117,112,112,101,114,99,97,115,101,32,118,97,114,105,97,98,108,101,41,58,32], nimCopy(null, name_p1, NTI33554449), [32,61,32], toString__OOZcoreZtypes_u496(value_p2)]);
     }
     
-    F.line = 594;
+    F.line = 791;
     F.filename = "vm.nim";
     break BeforeRet;
     }
     
-    F.line = 597;
+    F.line = 794;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].currentActivation.locals, name_p1, value_p2);
-    F.line = 598;
+    F.line = 795;
     break BeforeRet;
     }
     
-    if (isProtectedGlobal__OOZinterpreterZvm_u32(name_p1)) {
-    F.line = 603;
-    raiseException({message: ([67,97,110,110,111,116,32,114,101,97,115,115,105,103,110,32,112,114,111,116,101,99,116,101,100,32,103,108,111,98,97,108,58,32]).concat(name_p1), parent: null, m_type: NTI1241514010, node: null, name: null, trace: [], up: null}, "EvalError");
+    if (isProtectedGlobal__OOZinterpreterZvm_u361(name_p1)) {
+    F.line = 800;
+    raiseException({message: ([67,97,110,110,111,116,32,114,101,97,115,115,105,103,110,32,112,114,111,116,101,99,116,101,100,32,103,108,111,98,97,108,58,32]).concat(name_p1), parent: null, m_type: NTI1241514271, node: null, name: null, trace: [], up: null}, "EvalError");
     }
     
-      if (!(0 < (name_p1).length)) Temporary11 = false; else {        Temporary11 = !((ConstSet158[name_p1[chckIndx(0, 0, (name_p1).length - 1)]] != undefined));      }    if (Temporary11) {
-    F.line = 607;
-    raiseException({message: ([71,108,111,98,97,108,32,118,97,114,105,97,98,108,101,115,32,109,117,115,116,32,115,116,97,114,116,32,119,105,116,104,32,117,112,112,101,114,99,97,115,101,32,108,101,116,116,101,114,58,32]).concat(name_p1), parent: null, m_type: NTI1241514010, node: null, name: null, trace: [], up: null}, "EvalError");
+      if (!(0 < (name_p1).length)) Temporary11 = false; else {        Temporary11 = !((ConstSet182[name_p1[chckIndx(0, 0, (name_p1).length - 1)]] != undefined));      }    if (Temporary11) {
+    F.line = 804;
+    raiseException({message: ([71,108,111,98,97,108,32,118,97,114,105,97,98,108,101,115,32,109,117,115,116,32,115,116,97,114,116,32,119,105,116,104,32,117,112,112,101,114,99,97,115,101,32,108,101,116,116,101,114,58,32]).concat(name_p1), parent: null, m_type: NTI1241514271, node: null, name: null, trace: [], up: null}, "EvalError");
     }
     
       if (!(value_p2.kind == 9)) Temporary12 = false; else {        var Temporary13 = value_p2;
-        if (ConstSet159[Temporary13.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary13.kind, NTI1157627921)); }
+        if (ConstSet183[Temporary13.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary13.kind, NTI1157627921)); }
         Temporary12 = !((Temporary13.classVal == null));      }    if (Temporary12) {
     var Temporary14 = value_p2;
-    if (ConstSet160[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
-    F.line = 611;
+    if (ConstSet184[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
+    F.line = 808;
     Temporary14.classVal.name = nimCopy(null, name_p1, NTI33554449);
     }
     
-    F.line = 613;
+    F.line = 810;
     HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(interp_p0[interp_p0_Idx].globals, name_p1, value_p2);
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -16839,58 +17878,58 @@ function setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, name_p1,
   
 }
 
-function popValues__OOZinterpreterZvm_u19521(interp_p0, interp_p0_Idx, count_p1) {
-  var result_1241533508 = [];
+function popValues__OOZinterpreterZvm_u19883(interp_p0, interp_p0_Idx, count_p1) {
+  var result_1241533870 = [];
 
   var F = {procname: "vm.popValues", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2861;
+    F.line = 3095;
     F.filename = "vm.nim";
-    result_1241533508 = nimCopy(null, newSeq__OOZcoreZtypes_u6287(chckRange(count_p1, 0, 2147483647)), NTI1157631525);
+    result_1241533870 = nimCopy(null, newSeq__OOZcoreZtypes_u6287(chckRange(count_p1, 0, 2147483647)), NTI1157631525);
     Label1: {
-      F.line = 2862;
-      var i_1241533534 = 0;
+      F.line = 3096;
+      var i_1241533896 = 0;
       F.line = 6;
       F.filename = "iterators_1.nim";
-      var colontmp__587203263 = 0;
-      F.line = 2862;
+      var colontmp__587203301 = 0;
+      F.line = 3096;
       F.filename = "vm.nim";
-      colontmp__587203263 = subInt(count_p1, 1);
+      colontmp__587203301 = subInt(count_p1, 1);
       F.line = 33;
       F.filename = "iterators_1.nim";
-      var res_587203264 = colontmp__587203263;
+      var res_587203302 = colontmp__587203301;
       Label2: {
         F.line = 34;
           Label3: while (true) {
-          if (!(0 <= res_587203264)) break Label3;
-            F.line = 2862;
+          if (!(0 <= res_587203302)) break Label3;
+            F.line = 3096;
             F.filename = "vm.nim";
-            i_1241533534 = res_587203264;
-            F.line = 2863;
-            result_1241533508[chckIndx(i_1241533534, 0, (result_1241533508).length - 1)] = nimCopy(result_1241533508[chckIndx(i_1241533534, 0, (result_1241533508).length - 1)], popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx), NTI1157627922);
+            i_1241533896 = res_587203302;
+            F.line = 3097;
+            result_1241533870[chckIndx(i_1241533896, 0, (result_1241533870).length - 1)] = nimCopy(result_1241533870[chckIndx(i_1241533896, 0, (result_1241533870).length - 1)], popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx), NTI1157627922);
             F.line = 39;
             F.filename = "iterators_1.nim";
-            res_587203264 = subInt(res_587203264, 1);
+            res_587203302 = subInt(res_587203302, 1);
           }
       };
     };
   framePtr = F.prev;
 
-  return result_1241533508;
+  return result_1241533870;
 
 }
 
-function newApplyBlockFrame__OOZinterpreterZvm_u19390(blockVal_p0, argCount_p1) {
-  var result_1241533377 = null;
+function newApplyBlockFrame__OOZinterpreterZvm_u19752(blockVal_p0, argCount_p1) {
+  var result_1241533739 = null;
 
   var F = {procname: "vm.newApplyBlockFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2813;
+    F.line = 3047;
     F.filename = "vm.nim";
-    result_1241533377 = {kind: 2, blockVal: blockVal_p0, argCount: argCount_p1, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533739 = {kind: 2, blockVal: blockVal_p0, argCount: argCount_p1, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533377;
+  return result_1241533739;
 
 }
 
@@ -16936,55 +17975,55 @@ function newStringInstance__OOZcoreZtypes_u6371(cls_p0, value_p1) {
 
 }
 
-function lookupClassMethod__OOZinterpreterZvm_u5647(cls_p0, selector_p1) {
+function lookupClassMethod__OOZinterpreterZvm_u5976(cls_p0, selector_p1) {
     var Temporary1;
 
-  var result_1241519634 = ({currentMethod: null, receiver: null, definingClass: null, found: false});
+  var result_1241519963 = ({currentMethod: null, receiver: null, definingClass: null, found: false});
 
   var F = {procname: "vm.lookupClassMethod", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     if ((cls_p0 == null)) {
-    F.line = 720;
+    F.line = 917;
     F.filename = "vm.nim";
-    result_1241519634 = nimCopy(result_1241519634, {currentMethod: null, receiver: null, definingClass: null, found: false}, NTI1241517236);
+    result_1241519963 = nimCopy(result_1241519963, {currentMethod: null, receiver: null, definingClass: null, found: false}, NTI1241517493);
     break BeforeRet;
     }
     
     if (contains__OOZcoreZtypes_u4367(cls_p0.allClassMethods, selector_p1)) {
-    F.line = 723;
-    result_1241519634 = nimCopy(result_1241519634, {currentMethod: (Temporary1 = HEX5BHEX5D__OOZcoreZtypes_u8775(cls_p0.allClassMethods, selector_p1), Temporary1)[0][Temporary1[1]], receiver: null, definingClass: cls_p0, found: true}, NTI1241517236);
+    F.line = 920;
+    result_1241519963 = nimCopy(result_1241519963, {currentMethod: (Temporary1 = HEX5BHEX5D__OOZcoreZtypes_u8775(cls_p0.allClassMethods, selector_p1), Temporary1)[0][Temporary1[1]], receiver: null, definingClass: cls_p0, found: true}, NTI1241517493);
     break BeforeRet;
     }
     
-    F.line = 729;
-    result_1241519634 = nimCopy(result_1241519634, {currentMethod: null, receiver: null, definingClass: null, found: false}, NTI1241517236);
+    F.line = 926;
+    result_1241519963 = nimCopy(result_1241519963, {currentMethod: null, receiver: null, definingClass: null, found: false}, NTI1241517493);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241519634;
+  return result_1241519963;
 
 }
 
-function newPopActivationFrame__OOZinterpreterZvm_u19401(savedReceiver_p0, isBlock_p1, evalStackDepth_p2) {
-  var result_1241533389 = null;
+function newPopActivationFrame__OOZinterpreterZvm_u19763(savedReceiver_p0, isBlock_p1, evalStackDepth_p2) {
+  var result_1241533751 = null;
 
   var F = {procname: "vm.newPopActivationFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2822;
+    F.line = 3056;
     F.filename = "vm.nim";
-    result_1241533389 = {kind: 7, savedReceiver: savedReceiver_p0, isBlockActivation: isBlock_p1, savedEvalStackDepth: evalStackDepth_p2, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
+    result_1241533751 = {kind: 7, savedReceiver: savedReceiver_p0, isBlockActivation: isBlock_p1, savedEvalStackDepth: evalStackDepth_p2, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0};
   framePtr = F.prev;
 
-  return result_1241533389;
+  return result_1241533751;
 
 }
 
-function lookupMethod__OOZinterpreterZvm_u5501(interp_p0, receiver_p1, selector_p2) {
+function lookupMethod__OOZinterpreterZvm_u5830(interp_p0, receiver_p1, selector_p2) {
     var Temporary1;
 
-  var result_1241519489 = ({currentMethod: null, receiver: null, definingClass: null, found: false});
+  var result_1241519818 = ({currentMethod: null, receiver: null, definingClass: null, found: false});
 
   var F = {procname: "vm.lookupMethod", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
@@ -16996,29 +18035,29 @@ function lookupMethod__OOZinterpreterZvm_u5501(interp_p0, receiver_p1, selector_
     logLoop__pureZlogging_u148(1, [[77,101,116,104,111,100,32,110,111,116,32,102,111,117,110,100,58,32], nimCopy(null, selector_p2, NTI33554449), [32,40,114,101,99,101,105,118,101,114,32,111,114,32,99,108,97,115,115,32,105,115,32,110,105,108,41]]);
     }
     
-    F.line = 699;
+    F.line = 896;
     F.filename = "vm.nim";
-    result_1241519489 = nimCopy(result_1241519489, {currentMethod: null, receiver: null, definingClass: null, found: false}, NTI1241517236);
+    result_1241519818 = nimCopy(result_1241519818, {currentMethod: null, receiver: null, definingClass: null, found: false}, NTI1241517493);
     break BeforeRet;
     }
     
-    F.line = 701;
-    var cls_1241519502 = receiver_p1.class;
+    F.line = 898;
+    var cls_1241519831 = receiver_p1.class;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
     F.filename = "logging.nim";
-    logLoop__pureZlogging_u148(1, [[76,111,111,107,105,110,103,32,117,112,32,109,101,116,104,111,100,58,32,39], nimCopy(null, selector_p2, NTI33554449), [39,32,105,110,32,99,108,97,115,115,58,32], nimCopy(null, cls_1241519502.name, NTI33554449)]);
+    logLoop__pureZlogging_u148(1, [[76,111,111,107,105,110,103,32,117,112,32,109,101,116,104,111,100,58,32,39], nimCopy(null, selector_p2, NTI33554449), [39,32,105,110,32,99,108,97,115,115,58,32], nimCopy(null, cls_1241519831.name, NTI33554449)]);
     }
     
-    if (contains__OOZcoreZtypes_u4367(cls_1241519502.allMethods, selector_p2)) {
+    if (contains__OOZcoreZtypes_u4367(cls_1241519831.allMethods, selector_p2)) {
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
-    logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,109,101,116,104,111,100,32], nimCopy(null, selector_p2, NTI33554449), [32,105,110,32,99,108,97,115,115,32], nimCopy(null, cls_1241519502.name, NTI33554449)]);
+    logLoop__pureZlogging_u148(1, [[70,111,117,110,100,32,109,101,116,104,111,100,32], nimCopy(null, selector_p2, NTI33554449), [32,105,110,32,99,108,97,115,115,32], nimCopy(null, cls_1241519831.name, NTI33554449)]);
     }
     
-    F.line = 707;
+    F.line = 904;
     F.filename = "vm.nim";
-    result_1241519489 = nimCopy(result_1241519489, {currentMethod: (Temporary1 = HEX5BHEX5D__OOZcoreZtypes_u8775(cls_1241519502.allMethods, selector_p2), Temporary1)[0][Temporary1[1]], receiver: receiver_p1, definingClass: cls_1241519502, found: true}, NTI1241517236);
+    result_1241519818 = nimCopy(result_1241519818, {currentMethod: (Temporary1 = HEX5BHEX5D__OOZcoreZtypes_u8775(cls_1241519831.allMethods, selector_p2), Temporary1)[0][Temporary1[1]], receiver: receiver_p1, definingClass: cls_1241519831, found: true}, NTI1241517493);
     break BeforeRet;
     }
     
@@ -17028,28 +18067,28 @@ function lookupMethod__OOZinterpreterZvm_u5501(interp_p0, receiver_p1, selector_
     logLoop__pureZlogging_u148(1, [[77,101,116,104,111,100,32,110,111,116,32,102,111,117,110,100,58,32], nimCopy(null, selector_p2, NTI33554449)]);
     }
     
-    F.line = 715;
+    F.line = 912;
     F.filename = "vm.nim";
-    result_1241519489 = nimCopy(result_1241519489, {currentMethod: null, receiver: receiver_p1, definingClass: null, found: false}, NTI1241517236);
+    result_1241519818 = nimCopy(result_1241519818, {currentMethod: null, receiver: receiver_p1, definingClass: null, found: false}, NTI1241517493);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241519489;
+  return result_1241519818;
 
 }
 
-function newWhileLoopFrame__OOZinterpreterZvm_u19411(loopKind_p0, conditionBlock_p1, bodyBlock_p2, loopState_p3) {
-  var result_1241533400 = null;
+function newWhileLoopFrame__OOZinterpreterZvm_u19773(loopKind_p0, conditionBlock_p1, bodyBlock_p2, loopState_p3) {
+  var result_1241533762 = null;
 
   var F = {procname: "vm.newWhileLoopFrame", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 2829;
+    F.line = 3063;
     F.filename = "vm.nim";
-    result_1241533400 = {kind: 14, loopKind: loopKind_p0, conditionBlock: conditionBlock_p1, bodyBlock: bodyBlock_p2, loopState: loopState_p3, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null};
+    result_1241533762 = {kind: 14, loopKind: loopKind_p0, conditionBlock: conditionBlock_p1, bodyBlock: bodyBlock_p2, loopState: loopState_p3, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null};
   framePtr = F.prev;
 
-  return result_1241533400;
+  return result_1241533762;
 
 }
 
@@ -17064,22 +18103,22 @@ function writeStderr__OOZinterpreterZvm_u13(s_p0) {
   
 }
 
-function findSelectorForMethod__OOZinterpreterZvm_u60(classObj_p0, methodBlk_p1, isClassMethod_p2) {
+function findSelectorForMethod__OOZinterpreterZvm_u389(classObj_p0, methodBlk_p1, isClassMethod_p2) {
     var Temporary1;
 
-  var result_1241514048 = [];
+  var result_1241514377 = [];
 
   var F = {procname: "vm.findSelectorForMethod", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     if (((classObj_p0 == null) || (methodBlk_p1 == null))) {
-    F.line = 70;
+    F.line = 265;
     F.filename = "vm.nim";
-    result_1241514048 = nimCopy(null, [40,117,110,107,110,111,119,110,41], NTI33554449);
+    result_1241514377 = nimCopy(null, [40,117,110,107,110,111,119,110,41], NTI33554449);
     break BeforeRet;
     }
     
-    F.line = 71;
+    F.line = 266;
     if (isClassMethod_p2) {
     Temporary1 = classObj_p0.classMethods;
     }
@@ -17087,47 +18126,47 @@ function findSelectorForMethod__OOZinterpreterZvm_u60(classObj_p0, methodBlk_p1,
     Temporary1 = classObj_p0.methods;
     }
     
-    var methods_1241514057 = nimCopy(null, Temporary1, NTI1157627950);
+    var methods_1241514386 = nimCopy(null, Temporary1, NTI1157627950);
     Label2: {
-      F.line = 72;
-      var selector_1241514062 = [];
-      F.line = 72;
-      var blk_1241514063 = null;
+      F.line = 267;
+      var selector_1241514391 = [];
+      F.line = 267;
+      var blk_1241514392 = null;
       F.line = 767;
       F.filename = "tables.nim";
-      var L_587203272 = len__OOZcoreZtypes_u3849(methods_1241514057);
+      var L_587203310 = len__OOZcoreZtypes_u3849(methods_1241514386);
       Label3: {
         F.line = 768;
-        var h_587203274 = 0;
+        var h_587203312 = 0;
         F.line = 81;
         F.filename = "iterators_1.nim";
-        var colontmp__587203275 = 0;
+        var colontmp__587203313 = 0;
         F.line = 768;
         F.filename = "tables.nim";
-        colontmp__587203275 = (methods_1241514057.data).length - 1;
+        colontmp__587203313 = (methods_1241514386.data).length - 1;
         F.line = 96;
         F.filename = "iterators_1.nim";
-        var res_587203276 = 0;
+        var res_587203314 = 0;
         Label4: {
           F.line = 97;
             Label5: while (true) {
-            if (!(res_587203276 <= colontmp__587203275)) break Label5;
+            if (!(res_587203314 <= colontmp__587203313)) break Label5;
               F.line = 768;
               F.filename = "tables.nim";
-              h_587203274 = res_587203276;
-              if (isFilled__pureZcollectionsZtables_u31(methods_1241514057.data[chckIndx(h_587203274, 0, (methods_1241514057.data).length - 1)].Field0)) {
-              F.line = 72;
+              h_587203312 = res_587203314;
+              if (isFilled__pureZcollectionsZtables_u31(methods_1241514386.data[chckIndx(h_587203312, 0, (methods_1241514386.data).length - 1)].Field0)) {
+              F.line = 267;
               F.filename = "vm.nim";
-              selector_1241514062 = methods_1241514057.data[chckIndx(h_587203274, 0, (methods_1241514057.data).length - 1)].Field1;
-              F.line = 72;
-              blk_1241514063 = methods_1241514057.data[chckIndx(h_587203274, 0, (methods_1241514057.data).length - 1)].Field2;
-              if ((blk_1241514063 == methodBlk_p1)) {
-              F.line = 74;
-              result_1241514048 = nimCopy(null, selector_1241514062, NTI33554449);
+              selector_1241514391 = methods_1241514386.data[chckIndx(h_587203312, 0, (methods_1241514386.data).length - 1)].Field1;
+              F.line = 267;
+              blk_1241514392 = methods_1241514386.data[chckIndx(h_587203312, 0, (methods_1241514386.data).length - 1)].Field2;
+              if ((blk_1241514392 == methodBlk_p1)) {
+              F.line = 269;
+              result_1241514377 = nimCopy(null, selector_1241514391, NTI33554449);
               break BeforeRet;
               }
               
-              if (!((len__OOZcoreZtypes_u3849(methods_1241514057) == L_587203272))) {
+              if (!((len__OOZcoreZtypes_u3849(methods_1241514386) == L_587203310))) {
               F.line = 771;
               F.filename = "tables.nim";
               failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim(771, 13) `len(t) == L` the length of the table changed while iterating over it"));
@@ -17137,23 +18176,23 @@ function findSelectorForMethod__OOZinterpreterZvm_u60(classObj_p0, methodBlk_p1,
               
               F.line = 102;
               F.filename = "iterators_1.nim";
-              res_587203276 = addInt(res_587203276, 1);
+              res_587203314 = addInt(res_587203314, 1);
             }
         };
       };
     };
-    F.line = 75;
+    F.line = 270;
     F.filename = "vm.nim";
-    result_1241514048 = nimCopy(null, [40,117,110,107,110,111,119,110,41], NTI33554449);
+    result_1241514377 = nimCopy(null, [40,117,110,107,110,111,119,110,41], NTI33554449);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241514048;
+  return result_1241514377;
 
 }
 
-function formatValue__OOZinterpreterZvm_u146(result_p0, result_p0_Idx, value_p1) {
+function formatValue__OOZinterpreterZvm_u475(result_p0, result_p0_Idx, value_p1) {
   var F = {procname: "formatValue.formatValue", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/strformat.nim", line: 0};
   framePtr = F;
     F.line = 499;
@@ -17385,20 +18424,20 @@ function alignString__pureZstrformat_u20(s_p0, minimumWidth_p1, align_p2, fill_p
 
 }
 
-function formatValue__OOZinterpreterZvm_u152(result_p0, result_p0_Idx, value_p1) {
+function formatValue__OOZinterpreterZvm_u481(result_p0, result_p0_Idx, value_p1) {
   var F = {procname: "formatValue.formatValue", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/strformat.nim", line: 0};
   framePtr = F;
     F.line = 600;
     F.filename = "strformat.nim";
-    var value_1241514148 = nimCopy(null, value_p1, NTI33554449);
+    var value_1241514477 = nimCopy(null, value_p1, NTI33554449);
     F.line = 611;
-    result_p0[result_p0_Idx].push.apply(result_p0[result_p0_Idx], alignString__pureZstrformat_u20(value_1241514148, 0, 0, 32));;
+    result_p0[result_p0_Idx].push.apply(result_p0[result_p0_Idx], alignString__pureZstrformat_u20(value_1241514477, 0, 0, 32));;
   framePtr = F.prev;
 
   
 }
 
-function printStackTrace__OOZinterpreterZvm_u84(interp_p0, interp_p0_Idx) {
+function printStackTrace__OOZinterpreterZvm_u413(interp_p0, interp_p0_Idx) {
               var Temporary4;
               var Temporary5;
               var Temporary6;
@@ -17407,303 +18446,121 @@ function printStackTrace__OOZinterpreterZvm_u84(interp_p0, interp_p0_Idx) {
 
   var F = {procname: "vm.printStackTrace", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
-    F.line = 79;
+    F.line = 274;
     F.filename = "vm.nim";
     writeStderr__OOZinterpreterZvm_u13([10,61,61,61,32,83,116,97,99,107,32,84,114,97,99,101,32,61,61,61]);
     if (((interp_p0[interp_p0_Idx].activationStack).length == 0)) {
-    F.line = 81;
+    F.line = 276;
     writeStderr__OOZinterpreterZvm_u13([32,32,40,101,109,112,116,121,32,97,99,116,105,118,97,116,105,111,110,32,115,116,97,99,107,41]);
     }
     else {
       Label1: {
-        F.line = 83;
-        var i_1241514082 = 0;
+        F.line = 278;
+        var i_1241514411 = 0;
         F.line = 6;
         F.filename = "iterators_1.nim";
-        var colontmp__587203268 = 0;
-        F.line = 83;
+        var colontmp__587203306 = 0;
+        F.line = 278;
         F.filename = "vm.nim";
-        colontmp__587203268 = subInt((interp_p0[interp_p0_Idx].activationStack).length, 1);
+        colontmp__587203306 = subInt((interp_p0[interp_p0_Idx].activationStack).length, 1);
         F.line = 33;
         F.filename = "iterators_1.nim";
-        var res_587203269 = colontmp__587203268;
+        var res_587203307 = colontmp__587203306;
         Label2: {
           F.line = 34;
             Label3: while (true) {
-            if (!(0 <= res_587203269)) break Label3;
-              F.line = 83;
+            if (!(0 <= res_587203307)) break Label3;
+              F.line = 278;
               F.filename = "vm.nim";
-              i_1241514082 = res_587203269;
-              F.line = 84;
-              var activation_1241514083 = interp_p0[interp_p0_Idx].activationStack[chckIndx(i_1241514082, 0, (interp_p0[interp_p0_Idx].activationStack).length - 1)];
-              F.line = 85;
-              if (!((activation_1241514083.definingObject == null))) {
-              Temporary4 = activation_1241514083.definingObject.name;
+              i_1241514411 = res_587203307;
+              F.line = 279;
+              var activation_1241514412 = interp_p0[interp_p0_Idx].activationStack[chckIndx(i_1241514411, 0, (interp_p0[interp_p0_Idx].activationStack).length - 1)];
+              F.line = 280;
+              if (!((activation_1241514412.definingObject == null))) {
+              Temporary4 = activation_1241514412.definingObject.name;
               }
               else {
-              if ((!((activation_1241514083.receiver == null)) && !((activation_1241514083.receiver.class == null)))) {
-              Temporary4 = activation_1241514083.receiver.class.name;
+              if ((!((activation_1241514412.receiver == null)) && !((activation_1241514412.receiver.class == null)))) {
+              Temporary4 = activation_1241514412.receiver.class.name;
               }
               else {
               Temporary4 = [40,117,110,107,110,111,119,110,41];
               }
               }
-              var className_1241514096 = nimCopy(null, Temporary4, NTI33554449);
-              F.line = 91;
-              if ((!((activation_1241514083.receiver == null)) && !((activation_1241514083.receiver.class == null)))) {
-              Temporary5 = activation_1241514083.receiver.class.name;
+              var className_1241514425 = nimCopy(null, Temporary4, NTI33554449);
+              F.line = 286;
+              if ((!((activation_1241514412.receiver == null)) && !((activation_1241514412.receiver.class == null)))) {
+              Temporary5 = activation_1241514412.receiver.class.name;
               }
               else {
               Temporary5 = [40,110,105,108,41];
               }
               
-              var receiverClass_1241514105 = nimCopy(null, Temporary5, NTI33554449);
-              F.line = 95;
-              var isMethod_1241514110 = (!((activation_1241514083.currentMethod == null)) && activation_1241514083.currentMethod.isMethod);
-              F.line = 96;
-              if (isMethod_1241514110) {
+              var receiverClass_1241514434 = nimCopy(null, Temporary5, NTI33554449);
+              F.line = 290;
+              var isMethod_1241514439 = (!((activation_1241514412.currentMethod == null)) && activation_1241514412.currentMethod.isMethod);
+              F.line = 291;
+              if (isMethod_1241514439) {
               Temporary6 = [];
               }
               else {
               Temporary6 = [40,98,108,111,99,107,41,32];
               }
               
-              var methodType_1241514111 = nimCopy(null, Temporary6, NTI33554449);
-              F.line = 97;
-              if (isMethod_1241514110) {
-              Temporary7 = findSelectorForMethod__OOZinterpreterZvm_u60(activation_1241514083.definingObject, activation_1241514083.currentMethod, activation_1241514083.isClassMethod);
+              var methodType_1241514440 = nimCopy(null, Temporary6, NTI33554449);
+              F.line = 292;
+              if (isMethod_1241514439) {
+              Temporary7 = findSelectorForMethod__OOZinterpreterZvm_u389(activation_1241514412.definingObject, activation_1241514412.currentMethod, activation_1241514412.isClassMethod);
               }
               else {
               Temporary7 = [];
               }
               
-              var selector_1241514112 = nimCopy(null, Temporary7, NTI33554449);
-              F.line = 101;
-              if ((0 < (selector_1241514112).length)) {
-              Temporary8 = selector_1241514112;
+              var selector_1241514441 = nimCopy(null, Temporary7, NTI33554449);
+              F.line = 296;
+              if ((0 < (selector_1241514441).length)) {
+              Temporary8 = selector_1241514441;
               }
               else {
-              Temporary8 = methodType_1241514111;
+              Temporary8 = methodType_1241514440;
               }
               
-              var methodDisplay_1241514113 = nimCopy(null, Temporary8, NTI33554449);
-              F.line = 102;
+              var methodDisplay_1241514442 = nimCopy(null, Temporary8, NTI33554449);
+              F.line = 297;
               Label9: {
-                F.line = 102;
-                var fmtRes_1241514122 = [mnewString(0)];
-                F.line = 102;
-                fmtRes_1241514122[0].push.apply(fmtRes_1241514122[0], [32,32]);;
-                F.line = 102;
-                formatValue__OOZinterpreterZvm_u146(fmtRes_1241514122, 0, subInt(subInt((interp_p0[interp_p0_Idx].activationStack).length, 1), i_1241514082));
-                F.line = 102;
-                fmtRes_1241514122[0].push.apply(fmtRes_1241514122[0], [58,32]);;
-                F.line = 102;
-                formatValue__OOZinterpreterZvm_u152(fmtRes_1241514122, 0, className_1241514096);
-                F.line = 102;
-                fmtRes_1241514122[0].push.apply(fmtRes_1241514122[0], [62,62]);;
-                F.line = 102;
-                formatValue__OOZinterpreterZvm_u152(fmtRes_1241514122, 0, methodDisplay_1241514113);
-                F.line = 102;
-                fmtRes_1241514122[0].push.apply(fmtRes_1241514122[0], [40,115,101,108,102,61]);;
-                F.line = 102;
-                formatValue__OOZinterpreterZvm_u152(fmtRes_1241514122, 0, receiverClass_1241514105);
-                F.line = 102;
-                fmtRes_1241514122[0].push.apply(fmtRes_1241514122[0], [41]);;
+                F.line = 297;
+                var fmtRes_1241514451 = [mnewString(0)];
+                F.line = 297;
+                fmtRes_1241514451[0].push.apply(fmtRes_1241514451[0], [32,32]);;
+                F.line = 297;
+                formatValue__OOZinterpreterZvm_u475(fmtRes_1241514451, 0, subInt(subInt((interp_p0[interp_p0_Idx].activationStack).length, 1), i_1241514411));
+                F.line = 297;
+                fmtRes_1241514451[0].push.apply(fmtRes_1241514451[0], [58,32]);;
+                F.line = 297;
+                formatValue__OOZinterpreterZvm_u481(fmtRes_1241514451, 0, className_1241514425);
+                F.line = 297;
+                fmtRes_1241514451[0].push.apply(fmtRes_1241514451[0], [62,62]);;
+                F.line = 297;
+                formatValue__OOZinterpreterZvm_u481(fmtRes_1241514451, 0, methodDisplay_1241514442);
+                F.line = 297;
+                fmtRes_1241514451[0].push.apply(fmtRes_1241514451[0], [40,115,101,108,102,61]);;
+                F.line = 297;
+                formatValue__OOZinterpreterZvm_u481(fmtRes_1241514451, 0, receiverClass_1241514434);
+                F.line = 297;
+                fmtRes_1241514451[0].push.apply(fmtRes_1241514451[0], [41]);;
               };
-              writeStderr__OOZinterpreterZvm_u13(fmtRes_1241514122[0]);
+              writeStderr__OOZinterpreterZvm_u13(fmtRes_1241514451[0]);
               F.line = 39;
               F.filename = "iterators_1.nim";
-              res_587203269 = subInt(res_587203269, 1);
+              res_587203307 = subInt(res_587203307, 1);
             }
         };
       };
     }
     
-    F.line = 103;
+    F.line = 298;
     F.filename = "vm.nim";
     writeStderr__OOZinterpreterZvm_u13([61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,10]);
-  framePtr = F.prev;
-
-  
-}
-
-function mustRehash__OOZcoreZtypes_u7883(t_p0) {
-  var result_1157635790 = false;
-
-  var F = {procname: "mustRehash.mustRehash", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
-  framePtr = F;
-    if (!((t_p0.counter < (t_p0.data).length))) {
-    F.line = 34;
-    F.filename = "hashcommon.nim";
-    failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim(34, 9) `\x0At.counter < t.dataLen` "));
-    }
-    
-    F.line = 35;
-    result_1157635790 = (((t_p0.data).length < addInt(t_p0.counter, divInt(t_p0.counter, 2))) || (subInt((t_p0.data).length, t_p0.counter) < 4));
-  framePtr = F.prev;
-
-  return result_1157635790;
-
-}
-
-function rawInsert__OOZcoreZtypes_u8300(t_p0, data_p1, data_p1_Idx, key_p2, val_p3, hc_p4, h_p5) {
-  var F = {procname: "rawInsert.rawInsert", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tableimpl.nim", line: 0};
-  framePtr = F;
-    F.line = 25;
-    F.filename = "tableimpl.nim";
-    data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field1 = nimCopy(data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field1, key_p2, NTI1157627922);
-    F.line = 26;
-    data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field2 = nimCopy(data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field2, val_p3, NTI1157627922);
-    F.line = 27;
-    data_p1[data_p1_Idx][chckIndx(h_p5, 0, (data_p1[data_p1_Idx]).length - 1)].Field0 = hc_p4;
-  framePtr = F.prev;
-
-  
-}
-
-function enlarge__OOZcoreZtypes_u8026(t_p0) {
-  var F = {procname: "enlarge.enlarge", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
-  framePtr = F;
-    F.line = 247;
-    F.filename = "tables.nim";
-    var n_1157635936 = [];
-    F.line = 248;
-    n_1157635936 = new Array(chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647)); for (var i = 0 ; i < chckRange(mulInt((t_p0.data).length, 2), 0, 2147483647) ; ++i) { n_1157635936[i] = {Field0: 0, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field2: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})}; }    F.line = 249;
-    F.line = 249;
-    var HEX3Atmp_587203285 = nimCopy(null, t_p0.data, NTI1157627990);
-    F.line = 249;
-    t_p0.data = n_1157635936;
-    F.line = 249;
-    n_1157635936 = HEX3Atmp_587203285;
-    Label1: {
-      F.line = 250;
-      var i_1157635996 = 0;
-      F.line = 46;
-      F.filename = "iterators_1.nim";
-      var colontmp__587203282 = 0;
-      F.line = 250;
-      F.filename = "tables.nim";
-      colontmp__587203282 = (n_1157635936).length - 1;
-      F.line = 68;
-      F.filename = "iterators_1.nim";
-      var res_587203283 = 0;
-      Label2: {
-        F.line = 69;
-          Label3: while (true) {
-          if (!(res_587203283 <= colontmp__587203282)) break Label3;
-            F.line = 250;
-            F.filename = "tables.nim";
-            i_1157635996 = res_587203283;
-            F.line = 251;
-            var eh_1157636046 = n_1157635936[chckIndx(i_1157635996, 0, (n_1157635936).length - 1)].Field0;
-            if (isFilled__pureZcollectionsZtables_u31(eh_1157636046)) {
-            F.line = 253;
-            var j_1157636050 = (eh_1157636046 & (t_p0.data).length - 1);
-            Label4: {
-              F.line = 254;
-                Label5: while (true) {
-                if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(j_1157636050, 0, (t_p0.data).length - 1)].Field0)) break Label5;
-                  F.line = 255;
-                  j_1157636050 = nextTry__pureZcollectionsZtables_u34(j_1157636050, (t_p0.data).length - 1);
-                }
-            };
-            F.line = 257;
-            rawInsert__OOZcoreZtypes_u8300(t_p0, t_p0, "data", n_1157635936[chckIndx(i_1157635996, 0, (n_1157635936).length - 1)].Field1, n_1157635936[chckIndx(i_1157635996, 0, (n_1157635936).length - 1)].Field2, eh_1157636046, j_1157636050);
-            }
-            
-            F.line = 74;
-            F.filename = "iterators_1.nim";
-            res_587203283 = addInt(res_587203283, 1);
-          }
-      };
-    };
-  framePtr = F.prev;
-
-  
-}
-
-function rawGetKnownHC__OOZcoreZtypes_u8457(t_p0, key_p1, hc_p2) {
-  var result_1157636367 = 0;
-
-  var F = {procname: "rawGetKnownHC.rawGetKnownHC", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/hashcommon.nim", line: 0};
-  framePtr = F;
-  BeforeRet: {
-    if (((t_p0.data).length == 0)) {
-    F.line = 43;
-    F.filename = "hashcommon.nim";
-    result_1157636367 = (-1);
-    break BeforeRet;
-    }
-    
-    F.line = 44;
-    var h_1157636414 = (hc_p2 & (t_p0.data).length - 1);
-    Label1: {
-      F.line = 45;
-        Label2: while (true) {
-        if (!isFilled__pureZcollectionsZtables_u31(t_p0.data[chckIndx(h_1157636414, 0, (t_p0.data).length - 1)].Field0)) break Label2;
-          if (((t_p0.data[chckIndx(h_1157636414, 0, (t_p0.data).length - 1)].Field0 == hc_p2) && HEX3DHEX3D__OOZcoreZtypes_u1146(t_p0.data[chckIndx(h_1157636414, 0, (t_p0.data).length - 1)].Field1, key_p1))) {
-          F.line = 51;
-          result_1157636367 = h_1157636414;
-          break BeforeRet;
-          }
-          
-          F.line = 52;
-          h_1157636414 = nextTry__pureZcollectionsZtables_u34(h_1157636414, (t_p0.data).length - 1);
-        }
-    };
-    F.line = 53;
-    result_1157636367 = subInt((-1), h_1157636414);
-  };
-  framePtr = F.prev;
-
-  return result_1157636367;
-
-}
-
-function HEX5BHEX5DHEX3D__OOZcoreZtypes_u7718(t_p0, key_p1, val_p2) {
-  var F = {procname: "[]=.[]=", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim", line: 0};
-  framePtr = F;
-    if (((t_p0.data).length == 0)) {
-    F.line = 182;
-    F.filename = "tableimpl.nim";
-    var correctSizeHEX60gensym183_1157635672 = slotsNeeded__pureZcollectionsZtables_u42(32);
-    F.line = 186;
-    t_p0.counter = 0;
-    F.line = 187;
-    t_p0.data = new Array(chckRange(correctSizeHEX60gensym183_1157635672, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym183_1157635672, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field2: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})}; }    }
-    
-    F.line = 59;
-    var hc_1157635681 = [0];
-    F.line = 60;
-    var index_1157635688 = rawGet__OOZcoreZtypes_u6612(t_p0, key_p1, hc_1157635681, 0);
-    if ((0 <= index_1157635688)) {
-    F.line = 61;
-    t_p0.data[chckIndx(index_1157635688, 0, (t_p0.data).length - 1)].Field2 = nimCopy(t_p0.data[chckIndx(index_1157635688, 0, (t_p0.data).length - 1)].Field2, val_p2, NTI1157627922);
-    }
-    else {
-      if (((t_p0.data).length == 0)) {
-      F.line = 182;
-      var correctSizeHEX60gensym186_1157635782 = slotsNeeded__pureZcollectionsZtables_u42(32);
-      F.line = 186;
-      t_p0.counter = 0;
-      F.line = 187;
-      t_p0.data = new Array(chckRange(correctSizeHEX60gensym186_1157635782, 0, 2147483647)); for (var i = 0 ; i < chckRange(correctSizeHEX60gensym186_1157635782, 0, 2147483647) ; ++i) { t_p0.data[i] = {Field0: 0, Field1: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field2: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})}; }      }
-      
-      if (mustRehash__OOZcoreZtypes_u7883(t_p0)) {
-      F.line = 51;
-      enlarge__OOZcoreZtypes_u8026(t_p0);
-      F.line = 52;
-      index_1157635688 = rawGetKnownHC__OOZcoreZtypes_u8457(t_p0, key_p1, hc_1157635681[0]);
-      }
-      
-      F.line = 53;
-      index_1157635688 = subInt((-1), index_1157635688);
-      F.line = 54;
-      rawInsert__OOZcoreZtypes_u8300(t_p0, t_p0, "data", key_p1, val_p2, hc_1157635681[0], index_1157635688);
-      F.line = 62;
-      t_p0.counter = addInt(t_p0.counter, 1);
-    }
-    
   framePtr = F.prev;
 
   
@@ -17734,49 +18591,49 @@ function isTruthy__OOZcoreZtypes_u317(val_p0) {
     case 4:
       F.line = 336;
       var Temporary1 = val_p0;
-      if (ConstSet196[Temporary1.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary1.kind, NTI1157627921)); }
+      if (ConstSet220[Temporary1.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary1.kind, NTI1157627921)); }
       result_1157628223 = Temporary1.boolVal;
       break BeforeRet;
       break;
     case 0:
       F.line = 337;
       var Temporary2 = val_p0;
-      if (ConstSet197[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627921)); }
+      if (ConstSet221[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627921)); }
       result_1157628223 = !((Temporary2.intVal == 0));
       break BeforeRet;
       break;
     case 1:
       F.line = 338;
       var Temporary3 = val_p0;
-      if (ConstSet198[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627921)); }
+      if (ConstSet222[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627921)); }
       result_1157628223 = !((Temporary3.floatVal == 0.0));
       break BeforeRet;
       break;
     case 2:
       F.line = 339;
       var Temporary4 = val_p0;
-      if (ConstSet199[Temporary4.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary4.kind, NTI1157627921)); }
+      if (ConstSet223[Temporary4.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary4.kind, NTI1157627921)); }
       result_1157628223 = (0 < (Temporary4.strVal).length);
       break BeforeRet;
       break;
     case 3:
       F.line = 340;
       var Temporary5 = val_p0;
-      if (ConstSet200[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'symVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
+      if (ConstSet224[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'symVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
       result_1157628223 = (0 < (Temporary5.symVal).length);
       break BeforeRet;
       break;
     case 7:
       F.line = 341;
       var Temporary6 = val_p0;
-      if (ConstSet201[Temporary6.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary6.kind, NTI1157627921)); }
+      if (ConstSet225[Temporary6.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary6.kind, NTI1157627921)); }
       result_1157628223 = (0 < (Temporary6.arrayVal).length);
       break BeforeRet;
       break;
     case 8:
       F.line = 342;
       var Temporary7 = val_p0;
-      if (ConstSet202[Temporary7.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary7.kind, NTI1157627921)); }
+      if (ConstSet226[Temporary7.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary7.kind, NTI1157627921)); }
       result_1157628223 = (0 < len__OOZcoreZtypes_u364(Temporary7.tableVal));
       break BeforeRet;
       break;
@@ -17793,7 +18650,7 @@ function isTruthy__OOZcoreZtypes_u317(val_p0) {
 
 }
 
-function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, frame_p1) {
+function handleContinuation__OOZinterpreterZvm_u20296(interp_p0, interp_p0_Idx, frame_p1) {
         var Temporary1;
           var Temporary2;
       var Temporary3;
@@ -17846,130 +18703,130 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
         var Temporary117;
         var Temporary118;
 
-  var result_1241533921 = false;
+  var result_1241534283 = false;
 
   var F = {procname: "vm.handleContinuation", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
-    F.line = 3179;
+    F.line = 3413;
     F.filename = "vm.nim";
     switch (frame_p1.kind) {
     case 4:
       if (((frame_p1.pendingArgs).length == 0)) {
-      F.line = 3184;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19377(frame_p1.pendingSelector, 0));
+      F.line = 3418;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19739(frame_p1.pendingSelector, 0));
       }
       else {
-        F.line = 3187;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19385(frame_p1.pendingSelector, frame_p1.pendingArgs, 0));
-        F.line = 3188;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(frame_p1.pendingArgs[chckIndx(0, 0, (frame_p1.pendingArgs).length - 1)]));
+        F.line = 3421;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19747(frame_p1.pendingSelector, frame_p1.pendingArgs, 0));
+        F.line = 3422;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(frame_p1.pendingArgs[chckIndx(0, 0, (frame_p1.pendingArgs).length - 1)]));
       }
       
-      F.line = 3189;
-      result_1241533921 = true;
+      F.line = 3423;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 5:
       if (eqStrings(frame_p1.pendingSelector, [95,95,97,115,115,105,103,110,95,95])) {
-      F.line = 3194;
-      var value_1241533925 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
-      F.line = 3195;
-      setVariable__OOZinterpreterZvm_u2638(interp_p0, interp_p0_Idx, frame_p1.selector, value_1241533925);
-      F.line = 3196;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, value_1241533925);
-      F.line = 3197;
-      result_1241533921 = true;
+      F.line = 3428;
+      var value_1241534287 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
+      F.line = 3429;
+      setVariable__OOZinterpreterZvm_u2967(interp_p0, interp_p0_Idx, frame_p1.selector, value_1241534287);
+      F.line = 3430;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, value_1241534287);
+      F.line = 3431;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
       if (eqStrings(frame_p1.pendingSelector, [58,61])) {
-      F.line = 3201;
-      var value_1241533926 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
+      F.line = 3435;
+      var value_1241534288 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
       if ((!((interp_p0[interp_p0_Idx].currentReceiver == null)) && (interp_p0[interp_p0_Idx].currentReceiver.kind == 0))) {
-      F.line = 3203;
-      var slotIndex_1241533935 = frame_p1.currentArgIndex;
-        if (!(0 <= slotIndex_1241533935)) Temporary1 = false; else {          var Temporary2 = interp_p0[interp_p0_Idx].currentReceiver;
-          if (ConstSet161[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627908)); }
-          Temporary1 = (slotIndex_1241533935 < (Temporary2.slots).length);        }      if (Temporary1) {
+      F.line = 3437;
+      var slotIndex_1241534297 = frame_p1.currentArgIndex;
+        if (!(0 <= slotIndex_1241534297)) Temporary1 = false; else {          var Temporary2 = interp_p0[interp_p0_Idx].currentReceiver;
+          if (ConstSet185[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627908)); }
+          Temporary1 = (slotIndex_1241534297 < (Temporary2.slots).length);        }      if (Temporary1) {
       var Temporary3 = interp_p0[interp_p0_Idx].currentReceiver;
-      if (ConstSet162[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627908)); }
-      F.line = 3205;
-      (Temporary4 = Temporary3.slots, Temporary4)[chckIndx(slotIndex_1241533935, 0, (Temporary4).length - 1)] = nimCopy((Temporary4 = Temporary3.slots, Temporary4)[chckIndx(slotIndex_1241533935, 0, (Temporary4).length - 1)], value_1241533926, NTI1157627922);
+      if (ConstSet186[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627908)); }
+      F.line = 3439;
+      (Temporary4 = Temporary3.slots, Temporary4)[chckIndx(slotIndex_1241534297, 0, (Temporary4).length - 1)] = nimCopy((Temporary4 = Temporary3.slots, Temporary4)[chckIndx(slotIndex_1241534297, 0, (Temporary4).length - 1)], value_1241534288, NTI1157627922);
       }
       
       }
       
-      F.line = 3206;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, value_1241533926);
-      F.line = 3207;
-      result_1241533921 = true;
+      F.line = 3440;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, value_1241534288);
+      F.line = 3441;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
       if (eqStrings(frame_p1.pendingSelector, [100,105,115,99,97,114,100])) {
-      F.line = 3211;
-      (popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx));
-      F.line = 3212;
-      result_1241533921 = true;
+      F.line = 3445;
+      (popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx));
+      F.line = 3446;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
-      F.line = 3215;
-      var nextIndex_1241533939 = addInt(frame_p1.currentArgIndex, 1);
-      if ((nextIndex_1241533939 < (frame_p1.pendingArgs).length)) {
-      F.line = 3218;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19385(frame_p1.pendingSelector, frame_p1.pendingArgs, nextIndex_1241533939));
-      F.line = 3219;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(frame_p1.pendingArgs[chckIndx(nextIndex_1241533939, 0, (frame_p1.pendingArgs).length - 1)]));
+      F.line = 3449;
+      var nextIndex_1241534301 = addInt(frame_p1.currentArgIndex, 1);
+      if ((nextIndex_1241534301 < (frame_p1.pendingArgs).length)) {
+      F.line = 3452;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19747(frame_p1.pendingSelector, frame_p1.pendingArgs, nextIndex_1241534301));
+      F.line = 3453;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(frame_p1.pendingArgs[chckIndx(nextIndex_1241534301, 0, (frame_p1.pendingArgs).length - 1)]));
       }
       else {
-        F.line = 3222;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19377(frame_p1.pendingSelector, (frame_p1.pendingArgs).length));
+        F.line = 3456;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19739(frame_p1.pendingSelector, (frame_p1.pendingArgs).length));
       }
       
-      F.line = 3223;
-      result_1241533921 = true;
+      F.line = 3457;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 1:
-      F.line = 3227;
-      var args_1241533946 = popValues__OOZinterpreterZvm_u19521(interp_p0, interp_p0_Idx, frame_p1.argCount);
-      F.line = 3228;
-      var receiverVal_1241533947 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
-      if ((receiverVal_1241533947.kind == 6)) {
-      F.line = 3232;
+      F.line = 3461;
+      var args_1241534308 = popValues__OOZinterpreterZvm_u19883(interp_p0, interp_p0_Idx, frame_p1.argCount);
+      F.line = 3462;
+      var receiverVal_1241534309 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
+      if ((receiverVal_1241534309.kind == 6)) {
+      F.line = 3466;
       switch (toJSStr(frame_p1.selector)) {
       case "value":
       case "value:":
       case "value:value:":
       case "value:value:value:":
       case "value:value:value:value:":
-        F.line = 3234;
-        var Temporary5 = receiverVal_1241533947;
-        if (ConstSet163[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'blockVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19390(Temporary5.blockVal, (args_1241533946).length));
+        F.line = 3468;
+        var Temporary5 = receiverVal_1241534309;
+        if (ConstSet187[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'blockVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19752(Temporary5.blockVal, (args_1241534308).length));
         Label6: {
-          F.line = 3236;
-          var arg_1241533958 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+          F.line = 3470;
+          var arg_1241534320 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
           F.line = 249;
           F.filename = "iterators.nim";
-          var i_587203179 = 0;
+          var i_587203217 = 0;
           F.line = 250;
-          var L_587203180 = (args_1241533946).length;
+          var L_587203218 = (args_1241534308).length;
           Label7: {
             F.line = 251;
               Label8: while (true) {
-              if (!(i_587203179 < L_587203180)) break Label8;
-                F.line = 3236;
+              if (!(i_587203217 < L_587203218)) break Label8;
+                F.line = 3470;
                 F.filename = "vm.nim";
-                arg_1241533958 = args_1241533946[chckIndx(i_587203179, 0, (args_1241533946).length - 1)];
-                F.line = 3237;
-                pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, arg_1241533958);
+                arg_1241534320 = args_1241534308[chckIndx(i_587203217, 0, (args_1241534308).length - 1)];
+                F.line = 3471;
+                pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, arg_1241534320);
                 F.line = 13;
                 F.filename = "iterators.nim";
-                i_587203179 += 1;
-                if (!(((args_1241533946).length == L_587203180))) {
+                i_587203217 += 1;
+                if (!(((args_1241534308).length == L_587203218))) {
                 F.line = 254;
                 failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
                 }
@@ -17977,9 +18834,9 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
               }
           };
         };
-        F.line = 3238;
+        F.line = 3472;
         F.filename = "vm.nim";
-        result_1241533921 = true;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       default: 
@@ -17987,44 +18844,44 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       }
       }
       
-      F.line = 3243;
-      var receiver_1241533959 = null;
-      F.line = 3244;
-      switch (receiverVal_1241533947.kind) {
+      F.line = 3477;
+      var receiver_1241534321 = null;
+      F.line = 3478;
+      switch (receiverVal_1241534309.kind) {
       case 10:
-        F.line = 3246;
-        var Temporary9 = receiverVal_1241533947;
-        if (ConstSet164[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627921)); }
-        receiver_1241533959 = Temporary9.instVal;
+        F.line = 3480;
+        var Temporary9 = receiverVal_1241534309;
+        if (ConstSet188[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627921)); }
+        receiver_1241534321 = Temporary9.instVal;
         break;
       case 0:
-        F.line = 3248;
-        var Temporary10 = receiverVal_1241533947;
-        if (ConstSet165[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627921)); }
-        receiver_1241533959 = newIntInstance__OOZcoreZtypes_u6363(integerClass_1157628212[0], Temporary10.intVal);
+        F.line = 3482;
+        var Temporary10 = receiverVal_1241534309;
+        if (ConstSet189[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627921)); }
+        receiver_1241534321 = newIntInstance__OOZcoreZtypes_u6363(integerClass_1157628212[0], Temporary10.intVal);
         break;
       case 1:
-        F.line = 3250;
-        var Temporary11 = receiverVal_1241533947;
-        if (ConstSet166[Temporary11.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary11.kind, NTI1157627921)); }
-        receiver_1241533959 = newFloatInstance__OOZcoreZtypes_u6367(floatClass_1157628213[0], Temporary11.floatVal);
+        F.line = 3484;
+        var Temporary11 = receiverVal_1241534309;
+        if (ConstSet190[Temporary11.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary11.kind, NTI1157627921)); }
+        receiver_1241534321 = newFloatInstance__OOZcoreZtypes_u6367(floatClass_1157628213[0], Temporary11.floatVal);
         break;
       case 2:
-        F.line = 3252;
-        var Temporary12 = receiverVal_1241533947;
-        if (ConstSet167[Temporary12.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary12.kind, NTI1157627921)); }
-        receiver_1241533959 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary12.strVal);
+        F.line = 3486;
+        var Temporary12 = receiverVal_1241534309;
+        if (ConstSet191[Temporary12.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary12.kind, NTI1157627921)); }
+        receiver_1241534321 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary12.strVal);
         break;
       case 4:
-        F.line = 3255;
-        var boolInst_1241533960 = null;
-        F.line = 3256;
-        boolInst_1241533960 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3257;
-        boolInst_1241533960.kind = 0;
-        F.line = 3258;
-          var Temporary14 = receiverVal_1241533947;
-          if (ConstSet168[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
+        F.line = 3489;
+        var boolInst_1241534322 = null;
+        F.line = 3490;
+        boolInst_1241534322 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 3491;
+        boolInst_1241534322.kind = 0;
+        F.line = 3492;
+          var Temporary14 = receiverVal_1241534309;
+          if (ConstSet192[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
         if (Temporary14.boolVal) {
         Temporary13 = trueClassCache_1493172530[0];
         }
@@ -18032,139 +18889,139 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
         Temporary13 = falseClassCache_1493172531[0];
         }
         
-        boolInst_1241533960.class = Temporary13;
-        var Temporary15 = boolInst_1241533960;
-        if (ConstSet169[Temporary15.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary15.kind, NTI1157627908)); }
-        F.line = 3259;
+        boolInst_1241534322.class = Temporary13;
+        var Temporary15 = boolInst_1241534322;
+        if (ConstSet193[Temporary15.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary15.kind, NTI1157627908)); }
+        F.line = 3493;
         Temporary15.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3266;
-        boolInst_1241533960.isNimProxy = false;
-        F.line = 3267;
-        receiver_1241533959 = boolInst_1241533960;
+        F.line = 3500;
+        boolInst_1241534322.isNimProxy = false;
+        F.line = 3501;
+        receiver_1241534321 = boolInst_1241534322;
         break;
       case 5:
-        F.line = 3269;
-        receiver_1241533959 = nilInstance_1157628220[0];
+        F.line = 3503;
+        receiver_1241534321 = nilInstance_1157628220[0];
         break;
       case 7:
-        F.line = 3271;
-        var Temporary16 = receiverVal_1241533947;
-        if (ConstSet170[Temporary16.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary16.kind, NTI1157627921)); }
-        receiver_1241533959 = newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], Temporary16.arrayVal);
+        F.line = 3505;
+        var Temporary16 = receiverVal_1241534309;
+        if (ConstSet194[Temporary16.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary16.kind, NTI1157627921)); }
+        receiver_1241534321 = newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], Temporary16.arrayVal);
         break;
       case 8:
-        F.line = 3273;
-        var Temporary17 = receiverVal_1241533947;
-        if (ConstSet171[Temporary17.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary17.kind, NTI1157627921)); }
-        receiver_1241533959 = newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], Temporary17.tableVal);
+        F.line = 3507;
+        var Temporary17 = receiverVal_1241534309;
+        if (ConstSet195[Temporary17.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary17.kind, NTI1157627921)); }
+        receiver_1241534321 = newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], Temporary17.tableVal);
         break;
       case 9:
-        F.line = 3276;
-        var Temporary18 = receiverVal_1241533947;
-        if (ConstSet172[Temporary18.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary18.kind, NTI1157627921)); }
-        var cls_1241533968 = Temporary18.classVal;
-        F.line = 3277;
-        var lookup_1241533969 = lookupClassMethod__OOZinterpreterZvm_u5647(cls_1241533968, frame_p1.selector);
-        if (lookup_1241533969.found) {
-        F.line = 3279;
-        var currentMethod_1241533970 = lookup_1241533969.currentMethod;
-        if (!((currentMethod_1241533970.nativeImpl == 0))) {
-        F.line = 3283;
-        var savedReceiver_1241533971 = interp_p0[interp_p0_Idx].currentReceiver;
-        F.line = 3285;
-        var classReceiver_1241533976 = {kind: 0, class: cls_1241533968, slots: [], isNimProxy: false, nimValue: 0, m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: []};
-        F.line = 3287;
-        interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241533976;
-        F.line = 3288;
+        F.line = 3510;
+        var Temporary18 = receiverVal_1241534309;
+        if (ConstSet196[Temporary18.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary18.kind, NTI1157627921)); }
+        var cls_1241534330 = Temporary18.classVal;
+        F.line = 3511;
+        var lookup_1241534331 = lookupClassMethod__OOZinterpreterZvm_u5976(cls_1241534330, frame_p1.selector);
+        if (lookup_1241534331.found) {
+        F.line = 3513;
+        var currentMethod_1241534332 = lookup_1241534331.currentMethod;
+        if (!((currentMethod_1241534332.nativeImpl == 0))) {
+        F.line = 3517;
+        var savedReceiver_1241534333 = interp_p0[interp_p0_Idx].currentReceiver;
+        F.line = 3519;
+        var classReceiver_1241534338 = {kind: 0, class: cls_1241534330, slots: [], isNimProxy: false, nimValue: 0, m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: []};
+        F.line = 3521;
+        interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534338;
+        F.line = 3522;
         try {
-        F.line = 3289;
-        var resultVal_1241533977 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-        if (currentMethod_1241533970.hasInterpreterParam) {
-        F.line = 3293;
-        var nativeProc_1241533984 = currentMethod_1241533970.nativeImpl;
-        F.line = 3294;
-        resultVal_1241533977 = nimCopy(resultVal_1241533977, nativeProc_1241533984(interp_p0, interp_p0_Idx, classReceiver_1241533976, args_1241533946), NTI1157627922);
+        F.line = 3523;
+        var resultVal_1241534339 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+        if (currentMethod_1241534332.hasInterpreterParam) {
+        F.line = 3527;
+        var nativeProc_1241534346 = currentMethod_1241534332.nativeImpl;
+        F.line = 3528;
+        resultVal_1241534339 = nimCopy(resultVal_1241534339, nativeProc_1241534346(interp_p0, interp_p0_Idx, classReceiver_1241534338, args_1241534308), NTI1157627922);
         }
         else {
-          F.line = 3298;
-          var nativeProc_1241533990 = currentMethod_1241533970.nativeImpl;
-          F.line = 3299;
-          resultVal_1241533977 = nimCopy(resultVal_1241533977, nativeProc_1241533990(cls_1241533968, args_1241533946), NTI1157627922);
+          F.line = 3532;
+          var nativeProc_1241534352 = currentMethod_1241534332.nativeImpl;
+          F.line = 3533;
+          resultVal_1241534339 = nimCopy(resultVal_1241534339, nativeProc_1241534352(cls_1241534330, args_1241534308), NTI1157627922);
         }
         
-        F.line = 3300;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, resultVal_1241533977);
+        F.line = 3534;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, resultVal_1241534339);
         } finally {
         framePtr = F;
-        F.line = 3302;
-        interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241533971;
+        F.line = 3536;
+        interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534333;
         }
-        F.line = 3303;
-        result_1241533921 = true;
+        F.line = 3537;
+        result_1241534283 = true;
         break BeforeRet;
         }
         
-        F.line = 3306;
-        var classReceiver_1241533995 = {kind: 0, class: cls_1241533968, slots: [], isNimProxy: false, nimValue: 0, m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: []};
-        if (!(((currentMethod_1241533970.parameters).length == (args_1241533946).length))) {
-        F.line = 3310;
-        raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241533970.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241533946).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+        F.line = 3540;
+        var classReceiver_1241534357 = {kind: 0, class: cls_1241534330, slots: [], isNimProxy: false, nimValue: 0, m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: []};
+        if (!(((currentMethod_1241534332.parameters).length == (args_1241534308).length))) {
+        F.line = 3544;
+        raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534332.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241534308).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
         }
         
-        F.line = 3315;
-        var activation_1241534009 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241533970, classReceiver_1241533995, interp_p0[interp_p0_Idx].currentActivation, lookup_1241533969.definingClass, true);
+        F.line = 3549;
+        var activation_1241534371 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534332, classReceiver_1241534357, interp_p0[interp_p0_Idx].currentActivation, lookup_1241534331.definingClass, true);
         Label20: {
-          F.line = 3318;
-          var i_1241534017 = 0;
+          F.line = 3552;
+          var i_1241534379 = 0;
           F.line = 126;
           F.filename = "iterators_1.nim";
-          var colontmp__587203183 = 0;
-          F.line = 3318;
+          var colontmp__587203221 = 0;
+          F.line = 3552;
           F.filename = "vm.nim";
-          colontmp__587203183 = (currentMethod_1241533970.parameters).length;
+          colontmp__587203221 = (currentMethod_1241534332.parameters).length;
           F.line = 128;
           F.filename = "iterators_1.nim";
-          var i_587203184 = 0;
+          var i_587203222 = 0;
           Label21: {
             F.line = 129;
               Label22: while (true) {
-              if (!(i_587203184 < colontmp__587203183)) break Label22;
-                F.line = 3318;
+              if (!(i_587203222 < colontmp__587203221)) break Label22;
+                F.line = 3552;
                 F.filename = "vm.nim";
-                i_1241534017 = i_587203184;
-                F.line = 3319;
-                HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534009.locals, currentMethod_1241533970.parameters[chckIndx(i_1241534017, 0, (currentMethod_1241533970.parameters).length - 1)], args_1241533946[chckIndx(i_1241534017, 0, (args_1241533946).length - 1)]);
+                i_1241534379 = i_587203222;
+                F.line = 3553;
+                HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534371.locals, currentMethod_1241534332.parameters[chckIndx(i_1241534379, 0, (currentMethod_1241534332.parameters).length - 1)], args_1241534308[chckIndx(i_1241534379, 0, (args_1241534308).length - 1)]);
                 F.line = 131;
                 F.filename = "iterators_1.nim";
-                i_587203184 = addInt(i_587203184, 1);
+                i_587203222 = addInt(i_587203222, 1);
               }
           };
         };
         Label23: {
-          F.line = 3322;
+          F.line = 3556;
           F.filename = "vm.nim";
-          var tempName_1241534063 = [];
+          var tempName_1241534425 = [];
           F.line = 249;
           F.filename = "iterators.nim";
-          var i_587203187 = 0;
+          var i_587203225 = 0;
           F.line = 250;
-          var L_587203188 = (currentMethod_1241533970.temporaries).length;
+          var L_587203226 = (currentMethod_1241534332.temporaries).length;
           Label24: {
             F.line = 251;
               Label25: while (true) {
-              if (!(i_587203187 < L_587203188)) break Label25;
-                F.line = 3322;
+              if (!(i_587203225 < L_587203226)) break Label25;
+                F.line = 3556;
                 F.filename = "vm.nim";
-                tempName_1241534063 = currentMethod_1241533970.temporaries[chckIndx(i_587203187, 0, (currentMethod_1241533970.temporaries).length - 1)];
-                if (!(contains__OOZinterpreterZvm_u1463(activation_1241534009.locals, tempName_1241534063))) {
-                F.line = 3324;
-                HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534009.locals, tempName_1241534063, nilValue__OOZcoreZtypes_u1406());
+                tempName_1241534425 = currentMethod_1241534332.temporaries[chckIndx(i_587203225, 0, (currentMethod_1241534332.temporaries).length - 1)];
+                if (!(contains__OOZinterpreterZvm_u1792(activation_1241534371.locals, tempName_1241534425))) {
+                F.line = 3558;
+                HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534371.locals, tempName_1241534425, nilValue__OOZcoreZtypes_u1406());
                 }
                 
                 F.line = 13;
                 F.filename = "iterators.nim";
-                i_587203187 += 1;
-                if (!(((currentMethod_1241533970.temporaries).length == L_587203188))) {
+                i_587203225 += 1;
+                if (!(((currentMethod_1241534332.temporaries).length == L_587203226))) {
                 F.line = 254;
                 failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
                 }
@@ -18172,174 +19029,174 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
               }
           };
         };
-        F.line = 3327;
+        F.line = 3561;
         F.filename = "vm.nim";
-        var savedReceiver_1241534149 = interp_p0[interp_p0_Idx].currentReceiver;
-        F.line = 3330;
-        interp_p0[interp_p0_Idx].activationStack.push(activation_1241534009);;
-        F.line = 3331;
-        interp_p0[interp_p0_Idx].currentActivation = activation_1241534009;
-        F.line = 3332;
-        interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241533995;
-        if (currentMethod_1241533970.isMethod) {
-        F.line = 3336;
-        currentMethod_1241533970.homeActivation = activation_1241534009;
+        var savedReceiver_1241534511 = interp_p0[interp_p0_Idx].currentReceiver;
+        F.line = 3564;
+        interp_p0[interp_p0_Idx].activationStack.push(activation_1241534371);;
+        F.line = 3565;
+        interp_p0[interp_p0_Idx].currentActivation = activation_1241534371;
+        F.line = 3566;
+        interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534357;
+        if (currentMethod_1241534332.isMethod) {
+        F.line = 3570;
+        currentMethod_1241534332.homeActivation = activation_1241534371;
         }
         
-        F.line = 3339;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19401(savedReceiver_1241534149, false, (interp_p0[interp_p0_Idx].evalStack).length));
-        if ((0 < (currentMethod_1241533970.body).length)) {
+        F.line = 3573;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19763(savedReceiver_1241534511, false, (interp_p0[interp_p0_Idx].evalStack).length));
+        if ((0 < (currentMethod_1241534332.body).length)) {
         Label26: {
-          F.line = 3343;
-          var i_1241534168 = 0;
+          F.line = 3577;
+          var i_1241534530 = 0;
           F.line = 6;
           F.filename = "iterators_1.nim";
-          var colontmp__587203191 = 0;
-          F.line = 3343;
+          var colontmp__587203229 = 0;
+          F.line = 3577;
           F.filename = "vm.nim";
-          colontmp__587203191 = subInt((currentMethod_1241533970.body).length, 1);
+          colontmp__587203229 = subInt((currentMethod_1241534332.body).length, 1);
           F.line = 33;
           F.filename = "iterators_1.nim";
-          var res_587203192 = colontmp__587203191;
+          var res_587203230 = colontmp__587203229;
           Label27: {
             F.line = 34;
               Label28: while (true) {
-              if (!(0 <= res_587203192)) break Label28;
-                F.line = 3343;
+              if (!(0 <= res_587203230)) break Label28;
+                F.line = 3577;
                 F.filename = "vm.nim";
-                i_1241534168 = res_587203192;
-                if ((i_1241534168 < subInt((currentMethod_1241533970.body).length, 1))) {
-                F.line = 3345;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                i_1241534530 = res_587203230;
+                if ((i_1241534530 < subInt((currentMethod_1241534332.body).length, 1))) {
+                F.line = 3579;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                 }
                 
-                F.line = 3346;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(currentMethod_1241533970.body[chckIndx(i_1241534168, 0, (currentMethod_1241533970.body).length - 1)]));
+                F.line = 3580;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(currentMethod_1241534332.body[chckIndx(i_1241534530, 0, (currentMethod_1241534332.body).length - 1)]));
                 F.line = 39;
                 F.filename = "iterators_1.nim";
-                res_587203192 = subInt(res_587203192, 1);
+                res_587203230 = subInt(res_587203230, 1);
               }
           };
         };
         }
         else {
-          F.line = 3348;
+          F.line = 3582;
           F.filename = "vm.nim";
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         }
         
-        F.line = 3350;
-        result_1241533921 = true;
+        F.line = 3584;
+        result_1241534283 = true;
         break BeforeRet;
         }
         else {
-          F.line = 3354;
-          var classReceiver_1241534176 = {kind: 0, class: cls_1241533968, slots: [], isNimProxy: false, nimValue: 0, m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: []};
-          F.line = 3355;
-          var instanceLookup_1241534177 = lookupMethod__OOZinterpreterZvm_u5501(interp_p0[interp_p0_Idx], classReceiver_1241534176, frame_p1.selector);
-          if (instanceLookup_1241534177.found) {
-          F.line = 3358;
-          var currentMethod_1241534178 = instanceLookup_1241534177.currentMethod;
+          F.line = 3588;
+          var classReceiver_1241534538 = {kind: 0, class: cls_1241534330, slots: [], isNimProxy: false, nimValue: 0, m_type: NTI1157627977, elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: []};
+          F.line = 3589;
+          var instanceLookup_1241534539 = lookupMethod__OOZinterpreterZvm_u5830(interp_p0[interp_p0_Idx], classReceiver_1241534538, frame_p1.selector);
+          if (instanceLookup_1241534539.found) {
+          F.line = 3592;
+          var currentMethod_1241534540 = instanceLookup_1241534539.currentMethod;
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
           logLoop__pureZlogging_u148(1, [[86,77,58,32,70,111,117,110,100,32,105,110,115,116,97,110,99,101,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,32,111,110,32,67,108,97,115,115,32,99,108,97,115,115]]);
           }
           
-          if (!((currentMethod_1241534178.nativeImpl == 0))) {
-          F.line = 3363;
+          if (!((currentMethod_1241534540.nativeImpl == 0))) {
+          F.line = 3597;
           F.filename = "vm.nim";
-          var savedReceiver_1241534183 = interp_p0[interp_p0_Idx].currentReceiver;
-          F.line = 3364;
-          interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534176;
-          F.line = 3365;
+          var savedReceiver_1241534545 = interp_p0[interp_p0_Idx].currentReceiver;
+          F.line = 3598;
+          interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534538;
+          F.line = 3599;
           try {
-          F.line = 3366;
-          var resultVal_1241534184 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-          if (currentMethod_1241534178.hasInterpreterParam) {
-          F.line = 3369;
-          var nativeProc_1241534191 = currentMethod_1241534178.nativeImpl;
-          F.line = 3370;
-          resultVal_1241534184 = nimCopy(resultVal_1241534184, nativeProc_1241534191(interp_p0, interp_p0_Idx, classReceiver_1241534176, args_1241533946), NTI1157627922);
+          F.line = 3600;
+          var resultVal_1241534546 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+          if (currentMethod_1241534540.hasInterpreterParam) {
+          F.line = 3603;
+          var nativeProc_1241534553 = currentMethod_1241534540.nativeImpl;
+          F.line = 3604;
+          resultVal_1241534546 = nimCopy(resultVal_1241534546, nativeProc_1241534553(interp_p0, interp_p0_Idx, classReceiver_1241534538, args_1241534308), NTI1157627922);
           }
           else {
-            F.line = 3373;
-            var nativeProc_1241534197 = currentMethod_1241534178.nativeImpl;
-            F.line = 3374;
-            resultVal_1241534184 = nimCopy(resultVal_1241534184, nativeProc_1241534197(classReceiver_1241534176, args_1241533946), NTI1157627922);
+            F.line = 3607;
+            var nativeProc_1241534559 = currentMethod_1241534540.nativeImpl;
+            F.line = 3608;
+            resultVal_1241534546 = nimCopy(resultVal_1241534546, nativeProc_1241534559(classReceiver_1241534538, args_1241534308), NTI1157627922);
           }
           
-          F.line = 3375;
-          pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, resultVal_1241534184);
+          F.line = 3609;
+          pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, resultVal_1241534546);
           } finally {
           framePtr = F;
-          F.line = 3377;
-          interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534183;
+          F.line = 3611;
+          interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534545;
           }
-          F.line = 3378;
-          result_1241533921 = true;
+          F.line = 3612;
+          result_1241534283 = true;
           break BeforeRet;
           }
           
-          if (!(((currentMethod_1241534178.parameters).length == (args_1241533946).length))) {
-          F.line = 3382;
-          raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534178.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241533946).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+          if (!(((currentMethod_1241534540.parameters).length == (args_1241534308).length))) {
+          F.line = 3616;
+          raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534540.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241534308).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
           }
           
-          F.line = 3386;
-          var activation_1241534211 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534178, classReceiver_1241534176, interp_p0[interp_p0_Idx].currentActivation, instanceLookup_1241534177.definingClass, false);
+          F.line = 3620;
+          var activation_1241534573 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534540, classReceiver_1241534538, interp_p0[interp_p0_Idx].currentActivation, instanceLookup_1241534539.definingClass, false);
           Label30: {
-            F.line = 3388;
-            var i_1241534219 = 0;
+            F.line = 3622;
+            var i_1241534581 = 0;
             F.line = 126;
             F.filename = "iterators_1.nim";
-            var colontmp__587203195 = 0;
-            F.line = 3388;
+            var colontmp__587203233 = 0;
+            F.line = 3622;
             F.filename = "vm.nim";
-            colontmp__587203195 = (currentMethod_1241534178.parameters).length;
+            colontmp__587203233 = (currentMethod_1241534540.parameters).length;
             F.line = 128;
             F.filename = "iterators_1.nim";
-            var i_587203196 = 0;
+            var i_587203234 = 0;
             Label31: {
               F.line = 129;
                 Label32: while (true) {
-                if (!(i_587203196 < colontmp__587203195)) break Label32;
-                  F.line = 3388;
+                if (!(i_587203234 < colontmp__587203233)) break Label32;
+                  F.line = 3622;
                   F.filename = "vm.nim";
-                  i_1241534219 = i_587203196;
-                  F.line = 3389;
-                  HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534211.locals, currentMethod_1241534178.parameters[chckIndx(i_1241534219, 0, (currentMethod_1241534178.parameters).length - 1)], args_1241533946[chckIndx(i_1241534219, 0, (args_1241533946).length - 1)]);
+                  i_1241534581 = i_587203234;
+                  F.line = 3623;
+                  HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534573.locals, currentMethod_1241534540.parameters[chckIndx(i_1241534581, 0, (currentMethod_1241534540.parameters).length - 1)], args_1241534308[chckIndx(i_1241534581, 0, (args_1241534308).length - 1)]);
                   F.line = 131;
                   F.filename = "iterators_1.nim";
-                  i_587203196 = addInt(i_587203196, 1);
+                  i_587203234 = addInt(i_587203234, 1);
                 }
             };
           };
           Label33: {
-            F.line = 3391;
+            F.line = 3625;
             F.filename = "vm.nim";
-            var tempName_1241534265 = [];
+            var tempName_1241534627 = [];
             F.line = 249;
             F.filename = "iterators.nim";
-            var i_587203199 = 0;
+            var i_587203237 = 0;
             F.line = 250;
-            var L_587203200 = (currentMethod_1241534178.temporaries).length;
+            var L_587203238 = (currentMethod_1241534540.temporaries).length;
             Label34: {
               F.line = 251;
                 Label35: while (true) {
-                if (!(i_587203199 < L_587203200)) break Label35;
-                  F.line = 3391;
+                if (!(i_587203237 < L_587203238)) break Label35;
+                  F.line = 3625;
                   F.filename = "vm.nim";
-                  tempName_1241534265 = currentMethod_1241534178.temporaries[chckIndx(i_587203199, 0, (currentMethod_1241534178.temporaries).length - 1)];
-                  if (!(contains__OOZinterpreterZvm_u1463(activation_1241534211.locals, tempName_1241534265))) {
-                  F.line = 3393;
-                  HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534211.locals, tempName_1241534265, nilValue__OOZcoreZtypes_u1406());
+                  tempName_1241534627 = currentMethod_1241534540.temporaries[chckIndx(i_587203237, 0, (currentMethod_1241534540.temporaries).length - 1)];
+                  if (!(contains__OOZinterpreterZvm_u1792(activation_1241534573.locals, tempName_1241534627))) {
+                  F.line = 3627;
+                  HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534573.locals, tempName_1241534627, nilValue__OOZcoreZtypes_u1406());
                   }
                   
                   F.line = 13;
                   F.filename = "iterators.nim";
-                  i_587203199 += 1;
-                  if (!(((currentMethod_1241534178.temporaries).length == L_587203200))) {
+                  i_587203237 += 1;
+                  if (!(((currentMethod_1241534540.temporaries).length == L_587203238))) {
                   F.line = 254;
                   failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
                   }
@@ -18347,172 +19204,172 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
                 }
             };
           };
-          F.line = 3395;
+          F.line = 3629;
           F.filename = "vm.nim";
-          var savedReceiver_1241534351 = interp_p0[interp_p0_Idx].currentReceiver;
-          F.line = 3396;
-          interp_p0[interp_p0_Idx].activationStack.push(activation_1241534211);;
-          F.line = 3397;
-          interp_p0[interp_p0_Idx].currentActivation = activation_1241534211;
-          F.line = 3398;
-          interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534176;
-          if (currentMethod_1241534178.isMethod) {
-          F.line = 3401;
-          currentMethod_1241534178.homeActivation = activation_1241534211;
+          var savedReceiver_1241534713 = interp_p0[interp_p0_Idx].currentReceiver;
+          F.line = 3630;
+          interp_p0[interp_p0_Idx].activationStack.push(activation_1241534573);;
+          F.line = 3631;
+          interp_p0[interp_p0_Idx].currentActivation = activation_1241534573;
+          F.line = 3632;
+          interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534538;
+          if (currentMethod_1241534540.isMethod) {
+          F.line = 3635;
+          currentMethod_1241534540.homeActivation = activation_1241534573;
           }
           
-          F.line = 3403;
-          pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19401(savedReceiver_1241534351, false, (interp_p0[interp_p0_Idx].evalStack).length));
-          if ((0 < (currentMethod_1241534178.body).length)) {
+          F.line = 3637;
+          pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19763(savedReceiver_1241534713, false, (interp_p0[interp_p0_Idx].evalStack).length));
+          if ((0 < (currentMethod_1241534540.body).length)) {
           Label36: {
-            F.line = 3406;
-            var i_1241534370 = 0;
+            F.line = 3640;
+            var i_1241534732 = 0;
             F.line = 6;
             F.filename = "iterators_1.nim";
-            var colontmp__587203203 = 0;
-            F.line = 3406;
+            var colontmp__587203241 = 0;
+            F.line = 3640;
             F.filename = "vm.nim";
-            colontmp__587203203 = subInt((currentMethod_1241534178.body).length, 1);
+            colontmp__587203241 = subInt((currentMethod_1241534540.body).length, 1);
             F.line = 33;
             F.filename = "iterators_1.nim";
-            var res_587203204 = colontmp__587203203;
+            var res_587203242 = colontmp__587203241;
             Label37: {
               F.line = 34;
                 Label38: while (true) {
-                if (!(0 <= res_587203204)) break Label38;
-                  F.line = 3406;
+                if (!(0 <= res_587203242)) break Label38;
+                  F.line = 3640;
                   F.filename = "vm.nim";
-                  i_1241534370 = res_587203204;
-                  if ((i_1241534370 < subInt((currentMethod_1241534178.body).length, 1))) {
-                  F.line = 3408;
-                  pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                  i_1241534732 = res_587203242;
+                  if ((i_1241534732 < subInt((currentMethod_1241534540.body).length, 1))) {
+                  F.line = 3642;
+                  pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                   }
                   
-                  F.line = 3409;
-                  pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(currentMethod_1241534178.body[chckIndx(i_1241534370, 0, (currentMethod_1241534178.body).length - 1)]));
+                  F.line = 3643;
+                  pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(currentMethod_1241534540.body[chckIndx(i_1241534732, 0, (currentMethod_1241534540.body).length - 1)]));
                   F.line = 39;
                   F.filename = "iterators_1.nim";
-                  res_587203204 = subInt(res_587203204, 1);
+                  res_587203242 = subInt(res_587203242, 1);
                 }
             };
           };
           }
           else {
-            F.line = 3411;
+            F.line = 3645;
             F.filename = "vm.nim";
-          pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+          pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
           }
           
-          F.line = 3413;
-          result_1241533921 = true;
+          F.line = 3647;
+          result_1241534283 = true;
           break BeforeRet;
           }
           else {
-            F.line = 3417;
-            var classMethodLookup_1241534374 = lookupClassMethod__OOZinterpreterZvm_u5647(cls_1241533968, frame_p1.selector);
-            if (classMethodLookup_1241534374.found) {
-            F.line = 3419;
-            var currentMethod_1241534375 = classMethodLookup_1241534374.currentMethod;
+            F.line = 3651;
+            var classMethodLookup_1241534736 = lookupClassMethod__OOZinterpreterZvm_u5976(cls_1241534330, frame_p1.selector);
+            if (classMethodLookup_1241534736.found) {
+            F.line = 3653;
+            var currentMethod_1241534737 = classMethodLookup_1241534736.currentMethod;
             if ((level_1090519067[0] <= 1)) {
             F.line = 701;
             F.filename = "logging.nim";
-            logLoop__pureZlogging_u148(1, [[86,77,58,32,70,111,117,110,100,32,99,108,97,115,115,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,32,111,110,32,99,108,97,115,115,32], nimCopy(null, cls_1241533968.name, NTI33554449)]);
+            logLoop__pureZlogging_u148(1, [[86,77,58,32,70,111,117,110,100,32,99,108,97,115,115,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,32,111,110,32,99,108,97,115,115,32], nimCopy(null, cls_1241534330.name, NTI33554449)]);
             }
             
-            if (!((currentMethod_1241534375.nativeImpl == 0))) {
-            F.line = 3424;
+            if (!((currentMethod_1241534737.nativeImpl == 0))) {
+            F.line = 3658;
             F.filename = "vm.nim";
-            var savedReceiver_1241534380 = interp_p0[interp_p0_Idx].currentReceiver;
-            F.line = 3425;
-            interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534176;
-            F.line = 3426;
+            var savedReceiver_1241534742 = interp_p0[interp_p0_Idx].currentReceiver;
+            F.line = 3659;
+            interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534538;
+            F.line = 3660;
             try {
-            F.line = 3427;
-            var resultVal_1241534381 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-            if (currentMethod_1241534375.hasInterpreterParam) {
-            F.line = 3430;
-            var nativeProc_1241534388 = currentMethod_1241534375.nativeImpl;
-            F.line = 3431;
-            resultVal_1241534381 = nimCopy(resultVal_1241534381, nativeProc_1241534388(interp_p0, interp_p0_Idx, classReceiver_1241534176, args_1241533946), NTI1157627922);
+            F.line = 3661;
+            var resultVal_1241534743 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+            if (currentMethod_1241534737.hasInterpreterParam) {
+            F.line = 3664;
+            var nativeProc_1241534750 = currentMethod_1241534737.nativeImpl;
+            F.line = 3665;
+            resultVal_1241534743 = nimCopy(resultVal_1241534743, nativeProc_1241534750(interp_p0, interp_p0_Idx, classReceiver_1241534538, args_1241534308), NTI1157627922);
             }
             else {
-              F.line = 3434;
-              var nativeProc_1241534394 = currentMethod_1241534375.nativeImpl;
-              F.line = 3435;
-              resultVal_1241534381 = nimCopy(resultVal_1241534381, nativeProc_1241534394(cls_1241533968, args_1241533946), NTI1157627922);
+              F.line = 3668;
+              var nativeProc_1241534756 = currentMethod_1241534737.nativeImpl;
+              F.line = 3669;
+              resultVal_1241534743 = nimCopy(resultVal_1241534743, nativeProc_1241534756(cls_1241534330, args_1241534308), NTI1157627922);
             }
             
-            F.line = 3436;
-            pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, resultVal_1241534381);
+            F.line = 3670;
+            pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, resultVal_1241534743);
             } finally {
             framePtr = F;
-            F.line = 3438;
-            interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534380;
+            F.line = 3672;
+            interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534742;
             }
-            F.line = 3439;
-            result_1241533921 = true;
+            F.line = 3673;
+            result_1241534283 = true;
             break BeforeRet;
             }
             
-            if (!(((currentMethod_1241534375.parameters).length == (args_1241533946).length))) {
-            F.line = 3443;
-            raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534375.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241533946).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+            if (!(((currentMethod_1241534737.parameters).length == (args_1241534308).length))) {
+            F.line = 3677;
+            raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534737.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241534308).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
             }
             
-            F.line = 3447;
-            var activation_1241534408 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534375, classReceiver_1241534176, interp_p0[interp_p0_Idx].currentActivation, classMethodLookup_1241534374.definingClass, true);
+            F.line = 3681;
+            var activation_1241534770 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534737, classReceiver_1241534538, interp_p0[interp_p0_Idx].currentActivation, classMethodLookup_1241534736.definingClass, true);
             Label40: {
-              F.line = 3449;
-              var i_1241534416 = 0;
+              F.line = 3683;
+              var i_1241534778 = 0;
               F.line = 126;
               F.filename = "iterators_1.nim";
-              var colontmp__587203207 = 0;
-              F.line = 3449;
+              var colontmp__587203245 = 0;
+              F.line = 3683;
               F.filename = "vm.nim";
-              colontmp__587203207 = (currentMethod_1241534375.parameters).length;
+              colontmp__587203245 = (currentMethod_1241534737.parameters).length;
               F.line = 128;
               F.filename = "iterators_1.nim";
-              var i_587203208 = 0;
+              var i_587203246 = 0;
               Label41: {
                 F.line = 129;
                   Label42: while (true) {
-                  if (!(i_587203208 < colontmp__587203207)) break Label42;
-                    F.line = 3449;
+                  if (!(i_587203246 < colontmp__587203245)) break Label42;
+                    F.line = 3683;
                     F.filename = "vm.nim";
-                    i_1241534416 = i_587203208;
-                    F.line = 3450;
-                    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534408.locals, currentMethod_1241534375.parameters[chckIndx(i_1241534416, 0, (currentMethod_1241534375.parameters).length - 1)], args_1241533946[chckIndx(i_1241534416, 0, (args_1241533946).length - 1)]);
+                    i_1241534778 = i_587203246;
+                    F.line = 3684;
+                    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534770.locals, currentMethod_1241534737.parameters[chckIndx(i_1241534778, 0, (currentMethod_1241534737.parameters).length - 1)], args_1241534308[chckIndx(i_1241534778, 0, (args_1241534308).length - 1)]);
                     F.line = 131;
                     F.filename = "iterators_1.nim";
-                    i_587203208 = addInt(i_587203208, 1);
+                    i_587203246 = addInt(i_587203246, 1);
                   }
               };
             };
             Label43: {
-              F.line = 3452;
+              F.line = 3686;
               F.filename = "vm.nim";
-              var tempName_1241534462 = [];
+              var tempName_1241534824 = [];
               F.line = 249;
               F.filename = "iterators.nim";
-              var i_587203211 = 0;
+              var i_587203249 = 0;
               F.line = 250;
-              var L_587203212 = (currentMethod_1241534375.temporaries).length;
+              var L_587203250 = (currentMethod_1241534737.temporaries).length;
               Label44: {
                 F.line = 251;
                   Label45: while (true) {
-                  if (!(i_587203211 < L_587203212)) break Label45;
-                    F.line = 3452;
+                  if (!(i_587203249 < L_587203250)) break Label45;
+                    F.line = 3686;
                     F.filename = "vm.nim";
-                    tempName_1241534462 = currentMethod_1241534375.temporaries[chckIndx(i_587203211, 0, (currentMethod_1241534375.temporaries).length - 1)];
-                    if (!(contains__OOZinterpreterZvm_u1463(activation_1241534408.locals, tempName_1241534462))) {
-                    F.line = 3454;
-                    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534408.locals, tempName_1241534462, nilValue__OOZcoreZtypes_u1406());
+                    tempName_1241534824 = currentMethod_1241534737.temporaries[chckIndx(i_587203249, 0, (currentMethod_1241534737.temporaries).length - 1)];
+                    if (!(contains__OOZinterpreterZvm_u1792(activation_1241534770.locals, tempName_1241534824))) {
+                    F.line = 3688;
+                    HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534770.locals, tempName_1241534824, nilValue__OOZcoreZtypes_u1406());
                     }
                     
                     F.line = 13;
                     F.filename = "iterators.nim";
-                    i_587203211 += 1;
-                    if (!(((currentMethod_1241534375.temporaries).length == L_587203212))) {
+                    i_587203249 += 1;
+                    if (!(((currentMethod_1241534737.temporaries).length == L_587203250))) {
                     F.line = 254;
                     failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
                     }
@@ -18520,68 +19377,68 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
                   }
               };
             };
-            F.line = 3456;
+            F.line = 3690;
             F.filename = "vm.nim";
-            var savedReceiver_1241534548 = interp_p0[interp_p0_Idx].currentReceiver;
-            F.line = 3457;
-            interp_p0[interp_p0_Idx].activationStack.push(activation_1241534408);;
-            F.line = 3458;
-            interp_p0[interp_p0_Idx].currentActivation = activation_1241534408;
-            F.line = 3459;
-            interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534176;
-            if (currentMethod_1241534375.isMethod) {
-            F.line = 3462;
-            currentMethod_1241534375.homeActivation = activation_1241534408;
+            var savedReceiver_1241534910 = interp_p0[interp_p0_Idx].currentReceiver;
+            F.line = 3691;
+            interp_p0[interp_p0_Idx].activationStack.push(activation_1241534770);;
+            F.line = 3692;
+            interp_p0[interp_p0_Idx].currentActivation = activation_1241534770;
+            F.line = 3693;
+            interp_p0[interp_p0_Idx].currentReceiver = classReceiver_1241534538;
+            if (currentMethod_1241534737.isMethod) {
+            F.line = 3696;
+            currentMethod_1241534737.homeActivation = activation_1241534770;
             }
             
-            F.line = 3464;
-            pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19401(savedReceiver_1241534548, false, (interp_p0[interp_p0_Idx].evalStack).length));
-            if ((0 < (currentMethod_1241534375.body).length)) {
+            F.line = 3698;
+            pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19763(savedReceiver_1241534910, false, (interp_p0[interp_p0_Idx].evalStack).length));
+            if ((0 < (currentMethod_1241534737.body).length)) {
             Label46: {
-              F.line = 3467;
-              var i_1241534567 = 0;
+              F.line = 3701;
+              var i_1241534929 = 0;
               F.line = 6;
               F.filename = "iterators_1.nim";
-              var colontmp__587203215 = 0;
-              F.line = 3467;
+              var colontmp__587203253 = 0;
+              F.line = 3701;
               F.filename = "vm.nim";
-              colontmp__587203215 = subInt((currentMethod_1241534375.body).length, 1);
+              colontmp__587203253 = subInt((currentMethod_1241534737.body).length, 1);
               F.line = 33;
               F.filename = "iterators_1.nim";
-              var res_587203216 = colontmp__587203215;
+              var res_587203254 = colontmp__587203253;
               Label47: {
                 F.line = 34;
                   Label48: while (true) {
-                  if (!(0 <= res_587203216)) break Label48;
-                    F.line = 3467;
+                  if (!(0 <= res_587203254)) break Label48;
+                    F.line = 3701;
                     F.filename = "vm.nim";
-                    i_1241534567 = res_587203216;
-                    if ((i_1241534567 < subInt((currentMethod_1241534375.body).length, 1))) {
-                    F.line = 3469;
-                    pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                    i_1241534929 = res_587203254;
+                    if ((i_1241534929 < subInt((currentMethod_1241534737.body).length, 1))) {
+                    F.line = 3703;
+                    pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                     }
                     
-                    F.line = 3470;
-                    pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(currentMethod_1241534375.body[chckIndx(i_1241534567, 0, (currentMethod_1241534375.body).length - 1)]));
+                    F.line = 3704;
+                    pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(currentMethod_1241534737.body[chckIndx(i_1241534929, 0, (currentMethod_1241534737.body).length - 1)]));
                     F.line = 39;
                     F.filename = "iterators_1.nim";
-                    res_587203216 = subInt(res_587203216, 1);
+                    res_587203254 = subInt(res_587203254, 1);
                   }
               };
             };
             }
             else {
-              F.line = 3472;
+              F.line = 3706;
               F.filename = "vm.nim";
-            pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+            pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
             }
             
-            F.line = 3474;
-            result_1241533921 = true;
+            F.line = 3708;
+            result_1241534283 = true;
             break BeforeRet;
             }
             else {
-              F.line = 3476;
+              F.line = 3710;
               raiseException({message: ([77,101,116,104,111,100,32,110,111,116,32,102,111,117,110,100,58,32]).concat(frame_p1.selector), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
             }
             
@@ -18591,51 +19448,51 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
         
         break;
       case 6:
-        F.line = 3479;
-        var blockInst_1241534572 = null;
-        F.line = 3480;
-        blockInst_1241534572 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3481;
-        blockInst_1241534572.kind = 0;
-        F.line = 3482;
-        blockInst_1241534572.class = blockClass_1157628217[0];
-        var Temporary49 = blockInst_1241534572;
-        if (ConstSet173[Temporary49.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary49.kind, NTI1157627908)); }
-        F.line = 3483;
+        F.line = 3713;
+        var blockInst_1241534934 = null;
+        F.line = 3714;
+        blockInst_1241534934 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 3715;
+        blockInst_1241534934.kind = 0;
+        F.line = 3716;
+        blockInst_1241534934.class = blockClass_1157628217[0];
+        var Temporary49 = blockInst_1241534934;
+        if (ConstSet197[Temporary49.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary49.kind, NTI1157627908)); }
+        F.line = 3717;
         Temporary49.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3484;
-        blockInst_1241534572.isNimProxy = false;
-        F.line = 3487;
-        receiver_1241533959 = blockInst_1241534572;
+        F.line = 3718;
+        blockInst_1241534934.isNimProxy = false;
+        F.line = 3721;
+        receiver_1241534321 = blockInst_1241534934;
         break;
       case 3:
-        F.line = 3489;
-        var Temporary50 = receiverVal_1241533947;
-        if (ConstSet174[Temporary50.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'symVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary50.kind, NTI1157627921)); }
-        receiver_1241533959 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary50.symVal);
+        F.line = 3723;
+        var Temporary50 = receiverVal_1241534309;
+        if (ConstSet198[Temporary50.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'symVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary50.kind, NTI1157627921)); }
+        receiver_1241534321 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary50.symVal);
         break;
       }
-      if ((((((receiver_1241533959.kind == 0) && (receiver_1241533959.class == blockClass_1157628217[0])) && !(receiver_1241533959.isNimProxy)) && (0 < (args_1241533946).length)) && (args_1241533946[chckIndx(0, 0, (args_1241533946).length - 1)].kind == 6))) {
-      F.line = 3521;
-      var conditionBlock_1241534595 = receiver_1241533959.nimValue;
-      F.line = 3522;
-      var Temporary51 = args_1241533946[chckIndx(0, 0, (args_1241533946).length - 1)];
-      if (ConstSet175[Temporary51.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'blockVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary51.kind, NTI1157627921)); }
-      var bodyBlock_1241534596 = Temporary51.blockVal;
-      F.line = 3523;
+      if ((((((receiver_1241534321.kind == 0) && (receiver_1241534321.class == blockClass_1157628217[0])) && !(receiver_1241534321.isNimProxy)) && (0 < (args_1241534308).length)) && (args_1241534308[chckIndx(0, 0, (args_1241534308).length - 1)].kind == 6))) {
+      F.line = 3755;
+      var conditionBlock_1241534957 = receiver_1241534321.nimValue;
+      F.line = 3756;
+      var Temporary51 = args_1241534308[chckIndx(0, 0, (args_1241534308).length - 1)];
+      if (ConstSet199[Temporary51.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'blockVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary51.kind, NTI1157627921)); }
+      var bodyBlock_1241534958 = Temporary51.blockVal;
+      F.line = 3757;
       switch (toJSStr(frame_p1.selector)) {
       case "whileTrue:":
-        F.line = 3526;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newWhileLoopFrame__OOZinterpreterZvm_u19411(true, conditionBlock_1241534595, bodyBlock_1241534596, 0));
-        F.line = 3527;
-        result_1241533921 = true;
+        F.line = 3760;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newWhileLoopFrame__OOZinterpreterZvm_u19773(true, conditionBlock_1241534957, bodyBlock_1241534958, 0));
+        F.line = 3761;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       case "whileFalse:":
-        F.line = 3530;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newWhileLoopFrame__OOZinterpreterZvm_u19411(false, conditionBlock_1241534595, bodyBlock_1241534596, 0));
-        F.line = 3531;
-        result_1241533921 = true;
+        F.line = 3764;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newWhileLoopFrame__OOZinterpreterZvm_u19773(false, conditionBlock_1241534957, bodyBlock_1241534958, 0));
+        F.line = 3765;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       default: 
@@ -18643,18 +19500,18 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       }
       }
       
-      if ((receiver_1241533959 == null)) {
-      F.line = 3536;
-      printStackTrace__OOZinterpreterZvm_u84(interp_p0, interp_p0_Idx);
-      F.line = 3537;
+      if ((receiver_1241534321 == null)) {
+      F.line = 3770;
+      printStackTrace__OOZinterpreterZvm_u413(interp_p0, interp_p0_Idx);
+      F.line = 3771;
       raiseException({message: ([67,97,110,110,111,116,32,115,101,110,100,32,109,101,115,115,97,103,101,32,116,111,32,110,105,108,32,114,101,99,101,105,118,101,114,32,102,111,114,32,109,101,115,115,97,103,101,58,32]).concat(frame_p1.selector), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      if (!((receiver_1241533959.class == null))) {
-      Temporary52 = receiver_1241533959.class.name;
+      if (!((receiver_1241534321.class == null))) {
+      Temporary52 = receiver_1241534321.class.name;
       }
       else {
       Temporary52 = [110,105,108];
@@ -18663,73 +19520,73 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       logLoop__pureZlogging_u148(1, [[86,77,58,32,76,111,111,107,105,110,103,32,117,112,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,32,111,110,32], nimCopy(null, Temporary52, NTI33554449)]);
       }
       
-      F.line = 3541;
+      F.line = 3775;
       F.filename = "vm.nim";
-      var lookup_1241534610 = lookupMethod__OOZinterpreterZvm_u5501(interp_p0[interp_p0_Idx], receiver_1241533959, frame_p1.selector);
-      if (!(lookup_1241534610.found)) {
-      F.line = 3544;
-      var dnuLookup_1241534611 = lookupMethod__OOZinterpreterZvm_u5501(interp_p0[interp_p0_Idx], receiver_1241533959, [100,111,101,115,78,111,116,85,110,100,101,114,115,116,97,110,100,58]);
-      if (dnuLookup_1241534611.found) {
-      F.line = 3546;
-      var selectorVal_1241534612 = {kind: 3, symVal: nimCopy(null, frame_p1.selector, NTI33554449), intVal: 0, floatVal: 0.0, strVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null};
-      F.line = 3547;
-      var dnuResult_1241534617 = executeMethod__OOZinterpreterZvm_u5752(interp_p0, interp_p0_Idx, dnuLookup_1241534611.currentMethod, receiver_1241533959, [nimCopy(null, selectorVal_1241534612, NTI1157627922)], dnuLookup_1241534611.definingClass, false);
-      F.line = 3548;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, dnuResult_1241534617);
-      F.line = 3549;
-      result_1241533921 = true;
+      var lookup_1241534972 = lookupMethod__OOZinterpreterZvm_u5830(interp_p0[interp_p0_Idx], receiver_1241534321, frame_p1.selector);
+      if (!(lookup_1241534972.found)) {
+      F.line = 3778;
+      var dnuLookup_1241534973 = lookupMethod__OOZinterpreterZvm_u5830(interp_p0[interp_p0_Idx], receiver_1241534321, [100,111,101,115,78,111,116,85,110,100,101,114,115,116,97,110,100,58]);
+      if (dnuLookup_1241534973.found) {
+      F.line = 3780;
+      var selectorVal_1241534974 = {kind: 3, symVal: nimCopy(null, frame_p1.selector, NTI33554449), intVal: 0, floatVal: 0.0, strVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null};
+      F.line = 3781;
+      var dnuResult_1241534979 = executeMethod__OOZinterpreterZvm_u6081(interp_p0, interp_p0_Idx, dnuLookup_1241534973.currentMethod, receiver_1241534321, [nimCopy(null, selectorVal_1241534974, NTI1157627922)], dnuLookup_1241534973.definingClass, false);
+      F.line = 3782;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, dnuResult_1241534979);
+      F.line = 3783;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
-      F.line = 3550;
-      printStackTrace__OOZinterpreterZvm_u84(interp_p0, interp_p0_Idx);
-      if (!((receiver_1241533959.class == null))) {
-      Temporary53 = receiver_1241533959.class.name;
+      F.line = 3784;
+      printStackTrace__OOZinterpreterZvm_u413(interp_p0, interp_p0_Idx);
+      if (!((receiver_1241534321.class == null))) {
+      Temporary53 = receiver_1241534321.class.name;
       }
       else {
       Temporary53 = [117,110,107,110,111,119,110];
       }
       
-      F.line = 3551;
+      F.line = 3785;
       raiseException({message: ([77,101,116,104,111,100,32,110,111,116,32,102,111,117,110,100,58,32]).concat(frame_p1.selector,[32,111,110,32],Temporary53), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
-      F.line = 3555;
-      var currentMethod_1241534623 = lookup_1241534610.currentMethod;
+      F.line = 3789;
+      var currentMethod_1241534985 = lookup_1241534972.currentMethod;
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      logLoop__pureZlogging_u148(1, [[86,77,58,32,70,111,117,110,100,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,44,32,110,97,116,105,118,101,61], nimBoolToStr(!((currentMethod_1241534623.nativeImpl == 0)))]);
+      logLoop__pureZlogging_u148(1, [[86,77,58,32,70,111,117,110,100,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,44,32,110,97,116,105,118,101,61], nimBoolToStr(!((currentMethod_1241534985.nativeImpl == 0)))]);
       }
       
-      if (!((currentMethod_1241534623.nativeImpl == 0))) {
+      if (!((currentMethod_1241534985.nativeImpl == 0))) {
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       logLoop__pureZlogging_u148(1, [[86,77,58,32,67,97,108,108,105,110,103,32,110,97,116,105,118,101,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39]]);
       }
       
-      F.line = 3560;
+      F.line = 3794;
       F.filename = "vm.nim";
-      var savedReceiver_1241534632 = interp_p0[interp_p0_Idx].currentReceiver;
-      F.line = 3561;
+      var savedReceiver_1241534994 = interp_p0[interp_p0_Idx].currentReceiver;
+      F.line = 3795;
       try {
-      F.line = 3562;
-      var resultVal_1241534633 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
-      if (currentMethod_1241534623.hasInterpreterParam) {
+      F.line = 3796;
+      var resultVal_1241534995 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+      if (currentMethod_1241534985.hasInterpreterParam) {
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      logLoop__pureZlogging_u148(1, [[86,77,58,32,78,97,116,105,118,101,32,109,101,116,104,111,100,32,104,97,115,32,105,110,116,101,114,112,114,101,116,101,114,32,112,97,114,97,109,44,32,110,97,116,105,118,101,73,109,112,108,61], HEX24__systemZdollars_u14(currentMethod_1241534623.nativeImpl)]);
+      logLoop__pureZlogging_u148(1, [[86,77,58,32,78,97,116,105,118,101,32,109,101,116,104,111,100,32,104,97,115,32,105,110,116,101,114,112,114,101,116,101,114,32,112,97,114,97,109,44,32,110,97,116,105,118,101,73,109,112,108,61], HEX24__systemZdollars_u14(currentMethod_1241534985.nativeImpl)]);
       }
       
-      F.line = 3566;
+      F.line = 3800;
       F.filename = "vm.nim";
-      var nativeProc_1241534644 = currentMethod_1241534623.nativeImpl;
+      var nativeProc_1241535006 = currentMethod_1241534985.nativeImpl;
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      if (!((receiver_1241533959 == null))) {
-      Temporary55 = receiver_1241533959.class.name;
+      if (!((receiver_1241534321 == null))) {
+      Temporary55 = receiver_1241534321.class.name;
       }
       else {
       Temporary55 = [110,105,108];
@@ -18738,197 +19595,197 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       logLoop__pureZlogging_u148(1, [[86,77,58,32,65,98,111,117,116,32,116,111,32,99,97,108,108,32,110,97,116,105,118,101,80,114,111,99,44,32,114,101,99,101,105,118,101,114,61], nimCopy(null, Temporary55, NTI33554449)]);
       }
       
-      F.line = 3568;
+      F.line = 3802;
       F.filename = "vm.nim";
-      resultVal_1241534633 = nimCopy(resultVal_1241534633, nativeProc_1241534644(interp_p0, interp_p0_Idx, receiver_1241533959, args_1241533946), NTI1157627922);
+      resultVal_1241534995 = nimCopy(resultVal_1241534995, nativeProc_1241535006(interp_p0, interp_p0_Idx, receiver_1241534321, args_1241534308), NTI1157627922);
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      logLoop__pureZlogging_u148(1, [[86,77,58,32,78,97,116,105,118,101,32,109,101,116,104,111,100,32,114,101,116,117,114,110,101,100,58,32], toString__OOZcoreZtypes_u496(resultVal_1241534633)]);
+      logLoop__pureZlogging_u148(1, [[86,77,58,32,78,97,116,105,118,101,32,109,101,116,104,111,100,32,114,101,116,117,114,110,101,100,58,32], toString__OOZcoreZtypes_u496(resultVal_1241534995)]);
       }
       
       }
       else {
-        F.line = 3572;
+        F.line = 3806;
         F.filename = "vm.nim";
-        var nativeProc_1241534662 = currentMethod_1241534623.nativeImpl;
-        F.line = 3573;
-        resultVal_1241534633 = nimCopy(resultVal_1241534633, nativeProc_1241534662(receiver_1241533959, args_1241533946), NTI1157627922);
+        var nativeProc_1241535024 = currentMethod_1241534985.nativeImpl;
+        F.line = 3807;
+        resultVal_1241534995 = nimCopy(resultVal_1241534995, nativeProc_1241535024(receiver_1241534321, args_1241534308), NTI1157627922);
       }
       
-      F.line = 3574;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, resultVal_1241534633);
+      F.line = 3808;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, resultVal_1241534995);
       } finally {
       framePtr = F;
-      F.line = 3576;
-      interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534632;
+      F.line = 3810;
+      interp_p0[interp_p0_Idx].currentReceiver = savedReceiver_1241534994;
       }
-      F.line = 3577;
-      result_1241533921 = true;
+      F.line = 3811;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      logLoop__pureZlogging_u148(1, [[86,77,58,32,69,120,101,99,117,116,105,110,103,32,105,110,116,101,114,112,114,101,116,101,100,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,32,119,105,116,104,32], HEX24__systemZdollars_u14((args_1241533946).length), [32,97,114,103,115,44,32,98,111,100,121,32,104,97,115,32], HEX24__systemZdollars_u14((currentMethod_1241534623.body).length), [32,115,116,97,116,101,109,101,110,116,115]]);
+      logLoop__pureZlogging_u148(1, [[86,77,58,32,69,120,101,99,117,116,105,110,103,32,105,110,116,101,114,112,114,101,116,101,100,32,109,101,116,104,111,100,32,39], nimCopy(null, frame_p1.selector, NTI33554449), [39,32,119,105,116,104,32], HEX24__systemZdollars_u14((args_1241534308).length), [32,97,114,103,115,44,32,98,111,100,121,32,104,97,115,32], HEX24__systemZdollars_u14((currentMethod_1241534985.body).length), [32,115,116,97,116,101,109,101,110,116,115]]);
       }
       
-      if (!(((currentMethod_1241534623.parameters).length == (args_1241533946).length))) {
-      F.line = 3584;
+      if (!(((currentMethod_1241534985.parameters).length == (args_1241534308).length))) {
+      F.line = 3818;
       F.filename = "vm.nim";
-      raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534623.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241533946).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((currentMethod_1241534985.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241534308).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
-      F.line = 3589;
-      var activation_1241534686 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534623, receiver_1241533959, interp_p0[interp_p0_Idx].currentActivation, lookup_1241534610.definingClass, false);
+      F.line = 3823;
+      var activation_1241535048 = newActivation__OOZinterpreterZactivation_u6(currentMethod_1241534985, receiver_1241534321, interp_p0[interp_p0_Idx].currentActivation, lookup_1241534972.definingClass, false);
       Label56: {
-        F.line = 3592;
-        var i_1241534694 = 0;
+        F.line = 3826;
+        var i_1241535056 = 0;
         F.line = 126;
         F.filename = "iterators_1.nim";
-        var colontmp__587203219 = 0;
-        F.line = 3592;
+        var colontmp__587203257 = 0;
+        F.line = 3826;
         F.filename = "vm.nim";
-        colontmp__587203219 = (currentMethod_1241534623.parameters).length;
+        colontmp__587203257 = (currentMethod_1241534985.parameters).length;
         F.line = 128;
         F.filename = "iterators_1.nim";
-        var i_587203220 = 0;
+        var i_587203258 = 0;
         Label57: {
           F.line = 129;
             Label58: while (true) {
-            if (!(i_587203220 < colontmp__587203219)) break Label58;
-              F.line = 3592;
+            if (!(i_587203258 < colontmp__587203257)) break Label58;
+              F.line = 3826;
               F.filename = "vm.nim";
-              i_1241534694 = i_587203220;
-              F.line = 3593;
-              HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534686.locals, currentMethod_1241534623.parameters[chckIndx(i_1241534694, 0, (currentMethod_1241534623.parameters).length - 1)], args_1241533946[chckIndx(i_1241534694, 0, (args_1241533946).length - 1)]);
+              i_1241535056 = i_587203258;
+              F.line = 3827;
+              HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241535048.locals, currentMethod_1241534985.parameters[chckIndx(i_1241535056, 0, (currentMethod_1241534985.parameters).length - 1)], args_1241534308[chckIndx(i_1241535056, 0, (args_1241534308).length - 1)]);
               F.line = 131;
               F.filename = "iterators_1.nim";
-              i_587203220 = addInt(i_587203220, 1);
+              i_587203258 = addInt(i_587203258, 1);
             }
         };
       };
-      F.line = 3596;
+      F.line = 3830;
       F.filename = "vm.nim";
-      var savedReceiver_1241534737 = interp_p0[interp_p0_Idx].currentReceiver;
-      F.line = 3599;
-      interp_p0[interp_p0_Idx].activationStack.push(activation_1241534686);;
-      F.line = 3600;
-      interp_p0[interp_p0_Idx].currentActivation = activation_1241534686;
-      F.line = 3601;
-      interp_p0[interp_p0_Idx].currentReceiver = receiver_1241533959;
-      if (currentMethod_1241534623.isMethod) {
-      F.line = 3605;
-      currentMethod_1241534623.homeActivation = activation_1241534686;
+      var savedReceiver_1241535099 = interp_p0[interp_p0_Idx].currentReceiver;
+      F.line = 3833;
+      interp_p0[interp_p0_Idx].activationStack.push(activation_1241535048);;
+      F.line = 3834;
+      interp_p0[interp_p0_Idx].currentActivation = activation_1241535048;
+      F.line = 3835;
+      interp_p0[interp_p0_Idx].currentReceiver = receiver_1241534321;
+      if (currentMethod_1241534985.isMethod) {
+      F.line = 3839;
+      currentMethod_1241534985.homeActivation = activation_1241535048;
       }
       
-      F.line = 3608;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19401(savedReceiver_1241534737, false, (interp_p0[interp_p0_Idx].evalStack).length));
-      if ((0 < (currentMethod_1241534623.body).length)) {
+      F.line = 3842;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newPopActivationFrame__OOZinterpreterZvm_u19763(savedReceiver_1241535099, false, (interp_p0[interp_p0_Idx].evalStack).length));
+      if ((0 < (currentMethod_1241534985.body).length)) {
       Label59: {
-        F.line = 3612;
-        var i_1241534756 = 0;
+        F.line = 3846;
+        var i_1241535118 = 0;
         F.line = 6;
         F.filename = "iterators_1.nim";
-        var colontmp__587203223 = 0;
-        F.line = 3612;
+        var colontmp__587203261 = 0;
+        F.line = 3846;
         F.filename = "vm.nim";
-        colontmp__587203223 = subInt((currentMethod_1241534623.body).length, 1);
+        colontmp__587203261 = subInt((currentMethod_1241534985.body).length, 1);
         F.line = 33;
         F.filename = "iterators_1.nim";
-        var res_587203224 = colontmp__587203223;
+        var res_587203262 = colontmp__587203261;
         Label60: {
           F.line = 34;
             Label61: while (true) {
-            if (!(0 <= res_587203224)) break Label61;
-              F.line = 3612;
+            if (!(0 <= res_587203262)) break Label61;
+              F.line = 3846;
               F.filename = "vm.nim";
-              i_1241534756 = res_587203224;
-              if ((i_1241534756 < subInt((currentMethod_1241534623.body).length, 1))) {
-              F.line = 3615;
-              pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+              i_1241535118 = res_587203262;
+              if ((i_1241535118 < subInt((currentMethod_1241534985.body).length, 1))) {
+              F.line = 3849;
+              pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
               }
               
-              F.line = 3616;
-              pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(currentMethod_1241534623.body[chckIndx(i_1241534756, 0, (currentMethod_1241534623.body).length - 1)]));
+              F.line = 3850;
+              pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(currentMethod_1241534985.body[chckIndx(i_1241535118, 0, (currentMethod_1241534985.body).length - 1)]));
               F.line = 39;
               F.filename = "iterators_1.nim";
-              res_587203224 = subInt(res_587203224, 1);
+              res_587203262 = subInt(res_587203262, 1);
             }
         };
       };
       }
       else {
-        F.line = 3619;
+        F.line = 3853;
         F.filename = "vm.nim";
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
       }
       
-      F.line = 3621;
-      result_1241533921 = true;
+      F.line = 3855;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 2:
-      F.line = 3625;
-      var args_1241534760 = popValues__OOZinterpreterZvm_u19521(interp_p0, interp_p0_Idx, frame_p1.argCount);
-      F.line = 3626;
-      var blockNode_1241534761 = frame_p1.blockVal;
-      if (!(((blockNode_1241534761.parameters).length == (args_1241534760).length))) {
-      F.line = 3630;
-      raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,32,116,111,32,98,108,111,99,107,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((blockNode_1241534761.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241534760).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      F.line = 3859;
+      var args_1241535122 = popValues__OOZinterpreterZvm_u19883(interp_p0, interp_p0_Idx, frame_p1.argCount);
+      F.line = 3860;
+      var blockNode_1241535123 = frame_p1.blockVal;
+      if (!(((blockNode_1241535123.parameters).length == (args_1241535122).length))) {
+      F.line = 3864;
+      raiseException({message: ([87,114,111,110,103,32,110,117,109,98,101,114,32,111,102,32,97,114,103,117,109,101,110,116,115,32,116,111,32,98,108,111,99,107,58,32,101,120,112,101,99,116,101,100,32]).concat(HEX24__systemZdollars_u14((blockNode_1241535123.parameters).length),[44,32,103,111,116,32],HEX24__systemZdollars_u14((args_1241535122).length)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       }
       
-      F.line = 3635;
-      var blockHome_1241534775 = blockNode_1241534761.homeActivation;
-      F.line = 3636;
-      if ((!((blockHome_1241534775 == null)) && !((blockHome_1241534775.receiver == null)))) {
-      Temporary62 = blockHome_1241534775.receiver;
+      F.line = 3869;
+      var blockHome_1241535137 = blockNode_1241535123.homeActivation;
+      F.line = 3870;
+      if ((!((blockHome_1241535137 == null)) && !((blockHome_1241535137.receiver == null)))) {
+      Temporary62 = blockHome_1241535137.receiver;
       }
       else {
       Temporary62 = interp_p0[interp_p0_Idx].currentReceiver;
       }
       
-      var blockReceiver_1241534784 = Temporary62;
-      F.line = 3642;
-      var activation_1241534785 = newActivation__OOZinterpreterZactivation_u6(blockNode_1241534761, blockReceiver_1241534784, interp_p0[interp_p0_Idx].currentActivation, null, false);
-      if ((blockNode_1241534761.capturedEnvInitialized && (0 < len__OOZinterpreterZvm_u890(blockNode_1241534761.capturedEnv)))) {
+      var blockReceiver_1241535146 = Temporary62;
+      F.line = 3876;
+      var activation_1241535147 = newActivation__OOZinterpreterZactivation_u6(blockNode_1241535123, blockReceiver_1241535146, interp_p0[interp_p0_Idx].currentActivation, null, false);
+      if ((blockNode_1241535123.capturedEnvInitialized && (0 < len__OOZinterpreterZvm_u1219(blockNode_1241535123.capturedEnv)))) {
       Label63: {
-        F.line = 3646;
-        var name_1241534834 = [];
-        F.line = 3646;
-        var cell_1241534835 = null;
+        F.line = 3880;
+        var name_1241535196 = [];
+        F.line = 3880;
+        var cell_1241535197 = null;
         F.line = 767;
         F.filename = "tables.nim";
-        var L_587203227 = len__OOZinterpreterZvm_u890(blockNode_1241534761.capturedEnv);
+        var L_587203265 = len__OOZinterpreterZvm_u1219(blockNode_1241535123.capturedEnv);
         Label64: {
           F.line = 768;
-          var h_587203229 = 0;
+          var h_587203267 = 0;
           F.line = 81;
           F.filename = "iterators_1.nim";
-          var colontmp__587203230 = 0;
+          var colontmp__587203268 = 0;
           F.line = 768;
           F.filename = "tables.nim";
-          colontmp__587203230 = (blockNode_1241534761.capturedEnv.data).length - 1;
+          colontmp__587203268 = (blockNode_1241535123.capturedEnv.data).length - 1;
           F.line = 96;
           F.filename = "iterators_1.nim";
-          var res_587203231 = 0;
+          var res_587203269 = 0;
           Label65: {
             F.line = 97;
               Label66: while (true) {
-              if (!(res_587203231 <= colontmp__587203230)) break Label66;
+              if (!(res_587203269 <= colontmp__587203268)) break Label66;
                 F.line = 768;
                 F.filename = "tables.nim";
-                h_587203229 = res_587203231;
-                if (isFilled__pureZcollectionsZtables_u31(blockNode_1241534761.capturedEnv.data[chckIndx(h_587203229, 0, (blockNode_1241534761.capturedEnv.data).length - 1)].Field0)) {
-                F.line = 3646;
+                h_587203267 = res_587203269;
+                if (isFilled__pureZcollectionsZtables_u31(blockNode_1241535123.capturedEnv.data[chckIndx(h_587203267, 0, (blockNode_1241535123.capturedEnv.data).length - 1)].Field0)) {
+                F.line = 3880;
                 F.filename = "vm.nim";
-                name_1241534834 = blockNode_1241534761.capturedEnv.data[chckIndx(h_587203229, 0, (blockNode_1241534761.capturedEnv.data).length - 1)].Field1;
-                F.line = 3646;
-                cell_1241534835 = blockNode_1241534761.capturedEnv.data[chckIndx(h_587203229, 0, (blockNode_1241534761.capturedEnv.data).length - 1)].Field2;
-                F.line = 3647;
-                HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534785.locals, name_1241534834, cell_1241534835.value);
-                if (!((len__OOZinterpreterZvm_u890(blockNode_1241534761.capturedEnv) == L_587203227))) {
+                name_1241535196 = blockNode_1241535123.capturedEnv.data[chckIndx(h_587203267, 0, (blockNode_1241535123.capturedEnv.data).length - 1)].Field1;
+                F.line = 3880;
+                cell_1241535197 = blockNode_1241535123.capturedEnv.data[chckIndx(h_587203267, 0, (blockNode_1241535123.capturedEnv.data).length - 1)].Field2;
+                F.line = 3881;
+                HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241535147.locals, name_1241535196, cell_1241535197.value);
+                if (!((len__OOZinterpreterZvm_u1219(blockNode_1241535123.capturedEnv) == L_587203265))) {
                 F.line = 771;
                 F.filename = "tables.nim";
                 failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/collections/tables.nim(771, 13) `len(t) == L` the length of the table changed while iterating over it"));
@@ -18938,7 +19795,7 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
                 
                 F.line = 102;
                 F.filename = "iterators_1.nim";
-                res_587203231 = addInt(res_587203231, 1);
+                res_587203269 = addInt(res_587203269, 1);
               }
           };
         };
@@ -18946,55 +19803,55 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       }
       
       Label67: {
-        F.line = 3650;
+        F.line = 3884;
         F.filename = "vm.nim";
-        var i_1241534885 = 0;
+        var i_1241535247 = 0;
         F.line = 126;
         F.filename = "iterators_1.nim";
-        var colontmp__587203234 = 0;
-        F.line = 3650;
+        var colontmp__587203272 = 0;
+        F.line = 3884;
         F.filename = "vm.nim";
-        colontmp__587203234 = (blockNode_1241534761.parameters).length;
+        colontmp__587203272 = (blockNode_1241535123.parameters).length;
         F.line = 128;
         F.filename = "iterators_1.nim";
-        var i_587203235 = 0;
+        var i_587203273 = 0;
         Label68: {
           F.line = 129;
             Label69: while (true) {
-            if (!(i_587203235 < colontmp__587203234)) break Label69;
-              F.line = 3650;
+            if (!(i_587203273 < colontmp__587203272)) break Label69;
+              F.line = 3884;
               F.filename = "vm.nim";
-              i_1241534885 = i_587203235;
-              F.line = 3651;
-              HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534785.locals, blockNode_1241534761.parameters[chckIndx(i_1241534885, 0, (blockNode_1241534761.parameters).length - 1)], args_1241534760[chckIndx(i_1241534885, 0, (args_1241534760).length - 1)]);
+              i_1241535247 = i_587203273;
+              F.line = 3885;
+              HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241535147.locals, blockNode_1241535123.parameters[chckIndx(i_1241535247, 0, (blockNode_1241535123.parameters).length - 1)], args_1241535122[chckIndx(i_1241535247, 0, (args_1241535122).length - 1)]);
               F.line = 131;
               F.filename = "iterators_1.nim";
-              i_587203235 = addInt(i_587203235, 1);
+              i_587203273 = addInt(i_587203273, 1);
             }
         };
       };
       Label70: {
-        F.line = 3654;
+        F.line = 3888;
         F.filename = "vm.nim";
-        var tempName_1241534931 = [];
+        var tempName_1241535293 = [];
         F.line = 249;
         F.filename = "iterators.nim";
-        var i_587203238 = 0;
+        var i_587203276 = 0;
         F.line = 250;
-        var L_587203239 = (blockNode_1241534761.temporaries).length;
+        var L_587203277 = (blockNode_1241535123.temporaries).length;
         Label71: {
           F.line = 251;
             Label72: while (true) {
-            if (!(i_587203238 < L_587203239)) break Label72;
-              F.line = 3654;
+            if (!(i_587203276 < L_587203277)) break Label72;
+              F.line = 3888;
               F.filename = "vm.nim";
-              tempName_1241534931 = blockNode_1241534761.temporaries[chckIndx(i_587203238, 0, (blockNode_1241534761.temporaries).length - 1)];
-              F.line = 3655;
-              HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241534785.locals, tempName_1241534931, nilValue__OOZcoreZtypes_u1406());
+              tempName_1241535293 = blockNode_1241535123.temporaries[chckIndx(i_587203276, 0, (blockNode_1241535123.temporaries).length - 1)];
+              F.line = 3889;
+              HEX5BHEX5DHEX3D__OOZcoreZtypes_u2143(activation_1241535147.locals, tempName_1241535293, nilValue__OOZcoreZtypes_u1406());
               F.line = 13;
               F.filename = "iterators.nim";
-              i_587203238 += 1;
-              if (!(((blockNode_1241534761.temporaries).length == L_587203239))) {
+              i_587203276 += 1;
+              if (!(((blockNode_1241535123.temporaries).length == L_587203277))) {
               F.line = 254;
               failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
               }
@@ -19002,63 +19859,63 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
             }
         };
       };
-      F.line = 3658;
+      F.line = 3892;
       F.filename = "vm.nim";
-      var savedReceiver_1241534974 = interp_p0[interp_p0_Idx].currentReceiver;
-      F.line = 3661;
-      interp_p0[interp_p0_Idx].activationStack.push(activation_1241534785);;
-      F.line = 3662;
-      interp_p0[interp_p0_Idx].currentActivation = activation_1241534785;
-      F.line = 3663;
-      interp_p0[interp_p0_Idx].currentReceiver = blockReceiver_1241534784;
-      F.line = 3667;
-      var popFrame_1241534982 = newPopActivationFrame__OOZinterpreterZvm_u19401(savedReceiver_1241534974, true, (interp_p0[interp_p0_Idx].evalStack).length);
-      F.line = 3668;
-      popFrame_1241534982.blockVal = blockNode_1241534761;
-      F.line = 3669;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, popFrame_1241534982);
-      if ((0 < (blockNode_1241534761.body).length)) {
+      var savedReceiver_1241535336 = interp_p0[interp_p0_Idx].currentReceiver;
+      F.line = 3895;
+      interp_p0[interp_p0_Idx].activationStack.push(activation_1241535147);;
+      F.line = 3896;
+      interp_p0[interp_p0_Idx].currentActivation = activation_1241535147;
+      F.line = 3897;
+      interp_p0[interp_p0_Idx].currentReceiver = blockReceiver_1241535146;
+      F.line = 3901;
+      var popFrame_1241535344 = newPopActivationFrame__OOZinterpreterZvm_u19763(savedReceiver_1241535336, true, (interp_p0[interp_p0_Idx].evalStack).length);
+      F.line = 3902;
+      popFrame_1241535344.blockVal = blockNode_1241535123;
+      F.line = 3903;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, popFrame_1241535344);
+      if ((0 < (blockNode_1241535123.body).length)) {
       Label73: {
-        F.line = 3673;
-        var i_1241534994 = 0;
+        F.line = 3907;
+        var i_1241535356 = 0;
         F.line = 6;
         F.filename = "iterators_1.nim";
-        var colontmp__587203242 = 0;
-        F.line = 3673;
+        var colontmp__587203280 = 0;
+        F.line = 3907;
         F.filename = "vm.nim";
-        colontmp__587203242 = subInt((blockNode_1241534761.body).length, 1);
+        colontmp__587203280 = subInt((blockNode_1241535123.body).length, 1);
         F.line = 33;
         F.filename = "iterators_1.nim";
-        var res_587203243 = colontmp__587203242;
+        var res_587203281 = colontmp__587203280;
         Label74: {
           F.line = 34;
             Label75: while (true) {
-            if (!(0 <= res_587203243)) break Label75;
-              F.line = 3673;
+            if (!(0 <= res_587203281)) break Label75;
+              F.line = 3907;
               F.filename = "vm.nim";
-              i_1241534994 = res_587203243;
-              if ((i_1241534994 < subInt((blockNode_1241534761.body).length, 1))) {
-              F.line = 3675;
-              pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+              i_1241535356 = res_587203281;
+              if ((i_1241535356 < subInt((blockNode_1241535123.body).length, 1))) {
+              F.line = 3909;
+              pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 5, pendingSelector: [100,105,115,99,97,114,100], returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
               }
               
-              F.line = 3676;
-              pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(blockNode_1241534761.body[chckIndx(i_1241534994, 0, (blockNode_1241534761.body).length - 1)]));
+              F.line = 3910;
+              pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(blockNode_1241535123.body[chckIndx(i_1241535356, 0, (blockNode_1241535123.body).length - 1)]));
               F.line = 39;
               F.filename = "iterators_1.nim";
-              res_587203243 = subInt(res_587203243, 1);
+              res_587203281 = subInt(res_587203281, 1);
             }
         };
       };
       }
       else {
-        F.line = 3679;
+        F.line = 3913;
         F.filename = "vm.nim";
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
       }
       
-      F.line = 3681;
-      result_1241533921 = true;
+      F.line = 3915;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 7:
@@ -19068,151 +19925,151 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       logLoop__pureZlogging_u148(1, [[86,77,58,32,119,102,80,111,112,65,99,116,105,118,97,116,105,111,110,44,32,101,118,97,108,83,116,97,99,107,46,108,101,110,61], HEX24__systemZdollars_u14((interp_p0[interp_p0_Idx].evalStack).length)]);
       }
       
-      F.line = 3687;
+      F.line = 3921;
       F.filename = "vm.nim";
       if ((0 < (interp_p0[interp_p0_Idx].evalStack).length)) {
-      Temporary76 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
+      Temporary76 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
       }
       else {
       Temporary76 = nilValue__OOZcoreZtypes_u1406();
       }
       
-      var resultValue_1241535008 = nimCopy(null, Temporary76, NTI1157627922);
+      var resultValue_1241535370 = nimCopy(null, Temporary76, NTI1157627922);
       if ((level_1090519067[0] <= 1)) {
       F.line = 701;
       F.filename = "logging.nim";
-      logLoop__pureZlogging_u148(1, [[86,77,58,32,119,102,80,111,112,65,99,116,105,118,97,116,105,111,110,32,114,101,115,117,108,116,86,97,108,117,101,61], toString__OOZcoreZtypes_u496(resultValue_1241535008)]);
+      logLoop__pureZlogging_u148(1, [[86,77,58,32,119,102,80,111,112,65,99,116,105,118,97,116,105,111,110,32,114,101,115,117,108,116,86,97,108,117,101,61], toString__OOZcoreZtypes_u496(resultValue_1241535370)]);
       }
       
       if ((!((interp_p0[interp_p0_Idx].currentActivation == null)) && interp_p0[interp_p0_Idx].currentActivation.hasReturned)) {
-      F.line = 3701;
+      F.line = 3935;
       F.filename = "vm.nim";
-      var returnVal_1241535017 = nimCopy(null, interp_p0[interp_p0_Idx].currentActivation.returnValue, NTI1157627922);
-      F.line = 3704;
-      (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
+      var returnVal_1241535379 = nimCopy(null, interp_p0[interp_p0_Idx].currentActivation.returnValue, NTI1157627922);
+      F.line = 3938;
+      (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
       if ((0 < (interp_p0[interp_p0_Idx].activationStack).length)) {
-      F.line = 3706;
-      interp_p0[interp_p0_Idx].currentActivation = (Temporary77 = HEX5BHEX5D__OOZinterpreterZvm_u677(interp_p0[interp_p0_Idx].activationStack, 1), Temporary77)[0][Temporary77[1]];
-      F.line = 3707;
+      F.line = 3940;
+      interp_p0[interp_p0_Idx].currentActivation = (Temporary77 = HEX5BHEX5D__OOZinterpreterZvm_u1006(interp_p0[interp_p0_Idx].activationStack, 1), Temporary77)[0][Temporary77[1]];
+      F.line = 3941;
       interp_p0[interp_p0_Idx].currentReceiver = interp_p0[interp_p0_Idx].currentActivation.receiver;
       }
       else {
-        F.line = 3709;
+        F.line = 3943;
         interp_p0[interp_p0_Idx].currentActivation = null;
-        F.line = 3710;
+        F.line = 3944;
         interp_p0[interp_p0_Idx].currentReceiver = frame_p1.savedReceiver;
       }
       
-      F.line = 3712;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(returnVal_1241535017));
+      F.line = 3946;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(returnVal_1241535379));
       }
       else {
-        F.line = 3715;
-        (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
+        F.line = 3949;
+        (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
         if ((0 < (interp_p0[interp_p0_Idx].activationStack).length)) {
-        F.line = 3717;
-        interp_p0[interp_p0_Idx].currentActivation = (Temporary78 = HEX5BHEX5D__OOZinterpreterZvm_u677(interp_p0[interp_p0_Idx].activationStack, 1), Temporary78)[0][Temporary78[1]];
-        F.line = 3718;
+        F.line = 3951;
+        interp_p0[interp_p0_Idx].currentActivation = (Temporary78 = HEX5BHEX5D__OOZinterpreterZvm_u1006(interp_p0[interp_p0_Idx].activationStack, 1), Temporary78)[0][Temporary78[1]];
+        F.line = 3952;
         interp_p0[interp_p0_Idx].currentReceiver = interp_p0[interp_p0_Idx].currentActivation.receiver;
         }
         else {
-          F.line = 3720;
+          F.line = 3954;
           interp_p0[interp_p0_Idx].currentActivation = null;
-          F.line = 3721;
+          F.line = 3955;
           interp_p0[interp_p0_Idx].currentReceiver = frame_p1.savedReceiver;
         }
         
-        F.line = 3723;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(resultValue_1241535008));
+        F.line = 3957;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, unwrap__OOZcoreZtypes_u1504(resultValue_1241535370));
       }
       
-      F.line = 3725;
-      result_1241533921 = true;
+      F.line = 3959;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 3:
-      F.line = 3729;
+      F.line = 3963;
       if (!((frame_p1.returnValue.kind == 5))) {
       Temporary79 = frame_p1.returnValue;
       }
       else {
-      Temporary79 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
+      Temporary79 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
       }
       
-      var value_1241535042 = nimCopy(null, Temporary79, NTI1157627922);
-      F.line = 3733;
-      var returnVal_1241535043 = unwrap__OOZcoreZtypes_u1504(value_1241535042);
-      F.line = 3738;
-      var targetActivation_1241535044 = null;
+      var value_1241535404 = nimCopy(null, Temporary79, NTI1157627922);
+      F.line = 3967;
+      var returnVal_1241535405 = unwrap__OOZcoreZtypes_u1504(value_1241535404);
+      F.line = 3972;
+      var targetActivation_1241535406 = null;
       if ((!((interp_p0[interp_p0_Idx].currentActivation == null)) && !((interp_p0[interp_p0_Idx].currentActivation.currentMethod == null)))) {
-      F.line = 3740;
-      var currentMethod_1241535053 = interp_p0[interp_p0_Idx].currentActivation.currentMethod;
-      if ((!(currentMethod_1241535053.isMethod) && !((currentMethod_1241535053.homeActivation == null)))) {
-      F.line = 3742;
-      targetActivation_1241535044 = currentMethod_1241535053.homeActivation;
+      F.line = 3974;
+      var currentMethod_1241535415 = interp_p0[interp_p0_Idx].currentActivation.currentMethod;
+      if ((!(currentMethod_1241535415.isMethod) && !((currentMethod_1241535415.homeActivation == null)))) {
+      F.line = 3976;
+      targetActivation_1241535406 = currentMethod_1241535415.homeActivation;
       }
       else {
-        F.line = 3744;
-        targetActivation_1241535044 = interp_p0[interp_p0_Idx].currentActivation;
+        F.line = 3978;
+        targetActivation_1241535406 = interp_p0[interp_p0_Idx].currentActivation;
       }
       
       }
       
-      if ((targetActivation_1241535044 == null)) {
-      F.line = 3748;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, returnVal_1241535043);
-      F.line = 3749;
-      result_1241533921 = true;
+      if ((targetActivation_1241535406 == null)) {
+      F.line = 3982;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, returnVal_1241535405);
+      F.line = 3983;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
-      F.line = 3753;
-      var targetOnStack_1241535062 = false;
+      F.line = 3987;
+      var targetOnStack_1241535424 = false;
       Label80: {
-        F.line = 3754;
-        var i_1241535070 = 0;
+        F.line = 3988;
+        var i_1241535432 = 0;
         F.line = 126;
         F.filename = "iterators_1.nim";
-        var colontmp__587203246 = 0;
-        F.line = 3754;
+        var colontmp__587203284 = 0;
+        F.line = 3988;
         F.filename = "vm.nim";
-        colontmp__587203246 = (interp_p0[interp_p0_Idx].activationStack).length;
+        colontmp__587203284 = (interp_p0[interp_p0_Idx].activationStack).length;
         F.line = 128;
         F.filename = "iterators_1.nim";
-        var i_587203247 = 0;
+        var i_587203285 = 0;
         Label81: {
           F.line = 129;
             Label82: while (true) {
-            if (!(i_587203247 < colontmp__587203246)) break Label82;
-              F.line = 3754;
+            if (!(i_587203285 < colontmp__587203284)) break Label82;
+              F.line = 3988;
               F.filename = "vm.nim";
-              i_1241535070 = i_587203247;
-              if ((interp_p0[interp_p0_Idx].activationStack[chckIndx(i_1241535070, 0, (interp_p0[interp_p0_Idx].activationStack).length - 1)] == targetActivation_1241535044)) {
-              F.line = 3756;
-              targetOnStack_1241535062 = true;
-              F.line = 3757;
+              i_1241535432 = i_587203285;
+              if ((interp_p0[interp_p0_Idx].activationStack[chckIndx(i_1241535432, 0, (interp_p0[interp_p0_Idx].activationStack).length - 1)] == targetActivation_1241535406)) {
+              F.line = 3990;
+              targetOnStack_1241535424 = true;
+              F.line = 3991;
               break Label80;
               }
               
               F.line = 131;
               F.filename = "iterators_1.nim";
-              i_587203247 = addInt(i_587203247, 1);
+              i_587203285 = addInt(i_587203285, 1);
             }
         };
       };
-      if (!(targetOnStack_1241535062)) {
+      if (!(targetOnStack_1241535424)) {
       if (!((interp_p0[interp_p0_Idx].currentActivation == null))) {
-      F.line = 3764;
+      F.line = 3998;
       F.filename = "vm.nim";
       interp_p0[interp_p0_Idx].currentActivation.hasReturned = true;
-      F.line = 3765;
-      interp_p0[interp_p0_Idx].currentActivation.returnValue = nimCopy(interp_p0[interp_p0_Idx].currentActivation.returnValue, returnVal_1241535043, NTI1157627922);
+      F.line = 3999;
+      interp_p0[interp_p0_Idx].currentActivation.returnValue = nimCopy(interp_p0[interp_p0_Idx].currentActivation.returnValue, returnVal_1241535405, NTI1157627922);
       }
       
-      F.line = 3766;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, returnVal_1241535043);
-      F.line = 3767;
-      result_1241533921 = true;
+      F.line = 4000;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, returnVal_1241535405);
+      F.line = 4001;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
@@ -19222,47 +20079,47 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
       logLoop__pureZlogging_u148(1, [[86,77,58,32,119,102,82,101,116,117,114,110,86,97,108,117,101,32,117,110,119,105,110,100,105,110,103,32,116,111,32,116,97,114,103,101,116,32,97,99,116,105,118,97,116,105,111,110]]);
       }
       
-      F.line = 3773;
+      F.line = 4007;
       F.filename = "vm.nim";
-      var found_1241535083 = false;
-      F.line = 3774;
-      var targetEvalStackDepth_1241535084 = 0;
+      var found_1241535445 = false;
+      F.line = 4008;
+      var targetEvalStackDepth_1241535446 = 0;
       Label83: {
-        F.line = 3775;
+        F.line = 4009;
           Label84: while (true) {
-          if (!((0 < (interp_p0[interp_p0_Idx].workQueue).length) && !(found_1241535083))) break Label84;
-            F.line = 3776;
-            var wf_1241535091 = pop__OOZinterpreterZvm_u19448(interp_p0[interp_p0_Idx], "workQueue");
-            if ((wf_1241535091.kind == 7)) {
-            if ((interp_p0[interp_p0_Idx].currentActivation == targetActivation_1241535044)) {
-            F.line = 3781;
-            targetEvalStackDepth_1241535084 = wf_1241535091.savedEvalStackDepth;
-            F.line = 3784;
-            (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
+          if (!((0 < (interp_p0[interp_p0_Idx].workQueue).length) && !(found_1241535445))) break Label84;
+            F.line = 4010;
+            var wf_1241535453 = pop__OOZinterpreterZvm_u19810(interp_p0[interp_p0_Idx], "workQueue");
+            if ((wf_1241535453.kind == 7)) {
+            if ((interp_p0[interp_p0_Idx].currentActivation == targetActivation_1241535406)) {
+            F.line = 4015;
+            targetEvalStackDepth_1241535446 = wf_1241535453.savedEvalStackDepth;
+            F.line = 4018;
+            (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
             if ((0 < (interp_p0[interp_p0_Idx].activationStack).length)) {
-            F.line = 3786;
-            interp_p0[interp_p0_Idx].currentActivation = (Temporary85 = HEX5BHEX5D__OOZinterpreterZvm_u677(interp_p0[interp_p0_Idx].activationStack, 1), Temporary85)[0][Temporary85[1]];
-            F.line = 3787;
+            F.line = 4020;
+            interp_p0[interp_p0_Idx].currentActivation = (Temporary85 = HEX5BHEX5D__OOZinterpreterZvm_u1006(interp_p0[interp_p0_Idx].activationStack, 1), Temporary85)[0][Temporary85[1]];
+            F.line = 4021;
             interp_p0[interp_p0_Idx].currentReceiver = interp_p0[interp_p0_Idx].currentActivation.receiver;
             }
             else {
-              F.line = 3789;
+              F.line = 4023;
               interp_p0[interp_p0_Idx].currentActivation = null;
-              F.line = 3790;
-              interp_p0[interp_p0_Idx].currentReceiver = wf_1241535091.savedReceiver;
+              F.line = 4024;
+              interp_p0[interp_p0_Idx].currentReceiver = wf_1241535453.savedReceiver;
             }
             
-            F.line = 3791;
-            found_1241535083 = true;
+            F.line = 4025;
+            found_1241535445 = true;
             }
             else {
               if ((0 < (interp_p0[interp_p0_Idx].activationStack).length)) {
-              F.line = 3795;
-              (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
+              F.line = 4029;
+              (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
               if ((0 < (interp_p0[interp_p0_Idx].activationStack).length)) {
-              F.line = 3797;
-              interp_p0[interp_p0_Idx].currentActivation = (Temporary86 = HEX5BHEX5D__OOZinterpreterZvm_u677(interp_p0[interp_p0_Idx].activationStack, 1), Temporary86)[0][Temporary86[1]];
-              F.line = 3798;
+              F.line = 4031;
+              interp_p0[interp_p0_Idx].currentActivation = (Temporary86 = HEX5BHEX5D__OOZinterpreterZvm_u1006(interp_p0[interp_p0_Idx].activationStack, 1), Temporary86)[0][Temporary86[1]];
+              F.line = 4032;
               interp_p0[interp_p0_Idx].currentReceiver = interp_p0[interp_p0_Idx].currentActivation.receiver;
               }
               
@@ -19274,83 +20131,83 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
             
           }
       };
-      if ((targetEvalStackDepth_1241535084 < (interp_p0[interp_p0_Idx].evalStack).length)) {
-      F.line = 3802;
-      if (interp_p0[interp_p0_Idx].evalStack.length < chckRange(targetEvalStackDepth_1241535084, 0, 2147483647)) { for (var i = interp_p0[interp_p0_Idx].evalStack.length ; i < chckRange(targetEvalStackDepth_1241535084, 0, 2147483647) ; ++i) interp_p0[interp_p0_Idx].evalStack.push(({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})); }
-               else { interp_p0[interp_p0_Idx].evalStack.length = chckRange(targetEvalStackDepth_1241535084, 0, 2147483647); };
+      if ((targetEvalStackDepth_1241535446 < (interp_p0[interp_p0_Idx].evalStack).length)) {
+      F.line = 4036;
+      if (interp_p0[interp_p0_Idx].evalStack.length < chckRange(targetEvalStackDepth_1241535446, 0, 2147483647)) { for (var i = interp_p0[interp_p0_Idx].evalStack.length ; i < chckRange(targetEvalStackDepth_1241535446, 0, 2147483647) ; ++i) interp_p0[interp_p0_Idx].evalStack.push(({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null})); }
+               else { interp_p0[interp_p0_Idx].evalStack.length = chckRange(targetEvalStackDepth_1241535446, 0, 2147483647); };
       }
       
-      F.line = 3803;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, returnVal_1241535043);
-      F.line = 3804;
-      result_1241533921 = true;
+      F.line = 4037;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, returnVal_1241535405);
+      F.line = 4038;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 6:
-      F.line = 3808;
-      var receiverVal_1241535131 = peekValue__OOZinterpreterZvm_u19506(interp_p0[interp_p0_Idx]);
-      F.line = 3809;
-      var messages_1241535132 = nimCopy(null, frame_p1.cascadeMessages, NTI1157627999);
-      if (((messages_1241535132).length == 0)) {
-      F.line = 3813;
-      result_1241533921 = true;
+      F.line = 4042;
+      var receiverVal_1241535493 = peekValue__OOZinterpreterZvm_u19868(interp_p0[interp_p0_Idx]);
+      F.line = 4043;
+      var messages_1241535494 = nimCopy(null, frame_p1.cascadeMessages, NTI1157627999);
+      if (((messages_1241535494).length == 0)) {
+      F.line = 4047;
+      result_1241534283 = true;
       break BeforeRet;
       }
       
-      F.line = 3816;
-      (popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx));
-      F.line = 3819;
-      var savedReceiver_1241535136 = interp_p0[interp_p0_Idx].currentReceiver;
-      F.line = 3822;
-      var receiver_1241535137 = null;
-      F.line = 3823;
-      switch (receiverVal_1241535131.kind) {
+      F.line = 4050;
+      (popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx));
+      F.line = 4053;
+      var savedReceiver_1241535498 = interp_p0[interp_p0_Idx].currentReceiver;
+      F.line = 4056;
+      var receiver_1241535499 = null;
+      F.line = 4057;
+      switch (receiverVal_1241535493.kind) {
       case 10:
-        F.line = 3825;
-        var Temporary87 = receiverVal_1241535131;
-        if (ConstSet176[Temporary87.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary87.kind, NTI1157627921)); }
-        receiver_1241535137 = Temporary87.instVal;
+        F.line = 4059;
+        var Temporary87 = receiverVal_1241535493;
+        if (ConstSet200[Temporary87.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary87.kind, NTI1157627921)); }
+        receiver_1241535499 = Temporary87.instVal;
         break;
       case 0:
-        F.line = 3827;
-        var Temporary88 = receiverVal_1241535131;
-        if (ConstSet177[Temporary88.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary88.kind, NTI1157627921)); }
-        receiver_1241535137 = newIntInstance__OOZcoreZtypes_u6363(integerClass_1157628212[0], Temporary88.intVal);
+        F.line = 4061;
+        var Temporary88 = receiverVal_1241535493;
+        if (ConstSet201[Temporary88.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary88.kind, NTI1157627921)); }
+        receiver_1241535499 = newIntInstance__OOZcoreZtypes_u6363(integerClass_1157628212[0], Temporary88.intVal);
         break;
       case 1:
-        F.line = 3829;
-        var Temporary89 = receiverVal_1241535131;
-        if (ConstSet178[Temporary89.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary89.kind, NTI1157627921)); }
-        receiver_1241535137 = newFloatInstance__OOZcoreZtypes_u6367(floatClass_1157628213[0], Temporary89.floatVal);
+        F.line = 4063;
+        var Temporary89 = receiverVal_1241535493;
+        if (ConstSet202[Temporary89.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary89.kind, NTI1157627921)); }
+        receiver_1241535499 = newFloatInstance__OOZcoreZtypes_u6367(floatClass_1157628213[0], Temporary89.floatVal);
         break;
       case 2:
-        F.line = 3831;
-        var Temporary90 = receiverVal_1241535131;
-        if (ConstSet179[Temporary90.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary90.kind, NTI1157627921)); }
-        receiver_1241535137 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary90.strVal);
+        F.line = 4065;
+        var Temporary90 = receiverVal_1241535493;
+        if (ConstSet203[Temporary90.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary90.kind, NTI1157627921)); }
+        receiver_1241535499 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary90.strVal);
         break;
       case 7:
-        F.line = 3833;
-        var Temporary91 = receiverVal_1241535131;
-        if (ConstSet180[Temporary91.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary91.kind, NTI1157627921)); }
-        receiver_1241535137 = newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], Temporary91.arrayVal);
+        F.line = 4067;
+        var Temporary91 = receiverVal_1241535493;
+        if (ConstSet204[Temporary91.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary91.kind, NTI1157627921)); }
+        receiver_1241535499 = newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], Temporary91.arrayVal);
         break;
       case 8:
-        F.line = 3835;
-        var Temporary92 = receiverVal_1241535131;
-        if (ConstSet181[Temporary92.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary92.kind, NTI1157627921)); }
-        receiver_1241535137 = newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], Temporary92.tableVal);
+        F.line = 4069;
+        var Temporary92 = receiverVal_1241535493;
+        if (ConstSet205[Temporary92.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary92.kind, NTI1157627921)); }
+        receiver_1241535499 = newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], Temporary92.tableVal);
         break;
       case 4:
-        F.line = 3837;
-        var boolInst_1241535138 = null;
-        F.line = 3838;
-        boolInst_1241535138 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3839;
-        boolInst_1241535138.kind = 0;
-        F.line = 3840;
-          var Temporary94 = receiverVal_1241535131;
-          if (ConstSet182[Temporary94.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary94.kind, NTI1157627921)); }
+        F.line = 4071;
+        var boolInst_1241535500 = null;
+        F.line = 4072;
+        boolInst_1241535500 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 4073;
+        boolInst_1241535500.kind = 0;
+        F.line = 4074;
+          var Temporary94 = receiverVal_1241535493;
+          if (ConstSet206[Temporary94.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary94.kind, NTI1157627921)); }
         if (Temporary94.boolVal) {
         Temporary93 = trueClassCache_1493172530[0];
         }
@@ -19358,257 +20215,257 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
         Temporary93 = falseClassCache_1493172531[0];
         }
         
-        boolInst_1241535138.class = Temporary93;
-        var Temporary95 = boolInst_1241535138;
-        if (ConstSet183[Temporary95.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary95.kind, NTI1157627908)); }
-        F.line = 3841;
+        boolInst_1241535500.class = Temporary93;
+        var Temporary95 = boolInst_1241535500;
+        if (ConstSet207[Temporary95.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary95.kind, NTI1157627908)); }
+        F.line = 4075;
         Temporary95.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3848;
-        boolInst_1241535138.isNimProxy = false;
-        F.line = 3849;
-        receiver_1241535137 = boolInst_1241535138;
+        F.line = 4082;
+        boolInst_1241535500.isNimProxy = false;
+        F.line = 4083;
+        receiver_1241535499 = boolInst_1241535500;
         break;
       case 6:
-        F.line = 3851;
-        var blockInst_1241535146 = null;
-        F.line = 3852;
-        blockInst_1241535146 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3853;
-        blockInst_1241535146.kind = 0;
-        F.line = 3854;
-        blockInst_1241535146.class = blockClass_1157628217[0];
-        var Temporary96 = blockInst_1241535146;
-        if (ConstSet184[Temporary96.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary96.kind, NTI1157627908)); }
-        F.line = 3855;
+        F.line = 4085;
+        var blockInst_1241535508 = null;
+        F.line = 4086;
+        blockInst_1241535508 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 4087;
+        blockInst_1241535508.kind = 0;
+        F.line = 4088;
+        blockInst_1241535508.class = blockClass_1157628217[0];
+        var Temporary96 = blockInst_1241535508;
+        if (ConstSet208[Temporary96.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary96.kind, NTI1157627908)); }
+        F.line = 4089;
         Temporary96.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3856;
-        blockInst_1241535146.isNimProxy = false;
-        F.line = 3859;
-        receiver_1241535137 = blockInst_1241535146;
+        F.line = 4090;
+        blockInst_1241535508.isNimProxy = false;
+        F.line = 4093;
+        receiver_1241535499 = blockInst_1241535508;
         break;
       case 9:
-        F.line = 3861;
-        var classInst_1241535154 = null;
-        F.line = 3862;
-        classInst_1241535154 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3863;
-        classInst_1241535154.kind = 0;
-        F.line = 3864;
-        classInst_1241535154.class = objectClass_1157628208[0];
-        var Temporary97 = classInst_1241535154;
-        if (ConstSet185[Temporary97.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary97.kind, NTI1157627908)); }
-        F.line = 3865;
+        F.line = 4095;
+        var classInst_1241535516 = null;
+        F.line = 4096;
+        classInst_1241535516 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 4097;
+        classInst_1241535516.kind = 0;
+        F.line = 4098;
+        classInst_1241535516.class = objectClass_1157628208[0];
+        var Temporary97 = classInst_1241535516;
+        if (ConstSet209[Temporary97.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary97.kind, NTI1157627908)); }
+        F.line = 4099;
         Temporary97.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3866;
-        classInst_1241535154.isNimProxy = false;
-        F.line = 3869;
-        receiver_1241535137 = classInst_1241535154;
+        F.line = 4100;
+        classInst_1241535516.isNimProxy = false;
+        F.line = 4103;
+        receiver_1241535499 = classInst_1241535516;
         break;
       default: 
-        F.line = 3871;
-        raiseException({message: ([67,97,115,99,97,100,101,32,116,111,32,117,110,115,117,112,112,111,114,116,101,100,32,118,97,108,117,101,32,107,105,110,100,58,32]).concat(reprEnum(receiverVal_1241535131.kind, NTI1157627921)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+        F.line = 4105;
+        raiseException({message: ([67,97,115,99,97,100,101,32,116,111,32,117,110,115,117,112,112,111,114,116,101,100,32,118,97,108,117,101,32,107,105,110,100,58,32]).concat(reprEnum(receiverVal_1241535493.kind, NTI1157627921)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
         break;
       }
-      F.line = 3874;
-      interp_p0[interp_p0_Idx].currentReceiver = receiver_1241535137;
-      if (((messages_1241535132).length == 1)) {
-      F.line = 3884;
-      var msg_1241535169 = messages_1241535132[chckIndx(0, 0, (messages_1241535132).length - 1)];
-      F.line = 3885;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 4, pendingSelector: nimCopy(null, msg_1241535169.selector, NTI33554449), pendingArgs: nimCopy(null, msg_1241535169.arguments, NTI1157628058), currentArgIndex: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
-      F.line = 3891;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, receiverVal_1241535131);
+      F.line = 4108;
+      interp_p0[interp_p0_Idx].currentReceiver = receiver_1241535499;
+      if (((messages_1241535494).length == 1)) {
+      F.line = 4118;
+      var msg_1241535531 = messages_1241535494[chckIndx(0, 0, (messages_1241535494).length - 1)];
+      F.line = 4119;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 4, pendingSelector: nimCopy(null, msg_1241535531.selector, NTI33554449), pendingArgs: nimCopy(null, msg_1241535531.arguments, NTI1157628058), currentArgIndex: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+      F.line = 4125;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, receiverVal_1241535493);
       }
       else {
-        F.line = 3895;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 12, savedReceiver: savedReceiver_1241535136, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+        F.line = 4129;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 12, savedReceiver: savedReceiver_1241535498, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
         Label98: {
-          F.line = 3898;
-          var i_1241535178 = 0;
+          F.line = 4132;
+          var i_1241535540 = 0;
           F.line = 6;
           F.filename = "iterators_1.nim";
-          var colontmp__587203251 = 0;
-          F.line = 3898;
+          var colontmp__587203289 = 0;
+          F.line = 4132;
           F.filename = "vm.nim";
-          colontmp__587203251 = subInt((messages_1241535132).length, 1);
+          colontmp__587203289 = subInt((messages_1241535494).length, 1);
           F.line = 33;
           F.filename = "iterators_1.nim";
-          var res_587203252 = colontmp__587203251;
+          var res_587203290 = colontmp__587203289;
           Label99: {
             F.line = 34;
               Label100: while (true) {
-              if (!(0 <= res_587203252)) break Label100;
-                F.line = 3898;
+              if (!(0 <= res_587203290)) break Label100;
+                F.line = 4132;
                 F.filename = "vm.nim";
-                i_1241535178 = res_587203252;
-                F.line = 3899;
-                var msg_1241535179 = messages_1241535132[chckIndx(i_1241535178, 0, (messages_1241535132).length - 1)];
-                if ((i_1241535178 == subInt((messages_1241535132).length, 1))) {
-                F.line = 3902;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 10, pendingSelector: nimCopy(null, msg_1241535179.selector, NTI33554449), pendingArgs: nimCopy(null, msg_1241535179.arguments, NTI1157628058), currentArgIndex: 0, cascadeReceiver: nimCopy(null, receiverVal_1241535131, NTI1157627922), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                i_1241535540 = res_587203290;
+                F.line = 4133;
+                var msg_1241535541 = messages_1241535494[chckIndx(i_1241535540, 0, (messages_1241535494).length - 1)];
+                if ((i_1241535540 == subInt((messages_1241535494).length, 1))) {
+                F.line = 4136;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 10, pendingSelector: nimCopy(null, msg_1241535541.selector, NTI33554449), pendingArgs: nimCopy(null, msg_1241535541.arguments, NTI1157628058), currentArgIndex: 0, cascadeReceiver: nimCopy(null, receiverVal_1241535493, NTI1157627922), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                 }
                 else {
-                  F.line = 3911;
-                pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 11, pendingSelector: nimCopy(null, msg_1241535179.selector, NTI33554449), pendingArgs: nimCopy(null, msg_1241535179.arguments, NTI1157628058), currentArgIndex: 0, cascadeReceiver: nimCopy(null, receiverVal_1241535131, NTI1157627922), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
+                  F.line = 4145;
+                pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 11, pendingSelector: nimCopy(null, msg_1241535541.selector, NTI33554449), pendingArgs: nimCopy(null, msg_1241535541.arguments, NTI1157628058), currentArgIndex: 0, cascadeReceiver: nimCopy(null, receiverVal_1241535493, NTI1157627922), returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null, loopKind: false, conditionBlock: null, bodyBlock: null, loopState: 0});
                 }
                 
                 F.line = 39;
                 F.filename = "iterators_1.nim";
-                res_587203252 = subInt(res_587203252, 1);
+                res_587203290 = subInt(res_587203290, 1);
               }
           };
         };
       }
       
-      F.line = 3919;
+      F.line = 4153;
       F.filename = "vm.nim";
-      result_1241533921 = true;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 8:
-      F.line = 3923;
-      var count_1241535183 = frame_p1.argCount;
-      F.line = 3924;
-      var elements_1241535204 = newSeq__OOZcoreZtypes_u6287(chckRange(count_1241535183, 0, 2147483647));
+      F.line = 4157;
+      var count_1241535545 = frame_p1.argCount;
+      F.line = 4158;
+      var elements_1241535566 = newSeq__OOZcoreZtypes_u6287(chckRange(count_1241535545, 0, 2147483647));
       Label101: {
-        F.line = 3926;
-        var i_1241535210 = 0;
+        F.line = 4160;
+        var i_1241535572 = 0;
         F.line = 6;
         F.filename = "iterators_1.nim";
-        var colontmp__587203255 = 0;
-        F.line = 3926;
+        var colontmp__587203293 = 0;
+        F.line = 4160;
         F.filename = "vm.nim";
-        colontmp__587203255 = subInt(count_1241535183, 1);
+        colontmp__587203293 = subInt(count_1241535545, 1);
         F.line = 33;
         F.filename = "iterators_1.nim";
-        var res_587203256 = colontmp__587203255;
+        var res_587203294 = colontmp__587203293;
         Label102: {
           F.line = 34;
             Label103: while (true) {
-            if (!(0 <= res_587203256)) break Label103;
-              F.line = 3926;
+            if (!(0 <= res_587203294)) break Label103;
+              F.line = 4160;
               F.filename = "vm.nim";
-              i_1241535210 = res_587203256;
-              F.line = 3927;
-              elements_1241535204[chckIndx(i_1241535210, 0, (elements_1241535204).length - 1)] = nimCopy(elements_1241535204[chckIndx(i_1241535210, 0, (elements_1241535204).length - 1)], popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx), NTI1157627922);
+              i_1241535572 = res_587203294;
+              F.line = 4161;
+              elements_1241535566[chckIndx(i_1241535572, 0, (elements_1241535566).length - 1)] = nimCopy(elements_1241535566[chckIndx(i_1241535572, 0, (elements_1241535566).length - 1)], popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx), NTI1157627922);
               F.line = 39;
               F.filename = "iterators_1.nim";
-              res_587203256 = subInt(res_587203256, 1);
+              res_587203294 = subInt(res_587203294, 1);
             }
         };
       };
       if (!((arrayClass_1157628215[0] == null))) {
-      F.line = 3929;
+      F.line = 4163;
       F.filename = "vm.nim";
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], elements_1241535204)));
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], elements_1241535566)));
       }
       else {
-        F.line = 3931;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, {kind: 7, arrayVal: nimCopy(null, elements_1241535204, NTI1157631525), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+        F.line = 4165;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, {kind: 7, arrayVal: nimCopy(null, elements_1241535566, NTI1157631525), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
       }
       
-      F.line = 3932;
-      result_1241533921 = true;
+      F.line = 4166;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 9:
-      F.line = 3938;
-      var pairCount_1241535215 = divInt(frame_p1.argCount, 2);
-      F.line = 3939;
-      var entries_1241535232 = [initTable__OOZinterpreterZobjects_u4371(32)];
+      F.line = 4172;
+      var pairCount_1241535577 = divInt(frame_p1.argCount, 2);
+      F.line = 4173;
+      var entries_1241535594 = [initTable__OOZinterpreterZobjects_u4371(32)];
       Label104: {
-        F.line = 3940;
-        var i_1241535237 = 0;
+        F.line = 4174;
+        var i_1241535599 = 0;
         F.line = 128;
         F.filename = "iterators_1.nim";
-        var i_587203259 = 0;
+        var i_587203297 = 0;
         Label105: {
           F.line = 129;
             Label106: while (true) {
-            if (!(i_587203259 < pairCount_1241535215)) break Label106;
-              F.line = 3940;
+            if (!(i_587203297 < pairCount_1241535577)) break Label106;
+              F.line = 4174;
               F.filename = "vm.nim";
-              i_1241535237 = i_587203259;
-              F.line = 3941;
-              var value_1241535238 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
-              F.line = 3942;
-              var key_1241535239 = popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx);
-              F.line = 3943;
-              HEX5BHEX5DHEX3D__OOZcoreZtypes_u7718(entries_1241535232[0], key_1241535239, value_1241535238);
+              i_1241535599 = i_587203297;
+              F.line = 4175;
+              var value_1241535600 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
+              F.line = 4176;
+              var key_1241535601 = popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx);
+              F.line = 4177;
+              HEX5BHEX5DHEX3D__OOZcoreZtypes_u7718(entries_1241535594[0], key_1241535601, value_1241535600);
               F.line = 131;
               F.filename = "iterators_1.nim";
-              i_587203259 = addInt(i_587203259, 1);
+              i_587203297 = addInt(i_587203297, 1);
             }
         };
       };
       if (!((tableClass_1157628216[0] == null))) {
-      F.line = 3945;
+      F.line = 4179;
       F.filename = "vm.nim";
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], entries_1241535232[0])));
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, toValue__OOZcoreZtypes_u1501(newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], entries_1241535594[0])));
       }
       else {
-        F.line = 3947;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, {kind: 8, tableVal: nimCopy(null, entries_1241535232[0], NTI1157627987), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], classVal: null, instVal: null});
+        F.line = 4181;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, {kind: 8, tableVal: nimCopy(null, entries_1241535594[0], NTI1157627987), intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], classVal: null, instVal: null});
       }
       
-      F.line = 3948;
-      result_1241533921 = true;
+      F.line = 4182;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 10:
     case 11:
-      F.line = 3952;
-      var receiverVal_1241535286 = nimCopy(null, frame_p1.cascadeReceiver, NTI1157627922);
-      F.line = 3955;
-      var receiver_1241535287 = null;
-      F.line = 3956;
-      switch (receiverVal_1241535286.kind) {
+      F.line = 4186;
+      var receiverVal_1241535648 = nimCopy(null, frame_p1.cascadeReceiver, NTI1157627922);
+      F.line = 4189;
+      var receiver_1241535649 = null;
+      F.line = 4190;
+      switch (receiverVal_1241535648.kind) {
       case 10:
-        F.line = 3958;
-        var Temporary107 = receiverVal_1241535286;
-        if (ConstSet186[Temporary107.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary107.kind, NTI1157627921)); }
-        receiver_1241535287 = Temporary107.instVal;
+        F.line = 4192;
+        var Temporary107 = receiverVal_1241535648;
+        if (ConstSet210[Temporary107.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary107.kind, NTI1157627921)); }
+        receiver_1241535649 = Temporary107.instVal;
         break;
       case 0:
-        F.line = 3960;
-        var Temporary108 = receiverVal_1241535286;
-        if (ConstSet187[Temporary108.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary108.kind, NTI1157627921)); }
-        receiver_1241535287 = newIntInstance__OOZcoreZtypes_u6363(integerClass_1157628212[0], Temporary108.intVal);
+        F.line = 4194;
+        var Temporary108 = receiverVal_1241535648;
+        if (ConstSet211[Temporary108.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'intVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary108.kind, NTI1157627921)); }
+        receiver_1241535649 = newIntInstance__OOZcoreZtypes_u6363(integerClass_1157628212[0], Temporary108.intVal);
         break;
       case 1:
-        F.line = 3962;
-        var Temporary109 = receiverVal_1241535286;
-        if (ConstSet188[Temporary109.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary109.kind, NTI1157627921)); }
-        receiver_1241535287 = newFloatInstance__OOZcoreZtypes_u6367(floatClass_1157628213[0], Temporary109.floatVal);
+        F.line = 4196;
+        var Temporary109 = receiverVal_1241535648;
+        if (ConstSet212[Temporary109.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'floatVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary109.kind, NTI1157627921)); }
+        receiver_1241535649 = newFloatInstance__OOZcoreZtypes_u6367(floatClass_1157628213[0], Temporary109.floatVal);
         break;
       case 2:
-        F.line = 3964;
-        var Temporary110 = receiverVal_1241535286;
-        if (ConstSet189[Temporary110.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary110.kind, NTI1157627921)); }
-        receiver_1241535287 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary110.strVal);
+        F.line = 4198;
+        var Temporary110 = receiverVal_1241535648;
+        if (ConstSet213[Temporary110.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'strVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary110.kind, NTI1157627921)); }
+        receiver_1241535649 = newStringInstance__OOZcoreZtypes_u6371(stringClass_1157628214[0], Temporary110.strVal);
         break;
       case 7:
-        F.line = 3966;
-        var Temporary111 = receiverVal_1241535286;
-        if (ConstSet190[Temporary111.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary111.kind, NTI1157627921)); }
-        receiver_1241535287 = newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], Temporary111.arrayVal);
+        F.line = 4200;
+        var Temporary111 = receiverVal_1241535648;
+        if (ConstSet214[Temporary111.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'arrayVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary111.kind, NTI1157627921)); }
+        receiver_1241535649 = newArrayInstance__OOZcoreZtypes_u6375(arrayClass_1157628215[0], Temporary111.arrayVal);
         break;
       case 8:
-        F.line = 3968;
-        var Temporary112 = receiverVal_1241535286;
-        if (ConstSet191[Temporary112.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary112.kind, NTI1157627921)); }
-        receiver_1241535287 = newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], Temporary112.tableVal);
+        F.line = 4202;
+        var Temporary112 = receiverVal_1241535648;
+        if (ConstSet215[Temporary112.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'tableVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary112.kind, NTI1157627921)); }
+        receiver_1241535649 = newTableInstance__OOZcoreZtypes_u6379(tableClass_1157628216[0], Temporary112.tableVal);
         break;
       case 4:
-        F.line = 3970;
-        var boolInst_1241535288 = null;
-        F.line = 3971;
-        boolInst_1241535288 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3972;
-        boolInst_1241535288.kind = 0;
-        F.line = 3973;
-          var Temporary114 = receiverVal_1241535286;
-          if (ConstSet192[Temporary114.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary114.kind, NTI1157627921)); }
+        F.line = 4204;
+        var boolInst_1241535650 = null;
+        F.line = 4205;
+        boolInst_1241535650 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 4206;
+        boolInst_1241535650.kind = 0;
+        F.line = 4207;
+          var Temporary114 = receiverVal_1241535648;
+          if (ConstSet216[Temporary114.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'boolVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary114.kind, NTI1157627921)); }
         if (Temporary114.boolVal) {
         Temporary113 = trueClassCache_1493172530[0];
         }
@@ -19616,228 +20473,228 @@ function handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, 
         Temporary113 = falseClassCache_1493172531[0];
         }
         
-        boolInst_1241535288.class = Temporary113;
-        var Temporary115 = boolInst_1241535288;
-        if (ConstSet193[Temporary115.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary115.kind, NTI1157627908)); }
-        F.line = 3974;
+        boolInst_1241535650.class = Temporary113;
+        var Temporary115 = boolInst_1241535650;
+        if (ConstSet217[Temporary115.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary115.kind, NTI1157627908)); }
+        F.line = 4208;
         Temporary115.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3981;
-        boolInst_1241535288.isNimProxy = false;
-        F.line = 3982;
-        receiver_1241535287 = boolInst_1241535288;
+        F.line = 4215;
+        boolInst_1241535650.isNimProxy = false;
+        F.line = 4216;
+        receiver_1241535649 = boolInst_1241535650;
         break;
       case 6:
-        F.line = 3984;
-        var blockInst_1241535296 = null;
-        F.line = 3985;
-        blockInst_1241535296 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3986;
-        blockInst_1241535296.kind = 0;
-        F.line = 3987;
-        blockInst_1241535296.class = blockClass_1157628217[0];
-        var Temporary116 = blockInst_1241535296;
-        if (ConstSet194[Temporary116.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary116.kind, NTI1157627908)); }
-        F.line = 3988;
+        F.line = 4218;
+        var blockInst_1241535658 = null;
+        F.line = 4219;
+        blockInst_1241535658 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 4220;
+        blockInst_1241535658.kind = 0;
+        F.line = 4221;
+        blockInst_1241535658.class = blockClass_1157628217[0];
+        var Temporary116 = blockInst_1241535658;
+        if (ConstSet218[Temporary116.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary116.kind, NTI1157627908)); }
+        F.line = 4222;
         Temporary116.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3989;
-        blockInst_1241535296.isNimProxy = false;
-        F.line = 3992;
-        receiver_1241535287 = blockInst_1241535296;
+        F.line = 4223;
+        blockInst_1241535658.isNimProxy = false;
+        F.line = 4226;
+        receiver_1241535649 = blockInst_1241535658;
         break;
       case 9:
-        F.line = 3994;
-        var classInst_1241535304 = null;
-        F.line = 3995;
-        classInst_1241535304 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
-        F.line = 3996;
-        classInst_1241535304.kind = 0;
-        F.line = 3997;
-        classInst_1241535304.class = objectClass_1157628208[0];
-        var Temporary117 = classInst_1241535304;
-        if (ConstSet195[Temporary117.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary117.kind, NTI1157627908)); }
-        F.line = 3998;
+        F.line = 4228;
+        var classInst_1241535666 = null;
+        F.line = 4229;
+        classInst_1241535666 = {kind: 0, m_type: NTI1157627977, class: null, slots: [], elements: [], entries: ({data: [], counter: 0}), intVal: 0, floatVal: 0.0, strVal: [], isNimProxy: false, nimValue: 0};
+        F.line = 4230;
+        classInst_1241535666.kind = 0;
+        F.line = 4231;
+        classInst_1241535666.class = objectClass_1157628208[0];
+        var Temporary117 = classInst_1241535666;
+        if (ConstSet219[Temporary117.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'slots\' is not accessible for type \'Instance\' using \'kind = "), reprDiscriminant(Temporary117.kind, NTI1157627908)); }
+        F.line = 4232;
         Temporary117.slots = nimCopy(null, [], NTI1157633137);
-        F.line = 3999;
-        classInst_1241535304.isNimProxy = false;
-        F.line = 4002;
-        receiver_1241535287 = classInst_1241535304;
+        F.line = 4233;
+        classInst_1241535666.isNimProxy = false;
+        F.line = 4236;
+        receiver_1241535649 = classInst_1241535666;
         break;
       default: 
-        F.line = 4004;
-        raiseException({message: ([67,97,115,99,97,100,101,32,116,111,32,117,110,115,117,112,112,111,114,116,101,100,32,118,97,108,117,101,32,107,105,110,100,58,32]).concat(reprEnum(receiverVal_1241535286.kind, NTI1157627921)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+        F.line = 4238;
+        raiseException({message: ([67,97,115,99,97,100,101,32,116,111,32,117,110,115,117,112,112,111,114,116,101,100,32,118,97,108,117,101,32,107,105,110,100,58,32]).concat(reprEnum(receiverVal_1241535648.kind, NTI1157627921)), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
         break;
       }
-      F.line = 4007;
-      interp_p0[interp_p0_Idx].currentReceiver = receiver_1241535287;
-      F.line = 4010;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, receiverVal_1241535286);
+      F.line = 4241;
+      interp_p0[interp_p0_Idx].currentReceiver = receiver_1241535649;
+      F.line = 4244;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, receiverVal_1241535648);
       if (((frame_p1.pendingArgs).length == 0)) {
-      F.line = 4014;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19377(frame_p1.pendingSelector, 0));
+      F.line = 4248;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newSendMessageFrame__OOZinterpreterZvm_u19739(frame_p1.pendingSelector, 0));
       }
       else {
-        F.line = 4016;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19385(frame_p1.pendingSelector, frame_p1.pendingArgs, 0));
-        F.line = 4017;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19234(frame_p1.pendingArgs[chckIndx(0, 0, (frame_p1.pendingArgs).length - 1)]));
+        F.line = 4250;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newAfterArgFrame__OOZinterpreterZvm_u19747(frame_p1.pendingSelector, frame_p1.pendingArgs, 0));
+        F.line = 4251;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newEvalFrame__OOZinterpreterZvm_u19596(frame_p1.pendingArgs[chckIndx(0, 0, (frame_p1.pendingArgs).length - 1)]));
       }
       
-      F.line = 4018;
-      result_1241533921 = true;
+      F.line = 4252;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 12:
-      F.line = 4022;
+      F.line = 4256;
       interp_p0[interp_p0_Idx].currentReceiver = frame_p1.savedReceiver;
-      F.line = 4023;
-      result_1241533921 = true;
+      F.line = 4257;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 13:
       if (frame_p1.conditionResult) {
-      F.line = 4029;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19390(frame_p1.thenBlock, 0));
+      F.line = 4263;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19752(frame_p1.thenBlock, 0));
       }
       else {
       if (!((frame_p1.elseBlock == null))) {
-      F.line = 4032;
-      pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19390(frame_p1.elseBlock, 0));
+      F.line = 4266;
+      pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19752(frame_p1.elseBlock, 0));
       }
       else {
-        F.line = 4035;
-      pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+        F.line = 4269;
+      pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
       }
       }
-      F.line = 4036;
-      result_1241533921 = true;
+      F.line = 4270;
+      result_1241534283 = true;
       break BeforeRet;
       break;
     case 14:
-      F.line = 4040;
+      F.line = 4274;
       switch (frame_p1.loopState) {
       case 0:
-        F.line = 4043;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 1, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
-        F.line = 4047;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19390(frame_p1.conditionBlock, 0));
-        F.line = 4048;
-        result_1241533921 = true;
+        F.line = 4277;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 1, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
+        F.line = 4281;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19752(frame_p1.conditionBlock, 0));
+        F.line = 4282;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       case 1:
-        F.line = 4051;
-        var conditionResult_1241535323 = peekValue__OOZinterpreterZvm_u19506(interp_p0[interp_p0_Idx]);
-        F.line = 4052;
-        var condBool_1241535324 = isTruthy__OOZcoreZtypes_u317(conditionResult_1241535323);
-        F.line = 4053;
+        F.line = 4285;
+        var conditionResult_1241535685 = peekValue__OOZinterpreterZvm_u19868(interp_p0[interp_p0_Idx]);
+        F.line = 4286;
+        var condBool_1241535686 = isTruthy__OOZcoreZtypes_u317(conditionResult_1241535685);
+        F.line = 4287;
         if (frame_p1.loopKind) {
-        Temporary118 = condBool_1241535324;
+        Temporary118 = condBool_1241535686;
         }
         else {
-        Temporary118 = !(condBool_1241535324);
+        Temporary118 = !(condBool_1241535686);
         }
         
-        var shouldContinue_1241535325 = Temporary118;
-        F.line = 4054;
-        (popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx));
-        if (shouldContinue_1241535325) {
-        F.line = 4057;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 2, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
-        F.line = 4061;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19390(frame_p1.bodyBlock, 0));
+        var shouldContinue_1241535687 = Temporary118;
+        F.line = 4288;
+        (popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx));
+        if (shouldContinue_1241535687) {
+        F.line = 4291;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 2, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
+        F.line = 4295;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, newApplyBlockFrame__OOZinterpreterZvm_u19752(frame_p1.bodyBlock, 0));
         }
         else {
-          F.line = 4064;
-        pushValue__OOZinterpreterZvm_u19466(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
+          F.line = 4298;
+        pushValue__OOZinterpreterZvm_u19828(interp_p0, interp_p0_Idx, nilValue__OOZcoreZtypes_u1406());
         }
         
-        F.line = 4065;
-        result_1241533921 = true;
+        F.line = 4299;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       case 2:
-        F.line = 4068;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 3, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
-        F.line = 4072;
-        result_1241533921 = true;
+        F.line = 4302;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 3, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
+        F.line = 4306;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       case 3:
-        F.line = 4075;
-        (popValue__OOZinterpreterZvm_u19480(interp_p0, interp_p0_Idx));
-        F.line = 4076;
-        pushWorkFrame__OOZinterpreterZvm_u19433(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
-        F.line = 4080;
-        result_1241533921 = true;
+        F.line = 4309;
+        (popValue__OOZinterpreterZvm_u19842(interp_p0, interp_p0_Idx));
+        F.line = 4310;
+        pushWorkFrame__OOZinterpreterZvm_u19795(interp_p0, interp_p0_Idx, {kind: 14, loopKind: frame_p1.loopKind, conditionBlock: frame_p1.conditionBlock, bodyBlock: frame_p1.bodyBlock, loopState: 0, returnValue: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, cascadeReceiver: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}, node: null, selector: [], argCount: 0, blockVal: null, pendingSelector: [], pendingArgs: [], currentArgIndex: 0, cascadeMessages: [], savedReceiver: null, isBlockActivation: false, savedEvalStackDepth: 0, conditionResult: false, thenBlock: null, elseBlock: null});
+        F.line = 4314;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       case 4:
-        F.line = 4082;
-        result_1241533921 = true;
+        F.line = 4316;
+        result_1241534283 = true;
         break BeforeRet;
         break;
       }
       break;
     case 0:
-      F.line = 4086;
-      result_1241533921 = handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, frame_p1);
+      F.line = 4320;
+      result_1241534283 = handleEvalNode__OOZinterpreterZvm_u19923(interp_p0, interp_p0_Idx, frame_p1);
       break BeforeRet;
       break;
     }
   };
   framePtr = F.prev;
 
-  return result_1241533921;
+  return result_1241534283;
 
 }
 
-function runASTInterpreter__OOZinterpreterZvm_u21358(interp_p0, interp_p0_Idx) {
+function runASTInterpreter__OOZinterpreterZvm_u21720(interp_p0, interp_p0_Idx) {
           var Temporary4;
     var Temporary5;
 
-  var result_1241535344 = ({status: 0, value: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), error: []});
+  var result_1241535706 = ({status: 0, value: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), error: []});
 
   var F = {procname: "vm.runASTInterpreter", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     Label1: {
-      F.line = 4096;
+      F.line = 4330;
       F.filename = "vm.nim";
         Label2: while (true) {
-        if (!hasWorkFrames__OOZinterpreterZvm_u19460(interp_p0[interp_p0_Idx])) break Label2;
+        if (!hasWorkFrames__OOZinterpreterZvm_u19822(interp_p0[interp_p0_Idx])) break Label2;
           if (interp_p0[interp_p0_Idx].shouldYield) {
-          F.line = 4099;
+          F.line = 4333;
           interp_p0[interp_p0_Idx].shouldYield = false;
-          F.line = 4100;
-          result_1241535344 = nimCopy(result_1241535344, {status: 1, value: peekValue__OOZinterpreterZvm_u19506(interp_p0[interp_p0_Idx]), error: []}, NTI1241524928);
+          F.line = 4334;
+          result_1241535706 = nimCopy(result_1241535706, {status: 1, value: peekValue__OOZinterpreterZvm_u19868(interp_p0[interp_p0_Idx]), error: []}, NTI1241525215);
           break BeforeRet;
           }
           
-          F.line = 4102;
-          var frame_1241535345 = popWorkFrame__OOZinterpreterZvm_u19440(interp_p0, interp_p0_Idx);
+          F.line = 4336;
+          var frame_1241535707 = popWorkFrame__OOZinterpreterZvm_u19802(interp_p0, interp_p0_Idx);
           if ((level_1090519067[0] <= 1)) {
           F.line = 701;
           F.filename = "logging.nim";
-          logLoop__pureZlogging_u148(1, [[86,77,58,32,80,114,111,99,101,115,115,105,110,103,32,102,114,97,109,101,32,107,105,110,100,61], reprEnum(frame_1241535345.kind, NTI1157627916)]);
+          logLoop__pureZlogging_u148(1, [[86,77,58,32,80,114,111,99,101,115,115,105,110,103,32,102,114,97,109,101,32,107,105,110,100,61], reprEnum(frame_1241535707.kind, NTI1157627916)]);
           }
           
-          F.line = 4105;
+          F.line = 4339;
           F.filename = "vm.nim";
 ++excHandler;
           try {
-          F.line = 4106;
-          F.line = 4106;
-          switch (frame_1241535345.kind) {
+          F.line = 4340;
+          F.line = 4340;
+          switch (frame_1241535707.kind) {
           case 0:
-            Temporary4 = handleEvalNode__OOZinterpreterZvm_u19561(interp_p0, interp_p0_Idx, frame_1241535345);
+            Temporary4 = handleEvalNode__OOZinterpreterZvm_u19923(interp_p0, interp_p0_Idx, frame_1241535707);
             break;
           default: 
-            Temporary4 = handleContinuation__OOZinterpreterZvm_u19934(interp_p0, interp_p0_Idx, frame_1241535345);
+            Temporary4 = handleContinuation__OOZinterpreterZvm_u20296(interp_p0, interp_p0_Idx, frame_1241535707);
             break;
           }
-          var shouldContinue_1241535356 = Temporary4;
-          if (!(shouldContinue_1241535356)) {
-          F.line = 4113;
+          var shouldContinue_1241535718 = Temporary4;
+          if (!(shouldContinue_1241535718)) {
+          F.line = 4347;
           break Label1;
           }
           
@@ -19848,17 +20705,17 @@ function runASTInterpreter__OOZinterpreterZvm_u21358(interp_p0, interp_p0_Idx) {
  --excHandler;
           framePtr = F;
           if (lastJSError && (isObj(lastJSError.m_type, NTI134217746))) {
-          F.line = 4115;
-          var e_1241535357 = getCurrentException();
-          F.line = 4115;
-          result_1241535344 = nimCopy(result_1241535344, {status: 3, error: nimCopy(null, e_1241535357.message, NTI33554449), value: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}}, NTI1241524928);
+          F.line = 4349;
+          var e_1241535719 = getCurrentException();
+          F.line = 4349;
+          result_1241535706 = nimCopy(result_1241535706, {status: 3, error: nimCopy(null, e_1241535719.message, NTI33554449), value: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}}, NTI1241525215);
           break BeforeRet;
           }
           else           if (lastJSError && (isObj(lastJSError.m_type, NTI33555171))) {
-          F.line = 4117;
-          var e_1241535358 = getCurrentException();
-          F.line = 4117;
-          result_1241535344 = nimCopy(result_1241535344, {status: 3, error: ([86,77,32,101,114,114,111,114,58,32]).concat(e_1241535358.message), value: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}}, NTI1241524928);
+          F.line = 4351;
+          var e_1241535720 = getCurrentException();
+          F.line = 4351;
+          result_1241535706 = nimCopy(result_1241535706, {status: 3, error: ([86,77,32,101,114,114,111,114,58,32]).concat(e_1241535720.message), value: {kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}}, NTI1241525215);
           break BeforeRet;
           }
           else {
@@ -19870,137 +20727,137 @@ function runASTInterpreter__OOZinterpreterZvm_u21358(interp_p0, interp_p0_Idx) {
           }
         }
     };
-    F.line = 4120;
+    F.line = 4354;
     if ((0 < (interp_p0[interp_p0_Idx].evalStack).length)) {
-    Temporary5 = HEX5BHEX5D__OOZinterpreterZvm_u19513(interp_p0[interp_p0_Idx].evalStack, 1);
+    Temporary5 = HEX5BHEX5D__OOZinterpreterZvm_u19875(interp_p0[interp_p0_Idx].evalStack, 1);
     }
     else {
     Temporary5 = nilValue__OOZcoreZtypes_u1406();
     }
     
-    var resultValue_1241535366 = nimCopy(null, Temporary5, NTI1157627922);
-    F.line = 4125;
-    result_1241535344 = nimCopy(result_1241535344, {status: 2, value: nimCopy(null, resultValue_1241535366, NTI1157627922), error: []}, NTI1241524928);
+    var resultValue_1241535728 = nimCopy(null, Temporary5, NTI1157627922);
+    F.line = 4359;
+    result_1241535706 = nimCopy(result_1241535706, {status: 2, value: nimCopy(null, resultValue_1241535728, NTI1157627922), error: []}, NTI1241525215);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241535344;
+  return result_1241535706;
 
 }
 
-function evalWithVM__OOZinterpreterZvm_u45(interp_p0, interp_p0_Idx, node_p1) {
+function evalWithVM__OOZinterpreterZvm_u374(interp_p0, interp_p0_Idx, node_p1) {
     var Temporary1;
 
-  var result_1241535440 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
+  var result_1241535802 = ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null});
 
   var F = {procname: "vm.evalWithVM", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
     if ((node_p1 == null)) {
-    F.line = 4132;
+    F.line = 4366;
     F.filename = "vm.nim";
-    result_1241535440 = nimCopy(result_1241535440, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
+    result_1241535802 = nimCopy(result_1241535802, nilValue__OOZcoreZtypes_u1406(), NTI1157627922);
     break BeforeRet;
     }
     
-    F.line = 4135;
-    var savedWorkQueue_1241535445 = nimCopy(null, interp_p0[interp_p0_Idx].workQueue, NTI1157628018);
-    F.line = 4136;
-    var savedEvalStack_1241535446 = nimCopy(null, interp_p0[interp_p0_Idx].evalStack, NTI1157628019);
-    F.line = 4139;
-    interp_p0[interp_p0_Idx].workQueue = nimCopy(null, [newEvalFrame__OOZinterpreterZvm_u19234(node_p1)], NTI1241526569);
-    F.line = 4140;
+    F.line = 4369;
+    var savedWorkQueue_1241535807 = nimCopy(null, interp_p0[interp_p0_Idx].workQueue, NTI1157628018);
+    F.line = 4370;
+    var savedEvalStack_1241535808 = nimCopy(null, interp_p0[interp_p0_Idx].evalStack, NTI1157628019);
+    F.line = 4373;
+    interp_p0[interp_p0_Idx].workQueue = nimCopy(null, [newEvalFrame__OOZinterpreterZvm_u19596(node_p1)], NTI1241526856);
+    F.line = 4374;
     interp_p0[interp_p0_Idx].evalStack = nimCopy(null, [], NTI1157633137);
-    F.line = 4143;
-    var vmResult_1241535455 = runASTInterpreter__OOZinterpreterZvm_u21358(interp_p0, interp_p0_Idx);
-    F.line = 4146;
-    F.line = 4146;
-    switch (vmResult_1241535455.status) {
+    F.line = 4377;
+    var vmResult_1241535817 = runASTInterpreter__OOZinterpreterZvm_u21720(interp_p0, interp_p0_Idx);
+    F.line = 4380;
+    F.line = 4380;
+    switch (vmResult_1241535817.status) {
     case 2:
     case 1:
-      Temporary1 = vmResult_1241535455.value;
+      Temporary1 = vmResult_1241535817.value;
       break;
     case 3:
-      F.line = 4150;
-      raiseException({message: nimCopy(null, vmResult_1241535455.error, NTI33554449), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
+      F.line = 4384;
+      raiseException({message: nimCopy(null, vmResult_1241535817.error, NTI33554449), parent: null, m_type: NTI134217746, name: null, trace: [], up: null}, "ValueError");
       break;
     case 0:
       Temporary1 = nilValue__OOZcoreZtypes_u1406();
       break;
     }
-    var resultValue_1241535457 = nimCopy(null, Temporary1, NTI1157627922);
-    F.line = 4155;
-    interp_p0[interp_p0_Idx].workQueue = nimCopy(null, savedWorkQueue_1241535445, NTI1157628018);
-    F.line = 4156;
-    interp_p0[interp_p0_Idx].evalStack = nimCopy(null, savedEvalStack_1241535446, NTI1157628019);
-    F.line = 4158;
-    result_1241535440 = nimCopy(result_1241535440, resultValue_1241535457, NTI1157627922);
+    var resultValue_1241535819 = nimCopy(null, Temporary1, NTI1157627922);
+    F.line = 4389;
+    interp_p0[interp_p0_Idx].workQueue = nimCopy(null, savedWorkQueue_1241535807, NTI1157628018);
+    F.line = 4390;
+    interp_p0[interp_p0_Idx].evalStack = nimCopy(null, savedEvalStack_1241535808, NTI1157628019);
+    F.line = 4392;
+    result_1241535802 = nimCopy(result_1241535802, resultValue_1241535819, NTI1157627922);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241535440;
+  return result_1241535802;
 
 }
 
-function doit__OOZinterpreterZvm_u48(interp_p0, interp_p0_Idx, source_p1, dumpAst_p2) {
-  var result_1241535478 = {Field0: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field1: []};
+function doit__OOZinterpreterZvm_u377(interp_p0, interp_p0_Idx, source_p1, dumpAst_p2) {
+  var result_1241535840 = {Field0: ({kind: 0, intVal: 0, floatVal: 0.0, strVal: [], symVal: [], boolVal: false, blockVal: null, arrayVal: [], tableVal: ({data: [], counter: 0}), classVal: null, instVal: null}), Field1: []};
 
   var F = {procname: "vm.doit", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
-    F.line = 4162;
+    F.line = 4396;
     F.filename = "vm.nim";
-    var tokens_1241535479 = lex__OOZparserZlexer_u322(source_p1);
-    F.line = 4163;
-    var parser_1241535480 = [initParser__OOZparserZparser_u417(tokens_1241535479, [])];
-    F.line = 4164;
-    var nodes_1241535481 = parseStatements__OOZparserZparser_u2282(parser_1241535480, 0);
-    if (parser_1241535480[0].hasError) {
-    F.line = 4167;
+    var tokens_1241535841 = lex__OOZparserZlexer_u322(source_p1);
+    F.line = 4397;
+    var parser_1241535842 = [initParser__OOZparserZparser_u417(tokens_1241535841, [])];
+    F.line = 4398;
+    var nodes_1241535843 = parseStatements__OOZparserZparser_u2282(parser_1241535842, 0);
+    if (parser_1241535842[0].hasError) {
+    F.line = 4401;
     var colontmp__587202801 = nilValue__OOZcoreZtypes_u1406();
-    F.line = 4167;
-    var colontmp__587202802 = ([80,97,114,115,101,32,101,114,114,111,114,58,32]).concat(parser_1241535480[0].errorMsg);
-    F.line = 4167;
-    result_1241535478 = nimCopy(result_1241535478, {Field0: nimCopy(null, colontmp__587202801, NTI1157627922), Field1: nimCopy(null, colontmp__587202802, NTI33554449)}, NTI1241514018);
+    F.line = 4401;
+    var colontmp__587202802 = ([80,97,114,115,101,32,101,114,114,111,114,58,32]).concat(parser_1241535842[0].errorMsg);
+    F.line = 4401;
+    result_1241535840 = nimCopy(result_1241535840, {Field0: nimCopy(null, colontmp__587202801, NTI1157627922), Field1: nimCopy(null, colontmp__587202802, NTI33554449)}, NTI1241514279);
     break BeforeRet;
     }
     
-    if (((nodes_1241535481).length == 0)) {
-    F.line = 4170;
+    if (((nodes_1241535843).length == 0)) {
+    F.line = 4404;
     var colontmp__587202803 = nilValue__OOZcoreZtypes_u1406();
-    F.line = 4170;
+    F.line = 4404;
     var colontmp__587202804 = [78,111,32,101,120,112,114,101,115,115,105,111,110,32,116,111,32,101,118,97,108,117,97,116,101];
-    F.line = 4170;
-    result_1241535478 = nimCopy(result_1241535478, {Field0: nimCopy(null, colontmp__587202803, NTI1157627922), Field1: nimCopy(null, colontmp__587202804, NTI33554449)}, NTI1241514018);
+    F.line = 4404;
+    result_1241535840 = nimCopy(result_1241535840, {Field0: nimCopy(null, colontmp__587202803, NTI1157627922), Field1: nimCopy(null, colontmp__587202804, NTI33554449)}, NTI1241514279);
     break BeforeRet;
     }
     
     if (dumpAst_p2) {
-    F.line = 4174;
+    F.line = 4408;
     rawEcho([65,83,84,58]);
     Label1: {
-      F.line = 4175;
-      var node_1241535488 = null;
+      F.line = 4409;
+      var node_1241535850 = null;
       F.line = 249;
       F.filename = "iterators.nim";
       var i_587202807 = 0;
       F.line = 250;
-      var L_587202808 = (nodes_1241535481).length;
+      var L_587202808 = (nodes_1241535843).length;
       Label2: {
         F.line = 251;
           Label3: while (true) {
           if (!(i_587202807 < L_587202808)) break Label3;
-            F.line = 4175;
+            F.line = 4409;
             F.filename = "vm.nim";
-            node_1241535488 = nodes_1241535481[chckIndx(i_587202807, 0, (nodes_1241535481).length - 1)];
-            F.line = 4176;
-            rawEcho(printAST__OOZparserZparser_u2418(node_1241535488, 0));
+            node_1241535850 = nodes_1241535843[chckIndx(i_587202807, 0, (nodes_1241535843).length - 1)];
+            F.line = 4410;
+            rawEcho(printAST__OOZparserZparser_u2418(node_1241535850, 0));
             F.line = 13;
             F.filename = "iterators.nim";
             i_587202807 += 1;
-            if (!(((nodes_1241535481).length == L_587202808))) {
+            if (!(((nodes_1241535843).length == L_587202808))) {
             F.line = 254;
             failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
@@ -20010,33 +20867,33 @@ function doit__OOZinterpreterZvm_u48(interp_p0, interp_p0_Idx, source_p1, dumpAs
     };
     }
     
-    F.line = 4179;
+    F.line = 4413;
     F.filename = "vm.nim";
 ++excHandler;
     try {
-    F.line = 4180;
-    var lastResult_1241535489 = nilValue__OOZcoreZtypes_u1406();
+    F.line = 4414;
+    var lastResult_1241535851 = nilValue__OOZcoreZtypes_u1406();
     Label5: {
-      F.line = 4181;
-      var node_1241535493 = null;
+      F.line = 4415;
+      var node_1241535855 = null;
       F.line = 249;
       F.filename = "iterators.nim";
       var i_587202811 = 0;
       F.line = 250;
-      var L_587202812 = (nodes_1241535481).length;
+      var L_587202812 = (nodes_1241535843).length;
       Label6: {
         F.line = 251;
           Label7: while (true) {
           if (!(i_587202811 < L_587202812)) break Label7;
-            F.line = 4181;
+            F.line = 4415;
             F.filename = "vm.nim";
-            node_1241535493 = nodes_1241535481[chckIndx(i_587202811, 0, (nodes_1241535481).length - 1)];
-            F.line = 4182;
-            lastResult_1241535489 = nimCopy(lastResult_1241535489, evalWithVM__OOZinterpreterZvm_u45(interp_p0, interp_p0_Idx, node_1241535493), NTI1157627922);
+            node_1241535855 = nodes_1241535843[chckIndx(i_587202811, 0, (nodes_1241535843).length - 1)];
+            F.line = 4416;
+            lastResult_1241535851 = nimCopy(lastResult_1241535851, evalWithVM__OOZinterpreterZvm_u374(interp_p0, interp_p0_Idx, node_1241535855), NTI1157627922);
             F.line = 13;
             F.filename = "iterators.nim";
             i_587202811 += 1;
-            if (!(((nodes_1241535481).length == L_587202812))) {
+            if (!(((nodes_1241535843).length == L_587202812))) {
             F.line = 254;
             failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
@@ -20044,15 +20901,15 @@ function doit__OOZinterpreterZvm_u48(interp_p0, interp_p0_Idx, source_p1, dumpAs
           }
       };
     };
-    F.line = 4183;
+    F.line = 4417;
     F.filename = "vm.nim";
-    interp_p0[interp_p0_Idx].lastResult = nimCopy(interp_p0[interp_p0_Idx].lastResult, lastResult_1241535489, NTI1157627922);
-    F.line = 4184;
-    var colontmp__587202814 = nimCopy(null, lastResult_1241535489, NTI1157627922);
-    F.line = 4184;
+    interp_p0[interp_p0_Idx].lastResult = nimCopy(interp_p0[interp_p0_Idx].lastResult, lastResult_1241535851, NTI1157627922);
+    F.line = 4418;
+    var colontmp__587202814 = nimCopy(null, lastResult_1241535851, NTI1157627922);
+    F.line = 4418;
     var colontmp__587202815 = [];
-    F.line = 4184;
-    result_1241535478 = nimCopy(result_1241535478, {Field0: nimCopy(null, colontmp__587202814, NTI1157627922), Field1: nimCopy(null, colontmp__587202815, NTI33554449)}, NTI1241514018);
+    F.line = 4418;
+    result_1241535840 = nimCopy(result_1241535840, {Field0: nimCopy(null, colontmp__587202814, NTI1157627922), Field1: nimCopy(null, colontmp__587202815, NTI33554449)}, NTI1241514279);
     break BeforeRet;
 --excHandler;
 } catch (EXCEPTION) {
@@ -20061,29 +20918,29 @@ function doit__OOZinterpreterZvm_u48(interp_p0, interp_p0_Idx, source_p1, dumpAs
  --excHandler;
     framePtr = F;
     if (lastJSError && (isObj(lastJSError.m_type, NTI134217746))) {
-    F.line = 4186;
+    F.line = 4420;
     reraiseException();
     }
-    else     if (lastJSError && (isObj(lastJSError.m_type, NTI1241514010))) {
-    F.line = 4188;
-    var e_1241535494 = getCurrentException();
-    F.line = 4188;
+    else     if (lastJSError && (isObj(lastJSError.m_type, NTI1241514271))) {
+    F.line = 4422;
+    var e_1241535856 = getCurrentException();
+    F.line = 4422;
     var colontmp__587202816 = nilValue__OOZcoreZtypes_u1406();
-    F.line = 4188;
-    var colontmp__587202817 = ([82,117,110,116,105,109,101,32,101,114,114,111,114,58,32]).concat(e_1241535494.message);
-    F.line = 4188;
-    result_1241535478 = nimCopy(result_1241535478, {Field0: nimCopy(null, colontmp__587202816, NTI1157627922), Field1: nimCopy(null, colontmp__587202817, NTI33554449)}, NTI1241514018);
+    F.line = 4422;
+    var colontmp__587202817 = ([82,117,110,116,105,109,101,32,101,114,114,111,114,58,32]).concat(e_1241535856.message);
+    F.line = 4422;
+    result_1241535840 = nimCopy(result_1241535840, {Field0: nimCopy(null, colontmp__587202816, NTI1157627922), Field1: nimCopy(null, colontmp__587202817, NTI33554449)}, NTI1241514279);
     break BeforeRet;
     }
     else     if (lastJSError && (isObj(lastJSError.m_type, NTI33555171))) {
-    F.line = 4190;
-    var e_1241535495 = getCurrentException();
-    F.line = 4190;
+    F.line = 4424;
+    var e_1241535857 = getCurrentException();
+    F.line = 4424;
     var colontmp__587202818 = nilValue__OOZcoreZtypes_u1406();
-    F.line = 4190;
-    var colontmp__587202819 = ([69,114,114,111,114,58,32]).concat(e_1241535495.message);
-    F.line = 4190;
-    result_1241535478 = nimCopy(result_1241535478, {Field0: nimCopy(null, colontmp__587202818, NTI1157627922), Field1: nimCopy(null, colontmp__587202819, NTI33554449)}, NTI1241514018);
+    F.line = 4424;
+    var colontmp__587202819 = ([69,114,114,111,114,58,32]).concat(e_1241535857.message);
+    F.line = 4424;
+    result_1241535840 = nimCopy(result_1241535840, {Field0: nimCopy(null, colontmp__587202818, NTI1157627922), Field1: nimCopy(null, colontmp__587202819, NTI33554449)}, NTI1241514279);
     break BeforeRet;
     }
     else {
@@ -20096,73 +20953,73 @@ function doit__OOZinterpreterZvm_u48(interp_p0, interp_p0_Idx, source_p1, dumpAs
   };
   framePtr = F.prev;
 
-  return result_1241535478;
+  return result_1241535840;
 
 }
 
-function evalStatements__OOZinterpreterZvm_u52(interp_p0, interp_p0_Idx, source_p1) {
-  var result_1241535499 = {Field0: [], Field1: []};
+function evalStatements__OOZinterpreterZvm_u381(interp_p0, interp_p0_Idx, source_p1) {
+  var result_1241535861 = {Field0: [], Field1: []};
 
   var F = {procname: "vm.evalStatements", prev: framePtr, filename: "/home/gokr/tankfeud/nemo/src/harding/interpreter/vm.nim", line: 0};
   framePtr = F;
   BeforeRet: {
-    F.line = 4195;
+    F.line = 4429;
     F.filename = "vm.nim";
-    var tokens_1241535500 = lex__OOZparserZlexer_u322(source_p1);
-    F.line = 4196;
-    var parser_1241535501 = [initParser__OOZparserZparser_u417(tokens_1241535500, [])];
-    F.line = 4197;
-    var nodes_1241535502 = parseStatements__OOZparserZparser_u2282(parser_1241535501, 0);
-    if (parser_1241535501[0].hasError) {
-    F.line = 4200;
-    var colontmp__587203287 = [];
-    F.line = 4200;
-    var colontmp__587203288 = ([80,97,114,115,101,32,101,114,114,111,114,58,32]).concat(parser_1241535501[0].errorMsg);
-    F.line = 4200;
-    result_1241535499 = nimCopy(result_1241535499, {Field0: nimCopy(null, colontmp__587203287, NTI1241514022), Field1: nimCopy(null, colontmp__587203288, NTI33554449)}, NTI1241514021);
+    var tokens_1241535862 = lex__OOZparserZlexer_u322(source_p1);
+    F.line = 4430;
+    var parser_1241535863 = [initParser__OOZparserZparser_u417(tokens_1241535862, [])];
+    F.line = 4431;
+    var nodes_1241535864 = parseStatements__OOZparserZparser_u2282(parser_1241535863, 0);
+    if (parser_1241535863[0].hasError) {
+    F.line = 4434;
+    var colontmp__587203318 = [];
+    F.line = 4434;
+    var colontmp__587203319 = ([80,97,114,115,101,32,101,114,114,111,114,58,32]).concat(parser_1241535863[0].errorMsg);
+    F.line = 4434;
+    result_1241535861 = nimCopy(result_1241535861, {Field0: nimCopy(null, colontmp__587203318, NTI1241514283), Field1: nimCopy(null, colontmp__587203319, NTI33554449)}, NTI1241514282);
     break BeforeRet;
     }
     
-    F.line = 4202;
-    var results_1241535527 = newSeq__OOZcoreZtypes_u6287(0);
-    if ((0 < (nodes_1241535502).length)) {
-    F.line = 4208;
-    var topLevelBlock_1241535555 = {parameters: [], temporaries: [], body: nimCopy(null, nodes_1241535502, NTI1224738312), isMethod: true, capturedEnv: initTable__OOZparserZparser_u1231(32), capturedEnvInitialized: true, m_type: NTI1157628021, nativeImpl: 0, hasInterpreterParam: false, homeActivation: null, line: 0, col: 0};
-    F.line = 4216;
-    var activation_1241535556 = newActivation__OOZinterpreterZactivation_u6(topLevelBlock_1241535555, interp_p0[interp_p0_Idx].currentReceiver, interp_p0[interp_p0_Idx].currentActivation, null, false);
-    F.line = 4217;
-    interp_p0[interp_p0_Idx].activationStack.push(activation_1241535556);;
-    F.line = 4218;
-    var savedActivation_1241535561 = interp_p0[interp_p0_Idx].currentActivation;
-    F.line = 4219;
-    interp_p0[interp_p0_Idx].currentActivation = activation_1241535556;
-    F.line = 4221;
+    F.line = 4436;
+    var results_1241535889 = newSeq__OOZcoreZtypes_u6287(0);
+    if ((0 < (nodes_1241535864).length)) {
+    F.line = 4442;
+    var topLevelBlock_1241535917 = {parameters: [], temporaries: [], body: nimCopy(null, nodes_1241535864, NTI1224738312), isMethod: true, capturedEnv: initTable__OOZparserZparser_u1231(32), capturedEnvInitialized: true, m_type: NTI1157628021, nativeImpl: 0, hasInterpreterParam: false, homeActivation: null, line: 0, col: 0};
+    F.line = 4450;
+    var activation_1241535918 = newActivation__OOZinterpreterZactivation_u6(topLevelBlock_1241535917, interp_p0[interp_p0_Idx].currentReceiver, interp_p0[interp_p0_Idx].currentActivation, null, false);
+    F.line = 4451;
+    interp_p0[interp_p0_Idx].activationStack.push(activation_1241535918);;
+    F.line = 4452;
+    var savedActivation_1241535923 = interp_p0[interp_p0_Idx].currentActivation;
+    F.line = 4453;
+    interp_p0[interp_p0_Idx].currentActivation = activation_1241535918;
+    F.line = 4455;
 ++excHandler;
     try {
     Label2: {
-      F.line = 4222;
-      var node_1241535565 = null;
+      F.line = 4456;
+      var node_1241535927 = null;
       F.line = 249;
       F.filename = "iterators.nim";
-      var i_587203290 = 0;
+      var i_587203321 = 0;
       F.line = 250;
-      var L_587203291 = (nodes_1241535502).length;
+      var L_587203322 = (nodes_1241535864).length;
       Label3: {
         F.line = 251;
           Label4: while (true) {
-          if (!(i_587203290 < L_587203291)) break Label4;
-            F.line = 4222;
+          if (!(i_587203321 < L_587203322)) break Label4;
+            F.line = 4456;
             F.filename = "vm.nim";
-            node_1241535565 = nodes_1241535502[chckIndx(i_587203290, 0, (nodes_1241535502).length - 1)];
-            F.line = 4223;
-            var evalResult_1241535566 = evalWithVM__OOZinterpreterZvm_u45(interp_p0, interp_p0_Idx, node_1241535565);
-            F.line = 4224;
-            var Temporary5 = nimCopy(null, evalResult_1241535566, NTI1157627922);
-            results_1241535527.push(Temporary5);;
+            node_1241535927 = nodes_1241535864[chckIndx(i_587203321, 0, (nodes_1241535864).length - 1)];
+            F.line = 4457;
+            var evalResult_1241535928 = evalWithVM__OOZinterpreterZvm_u374(interp_p0, interp_p0_Idx, node_1241535927);
+            F.line = 4458;
+            var Temporary5 = nimCopy(null, evalResult_1241535928, NTI1157627922);
+            results_1241535889.push(Temporary5);;
             F.line = 13;
             F.filename = "iterators.nim";
-            i_587203290 += 1;
-            if (!(((nodes_1241535502).length == L_587203291))) {
+            i_587203321 += 1;
+            if (!(((nodes_1241535864).length == L_587203322))) {
             F.line = 254;
             failedAssertImpl__stdZassertions_u84(makeNimstrLit("/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/system/iterators.nim(254, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
@@ -20177,49 +21034,49 @@ function evalStatements__OOZinterpreterZvm_u52(interp_p0, interp_p0_Idx, source_
  --excHandler;
     framePtr = F;
     if (lastJSError && (isObj(lastJSError.m_type, NTI134217746))) {
-    F.line = 4226;
+    F.line = 4460;
     F.filename = "vm.nim";
-    var e_1241535571 = getCurrentException();
-    F.line = 4226;
-    (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
-    F.line = 4227;
-    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535561;
-    F.line = 4228;
-    var colontmp__587203293 = [];
-    F.line = 4228;
-    var colontmp__587203294 = ([69,114,114,111,114,58,32]).concat(e_1241535571.message);
-    F.line = 4228;
-    result_1241535499 = nimCopy(result_1241535499, {Field0: nimCopy(null, colontmp__587203293, NTI1241514022), Field1: nimCopy(null, colontmp__587203294, NTI33554449)}, NTI1241514021);
+    var e_1241535933 = getCurrentException();
+    F.line = 4460;
+    (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
+    F.line = 4461;
+    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535923;
+    F.line = 4462;
+    var colontmp__587203324 = [];
+    F.line = 4462;
+    var colontmp__587203325 = ([69,114,114,111,114,58,32]).concat(e_1241535933.message);
+    F.line = 4462;
+    result_1241535861 = nimCopy(result_1241535861, {Field0: nimCopy(null, colontmp__587203324, NTI1241514283), Field1: nimCopy(null, colontmp__587203325, NTI33554449)}, NTI1241514282);
     break BeforeRet;
     }
-    else     if (lastJSError && (isObj(lastJSError.m_type, NTI1241514010))) {
-    F.line = 4230;
-    var e_1241535579 = getCurrentException();
-    F.line = 4230;
-    (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
-    F.line = 4231;
-    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535561;
-    F.line = 4232;
-    var colontmp__587203295 = [];
-    F.line = 4232;
-    var colontmp__587203296 = ([82,117,110,116,105,109,101,32,101,114,114,111,114,58,32]).concat(e_1241535579.message);
-    F.line = 4232;
-    result_1241535499 = nimCopy(result_1241535499, {Field0: nimCopy(null, colontmp__587203295, NTI1241514022), Field1: nimCopy(null, colontmp__587203296, NTI33554449)}, NTI1241514021);
+    else     if (lastJSError && (isObj(lastJSError.m_type, NTI1241514271))) {
+    F.line = 4464;
+    var e_1241535941 = getCurrentException();
+    F.line = 4464;
+    (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
+    F.line = 4465;
+    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535923;
+    F.line = 4466;
+    var colontmp__587203326 = [];
+    F.line = 4466;
+    var colontmp__587203327 = ([82,117,110,116,105,109,101,32,101,114,114,111,114,58,32]).concat(e_1241535941.message);
+    F.line = 4466;
+    result_1241535861 = nimCopy(result_1241535861, {Field0: nimCopy(null, colontmp__587203326, NTI1241514283), Field1: nimCopy(null, colontmp__587203327, NTI33554449)}, NTI1241514282);
     break BeforeRet;
     }
     else     if (lastJSError && (isObj(lastJSError.m_type, NTI33555171))) {
-    F.line = 4234;
-    var e_1241535587 = getCurrentException();
-    F.line = 4234;
-    (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
-    F.line = 4235;
-    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535561;
-    F.line = 4236;
-    var colontmp__587203297 = [];
-    F.line = 4236;
-    var colontmp__587203298 = ([69,114,114,111,114,58,32]).concat(e_1241535587.message);
-    F.line = 4236;
-    result_1241535499 = nimCopy(result_1241535499, {Field0: nimCopy(null, colontmp__587203297, NTI1241514022), Field1: nimCopy(null, colontmp__587203298, NTI33554449)}, NTI1241514021);
+    F.line = 4468;
+    var e_1241535949 = getCurrentException();
+    F.line = 4468;
+    (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
+    F.line = 4469;
+    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535923;
+    F.line = 4470;
+    var colontmp__587203328 = [];
+    F.line = 4470;
+    var colontmp__587203329 = ([69,114,114,111,114,58,32]).concat(e_1241535949.message);
+    F.line = 4470;
+    result_1241535861 = nimCopy(result_1241535861, {Field0: nimCopy(null, colontmp__587203328, NTI1241514283), Field1: nimCopy(null, colontmp__587203329, NTI33554449)}, NTI1241514282);
     break BeforeRet;
     }
     else {
@@ -20229,23 +21086,23 @@ function evalStatements__OOZinterpreterZvm_u52(interp_p0, interp_p0_Idx, source_
     } finally {
     framePtr = F;
     }
-    F.line = 4238;
-    (pop__OOZinterpreterZvm_u661(interp_p0[interp_p0_Idx], "activationStack"));
-    F.line = 4239;
-    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535561;
+    F.line = 4472;
+    (pop__OOZinterpreterZvm_u990(interp_p0[interp_p0_Idx], "activationStack"));
+    F.line = 4473;
+    interp_p0[interp_p0_Idx].currentActivation = savedActivation_1241535923;
     }
     
-    F.line = 4241;
-    var colontmp__587203299 = nimCopy(null, results_1241535527, NTI1241514022);
-    F.line = 4241;
-    var colontmp__587203300 = [];
-    F.line = 4241;
-    result_1241535499 = nimCopy(result_1241535499, {Field0: nimCopy(null, colontmp__587203299, NTI1241514022), Field1: nimCopy(null, colontmp__587203300, NTI33554449)}, NTI1241514021);
+    F.line = 4475;
+    var colontmp__587203330 = nimCopy(null, results_1241535889, NTI1241514283);
+    F.line = 4475;
+    var colontmp__587203331 = [];
+    F.line = 4475;
+    result_1241535861 = nimCopy(result_1241535861, {Field0: nimCopy(null, colontmp__587203330, NTI1241514283), Field1: nimCopy(null, colontmp__587203331, NTI33554449)}, NTI1241514282);
     break BeforeRet;
   };
   framePtr = F.prev;
 
-  return result_1241535499;
+  return result_1241535861;
 
 }
 
@@ -20260,7 +21117,7 @@ function loadEmbeddedSource__jslib_u19(interp_p0, interp_p0_Idx, source_p1, file
     
     F.line = 46;
     F.filename = "jslib.nim";
-    var tmpTuple_1560281115 = evalStatements__OOZinterpreterZvm_u52(interp_p0, interp_p0_Idx, source_p1);
+    var tmpTuple_1560281115 = evalStatements__OOZinterpreterZvm_u381(interp_p0, interp_p0_Idx, source_p1);
     F.line = 46;
     var err_1560281116 = nimCopy(null, tmpTuple_1560281115["Field1"], NTI33554449);
     if ((0 < (err_1560281116).length)) {
@@ -20304,7 +21161,7 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
   framePtr = F;
     F.line = 57;
     F.filename = "jslib.nim";
-    (doit__OOZinterpreterZvm_u48(interp_p0, interp_p0_Idx, [83,116,97,110,100,97,114,100,32,58,61,32,76,105,98,114,97,114,121,32,110,101,119,46], false));
+    (doit__OOZinterpreterZvm_u377(interp_p0, interp_p0_Idx, [83,116,97,110,100,97,114,100,32,58,61,32,76,105,98,114,97,114,121,32,110,101,119,46], false));
     F.line = 60;
     loadEmbeddedSource__jslib_u19(interp_p0, interp_p0_Idx, makeNimstrLit("#!/usr/bin/env harding\x0A#\x0A# Object.nt - Root object with core methods\x0A# This is the foundation of the Harding object system\x0A\x0A# Object is the root of the class hierarchy\x0A# It provides fundamental behaviors that all objects inherit\x0A\x0A# Note: Object is set by initGlobals() in interpreter/evaluator.nim\x0A#====================================================================\x0A# Object creation and copying\x0A#====================================================================\x0A\x0A# Note: derive, derive:, and new are defined as class methods in initCoreClasses\x0A# They are installed as native methods on the Object class and create proper\x0A# Class-based objects with slot accessors.\x0A#\x0A# Object class>>derive - Create a subclass with no slots\x0A# Object class>>derive: - Create a subclass with declared instance variables\x0A# Object class>>new - Create a new instance of the class\x0A#\x0A# Usage: Point := Object derive: #(x y).\x0A#        point := Point new.\x0A#        point x: 10.\x0A\x0AObject>>clone <primitive primitiveClone>\x0A\x0A#====================================================================\x0A# Class-side methods (using class>> syntax)\x0A#====================================================================\x0A\x0AObject class>>derive: slotsArray methods: methodBlock [\x0A  # Create a subclass with extra slots AND define methods in one expression.\x0A  # Usage: Person := Object derive: #(name age) methods: [\x0A  #   self >> greet [ \"Hello, I am \" + name ]\x0A  #   self >> haveBirthday [ age := age + 1 ]\x0A  # ]\x0A  | newClass |\x0A  newClass := self derive: slotsArray.\x0A  newClass extend: methodBlock.\x0A  ^ newClass\x0A]\x0A\x0AObject class>>derive: slotArray superclasses: superclassArray methods: methodBlock [\x0A  # Create a subclass with instance variables, additional superclasses and define methods in one expression.\x0A  # The receiver class determines the instance type (Integer, Float, String, Array, Table, etc.).\x0A  # Other superclasses must be compatible (usually Mixin subclasses with only methods, no conflicting slots).\x0A  #\x0A  # Note: Methods are applied BEFORE adding superclasses, so you can override conflicting methods\x0A  # from superclasses. If methods conflict and are not overridden, an error will be raised.\x0A  #\x0A  # Usage:\x0A  #   Child := Object derive: #(x) superclasses: #(Parent1 Parent2) methods: [\x0A  #     self >> bar [ 42 ]\x0A  #   ]\x0A  #\x0A  # Or create a mixin class:\x0A  #   Mixin1 := Object derive: #() superclasses: #() methods: [\x0A  #     self >> foo [ 1 ]\x0A  #   ]\x0A  #\x0A  #   Mixin2 := Object derive: #() superclasses: #() methods: [\x0A  #     self >> bar [ 2 ]\x0A  #   ]\x0A  #\x0A  #   Combined := Object derive: #() superclasses: #(Mixin1 Mixin2) methods: [\x0A  #     self >> both [ self foo + self bar ]\x0A  #   ]\x0A  #\x0A  | newClass |\x0A  # First create the class with slots (deriving from self as first superclass)\x0A  newClass := self derive: slotArray.\x0A\x0A  # Apply methods FIRST - this allows overrides to resolve conflicts before adding superclasses\x0A  newClass extend: methodBlock.\x0A\x0A  # Then add each additional superclass (this performs conflict detection)\x0A  superclassArray do: [:superclass |\x0A    newClass addSuperclass: superclass\x0A  ].\x0A\x0A  ^ newClass\x0A]\x0A\x0AObject>>printHierarchy [\x0A  # Print an indented class hierarchy with slots as Harding code\x0A  self printHierarchyIndent: 0\x0A]\x0A\x0AObject>>printHierarchyIndent: level [\x0A  # Print this class and its superclasses recursively with indentation\x0A  # Usage: MyClass printHierarchyIndent: 0  # Start with 0 indentation\x0A  self printClassIndent: level.\x0A\x0A  # Recursively print superclasses with increased indentation\x0A  self superclassNames do: [:superclassName |\x0A    | superclass |\x0A    superclass := Global at: superclassName ifAbsent: [ nil ].\x0A    superclass isNil ifFalse: [\x0A      superclass printHierarchyIndent: (level + 1)\x0A    ]\x0A  ]\x0A]\x0A\x0AObject>>printClassIndent: level [\x0A  # Print this class definition with indentation\x0A  | indent slotsString |\x0A  indent := \"    \" repeat: level\x0A\x0A  # Build slots part\x0A  slotsString := self slotNames isNil\x0A    ifTrue: [ \"#()\" ]\x0A    ifFalse: [\x0A      self slotNames size = 0\x0A        ifTrue: [ \"#()\" ]\x0A        ifFalse: [\x0A          \"#(\" , ((self slotNames collect: [:name | name asString]) join: \", \") , \")\"\x0A        ]\x0A    ]\x0A\x0A  # Build superclasses part\x0A  self superclassNames isNil\x0A    ifTrue: [ slotsString println ]\x0A    ifFalse: [\x0A      self superclassNames size = 0\x0A        ifTrue: [ slotsString println ]\x0A        ifFalse: [\x0A          (slotsString , \" superclasses: #(\" , (self superclassNames join: \", \") , \")\") println\x0A        ]\x0A    ]\x0A]\x0A\x0A#====================================================================\x0A# Property access\x0A#====================================================================\x0A\x0AObject>>at: key <primitive primitiveAt: key>\x0A\x0AObject>>at: key put: value <primitive primitiveAt: key put: value>\x0A\x0AObject>>hasProperty: key <primitive primitiveHasProperty: key>\x0A\x0AObject>>properties <primitive primitiveProperties>\x0A\x0A#====================================================================\x0A# Class reflection\x0A#====================================================================\x0A\x0AObject>>slotNames <primitive primitiveSlotNames>\x0A\x0AObject>>superclassNames <primitive primitiveSuperclassNames>\x0A\x0A\x0A#====================================================================\x0A# Method management\x0A#====================================================================\x0A\x0AObject>>respondsTo: selector <primitive primitiveRespondsTo: selector>\x0A\x0AObject>>methods <primitive primitiveMethods>\x0A\x0AObject>>doesNotUnderstand: selector with: arg1 with: arg2 [\x0A  # Default handler for unrecognized messages.\x0A  # Subclasses can override to provide custom behavior.\x0A  # selector: the message selector that was not understood\x0A  # arg1, arg2: optional arguments that were passed with the message\x0A  self error: (\"Message not understood: \" , (selector asString))\x0A]\x0A\x0A#====================================================================\x0A# Identity and comparison\x0A#====================================================================\x0A\x0AObject>>= other [\x0A  # Test if this object equals other (value equality).\x0A  # Default implementation uses identity (==).\x0A  # Subclasses like String, Number should override for value comparison.\x0A  ^ self == other\x0A]\x0A\x0AObject>>== other <primitive primitiveEquals: other>\x0A\x0AObject>>printString [\x0A  # Return a string representation of this object.\x0A  ^ \"<\" , self class name , \">\"\x0A]\x0A\x0AObject>>className <primitive primitiveClassName>\x0A\x0AObject>>class <primitive primitiveClass>\x0A\x0A#====================================================================\x0A# Error handling\x0A#====================================================================\x0A\x0AObject>>error: message <primitive primitiveError: message>\x0A\x0A#====================================================================\x0A# Testing and debugging\x0A#====================================================================\x0A\x0AObject>>inspect [\x0A  # Open an inspector on this object. (placeholder)\x0A  self printString print\x0A]\x0A\x0AObject>>yourself [\x0A  # Return self - useful for cascading messages.\x0A  ^ self\x0A]\x0A\x0A#====================================================================\x0A# Initialization\x0A#====================================================================\x0A\x0AObject>>initialize [\x0A  # Initialize a new instance. Subclasses should override.\x0A  ^ self\x0A]\x0A\x0A#====================================================================\x0A# Utility methods\x0A#====================================================================\x0A\x0AObject>>isNil [\x0A  # Check if object is nil\x0A  ^ self = nil\x0A]\x0A\x0AObject>>notNil [\x0A  # Check if object is not nil\x0A  ^ self isNil not\x0A]\x0A\x0AObject>>isKindOf: aClass <primitive primitiveIsKindOf: aClass>\x0A\x0AObject>>asString [\x0A  # Return string representation\x0A  ^ self printString\x0A]\x0A\x0AObject>>asSelfDo: aBlock <primitive primitiveAsSelfDo: aBlock>\x0A\x0AObject class>>extend: aBlock [\x0A  # Extend this class with instance methods defined in aBlock.\x0A  # The block is evaluated with self bound to this object.\x0A  # Usage: Person extend: [\x0A  #   self >> greet [ \"Hello!\" println ]\x0A  #   self >> name: n [ name := n ]\x0A  # ]\x0A  ^ self asSelfDo: aBlock\x0A]\x0A\x0AObject class>>extendClass: aBlock [\x0A  # Extend the class-side (metaclass) with methods defined in aBlock.\x0A  # These are methods on the class object itself, not instances.\x0A  # Usage: Person extendClass: [\x0A  #   self >> newNamed: name [ ... create and return instance ... ]\x0A  #   self >> withName: name age: age [ ... factory method ... ]\x0A  # ]\x0A  ^ self asSelfDo: aBlock\x0A]\x0A\x0AObject class>>name <primitive primitiveClassName>\x0A\x0AObject>>print [\x0A  # Print to stdout without newline\x0A  Stdout write: self printString\x0A]\x0A\x0AObject>>println [\x0A  # Print to stdout with newline\x0A  Stdout writeline: self printString\x0A]\x0A\x0A#====================================================================\x0A# Comparison\x0A#====================================================================\x0A\x0AObject>>~= other [\x0A  # Not equal - delegates to = and negates\x0A  ^ (self = other) not\x0A]\x0A\x0AObject>>== other <primitive primitiveEquals: other>\x0A\x0AObject>>~~ other [\x0A  # Not identity - true if different objects\x0A  ^ (self == other) not\x0A]\x0A"), [79,98,106,101,99,116,46,104,114,100]);
     F.line = 61;
@@ -20327,15 +21184,15 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     loadEmbeddedSource__jslib_u19(interp_p0, interp_p0_Idx, makeNimstrLit("#!/usr/bin/env harding\x0A#\x0A# Exception.nt - Exception handling for Harding\x0A# Provides Smalltalk-style on:do: exception handling\x0A\x0A#====================================================================\x0A# Exception hierarchy\x0A#====================================================================\x0A\x0AException := Object derive: #(message stackTrace signaler)\x0A\x0AException>>signal <primitive primitiveSignal>\x0A  # Signal this exception (raise it)\x0A\x0AException>>signal: messageText [\x0A  # Set message and signal this exception\x0A  self at: \"message\" put: messageText\x0A  ^ self signal\x0A]\x0A\x0AException>>message [\x0A  # Get exception message\x0A  ^ self getSlot: \"message\"\x0A]\x0A\x0AException>>message: msg [\x0A  # Set exception message\x0A  ^ self at: \"message\" put: msg\x0A]\x0A\x0AException>>stackTrace [\x0A  # Get stack trace\x0A  ^ self getSlot: \"stackTrace\"\x0A]\x0A\x0AException>>printString [\x0A  # String representation including message\x0A  | msg |\x0A  msg := self getSlot: \"message\"\x0A  msg isNil ifTrue: [ msg := \"Unknown error\" ]\x0A  ^ \"Exception: \" , msg\x0A]\x0A\x0A#====================================================================\x0A# Common exception types\x0A#====================================================================\x0A\x0AError := Exception derive\x0A\x0AMessageNotUnderstood := Exception derive\x0A\x0ASubscriptOutOfBounds := Exception derive\x0A\x0ADivisionByZero := Exception derive\x0A\x0A#====================================================================\x0A# Block extension for exception handling\x0A#====================================================================\x0A\x0ABlock>>on: exceptionClass do: handlerBlock <primitive primitiveOnDo: exceptionClass do: handlerBlock>\x0A  # Execute this block with exception handler installed\x0A  # Usage: [ protected code ] on: Error do: [ :ex | handler code ]\x0A\x0A#====================================================================\x0A# Error handling utilities\x0A#====================================================================\x0A\x0AObject>>ifError: errorBlock [\x0A  # Execute self, if error occurs run errorBlock with exception\x0A  ^ [ self ] on: Error do: errorBlock\x0A]\x0A\x0AObject>>ifError: errorBlock ifNoError: normalBlock [\x0A  # Execute self, handle error or run normal block with result\x0A  | result |\x0A  result := [ self ] on: Error do: [ :ex |\x0A    ^ errorBlock value: ex\x0A  ]\x0A  ^ normalBlock value: result\x0A]\x0A\x0A#====================================================================\x0A# Ensure (finally) support\x0A#====================================================================\x0A\x0ABlock>>ensure: cleanupBlock [\x0A  # Execute this block, always run cleanupBlock afterwards\x0A  | result |\x0A  # Note: This is a simplified version - full implementation needs primitive support\x0A  result := self value\x0A  cleanupBlock value\x0A  ^ result\x0A]\x0A"), [69,120,99,101,112,116,105,111,110,46,104,114,100]);
     F.line = 72;
     loadEmbeddedSource__jslib_u19(interp_p0, interp_p0_Idx, makeNimstrLit("# TestCase - Unit testing framework for Harding\x0A#\x0A# Provides assertion methods for writing unit tests in Harding.\x0A#\x0A# Example:\x0A#   MyTests := TestCase derive.\x0A#   MyTests>>testAddition [\x0A#     self assert: (1 + 1) equals: 2\x0A#   ]\x0A\x0ATestCase := Object derive: #(name assertions failures)\x0A\x0ATestCase>>initialize [\x0A  name := \"unnamed test\"\x0A  assertions := 0\x0A  failures := #()\x0A  ^self\x0A]\x0A\x0ATestCase>>name: aName [\x0A  name := aName\x0A]\x0A\x0ATestCase>>name [\x0A  ^name\x0A]\x0A\x0ATestCase>>assert: aBoolean [\x0A  assertions := assertions + 1\x0A  aBoolean ifFalse: [\x0A    failures add: \"Assertion failed in \" , name\x0A    Error signal: \"Assertion failed\"\x0A  ]\x0A]\x0A\x0ATestCase>>assert: actual equals: expected [\x0A  assertions := assertions + 1\x0A  (actual = expected) ifFalse: [\x0A    failures add: \"Assertion failed in \" , name\x0A    Error signal: \"Assertion failed\"\x0A  ]\x0A]\x0A\x0ATestCase>>fail: aMessage [\x0A  failures add: aMessage\x0A  Error signal: aMessage\x0A]\x0A\x0ATestCase>>assertions [\x0A  ^assertions\x0A]\x0A\x0ATestCase>>failures [\x0A  ^failures\x0A]\x0A\x0ATestCase>>hasFailures [\x0A  ^failures size > 0\x0A]\x0A\x0ATestCase>>setUp [\x0A  # Override in subclasses to set up test fixtures\x0A]\x0A\x0ATestCase>>tearDown [\x0A  # Override in subclasses to clean up after tests\x0A]\x0A"), [84,101,115,116,67,97,115,101,46,104,114,100]);
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [83,116,97,110,100,97,114,100])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [83,116,97,110,100,97,114,100])) {
     F.line = 77;
     var standardVal_1560281224 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [83,116,97,110,100,97,114,100]), NTI1157627922);
       if (!(standardVal_1560281224.kind == 10)) Temporary1 = false; else {        var Temporary2 = standardVal_1560281224;
-        if (ConstSet203[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627921)); }
+        if (ConstSet227[Temporary2.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary2.kind, NTI1157627921)); }
         Temporary1 = !((Temporary2.instVal == null));      }    if (Temporary1) {
     F.line = 79;
     var Temporary3 = standardVal_1560281224;
-    if (ConstSet204[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627921)); }
+    if (ConstSet228[Temporary3.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'instVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary3.kind, NTI1157627921)); }
     interp_p0[interp_p0_Idx].importedLibraries.push(Temporary3.instVal);;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20347,14 +21204,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [78,117,109,98,101,114])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [78,117,109,98,101,114])) {
     F.line = 84;
     F.filename = "jslib.nim";
     var numVal_1560281338 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [78,117,109,98,101,114]), NTI1157627922);
     if ((numVal_1560281338.kind == 9)) {
     F.line = 86;
     var Temporary4 = numVal_1560281338;
-    if (ConstSet205[Temporary4.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary4.kind, NTI1157627921)); }
+    if (ConstSet229[Temporary4.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary4.kind, NTI1157627921)); }
     numberClassCache_1493172532[0] = Temporary4.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20366,14 +21223,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [73,110,116,101,103,101,114])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [73,110,116,101,103,101,114])) {
     F.line = 90;
     F.filename = "jslib.nim";
     var intVal_1560281444 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [73,110,116,101,103,101,114]), NTI1157627922);
     if ((intVal_1560281444.kind == 9)) {
     F.line = 92;
     var Temporary5 = intVal_1560281444;
-    if (ConstSet206[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
+    if (ConstSet230[Temporary5.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary5.kind, NTI1157627921)); }
     integerClassCache_1493172533[0] = Temporary5.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20385,14 +21242,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [83,116,114,105,110,103])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [83,116,114,105,110,103])) {
     F.line = 96;
     F.filename = "jslib.nim";
     var strVal_1560281550 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [83,116,114,105,110,103]), NTI1157627922);
     if ((strVal_1560281550.kind == 9)) {
     F.line = 98;
     var Temporary6 = strVal_1560281550;
-    if (ConstSet207[Temporary6.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary6.kind, NTI1157627921)); }
+    if (ConstSet231[Temporary6.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary6.kind, NTI1157627921)); }
     stringClassCache_1493172534[0] = Temporary6.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20404,14 +21261,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [66,111,111,108,101,97,110])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [66,111,111,108,101,97,110])) {
     F.line = 102;
     F.filename = "jslib.nim";
     var boolVal_1560281656 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [66,111,111,108,101,97,110]), NTI1157627922);
     if ((boolVal_1560281656.kind == 9)) {
     F.line = 104;
     var Temporary7 = boolVal_1560281656;
-    if (ConstSet208[Temporary7.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary7.kind, NTI1157627921)); }
+    if (ConstSet232[Temporary7.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary7.kind, NTI1157627921)); }
     booleanClassCache_1493172529[0] = Temporary7.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20423,14 +21280,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [84,114,117,101])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [84,114,117,101])) {
     F.line = 108;
     F.filename = "jslib.nim";
     var trueVal_1560281762 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [84,114,117,101]), NTI1157627922);
     if ((trueVal_1560281762.kind == 9)) {
     F.line = 110;
     var Temporary8 = trueVal_1560281762;
-    if (ConstSet209[Temporary8.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary8.kind, NTI1157627921)); }
+    if (ConstSet233[Temporary8.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary8.kind, NTI1157627921)); }
     trueClassCache_1493172530[0] = Temporary8.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20442,14 +21299,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [70,97,108,115,101])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [70,97,108,115,101])) {
     F.line = 114;
     F.filename = "jslib.nim";
     var falseVal_1560281868 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [70,97,108,115,101]), NTI1157627922);
     if ((falseVal_1560281868.kind == 9)) {
     F.line = 116;
     var Temporary9 = falseVal_1560281868;
-    if (ConstSet210[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627921)); }
+    if (ConstSet234[Temporary9.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary9.kind, NTI1157627921)); }
     falseClassCache_1493172531[0] = Temporary9.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20461,14 +21318,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [66,108,111,99,107])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [66,108,111,99,107])) {
     F.line = 120;
     F.filename = "jslib.nim";
     var blockVal_1560281974 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [66,108,111,99,107]), NTI1157627922);
     if ((blockVal_1560281974.kind == 9)) {
     F.line = 122;
     var Temporary10 = blockVal_1560281974;
-    if (ConstSet211[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627921)); }
+    if (ConstSet235[Temporary10.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary10.kind, NTI1157627921)); }
     blockClassCache_1493172537[0] = Temporary10.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20480,14 +21337,14 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     }
     
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [84,97,98,108,101])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [84,97,98,108,101])) {
     F.line = 126;
     F.filename = "jslib.nim";
     var tableVal_1560282080 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [84,97,98,108,101]), NTI1157627922);
     if ((tableVal_1560282080.kind == 9)) {
     F.line = 128;
     var Temporary11 = tableVal_1560282080;
-    if (ConstSet212[Temporary11.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary11.kind, NTI1157627921)); }
+    if (ConstSet236[Temporary11.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary11.kind, NTI1157627921)); }
     tableClassCache_1493172536[0] = Temporary11.classVal;
     if ((level_1090519067[0] <= 1)) {
     F.line = 701;
@@ -20501,12 +21358,12 @@ function loadEmbeddedStdlib__jslib_u37(interp_p0, interp_p0_Idx) {
     
     F.line = 132;
     F.filename = "jslib.nim";
-    if (contains__OOZinterpreterZvm_u1463(interp_p0[interp_p0_Idx].globals, [70,105,108,101,83,116,114,101,97,109])) {
+    if (contains__OOZinterpreterZvm_u1792(interp_p0[interp_p0_Idx].globals, [70,105,108,101,83,116,114,101,97,109])) {
     F.line = 133;
     var fsVal_1560282186 = nimCopy(null, HEX5BHEX5D__OOZcoreZtypes_u1987(interp_p0[interp_p0_Idx].globals, [70,105,108,101,83,116,114,101,97,109]), NTI1157627922);
     if ((fsVal_1560282186.kind == 9)) {
     var Temporary14 = fsVal_1560282186;
-    if (ConstSet213[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
+    if (ConstSet237[Temporary14.kind]===undefined) { raiseFieldError2(makeNimstrLit("field \'classVal\' is not accessible for type \'NodeValue\' using \'kind = "), reprDiscriminant(Temporary14.kind, NTI1157627921)); }
     Temporary13 = Temporary14.classVal;
     }
     else {
@@ -20549,9 +21406,9 @@ function initJSInterpreter__hardingjs_u16() {
     }
     
     F.line = 47;
-    jsInterpreter_587202574[0] = newInterpreter__OOZinterpreterZvm_u383(false, 10000);
+    jsInterpreter_587202574[0] = newInterpreter__OOZinterpreterZvm_u712(false, 10000);
     F.line = 48;
-    initGlobals__OOZinterpreterZvm_u8031(jsInterpreter_587202574, 0);
+    initGlobals__OOZinterpreterZvm_u8393(jsInterpreter_587202574, 0);
     F.line = 51;
     loadEmbeddedStdlib__jslib_u37(jsInterpreter_587202574, 0);
     F.line = 53;
@@ -20577,7 +21434,7 @@ function jsDoit(source_p0) {
     F.line = 64;
     jsOutputBuffer_587202571[0] = nimCopy(null, [], NTI33554449);
     F.line = 67;
-    var tmpTuple_587202580 = doit__OOZinterpreterZvm_u48(jsInterpreter_587202574, 0, cstrToNimstr(source_p0), false);
+    var tmpTuple_587202580 = doit__OOZinterpreterZvm_u377(jsInterpreter_587202574, 0, cstrToNimstr(source_p0), false);
     F.line = 67;
     var result_587202581 = nimCopy(null, tmpTuple_587202580["Field0"], NTI1157627922);
     F.line = 67;
@@ -20633,7 +21490,7 @@ function jsDoitWithOutput(source_p0, output_p1, output_p1_Idx) {
     F.line = 92;
     jsOutputBuffer_587202571[0] = nimCopy(null, [], NTI33554449);
     F.line = 95;
-    var tmpTuple_587202589 = doit__OOZinterpreterZvm_u48(jsInterpreter_587202574, 0, cstrToNimstr(source_p0), false);
+    var tmpTuple_587202589 = doit__OOZinterpreterZvm_u377(jsInterpreter_587202574, 0, cstrToNimstr(source_p0), false);
     F.line = 95;
     var result_587202590 = nimCopy(null, tmpTuple_587202589["Field0"], NTI1157627922);
     F.line = 95;
@@ -20762,7 +21619,7 @@ function nsuToLowerAsciiChar(c_p0) {
 
   var F = {procname: "strutils.toLowerAscii", prev: framePtr, filename: "/home/gokr/.choosenim/toolchains/nim-2.2.6/lib/pure/strutils.nim", line: 0};
   framePtr = F;
-    if ((ConstSet215[c_p0] != undefined)) {
+    if ((ConstSet239[c_p0] != undefined)) {
     F.line = 219;
     F.filename = "strutils.nim";
     result_956301399 = (c_p0 ^ 32);
@@ -20791,25 +21648,25 @@ function nsuIntToStr(x_p0, minchars_p1) {
       var i_956302168 = 0;
       F.line = 81;
       F.filename = "iterators_1.nim";
-      var colontmp__587203310 = 0;
+      var colontmp__587203341 = 0;
       F.line = 1146;
       F.filename = "strutils.nim";
-      colontmp__587203310 = subInt(minchars_p1, (result_956302163).length);
+      colontmp__587203341 = subInt(minchars_p1, (result_956302163).length);
       F.line = 96;
       F.filename = "iterators_1.nim";
-      var res_587203311 = 1;
+      var res_587203342 = 1;
       Label2: {
         F.line = 97;
           Label3: while (true) {
-          if (!(res_587203311 <= colontmp__587203310)) break Label3;
+          if (!(res_587203342 <= colontmp__587203341)) break Label3;
             F.line = 1146;
             F.filename = "strutils.nim";
-            i_956302168 = res_587203311;
+            i_956302168 = res_587203342;
             F.line = 1147;
             result_956302163 = nimCopy(null, [48].concat(result_956302163), NTI33554449);
             F.line = 102;
             F.filename = "iterators_1.nim";
-            res_587203311 = addInt(res_587203311, 1);
+            res_587203342 = addInt(res_587203342, 1);
           }
       };
     };
@@ -21071,13 +21928,13 @@ function fromEpochDay__pureZtimes_u187(epochday_p0) {
     
     var m_1107296462 = addInt64(mp_1107296460, BigInt(Temporary2));
     F.line = 518;
-    var colontmp__587203313 = chckRange(Number(d_1107296461), 1, 31);
+    var colontmp__587203344 = chckRange(Number(d_1107296461), 1, 31);
     F.line = 518;
-    var colontmp__587203314 = chckRange(Number(m_1107296462), 1, 12);
+    var colontmp__587203345 = chckRange(Number(m_1107296462), 1, 12);
     F.line = 518;
-    var colontmp__587203315 = chckRange(Number(addInt64(y_1107296458, BigInt(((m_1107296462 <= 2n) ? 1 : 0)))), (-2147483648), 2147483647);
+    var colontmp__587203346 = chckRange(Number(addInt64(y_1107296458, BigInt(((m_1107296462 <= 2n) ? 1 : 0)))), (-2147483648), 2147483647);
     F.line = 518;
-    result_1107296448 = nimCopy(result_1107296448, {Field0: nimCopy(null, colontmp__587203313, NTI1107296266), Field1: colontmp__587203314, Field2: colontmp__587203315}, NTI1107296429);
+    result_1107296448 = nimCopy(result_1107296448, {Field0: nimCopy(null, colontmp__587203344, NTI1107296266), Field1: colontmp__587203345, Field2: colontmp__587203346}, NTI1107296429);
     break BeforeRet;
   };
   framePtr = F.prev;
@@ -21565,19 +22422,19 @@ function substituteLog__pureZlogging_u29(frmt_p0, level_p1, args_p2) {
       var arg_1090519078 = [];
       F.line = 18;
       F.filename = "iterators.nim";
-      var i_587203302 = 0;
+      var i_587203333 = 0;
       Label2: {
         F.line = 19;
           Label3: while (true) {
-          if (!(i_587203302 < (args_p2).length)) break Label3;
+          if (!(i_587203333 < (args_p2).length)) break Label3;
             F.line = 312;
             F.filename = "logging.nim";
-            arg_1090519078 = args_p2[chckIndx(i_587203302, 0, (args_p2).length - 1)];
+            arg_1090519078 = args_p2[chckIndx(i_587203333, 0, (args_p2).length - 1)];
             F.line = 313;
             msgLen_1090519074 = addInt(msgLen_1090519074, (arg_1090519078).length);
             F.line = 13;
             F.filename = "iterators.nim";
-            i_587203302 += 1;
+            i_587203333 += 1;
           }
       };
     };
@@ -21606,7 +22463,7 @@ function substituteLog__pureZlogging_u29(frmt_p0, level_p1, args_p2) {
             Label6: {
               F.line = 324;
                 Label7: while (true) {
-                  if (!(i_1090519083 < (frmt_p0).length)) Temporary8 = false; else {                    Temporary8 = (ConstSet214[frmt_p0[chckIndx(i_1090519083, 0, (frmt_p0).length - 1)]] != undefined);                  }                if (!Temporary8) break Label7;
+                  if (!(i_1090519083 < (frmt_p0).length)) Temporary8 = false; else {                    Temporary8 = (ConstSet238[frmt_p0[chckIndx(i_1090519083, 0, (frmt_p0).length - 1)]] != undefined);                  }                if (!Temporary8) break Label7;
                   F.line = 325;
                   addChar(v_1090519094, nsuToLowerAsciiChar(frmt_p0[chckIndx(i_1090519083, 0, (frmt_p0).length - 1)]));;
                   F.line = 326;
@@ -21655,19 +22512,19 @@ function substituteLog__pureZlogging_u29(frmt_p0, level_p1, args_p2) {
       var arg_1090519108 = [];
       F.line = 18;
       F.filename = "iterators.nim";
-      var i_587203307 = 0;
+      var i_587203338 = 0;
       Label10: {
         F.line = 19;
           Label11: while (true) {
-          if (!(i_587203307 < (args_p2).length)) break Label11;
+          if (!(i_587203338 < (args_p2).length)) break Label11;
             F.line = 339;
             F.filename = "logging.nim";
-            arg_1090519108 = args_p2[chckIndx(i_587203307, 0, (args_p2).length - 1)];
+            arg_1090519108 = args_p2[chckIndx(i_587203338, 0, (args_p2).length - 1)];
             F.line = 340;
             result_1090519073.push.apply(result_1090519073, arg_1090519108);;
             F.line = 13;
             F.filename = "iterators.nim";
-            i_587203307 += 1;
+            i_587203338 += 1;
           }
       };
     };
