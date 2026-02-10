@@ -3200,14 +3200,16 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
         discard  # Fall through to regular dispatch
 
     # ============================================================================
-    # FAST PATH: Tagged Integer Arithmetic
+    # FAST PATH: Tagged Integer Operations
     # Skip Instance allocation for primitive integer operations
     # ============================================================================
     if receiverVal.kind == vkInt and args.len > 0 and args[0].kind == vkInt:
       let a = toTagged(receiverVal)
       let b = toTagged(args[0])
       var taggedResult: TaggedValue
+      var boolResult: bool
       var isPrimitive = true
+      var isComparison = false
 
       case frame.selector
       of "+":
@@ -3221,21 +3223,30 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
       of "%":
         taggedResult = modInt(a, b)
       of "=":
-        isPrimitive = false  # Will use slow path for boolean result
+        boolResult = intEquals(a, b)
+        isComparison = true
       of "<":
-        isPrimitive = false
+        boolResult = lessThan(a, b)
+        isComparison = true
       of "<=":
-        isPrimitive = false
+        boolResult = lessOrEqual(a, b)
+        isComparison = true
       of ">":
-        isPrimitive = false
+        boolResult = greaterThan(a, b)
+        isComparison = true
       of ">=":
-        isPrimitive = false
+        boolResult = greaterOrEqual(a, b)
+        isComparison = true
       else:
         isPrimitive = false  # Not a primitive integer operation
 
       if isPrimitive:
-        # Fast path succeeded - push result and return
-        interp.pushValue(toNodeValue(taggedResult))
+        if isComparison:
+          # Comparison returns boolean
+          interp.pushValue(NodeValue(kind: vkBool, boolVal: boolResult))
+        else:
+          # Arithmetic returns integer
+          interp.pushValue(toNodeValue(taggedResult))
         return true
 
     # Convert receiver to Instance for method lookup

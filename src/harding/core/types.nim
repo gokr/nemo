@@ -1061,3 +1061,10 @@ proc sub*(a, b: TaggedValue): TaggedValue {.inline.} = tagged.sub(a, b)
 proc mul*(a, b: TaggedValue): TaggedValue {.inline.} = tagged.mul(a, b)
 proc divInt*(a, b: TaggedValue): TaggedValue {.inline.} = tagged.divInt(a, b)
 proc modInt*(a, b: TaggedValue): TaggedValue {.inline.} = tagged.modInt(a, b)
+
+# Wrapper procs for comparison operations
+proc intEquals*(a, b: TaggedValue): bool {.inline.} = tagged.equals(a, b)
+proc lessThan*(a, b: TaggedValue): bool {.inline.} = tagged.lessThan(a, b)
+proc lessOrEqual*(a, b: TaggedValue): bool {.inline.} = tagged.lessOrEqual(a, b)
+proc greaterThan*(a, b: TaggedValue): bool {.inline.} = tagged.greaterThan(a, b)
+proc greaterOrEqual*(a, b: TaggedValue): bool {.inline.} = tagged.greaterOrEqual(a, b)
