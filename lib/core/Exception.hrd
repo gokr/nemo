@@ -14,23 +14,23 @@ Exception>>signal <primitive primitiveSignal>
 
 Exception>>signal: messageText [
   # Set message and signal this exception
-  self at: "message" put: messageText
+  message := messageText
   ^ self signal
 ]
 
 Exception>>message [
   # Get exception message
-  ^ self getSlot: "message"
+  ^ message
 ]
 
 Exception>>message: msg [
   # Set exception message
-  ^ self at: "message" put: msg
+  message := msg
 ]
 
 Exception>>stackTrace [
   # Get stack trace
-  ^ self getSlot: "stackTrace"
+  ^ stackTrace
 ]
 
 Exception>>printString [
