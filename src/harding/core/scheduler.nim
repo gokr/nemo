@@ -162,10 +162,15 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   interp.lastResult = result
 
   # Check if process was blocked by a primitive (before status handling)
-  # If so, decrement PC so the statement will be re-executed when unblocked
+  # If so, decrement PC and clear the work queue/eval stack so the entire
+  # statement re-runs from scratch when unblocked. This is critical for
+  # primitives like SharedQueue next where the return value matters -
+  # stale continuation frames would use nilValue() instead of the actual item.
   let wasBlocked = sched.currentProcess.state == psBlocked
   if wasBlocked:
     dec activation.pc
+    interp.workQueue.setLen(0)
+    interp.evalStack.setLen(0)
 
   # Handle VM status
   case status
@@ -1117,13 +1122,12 @@ proc wait*(sem: Semaphore, process: Process, sched: Scheduler): bool =
 
 proc signal*(sem: Semaphore, sched: Scheduler) =
   ## Signal semaphore (increment). Unblocks waiting process if any.
+  ## Always increment first (standard Smalltalk semantics) so that
+  ## an unblocked process can re-acquire on its re-run of wait.
+  inc sem.count
   if sem.waitingQueue.len > 0:
-    # Unblock a waiting process
     let process = sem.waitingQueue.popFirst()
     sched.unblockProcess(process)
-  else:
-    # No waiters, just increment count
-    inc sem.count
 
 # Semaphore proxy creation
 proc createSemaphoreProxy*(sem: Semaphore): NodeValue =
