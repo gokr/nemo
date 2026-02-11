@@ -49,6 +49,43 @@ task bona_release, "Build bona IDE (release) in repo root":
   exec "nim c -d:release -d:gtk4 -o:bona src/harding/gui/bona.nim"
   echo "Binary available as ./bona (release)"
 
+task install_bona, "Install bona desktop integration (.desktop file and icon)":
+  ## Install bona.desktop file and icon to user's local applications directory
+  ## This enables proper icon display in Ubuntu dock and Alt-Tab switcher
+  let home = getHomeDir()
+  let desktopDir = home / ".local/share/applications"
+  let iconsDir = home / ".local/share/icons/hicolor/256x256/apps"
+  let cwd = getCurrentDir()
+
+  # Create directories using shell commands
+  echo "Creating directories..."
+  exec "mkdir -p " & (desktopDir).quoteShell()
+  exec "mkdir -p " & (iconsDir).quoteShell()
+
+  # Copy .desktop file and update Exec, Path, and StartupWMClass
+  echo "Installing bona.desktop..."
+  let bonaPath = cwd / "bona"
+  exec "cp " & (cwd / "bona.desktop").quoteShell() & " " & (desktopDir / "bona.desktop").quoteShell()
+  # Update Exec path to actual binary location
+  exec "sed -i 's|Exec=.*|Exec=" & bonaPath & "|g' " & (desktopDir / "bona.desktop").quoteShell()
+  # Update Path to repo root so bona can find lib/core/Bootstrap.hrd
+  exec "sed -i 's|Path=.*|Path=" & cwd & "|g' " & (desktopDir / "bona.desktop").quoteShell()
+  # Update StartupWMClass to match the application ID (org.harding-lang.bona)
+  exec "sed -i 's|StartupWMClass=.*|StartupWMClass=org.harding-lang.bona|g' " & (desktopDir / "bona.desktop").quoteShell()
+
+  # Copy icon if available
+  let iconSource = cwd / "website/content/images/harding-simple.png"
+  echo "Installing harding icon..."
+  exec "cp " & iconSource.quoteShell() & " " & (iconsDir / "harding.png").quoteShell() & " || echo 'Icon not found, skipping'"
+
+  # Update desktop database
+  echo "Updating desktop database..."
+  exec "update-desktop-database " & desktopDir.quoteShell() & " 2>/dev/null || true"
+
+  echo ""
+  echo "Bona desktop integration installed successfully!"
+  echo "You may need to log out and back in for the icon to appear in the applications menu."
+
 task local, "Build and copy binaries to root directory (legacy, use 'harding' instead)":
   # Build REPL and granite compiler directly
   exec "nim c -o:harding src/harding/repl/harding.nim"
