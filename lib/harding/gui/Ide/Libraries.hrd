@@ -1,0 +1,80 @@
+# ============================================================================
+# Libraries - Library organization for Harding IDE
+# ============================================================================
+
+# Global registry of all libraries
+Libraries := Array new.
+
+# Create core libraries
+CoreLib := Library new.
+CoreLib name: "Core".
+Libraries addLast: CoreLib.
+
+CollectionsLib := Library new.
+CollectionsLib name: "Collections".
+Libraries addLast: CollectionsLib.
+
+GUILib := Library new.
+GUILib name: "GUI".
+Libraries addLast: GUILib.
+
+IDELib := Library new.
+IDELib name: "IDE".
+Libraries addLast: IDELib.
+
+# Library class methods for accessing registered libraries
+Library class>>allLibraries [
+    ^ Libraries
+].
+
+Library class>>named: aName [
+    Libraries do: [:lib |
+        (lib name = aName) ifTrue: [ ^ lib ].
+    ].
+    ^ nil
+].
+
+Library class>>allNames [
+    ^ Libraries collect: [:lib | lib name ].
+].
+
+# Instance method to get classes in a library
+Library>>classes [
+    # Return array of class names in this library
+    ^ self keys select: [:key |
+        | val |
+        val := self at: key.
+        # Check if it's a class by seeing if it responds to class methods
+        val respondsTo: #className
+    ].
+].
+
+# Register core classes with CoreLib
+CoreLib at: "Object" put: Object.
+CoreLib at: "Class" put: Class.
+CoreLib at: "Block" put: Block.
+CoreLib at: "String" put: String.
+CoreLib at: "Number" put: Number.
+CoreLib at: "Integer" put: Integer.
+CoreLib at: "Float" put: Float.
+CoreLib at: "Array" put: Array.
+CoreLib at: "Table" put: Table.
+CoreLib at: "Set" put: Set.
+CoreLib at: "Boolean" put: Boolean.
+CoreLib at: "True" put: True.
+CoreLib at: "False" put: False.
+CoreLib at: "UndefinedObject" put: UndefinedObject.
+CoreLib at: "Library" put: Library.
+CoreLib at: "Process" put: Process.
+CoreLib at: "Scheduler" put: Scheduler.
+CoreLib at: "Processor" put: Processor.
+CoreLib at: "Monitor" put: Monitor.
+CoreLib at: "Semaphore" put: Semaphore.
+CoreLib at: "SharedQueue" put: SharedQueue.
+
+# Register collection classes
+CollectionsLib at: "Interval" put: Interval.
+CollectionsLib at: "SortedCollection" put: SortedCollection.
+
+# IDE classes are registered when the IDE files load
+# The IDE files will register themselves with IDELib

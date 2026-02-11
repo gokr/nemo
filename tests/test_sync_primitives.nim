@@ -10,6 +10,7 @@ suite "Multi-Process: Monitor":
   test "Monitor critical: provides mutual exclusion for shared counter":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     # Fork a coordinator process that sets up and runs the test
     let result = interp.evalStatements("""
@@ -46,6 +47,7 @@ suite "Multi-Process: Monitor":
   test "Monitor reentrant lock allows same process to acquire multiple times":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       M := Monitor new.
@@ -67,6 +69,7 @@ suite "Multi-Process: Semaphore":
   test "Binary semaphore ensures mutual exclusion":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [
@@ -104,6 +107,7 @@ suite "Multi-Process: Semaphore":
   test "Counting semaphore allows limited concurrent access":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [
@@ -169,6 +173,7 @@ suite "Multi-Process: Semaphore":
   test "Semaphore signal unblocks waiting process":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [
@@ -203,6 +208,7 @@ suite "Multi-Process: SharedQueue":
   test "SharedQueue producer-consumer pattern":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [
@@ -235,6 +241,7 @@ suite "Multi-Process: SharedQueue":
   test "SharedQueue multiple producers and consumers":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [
@@ -276,6 +283,7 @@ suite "Multi-Process: SharedQueue":
   test "SharedQueue bounded queue blocks when full":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [
@@ -310,6 +318,7 @@ suite "Multi-Process: Combined Synchronization":
   test "Monitor with Semaphore for resource pooling":
     let ctx = newSchedulerContext()
     var interp = ctx.mainProcess.getInterpreter()
+    loadStdlib(interp)
 
     let result = interp.evalStatements("""
       Coordinator := Processor fork: [

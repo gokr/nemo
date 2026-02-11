@@ -647,6 +647,7 @@ proc loadIdeToolFiles*(interp: var Interpreter, basePath: string = "") =
   debug("Loading IDE tool files from: ", libPath)
 
   let toolFiles = [
+    "Libraries.hrd",
     "BrowserPane.hrd",
     "Browser.hrd",
     "Inspector.hrd",
