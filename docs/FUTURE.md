@@ -68,11 +68,16 @@ The GTK bridge provides basic widget support. GUI tools can be written in Hardin
 - ScrolledWindow
 - Base signal handling with safe evaluation
 - Two-table system for GC safety
+- IDE Launcher with Transcript, Workspace
+- Print It functionality (inserts results in editor)
+- Window icon support (`iconName:`, `setWmClass:`)
 
 **In Progress:**
+- System Browser (class/method browsing)
 - TreeView for hierarchical data
 - HeaderBar
 - Menu system
+- Desktop integration (dock/Alt-Tab icons)
 
 ### Planned IDE Tools
 

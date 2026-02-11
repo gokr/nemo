@@ -31,7 +31,15 @@ cd harding
 nimble local  # Build and copy binaries to root directory
 ```
 
-Binaries: `harding` (REPL/interpreter), `granite` (compiler stub), `bona` (GTK IDE)
+Binaries: `harding` (REPL/interpreter), `granite` (compiler), `bona` (GTK IDE)
+
+### IDE Desktop Integration (Ubuntu/GNOME)
+
+For proper dock and Alt-Tab icons:
+
+```bash
+nimble install_bona  # Installs .desktop file and icon
+```
 
 ## Usage
 
@@ -138,7 +146,7 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - Automatic accessor generation: `deriveWithAccessors:`, `derive:getters:setters:`
 - Library/namespace system for modular code organization
 - String concatenation with auto-conversion using `,`
-- GTK-based IDE (`bona`) with Workspace and Transcript
+- GTK-based IDE (`bona`) with Workspace, Transcript, and System Browser
 - Smalltalk-style Print It - insert results in editor with selection
 - Exception handling via `on:do:`
 - Compiler infrastructure (`granite`) with Application class and build support

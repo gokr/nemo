@@ -181,11 +181,33 @@ bona --loglevel DEBUG
 
 ```bash
 # Build bona (GTK4 version, default)
-nimble gui
+nimble bona
+
+# Build release version
+nimble bona_release
 
 # Build GTK3 version (if GTK4 not available)
 nimble gui3
 ```
+
+### Desktop Integration
+
+For proper dock and Alt-Tab icons in Ubuntu/GNOME:
+
+```bash
+# Install .desktop file and icon
+nimble install_bona
+```
+
+This installs:
+- `~/.local/share/applications/bona.desktop` - Desktop entry
+- `~/.local/share/icons/hicolor/256x256/apps/harding.png` - Application icon
+- Updates desktop database
+
+After installation:
+- Launch Bona from the applications menu
+- Icon appears correctly in dock and Alt-Tab switcher
+- Window is identified as "Bonadventure IDE"
 
 ## Nimble Tasks
 
@@ -198,8 +220,14 @@ nimble build
 # Build and copy binaries to root directory
 nimble local
 
-# Build GUI IDE
-nimble gui
+# Build GUI IDE (debug)
+nimble bona
+
+# Build GUI IDE (release)
+nimble bona_release
+
+# Install desktop integration (.desktop and icon)
+nimble install_bona
 
 # Run tests
 nimble test

@@ -512,6 +512,14 @@ EOF
 - Computed goto dispatch for VM execution loop
 - Conditional debug template to eliminate debug overhead in release builds
 
+### Bona Desktop Integration (2026-02-11)
+- Fixed dock and Alt-Tab switcher icon display
+- Created `GtkApplication` with application ID `org.harding-lang.bona`
+- Added `bona.desktop` file with `StartupWMClass` matching application ID
+- Added `nimble install_bona` task for desktop integration
+- Restructured GTK4 flow to use `activate` signal for window creation
+- Windows now created via `gtk_application_window_new()` for proper app association
+
 ### GTK IDE Fixes (2026-02-10)
 - Fixed Print It - no longer prints to Transcript (only inserts in editor)
 - Keyboard shortcuts now stop event propagation
@@ -526,4 +534,4 @@ EOF
 - Added comprehensive multi-process tests (test_sync_primitives.nim)
 - Removed "Block body corruption" from known issues (fixed)
 
-*Last Updated: 2026-02-10*
+*Last Updated: 2026-02-11*

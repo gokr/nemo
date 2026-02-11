@@ -102,6 +102,45 @@ window setChild: box.
 window present
 ```
 
+### Window Icon and Desktop Integration
+
+For proper dock and Alt-Tab switcher icons in GTK4:
+
+```harding
+# In your main window setup (e.g., Launcher>>openInstance)
+window := GtkWindow new.
+
+# Set window icon (from icon theme)
+window iconName: "harding".
+
+# Set WM_CLASS for window manager identification (dock/Alt-Tab)
+# GTK3: Sets WM_CLASS property for X11
+# GTK4: Sets widget name (limited effect, use GtkApplication instead)
+window setWmClass: "bona".
+```
+
+**For full desktop integration with Bona IDE:**
+
+The `bona` command creates a proper `GtkApplication` with application ID `org.harding-lang.bona`, which enables:
+- Proper dock icon display
+- Correct Alt-Tab switcher icon
+- Window manager identification
+
+Install desktop integration:
+```bash
+nimble install_bona
+```
+
+This installs:
+- `~/.local/share/applications/bona.desktop` - Desktop entry
+- `~/.local/share/icons/hicolor/256x256/apps/harding.png` - Application icon
+
+**Manual window class setup (GTK3):**
+```harding
+# For GTK3/X11, set WM_CLASS directly
+window setWmClass: "myapp".
+```
+
 ### Signal Handling
 
 Connect GTK signals to Harding blocks:
@@ -129,7 +168,7 @@ entry connectKeyPressed: [ :keyval :keycode :mods |
 
 | Widget | Creation | Key Methods |
 |--------|----------|-------------|
-| Window | `GtkWindow new` | `title:`, `setDefaultSize:height:`, `setChild:`, `present` |
+| Window | `GtkWindow new` | `title:`, `setDefaultSize:height:`, `setChild:`, `present`, `setWmClass:` |
 | Button | `GtkButton newLabel:` | `label:`, `clicked:` |
 | Box | `GtkBox vertical` / `horizontal` | `append:`, `prepend:`, `remove:`, `setSpacing:` |
 | Label | `GtkLabel newLabel:` | `label:`, `markup:` |
@@ -274,13 +313,16 @@ except Exception as e:
 - Base signal handling with safe evaluation
 - Two-table system for GC safety
 - Basic layout containers
+- Window icon support (`iconName:`, `setWmClass:`)
+- Desktop integration via GtkApplication (GTK4)
 
 ### In Progress
 
-- IDE tools (Workspace, Transcript, Launcher via `bona` command)
+- IDE tools (Workspace, Transcript, Launcher, Browser via `bona` command)
 - TreeView for hierarchical data
 - HeaderBar
 - Menu system
+- Inspector tool
 
 ### Planned
 
