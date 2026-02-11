@@ -1021,6 +1021,34 @@ nil class           # Returns UndefinedObject
 nil isNil           # Returns true
 ```
 
+### Compiler (Granite)
+
+Harding includes a compiler infrastructure called Granite that can build Harding applications into native binaries:
+
+```smalltalk
+# Create an application
+MyApp := Application derive: #().
+MyApp>>main: args [
+    Transcript showCr: "Hello from compiled app!".
+    ^0
+].
+
+# Build it
+Granite build: MyApp
+```
+
+The compiler:
+- Collects transitive class dependencies
+- Generates Nim code from Harding AST
+- Compiles to native binary using Nim compiler
+
+**Note:** The `main: args` method accepts an array parameter, but command-line arguments from the OS are not yet passed (currently receives empty array).
+
+Build with granite support:
+```bash
+nim c -d:granite -o:harding_granite src/harding/repl/harding.nim
+```
+
 ### Missing Features
 
 Several Smalltalk-80 features are not implemented:

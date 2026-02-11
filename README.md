@@ -15,11 +15,11 @@ p age: 30
 ("Hello, " , p name) println
 
 # Class with manual method definition
-Point := Object derive: #(x y)
+Point := Object deriveWithAccessors: #(x y)
 Point>>distanceFromOrigin [ ^ ((x * x) + (y * y)) sqrt ]
 
 p := Point new
-p x: 3 y: 4
+p x: 3; y: 4
 p distanceFromOrigin println  # Prints: 5.0
 ```
 
@@ -56,7 +56,7 @@ total := 0
   counter := counter + 1
   total := total + i
 ]
-total  "Returns 15"
+total  # Returns 15
 ```
 
 Scripts execute with `self = nil`, following the Smalltalk workspace convention.
@@ -130,7 +130,7 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - Data structure literals
 - Method definition (`>>`), `self` and `super` support
 - Multi-character operators (`==`, `//`, `<=`, `>=`, `~=`, `~~`)
-- Standard library (Object, Boolean, Block, Number, Collections, String)
+- Standard library (Object, Boolean, Block, Number, Collections, String, Exception, TestCase)
 - Green threads: `Processor fork:`, `Processor yield`
 - Synchronization primitives: Monitor, SharedQueue, Semaphore
 - Multiple inheritance with conflict detection and scoped super send
@@ -140,6 +140,8 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - String concatenation with auto-conversion using `,`
 - GTK-based IDE (`bona`) with Workspace and Transcript
 - Smalltalk-style Print It - insert results in editor with selection
+- Exception handling via `on:do:`
+- Compiler infrastructure (`granite`) with Application class and build support
 
 **In progress:**
 - Compiler to Nim (granite is stub)

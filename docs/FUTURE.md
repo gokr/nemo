@@ -48,6 +48,12 @@ ch send: 42.
 value := ch receive.
 ```
 
+**Performance Optimizations** (Partially Implemented):
+- ✅ Monomorphic Inline Cache (MIC) - caches single method lookup per call site
+- Polymorphic Inline Cache (PIC) - cache multiple types for same call site
+- Type specialization for compiled methods
+- Escape analysis for stack allocation
+
 ---
 
 ## GUI IDE Development

@@ -31,6 +31,7 @@ harding --ast 05_classes.hrd
 | `10_blocks.hrd` | Blocks and closures |
 | `11_fibonacci.hrd` | Fibonacci calculation (recursive and iterative) |
 | `12_stdlib.hrd` | Complete standard library demonstration |
+| `process_demo.hrd` | Green threads and process forking |
 
 ## Quick Start
 

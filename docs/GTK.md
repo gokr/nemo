@@ -214,7 +214,7 @@ self printItSelection
 - Evaluates selected text, or current line if no selection
 - **Inserts result after the selection** (Smalltalk-style)
 - **Automatically selects the inserted text** so you can press Delete to remove it
-- Also prints to Transcript for reference
+- No output to Transcript (clean editor-focused workflow)
 
 **Example:**
 1. Select: `3 + 4`

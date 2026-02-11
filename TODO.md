@@ -46,7 +46,7 @@ This document tracks current work items and future directions for Harding develo
 - **Scripts execute with self = nil (Smalltalk workspace convention)** ✅
 - **DEBUG echo statements converted to proper debug() logging** ✅
 
-**Still Needed**: Compiler (granite is stub), FFI to Nim, standard library expansion.
+**Still Needed**: Method compilation in granite, FFI to Nim, standard library expansion.
 
 ## High Priority
 
@@ -55,11 +55,12 @@ This document tracks current work items and future directions for Harding develo
 - [x] Granite compiler primitives (`compile:`, `build:`)
 - [x] Transitive class collection
 - [x] Application binary generation
+- [x] Monomorphic Inline Cache (MIC) for message sends
 - [ ] Method compilation from AST to Nim procedures
 - [ ] Nim type definitions for Class and Instance
 - [ ] Symbol export for compiled methods
 - [ ] Dead code elimination
-- [ ] PIC (Polymorphic Inline Cache)
+- [ ] PIC (Polymorphic Inline Cache) - multi-type caching
 
 ### FFI Integration
 - [ ] Nim type marshaling
@@ -244,6 +245,9 @@ nim c -d:granite -o:harding_granite src/harding/repl/harding.nim
 ./build/testapp
 # Output: Application: testapp
 ```
+
+**Note on Command-Line Arguments:**
+The `main: args` method signature accepts an array of arguments, but currently the compiler passes an empty array. Full command-line argument passing from the host OS is not yet implemented.
 
 **Next Steps (Priority Order):**
 
@@ -485,6 +489,19 @@ EOF
 
 ---
 
+### Performance Optimizations (2026-02-10)
+- Implemented Monomorphic Inline Cache (MIC) for message sends
+- Tagged value representation for integers, booleans, and nil
+- Fast path for integer arithmetic with automatic overflow to heap
+- Computed goto dispatch for VM execution loop
+- Conditional debug template to eliminate debug overhead in release builds
+
+### GTK IDE Fixes (2026-02-10)
+- Fixed Print It - no longer prints to Transcript (only inserts in editor)
+- Keyboard shortcuts now stop event propagation
+- Fixed toolbar button vertical stretching in Launcher
+- Added window icon support for GTK4
+
 ### Synchronization Primitives Fix (2026-02-09)
 - Fixed blocking/unblocking in Monitor, Semaphore, and SharedQueue
 - Processes now properly yield when blocking on synchronization primitives
@@ -493,4 +510,4 @@ EOF
 - Added comprehensive multi-process tests (test_sync_primitives.nim)
 - Removed "Block body corruption" from known issues (fixed)
 
-*Last Updated: 2026-02-09*
+*Last Updated: 2026-02-10*
