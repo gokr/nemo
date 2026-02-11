@@ -53,6 +53,17 @@ proc main() =
       echo "  arguments: ", msg.arguments.len
       for i, arg in msg.arguments:
         echo "    arg[", i, "]: ", arg.kind
+        if arg.kind == nkMessage:
+          let argMsg = MessageNode(arg)
+          echo "      selector: ", argMsg.selector
+          echo "      receiver: ", argMsg.receiver.kind
+          if argMsg.arguments.len > 0:
+            echo "      arguments: ", argMsg.arguments.len
+            for j, subarg in argMsg.arguments:
+              echo "        arg[", j, "]: ", subarg.kind
+        elif arg.kind == nkLiteral:
+          let lit = LiteralNode(arg)
+          echo "      value: '", lit.value, "'"
 
   if parser2.hasError:
     echo "Parse error: ", parser2.errorMsg
