@@ -94,7 +94,7 @@ when defined(js):
         return if receiver.strVal == args[0].strVal: trueValue else: falseValue
       return if receiver == args[0].instVal: trueValue else: falseValue
 
-    of "primitiveClass":
+    of "primitiveClass", "class":
       # Return the class of the receiver
       if receiver.class != nil:
         return receiver.class.toValue()
@@ -178,7 +178,7 @@ when defined(js):
       return if sel in receiver.class.allMethods: trueValue else: falseValue
 
     # String primitives
-    of ",":
+    of ",", "primitiveConcat:":
       # String concatenation
       if receiver.kind == ikString:
         if args.len > 0:
@@ -187,7 +187,7 @@ when defined(js):
           return newStringInstance(receiver.class, receiver.strVal).toValue()
       return nilValue()
 
-    of "size":
+    of "size", "primitiveStringSize", "primitiveArraySize":
       # String/Array/Collection size
       if receiver.kind == ikString:
         return toValue(receiver.strVal.len)
@@ -197,7 +197,7 @@ when defined(js):
         return toValue(receiver.entries.len)
       return toValue(0)
 
-    of "at:":
+    of "at:", "primitiveStringAt:", "primitiveArrayAt:":
       # String character or Array element at index (1-based)
       if receiver.kind == ikString and args.len > 0:
         let (ok, idx) = args[0].tryGetInt()
@@ -213,7 +213,7 @@ when defined(js):
         return receiver.entries.getOrDefault(args[0], nilValue())
       return nilValue()
 
-    of "indexOf:":
+    of "indexOf:", "primitiveIndexOf:":
       # String index of substring (1-based)
       if receiver.kind == ikString and args.len > 0:
         let sub = args[0].toString()
@@ -224,13 +224,13 @@ when defined(js):
         return toValue(0)
       return toValue(0)
 
-    of "includesSubString:":
+    of "includesSubString:", "primitiveIncludesSubString:":
       # Check if includes substring
       if receiver.kind == ikString and args.len > 0:
         return toValue(args[0].toString() in receiver.strVal)
       return toValue(false)
 
-    of "replace:with:":
+    of "replace:with:", "primitiveReplaceWith:":
       # Replace substring
       if receiver.kind == ikString and args.len >= 2:
         let oldStr = args[0].toString()
@@ -238,25 +238,25 @@ when defined(js):
         return newStringInstance(receiver.class, receiver.strVal.replace(oldStr, newStr)).toValue()
       return receiver.toValue()
 
-    of "asUppercase":
+    of "asUppercase", "primitiveUppercase":
       # Convert to uppercase
       if receiver.kind == ikString:
         return newStringInstance(receiver.class, receiver.strVal.toUpperAscii()).toValue()
       return receiver.toValue()
 
-    of "asLowercase":
+    of "asLowercase", "primitiveLowercase":
       # Convert to lowercase
       if receiver.kind == ikString:
         return newStringInstance(receiver.class, receiver.strVal.toLowerAscii()).toValue()
       return receiver.toValue()
 
-    of "trim":
+    of "trim", "primitiveTrim":
       # Trim whitespace
       if receiver.kind == ikString:
         return newStringInstance(receiver.class, strip(receiver.strVal)).toValue()
       return receiver.toValue()
 
-    of "split:":
+    of "split:", "primitiveSplit:":
       # Split string by delimiter
       if receiver.kind == ikString and args.len > 0:
         let delim = args[0].toString()
@@ -271,7 +271,7 @@ when defined(js):
       return NodeValue(kind: vkArray, arrayVal: @[])
 
     # Array primitives
-    of "at:put:":
+    of "at:put:", "primitiveArrayAt:put:", "primitiveTableAt:put:":
       # Set array element or table entry
       if receiver.kind == ikArray and args.len >= 2:
         let (ok, idx) = args[0].tryGetInt()
@@ -283,7 +283,7 @@ when defined(js):
         return args[1]
       return nilValue()
 
-    of "add:":
+    of "add:", "primitiveArrayAdd:":
       # Add element to array
       if receiver.kind == ikArray:
         receiver.elements.add(args[0])
@@ -293,7 +293,7 @@ when defined(js):
     # Note: do: primitive needs forward declaration of evalBlock - skip for now
 
     # Table primitives
-    of "keys":
+    of "keys", "primitiveTableKeys":
       # Get table keys
       if receiver.kind == ikTable:
         var keys: seq[NodeValue] = @[]
@@ -306,7 +306,7 @@ when defined(js):
         return newArrayInstance(arrayClassCache, @[]).toValue()
       return NodeValue(kind: vkArray, arrayVal: @[])
 
-    of "values":
+    of "values", "primitiveTableValues":
       # Get table values
       if receiver.kind == ikTable:
         var vals: seq[NodeValue] = @[]

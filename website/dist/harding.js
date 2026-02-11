@@ -17543,6 +17543,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "primitiveClass":
+    case "class":
       if (!((receiver_p1.class == null))) {
       F.line = 100;
       result_1258291222 = nimCopy(result_1258291222, toValue__OOZcoreZtypes_u1490(receiver_p1.class), NTI1157627926);
@@ -17814,6 +17815,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case ",":
+    case "primitiveConcat:":
       if ((receiver_p1.kind == 5)) {
       if ((0 < (args_p3).length)) {
       F.line = 185;
@@ -17837,6 +17839,8 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "size":
+    case "primitiveStringSize":
+    case "primitiveArraySize":
       if ((receiver_p1.kind == 5)) {
       F.line = 193;
       var Temporary50 = receiver_p1;
@@ -17866,6 +17870,8 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "at:":
+    case "primitiveStringAt:":
+    case "primitiveArrayAt:":
       if (((receiver_p1.kind == 5) && (0 < (args_p3).length))) {
       F.line = 203;
       var tmpTuple_1258291556 = tryGetInt__OOZinterpreterZobjects_u203(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
@@ -17923,6 +17929,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "indexOf:":
+    case "primitiveIndexOf:":
       if (((receiver_p1.kind == 5) && (0 < (args_p3).length))) {
       F.line = 219;
       var sub_1258291714 = toString__OOZcoreZtypes_u512(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
@@ -17949,6 +17956,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "includesSubString:":
+    case "primitiveIncludesSubString:":
       if (((receiver_p1.kind == 5) && (0 < (args_p3).length))) {
       F.line = 230;
       var Temporary63 = receiver_p1;
@@ -17962,6 +17970,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "replace:with:":
+    case "primitiveReplaceWith:":
       if (((receiver_p1.kind == 5) && (2 <= (args_p3).length))) {
       F.line = 236;
       var oldStr_1258291730 = toString__OOZcoreZtypes_u512(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
@@ -17979,6 +17988,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "asUppercase":
+    case "primitiveUppercase":
       if ((receiver_p1.kind == 5)) {
       F.line = 244;
       var Temporary65 = receiver_p1;
@@ -17992,6 +18002,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "asLowercase":
+    case "primitiveLowercase":
       if ((receiver_p1.kind == 5)) {
       F.line = 250;
       var Temporary66 = receiver_p1;
@@ -18005,6 +18016,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "trim":
+    case "primitiveTrim":
       if ((receiver_p1.kind == 5)) {
       F.line = 256;
       var Temporary67 = receiver_p1;
@@ -18018,6 +18030,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "split:":
+    case "primitiveSplit:":
       if (((receiver_p1.kind == 5) && (0 < (args_p3).length))) {
       F.line = 262;
       var delim_1258291751 = toString__OOZcoreZtypes_u512(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
@@ -18108,6 +18121,8 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "at:put:":
+    case "primitiveArrayAt:put:":
+    case "primitiveTableAt:put:":
       if (((receiver_p1.kind == 1) && (2 <= (args_p3).length))) {
       F.line = 277;
       var tmpTuple_1258291785 = tryGetInt__OOZinterpreterZobjects_u203(args_p3[chckIndx(0, 0, (args_p3).length - 1)]);
@@ -18144,6 +18159,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "add:":
+    case "primitiveArrayAdd:":
       if ((receiver_p1.kind == 1)) {
       F.line = 289;
       var Temporary80 = receiver_p1;
@@ -18160,6 +18176,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "keys":
+    case "primitiveTableKeys":
       if ((receiver_p1.kind == 2)) {
       F.line = 299;
       var keys_1258291856 = [];
@@ -18245,6 +18262,7 @@ function dispatchPrimitive__OOZinterpreterZvm_u17(interp_p0, interp_p0_Idx, rece
       break BeforeRet;
       break;
     case "values":
+    case "primitiveTableValues":
       if ((receiver_p1.kind == 2)) {
       F.line = 312;
       var vals_1258291891 = [];
