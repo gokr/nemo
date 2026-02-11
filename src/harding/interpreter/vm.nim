@@ -2291,6 +2291,11 @@ proc initGlobals*(interp: var Interpreter) =
   intCls.methods["%"] = moduloMethod
   intCls.allMethods["%"] = moduloMethod
 
+  let intSqrtMethod = createCoreMethod("sqrt")
+  intSqrtMethod.setNativeImpl(sqrtImpl)
+  intCls.methods["sqrt"] = intSqrtMethod
+  intCls.allMethods["sqrt"] = intSqrtMethod
+
   # Create Float class (derives from Number)
   # Note: Float may have been created in initCoreClasses, but with wrong superclasses
   # We recreate it here with the proper inheritance chain
@@ -4064,8 +4069,8 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
 
     # Check for native implementation
     # currentMethod is set either from cache (cacheHit) or from lookup (slow path)
-    debug("VM: Found method '", frame.selector, "', native=", currentMethod.nativeImpl != nil)
-    if currentMethod.nativeImpl != nil:
+    debug("VM: Found method '", frame.selector, "', native=", nativeImplIsSet(currentMethod))
+    if nativeImplIsSet(currentMethod):
       # Call native method
       debug("VM: Calling native method '", frame.selector, "'")
       let savedReceiver = interp.currentReceiver
