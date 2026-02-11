@@ -40,6 +40,10 @@ proc setGtkApplication*(app: GtkApplication) =
 proc getGtkApplication*(): GtkApplication =
   gtkApp
 
+## Register the getter with window module to avoid circular imports
+## (window.nim is imported above, this sets up the forward reference)
+setGtkApplicationGetter(getGtkApplication)
+
 ## Forward declaration for launcher new implementation
 proc launcherNewImpl*(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
 
@@ -184,6 +188,11 @@ proc initGtkBridge*(interp: var Interpreter) =
   windowSetIconFromFileMethod.nativeImpl = cast[pointer](windowSetIconFromFileImpl)
   windowSetIconFromFileMethod.hasInterpreterParam = true
   addMethodToClass(windowCls, "iconFromFile:", windowSetIconFromFileMethod)
+
+  let windowSetWmClassMethod = createCoreMethod("setWmClass:")
+  windowSetWmClassMethod.nativeImpl = cast[pointer](windowSetWmClassImpl)
+  windowSetWmClassMethod.hasInterpreterParam = true
+  addMethodToClass(windowCls, "setWmClass:", windowSetWmClassMethod)
 
   interp.globals[]["GtkWindow"] = windowCls.toValue()
   debug("Registered GtkWindow class")
@@ -638,6 +647,9 @@ proc loadIdeToolFiles*(interp: var Interpreter, basePath: string = "") =
   debug("Loading IDE tool files from: ", libPath)
 
   let toolFiles = [
+    "BrowserPane.hrd",
+    "Browser.hrd",
+    "Inspector.hrd",
     "Transcript.hrd",
     "Workspace.hrd",
     "Launcher.hrd"
