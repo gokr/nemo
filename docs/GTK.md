@@ -331,20 +331,20 @@ except Exception as e:
 - Basic layout containers
 - Window icon support (`iconName:`, `setWmClass:`)
 - Desktop integration via GtkApplication (GTK4)
+- System Browser (four-pane class/method browser)
+- Inspector (object slot/property viewer)
+- BrowserPane (reusable list component)
 
 ### In Progress
 
-- IDE tools (Workspace, Transcript, Launcher, Browser via `bona` command)
 - TreeView for hierarchical data
 - HeaderBar
 - Menu system
-- Inspector tool
 
 ### Planned
 
-- Inspector tool (object introspection)
-- System Browser (class/method browsing)
 - Debugger (stack frame inspection)
+- Enhanced Browser (method source viewing, editing, saving)
 
 ## Future Extensions
 

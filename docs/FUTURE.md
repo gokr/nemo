@@ -72,10 +72,11 @@ The GTK bridge provides basic widget support. GUI tools can be written in Hardin
 - Print It functionality (inserts results in editor)
 - Window icon support (`iconName:`, `setWmClass:`)
 - Desktop integration (dock/Alt-Tab icons via icon themes)
-- Inspector tool (basic slot/property viewing)
+- System Browser (four-pane class/method browser)
+- Inspector (object slot/property viewer)
+- BrowserPane (reusable list component)
 
 **In Progress:**
-- System Browser (class/method browsing)
 - TreeView for hierarchical data
 - HeaderBar
 - Menu system

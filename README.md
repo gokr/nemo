@@ -43,6 +43,8 @@ nimble install_bona  # Installs .desktop file and icon
 
 ## Usage
 
+### REPL
+
 ```bash
 harding                    # Interactive REPL
 harding script.hrd         # Run a file
@@ -50,6 +52,21 @@ harding -e "3 + 4"         # Evaluate expression
 harding --ast script.hrd   # Show AST, then execute
 harding --loglevel DEBUG   # Verbose execution trace
 ```
+
+### GTK IDE (Bona)
+
+Launch the graphical IDE:
+
+```bash
+bona                       # Start IDE with Launcher
+```
+
+**IDE Tools:**
+- **Launcher** - Main window with access to all tools
+- **Workspace** - Code editor with Do It (Ctrl+D), Print It (Ctrl+P), Inspect It (Ctrl+I)
+- **Transcript** - Output console for logging and results
+- **System Browser** - Browse classes by library (Core, Collections, GUI, IDE)
+- **Inspector** - Examine object slots and values
 
 ### Script Execution
 
@@ -144,9 +161,9 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - Multiple inheritance with conflict detection and scoped super send
 - Dynamic message sending: `perform:`, `perform:with:`
 - Automatic accessor generation: `deriveWithAccessors:`, `derive:getters:setters:`
-- Library/namespace system for modular code organization
+- Library/namespace system for modular code organization (Core, Collections, GUI, IDE libraries)
 - String concatenation with auto-conversion using `,`
-- GTK-based IDE (`bona`) with Workspace, Transcript, System Browser, and Inspector
+- GTK-based IDE (`bona`) with Workspace (code editor with Do It/Print It/Inspect It), Transcript (output console), System Browser (class/method browser), and Inspector (object viewer)
 - Smalltalk-style Print It - insert results in editor with selection
 - Exception handling via `on:do:`
 - Compiler infrastructure (`granite`) with Application class and build support
