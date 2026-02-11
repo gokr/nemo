@@ -7,6 +7,12 @@ import ../core/types
 # Parses Smalltalk-style syntax into AST nodes
 # ============================================================================
 
+# Set of all binary operator tokens for quick lookup
+const BinaryOpTokens* = {
+  tkPlus, tkMinus, tkStar, tkSlash, tkLt, tkGt, tkEq, tkEqEq, tkPercent, tkComma,
+  tkIntDiv, tkMod, tkLtEq, tkGtEq, tkNotEq, tkAmpersand, tkPipe
+}
+
 type
   Parser* = ref object
     tokens*: seq[Token]
@@ -15,6 +21,9 @@ type
     hasError*: bool
     errorMsg*: string
     lastLine*, lastCol*: int
+
+# Forward declarations
+proc parseBinaryOperators*(parser: var Parser, left: Node): Node
 
 # Helper to parse primitive tag content as keyword message syntax
 # Input: "primitiveAt: key put: value" or "primitiveClone"
@@ -365,7 +374,13 @@ proc parseKeywordMessage(parser: var Parser, receiver: Node): MessageNode =
     if arg == nil:
       parser.parseError("Expected argument after keyword")
       return nil
-    arguments.add(arg)
+
+    # Parse binary operators after the argument (e.g., "at: 1 + 2")
+    var finalArg = arg
+    if parser.peek().kind in BinaryOpTokens:
+      finalArg = parser.parseBinaryOperators(arg)
+
+    arguments.add(finalArg)
 
   return MessageNode(
     receiver: receiver,
@@ -408,10 +423,6 @@ proc parseBinaryMessage(parser: var Parser, receiver: Node): MessageNode =
     return parser.parseKeywordMessage(msg)
 
   return msg
-
-# Binary operator tokens for parsing
-const BinaryOpTokens* = {tkPlus, tkMinus, tkStar, tkSlash, tkLt, tkGt, tkEq, tkEqEq, tkPercent, tkComma,
-                         tkIntDiv, tkMod, tkLtEq, tkGtEq, tkNotEq, tkAmpersand, tkPipe}
 
 # Parse binary operators with left-to-right associativity
 proc parseBinaryOperators(parser: var Parser, left: Node): Node =
@@ -485,9 +496,6 @@ proc parseExpression*(parser: var Parser; parseMessages = true): Node =
     of tkKeyword:
       # Keyword message (lowest precedence, parsed last)
       current = parser.parseKeywordMessage(primary)
-      # After keyword messages, check for binary operators (comma concatenation, etc.)
-      if parser.peek().kind in BinaryOpTokens:
-        current = parser.parseBinaryOperators(current)
       return current
     of tkIdent:
       if next.value[0].isLowerAscii():

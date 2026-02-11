@@ -19,6 +19,9 @@ Launcher>>openInstance [
   self setDefaultSize: 800 height: 600.
   self connectDestroy.
 
+  # Set window icon (works in both GTK3 and GTK4)
+  self iconName: "harding".
+
   # Create main layout box (vertical)
   mainBox := GtkBox vertical.
   mainBox setSpacing: 0.

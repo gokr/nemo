@@ -1,13 +1,15 @@
 #!/usr/bin/env harding
 # N-Queens Benchmark
 # Ported from SOM benchmark suite (https://github.com/smarr/SOM)
-# Solves the 8-queens puzzle using backtracking
 # Expected result: true (8-queens puzzle is solvable)
+#
+# Note: This implementation uses 1-based indexing for Harding compatibility
 
-Queens := Object deriveWithAccessors: #(freeRows freeMaxs freeMins queenRows).
+Queens := Object deriveWithAccessors: #(boardSize freeRows freeMaxs freeMins queenRows).
 
 Queens>>initialize [
   | i |
+  self boardSize: 8.
   self freeRows: (Array new: 8).
   self freeMaxs: (Array new: 16).
   self freeMins: (Array new: 16).
@@ -28,50 +30,68 @@ Queens>>initialize [
   ]
 ]
 
-Queens>>placeQueen: column [
-  | row subResult rowFree maxIdx minIdx maxFree minFree isFree |
-  row := 1.
-  [ row <= 8 ] whileTrue: [
-    # Check all three constraints
-    rowFree := self freeRows at: row.
-    maxIdx := row + column.
-    maxFree := self freeMaxs at: maxIdx.
-    minIdx := row - column + 8.
-    minFree := self freeMins at: minIdx.
-    
-    # All must be free (equal to 1)
-    isFree := 0.
-    rowFree = 1 ifTrue: [
-      maxFree = 1 ifTrue: [
-        minFree = 1 ifTrue: [
-          isFree := 1
-        ]
+Queens>>row: row column: column isFree [
+  # Check if a position is free (no conflicts)
+  | rowFree maxIdx minIdx maxFree minFree allFree |
+  rowFree := self freeRows at: row.
+  maxIdx := row + column.
+  maxFree := self freeMaxs at: maxIdx.
+  minIdx := row - column + 8.
+  minFree := self freeMins at: minIdx.
+  
+  allFree := 0.
+  rowFree = 1 ifTrue: [
+    maxFree = 1 ifTrue: [
+      minFree = 1 ifTrue: [
+        allFree := 1
       ]
-    ].
-    
+    ]
+  ].
+  ^ allFree
+]
+
+Queens>>placeInRow: row column: column [
+  # Mark a position as occupied
+  | maxIdx minIdx |
+  maxIdx := row + column.
+  minIdx := row - column + 8.
+  self freeRows at: row put: 0.
+  self freeMaxs at: maxIdx put: 0.
+  self freeMins at: minIdx put: 0.
+  self queenRows at: column put: row
+]
+
+Queens>>removeFromRow: row column: column [
+  # Mark a position as free (backtrack)
+  | maxIdx minIdx |
+  maxIdx := row + column.
+  minIdx := row - column + 8.
+  self freeRows at: row put: 1.
+  self freeMaxs at: maxIdx put: 1.
+  self freeMins at: minIdx put: 1.
+  self queenRows at: column put: 0
+]
+
+Queens>>placeQueen: column [
+  # Recursive solver
+  | row isFree subResult size |
+  size := self boardSize.
+  row := 1.
+  [ row <= size ] whileTrue: [
+    isFree := self row: row column: column isFree.
     isFree = 1 ifTrue: [
-      # Place queen - mark row and diagonals as occupied
-      self freeRows at: row put: 0.
-      self freeMaxs at: maxIdx put: 0.
-      self freeMins at: minIdx put: 0.
-      self queenRows at: column put: row.
+      self placeInRow: row column: column.
       
-      column = 8 ifTrue: [
-        # Success - all 8 queens placed
+      column = size ifTrue: [
         ^ 1
       ] ifFalse: [
-        # Recursively try to place next queen
         subResult := self placeQueen: (column + 1).
         subResult = 1 ifTrue: [
           ^ 1
         ]
       ].
       
-      # Backtrack - remove queen and restore state
-      self freeRows at: row put: 1.
-      self freeMaxs at: maxIdx put: 1.
-      self freeMins at: minIdx put: 1.
-      self queenRows at: column put: 0
+      self removeFromRow: row column: column
     ].
     row := row + 1
   ].

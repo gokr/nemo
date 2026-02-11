@@ -46,7 +46,7 @@ This document tracks current work items and future directions for Harding develo
 - **Scripts execute with self = nil (Smalltalk workspace convention)** ✅
 - **DEBUG echo statements converted to proper debug() logging** ✅
 
-**Still Needed**: Method compilation in granite, FFI to Nim, standard library expansion.
+**Still Needed**: Full method body compilation (blocks, control flow), FFI to Nim, standard library expansion.
 
 ## High Priority
 
@@ -55,9 +55,11 @@ This document tracks current work items and future directions for Harding develo
 - [x] Granite compiler primitives (`compile:`, `build:`)
 - [x] Transitive class collection
 - [x] Application binary generation
+- [x] Method compilation from AST to Nim procedures
+- [x] Nim type definitions for Harding classes
+- [x] Basic runtime helpers (println, arithmetic operators)
 - [x] Monomorphic Inline Cache (MIC) for message sends
-- [ ] Method compilation from AST to Nim procedures
-- [ ] Nim type definitions for Class and Instance
+- [ ] Full method body compilation (blocks, control flow)
 - [ ] Symbol export for compiled methods
 - [ ] Dead code elimination
 - [ ] PIC (Polymorphic Inline Cache) - multi-type caching
@@ -224,6 +226,11 @@ harding --loglevel ERROR script.harding    # Errors only (default)
   - Generates main() procedure
   - Creates build directory and writes .nim file
   - Compiles with Nim to binary
+- ✅ Method compilation from AST
+  - Compiles Harding method bodies to Nim procedures
+  - Generates class type definitions with slots
+  - Supports basic expressions (literals, arithmetic, message sends)
+  - Runtime helper functions (nt_println, nt_plus, etc.)
 
 **Working Example:**
 ```bash
@@ -233,17 +240,26 @@ nim c -d:granite -o:harding_granite src/harding/repl/harding.nim
 # Compile Harding to Nim
 ./harding_granite -e 'Granite compile: "3 + 4"'
 
-# Build Application to binary
+# Build Application with method compilation
 ./harding_granite -e '
-  App := Application new.
-  App name: "testapp".
-  Granite build: App
+MyApp := Application derive: #().
+MyApp>>main: args [
+  Stdout writeLine: "Hello from compiled Harding!".
+  Stdout writeLine: ("2 + 3 = ", (2 + 3) asString).
+  ^0
+].
+app := MyApp new.
+app name: "myapp".
+Granite build: app
 '
-# Output: Build successful: build/testapp
+# Output: Build successful: build/myapp
 
 # Run compiled binary
-./build/testapp
-# Output: Application: testapp
+./build/myapp
+# Output:
+# Application: myapp
+# Hello from compiled Harding!
+# 2 + 3 = 5
 ```
 
 **Note on Command-Line Arguments:**

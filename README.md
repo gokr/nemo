@@ -144,7 +144,7 @@ Harding distinguishes globals from locals by capitalization and enforces this in
 - Compiler infrastructure (`granite`) with Application class and build support
 
 **In progress:**
-- Compiler to Nim (granite is stub)
+- Compiler to Nim (granite works for basic applications)
 - FFI to Nim
 - Standard library expansion
 
