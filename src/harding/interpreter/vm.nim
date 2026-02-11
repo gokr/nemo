@@ -177,6 +177,140 @@ when defined(js):
       # Check in methods or allMethods
       return if selector in receiver.class.allMethods: trueValue else: falseValue
 
+    # String primitives
+    of ",":
+      # String concatenation
+      if receiver.kind == ikString:
+        if args.len > 0:
+          return newStringInstance(stringClass, receiver.strVal & args[0].toString()).toValue()
+        else:
+          return newStringInstance(stringClass, receiver.strVal).toValue()
+      return nilValue()
+
+    of "size":
+      # String/Array/Collection size
+      if receiver.kind == ikString:
+        return toValue(receiver.strVal.len)
+      elif receiver.kind == ikArray:
+        return toValue(receiver.elements.len)
+      elif receiver.kind == ikTable:
+        return toValue(receiver.entries.len)
+      return toValue(0)
+
+    of "at:":
+      # String character or Array element at index (1-based)
+      if receiver.kind == ikString and args.len > 0:
+        let (ok, idx) = args[0].tryGetInt()
+        if ok and idx >= 1 and idx <= receiver.strVal.len:
+          return toValue($receiver.strVal[idx - 1])
+        return toValue("")
+      elif receiver.kind == ikArray and args.len > 0:
+        let (ok, idx) = args[0].tryGetInt()
+        if ok and idx >= 1 and idx <= receiver.elements.len:
+          return receiver.elements[idx - 1]
+        return nilValue()
+      elif receiver.kind == ikTable and args.len > 0:
+        return receiver.entries.getOrDefault(args[0], nilValue())
+      return nilValue()
+
+    of "indexOf:":
+      # String index of substring (1-based)
+      if receiver.kind == ikString and args.len > 0:
+        let sub = args[0].toString()
+        if sub.len > 0:
+          let idx = receiver.strVal.find(sub)
+          if idx >= 0:
+            return toValue(idx + 1)
+        return toValue(0)
+      return toValue(0)
+
+    of "includesSubString:":
+      # Check if includes substring
+      if receiver.kind == ikString and args.len > 0:
+        return toValue(args[0].toString() in receiver.strVal)
+      return toValue(false)
+
+    of "replace:with:":
+      # Replace substring
+      if receiver.kind == ikString and args.len >= 2:
+        let oldStr = args[0].toString()
+        let newStr = args[1].toString()
+        return newStringInstance(stringClass, receiver.strVal.replace(oldStr, newStr)).toValue()
+      return receiver.toValue()
+
+    of "asUppercase":
+      # Convert to uppercase
+      if receiver.kind == ikString:
+        return newStringInstance(stringClass, receiver.strVal.toUpperAscii()).toValue()
+      return receiver.toValue()
+
+    of "asLowercase":
+      # Convert to lowercase
+      if receiver.kind == ikString:
+        return newStringInstance(stringClass, receiver.strVal.toLowerAscii()).toValue()
+      return receiver.toValue()
+
+    of "trim":
+      # Trim whitespace
+      if receiver.kind == ikString:
+        return newStringInstance(stringClass, strip(receiver.strVal)).toValue()
+      return receiver.toValue()
+
+    of "split:":
+      # Split string by delimiter
+      if receiver.kind == ikString and args.len > 0:
+        let delim = args[0].toString()
+        var parts: seq[NodeValue] = @[]
+        for part in receiver.strVal.split(delim):
+          parts.add(newStringInstance(stringClass, part).toValue())
+        return newArrayInstance(arrayClass, parts).toValue()
+      return newArrayInstance(arrayClass, @[]).toValue()
+
+    # Array primitives
+    of "at:put:":
+      # Set array element at index (1-based)
+      if receiver.kind == ikArray and args.len >= 2:
+        let (ok, idx) = args[0].tryGetInt()
+        if ok and idx >= 1 and idx <= receiver.elements.len:
+          receiver.elements[idx - 1] = args[1]
+          return args[1]
+      return nilValue()
+
+    of "add:":
+      # Add element to array
+      if receiver.kind == ikArray:
+        receiver.elements.add(args[0])
+        return receiver.toValue()
+      return nilValue()
+
+    # Note: do: primitive needs forward declaration of evalBlock - skip for now
+
+    # Table primitives
+    of "at:put:":
+      # Set table entry
+      if receiver.kind == ikTable and args.len >= 2:
+        receiver.entries[args[0]] = args[1]
+        return args[1]
+      return nilValue()
+
+    of "keys":
+      # Get table keys
+      if receiver.kind == ikTable:
+        var keys: seq[NodeValue] = @[]
+        for key, _ in receiver.entries:
+          keys.add(key)
+        return newArrayInstance(arrayClass, keys).toValue()
+      return newArrayInstance(arrayClass, @[]).toValue()
+
+    of "values":
+      # Get table values
+      if receiver.kind == ikTable:
+        var vals: seq[NodeValue] = @[]
+        for _, val in receiver.entries:
+          vals.add(val)
+        return newArrayInstance(arrayClass, vals).toValue()
+      return newArrayInstance(arrayClass, @[]).toValue()
+
     of "primitiveMethods":
       # Return array of method selectors
       if receiver.class == nil:
