@@ -2661,6 +2661,65 @@ proc initGlobals*(interp: var Interpreter) =
   tableCls.classMethods["new"] = tableNewMethod
   tableCls.allClassMethods["new"] = tableNewMethod
 
+  # ============================================================================
+  # Register Library primitive selectors (used by lib/core/Library.hrd)
+  # ============================================================================
+  # Use existing Library class from initCoreClasses
+  var libraryCls: Class
+  if libraryClass != nil:
+    libraryCls = libraryClass
+  else:
+    libraryCls = newClass(superclasses = @[objectCls],
+                          slotNames = @["bindings", "imports", "name"],
+                          name = "Library")
+    libraryCls.tags = @["Library", "Namespace"]
+    libraryClass = libraryCls
+
+  # Register Library instance primitives (at:, at:put:, keys, etc.)
+  let libraryAtMethod = createCoreMethod("primitiveLibraryAt:")
+  libraryAtMethod.setNativeImpl(libraryAtImpl)
+  libraryCls.methods["primitiveLibraryAt:"] = libraryAtMethod
+  libraryCls.allMethods["primitiveLibraryAt:"] = libraryAtMethod
+
+  let libraryAtPutMethod = createCoreMethod("primitiveLibraryAt:put:")
+  libraryAtPutMethod.setNativeImpl(libraryAtPutImpl)
+  libraryCls.methods["primitiveLibraryAt:put:"] = libraryAtPutMethod
+  libraryCls.allMethods["primitiveLibraryAt:put:"] = libraryAtPutMethod
+
+  let libraryKeysMethod = createCoreMethod("primitiveLibraryKeys")
+  libraryKeysMethod.setNativeImpl(libraryKeysImpl)
+  libraryCls.methods["primitiveLibraryKeys"] = libraryKeysMethod
+  libraryCls.allMethods["primitiveLibraryKeys"] = libraryKeysMethod
+
+  let libraryIncludesKeyMethod = createCoreMethod("primitiveLibraryIncludesKey:")
+  libraryIncludesKeyMethod.setNativeImpl(libraryIncludesKeyImpl)
+  libraryCls.methods["primitiveLibraryIncludesKey:"] = libraryIncludesKeyMethod
+  libraryCls.allMethods["primitiveLibraryIncludesKey:"] = libraryIncludesKeyMethod
+
+  let libraryNameMethod = createCoreMethod("primitiveLibraryName")
+  libraryNameMethod.setNativeImpl(libraryNameImpl)
+  libraryCls.methods["primitiveLibraryName"] = libraryNameMethod
+  libraryCls.allMethods["primitiveLibraryName"] = libraryNameMethod
+
+  let libraryNameSetMethod = createCoreMethod("primitiveLibraryName:")
+  libraryNameSetMethod.setNativeImpl(libraryNameSetImpl)
+  libraryCls.methods["primitiveLibraryName:"] = libraryNameSetMethod
+  libraryCls.allMethods["primitiveLibraryName:"] = libraryNameSetMethod
+
+  # Register Library class new method (as class method primitive)
+  let libraryNewPrimMethod = createCoreMethod("primitiveLibraryNew")
+  libraryNewPrimMethod.setNativeImpl(libraryNewImpl)
+  libraryNewPrimMethod.hasInterpreterParam = false  # libraryNewImpl doesn't take interpreter param
+  libraryCls.classMethods["primitiveLibraryNew"] = libraryNewPrimMethod
+  libraryCls.allClassMethods["primitiveLibraryNew"] = libraryNewPrimMethod
+
+  # Also register user-facing 'new' as a class method that wraps the primitive
+  let libraryNewMethod = createCoreMethod("new")
+  libraryNewMethod.setNativeImpl(libraryNewImpl)
+  libraryNewMethod.hasInterpreterParam = false  # libraryNewImpl doesn't take interpreter param
+  libraryCls.classMethods["new"] = libraryNewMethod
+  libraryCls.allClassMethods["new"] = libraryNewMethod
+
   # Create Boolean class (derives from Object)
   # Methods are defined in lib/core/Boolean.hrd
   let booleanCls = newClass(superclasses = @[objectCls], name = "Boolean")
@@ -3339,14 +3398,14 @@ type
 proc newEvalFrame*(node: Node): WorkFrame =
   WorkFrame(kind: wfEvalNode, node: node)
 
-proc newSendMessageFrame*(selector: string, argCount: int, msgNode: MessageNode = nil): WorkFrame =
-  WorkFrame(kind: wfSendMessage, selector: selector, argCount: argCount, msgNode: msgNode)
+proc newSendMessageFrame*(selector: string, argCount: int, msgNode: MessageNode = nil, isClassMethod: bool = false): WorkFrame =
+  WorkFrame(kind: wfSendMessage, selector: selector, argCount: argCount, msgNode: msgNode, isClassMethod: isClassMethod)
 
-proc newAfterReceiverFrame*(selector: string, args: seq[Node]): WorkFrame =
-  WorkFrame(kind: wfAfterReceiver, pendingSelector: selector, pendingArgs: args, currentArgIndex: 0)
+proc newAfterReceiverFrame*(selector: string, args: seq[Node], isClassMethod: bool = false): WorkFrame =
+  WorkFrame(kind: wfAfterReceiver, pendingSelector: selector, pendingArgs: args, currentArgIndex: 0, isClassMethod: isClassMethod)
 
-proc newAfterArgFrame*(selector: string, args: seq[Node], currentIndex: int): WorkFrame =
-  WorkFrame(kind: wfAfterArg, pendingSelector: selector, pendingArgs: args, currentArgIndex: currentIndex)
+proc newAfterArgFrame*(selector: string, args: seq[Node], currentIndex: int, isClassMethod: bool = false): WorkFrame =
+  WorkFrame(kind: wfAfterArg, pendingSelector: selector, pendingArgs: args, currentArgIndex: currentIndex, isClassMethod: isClassMethod)
 
 proc newApplyBlockFrame*(blockVal: BlockNode, argCount: int): WorkFrame =
   WorkFrame(kind: wfApplyBlock, blockVal: blockVal, argCount: argCount)
@@ -3700,6 +3759,7 @@ proc handleEvalNode(interp: var Interpreter, frame: WorkFrame): bool =
     let primCall = cast[PrimitiveCallNode](node)
     debug("VM: Primitive call #", primCall.selector, " with ", primCall.arguments.len, " args")
     debug("VM: currentReceiver=", if interp.currentReceiver != nil: interp.currentReceiver.class.name else: "nil")
+    debug("VM: isClassMethod=", $primCall.isClassMethod)
 
     # Push currentReceiver as the receiver
     if interp.currentReceiver != nil:
@@ -3709,9 +3769,9 @@ proc handleEvalNode(interp: var Interpreter, frame: WorkFrame): bool =
 
     # Use the same continuation mechanism as message sends
     if primCall.arguments.len > 0:
-      interp.pushWorkFrame(newAfterReceiverFrame(primCall.selector, primCall.arguments))
+      interp.pushWorkFrame(newAfterReceiverFrame(primCall.selector, primCall.arguments, primCall.isClassMethod))
     else:
-      interp.pushWorkFrame(newSendMessageFrame(primCall.selector, 0))
+      interp.pushWorkFrame(newSendMessageFrame(primCall.selector, 0, isClassMethod = primCall.isClassMethod))
     return true
 
 # Handle continuation frames (what to do after subexpression)
@@ -3721,10 +3781,10 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
     # Receiver is on stack, now evaluate arguments
     if frame.pendingArgs.len == 0:
       # No arguments - send message now
-      interp.pushWorkFrame(newSendMessageFrame(frame.pendingSelector, 0))
+      interp.pushWorkFrame(newSendMessageFrame(frame.pendingSelector, 0, isClassMethod = frame.isClassMethod))
     else:
       # Evaluate first argument
-      interp.pushWorkFrame(newAfterArgFrame(frame.pendingSelector, frame.pendingArgs, 0))
+      interp.pushWorkFrame(newAfterArgFrame(frame.pendingSelector, frame.pendingArgs, 0, frame.isClassMethod))
       interp.pushWorkFrame(newEvalFrame(frame.pendingArgs[0]))
     return true
 
@@ -3755,11 +3815,11 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
     let nextIndex = frame.currentArgIndex + 1
     if nextIndex < frame.pendingArgs.len:
       # More arguments to evaluate
-      interp.pushWorkFrame(newAfterArgFrame(frame.pendingSelector, frame.pendingArgs, nextIndex))
+      interp.pushWorkFrame(newAfterArgFrame(frame.pendingSelector, frame.pendingArgs, nextIndex, frame.isClassMethod))
       interp.pushWorkFrame(newEvalFrame(frame.pendingArgs[nextIndex]))
     else:
       # All arguments evaluated - send message
-      interp.pushWorkFrame(newSendMessageFrame(frame.pendingSelector, frame.pendingArgs.len))
+      interp.pushWorkFrame(newSendMessageFrame(frame.pendingSelector, frame.pendingArgs.len, isClassMethod = frame.isClassMethod))
     return true
 
   of wfSendMessage:
@@ -4002,26 +4062,38 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
 
           return true
         else:
-          # Instance method not found - try class methods on the class itself
+          # Instance method not found - try class methods on the class itself and Object
           # This allows class methods like selector:put: to work when called via self in blocks
+          # First try the class itself, then try Object's class methods (inherited)
+          var classMethodToRun: BlockNode = nil
+          var classMethodDefiningClass: Class = nil
+
           let classMethodLookup = lookupClassMethod(cls, frame.selector)
           if classMethodLookup.found:
-            let currentMethod = classMethodLookup.currentMethod
-            debug("VM: Found class method '", frame.selector, "' on class ", cls.name)
+            classMethodToRun = classMethodLookup.currentMethod
+            classMethodDefiningClass = classMethodLookup.definingClass
+          elif objectClass != nil:
+            let objectClassMethodLookup = lookupClassMethod(objectClass, frame.selector)
+            if objectClassMethodLookup.found:
+              classMethodToRun = objectClassMethodLookup.currentMethod
+              classMethodDefiningClass = objectClassMethodLookup.definingClass
+
+          if classMethodToRun != nil:
+            debug("VM: Found class method '", frame.selector, "' for class ", cls.name)
 
             # Handle native implementations
-            if nativeImplIsSet(currentMethod):
+            if nativeImplIsSet(classMethodToRun):
               let savedReceiver = interp.currentReceiver
               interp.currentReceiver = classReceiver
               try:
                 var resultVal: NodeValue
-                if currentMethod.hasInterpreterParam:
+                if classMethodToRun.hasInterpreterParam:
                   type NativeProcWithInterp = proc(interp: var Interpreter, self: Instance, args: seq[NodeValue]): NodeValue {.nimcall.}
-                  let nativeProc = cast[NativeProcWithInterp](currentMethod.nativeImpl)
+                  let nativeProc = cast[NativeProcWithInterp](classMethodToRun.nativeImpl)
                   resultVal = nativeProc(interp, classReceiver, args)
                 else:
                   type ClassMethodProc = proc(self: Class, args: seq[NodeValue]): NodeValue {.nimcall.}
-                  let nativeProc = cast[ClassMethodProc](currentMethod.nativeImpl)
+                  let nativeProc = cast[ClassMethodProc](classMethodToRun.nativeImpl)
                   resultVal = nativeProc(cls, args)
                 interp.pushValue(resultVal)
               finally:
@@ -4029,17 +4101,17 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
               return true
 
             # Interpreted class method - create activation with class wrapper as receiver
-            if currentMethod.parameters.len != args.len:
+            if classMethodToRun.parameters.len != args.len:
               raise newException(ValueError,
-                "Wrong number of arguments: expected " & $currentMethod.parameters.len &
+                "Wrong number of arguments: expected " & $classMethodToRun.parameters.len &
                 ", got " & $args.len)
 
-            let activation = newActivation(currentMethod, classReceiver, interp.currentActivation, classMethodLookup.definingClass, isClassMethod = true)
+            let activation = newActivation(classMethodToRun, classReceiver, interp.currentActivation, classMethodDefiningClass, isClassMethod = true)
 
-            for i in 0..<currentMethod.parameters.len:
-              activation.locals[currentMethod.parameters[i]] = args[i]
+            for i in 0..<classMethodToRun.parameters.len:
+              activation.locals[classMethodToRun.parameters[i]] = args[i]
 
-            for tempName in currentMethod.temporaries:
+            for tempName in classMethodToRun.temporaries:
               if tempName notin activation.locals:
                 activation.locals[tempName] = nilValue()
 
@@ -4048,16 +4120,16 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
             interp.currentActivation = activation
             interp.currentReceiver = classReceiver
 
-            if currentMethod.isMethod:
-              currentMethod.homeActivation = activation
+            if classMethodToRun.isMethod:
+              classMethodToRun.homeActivation = activation
 
             interp.pushWorkFrame(newPopActivationFrame(savedReceiver, isBlock = false, evalStackDepth = interp.evalStack.len))
 
-            if currentMethod.body.len > 0:
-              for i in countdown(currentMethod.body.len - 1, 0):
-                if i < currentMethod.body.len - 1:
+            if classMethodToRun.body.len > 0:
+              for i in countdown(classMethodToRun.body.len - 1, 0):
+                if i < classMethodToRun.body.len - 1:
                   interp.pushWorkFrame(WorkFrame(kind: wfAfterArg, pendingSelector: "discard"))
-                interp.pushWorkFrame(newEvalFrame(currentMethod.body[i]))
+                interp.pushWorkFrame(newEvalFrame(classMethodToRun.body[i]))
             else:
               interp.pushValue(nilValue())
 
@@ -4162,8 +4234,14 @@ proc handleContinuation(interp: var Interpreter, frame: WorkFrame): bool =
       # ============================================================================
       # SLOW PATH: Full method lookup
       # ============================================================================
-      debug("VM: Looking up method '", frame.selector, "' on ", (if receiver.class != nil: receiver.class.name else: "nil"))
-      let lookup = lookupMethod(interp, receiver, frame.selector)
+      debug("VM: Looking up method '", frame.selector, "' on ", (if receiver.class != nil: receiver.class.name else: "nil"), " isClassMethod=", $frame.isClassMethod)
+
+      var lookup: MethodResult
+      if frame.isClassMethod:
+        # For class method primitives, look in the receiver's class methods
+        lookup = lookupClassMethod(receiver.class, frame.selector)
+      else:
+        lookup = lookupMethod(interp, receiver, frame.selector)
       if not lookup.found:
         # Try doesNotUnderstand: before raising error
         let dnuLookup = lookupMethod(interp, receiver, "doesNotUnderstand:")
