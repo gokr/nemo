@@ -114,6 +114,36 @@ proc genComparisonFastPath*(op: string): string =
   output.add("    return NodeValue(kind: vkBool, boolVal: a.boolVal " & nimOp & " b.boolVal)\n")
   return output
 
+proc hasBlocksWithNonLocalReturn(node: Node): bool =
+  ## Check if an AST node contains blocks with ^ (non-local return)
+  if node == nil:
+    return false
+  case node.kind
+  of nkBlock:
+    let blk = node.BlockNode
+    for stmt in blk.body:
+      if stmt of ReturnNode:
+        return true
+    # Also check nested blocks
+    for stmt in blk.body:
+      if hasBlocksWithNonLocalReturn(stmt):
+        return true
+  of nkMessage:
+    let msg = node.MessageNode
+    if msg.receiver != nil and hasBlocksWithNonLocalReturn(msg.receiver):
+      return true
+    for arg in msg.arguments:
+      if hasBlocksWithNonLocalReturn(arg):
+        return true
+  of nkAssign:
+    return hasBlocksWithNonLocalReturn(node.AssignNode.expression)
+  of nkReturn:
+    if node.ReturnNode.expression != nil:
+      return hasBlocksWithNonLocalReturn(node.ReturnNode.expression)
+  else:
+    discard
+  return false
+
 proc genMethodBodyFromAST*(cls: ClassInfo, meth: BlockNode, selector: string): string =
   ## Generate method body by compiling AST nodes to Nim code
   ## This is the main method body compilation that translates Harding AST to Nim
@@ -123,20 +153,34 @@ proc genMethodBodyFromAST*(cls: ClassInfo, meth: BlockNode, selector: string): s
   for param in meth.parameters:
     ctx.parameters.add(param)
 
+  # Check if method contains blocks with non-local returns
+  var needsNLRWrapper = false
+  for stmt in meth.body:
+    if hasBlocksWithNonLocalReturn(stmt):
+      needsNLRWrapper = true
+      break
+
   var output = "\n"
+  let indent = if needsNLRWrapper: "    " else: "  "
+
+  if needsNLRWrapper:
+    output.add("  try:\n")
 
   # Generate temporaries
   if meth.temporaries.len > 0:
-    output.add("  # Temporaries\n")
+    output.add(indent & "# Temporaries\n")
     for temp in meth.temporaries:
-      output.add("  var " & temp & " = NodeValue(kind: vkNil)\n")
+      output.add(indent & "var " & temp & " = NodeValue(kind: vkNil)\n")
       ctx.locals.add(temp)
     output.add("\n")
 
   # Generate body statements
   if meth.body.len == 0:
     # Empty body - return self
-    output.add("  return self.toValue()\n")
+    output.add(indent & "return self.toValue()\n")
+    if needsNLRWrapper:
+      output.add("  except NonLocalReturnException as nlr:\n")
+      output.add("    return nlr.value\n")
     return output
 
   # Process each statement
@@ -148,9 +192,9 @@ proc genMethodBodyFromAST*(cls: ClassInfo, meth: BlockNode, selector: string): s
       let ret = stmt.ReturnNode
       if ret.expression != nil:
         let exprCode = genExpression(ctx, ret.expression)
-        output.add("  return " & exprCode & "\n")
+        output.add(indent & "return " & exprCode & "\n")
       else:
-        output.add("  return self.toValue()\n")
+        output.add(indent & "return self.toValue()\n")
 
     of nkAssign:
       let assign = stmt.AssignNode
@@ -160,30 +204,34 @@ proc genMethodBodyFromAST*(cls: ClassInfo, meth: BlockNode, selector: string): s
       # Check if variable is a slot
       if ctx.isSlot(varName):
         let idx = ctx.getSlotIndex(varName)
-        output.add("  self.slots[" & $idx & "] = " & exprCode & "\n")
+        output.add(indent & "self.slots[" & $idx & "] = " & exprCode & "\n")
         if isLast:
-          output.add("  return " & exprCode & "\n")
+          output.add(indent & "return " & exprCode & "\n")
       elif ctx.isLocal(varName):
         # Local variable reassignment
-        output.add("  " & varName & " = " & exprCode & "\n")
+        output.add(indent & varName & " = " & exprCode & "\n")
         if isLast:
-          output.add("  return " & exprCode & "\n")
+          output.add(indent & "return " & exprCode & "\n")
       else:
         # New local variable
-        output.add("  var " & varName & " = " & exprCode & "\n")
+        output.add(indent & "var " & varName & " = " & exprCode & "\n")
         ctx.locals.add(varName)
         if isLast:
-          output.add("  return " & varName & "\n")
+          output.add(indent & "return " & varName & "\n")
 
     else:
       # Expression statement
       let exprCode = genExpression(ctx, stmt)
       if isLast:
         # Last statement - return its value
-        output.add("  return " & exprCode & "\n")
+        output.add(indent & "return " & exprCode & "\n")
       else:
         # Not last - discard result
-        output.add("  discard " & exprCode & "\n")
+        output.add(indent & "discard " & exprCode & "\n")
+
+  if needsNLRWrapper:
+    output.add("  except NonLocalReturnException as nlr:\n")
+    output.add("    return nlr.value\n")
 
   return output
 
@@ -267,6 +315,13 @@ proc genRuntimeHelperMethods*(): string =
   ## Generate runtime helper methods
   result = """
 # Runtime helpers for primitives
+
+proc toInt*(val: NodeValue): int =
+  ## Convert NodeValue to integer for loop counters
+  case val.kind
+  of vkInt: return val.intVal
+  of vkFloat: return int(val.floatVal)
+  else: return 0
 
 proc getArg*(args: seq[NodeValue], index: int, default: NodeValue = NodeValue(kind: vkNil)): NodeValue =
   ## Get argument at index with default fallback

@@ -73,11 +73,67 @@ proc evalBlock*(runtime: Runtime, blk: BlockNode,
   discard
   return NodeValue(kind: vkNil)
 
+type
+  BlockProc0* = proc(): NodeValue {.cdecl.}
+  BlockProc1* = proc(a: NodeValue): NodeValue {.cdecl.}
+  BlockProc2* = proc(a, b: NodeValue): NodeValue {.cdecl.}
+  BlockProc3* = proc(a, b, c: NodeValue): NodeValue {.cdecl.}
+  BlockEnvProc0* = proc(env: pointer): NodeValue {.cdecl.}
+  BlockEnvProc1* = proc(env: pointer, a: NodeValue): NodeValue {.cdecl.}
+  BlockEnvProc2* = proc(env: pointer, a, b: NodeValue): NodeValue {.cdecl.}
+  BlockEnvProc3* = proc(env: pointer, a, b, c: NodeValue): NodeValue {.cdecl.}
+
+proc getBlockEnvPtr*(blk: BlockNode): pointer =
+  ## Retrieve the environment pointer from a block
+  if blk.capturedEnvInitialized and "__env_ptr__" in blk.capturedEnv:
+    return cast[pointer](blk.capturedEnv["__env_ptr__"].value.intVal)
+  return nil
+
 proc sendMessage*(runtime: Runtime, receiver: NodeValue,
                   selector: string, args: seq[NodeValue]): NodeValue =
   ## Send a message to a receiver (dynamic dispatch)
   ## This is the slow path fallback for compiled code
-  ## For now, handle basic methods directly
+
+  # Block evaluation: value, value:, value:value:, value:value:value:
+  if receiver.kind == vkBlock and receiver.blockVal != nil and
+     receiver.blockVal.nativeImpl != nil:
+    let envPtr = getBlockEnvPtr(receiver.blockVal)
+    let hasEnv = envPtr != nil
+    case selector
+    of "value":
+      if hasEnv:
+        let fn = cast[BlockEnvProc0](receiver.blockVal.nativeImpl)
+        return fn(envPtr)
+      else:
+        let fn = cast[BlockProc0](receiver.blockVal.nativeImpl)
+        return fn()
+    of "value:":
+      if args.len >= 1:
+        if hasEnv:
+          let fn = cast[BlockEnvProc1](receiver.blockVal.nativeImpl)
+          return fn(envPtr, args[0])
+        else:
+          let fn = cast[BlockProc1](receiver.blockVal.nativeImpl)
+          return fn(args[0])
+    of "value:value:":
+      if args.len >= 2:
+        if hasEnv:
+          let fn = cast[BlockEnvProc2](receiver.blockVal.nativeImpl)
+          return fn(envPtr, args[0], args[1])
+        else:
+          let fn = cast[BlockProc2](receiver.blockVal.nativeImpl)
+          return fn(args[0], args[1])
+    of "value:value:value:":
+      if args.len >= 3:
+        if hasEnv:
+          let fn = cast[BlockEnvProc3](receiver.blockVal.nativeImpl)
+          return fn(envPtr, args[0], args[1], args[2])
+        else:
+          let fn = cast[BlockProc3](receiver.blockVal.nativeImpl)
+          return fn(args[0], args[1], args[2])
+    else:
+      discard
+
   case selector
   of "writeLine:", "println":
     if args.len > 0:
