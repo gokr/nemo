@@ -15,6 +15,7 @@ Harding load: "lib/core/Float.hrd"
 Harding load: "lib/core/String.hrd"
 Harding load: "lib/core/Array.hrd"
 Harding load: "lib/core/Table.hrd"
+Harding load: "lib/core/Library.hrd"
 Harding load: "lib/core/Number.hrd"
 
 # Load new classes into Standard Library

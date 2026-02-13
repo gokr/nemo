@@ -1,0 +1,98 @@
+#!/usr/bin/env harding
+#
+# Library.hrd - Library (Namespace) class methods
+# Uses primitive selectors registered in vm.nim initGlobals()
+#
+
+#====================================================================
+# Library primitives
+#====================================================================
+
+Library>>at: key <primitive primitiveLibraryAt: key>
+
+Library>>at: key put: value <primitive primitiveLibraryAt: key put: value>
+
+Library>>keys <primitive primitiveLibraryKeys>
+
+Library>>includesKey: key <primitive primitiveLibraryIncludesKey: key>
+
+Library>>name <primitive primitiveLibraryName>
+
+Library>>name: value <primitive primitiveLibraryName: value>
+
+#====================================================================
+# Library class methods
+#====================================================================
+
+Library class>>new [
+    <primitive primitiveLibraryNew>
+]
+
+#====================================================================
+# Library iteration
+#====================================================================
+
+Library>>do: block [
+    # Iterate over values in the library
+    self keys do: [:key |
+        block value: (self at: key)
+    ]
+]
+
+Library>>keysAndValuesDo: block [
+    # Iterate over key-value pairs
+    self keys do: [:key |
+        block value: key value: (self at: key)
+    ]
+]
+
+#====================================================================
+# Library testing
+#====================================================================
+
+Library>>isEmpty [
+    ^ self keys isEmpty
+]
+
+Library>>notEmpty [
+    ^ self keys notEmpty
+]
+
+Library>>size [
+    ^ self keys size
+]
+
+#====================================================================
+# Library accessing
+#====================================================================
+
+Library>>at: key ifAbsent: block [
+    # Get value at key, or evaluate block if absent
+    (self includesKey: key) ifTrue: [
+        ^ self at: key
+    ] ifFalse: [
+        ^ block value
+    ]
+]
+
+Library>>at: key ifAbsentPut: block [
+    # Get value at key, or put and return result of block
+    (self includesKey: key) ifTrue: [
+        ^ self at: key
+    ] ifFalse: [
+        | value |
+        value := block value.
+        self at: key put: value.
+        ^ value
+    ]
+]
+
+Library>>removeKey: key ifAbsent: block [
+    # Remove key if present, otherwise evaluate block
+    (self includesKey: key) ifTrue: [
+        # Note: Library doesn't have removeKey: primitive, so this is a no-op
+        ^ nil
+    ] ifFalse: [
+        ^ block value
+    ]
+]
