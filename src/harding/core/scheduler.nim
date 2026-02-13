@@ -162,15 +162,10 @@ proc runCurrentProcess*(ctx: SchedulerContext): NodeValue =
   interp.lastResult = result
 
   # Check if process was blocked by a primitive (before status handling)
-  # If so, decrement PC and clear the work queue/eval stack so the entire
-  # statement re-runs from scratch when unblocked. This is critical for
-  # primitives like SharedQueue next where the return value matters -
-  # stale continuation frames would use nilValue() instead of the actual item.
+  # If so, decrement PC so the statement will be re-executed when unblocked
   let wasBlocked = sched.currentProcess.state == psBlocked
   if wasBlocked:
     dec activation.pc
-    interp.workQueue.setLen(0)
-    interp.evalStack.setLen(0)
 
   # Handle VM status
   case status
